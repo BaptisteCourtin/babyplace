@@ -54,6 +54,13 @@ function Footer() {
                         </ul>
                     </div>
                 </div>
+                <div className='footerBottom'>
+                    <p>
+                        © Datawarehouse™, 2020. All rights reserved.<br />
+                        Company Registration Number: 21479524.
+                    </p>
+                    <button><img src="" alt="M" /></button>
+                </div>
             </footer>
         </>
     )

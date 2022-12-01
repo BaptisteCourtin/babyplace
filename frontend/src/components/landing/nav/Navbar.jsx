@@ -20,22 +20,15 @@ function Navbar({ userType, setUserType }) {
                 </div>
             </nav>
         ) : (
-            <nav className='nav'>
-                <p>Logo</p>
+            <nav className='nav pro'>
+                <img src={logo} />
                 <ul>
-                    <li>
-                        <button>About</button>
-                    </li>
-                    <li>
-                        <button>Help</button>
-                    </li>
-                    <li>
-                        <button>Features</button>
-                    </li>
-                    <li>
-                        <button>Signup</button>
-                    </li>
+                    <button className='textBtn' onClick={() => setUserType('parent')}>Vous êtes un parent ?</button>
                 </ul>
+                <div className='navBtn'>
+                    <button>S'enregistrer</button>
+                    <button>Se connecter <span>➜</span></button>
+                </div>
             </nav>
         )
     )

@@ -54,11 +54,61 @@
             border-top-right-radius: 50px;
             background-color: $third;
             color: $white;
+            cursor: pointer;
             z-index: -1;
 
             & span {
                 font-size: $h4;
             }
         }
+    }
+}
+
+.headerPro {
+    width: 85%;
+    height: 85vh;
+    margin: 0 auto 100px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 160px;
+
+    & .headerProMain {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        flex-direction: column;
+        margin: 70px 0;
+        gap: 30px;
+
+        & h1 {
+            font-size: 80px;
+        }
+
+        & p {
+            line-height: 1.5;
+            font-size: $h4;
+        }
+
+        & button {
+            padding: 10px 25px 10px 25px;
+            background: $third;
+            color: $white;
+            border: 1px solid transparent;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: $h4;
+            transition: 0.3s ease-in-out;
+
+            &:hover {
+                background: none;
+                color: $second;
+                border: 1px solid $third;
+            }
+        }
+    }
+
+    & img {
+        height: 100%;
     }
 }
