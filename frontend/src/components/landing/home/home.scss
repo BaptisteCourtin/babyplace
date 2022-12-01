@@ -1,0 +1,69 @@
+.home {
+    width: 80%;
+    margin: 0 auto;
+    color: $second;
+    & h2 {
+        padding: 30px 0;
+        font-size: 40px;
+        text-align: center;
+        width: 70%;
+        margin: 0 auto 30px;
+    }
+
+    & .mainGrid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 120px;
+
+        & li {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 10px;
+            text-align: center;
+        }
+    }
+
+    & .mainApp {
+        margin: 100px 0;
+        padding: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        gap: 40px;
+        background-color: rgba(240, 99, 167, 0.1);
+        
+
+        & .mainAppText {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 30px;
+
+            & p {
+                font-size: $h2;
+            }
+        }
+
+    }
+
+    & .mainDesc {
+        margin-bottom: 100px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        text-align: center;
+        font-size: $h4;
+
+        & li {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: -10px 10px 10px rgba(75, 93, 104, 0.1);
+        }
+    }
+}

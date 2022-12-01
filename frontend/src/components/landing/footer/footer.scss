@@ -1,0 +1,94 @@
+hr {
+    height: 1px;
+    background-color: $third;
+}
+
+.footer {
+    padding: 100px 0;
+    width: 80%;
+    margin: 0 auto;
+
+    & .footerTop {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 70px;
+        margin-bottom: 100px;
+
+        & p {
+            font-size: 30px;
+        }
+
+        & .footerBtn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+
+            & button {
+                padding: 15px 30px;
+                border: 1px solid transparent;
+                border-radius: 50px;
+
+                &:first-of-type {
+                    background-color: $fourth;
+                    color: $white;
+                    transition: 0.3s ease-in-out;
+
+                    &:hover {
+                        border: 1px solid $fourth;
+                        background-color: transparent;
+                        color: $second;
+                    }
+                }
+
+                &:last-of-type {
+                    background: none;
+                    box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
+                }
+
+                & span {
+                    font-size: $h4;
+                    color: $third;
+                }
+            }
+        }
+    }
+
+    & .footerGrid {
+        display: grid;
+        grid-template-columns: 1fr 4fr;
+        & .footerLeft {
+            & .footerLogo {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+
+                & p {
+                    font-size: $h3;
+                }
+            }
+
+            & .footerAddress {
+                margin: 30px 0 10px;
+                font-size: $h4;
+                line-height: 1.5;
+            }
+
+            & .footerMail {
+                font-size: $small;
+            }
+        }
+
+        & .footerRight {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            gap: 50px;
+
+            & ul {
+                
+            }
+        }
+    }
+}
