@@ -1,13 +1,12 @@
-import React from 'react';
-import '../components/form/formStructure.scss'
-const FormStructure = () => {
-    return (
-        <div className="formStructureContainer">
-            <form className="formStrucure">
+import React from "react";
+import "../components/form/formStructure.scss";
 
-            </form>
-        </div>
-    );
-};
+function FormStructure() {
+  return (
+    <div className="formStructureContainer">
+      <form className="formStrucure" />
+    </div>
+  );
+}
 
 export default FormStructure;
