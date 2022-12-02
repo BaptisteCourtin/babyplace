@@ -1,64 +1,115 @@
 .header {
-    width: 85%;
-    height: 85vh;
-    margin: 0 auto;
+  width: 85%;
+  height: 85vh;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 40px;
+
+  & h1 {
+    width: 80%;
+    font-size: 50px;
+    font-family: $display;
+    color: $second;
+  }
+
+  & .headerInputs {
+    width: 80%;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+
+    & input {
+      padding: $h4;
+      box-shadow: 0px 3px 0px rgba(75, 93, 104, 0.1);
+      background: #ffffff;
+      outline: none;
+
+      &:first-of-type {
+        border-bottom-left-radius: 50px;
+        border-top-left-radius: 50px;
+      }
+
+      &:last-of-type {
+        border-bottom-right-radius: 50px;
+        border-top-right-radius: 50px;
+      }
+
+      &:focus {
+        &::placeholder {
+          color: $third;
+        }
+      }
+    }
+
+    & button {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 5px;
+      padding-right: 10px;
+      position: relative;
+      margin-left: -40px;
+      border-bottom-right-radius: 50px;
+      border-top-right-radius: 50px;
+      background-color: $third;
+      color: $white;
+      cursor: pointer;
+      z-index: -1;
+
+      & span {
+        font-size: $h4;
+      }
+    }
+  }
+}
+
+.headerPro {
+  width: 85%;
+  height: 85vh;
+  margin: 0 auto 100px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 160px;
+
+  & .headerProMain {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: space-between;
     flex-direction: column;
-    gap: 40px;
+    margin: 70px 0;
+    gap: 30px;
 
     & h1 {
-        width: 80%;
-        font-size: 50px;
-        font-family: $display;
+      font-size: 80px;
+    }
+
+    & p {
+      line-height: 1.5;
+      font-size: $h4;
+    }
+
+    & button {
+      padding: 10px 25px 10px 25px;
+      background: $third;
+      color: $white;
+      border: 1px solid transparent;
+      border-radius: 50px;
+      font-weight: 500;
+      font-size: $h4;
+      transition: 0.3s ease-in-out;
+
+      &:hover {
+        background: none;
         color: $second;
+        border: 1px solid $third;
+      }
     }
+  }
 
-    & .headerInputs {
-        width: 80%;
-        display: grid;
-        grid-template-columns: 2fr 1fr 1fr 1fr;
-
-        & input {
-            padding: $h4;
-            box-shadow: 0px 3px 0px rgba(75, 93, 104, 0.1);
-            background: #FFFFFF;
-            outline: none;
-
-            &:first-of-type {
-                border-bottom-left-radius: 50px;
-                border-top-left-radius: 50px;
-            }
-
-            &:last-of-type {
-                border-bottom-right-radius: 50px;
-                border-top-right-radius: 50px;
-            }
-
-            &:focus {
-                &::placeholder {
-                    color: $third;
-                }
-            }
-        }
-
-        & button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            position: relative;
-            margin-left: -40px;
-            border-bottom-right-radius: 50px;
-            border-top-right-radius: 50px;
-            background-color: $third;
-            color: $white;
-            z-index: -1;
-
-            & span {
-                font-size: $h4;
-            }
-        }
-    }
+  & img {
+    height: 100%;
+  }
 }

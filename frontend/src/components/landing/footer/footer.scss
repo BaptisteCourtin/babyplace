@@ -1,94 +1,168 @@
 hr {
-    height: 1px;
-    background-color: $third;
+  height: 1px;
+  background-color: $third;
 }
 
 .footer {
-    padding: 100px 0;
-    width: 80%;
-    margin: 0 auto;
+  padding: 100px 0;
+  width: 80%;
+  margin: 0 auto;
 
-    & .footerTop {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 70px;
-        margin-bottom: 100px;
+  & .footerTop {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    margin-bottom: 100px;
 
-        & p {
-            font-size: 30px;
+    & p {
+      font-size: 30px;
+    }
+
+    & div {
+      & p {
+        &:last-of-type {
+          margin-top: 10px;
+          color: $first;
+          font-size: $normal;
+        }
+      }
+    }
+
+    & .footerBtn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+
+      & button {
+        padding: 15px 30px;
+        border: 1px solid transparent;
+        border-radius: 50px;
+
+        &:first-of-type {
+          background-color: $fourth;
+          color: $white;
+          transition: 0.3s ease-in-out;
+
+          &:hover {
+            border: 1px solid $fourth;
+            background-color: transparent;
+            color: $second;
+          }
         }
 
-        & .footerBtn {
+        &:last-of-type {
+          background: none;
+          box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
+        }
+
+        & span {
+          font-size: $h4;
+          color: $third;
+        }
+      }
+    }
+  }
+
+  & .footerGrid {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    & .footerLeft {
+      & .footerLogo {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
+
+        & p {
+          font-size: $h3;
+        }
+      }
+
+      & .footerAddress {
+        margin: 30px 0 10px;
+        font-size: $h4;
+        line-height: 1.5;
+      }
+
+      & .footerMail {
+        font-size: $small;
+      }
+    }
+
+    & .footerRight {
+      display: flex;
+      justify-content: space-evenly;
+      gap: 50px;
+
+      & ul {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+
+        & li {
+          width: fit-content;
+          border-bottom: 1px solid transparent;
+          cursor: pointer;
+          transition: 0.3s ease-in-out;
+
+          &:hover {
+            border-bottom: 1px solid $second;
+          }
+        }
+
+        & div {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 10px;
+
+          & li {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: $grey;
+            color: $white;
+            font-size: $h4;
 
-            & button {
-                padding: 15px 30px;
-                border: 1px solid transparent;
-                border-radius: 50px;
-
-                &:first-of-type {
-                    background-color: $fourth;
-                    color: $white;
-                    transition: 0.3s ease-in-out;
-
-                    &:hover {
-                        border: 1px solid $fourth;
-                        background-color: transparent;
-                        color: $second;
-                    }
-                }
-
-                &:last-of-type {
-                    background: none;
-                    box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
-                }
-
-                & span {
-                    font-size: $h4;
-                    color: $third;
-                }
+            &:hover {
+              border-bottom: 1px solid transparent;
             }
+          }
         }
+      }
+    }
+  }
+
+  & .footerBottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 70px;
+    line-height: 1.5;
+
+    & p {
+      font-size: $xs;
     }
 
-    & .footerGrid {
-        display: grid;
-        grid-template-columns: 1fr 4fr;
-        & .footerLeft {
-            & .footerLogo {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 10px;
+    & button {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: $grey;
+      color: $white;
+      font-size: $h4;
 
-                & p {
-                    font-size: $h3;
-                }
-            }
-
-            & .footerAddress {
-                margin: 30px 0 10px;
-                font-size: $h4;
-                line-height: 1.5;
-            }
-
-            & .footerMail {
-                font-size: $small;
-            }
-        }
-
-        & .footerRight {
-            display: flex;
-            align-items: center;
-            justify-content: space-evenly;
-            gap: 50px;
-
-            & ul {
-                
-            }
-        }
+      & img {
+        width: 100%;
+        height: 100%;
+      }
     }
+  }
 }
