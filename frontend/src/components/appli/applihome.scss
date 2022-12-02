@@ -1,0 +1,82 @@
+.applihome {
+  background: $gradient;
+  min-height: 100vh;
+  text-align: left;
+  color: $white;
+  padding: 0 1rem 1rem 1rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h2 {
+    margin: 3rem;
+    font-size: $h1;
+    font-weight: 700;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1.5rem;
+    width: 90%;
+
+    input,
+    select {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: none;
+      border-radius: 10px;
+      width: 100%;
+      padding: 0.75rem;
+
+      &::placeholder {
+        color: $white;
+      }
+
+      option {
+        color: black;
+      }
+    }
+
+    select#occasionnel {
+      width: max-content;
+    }
+
+    label {
+      color: black;
+    }
+
+    .check {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+
+      input {
+        width: max-content;
+        padding: 0.2rem;
+        margin: 0 1rem;
+      }
+
+      label {
+        color: $white;
+      }
+    }
+
+    button {
+      background-color: $third;
+      align-self: center;
+      justify-self: center;
+      width: 100%;
+      line-height: 70px;
+      border-radius: 10px;
+      font-size: $h3;
+      margin-top: 70px;
+      font-weight: 500;
+      border: 2px red solid;
+    }
+  }
+}
