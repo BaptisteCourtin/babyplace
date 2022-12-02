@@ -1,11 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import logo from "@assets/logo.svg";
+import logo from "@assets/logo4.svg";
+import logotxt from "@assets/babyplacetxt.svg";
 
 function Navbar({ userType, setUserType }) {
   return userType === "parent" ? (
     <nav className="nav">
-      <img src={logo} alt="Babyplace" />
+      <div className="logoContainer">
+        <img src={logo} alt="Babyplace" id="logoCoeur" />
+        <img src={logotxt} alt="Babyplace" id="logotxt" />
+      </div>
       <button
         type="button"
         className="textBtn"

@@ -4,4 +4,17 @@
   width: 80vw;
   border: 1px solid black;
   margin: 1vh auto;
+
+  .pagination {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+
+  .buttonContainer {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+  }
 }

@@ -12,6 +12,22 @@
     cursor: pointer;
   }
 
+  .logoContainer {
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    #logoCoeur {
+      width: 17%;
+    }
+
+    #logotxt {
+      margin-top: 2%;
+      width: 80%;
+    }
+  }
+
   .textBtn {
     border-bottom: 1px solid transparent;
     transition: 0.3s ease-in-out;
@@ -71,6 +87,7 @@
     align-items: center;
     justify-content: center;
     gap: $h1;
+
     & button {
       padding: 10px 25px 10px 25px;
       border: 1px solid transparent;
