@@ -226,6 +226,7 @@ export default function Home() {
               )}
             </ul>
             <button
+              className="homeProCarouselBtn"
               type="button"
               onClick={() => setCarouselFirst(!carouselFirst)}
             >

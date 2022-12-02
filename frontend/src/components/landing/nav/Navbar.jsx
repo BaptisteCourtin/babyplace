@@ -42,9 +42,9 @@ function Navbar({ userType, setUserType }) {
       </ul>
       <div className="navBtn">
         <Link to='/register'>S'enregistrer</Link>
-        <button type="button">
+        <Link to="/login">
           Se connecter <span>➜</span>
-        </button>
+        </Link>
       </div>
     </nav>
   );
