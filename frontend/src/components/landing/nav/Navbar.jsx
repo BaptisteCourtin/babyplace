@@ -6,7 +6,7 @@ import logotxt from "@assets/babyplacetxt.svg";
 function Navbar({ userType, setUserType }) {
     return userType === "parent" ? (
         <nav className="nav">
-            <div class="logoContainer"><img src={logo} alt="Babyplace" id="logoCoeur" /><img src={logotxt} alt="Babyplace" id="logotxt" /></div>
+            <div className="logoContainer"><img src={logo} alt="Babyplace" id="logoCoeur" /><img src={logotxt} alt="Babyplace" id="logotxt" /></div>
             <button
                 type="button"
                 className="textBtn"
@@ -30,7 +30,7 @@ function Navbar({ userType, setUserType }) {
         </nav>
     ) : (
         <nav className="nav pro">
-            <img src={logo} alt="Babyplace" />
+            <div className="logoContainer"><img src={logo} alt="Babyplace" id="logoCoeur" /><img src={logotxt} alt="Babyplace" id="logotxt" /></div>
             <ul>
                 <button
                     type="button"
