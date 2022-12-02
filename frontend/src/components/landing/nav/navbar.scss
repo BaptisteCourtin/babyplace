@@ -1,67 +1,66 @@
 .nav {
-    width: 85%;
-    height: 15vh;
-    margin: 0 auto;
+  width: 85%;
+  height: 15vh;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .textBtn {
+    border-bottom: 1px solid transparent;
+    transition: 0.3s ease-in-out;
+
+    &:hover {
+      border-bottom: 1px solid $first;
+    }
+  }
+
+  .navRight {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 
-    & button {
-        background: none;
-        border: none;
-        cursor: pointer;
-    }
+    .connect {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-left: $h1;
+      text-align: left;
+      padding: 10px 25px 10px 20px;
+      background: #ffffff;
+      box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
+      border: 1px solid transparent;
+      border-radius: 50px;
+      transition: 0.3s ease-in-out;
 
-    .textBtn {
-        border-bottom: 1px solid transparent;
-        transition: 0.3s ease-in-out;
+      & div {
+        & span {
+          &:first-of-type {
+            font-size: $normal;
+          }
 
-        &:hover {
-            border-bottom: 1px solid $first;
+          &:nth-of-type(2) {
+            font-size: $xs;
+          }
         }
+      }
+
+      .arrow {
+        font-size: $h4;
+        color: $third;
+      }
+
+      &:hover {
+        border: 1px solid $third;
+        box-shadow: none;
+      }
     }
-
-    .navRight {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        .connect {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            margin-left: $h1;
-            text-align: left;
-            padding: 10px 25px 10px 20px;
-            background: #ffffff;
-            box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
-            border: 1px solid transparent;
-            border-radius: 50px;
-            transition: 0.3s ease-in-out;
-
-            & div {
-                & span {
-                    &:first-of-type {
-                        font-size: $normal;
-                    }
-    
-                    &:nth-of-type(2) {
-                        font-size: $xs;
-                    }
-                }
-            }
-            
-            .arrow {
-                font-size: $h4;
-                color: $third;
-            }
-
-            &:hover {
-                border: 1px solid $third;
-                box-shadow: none;
-            }
-        }
-    }
-
+  }
 }
