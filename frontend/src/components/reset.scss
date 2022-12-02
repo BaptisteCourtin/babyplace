@@ -3,9 +3,10 @@
   padding: 0;
   border: 0;
   font-size: 100%;
+  box-sizing: border-box;
+  vertical-align: baseline;
   font: inherit;
   color: inherit;
-  vertical-align: baseline;
 }
 
 article,
@@ -29,10 +30,12 @@ html {
   color: $second;
   background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
   cursor: default;
+  min-height: 100vh;
 }
 
 body {
   line-height: 1;
+  min-height: 100%;
 }
 
 button {

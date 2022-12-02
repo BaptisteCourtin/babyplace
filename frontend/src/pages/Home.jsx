@@ -3,6 +3,7 @@ import Header from "@components/landing/header/Header";
 import Navbar from "@components/landing/nav/Navbar";
 import Footer from "@components/landing/footer/Footer";
 
+<<<<<<< HEAD
 import dossier from "@assets/img-dossier.svg";
 import time from "@assets/img-time.svg";
 import key from "@assets/img-key.svg";
@@ -12,6 +13,10 @@ import imgInfo from "@assets/landing page/image2.svg";
 export default function Home() {
   const [userType, setUserType] = useState("parent");
   const [carouselFirst, setCarouselFirst] = useState(true);
+=======
+export default function Home() {
+  const [userType, setUserType] = useState("parent");
+>>>>>>> 5c20ad56654f1549e2e7626aefe8a394ffb39f89
 
   return (
     <>
@@ -78,6 +83,7 @@ export default function Home() {
           </ul>
         </main>
       ) : (
+<<<<<<< HEAD
         <main className="homePro">
           <section className="homeProInfo">
             <img src={imgInfo} alt="" />
@@ -219,6 +225,9 @@ export default function Home() {
             </button>
           </section>
         </main>
+=======
+        <main className="homePro" />
+>>>>>>> 5c20ad56654f1549e2e7626aefe8a394ffb39f89
       )}
       <Footer userType={userType} />
     </>
