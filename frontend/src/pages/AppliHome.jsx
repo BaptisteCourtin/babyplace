@@ -42,8 +42,8 @@ function AppliHome() {
         </div>
 
         <button type="submit">
-          <Link classname="link" to="/appli/search">
-            Rechercher
+          <Link to="/appli/search">
+            <p>Rechercher</p>
           </Link>
         </button>
       </form>

@@ -40,6 +40,14 @@
       }
     }
 
+    select#occasionnel {
+      width: max-content;
+    }
+
+    label {
+      color: black;
+    }
+
     .check {
       display: flex;
       flex-direction: row;
@@ -63,20 +71,12 @@
       align-self: center;
       justify-self: center;
       width: 100%;
-      height: 70px;
-
+      line-height: 70px;
       border-radius: 10px;
       font-size: $h3;
       margin-top: 70px;
       font-weight: 500;
-    }
-
-    select#occasionnel {
-      width: max-content;
-    }
-
-    label {
-      color: black;
+      border: 2px red solid;
     }
   }
 }
