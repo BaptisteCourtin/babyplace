@@ -8,15 +8,19 @@ import AppliHome from "@pages/AppliHome";
 import AppliSearch from "@pages/AppliSearch";
 
 import Home from "./pages/Home";
+import Dashboard from "@components/dashboard/Dashboard";
 
 function App() {
   return (
     <div className="app">
       <Routes>
         <Route path="/" element={<Home />} />
+
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/login-params" element={<Synthesis />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+
         <Route path="/appli" element={<Appli />} />
         <Route path="/appli/home" element={<AppliHome />} />
         <Route path="/appli/search" element={<AppliSearch />} />

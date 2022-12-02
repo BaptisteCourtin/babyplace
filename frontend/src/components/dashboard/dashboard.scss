@@ -1,0 +1,62 @@
+@import "./nav/dashNavbar.scss";
+
+.dashboard {
+    position: relative;
+    height: 100vh;
+    background-color: #e5e5e5;
+
+    & nav {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 85vw;
+        height: 6vh;
+        padding: 0 10px;
+        gap: 20px;
+        background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
+        box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
+
+        & button {
+            height: 100%;
+            background: none;
+            color: $third;
+        }
+    }
+
+    & main {
+        & .dashboardSection {
+            position: absolute;
+            top: 6vh;
+            left: 15vw;
+            height: 90vh;
+            width: 85vw;
+
+            & main {
+                margin: 0;
+                padding: 0;
+                max-height: 90vh;
+            }
+        }
+    }
+
+    & footer {
+        position: absolute;
+        width: 85vw;
+        height: 4vh;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 10px;
+        background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
+        box-shadow: 5px -5px 5px rgba(75, 93, 104, 0.1);
+
+        & p {
+            font-size: $xs;
+        }
+    }
+}

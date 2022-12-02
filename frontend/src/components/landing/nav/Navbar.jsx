@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import logo from "@assets/logo4.svg";
 import logotxt from "@assets/babyplacetxt.svg";
+import { Link } from "react-router-dom";
 
 function Navbar({ userType, setUserType }) {
   return userType === "parent" ? (
@@ -41,10 +42,10 @@ function Navbar({ userType, setUserType }) {
         </button>
       </ul>
       <div className="navBtn">
-        <button type="button">S'enregistrer</button>
-        <button type="button">
+        <Link to="/register">S'enregistrer</Link>
+        <Link to="/login">
           Se connecter <span>➜</span>
-        </button>
+        </Link>
       </div>
     </nav>
   );

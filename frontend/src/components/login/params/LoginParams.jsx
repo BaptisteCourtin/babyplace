@@ -20,7 +20,7 @@ function LoginParams() {
                     <Link to="/">Sécurité</Link>
                 </details>
                 <details>
-                    <summary>Votre </summary>
+                    <summary>Votre lieu d'accueil</summary>
                     <Link to="/">Structure d'accueil</Link>
                     <Link to="/">Localisation</Link>
                     <Link to="/">Photos</Link>
@@ -33,7 +33,7 @@ function LoginParams() {
                     <Link to="/">Paramètres de réservation</Link>
                 </details>
             </div>
-            <Link className='loginParamsBtn' to="/">Continuer</Link>
+            <Link className='loginParamsBtn' to="/dashboard">Continuer</Link>
         </section>
     )
 }
