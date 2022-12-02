@@ -1,16 +1,23 @@
 import React from "react";
-import logo from "@assets/logo-blanc.svg";
+import PropTypes from "prop-types";
+import logo from "@assets/logo.svg";
 
 function Navbar({ userType, setUserType }) {
   return userType === "parent" ? (
     <nav className="nav">
-      <img src={logo} />
-      <button className="textBtn" onClick={() => setUserType("pro")}>
+      <img src={logo} alt="Babyplace" />
+      <button
+        type="button"
+        className="textBtn"
+        onClick={() => setUserType("pro")}
+      >
         Vous êtes professionnel de la petite enfance ?
       </button>
       <div className="navRight">
-        <button className="textBtn">Besoin d'aide ?</button>
-        <button className="connect">
+        <button type="button" className="textBtn">
+          Besoin d'aide ?
+        </button>
+        <button type="button" className="connect">
           <div>
             <span>Se connecter</span>
             <br />
@@ -21,24 +28,30 @@ function Navbar({ userType, setUserType }) {
       </div>
     </nav>
   ) : (
-    <nav className="nav">
-      <p>Logo</p>
+    <nav className="nav pro">
+      <img src={logo} alt="Babyplace" />
       <ul>
-        <li>
-          <button>About</button>
-        </li>
-        <li>
-          <button>Help</button>
-        </li>
-        <li>
-          <button>Features</button>
-        </li>
-        <li>
-          <button>Signup</button>
-        </li>
+        <button
+          type="button"
+          className="textBtn"
+          onClick={() => setUserType("parent")}
+        >
+          Vous êtes un parent ?
+        </button>
       </ul>
+      <div className="navBtn">
+        <button type="button">S'enregistrer</button>
+        <button type="button">
+          Se connecter <span>➜</span>
+        </button>
+      </div>
     </nav>
   );
 }
 
 export default Navbar;
+
+Navbar.propTypes = {
+  userType: PropTypes.string.isRequired,
+  setUserType: PropTypes.func.isRequired,
+};

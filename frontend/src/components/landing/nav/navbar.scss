@@ -33,7 +33,7 @@
       gap: 10px;
       margin-left: $h1;
       text-align: left;
-      padding: 10px 25px 10px 20px;
+      padding: 10px 25px 10px 25px;
       background: #ffffff;
       box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
       border: 1px solid transparent;
@@ -60,6 +60,53 @@
       &:hover {
         border: 1px solid $third;
         box-shadow: none;
+      }
+    }
+  }
+}
+
+.pro {
+  & .navBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $h1;
+    & button {
+      padding: 10px 25px 10px 25px;
+      border: 1px solid transparent;
+      border-radius: 50px;
+
+      &:first-of-type {
+        background-color: $third;
+        color: $white;
+        font-weight: 500;
+        transition: 0.3s ease-in-out;
+
+        &:hover {
+          background: none;
+          border: 1px solid $third;
+          color: $second;
+        }
+      }
+
+      &:last-of-type {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
+        border: 1px solid transparent;
+        transition: 0.3s ease-in-out;
+
+        & span {
+          font-size: $h4;
+          color: $third;
+        }
+
+        &:hover {
+          border: 1px solid $third;
+          box-shadow: none;
+        }
       }
     }
   }

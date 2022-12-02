@@ -1,16 +1,24 @@
 import React from "react";
-import logo from "@assets/logo-blanc.svg";
+import PropTypes from "prop-types";
+import logo from "@assets/logo.svg";
 
-function Footer() {
+function Footer({ userType }) {
   return (
     <>
       <hr />
       <footer className="footer">
         <div className="footerTop">
-          <p>Vous êtes professionnel de la petite enfance ? </p>
+          {userType === "parent" ? (
+            <p>Vous êtes professionnel de la petite enfance ? </p>
+          ) : (
+            <div>
+              <p>Essayez c'est gratuit !</p>
+              <p>Profitez d'un mois d'essai gratuit</p>
+            </div>
+          )}
           <div className="footerBtn">
-            <button>En savoir plus</button>
-            <button>
+            <button type="button">En savoir plus</button>
+            <button type="button">
               Demander une démo <span>➜</span>
             </button>
           </div>
@@ -53,9 +61,23 @@ function Footer() {
             </ul>
           </div>
         </div>
+        <div className="footerBottom">
+          <p>
+            © Datawarehouse™, 2020. All rights reserved.
+            <br />
+            Company Registration Number: 21479524.
+          </p>
+          <button type="button">
+            <img src="" alt="M" />
+          </button>
+        </div>
       </footer>
     </>
   );
 }
 
 export default Footer;
+
+Footer.propTypes = {
+  userType: PropTypes.string.isRequired,
+};

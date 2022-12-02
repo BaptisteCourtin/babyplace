@@ -32,11 +32,12 @@
     align-items: center;
     justify-content: space-evenly;
     gap: 40px;
-    background-color: rgba(240, 99, 167, 0.1);
+    background-color: rgba(240, 99, 167, 0.2);
+    border-radius: 50px;
 
     & .mainAppText {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
       flex-direction: column;
       gap: 30px;
@@ -65,3 +66,161 @@
     }
   }
 }
+
+.homePro {
+  & .homeProInfo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    width: 60%;
+    margin: 0 auto 100px;
+    padding: 20px 50px;
+    background-color: rgba(240, 99, 167, 0.2);
+    border-radius: 50px;
+
+    & img {
+      width: 100%;
+    }
+
+    & div {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      flex-direction: column;
+      gap: 30px;
+
+      & h2 {
+        font-size: $h2;
+      }
+
+      & p {
+        line-height: 1.5;
+      }
+    }
+  }
+
+  & .homeProGrid {
+    width: 80%;
+    margin: 0 auto 100px;
+
+    & .homeProGridTitle {
+      width: 80%;
+      margin: 0 auto 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 20px;
+      text-align: center;
+
+      & h2 {
+        font-size: $h2;
+      }
+    }
+
+    & ul {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+
+      & li {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        border-radius: 50px;
+        padding: 40px 20px 40px 0;
+
+        & img {
+          width: 100%;
+          margin-left: -50px;
+        }
+
+        & div {
+          & h3 {
+            font-size: $h3;
+          }
+
+          & p {
+            margin: 20px 0;
+          }
+
+          & button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            background: none;
+            font-weight: 500;
+            border-bottom: 1px solid transparent;
+            transition: 0.3s ease-in-out;
+
+            &:hover {
+              border-bottom: 1px solid $second;
+            }
+          }
+        }
+
+        &:nth-of-type(1) {
+          background-color: rgba(45, 205, 122, 0.1);
+        }
+
+        &:nth-of-type(2) {
+          background-color: rgba(240, 99, 167, 0.1);
+        }
+
+        &:nth-of-type(3) {
+          background-color: rgba(126, 114, 242, 0.1);
+        }
+
+        &:nth-of-type(4) {
+          background-color: rgba(33, 35, 83, 0.1);
+        }
+      }
+    }
+  }
+
+  & .homeProCarousel {
+    position: relative;
+    width: 80%;
+    margin: 0 auto 100px;
+    background-color: $third;
+    padding: 100px 90px;
+    border-radius: 50px;
+
+    & h2 {
+      margin-bottom: 50px;
+      font-size: 40px;
+      color: $white;
+    }
+  }
+
+    & .homeProTestimonies {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+
+      & li {
+        padding: 50px 70px;
+        background-color: $white;
+        border-radius: 20px;
+
+        & p {
+          &:first-of-type {
+            margin-bottom: 10px;
+            font-weight: 500;
+            font-size: $h4;
+          }
+        }
+      }
+    }
+
+    & button {
+      position: absolute;
+      bottom: 5%;
+      right: 10%;
+      background: none;
+      font-size: 40px;
+      color: $white;
+    }
+  }
+
