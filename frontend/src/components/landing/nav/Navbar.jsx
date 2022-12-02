@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import logo from "@assets/logo.svg";
+import { Link } from "react-router-dom";
 
 function Navbar({ userType, setUserType }) {
   return userType === "parent" ? (
@@ -40,7 +41,7 @@ function Navbar({ userType, setUserType }) {
         </button>
       </ul>
       <div className="navBtn">
-        <button type="button">S'enregistrer</button>
+        <Link to='/register'>S'enregistrer</Link>
         <button type="button">
           Se connecter <span>➜</span>
         </button>

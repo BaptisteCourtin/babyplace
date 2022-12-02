@@ -1,7 +1,6 @@
 @import "./variables.scss";
 @import "./reset.scss";
 
-@import "../components/landing/nav/navbar.scss";
-@import "../components/landing/header/header.scss";
-@import "../components/landing/home/home.scss";
-@import "../components/landing/footer/footer.scss";
+@import "../components/landing/home.scss";
+
+@import "../components/register/register.scss"

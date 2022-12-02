@@ -71,43 +71,45 @@
     align-items: center;
     justify-content: center;
     gap: $h1;
+
+    & a {
+      padding: 10px 25px 10px 25px;
+      border: 1px solid transparent;
+      border-radius: 50px;
+      background-color: $third;
+      color: $white;
+      font-weight: 500;
+      transition: 0.3s ease-in-out;
+
+      &:hover {
+        background: none;
+        border: 1px solid $third;
+        color: $second;
+      }
+    }
+
     & button {
       padding: 10px 25px 10px 25px;
       border: 1px solid transparent;
       border-radius: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
+      border: 1px solid transparent;
+      transition: 0.3s ease-in-out;
 
-      &:first-of-type {
-        background-color: $third;
-        color: $white;
-        font-weight: 500;
-        transition: 0.3s ease-in-out;
-
-        &:hover {
-          background: none;
-          border: 1px solid $third;
-          color: $second;
-        }
+      & span {
+        font-size: $h4;
+        color: $third;
       }
 
-      &:last-of-type {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
-        border: 1px solid transparent;
-        transition: 0.3s ease-in-out;
-
-        & span {
-          font-size: $h4;
-          color: $third;
-        }
-
-        &:hover {
-          border: 1px solid $third;
-          box-shadow: none;
-        }
+      &:hover {
+        border: 1px solid $third;
+        box-shadow: none;
+      }
       }
     }
   }
-}
+

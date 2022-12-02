@@ -170,43 +170,57 @@ export default function Home() {
               {carouselFirst ? (
                 <>
                   <li>
-                    <p>User 1</p>
                     <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Nobis assumenda aliquam molestiae rem quia velit impedit
-                      quod cum aperiam eveniet quis exercitationem architecto
-                      tenetur illo, perferendis sunt ab eius dolor.
+                      <img
+                        src="https://randomuser.me/api/portraits/thumb/men/73.jpg"
+                        alt=""
+                      />
+                      Olympe
                     </p>
+                    <p>
+                      Site pratique et simple d'utilisation qui permet de
+                      réserver rapidement et facilement une place en crèche
+                    </p>
+                    <span>⭐⭐⭐⭐⭐</span>
                   </li>
                   <li>
-                    <p>User 2</p>
                     <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Nobis assumenda aliquam molestiae rem quia velit impedit
-                      quod cum aperiam eveniet quis exercitationem architecto
-                      tenetur illo, perferendis sunt ab eius dolor.
+                      <img
+                        src="https://randomuser.me/api/portraits/thumb/women/73.jpg"
+                        alt=""
+                      />
+                      Marie-Françoise
                     </p>
+                    <p>Permet une meilleure gestion de son agenda</p>
+                    <span>⭐⭐⭐⭐⭐</span>
                   </li>
                 </>
               ) : (
                 <>
                   <li>
-                    <p>User 3</p>
                     <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Nobis assumenda aliquam molestiae rem quia velit impedit
-                      quod cum aperiam eveniet quis exercitationem architecto
-                      tenetur illo, perferendis sunt ab eius dolor.
+                      <img
+                        src="https://randomuser.me/api/portraits/thumb/men/42.jpg"
+                        alt=""
+                      />
+                      Eustache
                     </p>
+                    <p>Très bien</p>
+                    <span>⭐⭐⭐⭐⭐</span>
                   </li>
                   <li>
-                    <p>User 4</p>
                     <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Nobis assumenda aliquam molestiae rem quia velit impedit
-                      quod cum aperiam eveniet quis exercitationem architecto
-                      tenetur illo, perferendis sunt ab eius dolor.
+                      <img
+                        src="https://randomuser.me/api/portraits/thumb/women/39.jpg"
+                        alt=""
+                      />
+                      Cécille-Myrtille
                     </p>
+                    <p>
+                      M'a permis de trouver rapidement une place en crèche pour
+                      mon enfant
+                    </p>
+                    <span>⭐⭐⭐⭐⭐</span>
                   </li>
                 </>
               )}
