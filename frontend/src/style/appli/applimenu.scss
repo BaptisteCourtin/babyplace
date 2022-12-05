@@ -1,0 +1,13 @@
+.applimenu {
+  main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1.5rem;
+    font-weight: 500;
+    font-size: 1.2rem;
+
+    margin: 0 1rem;
+  }
+}

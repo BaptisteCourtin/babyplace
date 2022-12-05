@@ -7,7 +7,21 @@
 @import "../components/login/login.scss";
 @import "../components/login/synthesis.scss";
 
-@import "../components/appli/applituto.scss";
-@import "../components/appli/buttons/buttons.scss";
-@import "../components/appli/applihome.scss";
-@import "../components/appli/applisearch.scss";
+// --- appli ---
+
+@import "../style/appli/applituto.scss";
+@import "../style/appli/applihome.scss";
+
+@import "../style/appli/applimenu.scss";
+@import "../style/appli/applisearch.scss";
+@import "../style/appli/applifiltres.scss";
+@import "../style/appli/appliuser.scss";
+@import "../style/appli/applinotif.scss";
+@import "../style/appli/applimessage.scss";
+
+@import "../components/appli/pagesTutoAppli/buttons.scss";
+@import "../components/appli/recherche/carteCreche.scss";
+@import "../components/appli/navbar/navbarApp.scss";
+@import "../components/appli/profilplat.scss";
+@import "../components/appli/filtres/toggle.scss";
+@import "../components/appli/filtres/check.scss";

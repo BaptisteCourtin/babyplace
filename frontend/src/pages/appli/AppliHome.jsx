@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Check from "@components/appli/filtres/Check";
 
 function AppliHome() {
   const [adresse, setAdresse] = useState();
   const [occasionnel, setOccasionnel] = useState();
   const [debut, setDebut] = useState();
   const [fin, setFin] = useState();
+  const [flexible, setFlexible] = useState();
 
   return (
     <div className="applihome">
@@ -36,17 +38,19 @@ function AppliHome() {
           <option value="">b</option>
         </select>
 
-        <div className="check">
-          <input type="checkbox" />
-          <label htmlFor="">Mes dates ou horaires sont flexibles</label>
-        </div>
-
-        <button type="submit">
-          <Link to="/appli/search">
-            <p>Rechercher</p>
-          </Link>
-        </button>
+        <Check
+          setter={setFlexible}
+          state={flexible}
+          nom="flexible"
+          p="Mes dates ou horaires sont flexibles"
+        />
       </form>
+
+      <button type="submit">
+        <Link to="/appli/search">
+          <p>Rechercher</p>
+        </Link>
+      </button>
     </div>
   );
 }
