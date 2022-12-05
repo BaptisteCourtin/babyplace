@@ -6,7 +6,7 @@ function Header({ userType }) {
   return userType === "parent" ? (
     <header className="header">
       <h1>
-        Réservez une place auprès de professionnelles de la petite enfance
+        Réservez une place auprès de professionnels de la petite enfance
         gratuitement en quelques clics
       </h1>
       <div className="headerInputs">

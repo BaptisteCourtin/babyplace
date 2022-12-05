@@ -1,0 +1,51 @@
+.registerImage {
+  background: $gradient;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  color: $white;
+
+  & div {
+    width: 80%;
+    margin: 0 auto;
+
+    & h2 {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 5px;
+      margin-bottom: 25px;
+      font-family: $display;
+      font-size: $h2;
+      font-weight: 700;
+
+      & span {
+        padding: 3px 15px;
+        font-size: $normal;
+        border: 1px solid $white;
+        border-radius: 50px;
+      }
+    }
+
+    & p {
+      &:first-of-type {
+        padding: 5px;
+        margin-bottom: 5px;
+        width: fit-content;
+        background-color: $white;
+        color: $third;
+        font-size: $h4;
+      }
+
+      &:last-of-type {
+        font-size: $h4;
+        font-weight: 700;
+      }
+    }
+  }
+
+  & img {
+    width: 70%;
+    margin: 0 auto;
+  }
+}

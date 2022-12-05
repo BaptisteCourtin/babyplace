@@ -1,3 +1,6 @@
+import Login from "@components/login/Login";
+import Synthesis from "@components/login/Synthesis";
+import Register from "@components/register/Register";
 import { Route, Routes } from "react-router-dom";
 
 import Appli from "@pages/appli/AppliTuto";
