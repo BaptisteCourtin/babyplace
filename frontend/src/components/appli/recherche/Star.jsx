@@ -1,28 +1,61 @@
 import React, { useState } from "react";
 import BlocStar from "./BlocStar";
 
+import Rating from "react-rating";
+import { AiOutlineStar } from "react-icons/ai";
+import { AiFillStar } from "react-icons/ai";
+import { useEffect } from "react";
+
 const tabStar = [
   { nom: "Communication", nbStar: 5 },
-  { nom: "Propreté", nbStar: 3.5 },
-  { nom: "Sécurité", nbStar: 2 },
-  { nom: "Eveil de l'enfant", nbStar: 3 },
-  { nom: "Souplesse des horaires", nbStar: 4 },
+  { nom: "Propreté", nbStar: 3.3 },
+  { nom: "Sécurité", nbStar: 2.6 },
+  { nom: "Eveil de l'enfant", nbStar: 3.5 },
+  { nom: "Souplesse des horaires", nbStar: 4.3 },
 ];
 
 function Star() {
   const [visibleStar, setVisibleStar] = useState(false);
+  const [nbStarMoyen, setNbStarMoyen] = useState(0);
+
+  useEffect(() => {
+    let init = 0;
+    for (let i = 0; i < tabStar.length; i++) {
+      init += tabStar[i].nbStar;
+    }
+    init = (init / tabStar.length).toFixed(1);
+    setNbStarMoyen(init);
+  }, []);
 
   return (
-    <div className="star" onClick={() => setVisibleStar(!visibleStar)}>
-      4.5 star
+    <div
+      className={visibleStar ? "star visible" : "star"}
+      onClick={() => setVisibleStar(!visibleStar)}
+    >
       {visibleStar ? (
         <div className="container-etoile">
-          <div>Avis (256)</div>
+          <div className="bloc-star">
+            Avis (256)
+            <Rating
+              className="rating"
+              emptySymbol={AiOutlineStar()}
+              fullSymbol={AiFillStar()}
+              initialRating={nbStarMoyen}
+              readonly
+            />
+          </div>
           {tabStar.map((each) => (
             <BlocStar nom={each.nom} nbStar={each.nbStar} />
           ))}
         </div>
-      ) : null}
+      ) : (
+        <div className="etoileDeBase">
+          <p>
+            <span>{nbStarMoyen}</span>
+            <span>{AiFillStar()}</span>
+          </p>
+        </div>
+      )}
     </div>
   );
 }

@@ -9,7 +9,7 @@ import imgCreche from "@assets/img-time.svg";
 const creche = [
   {
     image: imgCreche,
-    prix: "3.5€",
+    prix: 3.5,
     jours: [
       { jour: "Lun.14", check: true },
       { jour: "Mar.15", check: false },
@@ -25,7 +25,7 @@ const creche = [
   },
   {
     image: imgCreche,
-    prix: "0.75€",
+    prix: 0.75,
     jours: [
       { jour: "Lun.14", check: true },
       { jour: "Mar.15", check: true },
@@ -41,7 +41,7 @@ const creche = [
   },
   {
     image: imgCreche,
-    prix: "15€",
+    prix: 15,
     jours: [
       { jour: "Lun.14", check: false },
       { jour: "Mar.15", check: false },

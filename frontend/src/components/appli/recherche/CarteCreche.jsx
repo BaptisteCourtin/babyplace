@@ -9,7 +9,7 @@ function CarteCreche({ img, prix, jours, condition }) {
       <div className="info-creche">
         <div className="ville-prix">
           <p>ville à X mètres</p>
-          <p className="prix">{prix}</p>
+          <p className="prix">{prix}€</p>
         </div>
         <div className="jours">
           {jours.map((each) => (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import imgCreche from "@assets/img-time.svg";
 import BlocJour from "@components/appli/recherche/BlocJour";
@@ -7,7 +7,13 @@ import Star from "@components/appli/recherche/Star";
 function AppliCardCreche() {
   const location = useLocation();
   const { each } = location.state;
-  // each contient tous ce qu'il faut
+  // each contient tous ce qu'il faut pour 1 creche
+
+  const [prixJour, setPrixJour] = useState(0);
+
+  useEffect(() => {
+    setPrixJour(each.prix * 8);
+  }, []);
 
   return (
     <div className="appli-card-creche">
@@ -67,10 +73,10 @@ function AppliCardCreche() {
           <div className="prix-resa">
             <div className="prix">
               <p>
-                <span> {each.prix}</span> / heure *
+                <span> {each.prix}€</span> / heure *
               </p>
               <p>
-                <span>{each.prix}</span> / jour *
+                <span>{prixJour}€</span> / jour *
               </p>
             </div>
             <button type="button" onClick={() => popUp()}>
