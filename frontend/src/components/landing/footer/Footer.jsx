@@ -30,18 +30,20 @@ function Footer({ userType }) {
         </div>
         <div className="footerGrid">
           <div className="footerLeft">
-            <div className="logoContainer" onClick={() => {
-              window.scrollTo(0, 0);
-            }}
+            <div
+              className="logoContainer"
+              onClick={() => {
+                window.scrollTo(0, 0);
+              }}
             >
-              <img src={logo} alt="logo" id="logoCoeur" /><img src={logotxt} alt="babyplace" id="logotxt" />
-
+              <img src={logo} alt="logo" id="logoCoeur" />
+              <img src={logotxt} alt="babyplace" id="logotxt" />
             </div>
             <p className="footerAddress">
               DaveWarehouse Society, 4 rue Baron 44100 NANTES
             </p>
             <p className="footerMail">
-              info@davewarehouse.projet  -  02.40.01.02.03
+              info@davewarehouse.projet - 02.40.01.02.03
             </p>
           </div>
           <div className="footerCenter">
@@ -59,26 +61,29 @@ function Footer({ userType }) {
               <li>Reports</li>
               <li>Q&A</li>
             </ul>
-          </div><div className="footerLeft">
-
-            <div className="socials"><h3>Réseaux Sociaux</h3>
+          </div>
+          <div className="footerLeft">
+            <div className="socials">
+              <h3>Réseaux Sociaux</h3>
               <div className="socialMediaImg">
                 <img src={facebook} alt="facebook" />
                 <img src={twitter} alt="twitter" />
                 <img src={insta} alt="instagram" />
               </div>
             </div>
-
-
           </div>
         </div>
         <div className="footerBottom">
           <p>
-            © DaveWarehouse™, 2020. All rights reserved. Company Registration Number: 21479524.
+            © DaveWarehouse™, 2020. All rights reserved. Company Registration
+            Number: 21479524.
           </p>
-          <button type="button" onClick={() => {
-            window.scrollTo(0, 0);
-          }}>
+          <button
+            type="button"
+            onClick={() => {
+              window.scrollTo(0, 0);
+            }}
+          >
             <img src={up} alt="M" />
           </button>
         </div>

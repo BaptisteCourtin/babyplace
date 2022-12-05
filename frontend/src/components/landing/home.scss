@@ -6,6 +6,7 @@
   width: 80%;
   margin: 0 auto;
   color: $second;
+
   & h2 {
     padding: 30px 0;
     font-size: 40px;
@@ -198,54 +199,62 @@
     }
   }
 
-    & .homeProTestimonies {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 70px;
+  & .homeProTestimonies {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
 
-      & li {
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-start;
-        flex-direction: column;
-        gap: 5px;
-        height: 230px;
-        position: relative;
-        padding: 50px 70px;
-        background-color: $white;
-        border-radius: 20px;
+    & li {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      flex-direction: column;
+      gap: 5px;
+      height: 230px;
+      position: relative;
+      padding: 50px 70px;
+      background-color: $white;
+      border-radius: 20px;
 
-        & p {
-          &:first-of-type {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 10px;
-            font-weight: 500;
-            font-size: $h4;
+      & p {
+        &:first-of-type {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          margin-bottom: 10px;
+          font-weight: 500;
+          font-size: $h4;
 
-            & img {
-              border-radius: 50%;
-            }
+          & img {
+            border-radius: 50%;
           }
         }
-
-        & span {
-          position: absolute;
-          bottom: 20px;
-          left: 70px;
-        }
       }
-    }
 
-    & .homeProCarouselBtn {
-      position: absolute;
-      bottom: 5%;
-      right: 10%;
-      background: none;
-      font-size: 40px;
-      color: $white;
+      & span {
+        position: absolute;
+        bottom: 20px;
+        left: 70px;
+      }
     }
   }
 
+  & .homeProCarouselBtn {
+    position: absolute;
+    bottom: 5%;
+    right: 10%;
+    background: none;
+    font-size: 40px;
+    color: $white;
+  }
+
+  & button {
+    position: absolute;
+    bottom: 5%;
+    right: 10%;
+    background: none;
+    font-size: 40px;
+    color: $white;
+  }
+}

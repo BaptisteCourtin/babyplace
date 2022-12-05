@@ -1,65 +1,65 @@
 .formCo {
-    position: relative;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  & p {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    & a {
+      color: $third;
+      font-weight: 700;
+      border-bottom: 1px solid transparent;
+      transition: 0.3s ease-in-out;
+
+      &:hover {
+        border-bottom: 1px solid $third;
+      }
+    }
+  }
+
+  & h2 {
+    font-weight: 500;
+    font-size: $h3;
+    margin-bottom: 50px;
+  }
+
+  & form {
+    width: 50%;
+    margin: 0 auto;
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
+    gap: 15px;
 
-    & p {
-        position: absolute;
-        top: 20px;
-        right: 20px;
+    & input:not([type="checkbox"]) {
+      padding: 10px 15px;
+      border: 1px solid $grey;
+      border-radius: 5px;
+      outline: none;
 
-        & a {
-            color: $third;
-            font-weight: 700;
-            border-bottom: 1px solid transparent;
-            transition: 0.3s ease-in-out;
-
-            &:hover {
-                border-bottom: 1px solid $third;
-            }
-        }
+      &:focus {
+        outline: 1px solid $third;
+      }
     }
 
-    & h2 {
-        font-weight: 500;
-        font-size: $h3;
-        margin-bottom: 50px;
+    & div {
+      & label {
+        margin-left: 5px;
+      }
     }
 
-    & form {
-        width: 50%;
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-
-        & input:not([type=checkbox]) {
-            padding: 10px 15px;
-            border: 1px solid $grey;
-            border-radius: 5px;
-            outline: none;
-
-            &:focus {
-                outline: 1px solid $third;
-            }
-        }
-
-        & div {
-            & label {
-                margin-left: 5px;
-            }
-        }
-
-        & button {
-            margin-top: 10px;
-            background: $third;
-            color: $white;
-            padding: 10px 0;
-            font-size: $h3;
-            font-weight: 700;
-            border-radius: 5px;
-        }
+    & button {
+      margin-top: 10px;
+      background: $third;
+      color: $white;
+      padding: 10px 0;
+      font-size: $h3;
+      font-weight: 700;
+      border-radius: 5px;
     }
+  }
 }
