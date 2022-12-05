@@ -2,7 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import logo from "@assets/logo4.svg";
 import logotxt from "@assets/babyplacetxt.svg";
-import bulle from "@assets/bulle.svg";
+import up from "@assets/up.svg";
+import facebook from "@assets/facebook.svg";
+import twitter from "@assets/twitter.svg";
+import insta from "@assets/insta.svg";
 
 function Footer({ userType }) {
   return (
@@ -27,18 +30,21 @@ function Footer({ userType }) {
         </div>
         <div className="footerGrid">
           <div className="footerLeft">
-            <div className="logoContainer">
+            <div className="logoContainer" onClick={() => {
+              window.scrollTo(0, 0);
+            }}
+            >
               <img src={logo} alt="logo" id="logoCoeur" /><img src={logotxt} alt="babyplace" id="logotxt" />
 
             </div>
             <p className="footerAddress">
-              Warehouse Society, 234 Bahagia Ave Street PRBW 29281
+              DaveWarehouse Society, 4 rue Baron 44100 NANTES
             </p>
             <p className="footerMail">
-              info@warehouse.project 1-232-3434 (Main)
+              info@davewarehouse.projet  -  02.40.01.02.03
             </p>
           </div>
-          <div className="footerRight">
+          <div className="footerCenter">
             <ul>
               <li>About</li>
               <li>Profile</li>
@@ -53,24 +59,27 @@ function Footer({ userType }) {
               <li>Reports</li>
               <li>Q&A</li>
             </ul>
-            <ul>
-              <li>Social Media</li>
-              <div>
-                <li>F</li>
-                <li>T</li>
-                <li>I</li>
+          </div><div className="footerLeft">
+
+            <div className="socials"><h3>Réseaux Sociaux</h3>
+              <div className="socialMediaImg">
+                <img src={facebook} alt="facebook" />
+                <img src={twitter} alt="twitter" />
+                <img src={insta} alt="instagram" />
               </div>
-            </ul>
+            </div>
+
+
           </div>
         </div>
         <div className="footerBottom">
           <p>
-            © Datawarehouse™, 2020. All rights reserved.
-            <br />
-            Company Registration Number: 21479524.
+            © DaveWarehouse™, 2020. All rights reserved. Company Registration Number: 21479524.
           </p>
-          <button type="button">
-            <img src={bulle} alt="M" />
+          <button type="button" onClick={() => {
+            window.scrollTo(0, 0);
+          }}>
+            <img src={up} alt="M" />
           </button>
         </div>
       </footer>

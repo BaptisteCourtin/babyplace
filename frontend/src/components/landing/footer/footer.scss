@@ -72,14 +72,15 @@ hr {
 
   & .footerGrid {
     display: grid;
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: 1fr 1fr 1fr;
 
     & .footerLeft {
       & .logoContainer {
-        width: 85%;
+        width: 75%;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        cursor: pointer;
 
 
         #logoCoeur {
@@ -105,10 +106,10 @@ hr {
       }
     }
 
-    & .footerRight {
+    & .footerCenter {
       display: flex;
       justify-content: space-evenly;
-      gap: 50px;
+      gap: 70px;
 
       & ul {
         display: flex;
@@ -153,13 +154,36 @@ hr {
         }
       }
     }
+
+    & .footerLeft {
+      padding-top: 20px;
+
+      .socials {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+
+        .socialMediaImg {
+          display: flex;
+          gap: 20px;
+          width: 80%;
+
+          img {
+            width: 60%;
+            padding: 20px;
+          }
+        }
+      }
+    }
   }
 
   & .footerBottom {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 70px;
+    margin-top: 30px;
     line-height: 1.5;
 
     & p {
