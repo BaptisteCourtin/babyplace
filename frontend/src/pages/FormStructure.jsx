@@ -18,7 +18,6 @@ function FormStructure() {
               Back
             </button>
           )}
-          &&{" "}
           <button type="button" onClick={next}>
             {!isLastStep ? "Next" : "Finish"}
           </button>
