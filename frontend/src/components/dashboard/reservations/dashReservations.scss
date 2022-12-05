@@ -1,0 +1,343 @@
+.dashReservations {
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    overflow-y: scroll;
+
+    & .dashReserFilters {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 50px;
+
+        & h2 {
+            font-size: $h3;
+            font-weight: 700;
+        }
+
+        & .reserBtn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+
+            & button {
+                padding: 5px 10px;
+                font-size: $small;
+                font-weight: 500;
+                border-radius: 5px;
+                background: none;
+
+                &:nth-of-type(1) {
+                    color: $third;
+                    border: 1px solid $third;
+                }
+                
+                &:nth-of-type(2) {
+                    color: $fifth;
+                    border: 1px solid $fifth;
+                }
+
+                &:nth-of-type(3) {
+                    color: $sixth;
+                    border: 1px solid $sixth;
+                }
+
+                &:nth-of-type(4) {
+                    color: $seventh;
+                    border: 1px solid $seventh;
+                }
+
+                &:nth-of-type(5) {
+                    color: $first;
+                    border: 1px solid $first;
+                }
+            }
+
+            & .selected:nth-of-type(1) {
+                background: $third;
+                color: $white !important;
+            }
+
+            & .selected:nth-of-type(2) {
+                background: $fifth;
+                color: $white !important;
+            }
+
+            & .selected:nth-of-type(3) {
+                background: $sixth;
+                color: $white !important;
+            }
+
+            & .selected:nth-of-type(4) {
+                background: $seventh;
+                color: $white !important;
+            }
+
+            & .selected:nth-of-type(5) {
+                background: $first;
+                color: $white !important;
+            }
+        }
+    }
+
+    & .reserList {
+        margin-top: 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        & li {
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            align-items: center;
+            width: 95%;
+            margin: 0 auto;
+            padding: 10px 25px 10px 50px;
+            background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
+            border-radius: 5px;
+            box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
+
+            & .reserStatusColor {
+                position: absolute;
+                width: 25px;
+                height: 100%;
+                top: 0;
+                left: 0;
+                border-bottom-left-radius: 5px;
+                border-top-left-radius: 5px;
+            }
+
+            & .reserInfo1 {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                & p:first-of-type {
+                    text-transform: capitalize;
+                    font-weight: 500;
+                }
+            }
+
+            & .reserInfo2 {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                & p:first-of-type {
+                    text-transform: capitalize;
+                    font-weight: 500;
+                }
+            }
+
+            & .reserInfo3 {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                & p {
+                    & span {
+                        font-weight: 500;
+                    }
+                }
+            }
+
+            & .reserInfo4 {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                & p:last-of-type {
+                    font-weight: 500;
+                }
+            }
+
+            & .reserChoice, & .reserModif {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            & .reserChoice {
+
+                & button {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 3px;
+                    padding: 5px 10px;
+                    border-radius: 5px;
+                    background: none;
+                }
+
+                & button:first-of-type {
+                    background-color: $fifth;
+                    color: $white;
+                    font-weight: 500;
+                }
+
+                & button:last-of-type {
+                    background-color: $seventh;
+                    color: $white;
+                }
+            }
+
+            & .reserModif {
+                & button {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 3px;
+                    background: none;
+                    color: $third;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+
+    & .approvedModal {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: -6vh;
+        left: -15vw;
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(
+            148.74deg,
+            rgba(71, 79, 255, 0.6) 2.49%,
+            rgba(227, 122, 204, 0.6) 99.05%
+          );
+        z-index: 2;
+
+        & .approvedModalInner {
+            padding: 100px 150px;
+            text-align: center;
+            background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
+            border-radius: 5px;
+
+            & .approvedModalImg {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+                margin-bottom: 40px;
+
+                & img {
+                    border-radius: 50%;
+                    width: 72px;
+                    height: 72px;
+
+                    &:nth-of-type(2) {
+                        width: 48px;
+                        height: 48px;
+                        padding: 10px;
+                        background-color: $fifth;
+                    }
+                }
+            }
+
+            & h2 {
+                font-size: $h2;
+                font-weight: 500;
+                color: $fifth;
+            }
+
+            & p {
+                margin: 20px 0;
+            }
+
+            & .approvedModalBtn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                gap: 20px;
+
+                & button {
+                    width: 100%;
+                    background: none;
+                    padding: 10px 30px;
+                    border: 1px solid transparent;
+                    border-radius: 50px;
+
+                    &:first-of-type {
+                        background-color: $fifth;
+                        color: $white;
+                        font-weight: 500;
+                    }
+
+                    &:last-of-type {
+                        color: $fifth;
+                        border: 1px solid $fifth;
+                    }
+                }
+            }
+        }
+    }
+
+    & .refusedModal {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: -6vh;
+        left: -15vw;
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(
+            148.74deg,
+            rgba(71, 79, 255, 0.6) 2.49%,
+            rgba(227, 122, 204, 0.6) 99.05%
+          );
+        z-index: 2;
+
+        & .refusedModalInner {
+            padding: 100px 150px;
+            text-align: center;
+            background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
+            border-radius: 5px;
+
+            & .refusedModalImg {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+                margin-bottom: 40px;
+
+                & img {
+                    border-radius: 50%;
+                    width: 72px;
+                    height: 72px;
+
+                    &:nth-of-type(2) {
+                        width: 48px;
+                        height: 48px;
+                        padding: 10px;
+                        background-color: $fifth;
+                    }
+                }
+            }
+
+            & h2 {
+                font-size: $h2;
+                font-weight: 500;
+                color: $seventh;
+            }
+
+            & p {
+                margin: 20px 0;
+            }
+
+            & button {
+                width: 100%;
+                background: none;
+                padding: 10px 30px;
+                border: 1px solid $seventh;
+                color: $seventh;
+                border-radius: 50px;
+            }
+        }
+    }
+}

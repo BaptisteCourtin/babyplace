@@ -1,0 +1,204 @@
+.dashAgenda {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 50px;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+
+    & .agendaSection {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        padding: 20px 0;
+        background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
+        border-radius: 5px;
+
+        & h2 {
+            font-size: $h2;
+            font-weight: 500;
+            margin-left: 20px;
+        }
+
+        & .react-calendar {
+            padding: 0 70px;
+
+            &__navigation {
+                display: flex;
+                justify-content: space-evenly;
+
+                &__arrow {
+                    background: none;
+                    color: $third;
+                    font-size: $h2;
+                }
+
+                &__prev2-button {
+                    display: none;
+                }
+
+                &__label {
+                    flex-grow: 0 !important;
+                    background: $third;
+                    padding: 5px 10px;
+                    border-radius: 5px;
+
+                    & span {
+                        color: $white;
+                        font-weight: 500;
+                        text-transform: capitalize;
+                    }
+                }
+
+                &__next2-button {
+                    display: none;
+                }
+            }
+
+            &__month-view {
+                margin-top: 20px;
+                &__weekdays {
+                    padding-bottom: 10px;
+                    border-bottom: 1px solid $grey;
+
+                    &__weekday {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        & abbr {
+                            text-transform: capitalize;
+                        }
+                    }
+                }
+
+                &__days {
+                    &__day {
+                        border-bottom: 1px dashed $second;
+                        width: 50px;
+                        height: 50px;
+                        padding: 10px;
+                        background: none;
+                    }
+                }
+            }
+
+            &__tile--now {
+                background-color: $third;
+                color: $white;
+                font-weight: 500;
+                border-bottom: 1px solid transparent;
+            }
+        }
+
+        & .agendaCalendarBtn {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            gap: 50px;
+
+            & button {
+                background: none;
+                padding: 5px 10px;
+                border-radius: 5px;
+                font-weight: 500;
+                transition: 0.3s ease-in-out;
+
+                &:first-of-type {
+                    border: 1px solid $first;
+                    color: $first;
+
+                    &:hover {
+                        background-color: $first;
+                        color: $white;
+                    }
+                }
+
+                &:last-of-type {
+                    border: 1px solid $third;
+                    color: $third;
+
+                    &:hover {
+                        background-color: $third;
+                        color: $white;
+                    }
+                }
+            }
+        }
+    }
+
+    & .agendaMessage {
+        & .agendaLegend {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-bottom: 40px;
+
+            & li {
+                display: flex;
+                align-items: center;
+                & span {
+                    display: inline-block;
+                    width: 15px;
+                    height: 15px;
+                    border-radius: 50%;
+                    margin-right: 10px;
+                }
+
+                &:nth-of-type(1) {
+                    & span {
+                        background-color: $fifth;
+                    }
+                }
+
+                &:nth-of-type(2) {
+                    & span {
+                        background-color: $sixth;
+                    }
+                }
+                
+                &:nth-of-type(3) {
+                    & span {
+                        background-color: $seventh;
+                    }
+                }
+
+                &:nth-of-type(4) {
+                    & span {
+                        background-color: $second;
+                    }
+                }
+            }
+        }
+
+        & .agendaMessageList {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            & li {
+                display: flex;
+                gap: 30px;
+                padding: 10px 20px;
+                border-radius: 5px;
+                background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
+                box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
+
+                & .agendaMessageIcon {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: $h1;
+                    font-weight: 500;
+                }
+
+                & p {
+                    font-size: $h4;
+
+                    & span {
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+    }
+}

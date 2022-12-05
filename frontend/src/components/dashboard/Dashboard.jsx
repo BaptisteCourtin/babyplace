@@ -3,17 +3,21 @@ import DashNavbar from './nav/DashNavbar';
 
 import { FiBell } from 'react-icons/fi';
 import DashSettings from './settings/DashSettings';
+import DashReservations from './reservations/DashReservations';
+import DashAgenda from './agenda/DashAgenda';
 
 function Dashboard() {
 
     const [toggle, setToggle] = useState(0);
     const pageShown = () => {
-        if (toggle == 4) {
+        if (toggle === 1) {
+            return <DashReservations />
+        } else if (toggle === 2) {
+            return <DashAgenda />
+        } else if (toggle === 4) {
             return <DashSettings />
         }
     }
-
-    console.log(toggle)
 
     return (
         <div className='dashboard'>

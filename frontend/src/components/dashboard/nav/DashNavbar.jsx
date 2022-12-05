@@ -18,7 +18,7 @@ function DashNavbar({ toggle, setToggle }) {
                     <MdOutlineCalendarToday /><button onClick={() => setToggle(2)}>Agenda</button>
                 </li>
                 <li>
-                    <MdOutlinePlace /><button onClick={() => setToggle(3)}>Ajouter un lieu</button>
+                    <MdOutlinePlace /><button onClick={() => setToggle(3)}>Ajouter une place</button>
                 </li>
             </ul>
             <button className='dashNavParams' onClick={() => setToggle(4)}><MdOutlineSettings />Paramètres</button>
