@@ -5,8 +5,8 @@ import PropTypes from "prop-types";
 
 function CarteCreche({ img, prix, jours, condition }) {
   return (
-    <Link to="/appli/search/card" state={{ img, prix, jours, condition }}>
-      <div className="carte-creche">
+    <div className="carte-creche">
+      <Link to="/appli/search/card" state={{ img, prix, jours, condition }}>
         <img src={img} alt="img creche" />
         <div className="info-creche">
           <div className="ville-prix">
@@ -21,8 +21,8 @@ function CarteCreche({ img, prix, jours, condition }) {
           {condition.verif ? <p>N’accepte que les profils vérifiés</p> : null}
           {condition.essai ? <p>Période d’adaptation obligatoire</p> : null}
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }
 

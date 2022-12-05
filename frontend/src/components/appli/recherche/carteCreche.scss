@@ -2,8 +2,8 @@
   padding: 0.5rem;
   margin: 0.5rem 1rem;
   max-width: 350px;
+  height: 95%;
   background-color: $third;
-  border: 2px red solid;
 
   &:nth-child(even) {
     background-color: $fourth;
