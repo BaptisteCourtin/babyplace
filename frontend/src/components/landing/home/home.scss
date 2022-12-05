@@ -194,33 +194,32 @@
     }
   }
 
-    & .homeProTestimonies {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 70px;
+  & .homeProTestimonies {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
 
-      & li {
-        padding: 50px 70px;
-        background-color: $white;
-        border-radius: 20px;
+    & li {
+      padding: 50px 70px;
+      background-color: $white;
+      border-radius: 20px;
 
-        & p {
-          &:first-of-type {
-            margin-bottom: 10px;
-            font-weight: 500;
-            font-size: $h4;
-          }
+      & p {
+        &:first-of-type {
+          margin-bottom: 10px;
+          font-weight: 500;
+          font-size: $h4;
         }
       }
     }
-
-    & button {
-      position: absolute;
-      bottom: 5%;
-      right: 10%;
-      background: none;
-      font-size: 40px;
-      color: $white;
-    }
   }
 
+  & button {
+    position: absolute;
+    bottom: 5%;
+    right: 10%;
+    background: none;
+    font-size: 40px;
+    color: $white;
+  }
+}

@@ -1,0 +1,22 @@
+.navbar {
+  background-color: $white;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: $grey;
+  border-top: 1px black solid;
+
+  position: fixed;
+  bottom: 0;
+
+  img {
+    fill: red;
+    color: red;
+    background: $gradient;
+    padding: 7px;
+    border-radius: 10px;
+    height: 35px;
+  }
+}

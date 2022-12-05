@@ -23,6 +23,8 @@
     gap: 1.5rem;
     width: 90%;
 
+    flex-grow: 1;
+
     input,
     select {
       background-color: rgba(255, 255, 255, 0.1);
@@ -43,40 +45,17 @@
     select#occasionnel {
       width: max-content;
     }
+  }
 
-    label {
-      color: black;
-    }
+  button {
+    background-color: $third;
+    width: 100%;
+    line-height: 70px;
+    border-radius: 10px;
+    font-size: $h3;
+    font-weight: 500;
 
-    .check {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-
-      input {
-        width: max-content;
-        padding: 0.2rem;
-        margin: 0 1rem;
-      }
-
-      label {
-        color: $white;
-      }
-    }
-
-    button {
-      background-color: $third;
-      align-self: center;
-      justify-self: center;
-      width: 100%;
-      line-height: 70px;
-      border-radius: 10px;
-      font-size: $h3;
-      margin-top: 70px;
-      font-weight: 500;
-      border: 2px red solid;
-    }
+    flex-grow: 0;
+    flex-shrink: 0;
   }
 }
