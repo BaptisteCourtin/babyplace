@@ -5,6 +5,7 @@ import { FiBell } from 'react-icons/fi';
 import DashSettings from './settings/DashSettings';
 import DashReservations from './reservations/DashReservations';
 import DashAgenda from './agenda/DashAgenda';
+import DashPlaces from './places/DashPlaces';
 
 function Dashboard() {
 
@@ -14,6 +15,8 @@ function Dashboard() {
             return <DashReservations />
         } else if (toggle === 2) {
             return <DashAgenda />
+        } else if (toggle === 3) {
+            return <DashPlaces />
         } else if (toggle === 4) {
             return <DashSettings />
         }

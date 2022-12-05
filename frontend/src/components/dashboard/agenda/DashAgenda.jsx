@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
-import Calendar from 'react-calendar';
+import React from 'react';
+import DashCalendar from './calendar/DashCalendar';
 
 function DashAgenda() {
-
-    const [value, onChange] = useState(new Date());
 
     const places1 = Math.floor(Math.random() * 5)
     const places2 = Math.floor(Math.random() * 5)
@@ -13,7 +11,7 @@ function DashAgenda() {
         <div className='dashAgenda'>
             <section className='agendaSection'>
                 <h2>Agenda</h2>
-                <Calendar onChange={onChange} showNeighboringMonth={false} value={value} />
+                <DashCalendar />
                 <div className='agendaCalendarBtn'>
                     <button>+ Mettre à jour les disponibilités</button>
                     <button>+ Ajouter une place</button>
