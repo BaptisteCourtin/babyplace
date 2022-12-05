@@ -1,27 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import BlocJour from "@components/appli/recherche/BlocJour";
 import PropTypes from "prop-types";
 
 function CarteCreche({ img, prix, jours, condition }) {
   return (
     <div className="carte-creche">
-      <Link to="/appli/search/card" state={{ img, prix, jours, condition }}>
-        <img src={img} alt="img creche" />
-        <div className="info-creche">
-          <div className="ville-prix">
-            <p>ville à X mètres</p>
-            <p className="prix">{prix}</p>
-          </div>
-          <div className="jours">
-            {jours.map((each) => (
-              <BlocJour jour={each.jour} check={each.check} />
-            ))}
-          </div>
-          {condition.verif ? <p>N’accepte que les profils vérifiés</p> : null}
-          {condition.essai ? <p>Période d’adaptation obligatoire</p> : null}
+      <img src={img} alt="img creche" />
+      <div className="info-creche">
+        <div className="ville-prix">
+          <p>ville à X mètres</p>
+          <p className="prix">{prix}</p>
         </div>
-      </Link>
+        <div className="jours">
+          {jours.map((each) => (
+            <BlocJour jour={each.jour} check={each.check} />
+          ))}
+        </div>
+        {condition.verif ? <p>N’accepte que les profils vérifiés</p> : null}
+        {condition.essai ? <p>Période d’adaptation obligatoire</p> : null}
+      </div>
     </div>
   );
 }

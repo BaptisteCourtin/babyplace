@@ -82,12 +82,14 @@ function AppliSearch() {
 
         <main>
           {creche.map((each) => (
-            <CarteCreche
-              jours={each.jours}
-              prix={each.prix}
-              img={each.image}
-              condition={each.condition}
-            />
+            <Link to="/appli/search/card" state={{ each }}>
+              <CarteCreche
+                jours={each.jours}
+                prix={each.prix}
+                img={each.image}
+                condition={each.condition}
+              />
+            </Link>
           ))}
         </main>
       </div>
