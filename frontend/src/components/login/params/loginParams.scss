@@ -1,0 +1,63 @@
+.loginParams {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  flex-direction: column;
+  width: 80%;
+  margin: 0 auto;
+  padding: 60px 0;
+  gap: 30px;
+
+  & .loginParamsTitle {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    & h2 {
+      font-size: $h2;
+      font-weight: 700;
+    }
+
+    & p {
+      font-size: $small;
+    }
+  }
+
+  & .loginParamsDetails {
+    display: flex;
+    gap: 30px;
+    flex-direction: column;
+    & details {
+      & summary {
+        font-size: $h3;
+        font-weight: 700;
+      }
+
+      & a {
+        display: block;
+        width: fit-content;
+        margin-bottom: 10px;
+        margin-left: 20px;
+        border-bottom: 1px solid $second;
+        font-weight: 500;
+
+        &:first-of-type {
+          margin-top: 10px;
+        }
+
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  & .loginParamsBtn {
+    padding: 15px 20px;
+    background-color: $third;
+    border-radius: 50px;
+    font-size: $h4;
+    font-weight: 700;
+    color: $white;
+  }
+}

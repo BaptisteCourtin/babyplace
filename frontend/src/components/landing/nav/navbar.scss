@@ -28,6 +28,16 @@
     }
   }
 
+  .mainTextBtn {
+    border-bottom: 1px solid transparent;
+    transition: 0.3s ease-in-out;
+    font-weight: 700;
+
+    &:hover {
+      border-bottom: 1px solid $first;
+    }
+  }
+
   .textBtn {
     border-bottom: 1px solid transparent;
     transition: 0.3s ease-in-out;

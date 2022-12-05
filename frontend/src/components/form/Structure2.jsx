@@ -1,11 +1,7 @@
 import React from "react";
 
-function Structure2({ }) {
-    return (
-        <div>
-
-        </div>
-    );
+function Structure2({}) {
+  return <div />;
 }
 
 export default Structure2;

@@ -12,7 +12,7 @@ function Navbar({ userType, setUserType }) {
       </div>
       <button
         type="button"
-        className="textBtn"
+        className="mainTextBtn"
         onClick={() => setUserType("pro")}
       >
         Vous êtes professionnel de la petite enfance ?
@@ -33,11 +33,14 @@ function Navbar({ userType, setUserType }) {
     </nav>
   ) : (
     <nav className="nav pro">
-      <img src={logo} alt="Babyplace" />
+      <div className="logoContainer">
+        <img src={logo} alt="Babyplace" id="logoCoeur" />
+        <img src={logotxt} alt="Babyplace" id="logotxt" />
+      </div>
       <ul>
         <button
           type="button"
-          className="textBtn"
+          className="mainTextBtn"
           onClick={() => setUserType("parent")}
         >
           Vous êtes un parent ?
