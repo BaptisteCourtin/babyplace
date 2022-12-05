@@ -12,13 +12,13 @@ function DashNavbar({ toggle, setToggle }) {
             </div>
             <ul className='dashNavList'>
                 <li>
-                    <MdOutlineFormatListBulleted /><button>Demandes</button>
+                    <MdOutlineFormatListBulleted /><button onClick={() => setToggle(1)}>Demandes</button>
                 </li>
                 <li>
-                    <MdOutlineCalendarToday /><button>Agenda</button>
+                    <MdOutlineCalendarToday /><button onClick={() => setToggle(2)}>Agenda</button>
                 </li>
                 <li>
-                    <MdOutlinePlace /><button>Ajouter un lieu</button>
+                    <MdOutlinePlace /><button onClick={() => setToggle(3)}>Ajouter un lieu</button>
                 </li>
             </ul>
             <button className='dashNavParams' onClick={() => setToggle(4)}><MdOutlineSettings />Paramètres</button>

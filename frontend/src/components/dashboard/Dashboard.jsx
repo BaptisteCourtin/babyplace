@@ -2,16 +2,14 @@ import React, { useState } from 'react';
 import DashNavbar from './nav/DashNavbar';
 
 import { FiBell } from 'react-icons/fi';
-import { MdOutlineSettings } from 'react-icons/md';
-import Synthesis from '@components/login/Synthesis';
+import DashSettings from './settings/DashSettings';
 
 function Dashboard() {
 
     const [toggle, setToggle] = useState(0);
-
     const pageShown = () => {
-        if (toggle === 4) {
-            return <Synthesis />
+        if (toggle == 4) {
+            return <DashSettings />
         }
     }
 
@@ -22,17 +20,16 @@ function Dashboard() {
             <nav>
                 <button><FiBell /></button>
                 <button>Kévin</button>
-                <button><MdOutlineSettings /></button>
             </nav>
             <main>
                 <DashNavbar toggle={toggle} setToggle={setToggle} />
-                <div className='dashboardSection'>
+                <section className='dashboardSection'>
                     {pageShown()}
-                </div>
+                </section>
             </main>
             <footer>
                 <p>2022 © Babyplace</p>
-                <p>Crée avec ♥ Wild Code School x Babyplace</p>
+                <p>Crée avec <span>♥</span> Wild Code School x Babyplace</p>
             </footer>
         </div>
     )
