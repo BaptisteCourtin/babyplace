@@ -1,10 +1,8 @@
-import React, { useState } from "react";
-import BlocStar from "./BlocStar";
+import React, { useState, useEffect } from "react";
 
 import Rating from "react-rating";
-import { AiOutlineStar } from "react-icons/ai";
-import { AiFillStar } from "react-icons/ai";
-import { useEffect } from "react";
+import { AiOutlineStar, AiFillStar } from "react-icons/ai";
+import BlocStar from "./BlocStar";
 
 const tabStar = [
   { nom: "Communication", nbStar: 5 },

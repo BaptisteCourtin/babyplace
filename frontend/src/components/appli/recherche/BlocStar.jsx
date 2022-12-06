@@ -1,7 +1,6 @@
 import React from "react";
 import Rating from "react-rating";
-import { AiOutlineStar } from "react-icons/ai";
-import { AiFillStar } from "react-icons/ai";
+import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 
 function BlocStar({ nom, nbStar }) {
   return (

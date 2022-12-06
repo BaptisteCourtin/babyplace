@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Completion = ({ nom, completion }) => {
+function Completion({ nom, completion }) {
   const mystyle = {
     color: "black",
     width: `${completion}%`,
@@ -15,6 +15,6 @@ const Completion = ({ nom, completion }) => {
       </Link>
     </div>
   );
-};
+}
 
 export default Completion;
