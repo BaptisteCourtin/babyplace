@@ -19,14 +19,20 @@ function Structure1({
         <button
           type="button"
           className={typeStructure === "creche" ? "selected" : ""}
-          onClick={() => setTypeStructure("creche")}
+          onClick={() => {
+            setTypeStructure("creche");
+            updateFields({ typeStructure: "creche" });
+          }}
         >
           Crèche
         </button>
         <button
           type="button"
           className={typeStructure === "assmat" ? "selected" : ""}
-          onClick={() => setTypeStructure("assmat")}
+          onClick={() => {
+            setTypeStructure("assmat");
+            updateFields({ typeStructure: "creche" });
+          }}
         >
           Assistante maternelle
         </button>
@@ -39,14 +45,20 @@ function Structure1({
               <button
                 type="button"
                 className={typeCreche === "creche parentale" ? "selected" : ""}
-                onClick={() => setTypeCreche("creche parentale")}
+                onClick={() => {
+                  setTypeCreche("creche parentale");
+                  updateFields({ typeCreche: "creche parentale" });
+                }}
               >
                 Crèche parentale
               </button>
               <button
                 type="button"
                 className={typeCreche === "micro creche" ? "selected" : ""}
-                onClick={() => setTypeCreche("micro creche")}
+                onClick={() => {
+                  setTypeCreche("micro creche");
+                  updateFields({ typeCreche: "micro creche" });
+                }}
               >
                 Micro-crèche
               </button>
@@ -55,35 +67,50 @@ function Structure1({
                 className={
                   typeCreche === "creche d'entreprise" ? "selected" : ""
                 }
-                onClick={() => setTypeCreche("creche d'entreprise")}
+                onClick={() => {
+                  setTypeCreche("creche d'entreprise");
+                  updateFields({ typeCreche: "creche d'entreprise" });
+                }}
               >
                 Crèche d'entreprise
               </button>
               <button
                 type="button"
                 className={typeCreche === "halte garderie" ? "selected" : ""}
-                onClick={() => setTypeCreche("halte garderie")}
+                onClick={() => {
+                  setTypeCreche("halte garderie");
+                  updateFields({ typeCreche: "halte garderie" });
+                }}
               >
                 Halte garderie
               </button>
               <button
                 type="button"
                 className={typeCreche === "creche collective" ? "selected" : ""}
-                onClick={() => setTypeCreche("creche collective")}
+                onClick={() => {
+                  setTypeCreche("creche collective");
+                  updateFields({ typeCreche: "creche collective" });
+                }}
               >
                 Crèche collective
               </button>
               <button
                 type="button"
                 className={typeCreche === "multi accueil" ? "selected" : ""}
-                onClick={() => setTypeCreche("multi accueil")}
+                onClick={() => {
+                  setTypeCreche("multi accueil");
+                  updateFields({ typeCreche: "multi accueil" });
+                }}
               >
                 Multi-accueil
               </button>
               <button
                 type="button"
                 className={typeCreche === "creche municipale" ? "selected" : ""}
-                onClick={() => setTypeCreche("creche municipale")}
+                onClick={() => {
+                  setTypeCreche("creche municipale");
+                  updateFields({ typeCreche: "creche municipale" });
+                }}
               >
                 Crèche municipale
               </button>
@@ -92,7 +119,10 @@ function Structure1({
                 className={
                   typeCreche === "creche associative" ? "selected" : ""
                 }
-                onClick={() => setTypeCreche("creche associative")}
+                onClick={() => {
+                  setTypeCreche("creche associative");
+                  updateFields({ typeCreche: "creche associative" });
+                }}
               >
                 Crèche associative
               </button>

@@ -28,7 +28,7 @@
     background-color: #f9f9f9;
 
     & div {
-      padding: 16px;
+      padding: 24px;
       background-color: white;
       width: 40%;
       min-height: 30%;
@@ -39,7 +39,12 @@
       align-items: center;
 
       & h4 {
-        margin: 2vh 0;
+        margin: 0 0 2vh;
+      }
+
+      & pre {
+        max-width: 100%;
+        white-space: pre-wrap;
       }
     }
   }
@@ -111,6 +116,12 @@
     border: 1px solid $grey;
   }
 
+  & .backButton {
+    border: none;
+    color: $third;
+    background-color: white;
+  }
+
   .typeContainer,
   .typeCrecheContainer {
     display: flex;
@@ -153,18 +164,20 @@
   }
 }
 
-.structure2 {
+.structure2,
+.structure3 {
   padding: 8px;
   display: flex;
   flex-direction: column;
   padding-top: 5vh;
   height: 90%;
+  width: 100%;
 
-  .pageContent {
+  & .pageContent {
     display: flex;
   }
 
-  .imgContainer {
+  & .imgContainer {
     min-width: 150px;
     min-height: 150px;
     height: 150px;
@@ -182,5 +195,42 @@
     flex-direction: column;
     justify-content: center;
     margin-left: 2vw;
+  }
+
+  & input {
+    color: $grey;
+  }
+
+  & input::file-selector-button {
+    border: 2px solid $third;
+    border-radius: 10px;
+    height: 40px;
+    background-color: white;
+    color: $third;
+    font-weight: 600;
+  }
+}
+
+.structure3 {
+  & .pageContent {
+    display: block;
+  }
+
+  & .photoAndDescContainer {
+    display: flex;
+    margin-top: 2vh;
+  }
+
+  & .imgContainer {
+    min-width: 200px;
+    min-height: 150px;
+    height: 150px;
+    width: 200px;
+    border-radius: 0;
+    overflow: hidden;
+  }
+
+  & img {
+    width: 100%;
   }
 }

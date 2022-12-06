@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
-function Structure2() {
-  const [imageSrc, setImageSrc] = useState("https://via.placeholder.com/150");
+function Structure2({ imageProfilSrc, updateFields }) {
+  // const [imageProfilSrc, setImageProfilSrc] = useState("https://via.placeholder.com/150");
   const updateImg = (e) => {
     // e.files contient un objet FileList
-    console.log(e.target.files);
     const [picture] = e.target.files;
+    console.log(e.target.files);
 
     // "picture" est un objet File
     if (picture) {
@@ -16,7 +16,9 @@ function Structure2() {
       reader.onload = (e) => {
         // On change l'URL de l'image (base64)
         // console.log(e.result);
-        setImageSrc(e.target.result);
+        imageProfilSrc = e.target.result;
+        updateFields({ imageProfilSrc: e.target.result });
+        console.log(imageProfilSrc);
       };
 
       // On lit le fichier "picture" uploadé
@@ -28,7 +30,7 @@ function Structure2() {
       <h4>Choisir une photo de profil :</h4>
       <div className="pageContent">
         <div className="imgContainer">
-          <img src={imageSrc} alt="prévisualisation image" />
+          <img src={imageProfilSrc} alt="prévisualisation image" />
         </div>
         <div className="inputContainer">
           <label htmlFor="avatar">Formats acceptés : .jpg, .jpeg, .png</label>
