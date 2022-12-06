@@ -10,6 +10,7 @@ import AppliSearch from "@pages/appli/AppliSearch";
 import AppliSearchFiltres from "@pages/appli/AppliFiltres";
 import AppliCardCreche from "@pages/appli/AppliCardCreche";
 import AppliUser from "@pages/appli/AppliUser";
+import AppliUserCompletion from "@pages/appli/AppliUserCompletion";
 import AppliNotif from "@pages/appli/AppliNotif";
 import AppliMessage from "@pages/appli/AppliMessage";
 
@@ -34,6 +35,10 @@ function App() {
         <Route path="/appli/search/filtres" element={<AppliSearchFiltres />} />
         <Route path="/appli/search/card" element={<AppliCardCreche />} />
         <Route path="/appli/user" element={<AppliUser />} />
+        <Route
+          path="/appli/user/completion"
+          element={<AppliUserCompletion />}
+        />
         <Route path="/appli/notif" element={<AppliNotif />} />
         <Route path="/appli/message" element={<AppliMessage />} />
 

@@ -11,12 +11,15 @@
   position: fixed;
   bottom: 0;
 
-  img {
-    fill: red;
-    color: red;
+  .active {
+    color: $white;
     background: $gradient;
-    padding: 7px;
     border-radius: 10px;
-    height: 35px;
+  }
+
+  .img-nav {
+    width: 40px;
+    height: 40px;
+    padding: 7px;
   }
 }

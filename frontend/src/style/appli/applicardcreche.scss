@@ -32,7 +32,8 @@
         margin: 0.5rem 0.5rem;
       }
 
-      p {
+      p,
+      ul {
         margin: 0 1rem;
       }
 
@@ -45,7 +46,6 @@
       .prix-resa {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
 
         .prix {
           display: flex;
@@ -55,16 +55,6 @@
           span {
             font-size: $h3;
           }
-        }
-        button {
-          background-color: $third;
-          border-radius: 10px;
-          color: $white;
-          margin-right: 0.5rem;
-          font-weight: 500;
-          font-size: $h3;
-
-          flex-grow: 1;
         }
       }
     }

@@ -9,5 +9,11 @@
     font-size: 1.2rem;
 
     margin: 0 1rem;
+
+    .icon-menu {
+      color: $third;
+      margin-right: 1rem;
+      transform: translateY(3px);
+    }
   }
 }

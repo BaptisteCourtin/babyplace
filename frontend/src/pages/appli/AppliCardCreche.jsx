@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import imgCreche from "@assets/img-time.svg";
 import BlocJour from "@components/appli/recherche/BlocJour";
 import Star from "@components/appli/recherche/Star";
+import PopUp from "@components/appli/recherche/PopUp";
 
 function AppliCardCreche() {
   const location = useLocation();
@@ -79,9 +80,7 @@ function AppliCardCreche() {
                 <span>{prixJour}€</span> / jour *
               </p>
             </div>
-            <button type="button" onClick={() => popUp()}>
-              Réserver
-            </button>
+            <PopUp />
           </div>
         </div>
       </main>

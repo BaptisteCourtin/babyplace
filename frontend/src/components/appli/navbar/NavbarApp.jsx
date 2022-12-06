@@ -1,10 +1,10 @@
 import React from "react";
 
-import grid from "@assets/app parents/navbar/grid.svg";
-import loupe from "@assets/app parents/navbar/loupe.svg";
-import user from "@assets/app parents/navbar/user.svg";
-import bell from "@assets/app parents/navbar/bell.svg";
-import message from "@assets/app parents/navbar/message.svg";
+import { BsFillGridFill } from "react-icons/bs";
+import { BsSearch } from "react-icons/bs";
+import { AiOutlineUser } from "react-icons/ai";
+import { AiOutlineBell } from "react-icons/ai";
+import { BiMessageDetail } from "react-icons/bi";
 
 import { NavLink } from "react-router-dom";
 
@@ -12,19 +12,19 @@ function Navbar() {
   return (
     <div className="navbar">
       <NavLink to="/appli/menu">
-        <img src={grid} alt="grid" />
+        <BsFillGridFill className="img-nav" />
       </NavLink>
       <NavLink to="/appli/search">
-        <img src={loupe} alt="loupe" />
+        <BsSearch className="img-nav" />
       </NavLink>
       <NavLink to="/appli/user">
-        <img src={user} alt="user" />
+        <AiOutlineUser className="img-nav" />
       </NavLink>
       <NavLink to="/appli/notif">
-        <img src={bell} alt="bell" />
+        <AiOutlineBell className="img-nav" />
       </NavLink>
       <NavLink to="/appli/message">
-        <img src={message} alt="message" />
+        <BiMessageDetail className="img-nav" />
       </NavLink>
     </div>
   );

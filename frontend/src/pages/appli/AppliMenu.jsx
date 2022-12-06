@@ -3,33 +3,40 @@ import { Link } from "react-router-dom";
 import NavbarApp from "@components/appli/navbar/NavbarApp";
 import ProfilPlat from "@components/appli/ProfilPlat";
 
+import { AiFillHeart } from "react-icons/ai";
+import { AiOutlineFile } from "react-icons/ai";
+import { BsFillPeopleFill } from "react-icons/bs";
+import { AiFillCreditCard } from "react-icons/ai";
+import { BiBuoy } from "react-icons/bi";
+import { FaPiggyBank } from "react-icons/fa";
+
 function AppliMenu() {
   return (
     <div className="applimenu">
       <ProfilPlat />
       <main>
         <Link to="./appli/menu/fav">
-          <img src="" alt="fav" />
+          <AiFillHeart className="icon-menu" />
           Vos Favoris
         </Link>
         <Link to="/">
-          <img src="" alt="dossier" />
+          <AiOutlineFile className="icon-menu" />
           Dossier d'inscription
         </Link>
         <Link to="./appli/menu/personnesfav">
-          <img src="" alt="personnes" />
+          <BsFillPeopleFill className="icon-menu" />
           Personnes de confiance
         </Link>
         <Link to="./appli/menu/paiement">
-          <img src="" alt="cb" />
+          <AiFillCreditCard className="icon-menu" />
           Vos moyens de paiement
         </Link>
         <Link to="./appli/menu/aide">
-          <img src="" alt="aide" />
+          <BiBuoy className="icon-menu" />
           Aide
         </Link>
         <Link to="./appli/menu/reservation">
-          <img src="" alt="cochon" />
+          <FaPiggyBank className="icon-menu" />
           Réservations
         </Link>
       </main>
