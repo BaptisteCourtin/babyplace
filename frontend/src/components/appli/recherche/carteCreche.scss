@@ -1,0 +1,56 @@
+.carte-creche {
+  padding: 0.5rem;
+  margin: 0.5rem 1rem;
+  max-width: 350px;
+  height: 95%;
+  background-color: $third;
+
+  &:nth-child(even) {
+    background-color: $fourth;
+  }
+
+  img {
+    height: 145px;
+    width: 100%;
+    object-fit: cover;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+
+  .info-creche {
+    padding: 0.5rem;
+    background-color: $white;
+
+    .ville-prix {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .prix {
+      font-weight: 900;
+      font-size: $h3;
+    }
+
+    .jours {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.5rem;
+      margin: 0.5rem;
+
+      .daygreen .each-jour {
+        background-color: $fifth;
+        line-height: 25px;
+        text-align: center;
+        color: $white;
+      }
+      .daygray .each-jour {
+        background-color: $grey;
+        line-height: 25px;
+        text-align: center;
+        color: $white;
+      }
+    }
+  }
+}

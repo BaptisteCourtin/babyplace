@@ -20,6 +20,7 @@
     "husky": "^7.0.0"
   },
   "dependencies": {
+    "react-rating": "^2.0.5",
     "react-router-dom": "^6.4.4",
     "sass": "^1.56.1"
   }

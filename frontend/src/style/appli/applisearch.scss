@@ -1,0 +1,47 @@
+.applisearch {
+  padding-bottom: 4rem;
+  background-color: $white;
+
+  .content {
+    padding: 0 1rem;
+
+    .lieu-date {
+      width: 100%;
+      line-height: 50px;
+    }
+
+    .appli-filtres {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      width: 100%;
+      padding: 0 1rem;
+      background-color: $grey;
+      line-height: 50px;
+
+      .left-filter {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      button {
+        background-color: $grey;
+      }
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 350px));
+      grid-auto-rows: 1fr;
+      justify-content: center;
+
+      gap: 1rem;
+      width: 100%;
+    }
+  }
+}
