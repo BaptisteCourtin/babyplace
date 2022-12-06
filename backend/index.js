@@ -1,14 +1,15 @@
-require("dotenv").config();
+const express = require("express");
+const cors = require("cors")
+const app = express();
 
-const app = require("./src/app");
+const port = 5000;
+app.use(cors())
+app.use(express.json())
 
-const port = parseInt(process.env.APP_PORT ?? "5000", 10);
+const auth = require('./auth')
 
-app.listen(port, (err) => {
-  if (err) {
-    console.error("Something bad happened");
-  } else {
-    // eslint-disable-next-line no-restricted-syntax
-    console.log(`Server is listening on ${port}`);
-  }
-});
+app.use('/auth', auth)
+
+app.listen(port, () => {
+  console.log(`server started on port: ${port}`)
+})
