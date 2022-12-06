@@ -1,0 +1,81 @@
+.appli-card-creche {
+  background: $gradient;
+  min-height: 100vh;
+  padding: 1rem;
+
+  main {
+    background-color: $white;
+    border-radius: 10px;
+    margin: 2rem 0;
+
+    .container-img {
+      position: relative;
+
+      img {
+        height: 145px;
+        width: 100%;
+        object-fit: cover;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+      }
+    }
+
+    .text {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem 0.2rem;
+
+      h3 {
+        font-size: $h3;
+        font-weight: 600;
+        margin: 0.5rem 0.5rem;
+      }
+
+      p,
+      ul {
+        margin: 0 1rem;
+      }
+
+      .horaire {
+        background-color: $third;
+        font-weight: 500;
+        padding: 0.5rem 1.5rem;
+      }
+
+      .prix-resa {
+        display: flex;
+        flex-direction: row;
+
+        .prix {
+          display: flex;
+          flex-direction: column;
+          font-weight: 600;
+
+          span {
+            font-size: $h3;
+          }
+        }
+      }
+    }
+
+    .disponibilite {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.5rem;
+
+      .daygreen .each-jour {
+        background-color: $fifth;
+        line-height: 25px;
+        text-align: center;
+        color: $white;
+      }
+      .daygray .each-jour {
+        background-color: $grey;
+        line-height: 25px;
+        text-align: center;
+        color: $white;
+      }
+    }
+  }
+}

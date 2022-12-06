@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import Passer from "@components/appli/buttons/Passer";
-import Suivant from "@components/appli/buttons/Suivant";
-import Page0 from "../components/appli/pagesAppli/page0";
-import Page1 from "../components/appli/pagesAppli/page1";
+import Passer from "@components/appli/pagesTutoAppli/Passer";
+import Suivant from "@components/appli/pagesTutoAppli/Suivant";
+import Page0 from "../../components/appli/pagesTutoAppli/page0";
+import Page1 from "../../components/appli/pagesTutoAppli/page1";
 
 function Appli() {
   const [pageAppli, setPageAppli] = useState(true);

@@ -24,6 +24,7 @@
     "multi-range-slider-react": "^2.0.2",
     "react-calendar": "^4.0.0",
     "react-icons": "^4.7.1",
+    "react-rating": "^2.0.5",
     "react-router-dom": "^6.4.4",
     "sass": "^1.56.1"
   }

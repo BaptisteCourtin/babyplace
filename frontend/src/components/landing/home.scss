@@ -6,6 +6,7 @@
   width: 80%;
   margin: 0 auto;
   color: $second;
+
   & h2 {
     padding: 30px 0;
     font-size: 40px;
@@ -240,6 +241,15 @@
   }
 
   & .homeProCarouselBtn {
+    position: absolute;
+    bottom: 5%;
+    right: 10%;
+    background: none;
+    font-size: 40px;
+    color: $white;
+  }
+
+  & button {
     position: absolute;
     bottom: 5%;
     right: 10%;

@@ -1,0 +1,186 @@
+.formStructureContainer {
+  position: relative;
+  width: 80vw;
+  min-height: 80vh;
+  border: 1px solid black;
+  margin: 1vh auto;
+  display: flex;
+
+  & .formStructure {
+    width: 50%;
+    min-height: 80vh;
+    padding-left: 5%;
+    padding-right: 5%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  & .page-left {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 5vh;
+  }
+
+  & .explicationsContainer {
+    width: 50%;
+    background-color: #f9f9f9;
+
+    & div {
+      padding: 16px;
+      background-color: white;
+      width: 40%;
+      min-height: 30%;
+      margin: 20vh auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      & h4 {
+        margin: 2vh 0;
+      }
+    }
+  }
+
+  & .inputsContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2vh;
+
+    & input {
+      border-radius: 10px;
+      padding: 20px 4px 4px;
+      border: 1px solid $grey;
+      height: 50px;
+      position: relative;
+    }
+
+    & input:focus {
+      outline: 1.5px solid $third;
+    }
+
+    & input:valid {
+      border: 2px solid $fifth;
+    }
+
+    & input:valid + label {
+      color: $fifth;
+    }
+
+    .checkSymbol {
+      display: none;
+    }
+
+    & input:valid + label + p {
+      position: absolute;
+      transform: translateX(28vw) translateY(6px);
+      font-size: 2rem;
+      color: $fifth;
+      display: initial;
+    }
+
+    & label {
+      position: absolute;
+      z-index: 2;
+      transform: translateY(6px) translateX(4px);
+      font-weight: 800;
+      color: $grey;
+    }
+
+    & p {
+      padding-top: 4px;
+      margin-left: 8px;
+      font-size: 0.9rem;
+    }
+  }
+
+  button {
+    width: 150px;
+    height: 40px;
+    color: $white;
+    background: $third;
+    font-size: $h4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    margin: 4px;
+    padding: 8px;
+    border: 1px solid $grey;
+  }
+
+  .typeContainer,
+  .typeCrecheContainer {
+    display: flex;
+    flex-wrap: wrap;
+
+    & button {
+      background-color: #f2f2f2;
+      color: initial;
+      width: fit-content;
+      min-width: 140px;
+    }
+
+    & .selected {
+      background-color: $third;
+      color: white;
+    }
+  }
+
+  .pagination {
+    position: absolute;
+
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+
+  .buttonContainer {
+    margin-top: 1rem;
+    margin-bottom: 2vh;
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+    justify-content: right;
+    align-self: flex-end;
+  }
+
+  h4 {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 4vh 0 2vh;
+  }
+}
+
+.structure2 {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 5vh;
+  height: 90%;
+
+  .pageContent {
+    display: flex;
+  }
+
+  .imgContainer {
+    min-width: 150px;
+    min-height: 150px;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  .inputContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 2vw;
+  }
+}

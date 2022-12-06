@@ -1,0 +1,59 @@
+.star {
+  position: absolute;
+  bottom: -10px;
+  right: 10px;
+
+  background-color: $third;
+  color: $white;
+  border-radius: 10px;
+  padding: 0.5rem;
+
+  &.visible::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+  }
+
+  .container-etoile {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    background-color: $third;
+    border-radius: 10px;
+
+    position: absolute;
+    bottom: -130px;
+    right: 0;
+    padding: 0.5rem;
+    z-index: 2;
+
+    .bloc-star {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      width: 280px;
+
+      .rating {
+        color: gold;
+      }
+    }
+
+    .bloc-star:nth-child(1) {
+      margin-bottom: 1rem;
+    }
+  }
+
+  .etoileDeBase {
+    text-align: baseline;
+
+    p {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  }
+}

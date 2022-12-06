@@ -1,0 +1,25 @@
+.appli-user {
+  main {
+    background: $gradient;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: $white;
+    padding: 0 1rem;
+
+    img {
+      margin-top: 2rem;
+    }
+
+    h3 {
+      font-size: $h3;
+      font-weight: 500;
+      margin-bottom: 3rem;
+    }
+
+    .container-completion {
+      width: 100%;
+    }
+  }
+}
