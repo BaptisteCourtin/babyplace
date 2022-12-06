@@ -16,6 +16,7 @@ import AppliMessage from "@pages/appli/AppliMessage";
 
 import FormStructure from "@pages/FormStructure";
 
+import Dashboard from "@components/dashboard/Dashboard";
 import Home from "./pages/Home";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/login-params" element={<Synthesis />} />
+        <Route path="/dashboard" element={<Dashboard />} />
 
         <Route path="/appli" element={<Appli />} />
         <Route path="/appli/home" element={<AppliHome />} />
