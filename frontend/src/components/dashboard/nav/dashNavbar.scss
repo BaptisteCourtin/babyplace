@@ -1,70 +1,70 @@
 .dashNav {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 15vw;
-    background: $gradient;
-    padding: 15px;
-    color: $white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 15vw;
+  background: $gradient;
+  padding: 15px;
+  color: $white;
 
-    & .dashNavLogo {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        gap: 10px;
-        margin-bottom: 60px;
+  & .dashNavLogo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 60px;
 
-        & img {
-            width: 15%;
-        }
-
-        & h2 {
-            font-size: $h3;
-            font-weight: 500;
-
-            & span {
-                padding: 0 5px;
-                font-size: $normal;
-                border: 1px solid $white;
-                border-radius: 50px;
-            }
-        }
+    & img {
+      width: 15%;
     }
 
-    & .dashNavList {
-        display: flex;
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 25px;
+    & h2 {
+      font-size: $h3;
+      font-weight: 500;
 
-        & li {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-
-            & button {
-                border-bottom: 1px solid transparent;
-                background: none;
-                transition: 0.3s ease-in-out;
-
-                &:hover {
-                    border-bottom: 1px solid $white;
-                }
-            }
-        }
+      & span {
+        padding: 0 5px;
+        font-size: $normal;
+        border: 1px solid $white;
+        border-radius: 50px;
+      }
     }
+  }
 
-    & .dashNavParams {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 5px;
-        position: absolute;
-        bottom: 20px;
+  & .dashNavList {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 25px;
+
+    & li {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+
+      & button {
+        border-bottom: 1px solid transparent;
         background: none;
-        font-weight: 500;
+        transition: 0.3s ease-in-out;
+
+        &:hover {
+          border-bottom: 1px solid $white;
+        }
+      }
     }
+  }
+
+  & .dashNavParams {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    position: absolute;
+    bottom: 20px;
+    background: none;
+    font-weight: 500;
+  }
 }

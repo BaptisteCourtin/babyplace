@@ -7,8 +7,8 @@ import Appli from "@pages/AppliTuto";
 import AppliHome from "@pages/AppliHome";
 import AppliSearch from "@pages/AppliSearch";
 
-import Home from "./pages/Home";
 import Dashboard from "@components/dashboard/Dashboard";
+import Home from "./pages/Home";
 
 function App() {
   return (

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import logo from "@assets/logo4.svg";
-import logotxt from "@assets/babyplacetxt.svg";
+import logotxt from "@assets/babyplaceTxt.svg";
 import bulle from "@assets/bulle.svg";
 
 function Footer({ userType }) {
@@ -28,8 +28,8 @@ function Footer({ userType }) {
         <div className="footerGrid">
           <div className="footerLeft">
             <div className="logoContainer">
-              <img src={logo} alt="logo" id="logoCoeur" /><img src={logotxt} alt="babyplace" id="logotxt" />
-
+              <img src={logo} alt="logo" id="logoCoeur" />
+              <img src={logotxt} alt="babyplace" id="logotxt" />
             </div>
             <p className="footerAddress">
               Warehouse Society, 234 Bahagia Ave Street PRBW 29281
