@@ -21,18 +21,94 @@
     display: flex;
     flex-direction: column;
     padding-top: 5vh;
+
+    & textarea {
+      width: 80%;
+      height: 30vh;
+      border: 1px solid $grey;
+      border-radius: 10px;
+      margin: 2vh 10% 0;
+      resize: none;
+      padding: 8px;
+    }
+
+    & legend {
+      text-align: center;
+      color: $grey;
+    }
+
+    & textarea:focus {
+      outline: 1.5px solid $third;
+    }
+
+    & .inputsContainer {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 2vh;
+
+      & input {
+        border-radius: 10px;
+        padding: 20px 4px 4px;
+        border: 1px solid $grey;
+        height: 50px;
+        position: relative;
+      }
+
+      & input:focus {
+        outline: 1.5px solid $third;
+      }
+
+      & input:valid {
+        border: 2px solid $fifth;
+      }
+
+      & input:valid + label {
+        color: $fifth;
+      }
+
+      .checkSymbol {
+        display: none;
+      }
+
+      & input:valid + label + p {
+        position: absolute;
+        transform: translateX(28vw) translateY(6px);
+        font-size: 2rem;
+        color: $fifth;
+        display: initial;
+      }
+
+      & label {
+        position: absolute;
+        z-index: 2;
+        transform: translateY(6px) translateX(4px);
+        font-weight: 800;
+        color: $grey;
+      }
+
+      & p {
+        padding-top: 4px;
+        margin-left: 8px;
+        font-size: 0.9rem;
+      }
+    }
   }
 
   & .explicationsContainer {
     width: 50%;
     background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-    & div {
+    & .innerContainer {
       padding: 24px;
       background-color: white;
-      width: 40%;
+      min-width: 40%;
+      max-width: 60%;
       min-height: 30%;
-      margin: 20vh auto;
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -42,62 +118,44 @@
         margin: 0 0 2vh;
       }
 
+      & h5 {
+        font-weight: 600;
+        margin: 2vh 0 1vh;
+
+        & span {
+          font-weight: 400;
+        }
+      }
+
       & pre {
         max-width: 100%;
         white-space: pre-wrap;
       }
     }
-  }
 
-  & .inputsContainer {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 2vh;
-
-    & input {
-      border-radius: 10px;
-      padding: 20px 4px 4px;
-      border: 1px solid $grey;
-      height: 50px;
-      position: relative;
+    & .descExamples {
+      width: 100%;
+      margin: 1vh 0;
+      padding: 0;
+      min-height: 30%;
+      max-height: 80%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
     }
 
-    & input:focus {
-      outline: 1.5px solid $third;
-    }
+    & .imgTitleContainer {
+      width: 100%;
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin: 2vh 0 1vh;
 
-    & input:valid {
-      border: 2px solid $fifth;
-    }
-
-    & input:valid + label {
-      color: $fifth;
-    }
-
-    .checkSymbol {
-      display: none;
-    }
-
-    & input:valid + label + p {
-      position: absolute;
-      transform: translateX(28vw) translateY(6px);
-      font-size: 2rem;
-      color: $fifth;
-      display: initial;
-    }
-
-    & label {
-      position: absolute;
-      z-index: 2;
-      transform: translateY(6px) translateX(4px);
-      font-weight: 800;
-      color: $grey;
-    }
-
-    & p {
-      padding-top: 4px;
-      margin-left: 8px;
-      font-size: 0.9rem;
+      & img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+      }
     }
   }
 
@@ -232,5 +290,41 @@
 
   & img {
     width: 100%;
+  }
+}
+
+.structure5 {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 5vh;
+  height: 90%;
+  width: 100%;
+
+  & .inputsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75vh;
+    margin: 2vh 0;
+
+    & h5 {
+      font-weight: 600;
+    }
+
+    & input {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 1.1em;
+      height: 1.1em;
+      border: 1px solid $grey;
+      border-radius: 30%;
+      transform: translateY(0.2em);
+      cursor: pointer;
+      margin-right: 4px;
+    }
+
+    & input:checked {
+      background-color: $third;
+    }
   }
 }

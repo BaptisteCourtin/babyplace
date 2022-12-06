@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 function Structure3({ photo1Src, photo2Src, photo3Src, updateFields }) {
   // const [imageProfilSrc, setImageProfilSrc] = useState("https://via.placeholder.com/150");
