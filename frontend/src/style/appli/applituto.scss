@@ -1,0 +1,54 @@
+.applituto {
+  background: $gradient;
+  min-height: 100vh;
+  text-align: center;
+  color: $white;
+  padding: 0 1rem 1rem 1rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+
+    img {
+      width: calc(100vw - 4rem);
+      max-width: 330px;
+      margin-top: 30px;
+    }
+
+    &.page1 img:nth-child(1) {
+      margin-top: -10px;
+    }
+
+    &.page1 img:nth-child(2) {
+      margin-top: -60px;
+    }
+
+    .sub-title {
+      font-weight: 500;
+      font-size: 1.5rem;
+    }
+
+    .trouve {
+      margin-top: 43px;
+    }
+  }
+
+  .button {
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 75px;
+
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+}

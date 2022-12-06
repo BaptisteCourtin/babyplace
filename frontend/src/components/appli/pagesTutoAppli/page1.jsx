@@ -5,7 +5,7 @@ import logoBlanc from "@assets/logo-blanc.svg";
 
 const page0 = () => {
   return (
-    <>
+    <main className="page1">
       <img src={mom2} alt="mom-baby-2" />
       <img src={logoBlanc} alt="logo-blanc" />
 
@@ -15,7 +15,7 @@ const page0 = () => {
         Réservez une place en moins de 60 secondes et obtenez une solution de
         garde, même pour le lendemain !
       </p>
-    </>
+    </main>
   );
 };
 

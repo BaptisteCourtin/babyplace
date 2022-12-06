@@ -1,0 +1,12 @@
+.with-check {
+  width: 100%;
+
+  label {
+    display: flex;
+    gap: 1rem;
+
+    input {
+      width: 1.2rem;
+    }
+  }
+}
