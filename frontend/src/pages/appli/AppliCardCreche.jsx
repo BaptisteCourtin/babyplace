@@ -47,8 +47,8 @@ function AppliCardCreche() {
 
           <h3>Disponibiltés</h3>
           <div className="disponibilite">
-            {each.jours.map((each) => (
-              <BlocJour jour={each.jour} check={each.check} />
+            {each.jours.map((jour) => (
+              <BlocJour jour={jour.jour} check={jour.check} />
             ))}
           </div>
 

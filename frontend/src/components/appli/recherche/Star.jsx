@@ -18,7 +18,7 @@ function Star() {
 
   useEffect(() => {
     let init = 0;
-    for (let i = 0; i < tabStar.length; i++) {
+    for (let i = 0; i < tabStar.length; i += 1) {
       init += tabStar[i].nbStar;
     }
     init = (init / tabStar.length).toFixed(1);
@@ -26,7 +26,7 @@ function Star() {
   }, []);
 
   return (
-    <div
+    <button
       className={visibleStar ? "star visible" : "star"}
       onClick={() => setVisibleStar(!visibleStar)}
     >
@@ -54,7 +54,7 @@ function Star() {
           </p>
         </div>
       )}
-    </div>
+    </button>
   );
 }
 

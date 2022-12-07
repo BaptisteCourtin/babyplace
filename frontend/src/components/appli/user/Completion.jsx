@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 function Completion({ nom, completion }) {
   const mystyle = {
@@ -16,5 +17,10 @@ function Completion({ nom, completion }) {
     </div>
   );
 }
+
+Completion.propTypes = {
+  nom: PropTypes.string.isRequired,
+  completion: PropTypes.number.isRequired,
+};
 
 export default Completion;
