@@ -29,10 +29,10 @@ function LoginParams() {
     getData();
 
   }, [])
-
+  console.log(donnees.Indemn_repas);
   return (
     <section className="loginParams">
-      <p>Bonjour <span>{donnees.Nom}</span></p>
+      <p>Bienvenue <span>{donnees.Nom}</span></p>
       <div className="loginParamsTitle">
         <h2>
           Paramétrez votre profil et gérez vos annonces pour gagner de l’argent
@@ -64,7 +64,7 @@ function LoginParams() {
           <Link to="/">Paramètres de réservation</Link>
         </details>
       </div>
-      <Link className="loginParamsBtn" to="/dashboard">
+      <Link className="loginParamsBtn" to="/dashboard" state={{ repas: donnees.Indemn_repas }}>
         Continuer
       </Link>
     </section>
