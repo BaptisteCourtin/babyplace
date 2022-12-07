@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const PopUp = () => {
+function PopUp() {
   const [visiblePopUp, setVisiblePopUp] = useState(false);
 
   return (
@@ -59,6 +59,6 @@ const PopUp = () => {
       ) : null}
     </div>
   );
-};
+}
 
 export default PopUp;

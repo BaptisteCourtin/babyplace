@@ -1,10 +1,8 @@
-import React, { useState } from "react";
-import BlocStar from "./BlocStar";
+import React, { useState, useEffect } from "react";
 
 import Rating from "react-rating";
-import { AiOutlineStar } from "react-icons/ai";
-import { AiFillStar } from "react-icons/ai";
-import { useEffect } from "react";
+import { AiOutlineStar, AiFillStar } from "react-icons/ai";
+import BlocStar from "./BlocStar";
 
 const tabStar = [
   { nom: "Communication", nbStar: 5 },
@@ -20,7 +18,7 @@ function Star() {
 
   useEffect(() => {
     let init = 0;
-    for (let i = 0; i < tabStar.length; i++) {
+    for (let i = 0; i < tabStar.length; i += 1) {
       init += tabStar[i].nbStar;
     }
     init = (init / tabStar.length).toFixed(1);
@@ -28,7 +26,7 @@ function Star() {
   }, []);
 
   return (
-    <div
+    <button
       className={visibleStar ? "star visible" : "star"}
       onClick={() => setVisibleStar(!visibleStar)}
     >
@@ -56,7 +54,7 @@ function Star() {
           </p>
         </div>
       )}
-    </div>
+    </button>
   );
 }
 

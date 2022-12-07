@@ -48,28 +48,23 @@ function Footer({ userType }) {
           </div>
           <div className="footerCenter">
             <ul>
-              <li>About</li>
-              <li>Profile</li>
-              <li>Features</li>
-              <li>Careers</li>
-              <li>DW News</li>
+              <li>A propos</li>
+              <li>Profil</li>
+              <li>Caractéristiques</li>
+              <li>Carières</li>
             </ul>
             <ul>
-              <li>Help</li>
+              <li>Aide</li>
               <li>Support</li>
               <li>Guide</li>
-              <li>Reports</li>
-              <li>Q&A</li>
+              <li>FAQ</li>
             </ul>
           </div>
-          <div className="footerLeft">
+          <div className="footerRight">
             <div className="socials">
-              <h3>Réseaux Sociaux</h3>
-              <div className="socialMediaImg">
-                <img src={facebook} alt="facebook" />
-                <img src={twitter} alt="twitter" />
-                <img src={insta} alt="instagram" />
-              </div>
+              <img src={facebook} alt="facebook" />
+              <img src={twitter} alt="twitter" />
+              <img src={insta} alt="instagram" />
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import React from "react";
 
-const inscription = () => {
-  return <div>inscription</div>;
-};
+function Inscription() {
+  return <h3>Dossier Inscription</h3>;
+}
 
-export default inscription;
+export default Inscription;

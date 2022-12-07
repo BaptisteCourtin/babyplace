@@ -33,4 +33,69 @@
       }
     }
   }
+
+  main {
+    margin: 0 1rem;
+    h3 {
+      font-size: $h3;
+      font-weight: 600;
+      color: $gradient;
+    }
+
+    form {
+      border: 2px red solid;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 0.5rem;
+
+      div {
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+
+        input {
+          border: 2px solid black;
+          border-radius: 5px;
+          padding: 0 0.5rem;
+        }
+
+        input:valid {
+          border: 2px solid $green;
+        }
+
+        .checkSymbol {
+          display: none;
+        }
+
+        input:valid + label + .checkSymbol {
+          font-size: 1.5rem;
+          color: $green;
+          display: initial;
+        }
+      }
+    }
+
+    // enfant
+    .bebe {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin: 1rem 0;
+
+      button {
+        background-color: $third;
+        border-radius: 10px;
+        padding: 7px;
+      }
+    }
+
+    // parent
+    .form-parent {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+  }
 }

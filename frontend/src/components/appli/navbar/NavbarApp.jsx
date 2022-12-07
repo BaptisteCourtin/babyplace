@@ -1,9 +1,7 @@
 import React from "react";
 
-import { BsFillGridFill } from "react-icons/bs";
-import { BsSearch } from "react-icons/bs";
-import { AiOutlineUser } from "react-icons/ai";
-import { AiOutlineBell } from "react-icons/ai";
+import { BsFillGridFill, BsSearch } from "react-icons/bs";
+import { AiOutlineUser, AiOutlineBell } from "react-icons/ai";
 import { BiMessageDetail } from "react-icons/bi";
 
 import { NavLink } from "react-router-dom";

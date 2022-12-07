@@ -3,7 +3,7 @@ import NavbarApp from "@components/appli/navbar/NavbarApp";
 import avatar from "@assets/avatar1.svg";
 import Completion from "@components/appli/user/Completion";
 
-let tabCompletion = [
+const tabCompletion = [
   { nom: "Dossier Enfant", completion: 80 },
   { nom: "Dossier Parent", completion: 50 },
   { nom: "Dossier d'inscription", completion: 30 },

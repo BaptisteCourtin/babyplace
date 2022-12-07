@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-const Completion = ({ nom, completion }) => {
+function Completion({ nom, completion }) {
   const mystyle = {
     color: "black",
     width: `${completion}%`,
@@ -15,6 +16,11 @@ const Completion = ({ nom, completion }) => {
       </Link>
     </div>
   );
+}
+
+Completion.propTypes = {
+  nom: PropTypes.string.isRequired,
+  completion: PropTypes.number.isRequired,
 };
 
 export default Completion;

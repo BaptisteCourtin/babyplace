@@ -1,24 +1,23 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import Navbar from "@components/appli/navbar/NavbarApp";
-import Enfants from "@components/appli/user/enfants";
-import Parents from "@components/appli/user/parents";
-import Inscription from "@components/appli/user/inscription";
+import FormEnfant from "@components/appli/user/FormEnfant";
+import Parents from "@components/appli/user/Parents";
+import Inscription from "@components/appli/user/Inscription";
 
-const AppliUserCompletion = () => {
+function AppliUserCompletion() {
   const [compo, setCompo] = useState(0);
 
   const choixComposant = () => {
     if (compo === 0) {
-      return <Enfants setCompo={setCompo} />;
+      return <FormEnfant />;
     }
     if (compo === 1) {
-      return <Parents setCompo={setCompo} />;
+      return <Parents />;
     }
     if (compo === 2) {
-      return <Inscription setCompo={setCompo} />;
+      return <Inscription />;
     }
-    return <Enfants setCompo={setCompo} />;
+    return <FormEnfant />;
   };
 
   return (
@@ -43,6 +42,6 @@ const AppliUserCompletion = () => {
       <Navbar />
     </div>
   );
-};
+}
 
 export default AppliUserCompletion;
