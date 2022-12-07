@@ -1,4 +1,5 @@
 import React from "react";
+import Proptypes from "prop-types";
 
 function Structure4({ description, updateFields }) {
   return (
@@ -7,7 +8,7 @@ function Structure4({ description, updateFields }) {
       <div className="pageContent">
         <p>
           Présentez vous et décrivez votre expérience. Indiquez les activités
-          d’éveil que vous proposez aux enfants, ,respect du rythme de l’enfant,
+          d’éveil que vous proposez aux enfants, respect du rythme de l’enfant,
           activités, sorties, pédagogie... Décrivez les espaces de jeu, le lieu
           de sommeil, les équipements dont vous disposez...
         </p>
@@ -25,5 +26,8 @@ function Structure4({ description, updateFields }) {
     </div>
   );
 }
-
+Structure4.propTypes = {
+  description: Proptypes.string,
+  updateFields: Proptypes.func,
+};
 export default Structure4;

@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import Proptypes from "prop-types";
+import { StructureContext } from "@pages/FormStructure";
 
 function Structure1({
+  typeStructure,
   nomStructure,
   telephone,
   nomNaissance,
@@ -9,18 +12,17 @@ function Structure1({
   adresseStructure,
   updateFields,
 }) {
-  const [typeStructure, setTypeStructure] = useState("");
+  const { structure, setStructure } = useContext(StructureContext);
   const [typeCreche, setTypeCreche] = useState("");
-
   return (
     <div className="page-left">
       <h4>Quel type d’accueil proposez-vous ?</h4>
       <div className="typeContainer">
         <button
           type="button"
-          className={typeStructure === "creche" ? "selected" : ""}
+          className={structure === "creche" ? "selected" : ""}
           onClick={() => {
-            setTypeStructure("creche");
+            setStructure("creche");
             updateFields({ typeStructure: "creche" });
           }}
         >
@@ -28,10 +30,10 @@ function Structure1({
         </button>
         <button
           type="button"
-          className={typeStructure === "assmat" ? "selected" : ""}
+          className={structure === "assmat" ? "selected" : ""}
           onClick={() => {
-            setTypeStructure("assmat");
-            updateFields({ typeStructure: "creche" });
+            setStructure("assmat");
+            updateFields({ typeStructure: "assmat" });
           }}
         >
           Assistante maternelle
@@ -297,5 +299,14 @@ function Structure1({
     </div>
   );
 }
-
+Structure1.propTypes = {
+  typeStructure: Proptypes.string,
+  nomStructure: Proptypes.string,
+  telephone: Proptypes.string,
+  nomNaissance: Proptypes.string,
+  nomUsage: Proptypes.string,
+  prenom: Proptypes.string,
+  adresseStructure: Proptypes.string,
+  updateFields: Proptypes.func,
+};
 export default Structure1;

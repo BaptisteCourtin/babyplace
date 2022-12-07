@@ -1,11 +1,11 @@
 import React from "react";
+import Proptypes from "prop-types";
 
 function Structure2({ imageProfilSrc, updateFields }) {
   // const [imageProfilSrc, setImageProfilSrc] = useState("https://via.placeholder.com/150");
   const updateImg = (e) => {
     // e.files contient un objet FileList
     const [picture] = e.target.files;
-    console.log(e.target.files);
 
     // "picture" est un objet File
     if (picture) {
@@ -13,12 +13,11 @@ function Structure2({ imageProfilSrc, updateFields }) {
       const reader = new FileReader();
 
       // L'événement déclenché lorsque la lecture est complète
-      reader.onload = (e) => {
+      reader.onload = (el) => {
         // On change l'URL de l'image (base64)
         // console.log(e.result);
-        imageProfilSrc = e.target.result;
-        updateFields({ imageProfilSrc: e.target.result });
-        console.log(imageProfilSrc);
+        imageProfilSrc = el.target.result;
+        updateFields({ imageProfilSrc: el.target.result });
       };
 
       // On lit le fichier "picture" uploadé
@@ -30,7 +29,7 @@ function Structure2({ imageProfilSrc, updateFields }) {
       <h4>Choisir une photo de profil :</h4>
       <div className="pageContent">
         <div className="imgContainer">
-          <img src={imageProfilSrc} alt="prévisualisation image" />
+          <img src={imageProfilSrc} alt="prévisualisation" />
         </div>
         <div className="inputContainer">
           <label htmlFor="avatar">Formats acceptés : .jpg, .jpeg, .png</label>
@@ -47,5 +46,8 @@ function Structure2({ imageProfilSrc, updateFields }) {
     </div>
   );
 }
-
+Structure2.propTypes = {
+  imageProfilSrc: Proptypes.string,
+  updateFields: Proptypes.func,
+};
 export default Structure2;
