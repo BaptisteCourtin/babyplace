@@ -6,14 +6,18 @@ import {
   MdOutlineCalendarToday,
   MdOutlinePlace,
 } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import DashNavbar from "./nav/DashNavbar";
 
 import DashReservations from "./reservations/DashReservations";
 import DashAgenda from "./agenda/DashAgenda";
 import DashPlaces from "./places/DashPlaces";
 
+
 function Dashboard() {
+  const { state } = useLocation();
+  const { repas } = state;
+
   const navigate = useNavigate();
 
   const [toggle, setToggle] = useState(0);
@@ -25,7 +29,7 @@ function Dashboard() {
       return <DashAgenda />;
     }
     if (toggle === 3) {
-      return <DashPlaces title="Ajouter une place" />;
+      return <DashPlaces repas={repas} title="Ajouter une place" />;
     }
     if (toggle === 4) {
       return navigate("/structure/inscription-form");

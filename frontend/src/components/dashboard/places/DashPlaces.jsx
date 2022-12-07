@@ -5,7 +5,7 @@ import close from "@assets/dashboard/closed-sign.svg";
 import PropTypes from "prop-types";
 import DashCalendar from "../agenda/calendar/DashCalendar";
 
-function DashPlaces({ title }) {
+function DashPlaces({ title, repas }) {
   const days = [
     {
       min: 8,
@@ -250,7 +250,7 @@ function DashPlaces({ title }) {
               <input type="checkbox" id="dashSwitch3" />
               <span className="dashSwitchSlider" />
             </label>
-            <span className="dashOptionsPrices">8€</span>
+            <span className="dashOptionsPrices">{repas}€</span>
           </p>
         </div>
         <ul className="dashPlacesCheckboxes">
