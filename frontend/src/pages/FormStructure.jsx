@@ -94,14 +94,14 @@ function FormStructure() {
               {currentStepIndex === 0
                 ? "Choisissez votre catégorie d’annonce"
                 : currentStepIndex === 1
-                ? "Veillez à ce que votre photo montre clairement votre visage"
-                : currentStepIndex === 2
-                ? "Conseils rapides pour des photos de qualité"
-                : currentStepIndex === 3
-                ? "Inspirez vous des annonces Babyplace"
-                : currentStepIndex === 4
-                ? "Valorisez votre expérience et vos services"
-                : ""}
+                  ? "Veillez à ce que votre photo montre clairement votre visage"
+                  : currentStepIndex === 2
+                    ? "Conseils rapides pour des photos de qualité"
+                    : currentStepIndex === 3
+                      ? "Inspirez vous des annonces Babyplace"
+                      : currentStepIndex === 4
+                        ? "Valorisez votre expérience et vos services"
+                        : ""}
             </h4>
             {currentStepIndex === 3 && (
               <div className="descExamples">
@@ -142,10 +142,10 @@ function FormStructure() {
               {currentStepIndex === 0
                 ? "En sélectionnant les catégories adéquates, vous aidez les parents à savoir à quoi s'attendre concernant l’accueil de leur enfant au sein de votre structure."
                 : currentStepIndex === 2
-                ? "Désencombrez votre pièce. \nUtilisez la lumière naturelle du jour et évitez le flash. \nPrenez des photos en mode paysage depuis les coins des pièces. \nCentrez la prise de vue à égale distance entre le sol et le plafond. \nMettez en valeur les équipements et jeux d’éveil."
-                : currentStepIndex === 4
-                ? "Il s’agit en général des services que les parents souhaitent retrouver pour l’accueil de leurs enfants. Vous pourrez en ajouter d’autres après la publication."
-                : ""}
+                  ? "Désencombrez votre pièce. \nUtilisez la lumière naturelle du jour et évitez le flash. \nPrenez des photos en mode paysage depuis les coins des pièces. \nCentrez la prise de vue à égale distance entre le sol et le plafond. \nMettez en valeur les équipements et jeux d’éveil."
+                  : currentStepIndex === 4
+                    ? "Il s’agit en général des services que les parents souhaitent retrouver pour l’accueil de leurs enfants. Vous pourrez en ajouter d’autres après la publication."
+                    : ""}
             </pre>
           </div>
         </div>
