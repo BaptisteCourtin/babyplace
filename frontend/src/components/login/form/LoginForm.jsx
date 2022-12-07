@@ -7,24 +7,31 @@ function LoginForm() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [checked, setChecked] = useState(false);
+
+  const handleCompletedChange = () => {
+    setChecked(!checked);
+  };
 
   const handleClick = (e) => {
     e.preventDefault();
-    Axios
-      .post("http://localhost:5000/auth", {
-        email,
-        password,
-      })
-      .then((ret) => {
-        console.warn(ret);
-      })
-      .then(() => {
-        navigate("/login-params");
-      })
+    if (checked) {
+      Axios
+        .post("http://localhost:5000/auth", {
+          email,
+          password,
+        })
+        .then((ret) => {
+          console.warn(ret);
+        })
+        .then(() => {
+          navigate("/login-params");
+        })
 
-      .catch((err) => {
-        console.error(err);
-      });
+        .catch((err) => {
+          console.error(err);
+        });
+    };
   };
 
   return (
@@ -34,7 +41,7 @@ function LoginForm() {
         <input type="email" name="email" id="email" placeholder="Email" onChange={(event) => { setEmail(event.target.value) }} />
         <input type="password" name="pwd" id="pwd" placeholder="Password" onChange={(event) => { setPassword(event.target.value) }} />
         <div>
-          <input type="checkbox" name="useConditions" id="useConditions" />
+          <input type="checkbox" name="useConditions" id="useConditions" checked={checked} onChange={handleCompletedChange} />
           <label htmlFor="useConditions">
             J'accepte⠀
             <span>les conditions d'utilisation</span>
