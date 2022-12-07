@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import logo from "@assets/logo4.svg";
-import logotxt from "@assets/babyplacetxt.svg";
+import logotxt from "@assets/babyplaceTxt.svg";
 import up from "@assets/up.svg";
 import facebook from "@assets/facebook.svg";
 import twitter from "@assets/twitter.svg";
@@ -48,18 +48,16 @@ function Footer({ userType }) {
           </div>
           <div className="footerCenter">
             <ul>
-              <li>About</li>
-              <li>Profile</li>
-              <li>Features</li>
-              <li>Careers</li>
-              <li>DW News</li>
+              <li>A propos</li>
+              <li>Profil</li>
+              <li>Caractéristiques</li>
+              <li>Carières</li>
             </ul>
             <ul>
-              <li>Help</li>
+              <li>Aide</li>
               <li>Support</li>
               <li>Guide</li>
-              <li>Reports</li>
-              <li>Q&A</li>
+              <li>FAQ</li>
             </ul>
           </div>
           <div className="footerLeft">
