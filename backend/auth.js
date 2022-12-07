@@ -23,7 +23,7 @@ router.post('/', (req, res) => {
                         res.status(500).send("Erreur de connexion")
                     })
             } else {
-                res.status(401).send("EMail ou Password incorrect")
+                res.status(401).send("Email ou mot de passe incorrect")
             }
         })
         .catch((err) => {
