@@ -13,18 +13,18 @@
   }
 
   .logoContainer {
-    width: 20%;
     display: flex;
-    flex-direction: row;
+    align-items: center;
     justify-content: space-between;
+    gap: 10px;
 
     #logoCoeur {
-      width: 17%;
+      width: 30px;
+      height: 30px;
     }
 
     #logotxt {
-      margin-top: 2%;
-      width: 80%;
+      height: 30px;
     }
   }
 
@@ -51,13 +51,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 30px;
 
     .connect {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      margin-left: $h1;
       text-align: left;
       padding: 10px 25px 10px 25px;
       background: #ffffff;
@@ -98,7 +98,7 @@
     justify-content: center;
     gap: $h1;
 
-    & button {
+    & a {
       padding: 10px 25px 10px 25px;
       border: 1px solid transparent;
       border-radius: 50px;
@@ -134,6 +134,62 @@
           border: 1px solid $third;
           box-shadow: none;
         }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .nav {
+    width: 95%;
+
+    & .logoContainer {
+      & #logotxt {
+        display: none;
+      }
+    }
+
+    & .navRight {
+      & .textBtn {
+        display: none;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .nav {
+    gap: 20px;
+
+    & .mainTextBtn {
+      border: none;
+
+      &:hover {
+        border: none;
+      }
+    }
+
+    & .navRight {
+      & .connect {
+        & div {
+          & span:last-of-type {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .pro {
+    & .navBtn {
+      flex-direction: column;
+      gap: 10px;
+      text-align: center;
+
+      & a {
+        width: 100%;
       }
     }
   }

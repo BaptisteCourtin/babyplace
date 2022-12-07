@@ -20,6 +20,15 @@
     "husky": "^7.0.0"
   },
   "dependencies": {
+    "@originjs/vite-plugin-commonjs": "^1.0.3",
+    "multi-range-slider-react": "^2.0.2",
+    "react-calendar": "^4.0.0",
+    "react-icons": "^4.7.1",
+    "axios": "^1.2.1",
+    "cors": "^2.8.5",
+    "js-sha256": "^0.9.0",
+    "mysql2": "^2.3.3",
+    "react-rating": "^2.0.5",
     "react-router-dom": "^6.4.4",
     "sass": "^1.56.1"
   }

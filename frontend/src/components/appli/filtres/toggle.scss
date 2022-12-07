@@ -1,0 +1,43 @@
+.with-toggle {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+
+  input.input-toggle {
+    display: none;
+  }
+
+  label.toggle {
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    border-radius: 500px;
+    height: 30px;
+    width: 70px;
+    background: $grey;
+
+    .ball {
+      background-color: white;
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      transition: 0.3s ease-in-out;
+      margin: 0.25rem;
+    }
+  }
+
+  input.input-toggle:checked + .toggle {
+    background: $gradient;
+  }
+
+  input.input-toggle:checked + .toggle .ball {
+    transform: translateX(40px);
+  }
+}

@@ -1,0 +1,75 @@
+.filtres {
+  margin: 0 1rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  header {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .h2 {
+      font-size: $h2;
+      font-weight: 600;
+      background-color: transparent;
+    }
+
+    button {
+      background-color: $grey;
+      padding: 0.5rem;
+      border-radius: 10px;
+    }
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 2rem 1rem;
+    gap: 1.5rem;
+
+    flex-grow: 1;
+
+    .h3 {
+      font-size: $h3;
+      font-weight: 500;
+      background-color: transparent;
+    }
+
+    h4 {
+      font-size: $h4;
+      font-weight: 600;
+    }
+
+    p {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    &.filter-simple .date {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  button.apply {
+    background: $gradient;
+    align-self: center;
+    margin-bottom: 1rem;
+    width: 90%;
+    height: 70px;
+    border-radius: 10px;
+    color: $white;
+    font-size: $h3;
+    font-weight: 500;
+
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+}
