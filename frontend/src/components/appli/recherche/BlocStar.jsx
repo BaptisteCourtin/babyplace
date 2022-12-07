@@ -23,7 +23,7 @@ function BlocStar({ nom, nbStar }) {
   );
 }
 
-Check.propTypes = {
+BlocStar.propTypes = {
   nom: PropTypes.string.isRequired,
   nbStar: PropTypes.number.isRequired,
 };
