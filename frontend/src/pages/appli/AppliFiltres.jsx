@@ -32,7 +32,11 @@ function Filtres() {
   return (
     <div className="filtres">
       <header>
-        <h2 onClick={() => setCompo(0)}>{`< Filtres`}</h2>
+        <button
+          type="button"
+          className="h2"
+          onClick={() => setCompo(0)}
+        >{`< Filtres`}</button>
         <button type="button">RESET</button>
       </header>
 

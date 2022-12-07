@@ -3,10 +3,8 @@ import { Link } from "react-router-dom";
 import NavbarApp from "@components/appli/navbar/NavbarApp";
 import ProfilPlat from "@components/appli/ProfilPlat";
 
-import { AiFillHeart } from "react-icons/ai";
-import { AiOutlineFile } from "react-icons/ai";
+import { AiFillHeart, AiOutlineFile, AiFillCreditCard } from "react-icons/ai";
 import { BsFillPeopleFill } from "react-icons/bs";
-import { AiFillCreditCard } from "react-icons/ai";
 import { BiBuoy } from "react-icons/bi";
 import { FaPiggyBank } from "react-icons/fa";
 

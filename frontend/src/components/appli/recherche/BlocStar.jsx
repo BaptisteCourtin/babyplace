@@ -1,7 +1,7 @@
 import React from "react";
 import Rating from "react-rating";
-import { AiOutlineStar } from "react-icons/ai";
-import { AiFillStar } from "react-icons/ai";
+import { AiOutlineStar, AiFillStar } from "react-icons/ai";
+import PropTypes from "prop-types";
 
 function BlocStar({ nom, nbStar }) {
   return (
@@ -22,5 +22,10 @@ function BlocStar({ nom, nbStar }) {
     </div>
   );
 }
+
+Check.propTypes = {
+  nom: PropTypes.string.isRequired,
+  nbStar: PropTypes.number.isRequired,
+};
 
 export default BlocStar;
