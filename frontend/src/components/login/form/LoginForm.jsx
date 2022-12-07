@@ -9,6 +9,7 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const [checked, setChecked] = useState(false);
 
+
   const handleCompletedChange = () => {
     setChecked(!checked);
   };
@@ -22,16 +23,21 @@ function LoginForm() {
           password,
         })
         .then((ret) => {
-          console.warn(ret);
-        })
-        .then(() => {
-          navigate("/login-params");
+          console.log(ret.data.token);
+          const token = ret.data.token;
+          navigate("/login-params", {
+            state: {
+              token
+            }
+          });
+
         })
 
         .catch((err) => {
           console.error(err);
         });
     };
+
   };
 
   return (
