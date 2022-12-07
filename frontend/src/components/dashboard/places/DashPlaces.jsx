@@ -230,7 +230,7 @@ function DashPlaces({ title }) {
           <h3>Vos options</h3>
           <p>
             Indemnité d'entretien
-            <label htmlFor="dshSwitch1" className="dashSwitch">
+            <label htmlFor="dashSwitch1" className="dashSwitch">
               <input type="checkbox" id="dashSwitch1" />
               <span className="dashSwitchSlider" />
             </label>
@@ -238,7 +238,7 @@ function DashPlaces({ title }) {
           </p>
           <p>
             Indemnité kilométrique
-            <label htmlFor="dshSwitch2" className="dashSwitch">
+            <label htmlFor="dashSwitch2" className="dashSwitch">
               <input type="checkbox" id="dashSwitch2" />
               <span className="dashSwitchSlider" />
             </label>
@@ -246,7 +246,7 @@ function DashPlaces({ title }) {
           </p>
           <p>
             Indemnité de repas
-            <label htmlFor="dshSwitch3" className="dashSwitch">
+            <label htmlFor="dashSwitch3" className="dashSwitch">
               <input type="checkbox" id="dashSwitch3" />
               <span className="dashSwitchSlider" />
             </label>
