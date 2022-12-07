@@ -249,3 +249,119 @@
     color: $white;
   }
 }
+
+@media screen and (max-width: 1200px) {
+  .home {
+    & .mainApp {
+      margin: 50px 0;
+    }
+
+    & .mainGrid {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 50px;
+
+      & li {
+        width: 60%;
+        margin: 0 auto;
+        flex-direction: row;
+      }
+    }
+  }
+
+  .homePro {
+    & .homeProInfo {
+      width: 85%;
+    }
+    
+    & .homeProCarousel {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .home {
+    & .mainApp {
+      & img {
+        display: none;
+      }
+    }
+
+    & .mainDesc {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .homePro {
+
+    & .homeProInfo {
+
+      & div {
+        align-items: center;
+        justify-content: center;
+
+        & p {
+          display: none;
+        }
+      }
+    }
+
+    & .homeProGrid {
+      & ul {
+        width: 85%;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 30px;
+
+        & li {
+          grid-template-columns: 2fr 3fr;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .home {
+    & .mainDesc {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .homePro {
+    & .homeProInfo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      & h2 {
+        text-align: center;
+      }
+    }
+
+    & .homeProGrid {
+      width: 95%;
+      & ul {
+        & li {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          padding: 30px;
+
+          & img {
+            width: 80%;
+          }
+        }
+      }
+    }
+  }
+}
