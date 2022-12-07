@@ -30,6 +30,7 @@ function Parents() {
 
       <div className="form-parent">
         <form>
+          <h4>Parent 1</h4>
           <div>
             <label htmlFor="nom">
               <input
@@ -118,6 +119,7 @@ function Parents() {
         </form>
 
         <form>
+          <h4>Parent 2</h4>
           <div>
             <label htmlFor="nom2">
               <input

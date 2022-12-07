@@ -7,7 +7,6 @@ function Services() {
   const [nesting, setNesting] = useState(false);
   const [montessori, setMontessori] = useState(false);
   const [formationHandicape, setFormationHandicape] = useState(false);
-  const [niveauDiplome, setNiveauDiplome] = useState("");
   const [anneeExperience, setAnneeExperience] = useState("");
   // ---sorties
   const [jardin, setJardin] = useState(false);
@@ -58,16 +57,14 @@ function Services() {
         p="Formation accueil d'enfant handicapés"
       />
       <select
-        id="niveauDiplome"
-        onChange={(event) => setNiveauDiplome(event.target.value)}
-      >
-        <option value="a">a</option>
-      </select>
-      <select
         id="anneeExperience"
         onChange={(event) => setAnneeExperience(event.target.value)}
       >
-        <option value="a">a</option>
+        <option value="moins de 1 an">moins de 1 an</option>
+        <option value="1 - 2 ans">1 - 2 ans</option>
+        <option value="3 - 5 ans">3 - 5 ans</option>
+        <option value="5 - 10 ans">5 - 10 ans</option>
+        <option value="plus de 10 ans"> + 10 ans</option>
       </select>
       <p>ANNEES</p>
       <h4>Sorties</h4>
