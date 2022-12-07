@@ -126,10 +126,9 @@
     width: 95%;
 
     & .headerInputs {
-      grid-template-areas: 
+      grid-template-areas:
         "inp1 inp2 inp3"
-        "button button button"
-      ;
+        "button button button";
       justify-content: center;
       gap: 20px;
 

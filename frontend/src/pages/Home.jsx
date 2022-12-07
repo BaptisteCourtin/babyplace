@@ -93,7 +93,8 @@ export default function Home() {
                 Soyez prévenu en temps réel des annulations vous permettant
                 ainsi de remplacer les places vacantes
                 <br />
-                Remplacez facilement les absences grace aux “waiting list” des parents
+                Remplacez facilement les absences grace aux “waiting list” des
+                parents
               </p>
             </div>
           </section>
@@ -140,8 +141,8 @@ export default function Home() {
                   <h3>Marketing de votre activité</h3>
                   <p>
                     Optimisez votre page profil pour vous rendre plus visible et
-                    vous permettre de vous faire découvrir par les parents de votre
-                    quartier.
+                    vous permettre de vous faire découvrir par les parents de
+                    votre quartier.
                   </p>
                   <button type="button">
                     En savoir plus <span>➜</span>
@@ -153,10 +154,10 @@ export default function Home() {
                 <div>
                   <h3>Communiquez avec les parents</h3>
                   <p>
-                    Les parents doivent avoir préremplis leur liste de
-                    documents pour pouvoir faire des réservations. Les parents
-                    peuvent vous soumettre les contrats déjà validé par les
-                    équipes légales de Babyplace.
+                    Les parents doivent avoir préremplis leur liste de documents
+                    pour pouvoir faire des réservations. Les parents peuvent
+                    vous soumettre les contrats déjà validé par les équipes
+                    légales de Babyplace.
                   </p>
                   <button type="button">
                     En savoir plus <span>➜</span>
