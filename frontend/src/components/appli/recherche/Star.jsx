@@ -27,6 +27,7 @@ function Star() {
 
   return (
     <button
+      type="button"
       className={visibleStar ? "star visible" : "star"}
       onClick={() => setVisibleStar(!visibleStar)}
     >
