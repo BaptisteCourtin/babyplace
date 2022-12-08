@@ -60,14 +60,11 @@ function Footer({ userType }) {
               <li>FAQ</li>
             </ul>
           </div>
-          <div className="footerLeft">
+          <div className="footerRight">
             <div className="socials">
-              <h3>Réseaux Sociaux</h3>
-              <div className="socialMediaImg">
-                <img src={facebook} alt="facebook" />
-                <img src={twitter} alt="twitter" />
-                <img src={insta} alt="instagram" />
-              </div>
+              <img src={facebook} alt="facebook" />
+              <img src={twitter} alt="twitter" />
+              <img src={insta} alt="instagram" />
             </div>
           </div>
         </div>

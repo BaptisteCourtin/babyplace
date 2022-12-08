@@ -8,6 +8,11 @@
   padding: 60px 0;
   gap: 30px;
 
+  span {
+    font-weight: 800;
+    font-size: 1.15em;
+  }
+
   & .loginParamsTitle {
     display: flex;
     flex-direction: column;
@@ -27,6 +32,7 @@
     display: flex;
     gap: 30px;
     flex-direction: column;
+
     & details {
       & summary {
         font-size: $h3;
