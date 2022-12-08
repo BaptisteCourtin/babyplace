@@ -17,6 +17,7 @@ function LoginForm() {
   const handleClick = (e) => {
     e.preventDefault();
 
+
     if (checked) {
       console.log(email);
       Axios
@@ -39,6 +40,7 @@ function LoginForm() {
           console.error(err);
         });
     };
+
 
   };
 

@@ -1,0 +1,263 @@
+.appli-dashPlaces {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .dashPlacesType {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0.5rem 0;
+
+    button {
+      padding: 10px 15px;
+      background: transparent;
+      color: $third;
+      border: 1px solid $third;
+      border-radius: 5px;
+      font-weight: 500;
+    }
+
+    .selected {
+      background: $third;
+      color: $white;
+    }
+  }
+
+  // recurrent
+  .dashPlacesRange {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+
+    .dashPlacesDays {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      li {
+        width: 35px;
+        height: 35px;
+        border-radius: 5px;
+        color: $third;
+
+        input {
+          display: none;
+          width: 100%;
+          height: 100%;
+        }
+
+        label {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          height: 100%;
+          border-radius: 5px;
+          border: 1px solid $third;
+
+          &.selected {
+            background-color: $third;
+            color: $white;
+          }
+        }
+      }
+    }
+
+    .multi-range-slider {
+      width: 100%;
+      background: none;
+      box-shadow: none;
+      border: none;
+      margin: 2rem 0;
+
+      .bar {
+        border: 1px solid $first;
+        border-radius: 10px;
+
+        .bar-left {
+          background-color: $grey;
+          box-shadow: none;
+        }
+
+        .bar-inner {
+          background: $gradient;
+          border: none;
+          box-shadow: none;
+        }
+
+        .bar-right {
+          background-color: $grey;
+          box-shadow: none;
+        }
+      }
+
+      .thumb:before {
+        box-shadow: none;
+        border: 1px solid $first;
+        background-color: $white;
+      }
+
+      .ruler {
+        .ruler-rule {
+          border-bottom: 1px solid $third;
+          border-left: 1px solid $third;
+
+          &:last-of-type {
+            border-right: 1px solid $third;
+          }
+        }
+      }
+
+      .labels {
+        .label {
+          font-size: $normal;
+        }
+      }
+
+      .caption {
+        .min-caption {
+          background-color: $third;
+          box-shadow: none;
+        }
+
+        .max-caption {
+          background-color: $third;
+          box-shadow: none;
+        }
+      }
+    }
+
+    .dashRangeValues {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      p {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        font-weight: 500;
+
+        img {
+          width: 40px;
+        }
+      }
+    }
+  }
+
+  // occasionnel
+  .appli-calendar {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+    p {
+      margin-top: 2rem;
+
+      span {
+        font-size: $h4;
+        font-weight: 600;
+      }
+    }
+
+    .react-calendar {
+      &__navigation {
+        display: flex;
+        justify-content: space-evenly;
+
+        &__arrow {
+          background: none;
+          color: $third;
+          font-size: $h2;
+        }
+
+        &__prev2-button {
+          display: none;
+        }
+
+        &__label {
+          flex-grow: 0 !important;
+          background: $third;
+          padding: 5px 10px;
+          border-radius: 5px;
+
+          span {
+            color: $white;
+            font-weight: 500;
+            text-transform: capitalize;
+          }
+        }
+
+        &__next2-button {
+          display: none;
+        }
+      }
+
+      &__month-view {
+        margin-top: 20px;
+        &__weekdays {
+          padding-bottom: 10px;
+          border-bottom: 1px solid $grey;
+
+          &__weekday {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            abbr {
+              text-transform: capitalize;
+            }
+          }
+        }
+
+        &__days {
+          &__day {
+            border-bottom: 1px dashed $second;
+            width: 50px;
+            height: 50px;
+            padding: 10px;
+            background: none;
+          }
+        }
+      }
+
+      &__year-view {
+        margin-top: 20px;
+        &__months {
+          &__month {
+            border-bottom: 1px dashed $second;
+            width: 50px;
+            height: 50px;
+            padding: 10px;
+            background: none;
+
+            abbr {
+              text-transform: capitalize;
+            }
+          }
+        }
+      }
+
+      // jour du jour
+      &__tile--now {
+        background-color: $third;
+        color: $white;
+        font-weight: 500;
+        border-bottom: 1px solid transparent;
+      }
+
+      // jour choisi
+      &__tile--active {
+        background-color: $fourth;
+      }
+    }
+  }
+}

@@ -9,6 +9,7 @@
 
 @import "../components/dashboard/dashboard.scss";
 
+// --- appli ---
 @import "../style/appli/applituto.scss";
 @import "../style/appli/applihome.scss";
 
@@ -30,6 +31,7 @@
 @import "../components/appli/profilplat.scss";
 @import "../components/appli/filtres/toggle.scss";
 @import "../components/appli/filtres/check.scss";
+@import "../components/appli/filtres/appliPlaces.scss";
 
 // --- form ---
 @import "../components/form/formStructure.scss";
