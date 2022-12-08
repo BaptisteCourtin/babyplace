@@ -80,6 +80,9 @@ function FormStructure() {
                 : ""}
             </p>
           </div>
+          <div>
+            <p>Enregistrer et quitter</p>
+          </div>
         </div>
         <div className="pagination">
           <progress value={currentStepIndex} max={steps.length - 1}>
@@ -141,7 +144,7 @@ function FormStructure() {
                   ? "Valorisez votre expérience et vos services"
                   : ""}
               </h4>
-              {currentStepIndex === 3 && (
+              {(currentStepIndex === 3) & (structure === "assmat") ? (
                 <div className="descExamples">
                   <div className="imgTitleContainer">
                     <img src={profilJM} alt="profil JM" />
@@ -156,8 +159,10 @@ function FormStructure() {
                     jardin, proche du tram. Je suis maman de 3 enfants et mamie
                     de 5 petits enfants de 3 mois à 12 ans. J'ai une expérience
                     en garde d'enfants de quelques années.
-                  </p>{" "}
-                  <br />{" "}
+                  </p>
+                </div>
+              ) : (currentStepIndex === 3) & (structure === "creche") ? (
+                <div className="descExamples">
                   <div className="imgTitleContainer">
                     <img src={profilCPP} alt="profil CPP" />
                     <h5>
@@ -172,9 +177,11 @@ function FormStructure() {
                     grand local, lumineux et coloré et un jardin de 50 m²
                     environ. Avec des équipes dynamiques et pleines d'idées, les
                     activités ne manquent pas pour l'éveil et l'épanouissement
-                    de vos petits bouts !{" "}
+                    de vos petits bouts !
                   </p>
                 </div>
+              ) : (
+                ""
               )}
               <pre>
                 {currentStepIndex === 0

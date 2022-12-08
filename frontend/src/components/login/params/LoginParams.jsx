@@ -2,19 +2,16 @@ import Axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-
 function LoginParams() {
   const { state } = useLocation();
   const { token } = state;
   const [donnees, setDonnees] = useState({});
 
-
   const getData = () => {
-
     Axios.get("http://localhost:5000/structure", {
       headers: {
         "x-token": token,
-      }
+      },
     })
       .then((ret) => {
         console.warn(ret.data);
@@ -22,17 +19,18 @@ function LoginParams() {
       })
       .catch((err) => {
         console.error(err);
-      })
+      });
   };
 
   useEffect(() => {
     getData();
-
-  }, [])
+  }, []);
   console.log(donnees.Indemn_repas);
   return (
     <section className="loginParams">
-      <p>Bienvenue <span>{donnees.Nom}</span></p>
+      <p>
+        Bienvenue <span>{donnees.Nom}</span>
+      </p>
       <div className="loginParamsTitle">
         <h2>
           Paramétrez votre profil et gérez vos annonces pour gagner de l’argent
@@ -64,7 +62,11 @@ function LoginParams() {
           <Link to="/">Paramètres de réservation</Link>
         </details>
       </div>
-      <Link className="loginParamsBtn" to="/dashboard" state={{ repas: donnees.Indemn_repas }}>
+      <Link
+        className="loginParamsBtn"
+        to="/dashboard"
+        state={{ repas: donnees.Indemn_repas }}
+      >
         Continuer
       </Link>
     </section>

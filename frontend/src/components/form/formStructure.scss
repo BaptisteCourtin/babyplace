@@ -52,11 +52,10 @@
   display: flex;
 
   & .formStructure {
-    width: 50%;
-    padding-left: 5%;
-    padding-right: 5%;
+    width: 50vw;
     display: flex;
     flex-wrap: wrap;
+    margin-right: 5vw;
   }
 
   & .page-left {
@@ -261,12 +260,12 @@
 
 .structure2,
 .structure3 {
-  padding: 8px;
+  padding: 0 8px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: 80%;
-  width: 100%;
+  width: 40vw;
 
   & .pageContent {
     display: flex;
@@ -338,60 +337,78 @@
   height: 90%;
   width: 100%;
 
+  & .colonnePage5 {
+    display: flex;
+    gap: 4vw;
+    align-items: center;
+  }
+
+  & .optionsLeft {
+    flex: 1;
+  }
+
+  & .assmatOptionsRight {
+    flex: 1;
+
+    & h5 {
+      margin-top: 4vh;
+    }
+  }
+
+  & small {
+    font-size: 0.8rem;
+  }
+
+  & select {
+    width: 100%;
+    border: 1px solid $grey;
+    border-radius: 10px;
+    height: 50px;
+    padding-top: 15px;
+    padding-left: 12px;
+    margin: 8px 0;
+  }
+
+  & select:focus {
+    outline: 1.5px solid $third;
+  }
+
+  & .inputContainer {
+    position: relative;
+  }
+
+  & input {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1.1em;
+    height: 1.1em;
+    border: 1px solid $grey;
+    border-radius: 30%;
+    transform: translateY(0.2em);
+    cursor: pointer;
+    margin-right: 4px;
+  }
+
+  & input:checked {
+    background-color: $third;
+  }
+
+  & select + label {
+    color: $grey;
+    font-size: 0.9rem;
+    position: absolute;
+    top: 14px;
+    left: 16px;
+  }
+
+  & h5 {
+    font-weight: 600;
+  }
+
   & .inputsContainer {
     display: flex;
     flex-direction: column;
-    gap: 0.75vh;
-    margin: 0.8vh 0;
-
-    & h5 {
-      font-weight: 600;
-    }
-
-    & input {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 1.1em;
-      height: 1.1em;
-      border: 1px solid $grey;
-      border-radius: 30%;
-      transform: translateY(0.2em);
-      cursor: pointer;
-      margin-right: 4px;
-    }
-
-    & input:checked {
-      background-color: $third;
-    }
-
-    & small {
-      font-size: 0.8rem;
-    }
-
-    & select {
-      width: 70%;
-      border: 1px solid $grey;
-      border-radius: 10px;
-      height: 50px;
-      padding-top: 15px;
-      padding-left: 12px;
-      margin: 8px 0;
-    }
-
-    & select:focus {
-      outline: 1.5px solid $third;
-    }
-
-    & .inputContainer {
-      position: relative;
-    }
-
-    & select + label {
-      color: $grey;
-      font-size: 0.9rem;
-      position: absolute;
-      top: 14px;
-      left: 16px;
-    }
+    gap: 1vh;
+    margin: 2vh 0 1vh;
   }
 }
