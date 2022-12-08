@@ -10,7 +10,6 @@ function LoginParams() {
 
 
   const getData = () => {
-
     Axios.get("http://localhost:5000/structure", {
       headers: {
         "x-token": token,
@@ -27,9 +26,8 @@ function LoginParams() {
 
   useEffect(() => {
     getData();
-
   }, [])
-  console.log(donnees.Indemn_repas);
+
   return (
     <section className="loginParams">
       <p>Bienvenue <span>{donnees.Nom}</span></p>
@@ -64,7 +62,7 @@ function LoginParams() {
           <Link to="/">Paramètres de réservation</Link>
         </details>
       </div>
-      <Link className="loginParamsBtn" to="/dashboard" state={{ repas: donnees.Indemn_repas }}>
+      <Link className="loginParamsBtn" to="/dashboard" state={{ donnees: { ...donnees } }}>
         Continuer
       </Link>
     </section>

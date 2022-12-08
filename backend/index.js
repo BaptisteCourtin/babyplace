@@ -11,9 +11,13 @@ const auth = require('./auth')
 
 const structure = require('./structure')
 
+const dashboard = require('./dashboard')
+
 app.use('/auth', auth)
 
 app.use('/structure', structure)
+
+app.use('/dashboard', dashboard)
 
 app.listen(port, () => {
   console.log(`server started on port: ${port}`)

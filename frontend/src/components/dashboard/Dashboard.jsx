@@ -16,7 +16,9 @@ import DashPlaces from "./places/DashPlaces";
 
 function Dashboard() {
   const { state } = useLocation();
-  const { repas } = state;
+  const { donnees } = state;
+
+  const [type, setType] = useState("assmat");
 
   const navigate = useNavigate();
 
@@ -29,7 +31,7 @@ function Dashboard() {
       return <DashAgenda />;
     }
     if (toggle === 3) {
-      return <DashPlaces repas={repas} title="Ajouter une place" />;
+      return <DashPlaces type={type} {...donnees} title="Ajouter une place" />;
     }
     if (toggle === 4) {
       return navigate("/structure/inscription-form");
@@ -42,7 +44,7 @@ function Dashboard() {
         <button type="button">
           <FiBell />
         </button>
-        <button type="button">Kévin</button>
+        <button type="button">{donnees.Nom}</button>
       </nav>
       <main>
         <DashNavbar setToggle={setToggle} />
