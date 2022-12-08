@@ -19,7 +19,7 @@ function Appli() {
         {pageAppli ? (
           <Suivant setPageAppli={setPageAppli} />
         ) : (
-          <Link to="/appli/home">
+          <Link to="/appli/search">
             <Suivant setPageAppli={setPageAppli} />
           </Link>
         )}
