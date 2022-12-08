@@ -10,7 +10,7 @@ function LoginParams() {
 
 
   const getData = () => {
-
+    setDonnees({});
     Axios.get("http://localhost:5000/structure", {
       headers: {
         "x-token": token,
@@ -64,7 +64,7 @@ function LoginParams() {
           <Link to="/">Paramètres de réservation</Link>
         </details>
       </div>
-      <Link className="loginParamsBtn" to="/dashboard" state={{ repas: donnees.Indemn_repas }}>
+      <Link className="loginParamsBtn" to="/dashboard" state={{ repas: donnees.Indemn_repas, name: donnees.Nom, donnees: donnees }}>
         Continuer
       </Link>
     </section>

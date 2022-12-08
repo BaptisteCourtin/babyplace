@@ -4,7 +4,8 @@ const router = express.Router()
 
 
 router.get('/', (req, res) => {
-        datasource.query("SELECT * FROM structure AS s JOIN creche AS c ON s.structure_id=c.structure_id WHERE Token = ?", [req.headers["x-token"]])
+    console.log(req.headers["x-token"]);
+    datasource.query("SELECT * FROM structure AS s JOIN creche AS c ON s.structure_id=c.structure_id WHERE Token = ?", [req.headers["x-token"]])
         .then(([s]) => {
             res.json(s);
         }

@@ -7,6 +7,7 @@ import {
   MdOutlineFormatListBulleted,
   MdOutlineCalendarToday,
   MdOutlinePlace,
+  MdOutlineMarkAsUnread,
 } from "react-icons/md";
 
 function DashNavbar({ setToggle }) {
@@ -35,6 +36,12 @@ function DashNavbar({ setToggle }) {
           <MdOutlinePlace />
           <button type="button" onClick={() => setToggle(3)}>
             Place
+          </button>
+        </li>
+        <li>
+          <MdOutlineMarkAsUnread />
+          <button type="button" onClick={() => setToggle(5)}>
+            Message
           </button>
         </li>
       </ul>
