@@ -13,7 +13,6 @@ import DashReservations from "./reservations/DashReservations";
 import DashAgenda from "./agenda/DashAgenda";
 import DashPlaces from "./places/DashPlaces";
 
-
 function Dashboard() {
   const { state } = useLocation();
   const { repas } = state;

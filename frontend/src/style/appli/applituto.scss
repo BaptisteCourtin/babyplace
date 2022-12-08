@@ -14,6 +14,7 @@
     flex-direction: column;
     align-items: center;
     flex-grow: 1;
+    border: 2px red solid;
 
     img {
       width: calc(100vw - 4rem);
@@ -36,6 +37,36 @@
 
     .trouve {
       margin-top: 43px;
+    }
+
+    .butt {
+      color: $white;
+      background-color: transparent;
+      padding: 0.2rem;
+      font-size: 20px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      position: relative;
+      z-index: 1;
+
+      span.fleche {
+        padding-left: 1rem;
+      }
+
+      span.round {
+        position: absolute;
+        z-index: -1;
+        right: -5px;
+
+        height: 28px;
+        width: 28px;
+        margin-left: 0.5rem;
+        border-radius: 50%;
+        background-color: $third;
+      }
     }
   }
 

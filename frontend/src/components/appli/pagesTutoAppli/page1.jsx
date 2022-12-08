@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import mom2 from "@assets/app parents/mom2.png";
 import logoBlanc from "@assets/logo-blanc.svg";
 
-const page0 = () => {
+function Page1() {
   return (
     <main className="page1">
       <img src={mom2} alt="mom-baby-2" />
@@ -15,8 +16,25 @@ const page0 = () => {
         Réservez une place en moins de 60 secondes et obtenez une solution de
         garde, même pour le lendemain !
       </p>
+
+      <div className="button">
+        <Link to="/appli/search">
+          <button className="butt" type="button">
+            Passer
+          </button>
+        </Link>
+
+        <div className="suivant">
+          <Link to="/appli/search">
+            <button className="butt" type="button">
+              Suivant <span className="fleche">{`>`}</span>
+              <span className="round" />
+            </button>
+          </Link>
+        </div>
+      </div>
     </main>
   );
-};
+}
 
-export default page0;
+export default Page1;
