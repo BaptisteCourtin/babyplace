@@ -17,6 +17,7 @@ function LoginForm() {
   const handleClick = (e) => {
     e.preventDefault();
 
+
     if (checked) {
       Axios
         .post("http://localhost:5000/auth", {
@@ -38,6 +39,7 @@ function LoginForm() {
           console.error(err);
         });
     };
+
 
   };
 

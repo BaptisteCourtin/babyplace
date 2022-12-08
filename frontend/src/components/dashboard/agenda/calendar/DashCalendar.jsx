@@ -1,11 +1,19 @@
 import React, { useState } from "react";
 import Calendar from "react-calendar";
 
-function DashCalendar() {
-  const [value, onChange] = useState(new Date());
+function DashCalendar({ setClickedDay, clickedDay }) {
+  const value = new Date();
 
   return (
-    <Calendar onChange={onChange} showNeighboringMonth={false} value={value} />
+    <div>
+      <Calendar
+        showNeighboringMonth={false}
+        value={clickedDay}
+        minDetail="year"
+        minDate={value}
+        onClickDay={(e) => setClickedDay(e)}
+      />
+    </div>
   );
 }
 

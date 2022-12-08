@@ -36,6 +36,7 @@
 
   main {
     margin: 0 1rem;
+
     h3 {
       font-size: $h3;
       font-weight: 600;
@@ -43,12 +44,17 @@
     }
 
     form {
-      border: 2px red solid;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
       align-items: flex-start;
       gap: 0.5rem;
+
+      h4 {
+        font-size: $h4;
+        font-weight: 500;
+        margin: 1rem 0 0.25rem;
+      }
 
       div {
         display: flex;

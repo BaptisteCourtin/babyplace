@@ -1,5 +1,6 @@
 .applisearch {
   padding-bottom: 4rem;
+  min-height: 100vh;
   background-color: $white;
 
   .content {
@@ -13,11 +14,12 @@
     .appli-filtres {
       display: flex;
       flex-direction: row;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
 
       width: 100%;
-      padding: 0 1rem;
+      padding: 0 0.5rem;
       background-color: $grey;
       line-height: 50px;
 
@@ -31,6 +33,18 @@
 
       button {
         background-color: $grey;
+        position: relative;
+      }
+
+      .tri {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+
+        span {
+          margin-right: 0.25rem;
+        }
       }
     }
 

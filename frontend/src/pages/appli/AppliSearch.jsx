@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import filter from "@assets/app parents/Filter.svg";
 import { Link } from "react-router-dom";
 import CarteCreche from "@components/appli/recherche/CarteCreche";
 import NavbarApp from "@components/appli/navbar/NavbarApp";
-
 import imgCreche from "@assets/img-time.svg";
 
 const creche = [
@@ -22,6 +21,7 @@ const creche = [
       verif: true,
       essai: true,
     },
+    like: true,
   },
   {
     image: imgCreche,
@@ -38,6 +38,7 @@ const creche = [
       verif: true,
       essai: false,
     },
+    like: false,
   },
   {
     image: imgCreche,
@@ -54,10 +55,13 @@ const creche = [
       verif: false,
       essai: false,
     },
+    like: true,
   },
 ];
 
 function AppliSearch() {
+  const [tri, setTri] = useState("Date Croissant");
+
   return (
     <div className="applisearch">
       <div className="content">
@@ -66,31 +70,42 @@ function AppliSearch() {
         <div className="appli-filtres">
           <div className="left-filter">
             <div>
-              <img src={filter} alt="filter" />
-              <Link to="/appli/search/filtres">Filtres</Link>
+              <Link to="/appli/search/filtres">
+                <img src={filter} alt="filter" />
+                Filtres
+              </Link>
             </div>
-            <div>
+            <div className="tri">
               <img src={filter} alt="filter" />
-              <Link to="/appli/search/filtres">Trier</Link>
+              <span>Tri :</span>
+              <select id="tri" onChange={(event) => setTri(event.target.value)}>
+                <option value="Date recente">Mise en ligne recente</option>
+                <option value="Date ancienne">Mise en ligne ancienne</option>
+                <option value="Prix croissant">Prix croissant</option>
+                <option value="Prix decroissant">Prix décroissant</option>
+              </select>
             </div>
           </div>
-          <button type="button">
-            {/* version carte en composant => soit liste soit carte (mettre les 2 en composants) */}
-            <p>Carte</p>
-          </button>
         </div>
 
         <main>
-          {creche.map((each) => (
-            <Link to="/appli/search/card" state={{ each }}>
-              <CarteCreche
-                jours={each.jours}
-                prix={each.prix}
-                img={each.image}
-                condition={each.condition}
-              />
-            </Link>
-          ))}
+          {creche
+            .sort(function compare(a, b) {
+              if (tri === "Prix croissant") {
+                if (a.prix < b.prix) return -1;
+                if (a.prix > b.prix) return 1;
+                return 0;
+              }
+              if (tri === "Prix decroissant") {
+                if (a.prix > b.prix) return -1;
+                if (a.prix < b.prix) return 1;
+                return 0;
+              }
+              return 0;
+            })
+            .map((each) => (
+              <CarteCreche each={each} />
+            ))}
         </main>
       </div>
 

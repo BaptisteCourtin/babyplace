@@ -14,10 +14,6 @@ function FilterSimple() {
         nom="assisstance"
         p="Assisstant maternel"
       />
-      <div className="date">
-        <p>Date et horaire</p>
-        <p>{`Choisir >`}</p>
-      </div>
       <Toggle
         setter={setDispo}
         state={dispo}
