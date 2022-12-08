@@ -1,31 +1,31 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 
-import Passer from "@components/appli/pagesTutoAppli/Passer";
-import Suivant from "@components/appli/pagesTutoAppli/Suivant";
-import Page0 from "../../components/appli/pagesTutoAppli/page0";
-import Page1 from "../../components/appli/pagesTutoAppli/page1";
+import Connexion from "@components/appli/pagesTutoAppli/Connexion";
+import SeConnecter from "@components/appli/pagesTutoAppli/SeConnecter";
+import Bienvenue from "@components/appli/pagesTutoAppli/Bienvenue";
+import Page0 from "@components/appli/pagesTutoAppli/Page0";
+import Page1 from "@components/appli/pagesTutoAppli/Page1";
 
 function Appli() {
-  const [pageAppli, setPageAppli] = useState(true);
+  const [compo, setCompo] = useState(0);
 
-  return (
-    <div className="applituto">
-      {pageAppli ? <Page0 /> : <Page1 />}
+  const choixComposant = () => {
+    if (compo === 1) {
+      return <Bienvenue setCompo={setCompo} />;
+    }
+    if (compo === 2) {
+      return <Page0 setCompo={setCompo} />;
+    }
+    if (compo === 3) {
+      return <Page1 setCompo={setCompo} />;
+    }
+    if (compo === 4) {
+      return <SeConnecter setCompo={setCompo} />;
+    }
+    return <Connexion setCompo={setCompo} />;
+  };
 
-      <div className="button">
-        <Passer />
-
-        {pageAppli ? (
-          <Suivant setPageAppli={setPageAppli} />
-        ) : (
-          <Link to="/appli/search">
-            <Suivant setPageAppli={setPageAppli} />
-          </Link>
-        )}
-      </div>
-    </div>
-  );
+  return <div className="applituto">{choixComposant()}</div>;
 }
 
 export default Appli;
