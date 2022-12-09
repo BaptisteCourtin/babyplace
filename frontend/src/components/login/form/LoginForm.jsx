@@ -70,8 +70,7 @@ function LoginForm() {
             onChange={handleCompletedChange}
           />
           <label htmlFor="useConditions">
-            J'accepte⠀
-            <span>les conditions d'utilisation</span>
+            J'accepte les conditions d'utilisation
           </label>
         </div>
         <button
