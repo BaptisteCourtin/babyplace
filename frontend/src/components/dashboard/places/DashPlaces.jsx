@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MultiRangeSlider from "multi-range-slider-react";
 import open from "@assets/dashboard/open-sign.svg";
 import close from "@assets/dashboard/closed-sign.svg";
@@ -6,19 +6,12 @@ import PropTypes from "prop-types";
 import DashCalendar from "../agenda/calendar/DashCalendar";
 import axios from "axios";
 
-function DashPlaces({ type, title, Structure_id, Indemn_repas, Tarif_heure, Tarif_horaire_spec, Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche, Heure_min, Heure_max }) {
-
-  const minTime = Heure_min
-  const minHours = Math.floor(minTime / 60)
-  const minMinutes = minTime % 60
-
-  const maxTime = Heure_max
-  const maxHours = Math.floor(maxTime / 60)
-  const maxMinutes = maxTime % 60
+function DashPlaces({ type, title, Token, Structure_id, Indemn_repas, Tarif_heure, Tarif_horaire_spec }) {
 
   const [toggleType, setToggleType] = useState(0);
-  const [toggleDay, setToggleDay] = useState(Lundi);
   const [selected, setSelected] = useState("Lundi");
+  const [hoursOpen, setHoursOpen] = useState(null)
+  const [hoursClose, setHoursClose] = useState(null)
 
   const [indemn1, setIndemn1] = useState(5);
   const [switch1, setSwitch1] = useState(() => {
@@ -41,6 +34,31 @@ function DashPlaces({ type, title, Structure_id, Indemn_repas, Tarif_heure, Tari
     } return false
   })
 
+  const [data, setData] = useState({});
+
+  const getData = () => {
+    axios.get("http://localhost:5000/structure", {
+      headers: {
+        "x-token": Token,
+      }
+    })
+      .then((ret) => {
+        setData(ret.data[0]);
+        setHoursOpen(data.Heure_min)
+        setHoursClose(data.Heure_max)
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+  };
+
+  useEffect(() => {
+    getData();
+  }, [data.Lundi, data.Mardi, data.Mercredi, data.Jeudi, data.Vendredi, data.Samedi, data.Dimanche, data.Heure_min, data.Heure_max])
+
+  const [toggleDay, setToggleDay] = useState(data.Lundi);
+  const [clickedDay, setClickedDay] = useState(new Date());
+
   const updateDay = async () => {
     const data = {
       id: Structure_id,
@@ -49,8 +67,30 @@ function DashPlaces({ type, title, Structure_id, Indemn_repas, Tarif_heure, Tari
     }
     data[selected] = !toggleDay;
     console.log(data);
-    await axios.put(`http://localhost:5000/dashboard/${Structure_id}`, data)
+    await axios.put(`http://localhost:5000/dashboard/day/${Structure_id}`, data)
   }
+
+  const updateHours = async () => {
+    await axios.put(`http://localhost:5000/dashboard/hours/${Structure_id}`, {
+      id: Structure_id,
+      heure_min: hoursOpen,
+      heure_max: hoursClose
+    })
+  }
+
+  const updateIndemnRepas = async () => {
+    await axios.put(`http://localhost:5000/dashboard/indemn_repas/${Structure_id}`, {
+      id: Structure_id,
+      indemn_repas: indemn3
+    })
+  }
+
+  const handleInput = (e) => {
+    setHoursOpen(e.minValue);
+    setHoursClose(e.maxValue);
+  };
+
+  console.log(indemn3)
 
   return (
     <div className="dashPlaces">
@@ -82,7 +122,7 @@ function DashPlaces({ type, title, Structure_id, Indemn_repas, Tarif_heure, Tari
                     name="days"
                     id="Lundi"
                     value="Lundi"
-                    onChange={() => { setSelected("Lundi"); setToggleDay(Lundi) }}
+                    onChange={() => { setSelected("Lundi"); setToggleDay(data.Lundi) }}
                   />
                   <label
                     htmlFor="Lundi"
@@ -97,7 +137,7 @@ function DashPlaces({ type, title, Structure_id, Indemn_repas, Tarif_heure, Tari
                     name="days"
                     id="Mardi"
                     value="Mardi"
-                    onChange={() => { setSelected("Mardi"); setToggleDay(Mardi) }}
+                    onChange={() => { setSelected("Mardi"); setToggleDay(data.Mardi) }}
                   />
                   <label
                     htmlFor="Mardi"
@@ -112,7 +152,7 @@ function DashPlaces({ type, title, Structure_id, Indemn_repas, Tarif_heure, Tari
                     name="days"
                     id="Mercredi"
                     value="Mercredi"
-                    onChange={() => { setSelected("Mercredi"); setToggleDay(Mercredi) }}
+                    onChange={() => { setSelected("Mercredi"); setToggleDay(data.Mercredi) }}
                   />
                   <label
                     htmlFor="Mercredi"
@@ -127,7 +167,7 @@ function DashPlaces({ type, title, Structure_id, Indemn_repas, Tarif_heure, Tari
                     name="days"
                     id="Jeudi"
                     value="Jeudi"
-                    onChange={() => { setSelected("Jeudi"); setToggleDay(Jeudi) }}
+                    onChange={() => { setSelected("Jeudi"); setToggleDay(data.Jeudi) }}
                   />
                   <label
                     htmlFor="Jeudi"
@@ -142,7 +182,7 @@ function DashPlaces({ type, title, Structure_id, Indemn_repas, Tarif_heure, Tari
                     name="days"
                     id="Vendredi"
                     value="Vendredi"
-                    onChange={() => { setSelected("Vendredi"); setToggleDay(Vendredi) }}
+                    onChange={() => { setSelected("Vendredi"); setToggleDay(data.Vendredi) }}
                   />
                   <label
                     htmlFor="Vendredi"
@@ -157,7 +197,7 @@ function DashPlaces({ type, title, Structure_id, Indemn_repas, Tarif_heure, Tari
                     name="days"
                     id="Samedi"
                     value="Samedi"
-                    onChange={() => { setSelected("Samedi"); setToggleDay(Samedi) }}
+                    onChange={() => { setSelected("Samedi"); setToggleDay(data.Samedi) }}
                   />
                   <label
                     htmlFor="Samedi"
@@ -172,7 +212,7 @@ function DashPlaces({ type, title, Structure_id, Indemn_repas, Tarif_heure, Tari
                     name="days"
                     id="Dimanche"
                     value="Dimanche"
-                    onChange={() => { setSelected("Dimanche"); setToggleDay(Dimanche) }}
+                    onChange={() => { setSelected("Dimanche"); setToggleDay(data.Dimanche) }}
                   />
                   <label
                     htmlFor="Dimanche"
@@ -187,19 +227,20 @@ function DashPlaces({ type, title, Structure_id, Indemn_repas, Tarif_heure, Tari
                   <MultiRangeSlider
                     min={0}
                     max={23}
-                    minValue={minHours}
-                    maxValue={maxHours}
+                    minValue={hoursOpen}
+                    maxValue={hoursClose}
                     step={1}
+                    onChange={(e) => { handleInput(e); updateHours() }}
                   />
                   <div className="dashRangeValues">
                     <p>
-                      <img src={open} alt="" /> Ouverture : {minMinutes !== 0 ? (`${minHours} : ${minMinutes}`) : (`${minHours}H`)}
+                      <img src={open} alt="" /> Ouverture : {hoursOpen}H
                     </p>
                     <p>
-                      <img src={close} alt="" /> Fermeture : {maxMinutes !== 0 ? (`${maxHours} : ${maxMinutes}`) : (`${maxHours}H`)}
+                      <img src={close} alt="" /> Fermeture : {hoursClose}H
                     </p>
                   </div>
-                  <button className="dashPlacesSubmit" onClick={() => { setToggleDay(!toggleDay); updateDay() }}>
+                  <button className="dashPlacesSubmit" onClick={() => setToggleDay(!toggleDay)}>
                     Repos
                   </button>
                 </>
@@ -209,7 +250,7 @@ function DashPlaces({ type, title, Structure_id, Indemn_repas, Tarif_heure, Tari
             </>
           </div>
         ) : (
-          <DashCalendar />
+          <DashCalendar clickedDay={clickedDay} setClickedDay={setClickedDay} />
         )}
       </section>
       <section className="dashPlacesParams">
@@ -258,7 +299,7 @@ function DashPlaces({ type, title, Structure_id, Indemn_repas, Tarif_heure, Tari
               <span className="dashSwitchSlider" />
             </label>
             <p className="dashOptionsPrices" style={{ display: switch3 ? "flex" : "none" }}>
-              <input type="text" value={indemn3} onChange={(e) => setIndemn3(e.target.value)} />€
+              <input type="text" value={indemn3} onChange={(e) => { setIndemn3(e.target.value); updateIndemnRepas() }} />€
             </p>
           </div>
         </div>

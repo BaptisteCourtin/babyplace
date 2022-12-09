@@ -68,8 +68,7 @@ function LoginForm() {
         <div>
           <input type="checkbox" name="useConditions" id="useConditions" checked={checked} onChange={handleCompletedChange} />
           <label htmlFor="useConditions">
-            J'accepte⠀
-            <span>les conditions d'utilisation</span>
+            J'accepte les conditions d'utilisation
           </label>
         </div>
         <button
