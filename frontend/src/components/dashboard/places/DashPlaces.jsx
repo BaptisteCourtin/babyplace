@@ -260,9 +260,11 @@ function DashPlaces({ type, title, Token, Structure_id, Indemn_repas, Tarif_heur
           <p title="Entre 22h et 6h, Dimanche et jour férié">
             Heure spécifique <span>{Tarif_horaire_spec}€</span>
           </p>
-          <p title="Au delà de 45h/semaine">
-            Heure majorée <span>{Tarif_heure * 1.5}€</span>
-          </p>
+          {type === 'assmat' &&
+            <p title="Au delà de 45h/semaine">
+              Heure majorée <span>{Tarif_heure * 1.5}€</span>
+            </p>
+          }
         </div>
         <div className="dashPlacesOptions">
           <h3>Vos options</h3>

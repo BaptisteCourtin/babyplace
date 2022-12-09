@@ -59,12 +59,18 @@
 
   & .dashNavParams {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
+    flex-direction: column;
     gap: 5px;
     position: absolute;
     bottom: 20px;
-    background: none;
     font-weight: 500;
+    
+    & button {
+      display: flex;
+      gap: 5px;
+      background: none;
+    }
   }
 }
