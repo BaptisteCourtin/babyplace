@@ -8,9 +8,23 @@ import {
   MdOutlineCalendarToday,
   MdOutlinePlace,
   MdOutlineMarkAsUnread,
+  MdLogout
 } from "react-icons/md";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-function DashNavbar({ setToggle }) {
+function DashNavbar({ setToggle, Token, Structure_id }) {
+
+  const navigate = useNavigate()
+
+  const logout = () => {
+    axios.put(`http://localhost:5000/logout/${Structure_id}`, {
+      id: Structure_id,
+      token: Token
+    })
+    // navigate("/")
+  }
+
   return (
     <section className="dashNav">
       <div className="dashNavLogo">
@@ -45,14 +59,20 @@ function DashNavbar({ setToggle }) {
           </button>
         </li>
       </ul>
-      <button
-        type="button"
-        className="dashNavParams"
-        onClick={() => setToggle(4)}
-      >
-        <MdOutlineSettings />
-        Paramètres
-      </button>
+      <div className="dashNavParams">
+        <button
+          type="button"
+          onClick={() => setToggle(4)}
+        >
+          <MdOutlineSettings />
+          Paramètres
+        </button>
+        <button
+          onClick={() => logout()}
+        >
+          <MdLogout />Déconnexion
+        </button>
+      </div>
     </section>
   );
 }

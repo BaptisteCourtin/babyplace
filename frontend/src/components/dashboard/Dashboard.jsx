@@ -49,7 +49,7 @@ function Dashboard() {
         <button type="button" onClick={() => setToggle(0)}>{donnees.Nom}</button>
       </nav>
       <main>
-        <DashNavbar setToggle={setToggle} />
+        <DashNavbar {...donnees} setToggle={setToggle} />
         <section className="dashboardSection">
           {pageShown()}
           {toggle === 0 && (
