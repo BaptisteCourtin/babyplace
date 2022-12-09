@@ -44,7 +44,6 @@ function Structure1({
           <div>
             <h4>Maintenant précisons les choses...</h4>
             <div className="typeCrecheContainer">
-
               <button
                 type="button"
                 className={typeCreche === "micro creche" ? "selected" : ""}
@@ -117,7 +116,6 @@ function Structure1({
                   updateFields({ typeCreche: "creche collective" });
                 }}
               >
-
                 Crèche collective
               </button>
               <button
@@ -130,8 +128,6 @@ function Structure1({
               >
                 Crèche parentale
               </button>
-
-
             </div>
           </div>
           <h4>Complétez et vérifiez vos informations</h4>
