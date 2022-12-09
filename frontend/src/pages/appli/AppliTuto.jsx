@@ -25,7 +25,7 @@ function Appli() {
     return <Connexion setCompo={setCompo} />;
   };
 
-  return <div className="applituto">{choixComposant()}</div>;
+  return choixComposant();
 }
 
 export default Appli;

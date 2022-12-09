@@ -6,18 +6,19 @@ import logoBlanc from "@assets/logo-blanc.svg";
 
 function Page1() {
   return (
-    <main className="page1">
-      <img src={mom2} alt="mom-baby-2" />
-      <img src={logoBlanc} alt="logo-blanc" />
+    <div className="applituto">
+      <main className="page1">
+        <img src={mom2} alt="mom-baby-2" />
+        <img src={logoBlanc} alt="logo-blanc" />
 
-      <p className="sub-title">Garde d’enfant à la demande </p>
+        <p className="sub-title">Garde d’enfant à la demande </p>
 
-      <p className="trouve">
-        Réservez une place en moins de 60 secondes et obtenez une solution de
-        garde, même pour le lendemain !
-      </p>
-
-      <div className="button">
+        <p className="trouve">
+          Réservez une place en moins de 60 secondes et obtenez une solution de
+          garde, même pour le lendemain !
+        </p>
+      </main>
+      <div className="button-bas">
         <Link to="/appli/search">
           <button className="butt" type="button">
             Passer
@@ -33,7 +34,7 @@ function Page1() {
           </Link>
         </div>
       </div>
-    </main>
+    </div>
   );
 }
 
