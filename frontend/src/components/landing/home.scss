@@ -327,9 +327,21 @@
 
 @media screen and (max-width: 500px) {
   .home {
+    width: 95%;
+
     & .mainDesc {
       display: flex;
       flex-direction: column;
+    }
+
+    & .mainGrid {
+      & li {
+        width: 100%;
+
+        & img {
+          width: 45vw;
+        }
+      }
     }
   }
 

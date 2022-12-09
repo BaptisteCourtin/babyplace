@@ -33,7 +33,7 @@ function Dashboard() {
       return navigate("/structure/inscription-form");
     }
     if (toggle === 5) {
-      return <Messages donnees={donnees}/>;
+      return <Messages donnees={donnees} />;
     }
   };
   console.log(name)
@@ -55,16 +55,16 @@ function Dashboard() {
           {toggle === 0 && (
             <div className="dashboardWelcome">
               <div className="dashboardProfile">
-                <img className="dashboardProfilePic" src={donnees.Photo_profil} alt="" width={70} height={70} />
+                <img className="dashboardProfilePic" src={donnees.Photo_profil} alt="" width={70} height={70} loading="lazy" />
                 <h1>{donnees.Nom}<span>{reviews}<AiFillStar /></span></h1>
               </div>
               <p className="dashboardProfilePres">
                 {donnees.Description}
               </p>
               <ul className="dashboardProfilePicList">
-                <li><img src={donnees.Photo_structure_1} alt="" /></li>
-                <li><img src={donnees.Photo_structure_2} alt="" /></li>
-                <li><img src={donnees.Photo_structure_3} alt="" /></li>
+                <li><img src={donnees.Photo_structure_1} alt="" loading="lazy" /></li>
+                <li><img src={donnees.Photo_structure_2} alt="" loading="lazy" /></li>
+                <li><img src={donnees.Photo_structure_3} alt="" loading="lazy" /></li>
               </ul>
               <div className="dashboardProfileContact">
                 <p><AiOutlinePhone />0{donnees.Telephone}</p>

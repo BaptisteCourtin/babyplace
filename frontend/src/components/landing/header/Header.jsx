@@ -1,8 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import headerImg from "@assets/landing page/image1.svg";
+import { useNavigate } from "react-router-dom";
 
 function Header({ userType }) {
+
+  const navigate = useNavigate()
+
   return userType === "parent" ? (
     <header className="header">
       <h1>
@@ -18,7 +22,7 @@ function Header({ userType }) {
         />
         <input type="text" name="date" id="date" placeholder="Date" />
         <input type="text" name="place" id="place" placeholder="Où" />
-        <button type="submit">
+        <button type="submit" onClick={() => navigate("/appli")}>
           Rechercher <span>➜</span>
         </button>
       </div>
