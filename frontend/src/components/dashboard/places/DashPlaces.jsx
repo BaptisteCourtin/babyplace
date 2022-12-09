@@ -90,8 +90,6 @@ function DashPlaces({ type, title, Token, Structure_id, Indemn_repas, Tarif_heur
     setHoursClose(e.maxValue);
   };
 
-  console.log(indemn3)
-
   return (
     <div className="dashPlaces">
       <section className="agendaSection">
@@ -240,7 +238,7 @@ function DashPlaces({ type, title, Token, Structure_id, Indemn_repas, Tarif_heur
                       <img src={close} alt="" /> Fermeture : {hoursClose}H
                     </p>
                   </div>
-                  <button className="dashPlacesSubmit" onClick={() => setToggleDay(!toggleDay)}>
+                  <button className="dashPlacesSubmit" onClick={() => { setToggleDay(!toggleDay); updateDay() }}>
                     Repos
                   </button>
                 </>
