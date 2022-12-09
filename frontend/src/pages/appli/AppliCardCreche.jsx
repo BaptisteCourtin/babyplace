@@ -7,7 +7,7 @@ import PopUp from "@components/appli/recherche/PopUp";
 
 function AppliCardCreche() {
   const location = useLocation();
-  const { each } = location.state;
+  const { each, image } = location.state;
   // each contient tous ce qu'il faut pour 1 creche
 
   const [prixJour, setPrixJour] = useState(0);
@@ -24,7 +24,7 @@ function AppliCardCreche() {
 
       <main>
         <div className="container-img">
-          <img src={imgCreche} alt="img creche" />
+          <img src={image} alt="img creche" />
           <Star />
         </div>
 

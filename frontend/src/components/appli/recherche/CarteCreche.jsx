@@ -4,8 +4,8 @@ import BlocJour from "@components/appli/recherche/BlocJour";
 import PropTypes from "prop-types";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
-function CarteCreche({ each }) {
-  const { image, prix, jours, condition, like } = each;
+function CarteCreche({ each, image }) {
+  const { prix, jours, condition, like } = each;
   const [likeCard, setLikeCard] = useState(like);
   return (
     <div className="carte-creche">
@@ -14,7 +14,7 @@ function CarteCreche({ each }) {
       ) : (
         <AiOutlineHeart className="like" onClick={() => setLikeCard(true)} />
       )}
-      <Link to="/appli/search/card" state={{ each }}>
+      <Link to="/appli/search/card" state={{ each, image }}>
         <img src={image} alt="img creche" />
         <div className="info-creche">
           <div className="ville-prix">
@@ -22,8 +22,12 @@ function CarteCreche({ each }) {
             <p className="prix">{prix}€</p>
           </div>
           <div className="jours">
-            {jours.map((eachJour) => (
-              <BlocJour jour={eachJour.jour} check={eachJour.check} />
+            {jours.map((eachJour, index) => (
+              <BlocJour
+                jour={eachJour.jour}
+                check={eachJour.check}
+                key={index}
+              />
             ))}
           </div>
           <ul>

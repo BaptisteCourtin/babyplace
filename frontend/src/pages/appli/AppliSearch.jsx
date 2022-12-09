@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import filter from "@assets/app parents/Filter.svg";
 import { Link } from "react-router-dom";
 import CarteCreche from "@components/appli/recherche/CarteCreche";
 import NavbarApp from "@components/appli/navbar/NavbarApp";
 import imgCreche from "@assets/img-time.svg";
+import axios from "axios";
 
 const creche = [
   {
-    image: imgCreche,
+    // image: imgCreche,
     prix: 3.5,
     jours: [
       { jour: "Lun.14", check: true },
@@ -24,7 +25,7 @@ const creche = [
     like: true,
   },
   {
-    image: imgCreche,
+    // image: imgCreche,
     prix: 0.75,
     jours: [
       { jour: "Lun.14", check: true },
@@ -41,7 +42,7 @@ const creche = [
     like: false,
   },
   {
-    image: imgCreche,
+    // image: imgCreche,
     prix: 15,
     jours: [
       { jour: "Lun.14", check: false },
@@ -60,7 +61,29 @@ const creche = [
 ];
 
 function AppliSearch() {
-  const [tri, setTri] = useState("Date Croissant");
+  const [tri, setTri] = useState("Recent");
+
+  const [data, setData] = useState({});
+  let Token =
+    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+  const getData = () => {
+    axios
+      // dans structure
+      .get("http://localhost:5000/structure", {
+        headers: {
+          "x-token": Token,
+        },
+      })
+      .then((res) => {
+        setData(res.data[0]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    getData();
+  }, [data.Photo_structure_1]);
 
   return (
     <div className="applisearch">
@@ -103,8 +126,13 @@ function AppliSearch() {
               }
               return 0;
             })
+
             .map((each) => (
-              <CarteCreche each={each} />
+              <CarteCreche
+                each={each}
+                image={data.Photo_structure_1}
+                key={data.id}
+              />
             ))}
         </main>
       </div>
