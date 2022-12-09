@@ -5,7 +5,6 @@ const router = express.Router()
 router.put('/day/:id', (req, res) => {
 
     const { toggleDay, day, id } = req.body
-    console.log(req.body)
 
     datasource
         .query(`UPDATE structure SET ${day} = ? WHERE Structure_id = ?`, [toggleDay, id])
@@ -63,7 +62,6 @@ router.put('/hours/:id', (req, res) => {
 router.put('/indemn_repas/:id', (req, res) => {
 
     const { indemn_repas, id } = req.body
-    console.log(req.body)
 
     datasource
         .query("UPDATE structure SET Indemn_repas = ? WHERE Structure_id = ?", [indemn_repas, id])
