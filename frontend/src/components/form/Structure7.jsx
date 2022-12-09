@@ -9,10 +9,12 @@ function Structure7() {
         <div>
             <h4>Voici comment les parents pourront réserver chez vous</h4>
             <div className="etapesChoixResa">
-                <div className="etape1">
-                    <img src={imgCopie} alt="imprimante"></img>
-                    <h5>1. Les parents trouvent votre annonce</h5>
-                    <p>Toute personne qui souhaite réserver avec vous doit confirmer ses coordonnées, fournir des informations de paiement, et vous parler de l’accueil de leur enfant</p>
+                <div className="etape1Container">
+                    <div className="etape1">
+                        <img src={imgCopie} alt="imprimante"></img>
+                        <h5>1. Les parents trouvent votre annonce</h5>
+                        <p>Toute personne qui souhaite réserver avec vous doit confirmer ses coordonnées, fournir des informations de paiement, et vous parler de l’accueil de leur enfant</p>
+                    </div>
                 </div>
                 <div className="choixResaContainer">
                     <div className="choixResa">
