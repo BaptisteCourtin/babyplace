@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const INITIAL_DATA = {
   email: "",
   mdp: "",
 };
 
-function SeConnecter({ setCompo }) {
+function SeConnecter() {
   const [data, setData] = useState(INITIAL_DATA);
   function updateFields(fields) {
     setData((prev) => {
@@ -47,16 +47,14 @@ function SeConnecter({ setCompo }) {
         </form>
       </main>
       <div className="button-bas">
-        <button className="butt" type="button" onClick={() => setCompo(2)}>
-          Se connecter
-        </button>
+        <Link to="/appli/search">
+          <button className="butt" type="button">
+            Se connecter
+          </button>
+        </Link>
       </div>
     </div>
   );
 }
-
-SeConnecter.propTypes = {
-  setCompo: PropTypes.func.isRequired,
-};
 
 export default SeConnecter;
