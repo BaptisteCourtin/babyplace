@@ -7,13 +7,14 @@ import DashNavbar from "./nav/DashNavbar";
 import DashReservations from "./reservations/DashReservations";
 import DashAgenda from "./agenda/DashAgenda";
 import DashPlaces from "./places/DashPlaces";
-
+import Messages from "../messages/Messages";
 
 function Dashboard() {
   const { state } = useLocation();
   const { donnees } = state;
 
   const [type, setType] = useState("creche");
+
 
   const navigate = useNavigate();
 
@@ -31,7 +32,11 @@ function Dashboard() {
     if (toggle === 4) {
       return navigate("/structure/inscription-form");
     }
+    if (toggle === 5) {
+      return <Messages donnees={donnees}/>;
+    }
   };
+  console.log(name)
 
   const reviews = Math.round((donnees.Avis_com + donnees.Avis_horaires + donnees.Avis_eveil + donnees.Avis_proprete + donnees.Avis_securite) / 5 * 10) / 10
 

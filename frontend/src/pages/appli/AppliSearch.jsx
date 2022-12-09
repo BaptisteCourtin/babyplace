@@ -79,8 +79,8 @@ function AppliSearch() {
               <img src={filter} alt="filter" />
               <span>Tri :</span>
               <select id="tri" onChange={(event) => setTri(event.target.value)}>
-                <option value="Date recente">Mise en ligne recente</option>
-                <option value="Date ancienne">Mise en ligne ancienne</option>
+                <option value="Recent">Recent</option>
+                <option value="Ancien">Ancien</option>
                 <option value="Prix croissant">Prix croissant</option>
                 <option value="Prix decroissant">Prix décroissant</option>
               </select>

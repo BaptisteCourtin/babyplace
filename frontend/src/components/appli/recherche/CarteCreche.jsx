@@ -26,8 +26,12 @@ function CarteCreche({ each }) {
               <BlocJour jour={eachJour.jour} check={eachJour.check} />
             ))}
           </div>
-          {condition.verif ? <p>N’accepte que les profils vérifiés</p> : null}
-          {condition.essai ? <p>Période d’adaptation obligatoire</p> : null}
+          <ul>
+            {condition.verif ? (
+              <li>N’accepte que les profils vérifiés</li>
+            ) : null}
+            {condition.essai ? <li>Période d’adaptation obligatoire</li> : null}
+          </ul>
         </div>
       </Link>
     </div>
