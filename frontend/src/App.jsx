@@ -4,7 +4,6 @@ import Register from "@components/register/Register";
 import { Route, Routes } from "react-router-dom";
 
 import Appli from "@pages/appli/AppliTuto";
-import AppliHome from "@pages/appli/AppliHome";
 import AppliMenu from "@pages/appli/AppliMenu";
 import AppliSearch from "@pages/appli/AppliSearch";
 import AppliSearchFiltres from "@pages/appli/AppliFiltres";
@@ -32,7 +31,6 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/messages" element={<Messages />} />
         <Route path="/appli" element={<Appli />} />
-        <Route path="/appli/home" element={<AppliHome />} />
         <Route path="/appli/menu" element={<AppliMenu />} />
         <Route path="/appli/search" element={<AppliSearch />} />
         <Route path="/appli/search/filtres" element={<AppliSearchFiltres />} />

@@ -1,43 +1,39 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import NavbarApp from "@components/appli/navbar/NavbarApp";
-import ProfilPlat from "@components/appli/ProfilPlat";
 
-import { AiFillHeart, AiOutlineFile, AiFillCreditCard } from "react-icons/ai";
-import { BsFillPeopleFill } from "react-icons/bs";
-import { BiBuoy } from "react-icons/bi";
-import { FaPiggyBank } from "react-icons/fa";
+import Base from "@components/appli/menu/Base";
+import Favoris from "@components/appli/menu/Favoris";
+import Personnesconfiance from "@components/appli/menu/PersonnesConfiance";
+import MoyensPaiement from "@components/appli/menu/MoyensPaiement";
+import Aide from "@components/appli/menu/Aide";
+import Réservations from "@components/appli/menu/Reservations";
 
 function AppliMenu() {
+  const [compo, setCompo] = useState(0);
+
+  const choixComposant = () => {
+    if (compo === 1) {
+      return <Favoris setCompo={setCompo} />;
+    }
+    if (compo === 2) {
+      return <Personnesconfiance setCompo={setCompo} />;
+    }
+    if (compo === 3) {
+      return <MoyensPaiement setCompo={setCompo} />;
+    }
+    if (compo === 4) {
+      return <Aide setCompo={setCompo} />;
+    }
+    if (compo === 5) {
+      return <Réservations setCompo={setCompo} />;
+    }
+    return <Base setCompo={setCompo} />;
+  };
+
   return (
     <div className="applimenu">
-      <ProfilPlat />
-      <main>
-        <Link to="./appli/menu/fav">
-          <AiFillHeart className="icon-menu" />
-          Vos Favoris
-        </Link>
-        <Link to="/">
-          <AiOutlineFile className="icon-menu" />
-          Dossier d'inscription
-        </Link>
-        <Link to="./appli/menu/personnesfav">
-          <BsFillPeopleFill className="icon-menu" />
-          Personnes de confiance
-        </Link>
-        <Link to="./appli/menu/paiement">
-          <AiFillCreditCard className="icon-menu" />
-          Vos moyens de paiement
-        </Link>
-        <Link to="./appli/menu/aide">
-          <BiBuoy className="icon-menu" />
-          Aide
-        </Link>
-        <Link to="./appli/menu/reservation">
-          <FaPiggyBank className="icon-menu" />
-          Réservations
-        </Link>
-      </main>
+      <div className="principale">{choixComposant()}</div>
+
       <NavbarApp />
     </div>
   );

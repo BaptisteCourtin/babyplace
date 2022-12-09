@@ -1,5 +1,6 @@
-import React from 'react';
-import profil from '@assets/avatar1.svg'
+import React from "react";
+import profil from "@assets/avatar1.svg";
+
 
 
 const Messages = ({ donnees }) => {
@@ -29,8 +30,13 @@ const Messages = ({ donnees }) => {
 
             </div>
 
+
         </div>
-    );
-};
+        <div className="messages-affichage" />
+      </div>
+      <div className="conversationAffich" />
+    </div>
+  );
+}
 
 export default Messages;

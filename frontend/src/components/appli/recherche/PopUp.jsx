@@ -1,20 +1,22 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import iconCran from "@assets/app parents/Icon cran.svg";
 
 function PopUp() {
   const [visiblePopUp, setVisiblePopUp] = useState(false);
+  const profilComplet = false;
 
-  return (
-    <div className={visiblePopUp ? "pop-up-creche visible" : "pop-up-creche"}>
-      <button
-        type="button"
-        className="butt-reserver"
-        onClick={() => setVisiblePopUp(true)}
-      >
-        Réserver
-      </button>
-
-      {visiblePopUp ? (
+  function OnePopUp() {
+    if (visiblePopUp && profilComplet) {
+      return (
         <div className="pop">
+          <button
+            className="retour"
+            type="button"
+            onClick={() => setVisiblePopUp(false)}
+          >
+            Retour
+          </button>
           <div className="paragraphe">
             <h3>Aggréments</h3>
             <ul>
@@ -56,7 +58,54 @@ function PopUp() {
             J'ai compris !
           </button>
         </div>
-      ) : null}
+      );
+    }
+    if (visiblePopUp && !profilComplet) {
+      return (
+        <div className="pop">
+          <button
+            className="retour"
+            type="button"
+            onClick={() => setVisiblePopUp(false)}
+          >
+            Retour
+          </button>
+          <div className="cran">
+            <img src={iconCran} alt="cran" />
+            <h4>Mon dossier d'inscription</h4>
+          </div>
+          <p>
+            Comme tout accueil en structure collective, vous devez compléter un
+            dossier d’inscription comprennant :
+            <br />
+            <br />
+            - un certificat médical d’aptitude de vie en collectivité
+            <br />
+            - une photocopie du carnet de vaccinations,
+            <br />
+            - une photocopie du livret de famille
+            <br />- votre numéro d’allocataire CAF.
+          </p>
+          <button type="button">
+            <Link to="/appli/user/completion">Compléter mon dossier</Link>
+          </button>
+        </div>
+      );
+    }
+    return "";
+  }
+
+  return (
+    <div className={visiblePopUp ? "pop-up-creche visible" : "pop-up-creche"}>
+      <button
+        type="button"
+        className="butt-reserver"
+        onClick={() => setVisiblePopUp(true)}
+      >
+        Réserver
+      </button>
+
+      {OnePopUp()}
     </div>
   );
 }
