@@ -155,7 +155,7 @@
   & .pageChoixResa {
     width: clamp(800px, 90vw, 1300px);
     height: 85vh;
-    padding: 2vh;
+    padding: 2vh 3vh;
     margin: 0 auto;
     background-color: #f9f9f9;
     display: flex;
@@ -179,8 +179,9 @@
 
     & .etapesChoixResa {
       display: flex;
-      gap: 3vw;
+      gap: 2vw;
       align-items: center;
+      justify-content: center;
 
       & p {
         font-size: 1rem;
@@ -274,20 +275,29 @@
         box-shadow: 2px 2px 6px $third, -2px -2px 6px $third;
       }
 
-      & .resaContainer {
+      & .etapeContainer {
         display: flex;
-        gap: 3vw;
+        gap: 2vw;
+        margin-bottom: 6vh;
+        background-color: #fff;
+        margin-top: 6vh;
+        flex: 1;
+        max-width: 18vw;
 
+        & .etape1,
         & .etape2,
         & .etape3,
         & .etape4 {
           display: flex;
           flex-direction: column;
-          justify-content: center;
-          flex: 1;
-          background-color: #fff;
-          padding: 8px;
-          margin-top: 17vh;
+          align-items: center;
+          padding: 2vw;
+          height: 50vh;
+
+          & img {
+            width: 10vw;
+            height: 7.5vw;
+          }
         }
       }
     }

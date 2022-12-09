@@ -26,7 +26,7 @@ function Structure8({ resaInst }) {
           <div className="etapeContainer">
             <div className="etape2">
               <img src={imgTime} />
-              <h5>2. Ils efffectue une réservation en ligne</h5>
+              <h5>2. Ils effectue une réservation en ligne</h5>
               <p>
                 Les parents réservent instantanément en ligne, et vous disposez
                 de toutes les informations nécessaire à l’accueil de l’enfant.
