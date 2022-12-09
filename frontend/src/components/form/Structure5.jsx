@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Proptypes from "prop-types";
-import { StructureContext } from "@pages/FormStructure";
+import { StructureContext } from "@components/context/StructureContext";
 
 function Structure5({
   PCSC1,
@@ -31,10 +31,10 @@ function Structure5({
   return (
     <div className="structure5">
       <h4>Les petits plus de votre accueil</h4>
-      <h5>Expérience et Formations</h5>
       <div className="colonnePage5">
         <div className="optionsLeft">
           <div className="inputsContainer">
+            <h5>Formations</h5>
             <div className="inputContainer">
               <input
                 type="checkbox"
@@ -188,32 +188,35 @@ function Structure5({
         </div>
         {structure === "assmat" && (
           <div className="assmatOptionsRight">
-            <div className="inputContainer">
-              <select
-                id="experience"
-                name="experience"
-                onChange={(e) => updateFields({ experience: e.target.value })}
-              >
-                <option value="">...</option>
-                <option value="Moins d'1 an"> Moins d'1 an</option>
-                <option value="1 - 2 ans"> 1 - 2 ans</option>
-                <option value="3 - 5 ans"> 3 - 5 ans</option>
-                <option value="5 - 10 ans"> 5 - 10 ans</option>
-                <option value="Plus de 10 ans"> Plus de 10 ans</option>
-              </select>
-              <label htmlFor="experience">Années d'expérience</label>
-            </div>
-            <div className="inputContainer">
-              <input
-                type="checkbox"
-                id="enfants"
-                name="enfants"
-                onChange={() => updateFields({ enfants: !enfants })}
-              />
-              <label htmlFor="enfants">
-                J'ai moi-même un/des enfant(s){" "}
-                <small>(peu importe leur âge)</small>
-              </label>
+            <div className="inputsContainer">
+              <h5>Expérience</h5>
+              <div className="inputContainer">
+                <select
+                  id="experience"
+                  name="experience"
+                  onChange={(e) => updateFields({ experience: e.target.value })}
+                >
+                  <option value="">...</option>
+                  <option value="Moins d'1 an"> Moins d'1 an</option>
+                  <option value="1 - 2 ans"> 1 - 2 ans</option>
+                  <option value="3 - 5 ans"> 3 - 5 ans</option>
+                  <option value="5 - 10 ans"> 5 - 10 ans</option>
+                  <option value="Plus de 10 ans"> Plus de 10 ans</option>
+                </select>
+                <label htmlFor="experience">Années d'expérience</label>
+              </div>
+              <div className="inputContainer">
+                <input
+                  type="checkbox"
+                  id="enfants"
+                  name="enfants"
+                  onChange={() => updateFields({ enfants: !enfants })}
+                />
+                <label htmlFor="enfants">
+                  J'ai moi-même un/des enfant(s){" "}
+                  <small>(peu importe leur âge)</small>
+                </label>
+              </div>
             </div>
             <div className="inputsContainer">
               <h5>Accueil</h5>

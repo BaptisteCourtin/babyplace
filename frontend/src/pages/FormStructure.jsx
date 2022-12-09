@@ -1,15 +1,18 @@
 import useMultistepForm from "@components/form/useMultistepForm";
-import React, { useState, createContext } from "react";
+import React, { useState } from "react";
 import Structure1 from "../components/form/Structure1";
 import Structure2 from "../components/form/Structure2";
 import Structure3 from "../components/form/Structure3";
 import Structure4 from "../components/form/Structure4";
 import Structure5 from "../components/form/Structure5";
+import Structure6 from "../components/form/Structure6";
+import Structure7 from "../components/form/Structure7";
 import imgDossier from "../assets/img-dossier.svg";
 import imgCopie from "../assets/landing page/image2.svg";
 import selfie from "../assets/selfie.svg";
 import profilJM from "../assets/profilJM.png";
 import profilCPP from "../assets/profilCPP.jpg";
+import { StructureContext } from "@components/context/StructureContext";
 
 const INITIAL_DATA = {
   typeStructure: "",
@@ -21,9 +24,9 @@ const INITIAL_DATA = {
   prenom: "",
   adresseStructure: "",
   imageProfilSrc: "https://via.placeholder.com/150.png?text=photo",
-  photo1Src: "https://via.placeholder.com/240x135.png?text=photo+1",
-  photo2Src: "https://via.placeholder.com/240x135.png?text=photo+2",
-  photo3Src: "https://via.placeholder.com/240x135.png?text=photo+3",
+  photo1Src: "https://via.placeholder.com/240x160.png?text=photo+1",
+  photo2Src: "https://via.placeholder.com/240x160.png?text=photo+2",
+  photo3Src: "https://via.placeholder.com/240x160.png?text=photo+3",
   description: "",
   PCSC1: false,
   nesting: false,
@@ -46,7 +49,7 @@ const INITIAL_DATA = {
   album_photo: false,
   photo_connecte: false,
 };
-export const StructureContext = createContext("");
+
 
 function FormStructure() {
   const [data, setData] = useState(INITIAL_DATA);
@@ -63,10 +66,14 @@ function FormStructure() {
       <Structure3 {...data} updateFields={updateFields} />,
       <Structure4 {...data} updateFields={updateFields} />,
       <Structure5 {...data} updateFields={updateFields} />,
+      <Structure6 />,
+      <Structure7 {...data} updateFields={updateFields} />,
+
+
     ]);
   return (
     <StructureContext.Provider value={{ structure, setStructure }}>
-      <div className="formStructure">
+      <div className="formContainer">
         <div className="formTitleBar">
           <div className="leftPart">
             <h4>Babyplace</h4>
@@ -74,10 +81,10 @@ function FormStructure() {
               {currentStepIndex === 0
                 ? "Structure d'accueil"
                 : currentStepIndex === 1 || currentStepIndex === 2
-                ? "Photos"
-                : currentStepIndex === 3 || currentStepIndex === 4
-                ? "Présentation"
-                : ""}
+                  ? "Photos"
+                  : currentStepIndex === 3 || currentStepIndex === 4
+                    ? "Présentation"
+                    : currentStepIndex === 5 ? "Conditions d’utilisation" : currentStepIndex === 6 ? "Règlement intérieur" : ""}
             </p>
           </div>
           <div>
@@ -91,7 +98,7 @@ function FormStructure() {
           </progress>
         </div>
         <div className="formStructureContainer">
-          <form className="formStructure">
+          <form className={currentStepIndex === 6 || currentStepIndex === 7 ? "pageChoixResa" : "formStructure"}>
             {step}
             <div className="buttonContainer">
               {!isFirstStep && (
@@ -104,7 +111,7 @@ function FormStructure() {
               </button>
             </div>
           </form>
-          <div className="explicationsContainer">
+          {currentStepIndex !== 6 & currentStepIndex !== 7 ? <div className="explicationsContainer">
             <div className="innerContainer">
               {currentStepIndex === 0 ? (
                 <img
@@ -135,14 +142,14 @@ function FormStructure() {
                 {currentStepIndex === 0
                   ? "Choisissez votre catégorie d’annonce"
                   : currentStepIndex === 1
-                  ? "Veillez à ce que votre photo montre clairement votre visage"
-                  : currentStepIndex === 2
-                  ? "Conseils rapides pour des photos de qualité"
-                  : currentStepIndex === 3
-                  ? "Inspirez vous des annonces Babyplace"
-                  : currentStepIndex === 4
-                  ? "Valorisez votre expérience et vos services"
-                  : ""}
+                    ? "Veillez à ce que votre photo montre clairement votre visage"
+                    : currentStepIndex === 2
+                      ? "Conseils rapides pour des photos de qualité"
+                      : currentStepIndex === 3
+                        ? "Inspirez vous des annonces Babyplace"
+                        : currentStepIndex === 4
+                          ? "Valorisez votre expérience et vos services"
+                          : ""}
               </h4>
               {(currentStepIndex === 3) & (structure === "assmat") ? (
                 <div className="descExamples">
@@ -187,13 +194,14 @@ function FormStructure() {
                 {currentStepIndex === 0
                   ? "En sélectionnant les catégories adéquates, vous aidez les parents à savoir à quoi s'attendre concernant l’accueil de leur enfant au sein de votre structure."
                   : currentStepIndex === 2
-                  ? "Désencombrez votre pièce. \nUtilisez la lumière naturelle du jour et évitez le flash. \nPrenez des photos en mode paysage depuis les coins des pièces. \nCentrez la prise de vue à égale distance entre le sol et le plafond. \nMettez en valeur les équipements et jeux d’éveil."
-                  : currentStepIndex === 4
-                  ? "Il s’agit en général des services que les parents souhaitent retrouver pour l’accueil de leurs enfants. Vous pourrez en ajouter d’autres après la publication."
-                  : ""}
+                    ? "Désencombrez votre pièce. \nUtilisez la lumière naturelle du jour et évitez le flash. \nPrenez des photos en mode paysage depuis les coins des pièces. \nCentrez la prise de vue à égale distance entre le sol et le plafond. \nMettez en valeur les équipements et jeux d’éveil."
+                    : currentStepIndex === 4
+                      ? "Il s’agit en général des services que les parents souhaitent retrouver pour l’accueil de leurs enfants. Vous pourrez en ajouter d’autres après la publication."
+                      : ""}
               </pre>
+              {currentStepIndex === 5 && <img src={imgDossier} />}
             </div>
-          </div>
+          </div> : ""}
         </div>
       </div>
     </StructureContext.Provider>
