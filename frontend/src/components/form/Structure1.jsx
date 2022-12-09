@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import Proptypes from "prop-types";
-import { StructureContext } from "@pages/FormStructure";
+import { StructureContext } from "@components/context/StructureContext";
 
 function Structure1({
   typeStructure,
@@ -44,16 +44,7 @@ function Structure1({
           <div>
             <h4>Maintenant précisons les choses...</h4>
             <div className="typeCrecheContainer">
-              <button
-                type="button"
-                className={typeCreche === "creche parentale" ? "selected" : ""}
-                onClick={() => {
-                  setTypeCreche("creche parentale");
-                  updateFields({ typeCreche: "creche parentale" });
-                }}
-              >
-                Crèche parentale
-              </button>
+
               <button
                 type="button"
                 className={typeCreche === "micro creche" ? "selected" : ""}
@@ -88,13 +79,15 @@ function Structure1({
               </button>
               <button
                 type="button"
-                className={typeCreche === "creche collective" ? "selected" : ""}
+                className={
+                  typeCreche === "creche associative" ? "selected" : ""
+                }
                 onClick={() => {
-                  setTypeCreche("creche collective");
-                  updateFields({ typeCreche: "creche collective" });
+                  setTypeCreche("creche associative");
+                  updateFields({ typeCreche: "creche associative" });
                 }}
               >
-                Crèche collective
+                Crèche associative
               </button>
               <button
                 type="button"
@@ -118,16 +111,27 @@ function Structure1({
               </button>
               <button
                 type="button"
-                className={
-                  typeCreche === "creche associative" ? "selected" : ""
-                }
+                className={typeCreche === "creche collective" ? "selected" : ""}
                 onClick={() => {
-                  setTypeCreche("creche associative");
-                  updateFields({ typeCreche: "creche associative" });
+                  setTypeCreche("creche collective");
+                  updateFields({ typeCreche: "creche collective" });
                 }}
               >
-                Crèche associative
+
+                Crèche collective
               </button>
+              <button
+                type="button"
+                className={typeCreche === "creche parentale" ? "selected" : ""}
+                onClick={() => {
+                  setTypeCreche("creche parentale");
+                  updateFields({ typeCreche: "creche parentale" });
+                }}
+              >
+                Crèche parentale
+              </button>
+
+
             </div>
           </div>
           <h4>Complétez et vérifiez vos informations</h4>

@@ -1,19 +1,24 @@
 .formTitleBar {
   padding: 8px 5vw;
   height: 7vh;
+  min-height: 33px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  & p {
+    color: #787885;
+    width: 30vw;
+    text-align: center;
+  }
 
   & .leftPart {
     display: flex;
     align-items: center;
     gap: 5vw;
+
   }
 
-  & p {
-    color: #787885;
-  }
 
   & h4 {
     font-family: $display;
@@ -41,6 +46,12 @@
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
   }
+
+  & progress[value]::-moz-progress-bar {
+    background: $gradient;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
 }
 
 .formStructureContainer {
@@ -52,19 +63,24 @@
   display: flex;
 
   & .formStructure {
-    width: 50%;
-    padding-left: 5%;
-    padding-right: 5%;
+    width: 50vw;
     display: flex;
     flex-wrap: wrap;
+    margin-right: 5vw;
   }
 
   & .page-left {
     width: 100%;
+    min-height: 60vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding-top: 8px;
+
+    & h5 {
+      font-weight: 600;
+      margin: 0;
+    }
 
     & textarea {
       width: 80%;
@@ -106,7 +122,7 @@
         border: 2px solid $fifth;
       }
 
-      & input:valid + label {
+      & input:valid+label {
         color: $fifth;
       }
 
@@ -114,7 +130,7 @@
         display: none;
       }
 
-      & input:valid + label + p {
+      & input:valid+label+p {
         position: absolute;
         transform: translateX(28vw) translateY(6px);
         font-size: 2rem;
@@ -138,6 +154,101 @@
     }
   }
 
+  & .pageChoixResa {
+    width: 90vw;
+    height: 85vh;
+    padding: 2vh;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    & .buttonContainer {
+
+      & .backButton {
+        background-color: #f9f9f9;
+      }
+    }
+
+    & h4 {
+      text-align: center;
+    }
+
+    & h5 {
+      font-weight: 600;
+      margin: 1vh 0;
+    }
+
+    & .etapesChoixResa {
+      display: flex;
+      gap: 3vw;
+
+      & .etapes {
+        display: flex;
+        gap: 2vw;
+        min-height: 15vh;
+      }
+
+      & .etape1Container {
+        height: 45vh;
+        margin-top: 17vh;
+        background-color: #fff;
+
+        & .etape1 {
+          flex: 1;
+          height: 45vh;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 8px;
+          transform: translateY(-10vh);
+        }
+
+
+        & img {
+          width: 25vh;
+        }
+      }
+
+      & .choixResaContainer {
+        flex: 4;
+        padding-top: 20vh;
+      }
+
+      & .choixResa {
+        background-color: #fff;
+        margin-bottom: 1vw;
+        min-height: 20vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 8px;
+        position: relative;
+
+        & img {
+          position: absolute;
+          width: 25vh;
+          top: -17vh;
+          margin-left: 12vh;
+        }
+
+        & .etape2,
+        & .etape3 {
+          width: 50%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+
+        & .lienChoixResa {
+          color: $third;
+          font-size: 1.1rem;
+          text-align: right;
+        }
+      }
+    }
+  }
+
   & .explicationsContainer {
     width: 50%;
     height: 91vh;
@@ -157,9 +268,11 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      margin-bottom: 12vh;
 
       & h4 {
         margin: 0 0 2vh;
+        font-size: 1.1rem;
       }
 
       & h5 {
@@ -229,6 +342,7 @@
     display: flex;
     flex-wrap: wrap;
 
+
     & button {
       background-color: #f2f2f2;
       color: initial;
@@ -248,7 +362,7 @@
     display: flex;
     gap: 0.5rem;
     width: 100%;
-    justify-content: right;
+    justify-content: space-between;
     align-self: flex-end;
   }
 
@@ -261,7 +375,7 @@
 
 .structure2,
 .structure3 {
-  padding: 8px;
+  padding: 0 8px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -287,13 +401,16 @@
 
   .inputContainer {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
+    align-items: center;
     margin-left: 2vw;
+    width: 50%;
   }
 
   & input {
-    color: $grey;
+    color: #fff;
+    overflow: hidden
   }
 
   & input::file-selector-button {
@@ -303,25 +420,30 @@
     background-color: white;
     color: $third;
     font-weight: 600;
+    width: fit-content;
   }
 }
 
 .structure3 {
+  margin-bottom: 2vh;
+
   & .pageContent {
     display: block;
   }
 
   & .photoAndDescContainer {
     display: flex;
+    flex-wrap: wrap;
     margin-top: 2vh;
   }
 
   & .imgContainer {
-    min-width: 240px;
-    min-height: 135px;
-    height: 135px;
-    width: 240px;
+    min-width: 120px;
+    min-height: 67.5px;
+    height: 13.5vh;
+    width: 20vh;
     border-radius: 0;
+    object-fit: cover;
     overflow: hidden;
   }
 
@@ -338,60 +460,259 @@
   height: 90%;
   width: 100%;
 
+  & .colonnePage5 {
+    display: flex;
+    gap: 4vw;
+    // align-items: center;
+  }
+
+  & .optionsLeft {
+    flex: 1;
+    width: 100%;
+  }
+
+  & .assmatOptionsRight {
+    flex: 1;
+    width: 100%;
+
+  }
+
+  & small {
+    font-size: 0.8rem;
+  }
+
+  & select {
+    width: 100%;
+    border: 1px solid $grey;
+    border-radius: 10px;
+    height: 50px;
+    padding-top: 24px;
+    padding-left: 12px;
+    margin: 0;
+  }
+
+  & select:focus {
+    outline: 1.5px solid $third;
+  }
+
+  & .inputContainer {
+    position: relative;
+  }
+
+  & input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 1.1em;
+    height: 1.1em;
+    border: 1px solid $grey;
+    border-radius: 30%;
+    transform: translateY(0.2em);
+    cursor: pointer;
+    margin-right: 4px;
+  }
+
+  & input:checked {
+    background-color: #fff;
+    position: relative;
+
+    &:before {
+      content: "\2713";
+      padding: 0 2px;
+      display: block;
+      color: $third;
+      font-size: initial;
+      font-weight: 800;
+      position: absolute;
+    }
+  }
+
+  & select+label {
+    color: $grey;
+    font-size: 0.9rem;
+    position: absolute;
+    top: 10px;
+    left: 16px;
+  }
+
+  & h5 {
+    font-weight: 600;
+  }
+
   & .inputsContainer {
     display: flex;
     flex-direction: column;
-    gap: 0.75vh;
-    margin: 0.8vh 0;
+    gap: 1vh;
+    margin: 2vh 0 1vh;
+  }
+}
+
+.structure6 {
+  & h4 {
+    margin-bottom: .5vh;
+  }
+
+  & .pageContent {
+    & p {
+      margin: 1vh 0;
+    }
 
     & h5 {
-      font-weight: 600;
+      margin-top: 2vh;
+    }
+  }
+}
+
+@media screen and (max-width:1200px) {
+  .formStructureContainer {
+    position: relative;
+    width: 90vw;
+    min-height: 91vh;
+    height: fit-content;
+    margin: 0 auto;
+    display: block;
+
+    & .formStructure {
+      width: 100%;
     }
 
-    & input {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 1.1em;
-      height: 1.1em;
-      border: 1px solid $grey;
-      border-radius: 30%;
-      transform: translateY(0.2em);
-      cursor: pointer;
-      margin-right: 4px;
-    }
-
-    & input:checked {
-      background-color: $third;
-    }
-
-    & small {
-      font-size: 0.8rem;
-    }
-
-    & select {
-      width: 70%;
-      border: 1px solid $grey;
-      border-radius: 10px;
-      height: 50px;
-      padding-top: 15px;
-      padding-left: 12px;
-      margin: 8px 0;
-    }
-
-    & select:focus {
-      outline: 1.5px solid $third;
+    & h4 {
+      margin: 2vh 0 1vh;
+      text-align: center;
     }
 
     & .inputContainer {
-      position: relative;
+      width: 100%;
     }
 
-    & select + label {
-      color: $grey;
-      font-size: 0.9rem;
-      position: absolute;
-      top: 14px;
-      left: 16px;
+
+
+    & .explicationsContainer {
+      width: 100%;
+      height: 40%;
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 4vh;
+
+
+      & .innerContainer {
+        padding: 8px;
+        margin: 2vh;
+        width: 80vw;
+        min-width: 80%;
+        max-width: 100%;
+        min-height: 25%;
+        height: 25%;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      & img {
+        width: 30%;
+      }
+
+
+      & h5 {
+        font-weight: 600;
+        margin: 0;
+
+        & span {
+          font-weight: 400;
+        }
+      }
+
+      & pre {
+        max-width: 100%;
+        white-space: pre-wrap;
+        text-align: center;
+      }
+
+      & .imgTitleContainer {
+        width: 80vw;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        justify-content: center;
+        align-items: center;
+        margin: .5vh 0 .5vh;
+      }
+
+      & p {
+        height: fit-content
+      }
+
+      & .descExamples {
+        width: 80%;
+        gap: 2vw;
+        margin: 1vh 0;
+        padding: 0;
+        min-height: 30%;
+        max-height: 30%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+    }
+
+    & .structure2 {
+      & .pageContent {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1vh;
+        margin: 2vh 0;
+
+        & .photoAndDescContainer {
+          display: flex;
+          flex-wrap: nowrap;
+          align-items: center;
+          justify-content: center;
+          margin-top: 2vh;
+        }
+
+        & .inputContainer {
+          flex-direction: column;
+          justify-content: center;
+        }
+
+        & input {
+          width: 50%;
+        }
+      }
+
+    }
+
+    .typeCrecheContainer,
+    .typeContainer {
+      justify-content: center;
+    }
+
+    .structure3 {
+      & .inputContainer {
+        width: 50%;
+        // margin-top: 1vh;
+      }
+
+      & .photoAndDescContainer {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+        margin-top: 2vh;
+      }
+    }
+
+    .structure5 {
+      & .colonnePage5 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+
+        & h5 {
+          margin-top: 1vh;
+        }
+      }
     }
   }
 }

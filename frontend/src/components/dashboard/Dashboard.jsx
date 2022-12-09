@@ -15,7 +15,6 @@ import DashAgenda from "./agenda/DashAgenda";
 import DashPlaces from "./places/DashPlaces";
 import Messages from "../messages/Messages";
 
-
 function Dashboard() {
   const { state } = useLocation();
   const { repas, name, donnees } = state;
