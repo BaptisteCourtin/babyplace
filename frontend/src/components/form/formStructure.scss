@@ -189,16 +189,20 @@
         min-height: 15vh;
       }
 
-      & .etape1 {
-        background-color: #fff;
-        flex: 1;
+      & .etape1Container {
         height: 45vh;
         margin-top: 17vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 8px;
-        transform: translateY(-10vh);
+        background-color: #fff;
+
+        & .etape1 {
+          flex: 1;
+          height: 45vh;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 8px;
+          transform: translateY(-10vh);
+        }
 
 
         & img {
