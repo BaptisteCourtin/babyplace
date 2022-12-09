@@ -1,48 +1,70 @@
 .messages {
-  width: 100%;
-  height: 100%;
-  display: flex;
 
-  .messagesShortsAffich {
-    width: 50%;
-    height: 100%;
+    width: auto;
+    height: auto;
     display: flex;
-    flex-direction: column;
-    padding: 20px;
-    border-bottom: solid 10px rgba(230, 225, 225, 0.25);
-    border-right: solid 2px $fourth;
+    margin: 20px;
+    background-color: #ffffff;
+    border-radius: 5px;
 
-    h2 {
-      padding-left: 20px;
-      font-weight: 700;
-      font-size: 2em;
-      color: $second;
-    }
 
     .userPart {
       display: flex;
       align-items: center;
 
-      .profilText {
-        line-height: 1.5em;
+
+    .messagesShortsAffich {
+        width: 35%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        border-right: solid 2px $fourth;
+
 
         img {
           width: 75px;
           height: 75px;
         }
 
-        span {
-          font-weight: 700;
-          font-size: 1.5em;
-        }
+        .userPart {
+            border-bottom: solid 10px rgba(230, 225, 225, 0.25);
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            height: fit-content;
 
-        #email {
-          font-style: italic;
-          color: $third;
-          font-size: 0.9em;
-          font-weight: 500;
+
+            #profilImg {
+                width: 60px;
+                height: 60px;
+            }
+
+            .profilText {
+                line-height: 1.25em;
+
+
+                span {
+                    font-weight: 700;
+                    font-size: 1em;
+                }
+
+                #email {
+                    font-style: italic;
+                    color: $third;
+                    font-size: 0.80em;
+                    font-weight: 500;
+                }
+            }
+
         }
       }
     }
-  }
+
+
+    .conversationAffich {
+        padding: 20px;
+    }
+
 }
+

@@ -17,6 +17,7 @@ function LoginForm() {
     e.preventDefault();
 
     if (checked) {
+
       Axios.post("http://localhost:5000/auth", {
         email,
         password,
@@ -24,6 +25,7 @@ function LoginForm() {
         .then((ret) => {
           console.log(ret.data.token);
           const { token } = ret.data;
+
           navigate("/login-params", {
             state: {
               token,

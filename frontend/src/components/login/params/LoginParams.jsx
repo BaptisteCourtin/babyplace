@@ -62,11 +62,9 @@ function LoginParams() {
           <Link to="/">Paramètres de réservation</Link>
         </details>
       </div>
-      <Link
-        className="loginParamsBtn"
-        to="/dashboard"
-        state={{ repas: donnees.Indemn_repas }}
-      >
+
+      <Link className="loginParamsBtn" to="/dashboard" state={{ repas: donnees.Indemn_repas, name: donnees.Nom, donnees: donnees }}>
+
         Continuer
       </Link>
     </section>

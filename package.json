@@ -30,6 +30,8 @@
     "react-icons": "^4.7.1",
     "react-rating": "^2.0.5",
     "react-router-dom": "^6.4.4",
-    "sass": "^1.56.1"
+    "react-scroll-to-bottom": "^4.2.0",
+    "sass": "^1.56.1",
+    "socket-io": "^1.0.0"
   }
 }

@@ -7,8 +7,9 @@ router.post('/', (req, res) => {
     datasource.query("SELECT * FROM structure WHERE Email = ?", [req.body.email])
         .then(([[user]]) => {
             if (user && req.body.password === user.Password) {
-                const token = sha256('')
-                const start = Date.now()
+                const start = Date.now();
+                const token = sha256(req.body.email + start);
+
 
                 datasource.query("UPDATE structure SET token = ?, tokenStart = ? WHERE Email = ?", [token, start, user.Email])
                     .then(() => {

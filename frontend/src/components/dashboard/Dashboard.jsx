@@ -5,6 +5,7 @@ import {
   MdOutlineFormatListBulleted,
   MdOutlineCalendarToday,
   MdOutlinePlace,
+  MdOutlineMarkAsUnread,
 } from "react-icons/md";
 import { useNavigate, useLocation } from "react-router-dom";
 import DashNavbar from "./nav/DashNavbar";
@@ -12,10 +13,11 @@ import DashNavbar from "./nav/DashNavbar";
 import DashReservations from "./reservations/DashReservations";
 import DashAgenda from "./agenda/DashAgenda";
 import DashPlaces from "./places/DashPlaces";
+import Messages from "../messages/Messages";
 
 function Dashboard() {
   const { state } = useLocation();
-  const { repas } = state;
+  const { repas, name, donnees } = state;
 
   const navigate = useNavigate();
 
@@ -33,7 +35,11 @@ function Dashboard() {
     if (toggle === 4) {
       return navigate("/structure/inscription-form");
     }
+    if (toggle === 5) {
+      return <Messages donnees={donnees}/>;
+    }
   };
+  console.log(name)
 
   return (
     <div className="dashboard">
@@ -41,7 +47,7 @@ function Dashboard() {
         <button type="button">
           <FiBell />
         </button>
-        <button type="button">Kévin</button>
+        <button type="button">{name}</button>
       </nav>
       <main>
         <DashNavbar setToggle={setToggle} />
