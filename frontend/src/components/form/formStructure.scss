@@ -16,9 +16,7 @@
     display: flex;
     align-items: center;
     gap: 5vw;
-
   }
-
 
   & h4 {
     font-family: $display;
@@ -122,7 +120,7 @@
         border: 2px solid $fifth;
       }
 
-      & input:valid+label {
+      & input:valid + label {
         color: $fifth;
       }
 
@@ -130,7 +128,7 @@
         display: none;
       }
 
-      & input:valid+label+p {
+      & input:valid + label + p {
         position: absolute;
         transform: translateX(28vw) translateY(6px);
         font-size: 2rem;
@@ -155,16 +153,16 @@
   }
 
   & .pageChoixResa {
-    width: 90vw;
+    width: clamp(800px, 90vw, 1300px);
     height: 85vh;
     padding: 2vh;
+    margin: 0 auto;
     background-color: #f9f9f9;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
     & .buttonContainer {
-
       & .backButton {
         background-color: #f9f9f9;
       }
@@ -182,28 +180,40 @@
     & .etapesChoixResa {
       display: flex;
       gap: 3vw;
+      align-items: center;
+
+      & p {
+        font-size: 1rem;
+      }
+
+      & h5 {
+        font-size: 1.1rem;
+      }
 
       & .etapes {
         display: flex;
+        align-items: flex-start;
         gap: 2vw;
         min-height: 15vh;
       }
 
       & .etape1Container {
-        height: 45vh;
+        min-height: 15vh;
+        height: fit-content;
         margin-top: 17vh;
+        padding: 8px;
         background-color: #fff;
+        flex: 1;
 
         & .etape1 {
-          flex: 1;
-          height: 45vh;
+          height: fit-content;
+          width: 15vw;
           display: flex;
           flex-direction: column;
           align-items: center;
-          padding: 8px;
+          margin: 0 auto;
           transform: translateY(-10vh);
         }
-
 
         & img {
           width: 25vh;
@@ -222,8 +232,12 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        padding: 8px;
+        padding: 8px 16px;
         position: relative;
+        width: 100%;
+        border-radius: 0;
+        border: none;
+        color: $second;
 
         & img {
           position: absolute;
@@ -242,8 +256,38 @@
 
         & .lienChoixResa {
           color: $third;
+          width: fit-content;
+          background-color: #fff;
+          border: none;
           font-size: 1.1rem;
-          text-align: right;
+          font-weight: 500;
+          align-self: flex-end;
+        }
+      }
+
+      & .choixResa:hover {
+        box-shadow: 2px 2px 6px $third, -2px -2px 6px $third;
+        cursor: pointer;
+      }
+
+      & .chosen {
+        box-shadow: 2px 2px 6px $third, -2px -2px 6px $third;
+      }
+
+      & .resaContainer {
+        display: flex;
+        gap: 3vw;
+
+        & .etape2,
+        & .etape3,
+        & .etape4 {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          flex: 1;
+          background-color: #fff;
+          padding: 8px;
+          margin-top: 17vh;
         }
       }
     }
@@ -337,11 +381,19 @@
     background-color: white;
   }
 
+  .typeContainer {
+    justify-content: center;
+
+    & div {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+
   .typeContainer,
   .typeCrecheContainer {
     display: flex;
     flex-wrap: wrap;
-
 
     & button {
       background-color: #f2f2f2;
@@ -357,13 +409,16 @@
   }
 
   .buttonContainer {
-    // margin-top: 1rem;
     margin-bottom: 2vh;
     display: flex;
     gap: 0.5rem;
     width: 100%;
     justify-content: space-between;
     align-self: flex-end;
+  }
+
+  & .nextButton {
+    align-self: center;
   }
 
   h4 {
@@ -410,7 +465,7 @@
 
   & input {
     color: #fff;
-    overflow: hidden
+    overflow: hidden;
   }
 
   & input::file-selector-button {
@@ -474,7 +529,6 @@
   & .assmatOptionsRight {
     flex: 1;
     width: 100%;
-
   }
 
   & small {
@@ -527,7 +581,7 @@
     }
   }
 
-  & select+label {
+  & select + label {
     color: $grey;
     font-size: 0.9rem;
     position: absolute;
@@ -549,7 +603,7 @@
 
 .structure6 {
   & h4 {
-    margin-bottom: .5vh;
+    margin-bottom: 0.5vh;
   }
 
   & .pageContent {
@@ -563,7 +617,7 @@
   }
 }
 
-@media screen and (max-width:1200px) {
+@media screen and (max-width: 1200px) {
   .formStructureContainer {
     position: relative;
     width: 90vw;
@@ -585,15 +639,12 @@
       width: 100%;
     }
 
-
-
     & .explicationsContainer {
       width: 100%;
       height: 40%;
       display: flex;
       flex-direction: row;
       margin-bottom: 4vh;
-
 
       & .innerContainer {
         padding: 8px;
@@ -610,7 +661,6 @@
       & img {
         width: 30%;
       }
-
 
       & h5 {
         font-weight: 600;
@@ -634,11 +684,11 @@
         gap: 8px;
         justify-content: center;
         align-items: center;
-        margin: .5vh 0 .5vh;
+        margin: 0.5vh 0 0.5vh;
       }
 
       & p {
-        height: fit-content
+        height: fit-content;
       }
 
       & .descExamples {
@@ -679,7 +729,6 @@
           width: 50%;
         }
       }
-
     }
 
     .typeCrecheContainer,

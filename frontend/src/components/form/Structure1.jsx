@@ -16,35 +16,36 @@ function Structure1({
   const [typeCreche, setTypeCreche] = useState("");
   return (
     <div className="page-left">
-      <h4>Quel type d’accueil proposez-vous ?</h4>
       <div className="typeContainer">
-        <button
-          type="button"
-          className={structure === "creche" ? "selected" : ""}
-          onClick={() => {
-            setStructure("creche");
-            updateFields({ typeStructure: "creche" });
-          }}
-        >
-          Crèche
-        </button>
-        <button
-          type="button"
-          className={structure === "assmat" ? "selected" : ""}
-          onClick={() => {
-            setStructure("assmat");
-            updateFields({ typeStructure: "assmat" });
-          }}
-        >
-          Assistante maternelle
-        </button>
+        <h4>Quel type d’accueil proposez-vous ?</h4>
+        <div>
+          <button
+            type="button"
+            className={structure === "creche" ? "selected" : ""}
+            onClick={() => {
+              setStructure("creche");
+              updateFields({ typeStructure: "creche" });
+            }}
+          >
+            Crèche
+          </button>
+          <button
+            type="button"
+            className={structure === "assmat" ? "selected" : ""}
+            onClick={() => {
+              setStructure("assmat");
+              updateFields({ typeStructure: "assmat" });
+            }}
+          >
+            Assistante maternelle
+          </button>
+        </div>
       </div>
       {typeStructure === "creche" && (
         <div className="creche">
           <div>
             <h4>Maintenant précisons les choses...</h4>
             <div className="typeCrecheContainer">
-
               <button
                 type="button"
                 className={typeCreche === "micro creche" ? "selected" : ""}
@@ -117,7 +118,6 @@ function Structure1({
                   updateFields({ typeCreche: "creche collective" });
                 }}
               >
-
                 Crèche collective
               </button>
               <button
@@ -130,8 +130,6 @@ function Structure1({
               >
                 Crèche parentale
               </button>
-
-
             </div>
           </div>
           <h4>Complétez et vérifiez vos informations</h4>
