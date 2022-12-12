@@ -16,8 +16,7 @@ function LoginForm() {
   const handleClick = (e) => {
     e.preventDefault();
 
-    if (checked) {
-
+    if (checked && email && password) {
       Axios.post("http://localhost:5000/auth", {
         email,
         password,
@@ -52,6 +51,7 @@ function LoginForm() {
             setEmail(event.target.value);
           }}
         />
+
         <input
           type="password"
           name="pwd"
@@ -75,6 +75,10 @@ function LoginForm() {
         </div>
         <button
           type="submit"
+          style={{
+            opacity:
+              !checked || !email || !password ? "0.7" : "1"
+          }}
           onClick={(e) => {
             handleClick(e);
           }}
