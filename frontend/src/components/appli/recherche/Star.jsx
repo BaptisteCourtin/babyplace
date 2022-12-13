@@ -5,40 +5,18 @@ import Rating from "react-rating";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 import BlocStar from "./BlocStar";
 
-function Star() {
+function Star({ com, proprete, securite, eveil, horaires }) {
   const [visibleStar, setVisibleStar] = useState(false);
   const [nbStarMoyen, setNbStarMoyen] = useState(0);
 
   const [data, setData] = useState({});
   const tabStar = [
-    { nom: "Communication", nbStar: data.Avis_com },
-    { nom: "Propreté", nbStar: data.Avis_proprete },
-    { nom: "Sécurité", nbStar: data.Avis_securite },
-    { nom: "Eveil de l'enfant", nbStar: data.Avis_eveil },
-    { nom: "Souplesse des horaires", nbStar: data.Avis_horaires },
+    { nom: "Communication", nbStar: com },
+    { nom: "Propreté", nbStar: proprete },
+    { nom: "Sécurité", nbStar: securite },
+    { nom: "Eveil de l'enfant", nbStar: eveil },
+    { nom: "Souplesse des horaires", nbStar: horaires },
   ];
-
-  const Token =
-    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
-  // donne les étoiles de chaque
-  const getData = () => {
-    axios
-      .get("http://localhost:5000/structure", {
-        headers: {
-          "x-token": Token,
-        },
-      })
-      .then((res) => {
-        setData(res.data[0]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
 
   // donne les étoiles globales
   const staring = () => {
@@ -49,16 +27,9 @@ function Star() {
     init = (init / tabStar.length).toFixed(1);
     setNbStarMoyen(init);
   };
-
   useEffect(() => {
     staring();
-  }, [
-    data.Avis_com,
-    data.Avis_proprete,
-    data.Avis_securite,
-    data.Avis_eveil,
-    data.Avis_horaires,
-  ]);
+  }, []);
 
   return (
     <button

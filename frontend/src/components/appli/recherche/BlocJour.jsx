@@ -11,7 +11,7 @@ function BlocJour({ jour, check }) {
 
 BlocJour.propTypes = {
   jour: PropTypes.string.isRequired,
-  check: PropTypes.string.isRequired,
+  check: PropTypes.number.isRequired,
 };
 
 export default BlocJour;
