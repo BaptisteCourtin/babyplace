@@ -13,14 +13,14 @@ const structure = require('./structure')
 
 const dashboard = require('./dashboard')
 
-// const messages = require('./messages')
+const messages = require('./messages')
 
 app.use('/auth', auth)
 
 app.use('/structure', structure)
 
 app.use('/dashboard', dashboard)
-// app.use('/messages', messages)
+app.use('/messages', messages)
 
 app.listen(port, () => {
   console.log(`server started on port: ${port}`)
