@@ -32,7 +32,7 @@ function Dashboard() {
       return navigate("/structure/inscription-form");
     }
     if (toggle === 5) {
-      return <Messages donnees={donnees} />;
+      return <Messages {...donnees} />;
     }
   };
 

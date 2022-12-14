@@ -1,3 +1,5 @@
+@import"./chat.scss";
+
 .messages {
 
     width: auto;
@@ -7,24 +9,18 @@
     background-color: #ffffff;
     border-radius: 5px;
 
-
-    .userPart {
-      display: flex;
-      align-items: center;
-
-
     .messagesShortsAffich {
         width: 35%;
         height: 100%;
         display: flex;
         flex-direction: column;
         padding: 20px;
-        border-right: solid 2px $fourth;
+        border-right: solid 2px $third;
 
 
         img {
-          width: 75px;
-          height: 75px;
+            width: 75px;
+            height: 75px;
         }
 
         .userPart {
@@ -51,20 +47,17 @@
 
                 #email {
                     font-style: italic;
-                    color: $third;
+                    color: $fourth;
                     font-size: 0.80em;
                     font-weight: 500;
                 }
             }
 
         }
-      }
     }
-
-
-    .conversationAffich {
-        padding: 20px;
-    }
-
 }
 
+
+.conversationAffich {
+    padding: 20px;
+}

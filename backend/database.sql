@@ -389,3 +389,123 @@ update structure
 set
     photo_profil = 'https://metropole.nantes.fr/infonantes/association/logo/23043'
 where structure_id = 1;
+
+-- -----
+
+insert into
+    structure (
+        num_agrement,
+        telephone,
+        adresse,
+        email,
+        password,
+        resa_inst
+    )
+values (
+        '145623987',
+        '0687905645',
+        '37 rue dacoté 44000 nantes',
+        'crechetest@orange.fr',
+        '1234',
+        '0'
+    );
+
+insert into
+    creche (
+        siret,
+        nom,
+        type,
+        nb_employes,
+        financement_paje,
+        tarif_atelier,
+        structure_id
+    )
+values (
+        '4902904830018',
+        'Test',
+        'grande crêche',
+        '52',
+        '1',
+        '0',
+        '1'
+    );
+
+update structure
+set
+    transport = '1',
+    album_photo = '0',
+    photo_connecte = '0',
+    lundi = '1',
+    mardi = '0',
+    mercredi = '1',
+    jeudi = '0',
+    vendredi = '1',
+    samedi = '1',
+    dimanche = '0'
+where structure_id = 2;
+
+update structure
+set
+    description = 'Bonjour, voici une petite présentation de notre crèche'
+where structure_id = 2;
+
+update structure
+set
+    psci = '1',
+    nesting = '0',
+    montessori = '0',
+    handi = '1',
+    jardin = '1',
+    sorties = '1',
+    promenades = '1',
+    eveil = '1',
+    musique = '1',
+    art = '1',
+    bilingue = '0',
+    bibli = '0'
+where structure_id = 2;
+
+update structure
+set
+    heure_min = '450',
+    heure_max = '1140',
+    duree_min = '60',
+    duree_max = '690',
+    calendrier = '1',
+    nb_places = '30',
+    max_places = '30',
+    max_handi = '15',
+    max_18mois = '15',
+    max_nuit = '0',
+    tarif_heure = '8',
+    tarif_horaire_spec = '3.1',
+    indemn_repas = '5.5',
+    avis_global = '5',
+    avis_com = '4',
+    avis_proprete = '3',
+    avis_securite = '2',
+    avis_eveil = '3',
+    avis_horaires = '5'
+where structure_id = 2;
+
+update structure
+set
+    photo_structure_3 = 'https://www.caue-observatoire.fr/wp-content/uploads/2015/12/44_29e37147-5490-4d51-b406-6e182f0c4395_5.jpg'
+where structure_id = 2;
+
+update structure
+set
+    photo_structure_2 = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.caue-observatoire.fr%2Fouvrage%2Fcreche-bambou%2F&psig=AOvVaw1sl-UuDHpWye4DviICSk9k&ust=1669996015225000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCLiXh4zi2PsCFQAAAAAdAAAAABAE'
+where structure_id = 2;
+
+update structure
+set
+    photo_structure_1 = 'https://www.caue-observatoire.fr/wp-content/uploads/2015/12/44_29e37147-5490-4d51-b406-6e182f0c4395_2.jpg'
+where structure_id = 2;
+
+update structure set date_agrement='2022-12-01' where structure_id=2;
+
+update structure
+set
+    photo_profil = 'https://metropole.nantes.fr/infonantes/association/logo/23043'
+where structure_id = 2;

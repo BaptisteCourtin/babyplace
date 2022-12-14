@@ -16,9 +16,7 @@
     display: flex;
     align-items: center;
     gap: 5vw;
-
   }
-
 
   & h4 {
     font-family: $display;
@@ -67,6 +65,7 @@
     display: flex;
     flex-wrap: wrap;
     margin-right: 5vw;
+    overflow: hidden;
   }
 
   & .page-left {
@@ -155,20 +154,14 @@
   }
 
   & .pageChoixResa {
-    width: 90vw;
+    width: clamp(800px, 90vw, 1300px);
     height: 85vh;
-    padding: 2vh;
+    padding: 2vh 3vh;
+    margin: 0 auto;
     background-color: #f9f9f9;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
-    & .buttonContainer {
-
-      & .backButton {
-        background-color: #f9f9f9;
-      }
-    }
 
     & h4 {
       text-align: center;
@@ -181,29 +174,42 @@
 
     & .etapesChoixResa {
       display: flex;
-      gap: 3vw;
+      gap: 2vw;
+      align-items: center;
+      justify-content: center;
+
+      & p {
+        font-size: 1rem;
+      }
+
+      & h5 {
+        font-size: 1.1rem;
+      }
 
       & .etapes {
         display: flex;
+        align-items: flex-start;
         gap: 2vw;
         min-height: 15vh;
       }
 
       & .etape1Container {
-        height: 45vh;
+        min-height: 15vh;
+        height: fit-content;
         margin-top: 17vh;
+        padding: 8px;
         background-color: #fff;
+        flex: 1;
 
         & .etape1 {
-          flex: 1;
-          height: 45vh;
+          height: fit-content;
+          width: 80%;
           display: flex;
           flex-direction: column;
           align-items: center;
-          padding: 8px;
+          margin: 0 auto;
           transform: translateY(-10vh);
         }
-
 
         & img {
           width: 25vh;
@@ -219,11 +225,16 @@
         background-color: #fff;
         margin-bottom: 1vw;
         min-height: 20vh;
+        height: fit-content;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        padding: 8px;
+        padding: 8px 16px;
         position: relative;
+        width: 100%;
+        border-radius: 0;
+        border: none;
+        color: $second;
 
         & img {
           position: absolute;
@@ -242,8 +253,47 @@
 
         & .lienChoixResa {
           color: $third;
+          width: fit-content;
+          background-color: #fff;
+          border: none;
           font-size: 1.1rem;
-          text-align: right;
+          font-weight: 500;
+          align-self: flex-end;
+        }
+      }
+
+      & .choixResa:hover {
+        box-shadow: 2px 2px 6px $third, -2px -2px 6px $third;
+        cursor: pointer;
+      }
+
+      & .chosen {
+        box-shadow: 2px 2px 6px $third, -2px -2px 6px $third;
+      }
+
+      & .etapeContainer {
+        display: flex;
+        gap: 2vw;
+        margin-bottom: 6vh;
+        background-color: #fff;
+        margin-top: 6vh;
+        flex: 1;
+        max-width: 22%;
+
+        & .etape1,
+        & .etape2,
+        & .etape3,
+        & .etape4 {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 2vw;
+          height: 50vh;
+
+          & img {
+            width: 10vw;
+            height: 7.5vw;
+          }
         }
       }
     }
@@ -331,17 +381,36 @@
     border: 1px solid $grey;
   }
 
+  .buttonContainer {
+    margin-bottom: 2vh;
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+    justify-content: space-between;
+    align-self: flex-end;
+  }
+
   & .backButton {
     border: none;
     color: $third;
-    background-color: white;
+    background-color: #eeeeee00;
+  }
+
+  .typeContainer {
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    & div {
+      display: flex;
+      flex-wrap: wrap;
+    }
   }
 
   .typeContainer,
   .typeCrecheContainer {
     display: flex;
     flex-wrap: wrap;
-
 
     & button {
       background-color: #f2f2f2;
@@ -354,16 +423,6 @@
       background-color: $third;
       color: white;
     }
-  }
-
-  .buttonContainer {
-    // margin-top: 1rem;
-    margin-bottom: 2vh;
-    display: flex;
-    gap: 0.5rem;
-    width: 100%;
-    justify-content: space-between;
-    align-self: flex-end;
   }
 
   h4 {
@@ -380,7 +439,6 @@
   flex-direction: column;
   justify-content: center;
   height: 80%;
-  width: 100%;
 
   & .pageContent {
     display: flex;
@@ -395,11 +453,11 @@
     overflow: hidden;
   }
 
-  img {
+  & img {
     width: 100%;
   }
 
-  .inputContainer {
+  & .inputContainer {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -410,7 +468,7 @@
 
   & input {
     color: #fff;
-    overflow: hidden
+    overflow: hidden;
   }
 
   & input::file-selector-button {
@@ -474,7 +532,6 @@
   & .assmatOptionsRight {
     flex: 1;
     width: 100%;
-
   }
 
   & small {
@@ -549,7 +606,7 @@
 
 .structure6 {
   & h4 {
-    margin-bottom: .5vh;
+    margin-bottom: 0.5vh;
   }
 
   & .pageContent {
@@ -563,7 +620,7 @@
   }
 }
 
-@media screen and (max-width:1200px) {
+@media screen and (max-width: 1200px) {
   .formStructureContainer {
     position: relative;
     width: 90vw;
@@ -585,15 +642,12 @@
       width: 100%;
     }
 
-
-
     & .explicationsContainer {
       width: 100%;
       height: 40%;
       display: flex;
       flex-direction: row;
       margin-bottom: 4vh;
-
 
       & .innerContainer {
         padding: 8px;
@@ -610,7 +664,6 @@
       & img {
         width: 30%;
       }
-
 
       & h5 {
         font-weight: 600;
@@ -634,11 +687,11 @@
         gap: 8px;
         justify-content: center;
         align-items: center;
-        margin: .5vh 0 .5vh;
+        margin: 0.5vh 0 0.5vh;
       }
 
       & p {
-        height: fit-content
+        height: fit-content;
       }
 
       & .descExamples {
@@ -679,7 +732,6 @@
           width: 50%;
         }
       }
-
     }
 
     .typeCrecheContainer,
@@ -688,6 +740,8 @@
     }
 
     .structure3 {
+      width: 100%;
+
       & .inputContainer {
         width: 50%;
         // margin-top: 1vh;
@@ -711,6 +765,107 @@
 
         & h5 {
           margin-top: 1vh;
+        }
+      }
+    }
+
+    & .pageChoixResa {
+      width: 90vw;
+      height: fit-content;
+      padding: 2vh 3vh;
+      margin: 0 auto;
+
+      & .etapesChoixResa {
+        flex-direction: column;
+        gap: 4vw;
+        margin-bottom: 4vw;
+        align-items: center;
+        justify-content: center;
+
+        & .etapes {
+          flex-direction: column;
+          align-items: center;
+          margin-bottom: 3vh;
+          gap: 2vw;
+          min-height: 15vh;
+        }
+
+        & .etape1Container {
+          min-height: 10vh;
+          height: fit-content;
+          margin-top: 12vh;
+          padding: 8px;
+          background-color: #fff;
+          flex: 1;
+
+          & .etape1 {
+            height: fit-content;
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 auto;
+            transform: translateY(-10vh);
+          }
+
+          & img {
+            width: 25vh;
+          }
+        }
+
+        & .choixResaContainer {
+          flex: 4;
+          padding-top: 0;
+        }
+
+        & .choixResa {
+          margin-bottom: 4vh;
+          height: fit-content;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          padding: 8px 16px;
+          position: relative;
+          width: 100%;
+          border-radius: 0;
+          border: none;
+          color: $second;
+
+          & img {
+            display: none;
+          }
+
+          & .etape2,
+          & .etape3 {
+            width: 80%;
+          }
+
+          & .lienChoixResa {
+            order: -1;
+            margin: 2vh;
+          }
+        }
+
+        & .etapeContainer {
+          display: flex;
+          gap: 2vw;
+          margin-bottom: 1vh;
+          margin-top: 1vh;
+          flex: 1;
+          max-width: 90%;
+
+          & .etape1,
+          & .etape2,
+          & .etape3,
+          & .etape4 {
+            padding: 4vw;
+            height: fit-content;
+
+            & img {
+              width: 30vw;
+              height: 15vw;
+            }
+          }
         }
       }
     }
