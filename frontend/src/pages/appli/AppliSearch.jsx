@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import filter from "@assets/app parents/Filter.svg";
 import CarteCreche from "@components/appli/recherche/CarteCreche";
 import NavbarApp from "@components/appli/navbar/NavbarApp";
@@ -8,10 +8,6 @@ import axios from "axios";
 function AppliSearch() {
   const [tri, setTri] = useState("Recent");
   const [data, setData] = useState([]);
-
-  // un tableau avec les critères dans les filtres ???
-  const location = useLocation();
-  const { filtres } = location.state;
 
   const Token =
     "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
@@ -41,11 +37,7 @@ function AppliSearch() {
         <div className="appli-filtres">
           <div className="left-filter">
             <div>
-              <Link
-                to="/appli/search/filtres"
-                // setFiltres={setFiltres}
-                // state={{ filtres }}
-              >
+              <Link to="/appli/search/filtres">
                 <img src={filter} alt="filter" />
                 Filtres
               </Link>

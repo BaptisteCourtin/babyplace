@@ -1,63 +1,57 @@
-@import"./chat.scss";
+@import "./chat.scss";
 
 .messages {
+  width: auto;
+  height: auto;
+  display: flex;
+  margin: 20px;
+  background-color: #ffffff;
+  border-radius: 5px;
 
-    width: auto;
-    height: auto;
+  .messagesShortsAffich {
+    width: 35%;
+    height: 100%;
     display: flex;
-    margin: 20px;
-    background-color: #ffffff;
-    border-radius: 5px;
+    flex-direction: column;
+    padding: 20px;
+    border-right: solid 2px $third;
 
-    .messagesShortsAffich {
-        width: 35%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        padding: 20px;
-        border-right: solid 2px $third;
-
-
-        img {
-            width: 75px;
-            height: 75px;
-        }
-
-        .userPart {
-            border-bottom: solid 10px rgba(230, 225, 225, 0.25);
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-            height: fit-content;
-
-
-            #profilImg {
-                width: 60px;
-                height: 60px;
-            }
-
-            .profilText {
-                line-height: 1.25em;
-
-
-                span {
-                    font-weight: 700;
-                    font-size: 1em;
-                }
-
-                #email {
-                    font-style: italic;
-                    color: $fourth;
-                    font-size: 0.80em;
-                    font-weight: 500;
-                }
-            }
-
-        }
+    img {
+      width: 75px;
+      height: 75px;
     }
+
+    .userPart {
+      border-bottom: solid 10px rgba(230, 225, 225, 0.25);
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      height: fit-content;
+
+      #profilImg {
+        width: 60px;
+        height: 60px;
+      }
+
+      .profilText {
+        line-height: 1.25em;
+
+        span {
+          font-weight: 700;
+          font-size: 1em;
+        }
+
+        #email {
+          font-style: italic;
+          color: $fourth;
+          font-size: 0.8em;
+          font-weight: 500;
+        }
+      }
+    }
+  }
 }
 
-
 .conversationAffich {
-    padding: 20px;
+  padding: 20px;
 }

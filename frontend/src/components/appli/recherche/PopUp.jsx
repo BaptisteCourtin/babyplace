@@ -87,7 +87,9 @@ function PopUp() {
             <br />- votre numéro d’allocataire CAF.
           </p>
           <button type="button">
-            <Link to="/appli/user/completion">Compléter mon dossier</Link>
+            <Link to="/appli/user/completion" state={{ quelCompo: 2 }}>
+              Compléter mon dossier
+            </Link>
           </button>
         </div>
       );

@@ -121,7 +121,7 @@
         border: 2px solid $fifth;
       }
 
-      & input:valid+label {
+      & input:valid + label {
         color: $fifth;
       }
 
@@ -129,7 +129,7 @@
         display: none;
       }
 
-      & input:valid+label+p {
+      & input:valid + label + p {
         position: absolute;
         transform: translateX(28vw) translateY(6px);
         font-size: 2rem;
@@ -584,7 +584,7 @@
     }
   }
 
-  & select+label {
+  & select + label {
     color: $grey;
     font-size: 0.9rem;
     position: absolute;

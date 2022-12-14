@@ -76,8 +76,7 @@ function LoginForm() {
         <button
           type="submit"
           style={{
-            opacity:
-              !checked || !email || !password ? "0.7" : "1"
+            opacity: !checked || !email || !password ? "0.7" : "1",
           }}
           onClick={(e) => {
             handleClick(e);

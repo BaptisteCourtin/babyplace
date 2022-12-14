@@ -4,8 +4,7 @@ import headerImg from "@assets/landing page/image1.svg";
 import { useNavigate } from "react-router-dom";
 
 function Header({ userType }) {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return userType === "parent" ? (
     <header className="header">
