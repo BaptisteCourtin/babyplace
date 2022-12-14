@@ -11,6 +11,7 @@ import Structure6 from "../components/form/Structure6";
 import Structure7 from "../components/form/Structure7";
 import Structure8 from "../components/form/Structure8";
 import Structure9 from "../components/form/Structure9";
+import Structure10 from "../components/form/Structure10";
 import imgDossier from "../assets/img-dossier.svg";
 import imgCopie from "../assets/landing page/image2.svg";
 import selfie from "../assets/selfie.svg";
@@ -74,6 +75,8 @@ const INITIAL_DATA = {
   samediMax: "",
   dimancheMin: "",
   dimancheMax: "",
+  dureeMin: 0,
+  dureeMax: 0,
 };
 
 function FormStructure() {
@@ -105,6 +108,7 @@ function FormStructure() {
       <Structure7 {...data} updateFields={updateFields} />,
       <Structure8 {...data} />,
       <Structure9 {...data} updateFields={updateFields} />,
+      <Structure10 {...data} updateFields={updateFields} />,
     ]);
   return (
     <StructureContext.Provider value={{ structure, setStructure }}>
@@ -126,6 +130,8 @@ function FormStructure() {
                   ? "Paramètres de réservation"
                   : currentStepIndex === 8
                   ? "Horaires d'ouverture"
+                  : currentStepIndex === 9
+                  ? "Durée d'accueil"
                   : ""}
               </p>
             </div>
@@ -201,7 +207,7 @@ function FormStructure() {
                         alt="illustration impression"
                       />
                     ) : (
-                      currentStepIndex === 8 && (
+                      (currentStepIndex === 8 || currentStepIndex === 9) && (
                         <img
                           src={imgWoman}
                           className="illustrationSection"
@@ -274,6 +280,8 @@ function FormStructure() {
                         ? "Il s'agit en général des services que les parents souhaitent retrouver pour l'accueil de leurs enfants. Vous pourrez en ajouter d'autres après la publication."
                         : currentStepIndex === 8
                         ? "Renseignez ici les horaires d'accueil habituels, ces horaires seront renseignés sur votre fiche de présentation. Cela ne concerne pas vos disponibilités et vos plages de réservation."
+                        : currentStepIndex === 9
+                        ? "Autorisez les séjours de courte ou longue durée"
                         : ""}
                     </pre>
                     {currentStepIndex === 5 && (

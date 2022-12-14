@@ -339,6 +339,32 @@
     }
   }
 
+  & .structure10 {
+    & .pageContent {
+      display: flex;
+      flex-direction: column;
+      gap: 4vh;
+      margin-top: 4vh;
+
+      & .inputContainer {
+        display: flex;
+        align-items: center;
+        gap: 2vw;
+      }
+
+      & input {
+        border: 1px solid $third;
+        border-radius: 10px;
+        padding: 4px;
+        width: 50px;
+      }
+
+      & input:focus {
+        outline: 1.5px solid $third;
+      }
+    }
+  }
+
   & .explicationsContainer {
     width: 50%;
     height: 91vh;
