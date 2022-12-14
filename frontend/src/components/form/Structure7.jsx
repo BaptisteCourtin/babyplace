@@ -34,7 +34,7 @@ function Structure7({ resaInst, updateFields }) {
           >
             <div className="etapes">
               <div className="etape2">
-                <img src={imgTime} />
+                <img src={imgTime} alt="femme avec horloge" />
                 <h5>
                   2. Vous définissez qui peut réserver instantanément par des
                   règles
@@ -46,7 +46,7 @@ function Structure7({ resaInst, updateFields }) {
                 </p>
               </div>
               <div className="etape3">
-                <img src={imgDossier} />
+                <img src={imgDossier} alt="dossiers" />
                 <h5>3. Vous recevez une notification </h5>
                 <p>
                   Vous recevez immédiatement un email de confirmation contenant
@@ -94,5 +94,8 @@ function Structure7({ resaInst, updateFields }) {
     </div>
   );
 }
-
+Structure7.propTypes = {
+  resaInst: Proptypes.bool,
+  updateFields: Proptypes.func,
+};
 export default Structure7;
