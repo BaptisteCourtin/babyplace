@@ -2,8 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function RegisterForm() {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <section className="formCo">
@@ -21,7 +20,12 @@ function RegisterForm() {
             J'accepte les conditions d'utilisation
           </label>
         </div>
-        <button type="submit" onClick={() => navigate("/structure/inscription-form")}>S'inscrire</button>
+        <button
+          type="submit"
+          onClick={() => navigate("/structure/inscription-form")}
+        >
+          S'inscrire
+        </button>
       </form>
     </section>
   );
