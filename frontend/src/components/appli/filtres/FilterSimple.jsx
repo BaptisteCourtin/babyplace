@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import Toggle from "./Toggle";
 
 function FilterSimple({ setFiltres, filtres }) {
@@ -44,5 +45,10 @@ function FilterSimple({ setFiltres, filtres }) {
     </main>
   );
 }
+
+FilterSimple.propTypes = {
+  filtres: PropTypes.string.isRequired,
+  setFiltres: PropTypes.func.isRequired,
+};
 
 export default FilterSimple;

@@ -9,8 +9,6 @@ import Adresse from "@components/appli/filtres/Adresse";
 
 function Filtres() {
   const [filtres, setFiltres] = useState([]);
-  console.log(`filtres :${filtres}`);
-
   const [compo, setCompo] = useState(0);
 
   const choixComposant = () => {
