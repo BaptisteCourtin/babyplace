@@ -1,5 +1,6 @@
 const express = require("express");
 const datasource = require("./database");
+
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -28,6 +29,5 @@ router.get("/all", (req, res) => {
       res.status(500).send("Erreur de connexion");
     });
 });
-
 
 module.exports = router;

@@ -1,27 +1,28 @@
 const express = require("express");
 const cors = require("cors");
+
 const app = express();
 
 const port = 5000;
 
-app.use(cors())
-app.use(express.json())
+app.use(cors());
+app.use(express.json());
 
-const auth = require('./auth')
+const auth = require("./auth");
 
-const structure = require('./structure')
+const structure = require("./structure");
 
-const dashboard = require('./dashboard')
+const dashboard = require("./dashboard");
 
-const messages = require('./messages')
+const messages = require("./messages");
 
-app.use('/auth', auth)
+app.use("/auth", auth);
 
-app.use('/structure', structure)
+app.use("/structure", structure);
 
-app.use('/dashboard', dashboard)
-app.use('/messages', messages)
+app.use("/dashboard", dashboard);
+app.use("/messages", messages);
 
 app.listen(port, () => {
-  console.log(`server started on port: ${port}`)
-})
+  console.log(`server started on port: ${port}`);
+});
