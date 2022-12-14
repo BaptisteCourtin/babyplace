@@ -1,21 +1,20 @@
 import React, { useState } from "react";
 import { FiBell } from "react-icons/fi";
-import {
-  MdOutlineSettings,
-  MdOutlineFormatListBulleted,
-  MdOutlineCalendarToday,
-  MdOutlinePlace,
-} from "react-icons/md";
+import { AiFillStar, AiOutlinePhone, AiOutlineMail } from "react-icons/ai";
 import { useNavigate, useLocation } from "react-router-dom";
 import DashNavbar from "./nav/DashNavbar";
 
 import DashReservations from "./reservations/DashReservations";
 import DashAgenda from "./agenda/DashAgenda";
 import DashPlaces from "./places/DashPlaces";
+import Messages from "../messages/Messages";
 
 function Dashboard() {
   const { state } = useLocation();
-  const { repas } = state;
+  const { donnees } = state;
+
+  const [type, setType] = useState("creche");
+
 
   const navigate = useNavigate();
 
@@ -25,15 +24,21 @@ function Dashboard() {
       return <DashReservations />;
     }
     if (toggle === 2) {
-      return <DashAgenda />;
+      return <DashAgenda {...donnees} />;
     }
     if (toggle === 3) {
-      return <DashPlaces repas={repas} title="Ajouter une place" />;
+      return <DashPlaces type={type} {...donnees} title="Ajouter une place" />;
     }
     if (toggle === 4) {
       return navigate("/structure/inscription-form");
     }
+    if (toggle === 5) {
+      return <Messages {...donnees} />;
+    }
   };
+  console.log(name)
+
+  const reviews = Math.round((donnees.Avis_com + donnees.Avis_horaires + donnees.Avis_eveil + donnees.Avis_proprete + donnees.Avis_securite) / 5 * 10) / 10
 
   return (
     <div className="dashboard">
@@ -41,57 +46,31 @@ function Dashboard() {
         <button type="button">
           <FiBell />
         </button>
-        <button type="button">Kévin</button>
+        <button type="button" onClick={() => setToggle(0)}>{donnees.Nom}</button>
       </nav>
       <main>
-        <DashNavbar setToggle={setToggle} />
+        <DashNavbar {...donnees} setToggle={setToggle} />
         <section className="dashboardSection">
           {pageShown()}
           {toggle === 0 && (
             <div className="dashboardWelcome">
-              <h1>Bienvenue sur votre dashboard</h1>
-              <ul>
-                <li>
-                  <h2>
-                    <MdOutlineFormatListBulleted /> Demandes
-                  </h2>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Quisquam quas voluptatum nulla ducimus, asperiores odio
-                    delectus.
-                  </p>
-                </li>
-                <li>
-                  <h2>
-                    <MdOutlineCalendarToday /> Agenda
-                  </h2>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Quisquam quas voluptatum nulla ducimus, asperiores odio
-                    delectus.
-                  </p>
-                </li>
-                <li>
-                  <h2>
-                    <MdOutlinePlace /> Place
-                  </h2>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Quisquam quas voluptatum nulla ducimus, asperiores odio
-                    delectus.
-                  </p>
-                </li>
-                <li>
-                  <h2>
-                    <MdOutlineSettings /> Paramètres
-                  </h2>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Quisquam quas voluptatum nulla ducimus, asperiores odio
-                    delectus.
-                  </p>
-                </li>
+              <div className="dashboardProfile">
+                <img className="dashboardProfilePic" src={donnees.Photo_profil} alt="" width={70} height={70} loading="lazy" />
+                <h1>{donnees.Nom}<span>{reviews}<AiFillStar /></span></h1>
+              </div>
+              <p className="dashboardProfilePres">
+                {donnees.Description}
+              </p>
+              <ul className="dashboardProfilePicList">
+                <li><img src={donnees.Photo_structure_1} alt="" loading="lazy" /></li>
+                <li><img src={donnees.Photo_structure_2} alt="" loading="lazy" /></li>
+                <li><img src={donnees.Photo_structure_3} alt="" loading="lazy" /></li>
               </ul>
+              <div className="dashboardProfileContact">
+                <p><AiOutlinePhone />0{donnees.Telephone}</p>
+                <p><AiOutlineMail />{donnees.Email}</p>
+                <p></p>
+              </div>
             </div>
           )}
         </section>
@@ -102,7 +81,7 @@ function Dashboard() {
           Crée avec <span>♥</span> Wild Code School x Babyplace
         </p>
       </footer>
-    </div>
+    </div >
   );
 }
 

@@ -7,8 +7,9 @@ router.post('/', (req, res) => {
     datasource.query("SELECT * FROM structure WHERE Email = ?", [req.body.email])
         .then(([[user]]) => {
             if (user && req.body.password === user.Password) {
-                const token = sha256('')
-                const start = Date.now()
+                const start = Date.now();
+                const token = sha256(req.body.email + start);
+
 
                 datasource.query("UPDATE structure SET token = ?, tokenStart = ? WHERE Email = ?", [token, start, user.Email])
                     .then(() => {
@@ -29,6 +30,26 @@ router.post('/', (req, res) => {
         .catch((err) => {
             console.error(err);
             res.status(500).send("Erreur de connexion")
+        })
+})
+
+router.put('/logout', (req, res) => {
+
+    const { token } = req.body
+    console.log(req.body)
+
+    datasource
+        .query("UPDATE structure SET Token = ? WHERE Token = ?", [null, token])
+        .then(([result]) => {
+            if (result.affectedRows === 0) {
+                res.status(404).send("Not found")
+            } else {
+                res.sendStatus(204)
+            }
+        })
+        .catch((err) => {
+            console.error(err)
+            res.status(500).send("Error editing the database")
         })
 })
 

@@ -153,9 +153,10 @@
   }
 
   & .pageChoixResa {
-    width: 90vw;
+    width: clamp(800px, 90vw, 1300px);
     height: 85vh;
-    padding: 2vh;
+    padding: 2vh 3vh;
+    margin: 0 auto;
     background-color: #f9f9f9;
     display: flex;
     flex-direction: column;
@@ -178,26 +179,40 @@
 
     & .etapesChoixResa {
       display: flex;
-      gap: 3vw;
+      gap: 2vw;
+      align-items: center;
+      justify-content: center;
+
+      & p {
+        font-size: 1rem;
+      }
+
+      & h5 {
+        font-size: 1.1rem;
+      }
 
       & .etapes {
         display: flex;
+        align-items: flex-start;
         gap: 2vw;
         min-height: 15vh;
       }
 
       & .etape1Container {
-        height: 45vh;
+        min-height: 15vh;
+        height: fit-content;
         margin-top: 17vh;
+        padding: 8px;
         background-color: #fff;
+        flex: 1;
 
         & .etape1 {
-          flex: 1;
-          height: 45vh;
+          height: fit-content;
+          width: 15vw;
           display: flex;
           flex-direction: column;
           align-items: center;
-          padding: 8px;
+          margin: 0 auto;
           transform: translateY(-10vh);
         }
 
@@ -218,8 +233,12 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        padding: 8px;
+        padding: 8px 16px;
         position: relative;
+        width: 100%;
+        border-radius: 0;
+        border: none;
+        color: $second;
 
         & img {
           position: absolute;
@@ -238,8 +257,47 @@
 
         & .lienChoixResa {
           color: $third;
+          width: fit-content;
+          background-color: #fff;
+          border: none;
           font-size: 1.1rem;
-          text-align: right;
+          font-weight: 500;
+          align-self: flex-end;
+        }
+      }
+
+      & .choixResa:hover {
+        box-shadow: 2px 2px 6px $third, -2px -2px 6px $third;
+        cursor: pointer;
+      }
+
+      & .chosen {
+        box-shadow: 2px 2px 6px $third, -2px -2px 6px $third;
+      }
+
+      & .etapeContainer {
+        display: flex;
+        gap: 2vw;
+        margin-bottom: 6vh;
+        background-color: #fff;
+        margin-top: 6vh;
+        flex: 1;
+        max-width: 18vw;
+
+        & .etape1,
+        & .etape2,
+        & .etape3,
+        & .etape4 {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 2vw;
+          height: 50vh;
+
+          & img {
+            width: 10vw;
+            height: 7.5vw;
+          }
         }
       }
     }
@@ -333,6 +391,15 @@
     background-color: white;
   }
 
+  .typeContainer {
+    justify-content: center;
+
+    & div {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+
   .typeContainer,
   .typeCrecheContainer {
     display: flex;
@@ -352,13 +419,16 @@
   }
 
   .buttonContainer {
-    // margin-top: 1rem;
     margin-bottom: 2vh;
     display: flex;
     gap: 0.5rem;
     width: 100%;
     justify-content: space-between;
     align-self: flex-end;
+  }
+
+  & .nextButton {
+    align-self: center;
   }
 
   h4 {

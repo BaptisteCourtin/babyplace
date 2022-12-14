@@ -16,7 +16,7 @@ function LoginForm() {
   const handleClick = (e) => {
     e.preventDefault();
 
-    if (checked) {
+    if (checked && email && password) {
       Axios.post("http://localhost:5000/auth", {
         email,
         password,
@@ -24,6 +24,7 @@ function LoginForm() {
         .then((ret) => {
           console.log(ret.data.token);
           const { token } = ret.data;
+
           navigate("/login-params", {
             state: {
               token,
@@ -50,6 +51,7 @@ function LoginForm() {
             setEmail(event.target.value);
           }}
         />
+
         <input
           type="password"
           name="pwd"
@@ -68,12 +70,15 @@ function LoginForm() {
             onChange={handleCompletedChange}
           />
           <label htmlFor="useConditions">
-            J'accepte⠀
-            <span>les conditions d'utilisation</span>
+            J'accepte les conditions d'utilisation
           </label>
         </div>
         <button
           type="submit"
+          style={{
+            opacity:
+              !checked || !email || !password ? "0.7" : "1"
+          }}
           onClick={(e) => {
             handleClick(e);
           }}

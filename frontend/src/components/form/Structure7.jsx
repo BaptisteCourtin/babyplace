@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import imgCopie from "@assets/img-copie.svg";
 import imgTime from "@assets/img-time.svg";
 import imgDossier from "@assets/img-dossier.svg";
+import Proptypes from "prop-types";
+import { ResaContext } from "@components/context/ResaContext";
 
-function Structure7() {
+
+function Structure7({ resaInst, updateFields }) {
+  const { resa, setResa } = useContext(ResaContext);
   return (
     <div>
       <h4>Voici comment les parents pourront réserver chez vous</h4>
@@ -20,7 +24,14 @@ function Structure7() {
           </div>
         </div>
         <div className="choixResaContainer">
-          <div className="choixResa">
+          <button
+            type="button"
+            className={resa === "inst" ? "choixResa chosen" : "choixResa"}
+            onClick={() => {
+              setResa("inst");
+              updateFields({ resaInst: true });
+            }}
+          >
             <div className="etapes">
               <div className="etape2">
                 <img src={imgTime} />
@@ -39,23 +50,31 @@ function Structure7() {
                 <h5>3. Vous recevez une notification </h5>
                 <p>
                   Vous recevez immédiatement un email de confirmation contenant
-                  des informations comme la date et les horaires d’accueil,l’âge
-                  de l’enfant, son dossier administratif. ect...
+                  des informations comme la date et les horaires d’accueil,
+                  l’âge de l’enfant, son dossier administratif. ect...
                 </p>
               </div>
             </div>
             <p className="lienChoixResa">
-              Je souhaite la réservation instantanée &#62;
+              Je souhaite la réservation instantanée
             </p>
-          </div>
-          <div className="choixResa">
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setResa("nonInst");
+              updateFields({ resaInst: false });
+            }}
+            className={resa === "nonInst" ? "choixResa chosen" : "choixResa"}
+          >
             <div className=" etapes">
               <div className="etape2">
                 <h5>2. Vous souhaitez examiner chaque demande</h5>
                 <p>
                   Toute personne qui souhaite réserver avec vous doit confirmer
-                  ses coordonnées, fournir des informations de paiement, et vous
-                  parler de l’accueil de leur enfant
+                  ses coordonnées, fournir des informations de paiement, mettre
+                  à jour son dossier d’inscription et vous parler de l’accueil
+                  de leur enfant
                 </p>
               </div>
               <div className="etape3">
@@ -67,9 +86,9 @@ function Structure7() {
               </div>
             </div>
             <p className="lienChoixResa">
-              Je souhaite examiner chaque demande &#62;
+              Je souhaite examiner chaque demande{" "}
             </p>
-          </div>
+          </button>
         </div>
       </div>
     </div>

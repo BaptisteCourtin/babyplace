@@ -18,6 +18,7 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
     "mysql2": "^2.3.3",
+    "socket-io": "^1.0.0",
     "template-fullstack": "file:.."
   },
   "rules": {

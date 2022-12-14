@@ -24,8 +24,8 @@ function LoginParams() {
 
   useEffect(() => {
     getData();
-  }, []);
-  console.log(donnees.Indemn_repas);
+  }, [])
+
   return (
     <section className="loginParams">
       <p>
@@ -62,11 +62,7 @@ function LoginParams() {
           <Link to="/">Paramètres de réservation</Link>
         </details>
       </div>
-      <Link
-        className="loginParamsBtn"
-        to="/dashboard"
-        state={{ repas: donnees.Indemn_repas }}
-      >
+      <Link className="loginParamsBtn" to="/dashboard" state={{ donnees: { ...donnees } }}>
         Continuer
       </Link>
     </section>
