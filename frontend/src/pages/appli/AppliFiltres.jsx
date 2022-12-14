@@ -8,29 +8,32 @@ import Aggrements from "@components/appli/filtres/Aggrements";
 import Adresse from "@components/appli/filtres/Adresse";
 
 function Filtres() {
+  const [filtres, setFiltres] = useState([]);
+  console.log(`filtres :${filtres}`);
+
   const [compo, setCompo] = useState(0);
 
   const choixComposant = () => {
     if (compo === 1) {
-      return <FilterSimple setCompo={setCompo} />;
+      return <FilterSimple setFiltres={setFiltres} filtres={filtres} />;
     }
     if (compo === 2) {
-      return <DateHeure setCompo={setCompo} />;
+      return <DateHeure />;
     }
     if (compo === 3) {
-      return <Services setCompo={setCompo} />;
+      return <Services />;
     }
     if (compo === 4) {
-      return <Aggrements setCompo={setCompo} />;
+      return <Aggrements />;
     }
     if (compo === 5) {
-      return <Adresse setCompo={setCompo} />;
+      return <Adresse />;
     }
     return <Base setCompo={setCompo} />;
   };
 
   return (
-    <div className="filtres">
+    <div className="filtres" filtres={filtres}>
       <header>
         <button
           type="button"
@@ -43,7 +46,9 @@ function Filtres() {
       {choixComposant()}
 
       <button type="button" className="apply">
-        <Link to="/appli/search">Appliquer</Link>
+        <Link to="/appli/search" state={{ filtres }}>
+          Appliquer
+        </Link>
       </button>
     </div>
   );

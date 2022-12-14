@@ -42,7 +42,7 @@ function AppliCardCreche() {
 
           <div className="horaire">
             <p>Horaires : Lundi - Samedi : 9h-16h</p>
-            <p>Téléphone : {Telephone}</p>
+            <p>Téléphone : 0{Telephone}</p>
             <p> Mail : {Email}</p>
           </div>
 
