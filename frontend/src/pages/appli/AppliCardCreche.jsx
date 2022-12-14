@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import imgCreche from "@assets/img-time.svg";
 import BlocJour from "@components/appli/recherche/BlocJour";
 import Star from "@components/appli/recherche/Star";
 import PopUp from "@components/appli/recherche/PopUp";
 
 function AppliCardCreche() {
   const location = useLocation();
-  const { each } = location.state;
-  // each contient tous ce qu'il faut pour 1 creche
+  const { data, tabJour } = location.state;
+  const { Photo_structure_1, Tarif_heure, Description, Telephone, Email } =
+    data;
 
   const [prixJour, setPrixJour] = useState(0);
 
   useEffect(() => {
-    setPrixJour(each.prix * 8);
+    setPrixJour(Tarif_heure * 8);
   }, []);
 
   return (
@@ -24,30 +24,31 @@ function AppliCardCreche() {
 
       <main>
         <div className="container-img">
-          <img src={imgCreche} alt="img creche" />
-          <Star />
+          <img src={Photo_structure_1} alt="img creche" />
+          <Star
+            com={data.Avis_com}
+            proprete={data.Avis_proprete}
+            securite={data.Avis_securite}
+            eveil={data.Avis_eveil}
+            horaires={data.Avis_horaires}
+          />
         </div>
 
         <div className="text">
           <div className="presentation">
             <h3>Présentation</h3>
-            <p>
-              La crèche « Picoti Picota » n’est pas qu’un lieu de garde c’est
-              surtout un lieu d’échange et d’accueil des enfants et des familles
-              dans une confiance réciproque où le respect, l’autonomie et la
-              sécurité sont des références privilégiées dans notre projet.
-            </p>
+            <p>{Description}</p>
           </div>
 
           <div className="horaire">
             <p>Horaires : Lundi - Samedi : 9h-16h</p>
-            <p>Téléphone : 05 56 56 56 56</p>
-            <p> Mail : contact@contact.fr</p>
+            <p>Téléphone : {Telephone}</p>
+            <p> Mail : {Email}</p>
           </div>
 
           <h3>Disponibiltés</h3>
           <div className="disponibilite">
-            {each.jours.map((jour) => (
+            {tabJour.map((jour) => (
               <BlocJour jour={jour.jour} check={jour.check} />
             ))}
           </div>
@@ -74,7 +75,7 @@ function AppliCardCreche() {
           <div className="prix-resa">
             <div className="prix">
               <p>
-                <span> {each.prix}€</span> / heure *
+                <span> {Tarif_heure}€</span> / heure *
               </p>
               <p>
                 <span>{prixJour}€</span> / jour *

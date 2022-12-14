@@ -4,9 +4,19 @@ import BlocJour from "@components/appli/recherche/BlocJour";
 import PropTypes from "prop-types";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
-function CarteCreche({ each }) {
-  const { image, prix, jours, condition, like } = each;
-  const [likeCard, setLikeCard] = useState(like);
+function CarteCreche({ data }) {
+  const { Photo_structure_1, Tarif_heure } = data;
+  const [likeCard, setLikeCard] = useState(true);
+
+  const tabJour = [
+    { jour: "Lun", check: data.Lundi },
+    { jour: "Mar", check: data.Mardi },
+    { jour: "Mer", check: data.Mercredi },
+    { jour: "Jeu", check: data.Jeudi },
+    { jour: "Ven", check: data.Vendredi },
+    { jour: "Sam", check: data.Samedi },
+  ];
+
   return (
     <div className="carte-creche">
       {likeCard ? (
@@ -14,23 +24,25 @@ function CarteCreche({ each }) {
       ) : (
         <AiOutlineHeart className="like" onClick={() => setLikeCard(true)} />
       )}
-      <Link to="/appli/search/card" state={{ each }}>
-        <img src={image} alt="img creche" />
+      <Link to="/appli/search/card" state={{ data, tabJour }}>
+        <img src={Photo_structure_1} alt="img creche" />
         <div className="info-creche">
           <div className="ville-prix">
             <p>ville à X mètres</p>
-            <p className="prix">{prix}€</p>
+            <p className="prix">{Tarif_heure}€</p>
           </div>
           <div className="jours">
-            {jours.map((eachJour) => (
-              <BlocJour jour={eachJour.jour} check={eachJour.check} />
+            {tabJour.map((dataJour, index) => (
+              <BlocJour
+                jour={dataJour.jour}
+                check={dataJour.check}
+                key={index}
+              />
             ))}
           </div>
           <ul>
-            {condition.verif ? (
-              <li>N’accepte que les profils vérifiés</li>
-            ) : null}
-            {condition.essai ? <li>Période d’adaptation obligatoire</li> : null}
+            <li>N’accepte que les profils vérifiés</li>
+            <li>Période d’adaptation obligatoire</li>
           </ul>
         </div>
       </Link>
@@ -39,7 +51,7 @@ function CarteCreche({ each }) {
 }
 
 CarteCreche.propTypes = {
-  each: PropTypes.string.isRequired,
+  data: PropTypes.string.isRequired,
 };
 
 export default CarteCreche;

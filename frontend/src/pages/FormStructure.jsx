@@ -104,6 +104,7 @@ function FormStructure() {
               {currentStepIndex + 1}
             </progress>
           </div>
+
           <div className="formStructureContainer">
             <form
               className={
