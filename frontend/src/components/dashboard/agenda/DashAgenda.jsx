@@ -2,55 +2,77 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import DashCalendar from "./calendar/DashCalendar";
 
-function DashAgenda({ Token, Structure_id, Max_places, Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche }) {
-
-  const places1 = Math.floor(Math.random() * Max_places / 2);
-  const places2 = Math.floor(Math.random() * Max_places / 2);
-  const places3 = Math.floor(Math.random() * Max_places / 2);
+function DashAgenda({
+  Token,
+  Structure_id,
+  Max_places,
+  Lundi,
+  Mardi,
+  Mercredi,
+  Jeudi,
+  Vendredi,
+  Samedi,
+  Dimanche,
+}) {
+  const places1 = Math.floor((Math.random() * Max_places) / 2);
+  const places2 = Math.floor((Math.random() * Max_places) / 2);
+  const places3 = Math.floor((Math.random() * Max_places) / 2);
 
   const [data, setData] = useState({});
-  const [places, setPlaces] = useState('');
+  const [places, setPlaces] = useState("");
 
   const getData = () => {
-    axios.get("http://localhost:5000/structure", {
-      headers: {
-        "x-token": Token,
-      }
-    })
+    axios
+      .get("http://localhost:5000/structure", {
+        headers: {
+          "x-token": Token,
+        },
+      })
       .then((ret) => {
         setData(ret.data[0]);
-        setPlaces(data.Nb_places)
+        setPlaces(data.Nb_places);
       })
       .catch((err) => {
         console.error(err);
-      })
+      });
   };
 
   useEffect(() => {
     getData();
-  }, [data.Nb_places])
+  }, [data.Nb_places]);
 
-  const curDate = new Date()
-  const day = curDate.getDate()
-  const month = curDate.getMonth() + 1
+  const curDate = new Date();
+  const day = curDate.getDate();
+  const month = curDate.getMonth() + 1;
 
   const updatePlaces = async () => {
     await axios.put(`http://localhost:5000/dashboard/places/${Structure_id}`, {
       id: Structure_id,
-      places: places
-    })
-  }
+      places,
+    });
+  };
 
-  const [clickedDay, setClickedDay] = useState(new Date())
+  const [clickedDay, setClickedDay] = useState(new Date());
 
   return (
     <div className="dashAgenda">
       <section className="agendaSection">
         <h2>Agenda</h2>
-        <DashCalendar {...data} clickedDay={clickedDay} setClickedDay={setClickedDay} />
+        <DashCalendar
+          {...data}
+          clickedDay={clickedDay}
+          setClickedDay={setClickedDay}
+        />
         <div className="agendaCalendarBtn">
-          <input type="number" value={places} max={Max_places} onChange={(e) => setPlaces(e.target.value)} />
-          <button type="button" onClick={updatePlaces}>Modifier</button>
+          <input
+            type="number"
+            value={places}
+            max={Max_places}
+            onChange={(e) => setPlaces(e.target.value)}
+          />
+          <button type="button" onClick={updatePlaces}>
+            Modifier
+          </button>
         </div>
       </section>
       <section className="agendaMessage">
@@ -93,7 +115,8 @@ function DashAgenda({ Token, Structure_id, Max_places, Lundi, Mardi, Mercredi, J
               {places1 === 0 ? "!" : "+"}
             </span>
             <p>
-              Vous avez <span>{places1} places</span> disponibles le {day + 2} / {month}
+              Vous avez <span>{places1} places</span> disponibles le {day + 2} /{" "}
+              {month}
             </p>
           </li>
           <li>
@@ -116,7 +139,8 @@ function DashAgenda({ Token, Structure_id, Max_places, Lundi, Mardi, Mercredi, J
               {places2 === 0 ? "!" : "+"}
             </span>
             <p>
-              Vous avez <span>{places2} places</span> disponibles le {day + 5} / {month}
+              Vous avez <span>{places2} places</span> disponibles le {day + 5} /{" "}
+              {month}
             </p>
           </li>
           <li>
@@ -139,7 +163,8 @@ function DashAgenda({ Token, Structure_id, Max_places, Lundi, Mardi, Mercredi, J
               {places3 === 0 ? "!" : "+"}
             </span>
             <p>
-              Vous avez <span>{places3} places</span> disponibles le {day + 3} / {month}
+              Vous avez <span>{places3} places</span> disponibles le {day + 3} /{" "}
+              {month}
             </p>
           </li>
         </ul>

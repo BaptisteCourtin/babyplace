@@ -15,7 +15,6 @@ function Dashboard() {
 
   const [type, setType] = useState("creche");
 
-
   const navigate = useNavigate();
 
   const [toggle, setToggle] = useState(0);
@@ -36,9 +35,18 @@ function Dashboard() {
       return <Messages {...donnees} />;
     }
   };
-  console.log(name)
+  console.log(name);
 
-  const reviews = Math.round((donnees.Avis_com + donnees.Avis_horaires + donnees.Avis_eveil + donnees.Avis_proprete + donnees.Avis_securite) / 5 * 10) / 10
+  const reviews =
+    Math.round(
+      ((donnees.Avis_com +
+        donnees.Avis_horaires +
+        donnees.Avis_eveil +
+        donnees.Avis_proprete +
+        donnees.Avis_securite) /
+        5) *
+        10
+    ) / 10;
 
   return (
     <div className="dashboard">
@@ -46,7 +54,9 @@ function Dashboard() {
         <button type="button">
           <FiBell />
         </button>
-        <button type="button" onClick={() => setToggle(0)}>{donnees.Nom}</button>
+        <button type="button" onClick={() => setToggle(0)}>
+          {donnees.Nom}
+        </button>
       </nav>
       <main>
         <DashNavbar {...donnees} setToggle={setToggle} />
@@ -55,21 +65,43 @@ function Dashboard() {
           {toggle === 0 && (
             <div className="dashboardWelcome">
               <div className="dashboardProfile">
-                <img className="dashboardProfilePic" src={donnees.Photo_profil} alt="" width={70} height={70} loading="lazy" />
-                <h1>{donnees.Nom}<span>{reviews}<AiFillStar /></span></h1>
+                <img
+                  className="dashboardProfilePic"
+                  src={donnees.Photo_profil}
+                  alt=""
+                  width={70}
+                  height={70}
+                  loading="lazy"
+                />
+                <h1>
+                  {donnees.Nom}
+                  <span>
+                    {reviews}
+                    <AiFillStar />
+                  </span>
+                </h1>
               </div>
-              <p className="dashboardProfilePres">
-                {donnees.Description}
-              </p>
+              <p className="dashboardProfilePres">{donnees.Description}</p>
               <ul className="dashboardProfilePicList">
-                <li><img src={donnees.Photo_structure_1} alt="" loading="lazy" /></li>
-                <li><img src={donnees.Photo_structure_2} alt="" loading="lazy" /></li>
-                <li><img src={donnees.Photo_structure_3} alt="" loading="lazy" /></li>
+                <li>
+                  <img src={donnees.Photo_structure_1} alt="" loading="lazy" />
+                </li>
+                <li>
+                  <img src={donnees.Photo_structure_2} alt="" loading="lazy" />
+                </li>
+                <li>
+                  <img src={donnees.Photo_structure_3} alt="" loading="lazy" />
+                </li>
               </ul>
               <div className="dashboardProfileContact">
-                <p><AiOutlinePhone />0{donnees.Telephone}</p>
-                <p><AiOutlineMail />{donnees.Email}</p>
-                <p></p>
+                <p>
+                  <AiOutlinePhone />0{donnees.Telephone}
+                </p>
+                <p>
+                  <AiOutlineMail />
+                  {donnees.Email}
+                </p>
+                <p />
               </div>
             </div>
           )}
@@ -81,7 +113,7 @@ function Dashboard() {
           Crée avec <span>♥</span> Wild Code School x Babyplace
         </p>
       </footer>
-    </div >
+    </div>
   );
 }
 

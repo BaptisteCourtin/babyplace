@@ -13,7 +13,6 @@ import AppliUserCompletion from "@pages/appli/AppliUserCompletion";
 import AppliNotif from "@pages/appli/AppliNotif";
 import AppliMessage from "@pages/appli/AppliMessage";
 
-
 import FormStructure from "@pages/FormStructure";
 
 import Dashboard from "@components/dashboard/Dashboard";
@@ -29,7 +28,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/login-params" element={<Synthesis />} />
         <Route path="/dashboard" element={<Dashboard />} />
-      
+
         <Route path="/appli" element={<Appli />} />
         <Route path="/appli/menu" element={<AppliMenu />} />
         <Route path="/appli/search" element={<AppliSearch />} />

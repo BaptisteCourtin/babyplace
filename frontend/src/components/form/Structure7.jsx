@@ -5,12 +5,11 @@ import imgDossier from "@assets/img-dossier.svg";
 import Proptypes from "prop-types";
 import { ResaContext } from "@components/context/ResaContext";
 
-
 function Structure7({ resaInst, updateFields }) {
   const { resa, setResa } = useContext(ResaContext);
   return (
     <div>
-      <h4>Voici comment les parents pourront réserver chez vous</h4>
+      <h4>Choisissez comment les parents pourront réserver chez vous</h4>
       <div className="etapesChoixResa">
         <div className="etape1Container">
           <div className="etape1">
@@ -95,7 +94,7 @@ function Structure7({ resaInst, updateFields }) {
   );
 }
 Structure7.propTypes = {
-  resaInst: Proptypes.bool,
+  resaInst: Proptypes.string,
   updateFields: Proptypes.func,
 };
 export default Structure7;

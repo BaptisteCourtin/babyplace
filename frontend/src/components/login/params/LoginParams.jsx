@@ -24,7 +24,7 @@ function LoginParams() {
 
   useEffect(() => {
     getData();
-  }, [])
+  }, []);
 
   return (
     <section className="loginParams">
@@ -62,7 +62,11 @@ function LoginParams() {
           <Link to="/">Paramètres de réservation</Link>
         </details>
       </div>
-      <Link className="loginParamsBtn" to="/dashboard" state={{ donnees: { ...donnees } }}>
+      <Link
+        className="loginParamsBtn"
+        to="/dashboard"
+        state={{ donnees: { ...donnees } }}
+      >
         Continuer
       </Link>
     </section>
