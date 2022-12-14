@@ -4,7 +4,7 @@ const router = express.Router()
 
 
 router.get('/', (req, res) => {
-    datasource.query("SELECT * FROM structure AS s JOIN creche AS c ON s.structure_id=c.structure_id WHERE Token = ?", [req.headers["x-token"]])
+    datasource.query("SELECT c.creche_id, c.Nom FROM structure AS s JOIN creche AS c ON s.structure_id=c.structure_id")
         .then(([s]) => {
             res.json(s);
         })
@@ -13,6 +13,5 @@ router.get('/', (req, res) => {
             res.status(500).send("Erreur de connexion")
         })
 })
-
 
 module.exports = router;

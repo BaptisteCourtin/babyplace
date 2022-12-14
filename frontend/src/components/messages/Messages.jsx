@@ -1,21 +1,36 @@
 import React, { useState, useEffect } from "react";
 import io from 'socket.io-client';
 import Chat from "./Chat";
+import axios from "axios";
 
 const socket = io.connect("http://localhost:3001");
 
 const Messages = ({ Nom, Email, Photo_profil, Structure_id }) => {
 
     const [room, setRoom] = useState("");
+    const [title, setTitle] = useState("");
 
-    const joinRoom = () => {
-        setRoom("1");
-        socket.emit("join_room", room);
+    const [strucData, setStrucData] = useState([]);
+
+    const getStructureForMess = () => {
+        axios.get("http://localhost:5000/structure/all")
+            .then((ret) => {
+                console.warn(ret.data);
+                setStrucData(ret.data);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    };
+
+    const joinRoom = async (a, b) => {
+        setRoom(a + b);
+        await socket.emit("join_room", room);
     };
 
     useEffect(() => {
-        console.log(room);
-    }, [joinRoom])
+        getStructureForMess();
+    }, [])
 
     return (
         <div className='messages'>
@@ -29,12 +44,18 @@ const Messages = ({ Nom, Email, Photo_profil, Structure_id }) => {
                 </div>
                 <div className="messages-affichage">
                     <div className="salonsMessages">
-                        <button type="button" onClick={joinRoom}>Joindre Conversation</button>
+                        {strucData && strucData.filter(f => !f.Nom.includes(Nom))
+                            .map((element) => (
+                                <li className="contactList" key={(element.creche_id)}>
+                                    <button type="button" onClick={(e) => { e.preventDefault(); setTitle(element.Nom); joinRoom(Structure_id, element.creche_id) }} id="btn-affiche-con">{(element.Nom)}</button>
+                                </li>
+                            ))}
+
                     </div>
                 </div>
             </div>
             <div className="conversationAffich">
-                <Chat socket={socket} username={Nom} room={room} />
+                <Chat socket={socket} username={Nom} room={room} title={title} />
             </div>
         </div>
 

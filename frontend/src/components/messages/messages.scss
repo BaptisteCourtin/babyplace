@@ -17,6 +17,9 @@
         padding: 20px;
         border-right: solid 2px $third;
 
+        h2 {
+            margin: 20px;
+        }
 
         img {
             width: 75px;
@@ -53,6 +56,26 @@
                 }
             }
 
+        }
+
+        .messages-affichage {
+            .salonsMessages {
+                .contactList {
+                    list-style: none;
+                    margin: 10px;
+
+                }
+
+                #btn-affiche-con {
+                    height: auto;
+                    width: auto;
+                    padding: 20px;
+                    border-radius: 6px;
+                    color: #ffffff;
+                    background: #7E72F2;
+                    cursor: pointer;
+                }
+            }
         }
     }
 }
