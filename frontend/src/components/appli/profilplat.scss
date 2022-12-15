@@ -3,7 +3,8 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  margin: 2rem 1rem;
+  margin: 0 1rem 1rem;
+  border-bottom: 1px black solid;
 
   .container-image {
     background: $gradient;
