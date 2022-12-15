@@ -48,8 +48,6 @@ CREATE TABLE IF NOT EXISTS `babydb`.`structure` (
   `resaInst` TINYINT NOT NULL,
   `dureeMin` INT NULL,
   `dureeMax` INT NULL,
-  `calendrier` VARCHAR(300) NULL,
-  `nbPlaces` INT NULL,
   `maxPlaces` INT NULL,
   `maxHandi` INT NULL,
   `max18Mois` INT NULL,
@@ -248,8 +246,8 @@ CREATE TABLE IF NOT EXISTS `babydb`.`horaires` (
   `horairesId` INT NOT NULL AUTO_INCREMENT,
   `jourSemaine` VARCHAR(45) NULL,
   `ouvert` TINYINT NULL,
-  `heureMin` INT NULL,
-  `heureMax` INT NULL,
+  `heureMin` VARCHAR(5) NULL,
+  `heureMax` VARCHAR(5) NULL,
   `structureId` INT NULL,
   PRIMARY KEY (`horairesId`),
   INDEX `StructureIdfk_idx` (`structureId` ASC) VISIBLE,
@@ -267,9 +265,9 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `babydb`.`calendrier` ;
 
 CREATE TABLE IF NOT EXISTS `babydb`.`calendrier` (
-  `calendrierId` INT NOT NULL,
+  `calendrierId` INT NOT NULL AUTO_INCREMENT,
   `date` DATE NULL,
-  `nbPlaces` SMALLINT NULL,
+  `nbPlaces` TINYINT NULL,
   `structureId` INT NOT NULL,
   PRIMARY KEY (`calendrierId`),
   INDEX `fk_table1_structure1_idx` (`structureId` ASC) VISIBLE,
@@ -433,7 +431,7 @@ values (
         '52',
         '1',
         '0',
-        '1'
+        '2'
     );
 
 update structure
@@ -506,3 +504,203 @@ update structure
 set
     photoProfil = 'https://metropole.nantes.fr/infonantes/association/logo/23043'
 where structureId = 2;
+
+-- -----Famille1----- --
+
+insert into famille (
+        email,
+        password
+    )
+values (
+        'kevinDu75@exemple.com',
+        '0000'
+    );
+
+-- -----Parent1----- --
+
+insert into parent (
+        nomNaissance,
+        prenom,
+        familleId
+    )
+values (
+        'Bernard',
+        'Kevin',
+        '1'
+    );
+
+update parent
+set
+        nomUsage = "beberd",
+        profession = "chomeur",
+        telPortable = "0669696969",
+        emailContact = "kevinDu75@exemple.com",
+        numCaf = "0123456789",
+        numSecu = "9876543210"
+where parentId = 1;
+
+-- -----Enfant1----- --
+
+insert into enfant (
+        nom,
+        prenom,
+        dateNaissance,
+        familleId
+    )
+values (
+        'Bernard',
+        'Tiphaine',
+        '2021-12-15',
+        '1'
+    );
+
+update enfant
+set
+        marcheur = "0",
+        allergies = "lactose / arachide",
+        medecin = "El doctor de Amigos"
+where enfantId = 1;
+
+-- -----RELIER FAMILLE 1 ET CRECHE 1 ----- --
+
+insert into famille_structure (
+        familleId,
+        structureId,
+        liked
+    )
+values (
+        '1',
+        '1',
+        '1'
+    );
+
+-- -----CALENDRIER CRECHE 1 ----- --
+
+insert into calendrier (
+        date,
+        nbPlaces,
+        structureId
+    )
+values (
+        "2022-12-25",
+        '-1',
+        1
+    );
+
+insert into calendrier (
+        date,
+        nbPlaces,
+        structureId
+    )
+values (
+        "2022-12-22",
+        '2',
+        1
+    );
+
+-- -----HORAIRES CRECHE 1 ----- --
+
+insert into horaires (
+        jourSemaine,
+        ouvert,
+        heureMin,
+        heureMax,
+        structureId
+    )
+values (
+        "lundi",
+        1,
+        "8:00",
+        "18:00",
+        1
+    );
+
+insert into horaires (
+        jourSemaine,
+        ouvert,
+        heureMin,
+        heureMax,
+        structureId
+    )
+values (
+        "Mardi",
+        1,
+        "8:00",
+        "19:00",
+        1
+    );
+
+insert into horaires (
+        jourSemaine,
+        ouvert,
+        heureMin,
+        heureMax,
+        structureId
+    )
+values (
+        "Mercredi",
+        1,
+        "8:00",
+        "13:00",
+        1
+    );
+
+insert into horaires (
+        jourSemaine,
+        ouvert,
+        heureMin,
+        heureMax,
+        structureId
+    )
+values (
+        "Jeudi",
+        1,
+        "8:00",
+        "18:00",
+        1
+    );
+
+insert into horaires (
+        jourSemaine,
+        ouvert,
+        heureMin,
+        heureMax,
+        structureId
+    )
+values (
+        "Vendredi",
+        1,
+        "8:00",
+        "19:00",
+        1
+    );
+
+insert into horaires (
+        jourSemaine,
+        ouvert,
+        heureMin,
+        heureMax,
+        structureId
+    )
+values (
+        "Samedi",
+        1,
+        "9:00",
+        "17:00",
+        1
+    );
+
+insert into horaires (
+        jourSemaine,
+        ouvert,
+        heureMin,
+        heureMax,
+        structureId
+    )
+values (
+        "Dimanche",
+        0,
+        "14:00",
+        "17:00",
+        1
+    );
