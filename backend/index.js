@@ -19,6 +19,8 @@ const messages = require('./messages')
 
 const stockage = require('./stockage')
 
+const getMessages = require('./getMessageFromStockage')
+
 app.use('/auth', auth)
 
 app.use('/structure', structure)
@@ -28,6 +30,7 @@ app.use('/dashboard', dashboard)
 app.use('/messages', messages)
 
 app.use('/stockage', stockage)
+app.use('/stockage/recup', getMessages)
 
 app.listen(port, () => {
   console.log(`server started on port: ${port}`)

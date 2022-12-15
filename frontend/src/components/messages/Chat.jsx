@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import Scrolltobottom from 'react-scroll-to-bottom';
 import axios from 'axios';
 
-const Chat = ({ socket, username, room, title }) => {
+const Chat = ({ socket, username, room, title, joinRoom }) => {
 
     const [currentMessage, setCurrentMessage] = useState("");
     const [messageList, setMessageList] = useState([]);
+    const [messageListData, setMessageListData] = useState([]);
 
     const saveMessage = (messageData) => {
         const { room, author, message, date } = messageData;
@@ -13,7 +14,7 @@ const Chat = ({ socket, username, room, title }) => {
             room, author, message, date
         })
             .then((res) => {
-                alert(res);
+                console.log(res.data);
 
             }).catch((err) => {
                 console.error(err);
@@ -36,12 +37,33 @@ const Chat = ({ socket, username, room, title }) => {
         }
     };
 
-
     useEffect(() => {
         socket.on("receive_message", (data) => {
             setMessageList((list) => [...list, data]);
         });
     }, [socket]);
+
+    const getMessagesFromRoom = () => {
+        axios.get("http://localhost:5000/stockage/recup", {
+            headers: {
+                "room": room
+            }
+        })
+            .then((ret) => {
+                console.warn(ret.data);
+                setMessageListData(ret.data[0]);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    };
+
+    useEffect(() => {
+        joinRoom();
+        getMessagesFromRoom();
+        setMessageList([]);
+    }, [title]);
+
 
     return (
         <div className='chat-window'>
@@ -50,6 +72,23 @@ const Chat = ({ socket, username, room, title }) => {
             </div>
             <div className='chat-body'>
                 <Scrolltobottom className='message-container'>
+                    {
+                        messageListData.map((messageContent) => {
+                            return (
+                                <div className="message" id={username === messageContent.author ? "you" : "other"}>
+                                    <div>
+                                        <div className="message-meta">
+                                            <p id="author">{messageContent.author}</p>
+                                            <p id="time">{messageContent.time}</p>
+                                        </div>
+                                        <div className="message-content">
+                                            <p>{messageContent.message}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
                     {
                         messageList.map((messageContent) => {
                             return (
