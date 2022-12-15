@@ -37,6 +37,7 @@
   }
 
   // main pour button en bas => grow
+  // besoin du parent en flex
   main {
     width: 100%;
     max-width: 500px;
@@ -137,6 +138,7 @@
 
 // button en bas => shrink
 .button-bas {
+  color: $white;
   width: 95%;
   max-width: 500px;
 
@@ -176,6 +178,49 @@
       margin-left: 0.5rem;
       border-radius: 50%;
       background-color: $third;
+    }
+  }
+}
+
+.button-top {
+  color: $white;
+  width: 95%;
+  max-width: 500px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  margin-top: 20px;
+  z-index: 1;
+
+  .butt {
+    background-color: transparent;
+    padding: 0.2rem;
+    font-size: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    span.fleche {
+      padding-right: 1rem;
+      z-index: 2;
+    }
+
+    span.round {
+      position: absolute;
+      z-index: 1;
+      left: -11px;
+
+      height: 28px;
+      width: 28px;
+      margin-left: 0.5rem;
+      border-radius: 50%;
+      background-color: $fourth;
     }
   }
 }

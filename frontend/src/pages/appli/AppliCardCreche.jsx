@@ -7,13 +7,41 @@ import PopUp from "@components/appli/recherche/PopUp";
 function AppliCardCreche() {
   const location = useLocation();
   const { data, tabJour } = location.state;
-  const { Photo_structure_1, Tarif_heure, Description, Telephone, Email } =
-    data;
+  const {
+    Photo_structure_1,
+    Tarif_heure,
+    Description,
+
+    Heure_min,
+    Heure_max,
+    Telephone,
+    Email,
+    Adresse,
+
+    PSCI,
+    Nesting,
+    Montessori,
+    Handi,
+
+    Jardin,
+
+    Promenades,
+    Musique,
+    Art,
+    Bilingue,
+    Bibli,
+
+    Album_photo,
+    Photo_connecte,
+  } = data;
 
   const [prixJour, setPrixJour] = useState(0);
-
+  const [heureMax, setHeureMax] = useState(0);
+  const [heureMin, setHeureMin] = useState(0);
   useEffect(() => {
     setPrixJour(Tarif_heure * 8);
+    setHeureMin(Heure_min / 60);
+    setHeureMax(Heure_max / 60);
   }, []);
 
   return (
@@ -41,9 +69,12 @@ function AppliCardCreche() {
           </div>
 
           <div className="horaire">
-            <p>Horaires : Lundi - Samedi : 9h-16h</p>
+            <p>
+              Horaires : {heureMin}h-{heureMax}h
+            </p>
             <p>Téléphone : 0{Telephone}</p>
-            <p> Mail : {Email}</p>
+            <p>Mail : {Email}</p>
+            <p>Adresse : {Adresse}</p>
           </div>
 
           <h3>Disponibiltés</h3>
@@ -55,21 +86,35 @@ function AppliCardCreche() {
 
           <div>
             <h3>Expérience</h3>
-            <p>Formation 1er secours</p>
-            <p>Formation Nesting</p>
-            <p>Pédagogie Montessori</p>
+            {PSCI ? <p>Formation 1er secours</p> : null}
+            {Nesting ? <p>Formation Nesting</p> : null}
+            {Montessori ? <p>Pédagogie Montessori</p> : null}
+            {Handi ? <p>Formation handicapé</p> : null}
           </div>
+
           <div>
             <h3>Accueil</h3>
-            <p>Sorties extérieure</p>
-            <p>Repas maison</p>
-            <p>Foyer Non-Fumeur</p>
+            {Jardin ? <p>Jardin</p> : null}
+            {/* {Jardin ? <p>Présence d'animaux</p> : null}
+            {Jardin ? <p>Foyer non-fumeur</p> : null}
+            {Jardin ? <p>0% pollution intérieure</p> : null}
+            {Jardin ? <p>Repas maison</p> : null}
+            {Jardin ? <p>produits d'hygiène fournis</p> : null} */}
           </div>
+
           <div>
             <h3>Activité</h3>
-            <p>Promenade</p>
-            <p>Activité d’éveil</p>
-            <p>Atelier musique</p>
+            {Promenades ? <p>Promenades</p> : null}
+            {Bibli ? <p>Bibliothèque</p> : null}
+            {Art ? <p>Atelier art plastique</p> : null}
+            {Bilingue ? <p>Atelier Anglais</p> : null}
+            {Musique ? <p>Atelier musique</p> : null}
+          </div>
+
+          <div>
+            <h3>Lien avec les parents</h3>
+            {Album_photo ? <p>Album photo</p> : null}
+            {Photo_connecte ? <p>Album photo connecté</p> : null}
           </div>
 
           <div className="prix-resa">
