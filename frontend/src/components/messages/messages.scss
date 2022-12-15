@@ -3,7 +3,8 @@
 .messages {
 
     width: auto;
-    height: auto;
+    height: 95%;
+
     display: flex;
     margin: 20px;
     background-color: #ffffff;
@@ -14,25 +15,23 @@
         height: 100%;
         display: flex;
         flex-direction: column;
-        padding: 20px;
+
         border-right: solid 2px $third;
 
         h2 {
-            margin: 20px;
-        }
-
-        img {
-            width: 75px;
-            height: 75px;
+            margin: 30px;
+            font-weight: 900;
+            font-size: 2em;
         }
 
         .userPart {
             border-bottom: solid 10px rgba(230, 225, 225, 0.25);
             display: flex;
             align-items: center;
-            margin-bottom: 10px;
-            height: fit-content;
+            padding: 20px;
 
+            height: fit-content;
+            width: 100%;
 
             #profilImg {
                 width: 60px;
@@ -59,21 +58,41 @@
         }
 
         .messages-affichage {
+            width: 90%;
+            height: 90%;
+
             .salonsMessages {
                 .contactList {
                     list-style: none;
-                    margin: 10px;
-
+                    margin: 20px;
                 }
 
                 #btn-affiche-con {
-                    height: auto;
-                    width: auto;
-                    padding: 20px;
+                    gap: 5px;
+                    height: 60px;
+                    width: 95%;
+                    display: flex;
+                    padding: 5px;
+                    align-items: center;
                     border-radius: 6px;
-                    color: #ffffff;
-                    background: #7E72F2;
+                    font-weight: 600;
+                    background: #ffffff;
                     cursor: pointer;
+                    transition: all 0.3s ease-in-out;
+
+
+                    img {
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 25%;
+
+                    }
+                }
+
+                #btn-affiche-con:hover {
+                    background: $third;
+                    transform: scale(1.05);
+
                 }
             }
         }
@@ -82,5 +101,6 @@
 
 
 .conversationAffich {
-    padding: 20px;
+    margin: 20px 30px;
+    width: 100%;
 }

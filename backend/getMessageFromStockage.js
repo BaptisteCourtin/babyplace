@@ -5,7 +5,6 @@ const router = express.Router()
 router.get('/', (req, res) => {
     datasource.query("SELECT * FROM message_room WHERE room=?", [req.headers.room])
         .then((s) => {
-            console.log([s]);
             res.json(s);
         })
         .catch((err) => {

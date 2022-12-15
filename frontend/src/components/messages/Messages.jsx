@@ -19,12 +19,12 @@ const Messages = ({ Nom, Email, Photo_profil, Structure_id }) => {
             .catch((err) => {
                 console.error(err);
             });
-        };
-        
-        const joinRoom = async () => {
-            console.log(room);
-            await socket.emit("join_room", room);
-        };
+    };
+
+    const joinRoom = async () => {
+        console.log(room);
+        await socket.emit("join_room", room);
+    };
 
     useEffect(() => {
         getStructureForMess();
@@ -46,7 +46,7 @@ const Messages = ({ Nom, Email, Photo_profil, Structure_id }) => {
                         {strucData && strucData.filter(f => !f.Nom.includes(Nom))
                             .map((element) => (
                                 <li className="contactList" key={(element.creche_id)}>
-                                    <button type="button" onClick={(e) => { e.preventDefault(); setRoom(Structure_id + element.creche_id); setTitle(element.Nom)}} id="btn-affiche-con">{(element.Nom)}</button>
+                                    <button type="button" onClick={(e) => { e.preventDefault(); setRoom(Structure_id + element.creche_id); setTitle(element.Nom) }} id="btn-affiche-con"><img src={element.Photo_profil} />{(element.Nom)}</button>
                                 </li>
                             ))}
 
@@ -54,7 +54,7 @@ const Messages = ({ Nom, Email, Photo_profil, Structure_id }) => {
                 </div>
             </div>
             <div className="conversationAffich">
-                {room != "" ? (<Chat socket={socket} username={Nom} room={room} title={title} joinRoom={joinRoom}/>) : <></>}
+                {room != "" ? (<Chat socket={socket} username={Nom} room={room} title={title} joinRoom={joinRoom} />) : <></>}
             </div>
         </div>
 

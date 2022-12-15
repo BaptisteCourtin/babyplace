@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Scrolltobottom from 'react-scroll-to-bottom';
 import axios from 'axios';
+import moment from 'moment';
 
 const Chat = ({ socket, username, room, title, joinRoom }) => {
 
@@ -79,7 +80,7 @@ const Chat = ({ socket, username, room, title, joinRoom }) => {
                                     <div>
                                         <div className="message-meta">
                                             <p id="author">{messageContent.author}</p>
-                                            <p id="time">{messageContent.time}</p>
+                                            <p id="time">{moment.utc(messageContent.time).format("DD-MM-YYYY")}</p>
                                         </div>
                                         <div className="message-content">
                                             <p>{messageContent.message}</p>
@@ -109,7 +110,7 @@ const Chat = ({ socket, username, room, title, joinRoom }) => {
                 </Scrolltobottom>
             </div>
             <div className='chat-footer'>
-                <input type="text" placeholder='hey...' onChange={(event) => {
+                <input type="text" placeholder='Ecrire ici...' onChange={(event) => {
                     setCurrentMessage(event.target.value);
                 }} onKeyPress={(event) => { event.key === "Enter" && sendMessage() }} value={currentMessage} />
                 <button onClick={sendMessage}>&#9658;</button>
