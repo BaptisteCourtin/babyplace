@@ -18,6 +18,17 @@ router.get("/structure/all", (req, res) => {
       res.status(500).send("Erreur de connexion");
     });
 });
+router.get("/horaires/all", (req, res) => {
+  datasource
+    .query("SELECT * FROM horaires")
+    .then(([s]) => {
+      res.json(s);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Erreur de connexion");
+    });
+});
 
 router.put("/day/:id", dashboardControllers.updateDay);
 router.put("/indemn_repas/:id", dashboardControllers.updateIndemnRepas);

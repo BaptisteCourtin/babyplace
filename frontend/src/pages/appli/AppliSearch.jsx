@@ -7,11 +7,12 @@ import axios from "axios";
 
 function AppliSearch() {
   const [tri, setTri] = useState("Recent");
-  const [data, setData] = useState([]);
+  const [structure, setStructure] = useState([]);
+  const [horaires, setHoraires] = useState([]);
 
   const Token =
     "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
-  const getData = () => {
+  const getStructure = () => {
     axios
       .get("http://localhost:5000/structure/all", {
         headers: {
@@ -19,14 +20,29 @@ function AppliSearch() {
         },
       })
       .then((res) => {
-        setData(res.data);
+        setStructure(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  const getHoraires = () => {
+    axios
+      .get("http://localhost:5000/horaires/all", {
+        headers: {
+          "x-token": Token,
+        },
+      })
+      .then((res) => {
+        setHoraires(res.data);
       })
       .catch((err) => {
         console.error(err);
       });
   };
   useEffect(() => {
-    getData();
+    getStructure();
+    getHoraires();
   }, []);
 
   return (
@@ -56,8 +72,8 @@ function AppliSearch() {
         </div>
 
         <main>
-          {data.length !== 0 &&
-            data
+          {structure.length !== 0 &&
+            structure
               // .filter(
               //   (each) => each.includes
               //   // each.sorte d'établissement contient au moins un des critère => creche ou assistance
