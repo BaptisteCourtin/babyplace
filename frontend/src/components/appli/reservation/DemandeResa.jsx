@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import ProfilCPP from "@assets/profilCPP.jpg";
 import Toggle from "../filtres/Toggle";
 
-function DemandeResa({ setCompo }) {
+function DemandeResa({ setCompo, photo3, tarif }) {
   const [kilometre, setKilometre] = useState(false);
   const [entretien, setEntretien] = useState(false);
   const [repas, setRepas] = useState(false);
@@ -13,7 +12,7 @@ function DemandeResa({ setCompo }) {
       <div className="button-top">
         <div className="suivant">
           <Link to="/appli/search">
-            <button className="butt" type="button" onClick={() => setCompo(2)}>
+            <button className="butt" type="button">
               <span className="fleche">{`<`}</span>
               Annuler
               <span className="round" />
@@ -23,7 +22,7 @@ function DemandeResa({ setCompo }) {
       </div>
       <main className="demande-resa">
         <div className="container-img">
-          <img src={ProfilCPP} alt="img creche" />
+          <img src={photo3} alt="img creche" />
           {/* <Star
             com={data.Avis_com}
             proprete={data.Avis_proprete}
@@ -37,7 +36,7 @@ function DemandeResa({ setCompo }) {
           <div className="text">
             <h3>Demande de réservation Crèche Picoti Picota</h3>
             <p>Date : lundi 14 septembre </p>
-            <p> Horaires : 9h-16h</p>
+            <p>Horaires : 9h-16h</p>
           </div>
 
           <div className="tog">
@@ -64,8 +63,10 @@ function DemandeResa({ setCompo }) {
 
         <div className="prix-resa">
           <div className="prix">
+            {/* faire par rapport au nb d'heure */}
             <p>
-              <span> 75€ *</span>
+              <span> {tarif * 8}€ *</span>
+              {/* rajouter les indemnitées */}
             </p>
             <p>
               <span>8h de garde</span>

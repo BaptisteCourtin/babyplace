@@ -111,15 +111,19 @@
       color: $white;
       .mini-logo {
         max-height: 50px;
+        margin-bottom: 1rem;
       }
       .avatars {
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        justify-content: space-evenly;
         width: 100%;
 
-        img {
-          max-width: 50%;
+        .avatar {
+          width: 130px;
+          height: 130px;
+          border-radius: 50%;
+          object-fit: cover;
         }
       }
 

@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import PopUpProfilComplet from "./PopUpProfilComplet";
 import PopUpProfilNonComplet from "./PopUpProfilNonComplet";
 
-function PopUp() {
+function PopUp({ data }) {
   const [visiblePopUp, setVisiblePopUp] = useState(false);
   const profilComplet = true;
 
   const choixComposant = () => {
     if (visiblePopUp && profilComplet) {
-      return <PopUpProfilComplet setVisiblePopUp={setVisiblePopUp} />;
+      return (
+        <PopUpProfilComplet setVisiblePopUp={setVisiblePopUp} data={data} />
+      );
     }
     if (visiblePopUp && !profilComplet) {
       return <PopUpProfilNonComplet setVisiblePopUp={setVisiblePopUp} />;
