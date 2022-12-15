@@ -1,5 +1,5 @@
 import useMultistepForm from "@components/form/useMultistepForm";
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { StructureContext } from "@components/context/StructureContext";
 import { ResaContext } from "@components/context/ResaContext";
 import Structure1 from "../components/form/Structure1";
@@ -89,8 +89,8 @@ function FormStructure() {
                   ? "Présentation"
                   : currentStepIndex === 5
                   ? "Conditions d’utilisation"
-                  : currentStepIndex === 6
-                  ? "Règlement intérieur"
+                  : currentStepIndex === 6 || currentStepIndex === 7
+                  ? "Paramètres de réservation"
                   : ""}
               </p>
             </div>
@@ -104,6 +104,7 @@ function FormStructure() {
               {currentStepIndex + 1}
             </progress>
           </div>
+
           <div className="formStructureContainer">
             <form
               className={
@@ -114,10 +115,12 @@ function FormStructure() {
             >
               {step}
               <div className="buttonContainer">
-                {!isFirstStep && (
+                {!isFirstStep ? (
                   <button type="button" className="backButton" onClick={back}>
                     Précédent
                   </button>
+                ) : (
+                  <div> </div>
                 )}
                 {resa !== "" || currentStepIndex !== 6 ? (
                   <button type="button" className="nextButton" onClick={next}>
@@ -128,7 +131,7 @@ function FormStructure() {
                 )}
               </div>
             </form>
-            {(currentStepIndex !== 6) & (currentStepIndex !== 7) ? (
+            {currentStepIndex !== 6 && currentStepIndex !== 7 ? (
               <div className="explicationsContainer">
                 <div className="innerContainer">
                   {currentStepIndex === 0 ? (
@@ -169,7 +172,7 @@ function FormStructure() {
                       ? "Valorisez votre expérience et vos services"
                       : ""}
                   </h4>
-                  {(currentStepIndex === 3) & (structure === "assmat") ? (
+                  {currentStepIndex === 3 && structure === "assmat" ? (
                     <div className="descExamples">
                       <div className="imgTitleContainer">
                         <img src={profilJM} alt="profil JM" />
@@ -187,7 +190,7 @@ function FormStructure() {
                         quelques années.
                       </p>
                     </div>
-                  ) : (currentStepIndex === 3) & (structure === "creche") ? (
+                  ) : currentStepIndex === 3 && structure === "creche" ? (
                     <div className="descExamples">
                       <div className="imgTitleContainer">
                         <img src={profilCPP} alt="profil CPP" />
@@ -218,7 +221,9 @@ function FormStructure() {
                       ? "Il s’agit en général des services que les parents souhaitent retrouver pour l’accueil de leurs enfants. Vous pourrez en ajouter d’autres après la publication."
                       : ""}
                   </pre>
-                  {currentStepIndex === 5 && <img src={imgDossier} />}
+                  {currentStepIndex === 5 && (
+                    <img src={imgDossier} alt="dossiers" />
+                  )}
                 </div>
               </div>
             ) : (

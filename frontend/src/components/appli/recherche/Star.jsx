@@ -1,28 +1,33 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 
 import Rating from "react-rating";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 import BlocStar from "./BlocStar";
 
-const tabStar = [
-  { nom: "Communication", nbStar: 5 },
-  { nom: "Propreté", nbStar: 3.3 },
-  { nom: "Sécurité", nbStar: 2.6 },
-  { nom: "Eveil de l'enfant", nbStar: 3.5 },
-  { nom: "Souplesse des horaires", nbStar: 4.3 },
-];
-
-function Star() {
+function Star({ com, proprete, securite, eveil, horaires }) {
   const [visibleStar, setVisibleStar] = useState(false);
   const [nbStarMoyen, setNbStarMoyen] = useState(0);
 
-  useEffect(() => {
+  const tabStar = [
+    { nom: "Communication", nbStar: com },
+    { nom: "Propreté", nbStar: proprete },
+    { nom: "Sécurité", nbStar: securite },
+    { nom: "Eveil de l'enfant", nbStar: eveil },
+    { nom: "Souplesse des horaires", nbStar: horaires },
+  ];
+
+  // donne les étoiles globales
+  const staring = () => {
     let init = 0;
     for (let i = 0; i < tabStar.length; i += 1) {
       init += tabStar[i].nbStar;
     }
     init = (init / tabStar.length).toFixed(1);
     setNbStarMoyen(init);
+  };
+  useEffect(() => {
+    staring();
   }, []);
 
   return (
@@ -58,5 +63,13 @@ function Star() {
     </button>
   );
 }
+
+Star.propTypes = {
+  com: PropTypes.number.isRequired,
+  proprete: PropTypes.number.isRequired,
+  securite: PropTypes.number.isRequired,
+  eveil: PropTypes.number.isRequired,
+  horaires: PropTypes.number.isRequired,
+};
 
 export default Star;

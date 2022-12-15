@@ -1,4 +1,4 @@
-@import"./chat.scss";
+@import "./chat.scss";
 
 .messages {
 
@@ -33,19 +33,18 @@
             height: fit-content;
             width: 100%;
 
-            #profilImg {
-                width: 60px;
-                height: 60px;
-            }
+      #profilImg {
+        width: 60px;
+        height: 60px;
+      }
 
-            .profilText {
-                line-height: 1.25em;
+      .profilText {
+        line-height: 1.25em;
 
-
-                span {
-                    font-weight: 700;
-                    font-size: 1em;
-                }
+        span {
+          font-weight: 700;
+          font-size: 1em;
+        }
 
                 #email {
                     font-style: italic;
@@ -98,7 +97,6 @@
         }
     }
 }
-
 
 .conversationAffich {
     margin: 20px 30px;

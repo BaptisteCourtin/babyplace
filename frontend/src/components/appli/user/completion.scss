@@ -13,10 +13,14 @@
   }
 
   p {
-    padding: 0 0.5rem;
     display: flex;
     align-items: center;
     height: 70px;
+    color: black;
+
+    span {
+      padding: 0 0.5rem;
+    }
 
     &:nth-child(2) {
       text-align: right;

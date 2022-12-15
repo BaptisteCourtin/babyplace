@@ -1,13 +1,59 @@
 const express = require("express");
-
 const router = express.Router();
+const sha256 = require("js-sha256");
+const datasource = require("../database");
 
-const itemControllers = require("./controllers/itemControllers");
+const structure = require("./controllers/structure.controllers");
+const dashboardControllers = require("./controllers/dashboard.controllers");
 
-router.get("/items", itemControllers.browse);
-router.get("/items/:id", itemControllers.read);
-router.put("/items/:id", itemControllers.edit);
-router.post("/items", itemControllers.add);
-router.delete("/items/:id", itemControllers.destroy);
+router.get("/structure", structure.getStructure);
+router.get("/structure/all", (req, res) => {
+  datasource
+    .query("SELECT * FROM structure")
+    .then(([s]) => {
+      res.json(s);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Erreur de connexion");
+    });
+});
+
+router.put("/day/:id", dashboardControllers.updateDay);
+router.put("/indemn_repas/:id", dashboardControllers.updateIndemnRepas);
+
+router.post("/auth", (req, res) => {
+  datasource
+    .query("SELECT * FROM structure WHERE Email = ?", [req.body.email])
+    .then(([[user]]) => {
+      if (user && req.body.password === user.Password) {
+        const start = Date.now();
+        const token = sha256(req.body.email + start);
+
+        datasource
+          .query(
+            "UPDATE structure SET token = ?, tokenStart = ? WHERE Email = ?",
+            [token, start, user.Email]
+          )
+          .then(() => {
+            res.status(200).send({
+              email: user.Email,
+              token: token,
+              tokenStart: start,
+            });
+          })
+          .catch((err) => {
+            console.error(err);
+            res.status(500).send("Erreur de connexion");
+          });
+      } else {
+        res.status(401).send("Email ou mot de passe incorrect");
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Erreur de connexion");
+    });
+});
 
 module.exports = router;

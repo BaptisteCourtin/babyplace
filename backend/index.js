@@ -1,37 +1,12 @@
-const express = require("express");
-const cors = require("cors");
-const app = express();
+const app = require("./src/app");
 
 const port = 5000;
 
-app.use(cors())
-app.use(express.json())
-
-const auth = require('./auth')
-
-const structure = require('./structure')
-
-const structureData = require('./structure.data')
-
-const dashboard = require('./dashboard')
-
-const messages = require('./messages')
-
-const stockage = require('./stockage')
-
-const getMessages = require('./getMessageFromStockage')
-
-app.use('/auth', auth)
-
-app.use('/structure', structure)
-app.use('/structure/all', structureData)
-
-app.use('/dashboard', dashboard)
-app.use('/messages', messages)
-
-app.use('/stockage', stockage)
-app.use('/stockage/recup', getMessages)
-
-app.listen(port, () => {
-  console.log(`server started on port: ${port}`)
-})
+app.listen(port, (err) => {
+  if (err) {
+    console.error("Something bad happened");
+  } else {
+    // eslint-disable-next-line no-restricted-syntax
+    console.log(`Server is listening on port ${port}`);
+  }
+});
