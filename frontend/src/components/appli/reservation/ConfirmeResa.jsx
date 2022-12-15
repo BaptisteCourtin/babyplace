@@ -2,17 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logoBlanc from "@assets/logo-blanc.svg";
 
-import avatar1 from "@assets/avatar1.svg";
-import avatar2 from "@assets/avatar2.svg";
-
-function ConfirmeResa() {
+function ConfirmeResa({ photoProfil }) {
   return (
     <>
       <main className="confirme-resa">
         <img src={logoBlanc} className="mini-logo" alt="logo-blanc" />
         <div className="avatars">
-          <img src={avatar1} alt="avatar1" />
-          <img src={avatar2} alt="avatar2" />
+          <img className="avatar" src={photoProfil} alt="avatar1" />
+          <img className="avatar" src={photoProfil} alt="avatar2" />
         </div>
         <h3 className="title">Réservation</h3>
         <p className="sub-title">

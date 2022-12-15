@@ -126,7 +126,7 @@ function AppliCardCreche() {
                 <span>{prixJour}€</span> / jour *
               </p>
             </div>
-            <PopUp />
+            <PopUp data={data} />
           </div>
         </div>
       </main>

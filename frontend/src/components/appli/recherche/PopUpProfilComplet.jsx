@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function PopUpProfilComplet({ setVisiblePopUp }) {
+function PopUpProfilComplet({ setVisiblePopUp, data }) {
   return (
     <div className="pop">
       <button
@@ -48,7 +48,9 @@ function PopUpProfilComplet({ setVisiblePopUp }) {
         </p>
       </div>
       <button type="button">
-        <Link to="/appli/search/reservation">J'ai compris !</Link>
+        <Link to="/appli/search/reservation" state={{ data }}>
+          J'ai compris !
+        </Link>
       </button>
     </div>
   );

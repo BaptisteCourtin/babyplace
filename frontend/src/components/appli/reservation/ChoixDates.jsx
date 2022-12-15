@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import AppliPlaces from "@components/appli/filtres/AppliPlaces";
 import avatar1 from "@assets/avatar1.svg";
 
-function ChoixDates({ setCompo }) {
+function ChoixDates({ setCompo, photoProfil }) {
+  console.log(photoProfil);
   return (
     <>
       <div className="button-top">
@@ -21,7 +22,7 @@ function ChoixDates({ setCompo }) {
       <main className="choix-dates">
         <div className="profil-plat">
           <div className="container-image">
-            <img src={avatar1} alt="img" />
+            <img src={photoProfil} alt="avatar" />
           </div>
           <div className="user-info">
             <p>Demandez une place</p>

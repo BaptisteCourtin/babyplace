@@ -10,11 +10,16 @@
     background: $gradient;
     border-radius: 50%;
     margin: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     img {
+      padding: 5px;
       width: 80px;
+      height: 80px;
       border-radius: 50%;
-      object-fit: contain;
+      object-fit: cover;
     }
   }
 
