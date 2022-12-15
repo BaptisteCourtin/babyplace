@@ -64,23 +64,23 @@ function AppliSearch() {
               // )
               .sort(function compare(a, b) {
                 if (tri === "Prix croissant") {
-                  if (a.Tarif_heure < b.Tarif_heure) return -1;
-                  if (a.Tarif_heure > b.Tarif_heure) return 1;
+                  if (a.tarifHeure < b.tarifHeure) return -1;
+                  if (a.tarifHeure > b.tarifHeure) return 1;
                   return 0;
                 }
                 if (tri === "Prix decroissant") {
-                  if (a.Tarif_heure > b.Tarif_heure) return -1;
-                  if (a.Tarif_heure < b.Tarif_heure) return 1;
+                  if (a.tarifHeure > b.tarifHeure) return -1;
+                  if (a.tarifHeure < b.tarifHeure) return 1;
                   return 0;
                 }
                 if (tri === "Recent") {
-                  if (a.Structure_id > b.Structure_id) return -1;
-                  if (a.Structure_id < b.Structure_id) return 1;
+                  if (a.structureId > b.structureId) return -1;
+                  if (a.structureId < b.structureId) return 1;
                   return 0;
                 }
                 if (tri === "Ancien") {
-                  if (a.Structure_id < b.Structure_id) return -1;
-                  if (a.Structure_id > b.Structure_id) return 1;
+                  if (a.structureId < b.structureId) return -1;
+                  if (a.structureId > b.structureId) return 1;
                   return 0;
                 }
                 return 0;
