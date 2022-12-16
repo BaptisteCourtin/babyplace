@@ -80,7 +80,7 @@ const Chat = ({ socket, username, room, title, joinRoom }) => {
                                     <div>
                                         <div className="message-meta">
                                             <p id="author">{messageContent.author}</p>
-                                            <p id="time">{moment.utc(messageContent.time).format("DD-MM-YYYY")}</p>
+                                            <p id="time">{moment.utc(messageContent.time).format("DD/MM/YY")}</p>
                                         </div>
                                         <div className="message-content">
                                             <p>{messageContent.message}</p>
