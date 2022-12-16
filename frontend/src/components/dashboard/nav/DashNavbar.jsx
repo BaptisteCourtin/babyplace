@@ -12,11 +12,11 @@ import {
 } from "react-icons/md";
 import axios from "axios";
 
-function DashNavbar({ setToggle, Token, Structure_id }) {
+function DashNavbar({ setToggle, token, structureId }) {
   const logout = () => {
-    axios.put(`http://localhost:5000/logout/${Structure_id}`, {
-      id: Structure_id,
-      token: Token,
+    axios.put(`http://localhost:5000/logout/${structureId}`, {
+      id: structureId,
+      token: token,
     });
   };
 
@@ -72,6 +72,6 @@ export default DashNavbar;
 
 DashNavbar.propTypes = {
   setToggle: PropTypes.func.isRequired,
-  Structure_id: PropTypes.number.isRequired,
-  Token: PropTypes.string.isRequired,
+  structureId: PropTypes.number.isRequired,
+  token: PropTypes.string.isRequired,
 };

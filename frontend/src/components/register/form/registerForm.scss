@@ -42,11 +42,32 @@
       outline: none;
 
       &:focus {
-        outline: 1px solid $third;
+        border: 1px solid $third;
       }
     }
 
-    & div {
+    & .passwordInput {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      & input {
+        width: 100%;
+      }
+
+      & button {
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        right: 15px;
+        background: none;
+        color: $second;
+        font-size: $normal;
+      }
+    }
+
+    & .inputCheck {
       & label {
         margin-left: 5px;
       }
