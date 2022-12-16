@@ -18,7 +18,7 @@ function Base({ setCompo }) {
           Vos Favoris
         </button>
         <button type="button">
-          <Link to="/">
+          <Link to="/appli/user/completion" state={{ quelCompo: 2 }}>
             <AiOutlineFile className="icon-menu" />
             Dossier d'inscription
           </Link>

@@ -5,6 +5,13 @@ const getStructure = async (req, res) => {
     return res.json(result)
 }
 
+const getStructureDataMess = async (req, res) => {
+    console.log(req.body)
+    const result = await structureModels.getStructureDataMess(req)
+    return res.json(result)
+}
+
 module.exports = {
-    getStructure
+    getStructure,
+    getStructureDataMess
 }
