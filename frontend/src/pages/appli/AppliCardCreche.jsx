@@ -8,41 +8,39 @@ function AppliCardCreche() {
   const location = useLocation();
   const { data, tabJour } = location.state;
   const {
-    Photo_structure_1,
-    Tarif_heure,
-    Description,
+    photoStructure1,
+    tarifHeure,
+    description,
 
-    Heure_min,
-    Heure_max,
-    Telephone,
-    Email,
-    Adresse,
+    // Heure_min,
+    // Heure_max,
+    telephone,
+    email,
+    adresse,
 
-    PSCI,
-    Nesting,
-    Montessori,
-    Handi,
+    pcsc1,
+    nesting,
+    montessori,
+    handi,
 
-    Jardin,
+    jardin,
 
-    Promenades,
-    Musique,
-    Art,
-    Bilingue,
-    Bibli,
+    promenades,
+    musique,
+    art,
+    bilingue,
+    bibli,
 
-    Album_photo,
-    Photo_connecte,
+    albumPhoto,
+    photoConnecte,
   } = data;
 
-  const [prixJour, setPrixJour] = useState(0);
-  const [heureMax, setHeureMax] = useState(0);
-  const [heureMin, setHeureMin] = useState(0);
-  useEffect(() => {
-    setPrixJour(Tarif_heure * 8);
-    setHeureMin(Heure_min / 60);
-    setHeureMax(Heure_max / 60);
-  }, []);
+  // const [heureMax, setHeureMax] = useState(0);
+  // const [heureMin, setHeureMin] = useState(0);
+  // useEffect(() => {
+  //   setHeureMin(Heure_min / 60);
+  //   setHeureMax(Heure_max / 60);
+  // }, []);
 
   return (
     <div className="appli-card-creche">
@@ -52,29 +50,29 @@ function AppliCardCreche() {
 
       <main>
         <div className="container-img">
-          <img src={Photo_structure_1} alt="img creche" />
+          <img src={photoStructure1} alt="img creche" />
           <Star
-            com={data.Avis_com}
-            proprete={data.Avis_proprete}
-            securite={data.Avis_securite}
-            eveil={data.Avis_eveil}
-            horaires={data.Avis_horaires}
+            com={data.avisCom}
+            proprete={data.avisProprete}
+            securite={data.avisSecurite}
+            eveil={data.avisEveil}
+            horaires={data.avisHoraires}
           />
         </div>
 
         <div className="text">
           <div className="presentation">
             <h3>Présentation</h3>
-            <p>{Description}</p>
+            <p>{description}</p>
           </div>
 
           <div className="horaire">
-            <p>
+            {/* <p>
               Horaires : {heureMin}h-{heureMax}h
-            </p>
-            <p>Téléphone : 0{Telephone}</p>
-            <p>Mail : {Email}</p>
-            <p>Adresse : {Adresse}</p>
+            </p> */}
+            <p>Téléphone : 0{telephone}</p>
+            <p>Mail : {email}</p>
+            <p>Adresse : {adresse}</p>
           </div>
 
           <h3>Disponibiltés</h3>
@@ -86,15 +84,15 @@ function AppliCardCreche() {
 
           <div>
             <h3>Expérience</h3>
-            {PSCI ? <p>Formation 1er secours</p> : null}
-            {Nesting ? <p>Formation Nesting</p> : null}
-            {Montessori ? <p>Pédagogie Montessori</p> : null}
-            {Handi ? <p>Formation handicapé</p> : null}
+            {pcsc1 ? <p>Formation 1er secours</p> : null}
+            {nesting ? <p>Formation Nesting</p> : null}
+            {montessori ? <p>Pédagogie Montessori</p> : null}
+            {handi ? <p>Formation handicapé</p> : null}
           </div>
 
           <div>
             <h3>Accueil</h3>
-            {Jardin ? <p>Jardin</p> : null}
+            {jardin ? <p>Jardin</p> : null}
             {/* {Jardin ? <p>Présence d'animaux</p> : null}
             {Jardin ? <p>Foyer non-fumeur</p> : null}
             {Jardin ? <p>0% pollution intérieure</p> : null}
@@ -104,26 +102,26 @@ function AppliCardCreche() {
 
           <div>
             <h3>Activité</h3>
-            {Promenades ? <p>Promenades</p> : null}
-            {Bibli ? <p>Bibliothèque</p> : null}
-            {Art ? <p>Atelier art plastique</p> : null}
-            {Bilingue ? <p>Atelier Anglais</p> : null}
-            {Musique ? <p>Atelier musique</p> : null}
+            {promenades ? <p>Promenades</p> : null}
+            {bibli ? <p>Bibliothèque</p> : null}
+            {art ? <p>Atelier art plastique</p> : null}
+            {bilingue ? <p>Atelier Anglais</p> : null}
+            {musique ? <p>Atelier musique</p> : null}
           </div>
 
           <div>
             <h3>Lien avec les parents</h3>
-            {Album_photo ? <p>Album photo</p> : null}
-            {Photo_connecte ? <p>Album photo connecté</p> : null}
+            {albumPhoto ? <p>Album photo</p> : null}
+            {photoConnecte ? <p>Album photo connecté</p> : null}
           </div>
 
           <div className="prix-resa">
             <div className="prix">
               <p>
-                <span> {Tarif_heure}€</span> / heure *
+                <span> {tarifHeure}€</span> / heure *
               </p>
               <p>
-                <span>{prixJour}€</span> / jour *
+                <span>{tarifHeure * 8}€</span> / jour *
               </p>
             </div>
             <PopUp data={data} />

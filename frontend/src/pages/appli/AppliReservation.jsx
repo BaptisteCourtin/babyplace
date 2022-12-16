@@ -8,7 +8,7 @@ function AppliReservation() {
   const location = useLocation();
   const { data } = location.state;
 
-  const { Photo_profil, Photo_structure_3, Tarif_heure } = data;
+  const { photoProfil, photoStructure3, tarifHeure } = data;
 
   const [compo, setCompo] = useState(0);
   const choixComposant = () => {
@@ -16,15 +16,15 @@ function AppliReservation() {
       return (
         <DemandeResa
           setCompo={setCompo}
-          photo3={Photo_structure_3}
-          tarif={Tarif_heure}
+          photo3={photoStructure3}
+          tarif={tarifHeure}
         />
       );
     }
     if (compo === 3) {
-      return <ConfirmeResa photoProfil={Photo_profil} />;
+      return <ConfirmeResa photoProfil={photoProfil} />;
     }
-    return <ChoixDates setCompo={setCompo} photoProfil={Photo_profil} />;
+    return <ChoixDates setCompo={setCompo} photoProfil={photoProfil} />;
   };
 
   return <div className="appli-reservation">{choixComposant()}</div>;
