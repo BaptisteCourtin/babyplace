@@ -5,7 +5,7 @@ import Chat from "./Chat";
 
 const socket = io.connect("http://localhost:3001");
 
-function Messages({ Nom, Email, Photo_profil, Structure_id }) {
+function Messages({ nom, email, photoProfil, structureId }) {
   const [room, setRoom] = useState("");
   const [title, setTitle] = useState("");
   const [strucData, setStrucData] = useState([]);
@@ -35,32 +35,32 @@ function Messages({ Nom, Email, Photo_profil, Structure_id }) {
       <div className="messagesShortsAffich">
         <h2>Messagerie</h2>
         <div className="userPart">
-          <img src={Photo_profil} alt="photo de profil" id="profilImg" />
+          <img src={photoProfil} alt="photo de profil" id="profilImg" />
           <div className="profilText">
             <p>
-              <span>{Nom}</span>
+              <span>{nom}</span>
             </p>
-            <p id="email">{Email}</p>
+            <p id="email">{email}</p>
           </div>
         </div>
         <div className="messages-affichage">
           <div className="salonsMessages">
             {strucData &&
               strucData
-                .filter((f) => !f.Nom.includes(Nom))
+                .filter((f) => !f.nom.includes(nom))
                 .map((element) => (
-                  <li className="contactList" key={element.creche_id}>
+                  <li className="contactList" key={element.crecheId}>
                     <button
                       type="button"
                       onClick={(e) => {
                         e.preventDefault();
-                        setRoom(Structure_id + element.creche_id);
-                        setTitle(element.Nom);
+                        setRoom(structureId + element.crecheId);
+                        setTitle(element.nom);
                       }}
                       id="btn-affiche-con"
                     >
-                      <img src={element.Photo_profil} />
-                      {element.Nom}
+                      <img src={element.photoProfil} />
+                      {element.nom}
                     </button>
                   </li>
                 ))}
@@ -71,7 +71,7 @@ function Messages({ Nom, Email, Photo_profil, Structure_id }) {
         {room != "" ? (
           <Chat
             socket={socket}
-            username={Nom}
+            username={nom}
             room={room}
             title={title}
             joinRoom={joinRoom}

@@ -7,7 +7,7 @@ import DashNavbar from "./nav/DashNavbar";
 import DashReservations from "./reservations/DashReservations";
 import DashAgenda from "./agenda/DashAgenda";
 import DashPlaces from "./places/DashPlaces";
-// import Messages from "../messages/Messages";
+import Messages from "../messages/Messages";
 
 function Dashboard() {
   const { state } = useLocation();
@@ -46,7 +46,7 @@ function Dashboard() {
         donnees.avisProprete +
         donnees.avisSecurite) /
         5) *
-        10
+      10
     ) / 10;
 
   return (

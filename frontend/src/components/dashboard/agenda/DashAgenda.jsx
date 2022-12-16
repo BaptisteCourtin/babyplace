@@ -80,9 +80,8 @@ function DashAgenda({ token, structureId, maxPlaces }) {
   };
 
   const [clickedDay, setClickedDay] = useState(new Date());
-  const date = `${clickedDay.getFullYear()}-${
-    clickedDay.getMonth() + 1
-  }-${clickedDay.getDate()}`;
+  const date = `${clickedDay.getFullYear()}-${clickedDay.getMonth() + 1
+    }-${clickedDay.getDate()}`;
 
   const day = clickedDay.toLocaleDateString("fr-FR", { weekday: "long" });
 
@@ -116,6 +115,12 @@ function DashAgenda({ token, structureId, maxPlaces }) {
                 <>
                   <div className="agendaPlacesLeft">
                     <p>
+                      {fc.nbPlaces < 4
+                        ? (<span className="agendaAlertSign" style={{ backgroundColor: 'rgba(239, 54, 114, 0.6)' }}>!</span>)
+                        : (<span className="agendaAlertSign" style={{
+                          backgroundColor: 'rgba(45, 205, 122, 0.6)'
+                        }}>+</span>)
+                      }
                       Il vous reste
                       <b> {fc.nbPlaces} </b>
                       places sur

@@ -5,7 +5,6 @@ import axios from "axios";
 
 function DashCalendar({ setClickedDay, clickedDay }) {
   const value = new Date();
-
   return (
     <Calendar
       locale="fr"
