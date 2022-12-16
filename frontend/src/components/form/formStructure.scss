@@ -365,6 +365,109 @@
     }
   }
 
+  & .structure11 {
+    & .agendaSection {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      padding: 20px 0;
+      background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
+      border-radius: 5px;
+
+      & h2 {
+        font-size: $h2;
+        font-weight: 500;
+        margin-left: 20px;
+      }
+
+      & .react-calendar {
+        padding: 0 70px;
+        height: fit-content;
+
+        &__navigation {
+          display: flex;
+          justify-content: space-evenly;
+
+          &__arrow {
+            background: none;
+            color: $third;
+            font-size: $h2;
+          }
+
+          &__prev2-button {
+            display: none;
+          }
+
+          &__label {
+            flex-grow: 0 !important;
+            background: $third;
+            padding: 5px 10px;
+            border-radius: 5px;
+
+            & span {
+              color: $white;
+              font-weight: 500;
+              text-transform: capitalize;
+            }
+          }
+
+          &__next2-button {
+            display: none;
+          }
+        }
+
+        &__month-view {
+          margin-top: 20px;
+
+          &__weekdays {
+            padding-bottom: 10px;
+            border-bottom: 1px solid $grey;
+
+            &__weekday {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+
+              & abbr {
+                text-transform: capitalize;
+                text-decoration: none;
+              }
+            }
+          }
+
+          &__days {
+            &__day {
+              border-bottom: 1px dashed $second;
+              width: 50px;
+              height: 50px;
+              padding: 10px;
+              background: none;
+            }
+          }
+        }
+
+        &__tile--now {
+          background-color: $third;
+          color: $white;
+          font-weight: 500;
+          border-bottom: 1px solid transparent;
+        }
+      }
+
+      & .notWorked {
+        & .react-calendar__month-view__days {
+          & abbr {
+            opacity: 0.4;
+          }
+        }
+      }
+    }
+
+    & .selected {
+      background-color: $fifth;
+    }
+  }
+
   & .explicationsContainer {
     width: 50%;
     height: 91vh;
@@ -432,21 +535,6 @@
     }
   }
 
-  button {
-    width: 150px;
-    height: 40px;
-    color: $white;
-    background: $third;
-    font-size: $h4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50px;
-    margin: 4px;
-    padding: 8px;
-    border: 1px solid $grey;
-  }
-
   .buttonContainer {
     margin-bottom: 2vh;
     display: flex;
@@ -454,12 +542,27 @@
     width: 100%;
     justify-content: space-between;
     align-self: flex-end;
-  }
 
-  & .backButton {
-    border: none;
-    color: $third;
-    background-color: #eeeeee00;
+    button {
+      width: 150px;
+      height: 40px;
+      color: $white;
+      background: $third;
+      font-size: $h4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50px;
+      margin: 4px;
+      padding: 8px;
+      border: 1px solid $grey;
+    }
+
+    & .backButton {
+      border: none;
+      color: $third;
+      background-color: #eeeeee00;
+    }
   }
 
   .typeContainer {
@@ -481,9 +584,14 @@
 
     & button {
       background-color: #f2f2f2;
-      color: initial;
       width: fit-content;
       min-width: 140px;
+      height: 40px;
+      font-size: $h4;
+      border-radius: 50px;
+      margin: 4px;
+      padding: 8px;
+      border: 1px solid $grey;
     }
 
     & .selected {

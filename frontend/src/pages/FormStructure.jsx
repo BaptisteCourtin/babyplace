@@ -12,6 +12,7 @@ import Structure7 from "../components/form/Structure7";
 import Structure8 from "../components/form/Structure8";
 import Structure9 from "../components/form/Structure9";
 import Structure10 from "../components/form/Structure10";
+import Structure11 from "../components/form/Structure11";
 import imgDossier from "../assets/img-dossier.svg";
 import imgCopie from "../assets/landing page/image2.svg";
 import selfie from "../assets/selfie.svg";
@@ -75,8 +76,8 @@ const INITIAL_DATA = {
   samediMax: "",
   dimancheMin: "",
   dimancheMax: "",
-  dureeMin: 0,
-  dureeMax: 0,
+  dureeMin: 1,
+  dureeMax: 1,
 };
 
 function FormStructure() {
@@ -109,6 +110,7 @@ function FormStructure() {
       <Structure8 {...data} />,
       <Structure9 {...data} updateFields={updateFields} />,
       <Structure10 {...data} updateFields={updateFields} />,
+      <Structure11 {...data} updateFields={updateFields} />,
     ]);
   return (
     <StructureContext.Provider value={{ structure, setStructure }}>

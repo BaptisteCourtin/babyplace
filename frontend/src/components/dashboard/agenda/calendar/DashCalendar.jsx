@@ -49,7 +49,7 @@ function DashCalendar({
       value: Samedi,
     },
   ];
-
+  console.log(clickedDay);
   return (
     <Calendar
       showNeighboringMonth={false}
