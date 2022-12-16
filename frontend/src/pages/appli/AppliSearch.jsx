@@ -13,7 +13,7 @@ function AppliSearch() {
     "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getStructure = () => {
     axios
-      .get("http://localhost:5000/structure/all", {
+      .get("http://localhost:5000/structure/allapp", {
         headers: {
           "x-token": Token,
         },
