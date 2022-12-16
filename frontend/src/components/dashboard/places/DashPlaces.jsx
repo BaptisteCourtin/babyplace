@@ -9,16 +9,17 @@ import DashCalendar from "../agenda/calendar/DashCalendar";
 function DashPlaces({
   type,
   title,
-  Token,
-  Structure_id,
-  Indemn_repas,
-  Tarif_heure,
-  Tarif_horaire_spec,
+  token,
+  structureId,
+  indemnRepas,
+  tarifHeure,
+  tarifHoraireSpec,
 }) {
+
   const [toggleType, setToggleType] = useState(0);
-  const [selected, setSelected] = useState("Lundi");
-  const [hoursOpen, setHoursOpen] = useState(null);
-  const [hoursClose, setHoursClose] = useState(null);
+  const [toggleDay, setToggleDay] = useState(null)
+  const [selected, setSelected] = useState(null);
+  const [dayId, setDayId] = useState(null);
 
   const [indemn1, setIndemn1] = useState(5);
   const [switch1, setSwitch1] = useState(() => {
@@ -36,7 +37,7 @@ function DashPlaces({
     return false;
   });
 
-  const [indemn3, setIndemn3] = useState(`${Indemn_repas}`);
+  const [indemn3, setIndemn3] = useState(`${indemnRepas}`);
   const [switch3, setSwitch3] = useState(() => {
     if (indemn3) {
       return true;
@@ -44,19 +45,20 @@ function DashPlaces({
     return false;
   });
 
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
 
   const getData = () => {
     axios
-      .get("http://localhost:5000/structure", {
+      .get("http://localhost:5000/horaires", {
         headers: {
-          "x-token": Token,
+          "x-token": token,
         },
       })
-      .then((ret) => {
-        setData(ret.data[0]);
-        setHoursOpen(data.Heure_min);
-        setHoursClose(data.Heure_max);
+      .then((res) => {
+        setData(res.data);
+        setToggleDay(res.data[0].ouvert)
+        setSelected(res.data[0].jourSemaine)
+        setDayId(res.data[0].jourId)
       })
       .catch((err) => {
         console.error(err);
@@ -65,56 +67,46 @@ function DashPlaces({
 
   useEffect(() => {
     getData();
-  }, [
-    data.Lundi,
-    data.Mardi,
-    data.Mercredi,
-    data.Jeudi,
-    data.Vendredi,
-    data.Samedi,
-    data.Dimanche,
-    data.Heure_min,
-    data.Heure_max,
-  ]);
+  }, []);
 
-  const [toggleDay, setToggleDay] = useState(data.Lundi);
   const [clickedDay, setClickedDay] = useState(new Date());
 
   const updateDay = async () => {
     const dataSubmit = {
-      id: Structure_id,
+      id: structureId,
       day: selected,
       toggleDay: !toggleDay,
     };
     dataSubmit[selected] = !toggleDay;
     await axios.put(
-      `http://localhost:5000/dashboard/day/${Structure_id}`,
+      `http://localhost:5000/dashboard/day/${structureId}`,
       dataSubmit
     );
   };
 
   const updateHours = async () => {
-    await axios.put(`http://localhost:5000/dashboard/hours/${Structure_id}`, {
-      id: Structure_id,
-      heure_min: hoursOpen,
-      heure_max: hoursClose,
+    await axios.put(`http://localhost:5000/dashboard/hours/${structureId}`, {
+      heureMin: heureMin,
+      heureMax: heureMax,
+      structureId: structureId,
+      jourId: dayId
     });
   };
 
   const updateIndemnRepas = async () => {
     await axios.put(
-      `http://localhost:5000/dashboard/indemn_repas/${Structure_id}`,
+      `http://localhost:5000/dashboard/indemnRepas/${structureId}`,
       {
-        id: Structure_id,
-        indemn_repas: indemn3,
+        id: structureId,
+        indemnRepas: indemn3,
       }
     );
   };
 
-  const handleInput = (e) => {
-    setHoursOpen(e.minValue);
-    setHoursClose(e.maxValue);
-  };
+  // const handleInput = (e) => {
+  //   setHoursOpen(e.minValue);
+  //   setHoursClose(e.maxValue);
+  // };
 
   return (
     <div className="dashPlaces">
@@ -139,152 +131,44 @@ function DashPlaces({
         {toggleType === 0 ? (
           <div className="dashPlacesRange">
             <ul className="dashPlacesDays">
-              <li>
-                <input
-                  type="radio"
-                  name="days"
-                  id="Lundi"
-                  value="Lundi"
-                  onChange={() => {
-                    setSelected("Lundi");
-                    setToggleDay(data.Lundi);
-                  }}
-                />
-                <label
-                  htmlFor="Lundi"
-                  className={selected === "Lundi" ? "selected" : ""}
-                >
-                  L
-                </label>
-              </li>
-              <li>
-                <input
-                  type="radio"
-                  name="days"
-                  id="Mardi"
-                  value="Mardi"
-                  onChange={() => {
-                    setSelected("Mardi");
-                    setToggleDay(data.Mardi);
-                  }}
-                />
-                <label
-                  htmlFor="Mardi"
-                  className={selected === "Mardi" ? "selected" : ""}
-                >
-                  M
-                </label>
-              </li>
-              <li>
-                <input
-                  type="radio"
-                  name="days"
-                  id="Mercredi"
-                  value="Mercredi"
-                  onChange={() => {
-                    setSelected("Mercredi");
-                    setToggleDay(data.Mercredi);
-                  }}
-                />
-                <label
-                  htmlFor="Mercredi"
-                  className={selected === "Mercredi" ? "selected" : ""}
-                >
-                  M
-                </label>
-              </li>
-              <li>
-                <input
-                  type="radio"
-                  name="days"
-                  id="Jeudi"
-                  value="Jeudi"
-                  onChange={() => {
-                    setSelected("Jeudi");
-                    setToggleDay(data.Jeudi);
-                  }}
-                />
-                <label
-                  htmlFor="Jeudi"
-                  className={selected === "Jeudi" ? "selected" : ""}
-                >
-                  J
-                </label>
-              </li>
-              <li>
-                <input
-                  type="radio"
-                  name="days"
-                  id="Vendredi"
-                  value="Vendredi"
-                  onChange={() => {
-                    setSelected("Vendredi");
-                    setToggleDay(data.Vendredi);
-                  }}
-                />
-                <label
-                  htmlFor="Vendredi"
-                  className={selected === "Vendredi" ? "selected" : ""}
-                >
-                  V
-                </label>
-              </li>
-              <li>
-                <input
-                  type="radio"
-                  name="days"
-                  id="Samedi"
-                  value="Samedi"
-                  onChange={() => {
-                    setSelected("Samedi");
-                    setToggleDay(data.Samedi);
-                  }}
-                />
-                <label
-                  htmlFor="Samedi"
-                  className={selected === "Samedi" ? "selected" : ""}
-                >
-                  S
-                </label>
-              </li>
-              <li>
-                <input
-                  type="radio"
-                  name="days"
-                  id="Dimanche"
-                  value="Dimanche"
-                  onChange={() => {
-                    setSelected("Dimanche");
-                    setToggleDay(data.Dimanche);
-                  }}
-                />
-                <label
-                  htmlFor="Dimanche"
-                  className={selected === "Dimanche" ? "selected" : ""}
-                >
-                  D
-                </label>
-              </li>
+              {data.map(d => (
+                <li>
+                  <input
+                    type='radio'
+                    name='days'
+                    id={d.jourSemaine}
+                    value={d.jourSemaine}
+                    onChange={() => {
+                      setSelected(d.jourSemaine)
+                      setToggleDay(d.ouvert)
+                      setDayId(d.jourId)
+                    }}
+                  />
+                  <label htmlFor={d.jourSemaine} className={selected === d.jourSemaine ? "selected" : ""}>
+                    {d.jourSemaine.slice(0, 1)}
+                  </label>
+                </li>
+              ))}
             </ul>
             {toggleDay ? (
               <>
                 <MultiRangeSlider
                   min={0}
                   max={23}
-                  minValue={hoursOpen}
-                  maxValue={hoursClose}
+                  minValue={data[dayId].heureMin.split(':', 1)[0]}
+                  maxValue={data[dayId].heureMax.split(':', 1)[0]}
                   step={1}
-                  onChange={(e) => {
-                    handleInput(e);
-                    updateHours();
-                  }}
+                // onChange={(e) => {
+                //   handleInput(e);
+                //   updateHours();
+                // }}
                 />
                 <div className="dashRangeValues">
                   <p>
-                    <img src={open} alt="" /> Ouverture : {hoursOpen}H
+                    <img src={open} alt="" /> Ouverture : {data[dayId].heureMin}H
                   </p>
                   <p>
-                    <img src={close} alt="" /> Fermeture : {hoursClose}H
+                    <img src={close} alt="" /> Fermeture : {data[dayId].heureMax}H
                   </p>
                 </div>
                 <button
@@ -292,7 +176,6 @@ function DashPlaces({
                   className="dashPlacesSubmit"
                   onClick={() => {
                     setToggleDay(!toggleDay);
-                    updateDay();
                   }}
                 >
                   Repos
@@ -304,7 +187,6 @@ function DashPlaces({
                 className="dashNotWorking"
                 onClick={() => {
                   setToggleDay(!toggleDay);
-                  updateDay();
                 }}
               >
                 Envie de travailler ?
@@ -319,14 +201,14 @@ function DashPlaces({
         <div className="dashPlacesPrices">
           <h3>Vos tarifs</h3>
           <p>
-            Heure <span>{Tarif_heure}€</span>
+            Heure <span>{tarifHeure}€</span>
           </p>
           <p title="Entre 22h et 6h, Dimanche et jour férié">
-            Heure spécifique <span>{Tarif_horaire_spec}€</span>
+            Heure spécifique <span>{tarifHoraireSpec}€</span>
           </p>
           {type === "assmat" && (
             <p title="Au delà de 45h/semaine">
-              Heure majorée <span>{Tarif_heure * 1.5}€</span>
+              Heure majorée <span>{tarifHeure * 1.5}€</span>
             </p>
           )}
         </div>
@@ -398,7 +280,7 @@ function DashPlaces({
               style={{ display: switch3 ? "flex" : "none" }}
             >
               <input
-                type="text"
+                type="number"
                 value={indemn3}
                 onChange={(e) => {
                   setIndemn3(e.target.value);
@@ -445,8 +327,8 @@ export default DashPlaces;
 DashPlaces.propTypes = {
   title: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  Structure_id: PropTypes.number.isRequired,
-  Indemn_repas: PropTypes.number.isRequired,
+  structureId: PropTypes.number.isRequired,
+  indemnRepas: PropTypes.number.isRequired,
   Tarif_heure: PropTypes.number.isRequired,
   Tarif_horaire_spec: PropTypes.number.isRequired,
 };
