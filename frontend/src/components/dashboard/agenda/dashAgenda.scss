@@ -136,6 +136,11 @@
     font-size: $h2;
     font-weight: 500;
     margin-left: 20px;
+
+    &::first-letter {
+      font-weight: 700;
+      color: $third;
+    }
   }
 
   & .react-calendar {
@@ -179,7 +184,7 @@
 
       &__weekdays {
         padding-bottom: 10px;
-        border-bottom: 1px solid $grey;
+        border-bottom: 1px solid $third;
 
         &__weekday {
           display: flex;
@@ -199,15 +204,25 @@
           height: 50px;
           padding: 10px;
           background: none;
+
+          &:disabled {
+            opacity: 0.5;
+          }
         }
       }
     }
 
     &__tile--now {
+      color: $third;
+      font-weight: 700;
+    }
+
+    &__tile--active {
       background-color: $third;
       color: $white;
       font-weight: 500;
       border-bottom: 1px solid transparent;
+      background-color: $third;
     }
   }
 }
