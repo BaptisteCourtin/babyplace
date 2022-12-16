@@ -1,26 +1,26 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 function RegisterForm() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [checked, setChecked] = useState(false)
-  const [typePwd, setTypePwd] = useState(true)
+  const [checked, setChecked] = useState(false);
+  const [typePwd, setTypePwd] = useState(true);
 
   const handlePwdClick = (e) => {
     e.preventDefault();
-    setTypePwd(!typePwd)
-  }
+    setTypePwd(!typePwd);
+  };
 
   const handleClick = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (email && password && checked) {
-      navigate("/structure/inscription-form")
+      navigate("/structure/inscription-form");
     }
-  }
+  };
 
   return (
     <section className="formCo">
@@ -50,10 +50,7 @@ function RegisterForm() {
             }}
           />
           <button onClick={handlePwdClick}>
-            {typePwd
-              ? <AiOutlineEye />
-              : <AiOutlineEyeInvisible />
-            }
+            {typePwd ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
           </button>
         </div>
         <div className="inputCheck">
@@ -70,8 +67,7 @@ function RegisterForm() {
         <button
           type="submit"
           style={{
-            opacity:
-              !email || !password || !checked ? "0.7" : "1"
+            opacity: !email || !password || !checked ? "0.7" : "1",
           }}
           onClick={(e) => {
             handleClick(e);

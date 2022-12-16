@@ -16,7 +16,7 @@ function DashNavbar({ setToggle, token, structureId }) {
   const logout = () => {
     axios.put(`http://localhost:5000/logout/${structureId}`, {
       id: structureId,
-      token: token,
+      token,
     });
   };
 

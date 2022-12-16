@@ -5,7 +5,6 @@ import DashCalendar from "./calendar/DashCalendar";
 import moment from 'moment'
 
 function DashAgenda({ token, structureId, maxPlaces }) {
-
   const [data, setData] = useState([]);
   const [hours, setHours] = useState([]);
   const [calendar, setCalendar] = useState([]);
@@ -45,7 +44,7 @@ function DashAgenda({ token, structureId, maxPlaces }) {
   const getCalendar = () => {
     axios
       .get(`http://localhost:5000/calendrier/${structureId}`, {
-        structureId: structureId
+        structureId,
       })
       .then((res) => {
         setCalendar(res.data);
@@ -53,7 +52,7 @@ function DashAgenda({ token, structureId, maxPlaces }) {
       .catch((err) => {
         console.error(err);
       });
-  }
+  };
 
   useEffect(() => {
     getData();
@@ -62,25 +61,31 @@ function DashAgenda({ token, structureId, maxPlaces }) {
   }, []);
 
   const updatePlaces = async () => {
-    await axios.put(`http://localhost:5000/calendrier/places/${calendarIndex}`, {
-      id: calendarIndex,
-      nbPlaces: places,
-    });
+    await axios.put(
+      `http://localhost:5000/calendrier/places/${calendarIndex}`,
+      {
+        id: calendarIndex,
+        nbPlaces: places,
+      }
+    );
   };
 
   const updateStatus = async () => {
-    await axios.put()
-  }
+    await axios.put();
+  };
+
 
   const handleClick = (e) => {
-    e.preventDefault()
-    updateStatus()
-  }
+    e.preventDefault();
+    updateStatus();
+  };
 
   const [clickedDay, setClickedDay] = useState(new Date());
-  let date = clickedDay.getFullYear() + '-' + (clickedDay.getMonth() + 1) + '-' + clickedDay.getDate()
+  const date = `${clickedDay.getFullYear()}-${
+    clickedDay.getMonth() + 1
+  }-${clickedDay.getDate()}`;
 
-  let day = clickedDay.toLocaleDateString("fr-FR", { weekday: 'long' });
+  const day = clickedDay.toLocaleDateString("fr-FR", { weekday: "long" });
 
   console.log(calendarIndex)
 
@@ -96,9 +101,15 @@ function DashAgenda({ token, structureId, maxPlaces }) {
       </section>
       <section className="agendaMessage">
         <div className="agendaPlaces">
-          <h3>{day} {clickedDay.toLocaleDateString()}</h3>
-          {calendar.filter(c => (
-            c.structureId === structureId && c.date.split('T')[0] === date)).map(fc => (
+          <h3>
+            {day} {clickedDay.toLocaleDateString()}
+          </h3>
+          {calendar
+            .filter(
+              (c) =>
+                c.structureId === structureId && c.date.split("T")[0] === date
+            )
+            .map((fc) =>
               fc.nbPlaces == -1 ? (
                 <button className="agendaPlacesWork">Ouvrir</button>
               ) : (
@@ -118,7 +129,10 @@ function DashAgenda({ token, structureId, maxPlaces }) {
                       min={1}
                       max={maxPlaces}
                       placeholder={`1 à ${maxPlaces}`}
-                      onChange={(e) => { setPlaces(e.target.value); setCalendarIndex(fc.calendrierId); }}
+                      onChange={(e) => {
+                        setPlaces(e.target.value);
+                        setCalendarIndex(fc.calendrierId);
+                      }}
                     />
                     <button type="button" onClick={updatePlaces}>
                       Modifier
@@ -127,8 +141,7 @@ function DashAgenda({ token, structureId, maxPlaces }) {
                   <button className="agendaPlacesWork">Repos</button>
                 </>
               )
-            ))
-          }
+            )}
         </div>
         <ul className="agendaLegend">
           <li>
@@ -149,7 +162,7 @@ function DashAgenda({ token, structureId, maxPlaces }) {
           </li>
         </ul>
       </section>
-    </div >
+    </div>
   );
 }
 

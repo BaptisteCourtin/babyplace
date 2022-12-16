@@ -15,9 +15,8 @@ function DashPlaces({
   tarifHeure,
   tarifHoraireSpec,
 }) {
-
   const [toggleType, setToggleType] = useState(0);
-  const [toggleDay, setToggleDay] = useState(null)
+  const [toggleDay, setToggleDay] = useState(null);
   const [selected, setSelected] = useState(null);
   const [dayId, setDayId] = useState(null);
 
@@ -56,9 +55,9 @@ function DashPlaces({
       })
       .then((res) => {
         setData(res.data);
-        setToggleDay(res.data[0].ouvert)
-        setSelected(res.data[0].jourSemaine)
-        setDayId(res.data[0].jourId)
+        setToggleDay(res.data[0].ouvert);
+        setSelected(res.data[0].jourSemaine);
+        setDayId(res.data[0].jourId);
       })
       .catch((err) => {
         console.error(err);
@@ -86,10 +85,10 @@ function DashPlaces({
 
   const updateHours = async () => {
     await axios.put(`http://localhost:5000/dashboard/hours/${structureId}`, {
-      heureMin: heureMin,
-      heureMax: heureMax,
-      structureId: structureId,
-      jourId: dayId
+      heureMin,
+      heureMax,
+      structureId,
+      jourId: dayId,
     });
   };
 
@@ -131,20 +130,23 @@ function DashPlaces({
         {toggleType === 0 ? (
           <div className="dashPlacesRange">
             <ul className="dashPlacesDays">
-              {data.map(d => (
+              {data.map((d) => (
                 <li>
                   <input
-                    type='radio'
-                    name='days'
+                    type="radio"
+                    name="days"
                     id={d.jourSemaine}
                     value={d.jourSemaine}
                     onChange={() => {
-                      setSelected(d.jourSemaine)
-                      setToggleDay(d.ouvert)
-                      setDayId(d.jourId)
+                      setSelected(d.jourSemaine);
+                      setToggleDay(d.ouvert);
+                      setDayId(d.jourId);
                     }}
                   />
-                  <label htmlFor={d.jourSemaine} className={selected === d.jourSemaine ? "selected" : ""}>
+                  <label
+                    htmlFor={d.jourSemaine}
+                    className={selected === d.jourSemaine ? "selected" : ""}
+                  >
                     {d.jourSemaine.slice(0, 1)}
                   </label>
                 </li>
@@ -155,20 +157,22 @@ function DashPlaces({
                 <MultiRangeSlider
                   min={0}
                   max={23}
-                  minValue={data[dayId].heureMin.split(':', 1)[0]}
-                  maxValue={data[dayId].heureMax.split(':', 1)[0]}
+                  minValue={data[dayId].heureMin.split(":", 1)[0]}
+                  maxValue={data[dayId].heureMax.split(":", 1)[0]}
                   step={1}
-                // onChange={(e) => {
-                //   handleInput(e);
-                //   updateHours();
-                // }}
+                  // onChange={(e) => {
+                  //   handleInput(e);
+                  //   updateHours();
+                  // }}
                 />
                 <div className="dashRangeValues">
                   <p>
-                    <img src={open} alt="" /> Ouverture : {data[dayId].heureMin}H
+                    <img src={open} alt="" /> Ouverture : {data[dayId].heureMin}
+                    H
                   </p>
                   <p>
-                    <img src={close} alt="" /> Fermeture : {data[dayId].heureMax}H
+                    <img src={close} alt="" /> Fermeture :{" "}
+                    {data[dayId].heureMax}H
                   </p>
                 </div>
                 <button

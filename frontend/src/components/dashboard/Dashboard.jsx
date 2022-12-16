@@ -36,7 +36,7 @@ function Dashboard() {
     // }
   };
 
-  const tel = '0' + (donnees.telephone).toString()
+  const tel = `0${donnees.telephone.toString()}`;
 
   const reviews =
     Math.round(
@@ -46,7 +46,7 @@ function Dashboard() {
         donnees.avisProprete +
         donnees.avisSecurite) /
         5) *
-      10
+        10
     ) / 10;
 
   return (
@@ -96,7 +96,8 @@ function Dashboard() {
               </ul>
               <div className="dashboardProfileContact">
                 <p>
-                  <AiOutlinePhone />{tel.match(/.{1,2}/g).join(" ")}
+                  <AiOutlinePhone />
+                  {tel.match(/.{1,2}/g).join(" ")}
                 </p>
                 <p>
                   <AiOutlineMail />
