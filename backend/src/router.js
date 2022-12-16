@@ -6,20 +6,9 @@ const datasource = require("../database");
 const structure = require("./controllers/structure.controllers");
 const horaires = require('./controllers/horaires.controllers');
 const calendrier = require('./controllers/calendrier.controllers');
-const dashboardControllers = require("./controllers/dashboard.controllers");
+const dashboard = require("./controllers/dashboard.controllers");
 
-router.get("/structure", structure.getStructure);
-router.get("/structure/all", (req, res) => {
-  datasource
-    .query("SELECT * FROM structure")
-    .then(([s]) => {
-      res.json(s);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Erreur de connexion");
-    });
-});
+
 router.get("/horaires/all", (req, res) => {
   datasource
     .query("SELECT * FROM horaires")
@@ -37,8 +26,10 @@ router.get('/structure', structure.getStructure);
 router.get('/horaires', horaires.getHoraires);
 router.get('/calendrier/:id', calendrier.getCalendrier);
 
-router.put("/day/:id", dashboardControllers.updateDay);
-router.put("/indemn_repas/:id", dashboardControllers.updateIndemnRepas);
+router.put('/dashboard/day/:id', dashboard.updateDay);
+router.put('/dashboard/hours/:id', dashboard.updateHours);
+router.put('/dashboard/indemnRepas/:id', dashboard.updateIndemnRepas);
+router.put('/calendrier/places/:id', calendrier.updatePlaces);
 
 router.post('/auth', (req, res) => {
   datasource.query("SELECT * FROM structure WHERE email = ?", [req.body.email])
