@@ -7,7 +7,7 @@ import DashNavbar from "./nav/DashNavbar";
 import DashReservations from "./reservations/DashReservations";
 import DashAgenda from "./agenda/DashAgenda";
 import DashPlaces from "./places/DashPlaces";
-// import Messages from "../messages/Messages";
+import Messages from "../messages/Messages";
 
 function Dashboard() {
   const { state } = useLocation();
@@ -26,17 +26,17 @@ function Dashboard() {
       return <DashAgenda {...donnees} />;
     }
     if (toggle === 3) {
-      return <DashPlaces type={type} {...donnees} title="Ajouter une place" />;
+      return <DashPlaces type={type} {...donnees} title="Horaires" />;
     }
     if (toggle === 4) {
       return navigate("/structure/inscription-form");
     }
-    // if (toggle === 5) {
-    //   return <Messages {...donnees} />;
-    // }
+    if (toggle === 5) {
+      return <Messages {...donnees} />;
+    }
   };
 
-  const tel = '0' + (donnees.telephone).toString()
+  const tel = `0${donnees.telephone.toString()}`;
 
   const reviews =
     Math.round(
@@ -96,7 +96,8 @@ function Dashboard() {
               </ul>
               <div className="dashboardProfileContact">
                 <p>
-                  <AiOutlinePhone />{tel.match(/.{1,2}/g).join(" ")}
+                  <AiOutlinePhone />
+                  {tel.match(/.{1,2}/g).join(" ")}
                 </p>
                 <p>
                   <AiOutlineMail />

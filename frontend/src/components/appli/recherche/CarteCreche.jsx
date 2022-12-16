@@ -1,52 +1,62 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import BlocJour from "@components/appli/recherche/BlocJour";
 import PropTypes from "prop-types";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 function CarteCreche({ data }) {
-  const { photoStructure1, tarifHeure } = data;
+  const { photoStructure1, tarifHeure, structureId } = data;
   const [likeCard, setLikeCard] = useState(true);
+  // les horaires de chaques jour suivant l'id de la structure
+  const [dataHorairesId, setDataHorairesId] = useState([]);
 
-  const tabJour = [
-    { jour: "Lun", check: data.Lundi },
-    { jour: "Mar", check: data.Mardi },
-    { jour: "Mer", check: data.Mercredi },
-    { jour: "Jeu", check: data.Jeudi },
-    { jour: "Ven", check: data.Vendredi },
-    { jour: "Sam", check: data.Samedi },
-  ];
+  const Token =
+    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+  const getHorairesId = () => {
+    axios
+      .get(`http://localhost:5000/horaires/${structureId}`, {
+        headers: {
+          "x-token": Token,
+        },
+      })
+      .then((res) => {
+        setDataHorairesId(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  useEffect(() => {
+    getHorairesId();
+  }, []);
 
   return (
-    <div className="carte-creche">
-      {likeCard ? (
-        <AiFillHeart className="like" onClick={() => setLikeCard(false)} />
-      ) : (
-        <AiOutlineHeart className="like" onClick={() => setLikeCard(true)} />
-      )}
-      <Link to="/appli/search/card" state={{ data, tabJour }}>
-        <img src={photoStructure1} alt="img creche" />
-        <div className="info-creche">
-          <div className="ville-prix">
-            <p>ville à X mètres</p>
-            <p className="prix">{tarifHeure}€</p>
+    dataHorairesId.length !== 0 && (
+      <div className="carte-creche">
+        {likeCard ? (
+          <AiFillHeart className="like" onClick={() => setLikeCard(false)} />
+        ) : (
+          <AiOutlineHeart className="like" onClick={() => setLikeCard(true)} />
+        )}
+        <Link to="/appli/search/card" state={{ data, dataHorairesId }}>
+          <img src={photoStructure1} alt="img creche" />
+          <div className="info-creche">
+            <div className="ville-prix">
+              <p>ville à X mètres</p>
+              <p className="prix">{tarifHeure}€</p>
+            </div>
+            <div className="jours">
+              <BlocJour dataHorairesId={dataHorairesId} />
+            </div>
+            <ul>
+              <li>N’accepte que les profils vérifiés</li>
+              <li>Période d’adaptation obligatoire</li>
+            </ul>
           </div>
-          <div className="jours">
-            {tabJour.map((dataJour, index) => (
-              <BlocJour
-                jour={dataJour.jour}
-                check={dataJour.check}
-                key={index}
-              />
-            ))}
-          </div>
-          <ul>
-            <li>N’accepte que les profils vérifiés</li>
-            <li>Période d’adaptation obligatoire</li>
-          </ul>
-        </div>
-      </Link>
-    </div>
+        </Link>
+      </div>
+    )
   );
 }
 

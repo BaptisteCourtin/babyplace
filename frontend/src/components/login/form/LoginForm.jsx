@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
-import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 function LoginForm() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [typePwd, setTypePwd] = useState(true)
+  const [typePwd, setTypePwd] = useState(true);
 
   const handlePwdClick = (e) => {
     e.preventDefault();
-    setTypePwd(!typePwd)
-  }
+    setTypePwd(!typePwd);
+  };
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -61,17 +61,13 @@ function LoginForm() {
             }}
           />
           <button onClick={handlePwdClick}>
-            {typePwd
-              ? <AiOutlineEye />
-              : <AiOutlineEyeInvisible />
-            }
+            {typePwd ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
           </button>
         </div>
         <button
           type="submit"
           style={{
-            opacity:
-              !email || !password ? "0.7" : "1"
+            opacity: !email || !password ? "0.7" : "1",
           }}
           onClick={(e) => {
             handleClick(e);

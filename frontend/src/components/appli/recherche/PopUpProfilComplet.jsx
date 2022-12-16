@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 function PopUpProfilComplet({ setVisiblePopUp, data }) {
   return (
@@ -55,5 +56,10 @@ function PopUpProfilComplet({ setVisiblePopUp, data }) {
     </div>
   );
 }
+
+PopUpProfilComplet.propTypes = {
+  setVisiblePopUp: PropTypes.func.isRequired,
+  data: PropTypes.string.isRequired,
+};
 
 export default PopUpProfilComplet;

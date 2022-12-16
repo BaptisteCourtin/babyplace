@@ -3,13 +3,8 @@ import PropTypes from "prop-types";
 import Calendar from "react-calendar";
 import axios from "axios";
 
-function DashCalendar({
-  setClickedDay,
-  clickedDay
-}) {
-
+function DashCalendar({ setClickedDay, clickedDay }) {
   const value = new Date();
-
   return (
     <Calendar
       locale="fr"
