@@ -19,7 +19,7 @@ function FormEnfant() {
 
   return (
     <main className="enfant">
-      <h3>Dossier Parent</h3>
+      <h3>Dossier Enfants</h3>
 
       <div>
         <div className="bebe">

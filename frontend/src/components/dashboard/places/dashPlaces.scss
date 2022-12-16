@@ -78,6 +78,7 @@
             align-items: center;
             justify-content: center;
             position: absolute;
+            text-transform: capitalize;
             top: 0;
             left: 0;
             right: 0;
@@ -310,15 +311,11 @@
           transition: 0.3s ease-in-out;
 
           & input {
-            width: 35px;
+            width: 50px;
             outline: none;
-            border: 1px solid transparent;
+            border: 1px solid $third;
             border-radius: 5px;
             text-align: end;
-
-            &:focus {
-              border: 1px solid $third;
-            }
           }
         }
       }

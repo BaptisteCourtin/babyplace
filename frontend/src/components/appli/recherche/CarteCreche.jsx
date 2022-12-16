@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 function CarteCreche({ data }) {
-  const { Photo_structure_1, Tarif_heure } = data;
+  const { photoStructure1, tarifHeure } = data;
   const [likeCard, setLikeCard] = useState(true);
 
   const tabJour = [
@@ -25,11 +25,11 @@ function CarteCreche({ data }) {
         <AiOutlineHeart className="like" onClick={() => setLikeCard(true)} />
       )}
       <Link to="/appli/search/card" state={{ data, tabJour }}>
-        <img src={Photo_structure_1} alt="img creche" />
+        <img src={photoStructure1} alt="img creche" />
         <div className="info-creche">
           <div className="ville-prix">
             <p>ville à X mètres</p>
-            <p className="prix">{Tarif_heure}€</p>
+            <p className="prix">{tarifHeure}€</p>
           </div>
           <div className="jours">
             {tabJour.map((dataJour, index) => (

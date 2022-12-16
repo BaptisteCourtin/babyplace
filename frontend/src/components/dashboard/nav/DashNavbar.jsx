@@ -11,17 +11,13 @@ import {
   MdLogout,
 } from "react-icons/md";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
-function DashNavbar({ setToggle, Token, Structure_id }) {
-  const navigate = useNavigate();
-
+function DashNavbar({ setToggle, token, structureId }) {
   const logout = () => {
-    axios.put(`http://localhost:5000/logout/${Structure_id}`, {
-      id: Structure_id,
-      token: Token,
+    axios.put(`http://localhost:5000/logout/${structureId}`, {
+      id: structureId,
+      token,
     });
-    // navigate("/")
   };
 
   return (
@@ -54,7 +50,7 @@ function DashNavbar({ setToggle, Token, Structure_id }) {
         <li>
           <MdOutlineMarkAsUnread />
           <button type="button" onClick={() => setToggle(5)}>
-            Messages
+            Messagerie
           </button>
         </li>
       </ul>
@@ -76,4 +72,6 @@ export default DashNavbar;
 
 DashNavbar.propTypes = {
   setToggle: PropTypes.func.isRequired,
+  structureId: PropTypes.number.isRequired,
+  token: PropTypes.string.isRequired,
 };

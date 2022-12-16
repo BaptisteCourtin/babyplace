@@ -1,36 +1,52 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import DashCalendar from "./calendar/DashCalendar";
 
-function DashAgenda({
-  Token,
-  Structure_id,
-  Max_places,
-  Lundi,
-  Mardi,
-  Mercredi,
-  Jeudi,
-  Vendredi,
-  Samedi,
-  Dimanche,
-}) {
-  const places1 = Math.floor((Math.random() * Max_places) / 2);
-  const places2 = Math.floor((Math.random() * Max_places) / 2);
-  const places3 = Math.floor((Math.random() * Max_places) / 2);
-
-  const [data, setData] = useState({});
-  const [places, setPlaces] = useState("");
+function DashAgenda({ token, structureId, maxPlaces }) {
+  const [data, setData] = useState([]);
+  const [hours, setHours] = useState([]);
+  const [calendar, setCalendar] = useState([]);
+  const [calendarIndex, setCalendarIndex] = useState(null);
+  const [places, setPlaces] = useState(null);
 
   const getData = () => {
     axios
       .get("http://localhost:5000/structure", {
         headers: {
-          "x-token": Token,
+          "x-token": token,
         },
       })
-      .then((ret) => {
-        setData(ret.data[0]);
-        setPlaces(data.Nb_places);
+      .then((res) => {
+        setData(res.data[0]);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const getHours = () => {
+    axios
+      .get(`http://localhost:5000/horaires`, {
+        headers: {
+          "x-token": token,
+        },
+      })
+      .then((res) => {
+        setHours(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const getCalendar = () => {
+    axios
+      .get(`http://localhost:5000/calendrier/${structureId}`, {
+        structureId,
+      })
+      .then((res) => {
+        setCalendar(res.data);
       })
       .catch((err) => {
         console.error(err);
@@ -39,20 +55,38 @@ function DashAgenda({
 
   useEffect(() => {
     getData();
-  }, [data.Nb_places]);
-
-  const curDate = new Date();
-  const day = curDate.getDate();
-  const month = curDate.getMonth() + 1;
+    getHours();
+    getCalendar();
+  }, []);
 
   const updatePlaces = async () => {
-    await axios.put(`http://localhost:5000/dashboard/places/${Structure_id}`, {
-      id: Structure_id,
-      places,
-    });
+    await axios.put(
+      `http://localhost:5000/calendrier/places/${calendarIndex}`,
+      {
+        id: calendarIndex,
+        nbPlaces: places,
+      }
+    );
+  };
+
+  const updateStatus = async () => {
+    await axios.put();
+  };
+
+  console.log(calendarIndex);
+  console.log(calendar);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    updateStatus();
   };
 
   const [clickedDay, setClickedDay] = useState(new Date());
+  const date = `${clickedDay.getFullYear()}-${
+    clickedDay.getMonth() + 1
+  }-${clickedDay.getDate()}`;
+
+  const day = clickedDay.toLocaleDateString("fr-FR", { weekday: "long" });
 
   return (
     <div className="dashAgenda">
@@ -63,19 +97,51 @@ function DashAgenda({
           clickedDay={clickedDay}
           setClickedDay={setClickedDay}
         />
-        <div className="agendaCalendarBtn">
-          <input
-            type="number"
-            value={places}
-            max={Max_places}
-            onChange={(e) => setPlaces(e.target.value)}
-          />
-          <button type="button" onClick={updatePlaces}>
-            Modifier
-          </button>
-        </div>
       </section>
       <section className="agendaMessage">
+        <div className="agendaPlaces">
+          <h3>
+            {day} {clickedDay.toLocaleDateString()}
+          </h3>
+          {calendar
+            .filter(
+              (c) =>
+                c.structureId === structureId && c.date.split("T")[0] === date
+            )
+            .map((fc) =>
+              fc.nbPlaces == -1 ? (
+                <button className="agendaPlacesWork">Travail</button>
+              ) : (
+                <>
+                  <div className="agendaPlacesLeft">
+                    <p>
+                      Il vous reste
+                      <b> {fc.nbPlaces} </b>
+                      places sur
+                      <b> {maxPlaces} </b>
+                    </p>
+                  </div>
+                  <div className="agendaCalendarBtn">
+                    <input
+                      type="number"
+                      value={places}
+                      min={1}
+                      max={maxPlaces}
+                      placeholder={`1 à ${maxPlaces}`}
+                      onChange={(e) => {
+                        setPlaces(e.target.value);
+                        setCalendarIndex(fc.calendrierId);
+                      }}
+                    />
+                    <button type="button" onClick={updatePlaces}>
+                      Modifier
+                    </button>
+                  </div>
+                  <button className="agendaPlacesWork">Repos</button>
+                </>
+              )
+            )}
+        </div>
         <ul className="agendaLegend">
           <li>
             <span />
@@ -94,83 +160,15 @@ function DashAgenda({
             Jour off
           </li>
         </ul>
-        <ul className="agendaMessageList">
-          <li>
-            <span
-              className="agendaMessageIcon"
-              style={{
-                color: (() => {
-                  if (places1 === 0) {
-                    return "#EF3672";
-                  }
-                  if (places1 > 0 && places1 <= 2) {
-                    return "#FFA84C";
-                  }
-                  if (places1 > 2) {
-                    return "#2dcd7a";
-                  }
-                })(),
-              }}
-            >
-              {places1 === 0 ? "!" : "+"}
-            </span>
-            <p>
-              Vous avez <span>{places1} places</span> disponibles le {day + 2} /{" "}
-              {month}
-            </p>
-          </li>
-          <li>
-            <span
-              className="agendaMessageIcon"
-              style={{
-                color: (() => {
-                  if (places2 === 0) {
-                    return "#EF3672";
-                  }
-                  if (places2 > 0 && places2 <= 2) {
-                    return "#FFA84C";
-                  }
-                  if (places2 > 2) {
-                    return "#2dcd7a";
-                  }
-                })(),
-              }}
-            >
-              {places2 === 0 ? "!" : "+"}
-            </span>
-            <p>
-              Vous avez <span>{places2} places</span> disponibles le {day + 5} /{" "}
-              {month}
-            </p>
-          </li>
-          <li>
-            <span
-              className="agendaMessageIcon"
-              style={{
-                color: (() => {
-                  if (places3 === 0) {
-                    return "#EF3672";
-                  }
-                  if (places3 > 0 && places3 <= 2) {
-                    return "#FFA84C";
-                  }
-                  if (places3 > 2) {
-                    return "#2dcd7a";
-                  }
-                })(),
-              }}
-            >
-              {places3 === 0 ? "!" : "+"}
-            </span>
-            <p>
-              Vous avez <span>{places3} places</span> disponibles le {day + 3} /{" "}
-              {month}
-            </p>
-          </li>
-        </ul>
       </section>
     </div>
   );
 }
 
 export default DashAgenda;
+
+DashAgenda.propTypes = {
+  token: PropTypes.string.isRequired,
+  structureId: PropTypes.number.isRequired,
+  maxPlaces: PropTypes.number.isRequired,
+};

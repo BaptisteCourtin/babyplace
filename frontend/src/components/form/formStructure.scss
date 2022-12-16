@@ -477,6 +477,14 @@
     align-items: center;
     justify-content: center;
 
+    & .backButton {
+      border: none;
+      color: $third;
+      background-color: #eeeeee00;
+      padding: 8px;
+      margin: 1vh 0;
+    }
+
     & .innerContainer {
       padding: 24px;
       background-color: white;
@@ -1073,6 +1081,14 @@
           width: 100%;
           justify-content: center;
           gap: 3vw;
+        }
+      }
+    }
+
+    & .structure11 {
+      & .agendaSection {
+        & .react-calendar {
+          padding: 0;
         }
       }
     }

@@ -7,7 +7,7 @@ import DashNavbar from "./nav/DashNavbar";
 import DashReservations from "./reservations/DashReservations";
 import DashAgenda from "./agenda/DashAgenda";
 import DashPlaces from "./places/DashPlaces";
-import Messages from "../messages/Messages";
+// import Messages from "../messages/Messages";
 
 function Dashboard() {
   const { state } = useLocation();
@@ -31,19 +31,20 @@ function Dashboard() {
     if (toggle === 4) {
       return navigate("/structure/inscription-form");
     }
-    if (toggle === 5) {
-      return <Messages {...donnees} />;
-    }
+    // if (toggle === 5) {
+    //   return <Messages {...donnees} />;
+    // }
   };
-  console.log(name);
+
+  const tel = `0${donnees.telephone.toString()}`;
 
   const reviews =
     Math.round(
-      ((donnees.Avis_com +
-        donnees.Avis_horaires +
-        donnees.Avis_eveil +
-        donnees.Avis_proprete +
-        donnees.Avis_securite) /
+      ((donnees.avisCom +
+        donnees.avisHoraires +
+        donnees.avisEveil +
+        donnees.avisProprete +
+        donnees.avisSecurite) /
         5) *
         10
     ) / 10;
@@ -55,7 +56,7 @@ function Dashboard() {
           <FiBell />
         </button>
         <button type="button" onClick={() => setToggle(0)}>
-          {donnees.Nom}
+          {donnees.nom}
         </button>
       </nav>
       <main>
@@ -67,39 +68,40 @@ function Dashboard() {
               <div className="dashboardProfile">
                 <img
                   className="dashboardProfilePic"
-                  src={donnees.Photo_profil}
+                  src={donnees.photoProfil}
                   alt=""
                   width={70}
                   height={70}
                   loading="lazy"
                 />
                 <h1>
-                  {donnees.Nom}
+                  {donnees.nom}
                   <span>
                     {reviews}
                     <AiFillStar />
                   </span>
                 </h1>
               </div>
-              <p className="dashboardProfilePres">{donnees.Description}</p>
+              <p className="dashboardProfilePres">{donnees.description}</p>
               <ul className="dashboardProfilePicList">
                 <li>
-                  <img src={donnees.Photo_structure_1} alt="" loading="lazy" />
+                  <img src={donnees.photoStructure1} alt="" loading="lazy" />
                 </li>
                 <li>
-                  <img src={donnees.Photo_structure_2} alt="" loading="lazy" />
+                  <img src={donnees.photoStructure2} alt="" loading="lazy" />
                 </li>
                 <li>
-                  <img src={donnees.Photo_structure_3} alt="" loading="lazy" />
+                  <img src={donnees.photoStructure3} alt="" loading="lazy" />
                 </li>
               </ul>
               <div className="dashboardProfileContact">
                 <p>
-                  <AiOutlinePhone />0{donnees.Telephone}
+                  <AiOutlinePhone />
+                  {tel.match(/.{1,2}/g).join(" ")}
                 </p>
                 <p>
                   <AiOutlineMail />
-                  {donnees.Email}
+                  {donnees.email}
                 </p>
                 <p />
               </div>
