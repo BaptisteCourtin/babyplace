@@ -26,7 +26,7 @@ router.get('/structure', structure.getStructure);
 router.get('/horaires', horaires.getHoraires);
 router.get('/calendrier/:id', calendrier.getCalendrier);
 
-router.put('/dashboard/day/:id', dashboard.updateDay);
+router.put('/horaires/day/:id', horaires.updateDay);
 router.put('/dashboard/hours/:id', dashboard.updateHours);
 router.put('/dashboard/indemnRepas/:id', dashboard.updateIndemnRepas);
 router.put('/calendrier/places/:id', calendrier.updatePlaces);

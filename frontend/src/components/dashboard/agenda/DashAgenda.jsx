@@ -55,6 +55,7 @@ function DashAgenda({ token, structureId, maxPlaces }) {
       });
   }
 
+
   useEffect(() => {
     getData();
     getHours();
@@ -82,8 +83,6 @@ function DashAgenda({ token, structureId, maxPlaces }) {
 
   let day = clickedDay.toLocaleDateString("fr-FR", { weekday: 'long' });
 
-  console.log(calendarIndex)
-
   return (
     <div className="dashAgenda">
       <section className="agendaSection">
@@ -100,7 +99,10 @@ function DashAgenda({ token, structureId, maxPlaces }) {
           {calendar.filter(c => (
             c.structureId === structureId && c.date.split('T')[0] === date)).map(fc => (
               fc.nbPlaces == -1 ? (
-                <button className="agendaPlacesWork">Ouvrir</button>
+                <>
+                  <p>Vous ne travaillez pas 😀</p>
+                  <button className="agendaPlacesWork">Ouvrir</button>
+                </>
               ) : (
                 <>
                   <div className="agendaPlacesLeft">
@@ -118,12 +120,16 @@ function DashAgenda({ token, structureId, maxPlaces }) {
                       min={1}
                       max={maxPlaces}
                       placeholder={`1 à ${maxPlaces}`}
-                      onChange={(e) => { setPlaces(e.target.value); setCalendarIndex(fc.calendrierId); }}
+                      onChange={(e) => {
+                        setPlaces(e.target.value);
+                        setCalendarIndex(fc.calendrierId);
+                      }}
                     />
                     <button type="button" onClick={updatePlaces}>
                       Modifier
                     </button>
                   </div>
+                  <p className="agendaPlacesChoice"><span>ou</span></p>
                   <button className="agendaPlacesWork">Repos</button>
                 </>
               )
@@ -138,10 +144,6 @@ function DashAgenda({ token, structureId, maxPlaces }) {
           <li>
             <span />
             Places restantes
-          </li>
-          <li>
-            <span />
-            Trop d'enfants
           </li>
           <li>
             <span />

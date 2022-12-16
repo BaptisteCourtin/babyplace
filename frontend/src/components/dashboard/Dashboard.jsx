@@ -26,14 +26,14 @@ function Dashboard() {
       return <DashAgenda {...donnees} />;
     }
     if (toggle === 3) {
-      return <DashPlaces type={type} {...donnees} title="Ajouter une place" />;
+      return <DashPlaces type={type} {...donnees} title="Horaires" />;
     }
     if (toggle === 4) {
       return navigate("/structure/inscription-form");
     }
-    // if (toggle === 5) {
-    //   return <Messages {...donnees} />;
-    // }
+    if (toggle === 5) {
+      return <Messages {...donnees} />;
+    }
   };
 
   const tel = '0' + (donnees.telephone).toString()
