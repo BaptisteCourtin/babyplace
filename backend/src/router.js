@@ -29,6 +29,8 @@ router.get("/horaires/all", (req, res) => {
       res.status(500).send("Erreur de connexion");
     });
 });
+router.get("/structure/all", structure.getStructureDataMess);
+
 
 router.put("/day/:id", dashboardControllers.updateDay);
 router.put("/indemn_repas/:id", dashboardControllers.updateIndemnRepas);

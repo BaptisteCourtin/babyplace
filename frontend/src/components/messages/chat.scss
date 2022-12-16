@@ -1,6 +1,7 @@
 .chat-window {
-  width: 500px;
-  height: 420px;
+    width: 100%;
+    height: 100%;
+
 }
 
 .chat-window p {
@@ -8,11 +9,12 @@
 }
 
 .chat-window .chat-header {
-  height: 45px;
-  border-radius: 6px;
-  background: #7e72f2;
-  position: relative;
-  cursor: pointer;
+    height: 45px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background: #7E72F2;
+    position: relative;
+    cursor: pointer;
 }
 
 .chat-window .chat-header p {
@@ -24,9 +26,9 @@
 }
 
 .chat-window .chat-body {
-  height: calc(450px - (45px + 70px));
-  border: 1px solid #7e72f2;
-  background: #fff;
+    height: 80%;
+    border: 1px solid #7E72F2;
+    background: #fff;
 
   position: relative;
 }
@@ -49,21 +51,21 @@
 }
 
 .chat-window .chat-body .message .message-content {
-  width: auto;
-  height: auto;
-  min-height: 40px;
-  max-width: 120px;
-  background-color: #f063a7;
-  border-radius: 5px;
-  color: white;
-  display: flex;
-  align-items: center;
-  margin-right: 5px;
-  margin-left: 5px;
-  padding-right: 5px;
-  padding-left: 5px;
-  overflow-wrap: break-word;
-  word-break: break-word;
+    width: fit-content;
+    height: fit-content;
+    background-color: #F063A7;
+    border-radius: 50px;
+    color: white;
+    display: flex;
+    align-items: center;
+    margin: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 #you {
@@ -104,19 +106,23 @@
 }
 
 .chat-window .chat-footer {
-  height: 40px;
-  border: 1px solid #7e72f2;
-  border-top: none;
-  display: flex;
+    height: 40px;
+    border: 1px solid #7E72F2;
+    border-top: none;
+    display: flex;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .chat-window .chat-footer input {
-  height: 100%;
-  flex: 85%;
-  border: 0;
-  padding: 0 0.7em;
-  font-size: 1em;
-  border-right: 1px dotted #7e72f2;
+    height: 100%;
+    flex: 85%;
+    border: 0;
+    padding: 0 0.7em;
+    font-size: 1em;
+    border-right: 1px dotted #7E72F2;
+    border-bottom-left-radius: 5px;
+
 
   outline: none;
   font-family: "Open Sans", sans-serif;
