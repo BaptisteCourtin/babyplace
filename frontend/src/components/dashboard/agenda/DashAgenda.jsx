@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import DashCalendar from "./calendar/DashCalendar";
+import moment from 'moment'
 
 function DashAgenda({ token, structureId, maxPlaces }) {
   const [data, setData] = useState([]);
@@ -73,8 +74,6 @@ function DashAgenda({ token, structureId, maxPlaces }) {
     await axios.put();
   };
 
-  console.log(calendarIndex);
-  console.log(calendar);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -87,6 +86,8 @@ function DashAgenda({ token, structureId, maxPlaces }) {
   }-${clickedDay.getDate()}`;
 
   const day = clickedDay.toLocaleDateString("fr-FR", { weekday: "long" });
+
+  console.log(calendarIndex)
 
   return (
     <div className="dashAgenda">
@@ -110,7 +111,7 @@ function DashAgenda({ token, structureId, maxPlaces }) {
             )
             .map((fc) =>
               fc.nbPlaces == -1 ? (
-                <button className="agendaPlacesWork">Travail</button>
+                <button className="agendaPlacesWork">Ouvrir</button>
               ) : (
                 <>
                   <div className="agendaPlacesLeft">
