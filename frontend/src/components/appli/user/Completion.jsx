@@ -2,17 +2,20 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-function Completion({ nom, completion }) {
+function Completion({ nom, completion, quelCompo }) {
   const mystyle = {
-    color: "black",
     width: `${completion}%`,
   };
-
+  console.log(quelCompo);
   return (
     <div className="bar-completion">
-      <Link to="/appli/user/completion">
-        <p style={mystyle}>{nom}</p>
-        <p>{completion}% complété</p>
+      <Link to="/appli/user/completion" state={{ quelCompo }}>
+        <p style={mystyle}>
+          <span>{nom}</span>
+        </p>
+        <p>
+          <span>{completion}% complété</span>
+        </p>
       </Link>
     </div>
   );

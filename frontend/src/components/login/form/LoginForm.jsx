@@ -1,28 +1,28 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 
 function LoginForm() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [checked, setChecked] = useState(false);
+  const [typePwd, setTypePwd] = useState(true)
 
-  const handleCompletedChange = () => {
-    setChecked(!checked);
-  };
+  const handlePwdClick = (e) => {
+    e.preventDefault();
+    setTypePwd(!typePwd)
+  }
 
   const handleClick = (e) => {
     e.preventDefault();
-
-    if (checked && email && password) {
+    if (email && password) {
       Axios.post("http://localhost:5000/auth", {
         email,
         password,
       })
         .then((ret) => {
-          console.log(ret.data.token);
           const { token } = ret.data;
 
           navigate("/login-params", {
@@ -31,7 +31,6 @@ function LoginForm() {
             },
           });
         })
-
         .catch((err) => {
           console.error(err);
         });
@@ -51,33 +50,28 @@ function LoginForm() {
             setEmail(event.target.value);
           }}
         />
-
-        <input
-          type="password"
-          name="pwd"
-          id="pwd"
-          placeholder="Password"
-          onChange={(event) => {
-            setPassword(event.target.value);
-          }}
-        />
-        <div>
+        <div className="passwordInput">
           <input
-            type="checkbox"
-            name="useConditions"
-            id="useConditions"
-            checked={checked}
-            onChange={handleCompletedChange}
+            type={typePwd ? "password" : "text"}
+            name="pwd"
+            id="pwd"
+            placeholder="Password"
+            onChange={(event) => {
+              setPassword(event.target.value);
+            }}
           />
-          <label htmlFor="useConditions">
-            J'accepte les conditions d'utilisation
-          </label>
+          <button onClick={handlePwdClick}>
+            {typePwd
+              ? <AiOutlineEye />
+              : <AiOutlineEyeInvisible />
+            }
+          </button>
         </div>
         <button
           type="submit"
           style={{
             opacity:
-              !checked || !email || !password ? "0.7" : "1"
+              !email || !password ? "0.7" : "1"
           }}
           onClick={(e) => {
             handleClick(e);

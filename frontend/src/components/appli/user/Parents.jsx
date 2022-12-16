@@ -26,7 +26,7 @@ function Parents() {
 
   return (
     <main className="parent">
-      <h3>Dossier Parent</h3>
+      <h3>Dossier Parents</h3>
 
       <div className="form-parent">
         <form>

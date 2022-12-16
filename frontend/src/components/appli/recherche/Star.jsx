@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import PropTypes from "prop-types";
 
 import Rating from "react-rating";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
@@ -9,7 +9,6 @@ function Star({ com, proprete, securite, eveil, horaires }) {
   const [visibleStar, setVisibleStar] = useState(false);
   const [nbStarMoyen, setNbStarMoyen] = useState(0);
 
-  const [data, setData] = useState({});
   const tabStar = [
     { nom: "Communication", nbStar: com },
     { nom: "Propreté", nbStar: proprete },
@@ -64,5 +63,13 @@ function Star({ com, proprete, securite, eveil, horaires }) {
     </button>
   );
 }
+
+Star.propTypes = {
+  com: PropTypes.number.isRequired,
+  proprete: PropTypes.number.isRequired,
+  securite: PropTypes.number.isRequired,
+  eveil: PropTypes.number.isRequired,
+  horaires: PropTypes.number.isRequired,
+};
 
 export default Star;
