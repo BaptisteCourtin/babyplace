@@ -7,17 +7,8 @@ const structure = require("./controllers/structure.controllers");
 const dashboardControllers = require("./controllers/dashboard.controllers");
 
 router.get("/structure", structure.getStructure);
-router.get("/structure/all", (req, res) => {
-  datasource
-    .query("SELECT * FROM structure")
-    .then(([s]) => {
-      res.json(s);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Erreur de connexion");
-    });
-});
+router.get("/structure/all", structure.getStructureDataMess);
+
 
 router.put("/day/:id", dashboardControllers.updateDay);
 router.put("/indemn_repas/:id", dashboardControllers.updateIndemnRepas);
