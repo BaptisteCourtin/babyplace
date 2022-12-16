@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import BlocJour from "@components/appli/recherche/BlocJour";
 import Star from "@components/appli/recherche/Star";
@@ -6,7 +6,7 @@ import PopUp from "@components/appli/recherche/PopUp";
 
 function AppliCardCreche() {
   const location = useLocation();
-  const { data, tabJour } = location.state;
+  const { data, dataHorairesId } = location.state;
   const {
     photoStructure1,
     tarifHeure,
@@ -77,9 +77,7 @@ function AppliCardCreche() {
 
           <h3>Disponibiltés</h3>
           <div className="disponibilite">
-            {tabJour.map((jour) => (
-              <BlocJour jour={jour.jour} check={jour.check} />
-            ))}
+            <BlocJour dataHorairesId={dataHorairesId} />
           </div>
 
           <div>

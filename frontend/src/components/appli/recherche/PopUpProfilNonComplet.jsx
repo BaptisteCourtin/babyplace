@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import iconCran from "@assets/app parents/Icon cran.svg";
+import PropTypes from "prop-types";
 
 function PopUpProfilNonComplet({ setVisiblePopUp }) {
   return (
@@ -36,5 +37,9 @@ function PopUpProfilNonComplet({ setVisiblePopUp }) {
     </div>
   );
 }
+
+PopUpProfilNonComplet.propTypes = {
+  setVisiblePopUp: PropTypes.func.isRequired,
+};
 
 export default PopUpProfilNonComplet;

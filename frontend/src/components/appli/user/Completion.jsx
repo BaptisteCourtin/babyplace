@@ -6,7 +6,6 @@ function Completion({ nom, completion, quelCompo }) {
   const mystyle = {
     width: `${completion}%`,
   };
-  console.log(quelCompo);
   return (
     <div className="bar-completion">
       <Link to="/appli/user/completion" state={{ quelCompo }}>
@@ -24,6 +23,7 @@ function Completion({ nom, completion, quelCompo }) {
 Completion.propTypes = {
   nom: PropTypes.string.isRequired,
   completion: PropTypes.number.isRequired,
+  quelCompo: PropTypes.number.isRequired,
 };
 
 export default Completion;
