@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import moment from "moment";
 import DashCalendar from "./calendar/DashCalendar";
-import moment from 'moment'
 
 function DashAgenda({ token, structureId, maxPlaces }) {
   const [data, setData] = useState([]);
@@ -54,7 +54,6 @@ function DashAgenda({ token, structureId, maxPlaces }) {
       });
   };
 
-
   useEffect(() => {
     getData();
     getHours();
@@ -74,7 +73,6 @@ function DashAgenda({ token, structureId, maxPlaces }) {
   const updateStatus = async () => {
     await axios.put();
   };
-
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -140,7 +138,9 @@ function DashAgenda({ token, structureId, maxPlaces }) {
                       Modifier
                     </button>
                   </div>
-                  <p className="agendaPlacesChoice"><span>ou</span></p>
+                  <p className="agendaPlacesChoice">
+                    <span>ou</span>
+                  </p>
                   <button className="agendaPlacesWork">Repos</button>
                 </>
               )

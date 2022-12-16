@@ -84,7 +84,7 @@ function FormStructure() {
   const [data, setData] = useState(INITIAL_DATA);
   const [structure, setStructure] = useState("");
   const [resa, setResa] = useState("");
-  const [screenWidth, setScreenWidth] = useState(0);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [showExplications, setShowExplications] = useState(true);
   const updateSize = () => {
     setScreenWidth(window.innerWidth);

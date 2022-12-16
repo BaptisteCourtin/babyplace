@@ -76,10 +76,7 @@ function DashPlaces({
       toggleDay: !toggleDay,
     };
     dataSubmit[selected] = !toggleDay;
-    await axios.put(
-      `http://localhost:5000/horaires/day/${dayId}`,
-      dataSubmit
-    );
+    await axios.put(`http://localhost:5000/horaires/day/${dayId}`, dataSubmit);
   };
 
   const updateHours = async () => {
@@ -179,7 +176,7 @@ function DashPlaces({
                   className="dashPlacesSubmit"
                   onClick={() => {
                     setToggleDay(!toggleDay);
-                    updateDay()
+                    updateDay();
                   }}
                 >
                   Repos
@@ -191,7 +188,7 @@ function DashPlaces({
                 className="dashNotWorking"
                 onClick={() => {
                   setToggleDay(!toggleDay);
-                  updateDay()
+                  updateDay();
                 }}
               >
                 Envie de travailler ?
