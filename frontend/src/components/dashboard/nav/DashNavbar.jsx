@@ -50,7 +50,7 @@ function DashNavbar({ setToggle, Token, Structure_id }) {
         <li>
           <MdOutlineMarkAsUnread />
           <button type="button" onClick={() => setToggle(5)}>
-            Messages
+            Messagerie
           </button>
         </li>
       </ul>
