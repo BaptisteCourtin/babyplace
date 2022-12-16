@@ -5,6 +5,12 @@ const getHoraires = async (req) => {
     return result
 }
 
+const updateDay = async (toggleDay, id) => {
+    const [result] = await datasource.query(`UPDATE horaires SET ouvert = ? WHERE horairesId = ?`, [toggleDay, id])
+    return result
+}
+
 module.exports = {
-    getHoraires
+    getHoraires,
+    updateDay
 };
