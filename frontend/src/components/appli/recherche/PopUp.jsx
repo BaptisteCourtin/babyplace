@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import PopUpProfilComplet from "./PopUpProfilComplet";
 import PopUpProfilNonComplet from "./PopUpProfilNonComplet";
 
@@ -31,5 +32,9 @@ function PopUp({ data }) {
     </div>
   );
 }
+
+PopUp.propTypes = {
+  data: PropTypes.string.isRequired,
+};
 
 export default PopUp;

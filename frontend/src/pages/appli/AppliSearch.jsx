@@ -8,7 +8,6 @@ import axios from "axios";
 function AppliSearch() {
   const [tri, setTri] = useState("Recent");
   const [structure, setStructure] = useState([]);
-  const [horaires, setHoraires] = useState([]);
 
   const Token =
     "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
@@ -26,23 +25,8 @@ function AppliSearch() {
         console.error(err);
       });
   };
-  const getHoraires = () => {
-    axios
-      .get("http://localhost:5000/horaires/all", {
-        headers: {
-          "x-token": Token,
-        },
-      })
-      .then((res) => {
-        setHoraires(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
   useEffect(() => {
     getStructure();
-    getHoraires();
   }, []);
 
   return (
@@ -101,6 +85,7 @@ function AppliSearch() {
                 }
                 return 0;
               })
+              // faire avec params depuis CarteCreche et une route en :id
               .map((each) => <CarteCreche data={each} />)}
         </main>
       </div>
