@@ -1,10 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import AppliPlaces from "@components/appli/filtres/AppliPlaces";
-import avatar1 from "@assets/avatar1.svg";
+import PropTypes from "prop-types";
 
 function ChoixDates({ setCompo, photoProfil }) {
-  console.log(photoProfil);
   return (
     <>
       <div className="button-top">
@@ -43,5 +42,10 @@ function ChoixDates({ setCompo, photoProfil }) {
     </>
   );
 }
+
+ChoixDates.propTypes = {
+  setCompo: PropTypes.func.isRequired,
+  photoProfil: PropTypes.string.isRequired,
+};
 
 export default ChoixDates;

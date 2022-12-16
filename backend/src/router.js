@@ -15,18 +15,20 @@ router.get("/structure/all", (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).send("Erreur de connexion");
+      res.status(500).send("Erreur route /structure/all");
     });
 });
-router.get("/horaires/all", (req, res) => {
+router.get("/horaires/:id", (req, res) => {
+  console.log(req);
   datasource
-    .query("SELECT * FROM horaires")
+    // prend les horaires selon l'id de la structure
+    .query(`SELECT * FROM horaires WHERE structureId = ?`, [req.params.id])
     .then(([s]) => {
       res.json(s);
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).send("Erreur de connexion");
+      res.status(500).send("Erreur route /horaires/:id");
     });
 });
 

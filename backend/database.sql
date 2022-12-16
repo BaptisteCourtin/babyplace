@@ -704,3 +704,110 @@ values (
         "17:00",
         1
     );
+
+-- -----HORAIRES CRECHE 2 ----- --
+
+insert into horaires (
+        jourSemaine,
+        ouvert,
+        heureMin,
+        heureMax,
+        structureId
+    )
+values (
+        "lundi",
+        1,
+        "8:00",
+        "18:00",
+        2
+    );
+
+insert into horaires (
+        jourSemaine,
+        ouvert,
+        heureMin,
+        heureMax,
+        structureId
+    )
+values (
+        "Mardi",
+        1,
+        "8:00",
+        "19:00",
+        2
+    );
+
+insert into horaires (
+        jourSemaine,
+        ouvert,
+        heureMin,
+        heureMax,
+        structureId
+    )
+values (
+        "Mercredi",
+        0,
+        "8:00",
+        "13:00",
+        2
+    );
+
+insert into horaires (
+        jourSemaine,
+        ouvert,
+        heureMin,
+        heureMax,
+        structureId
+    )
+values (
+        "Jeudi",
+        1,
+        "8:00",
+        "18:00",
+        2
+    );
+
+insert into horaires (
+        jourSemaine,
+        ouvert,
+        heureMin,
+        heureMax,
+        structureId
+    )
+values (
+        "Vendredi",
+        0,
+        "8:00",
+        "19:00",
+        2
+    );
+
+insert into horaires (
+        jourSemaine,
+        ouvert,
+        heureMin,
+        heureMax,
+        structureId
+    )
+values (
+        "Samedi",
+        1,
+        "9:00",
+        "17:00",
+        2
+    );
+
+insert into horaires (
+        jourSemaine,
+        ouvert,
+        heureMin,
+        heureMax,
+        structureId
+    )
+values (
+        "Dimanche",
+        0,
+        "14:00",
+        "17:00",
+        2
+    );

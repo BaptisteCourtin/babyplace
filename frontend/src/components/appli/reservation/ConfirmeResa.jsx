@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logoBlanc from "@assets/logo-blanc.svg";
+import PropTypes from "prop-types";
 
 function ConfirmeResa({ photoProfil }) {
   return (
@@ -41,5 +42,9 @@ function ConfirmeResa({ photoProfil }) {
     </>
   );
 }
+
+ConfirmeResa.propTypes = {
+  photoProfil: PropTypes.string.isRequired,
+};
 
 export default ConfirmeResa;

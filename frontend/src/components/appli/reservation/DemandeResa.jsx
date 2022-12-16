@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import Toggle from "../filtres/Toggle";
 
 function DemandeResa({ setCompo, photo3, tarif }) {
@@ -85,5 +86,11 @@ function DemandeResa({ setCompo, photo3, tarif }) {
     </>
   );
 }
+
+DemandeResa.propTypes = {
+  setCompo: PropTypes.func.isRequired,
+  photo3: PropTypes.string.isRequired,
+  tarif: PropTypes.number.isRequired,
+};
 
 export default DemandeResa;
