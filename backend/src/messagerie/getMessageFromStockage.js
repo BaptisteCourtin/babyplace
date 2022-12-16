@@ -1,5 +1,5 @@
 const express = require("express")
-const datasource = require("./database")
+const datasource = require("../../database")
 const router = express.Router()
 
 router.get('/', (req, res) => {

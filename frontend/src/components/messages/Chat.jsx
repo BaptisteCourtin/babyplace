@@ -11,7 +11,7 @@ const Chat = ({ socket, username, room, title, joinRoom }) => {
 
     const saveMessage = (messageData) => {
         const { room, author, message, date } = messageData;
-        axios.post("http://localhost:5000/stockage", {
+        axios.post("http://localhost:5000/messages/sauvegarde", {
             room, author, message, date
         })
             .then((res) => {
@@ -45,7 +45,7 @@ const Chat = ({ socket, username, room, title, joinRoom }) => {
     }, [socket]);
 
     const getMessagesFromRoom = () => {
-        axios.get("http://localhost:5000/stockage/recup", {
+        axios.get("http://localhost:5000/messages/recup", {
             headers: {
                 "room": room
             }
