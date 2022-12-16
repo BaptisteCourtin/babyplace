@@ -7,15 +7,109 @@
   padding: 15px;
 
   & .agendaMessage {
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+    align-items: center;
+
+    & .agendaPlaces {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      flex-direction: column;
+      gap: 20px;
+
+      & h3 {
+        text-transform: capitalize;
+        font-size: $h3;
+        font-weight: 500;
+        margin-bottom: 15px;
+      }
+
+      & .agendaPlacesLeft {
+        & p {
+          & b {
+            font-weight: 500;
+          }
+        }
+      }
+
+      & .agendaCalendarBtn {
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+
+        & input {
+          padding: 5px 10px;
+          border: 1px solid $third;
+          outline: none;
+          border-top-left-radius: 5px;
+          border-bottom-left-radius: 5px;
+        }
+
+        & button {
+          background: $third;
+          padding: 5px 10px;
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+          font-size: $h4;
+          font-weight: 500;
+          border: 1px solid transparent;
+          border-left: none;
+          color: $white;
+          transition: 0.3s ease-in-out;
+
+          &:hover {
+            background: transparent;
+            color: $third;
+            border: 1px solid $third;
+            border-left: none;
+          }
+        }
+      }
+
+      & .agendaPlacesChoice {
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid $second;
+        line-height: 0.1em;
+        margin: 10px 0 20px;
+
+        & span {
+          text-transform: uppercase;
+          font-weight: 500;
+          background: #e5e5e5;
+          padding: 0 10px;
+        }
+      }
+
+      & .agendaPlacesWork {
+        width: 100%;
+        padding: 10px 15px;
+        font-size: $h4;
+        font-weight: 500;
+        background-color: $third;
+        border: 1px solid transparent;
+        border-radius: 5px;
+        color: $white;
+        transition: 0.3s ease-in-out;
+
+        &:hover {
+          background-color: transparent;
+          border: 1px solid $third;
+          color: $third;
+        }
+      }
+    }
+
     & .agendaLegend {
       display: flex;
       flex-direction: column;
       gap: 5px;
-      margin-bottom: 40px;
 
       & li {
         display: flex;
         align-items: center;
+
         & span {
           display: inline-block;
           width: 15px;
@@ -32,47 +126,13 @@
 
         &:nth-of-type(2) {
           & span {
-            background-color: $sixth;
+            background-color: $seventh;
           }
         }
 
         &:nth-of-type(3) {
           & span {
-            background-color: $seventh;
-          }
-        }
-
-        &:nth-of-type(4) {
-          & span {
-            background-color: $second;
-          }
-        }
-      }
-    }
-
-    & .agendaMessageList {
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-      & li {
-        display: flex;
-        align-items: center;
-        gap: 30px;
-        padding: 10px 20px;
-        border-radius: 5px;
-        background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
-        box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
-
-        & .agendaMessageIcon {
-          font-size: $h1;
-          font-weight: 500;
-        }
-
-        & p {
-          font-size: $h4;
-
-          & span {
-            font-weight: 500;
+            background-color: $orange;
           }
         }
       }
@@ -82,8 +142,9 @@
 
 .agendaSection {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-direction: column;
+  gap: 50px;
   padding: 20px 0;
   background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
   border-radius: 5px;
@@ -92,6 +153,11 @@
     font-size: $h2;
     font-weight: 500;
     margin-left: 20px;
+
+    &::first-letter {
+      font-weight: 700;
+      color: $third;
+    }
   }
 
   & .react-calendar {
@@ -132,9 +198,10 @@
 
     &__month-view {
       margin-top: 20px;
+
       &__weekdays {
         padding-bottom: 10px;
-        border-bottom: 1px solid $grey;
+        border-bottom: 1px solid $third;
 
         &__weekday {
           display: flex;
@@ -154,57 +221,27 @@
           height: 50px;
           padding: 10px;
           background: none;
+
+          &:disabled {
+            opacity: 0.5;
+          }
         }
       }
     }
 
     &__tile--now {
+      color: $third;
+      font-weight: 700;
+      font-size: $h4;
+    }
+
+    &__tile--active {
       background-color: $third;
       color: $white;
       font-weight: 500;
       border-bottom: 1px solid transparent;
-    }
-  }
-
-  & .notWorked {
-    & .react-calendar__month-view__days {
-      & abbr {
-        opacity: 0.4;
-      }
-    }
-  }
-
-  & .agendaCalendarBtn {
-    display: flex;
-    align-items: stretch;
-    justify-content: center;
-
-    & input {
-      padding: 5px 10px;
-      border: 1px solid $third;
-      outline: none;
-      border-top-left-radius: 5px;
-      border-bottom-left-radius: 5px;
-    }
-
-    & button {
-      background: $third;
-      padding: 5px 10px;
-      border-top-right-radius: 5px;
-      border-bottom-right-radius: 5px;
-      font-size: $h4;
-      font-weight: 500;
-      border: 1px solid transparent;
-      border-left: none;
-      color: $white;
-      transition: 0.3s ease-in-out;
-
-      &:hover {
-        background: transparent;
-        color: $third;
-        border: 1px solid $third;
-        border-left: none;
-      }
+      background-color: $third;
+      border-radius: 5px;
     }
   }
 }

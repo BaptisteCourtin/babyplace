@@ -6,17 +6,17 @@ import {
   MdOutlineSettings,
   MdOutlineFormatListBulleted,
   MdOutlineCalendarToday,
-  MdOutlinePlace,
+  MdAccessTime,
   MdOutlineMarkAsUnread,
   MdLogout,
 } from "react-icons/md";
 import axios from "axios";
 
-function DashNavbar({ setToggle, Token, Structure_id }) {
+function DashNavbar({ setToggle, token, structureId }) {
   const logout = () => {
-    axios.put(`http://localhost:5000/logout/${Structure_id}`, {
-      id: Structure_id,
-      token: Token,
+    axios.put(`http://localhost:5000/logout/${structureId}`, {
+      id: structureId,
+      token,
     });
   };
 
@@ -42,15 +42,15 @@ function DashNavbar({ setToggle, Token, Structure_id }) {
           </button>
         </li>
         <li>
-          <MdOutlinePlace />
+          <MdAccessTime />
           <button type="button" onClick={() => setToggle(3)}>
-            Place
+            Horaires
           </button>
         </li>
         <li>
           <MdOutlineMarkAsUnread />
           <button type="button" onClick={() => setToggle(5)}>
-            Messages
+            Messagerie
           </button>
         </li>
       </ul>
@@ -72,6 +72,6 @@ export default DashNavbar;
 
 DashNavbar.propTypes = {
   setToggle: PropTypes.func.isRequired,
-  Structure_id: PropTypes.number.isRequired,
-  Token: PropTypes.string.isRequired,
+  structureId: PropTypes.number.isRequired,
+  token: PropTypes.string.isRequired,
 };
