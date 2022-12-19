@@ -134,6 +134,8 @@ function FormStructure() {
                   ? "Horaires d'ouverture"
                   : currentStepIndex === 9
                   ? "Durée d'accueil"
+                  : currentStepIndex === 10
+                  ? "Calendrier et disponibilités"
                   : ""}
               </p>
             </div>
@@ -230,6 +232,8 @@ function FormStructure() {
                         ? "Inspirez vous des annonces Babyplace"
                         : currentStepIndex === 4
                         ? "Valorisez votre expérience et vos services"
+                        : currentStepIndex === 10
+                        ? "Toutes les dates à venir sont disponibles, à moins de les bloquer ou de demander un préavis de réservation."
                         : ""}
                     </h4>
                     {currentStepIndex === 3 && structure === "assmat" ? (
@@ -272,6 +276,17 @@ function FormStructure() {
                       </div>
                     ) : (
                       ""
+                    )}
+                    {currentStepIndex === 10 && (
+                      <div>
+                        <p>
+                          <span className="dispo">1</span>Disponible à la
+                          réservation
+                        </p>{" "}
+                        <p>
+                          <span className="indispo">1</span>Bloqué
+                        </p>
+                      </div>
                     )}
                     <pre>
                       {currentStepIndex === 0
