@@ -3,11 +3,12 @@ import React from "react";
 function Aide({ setCompo }) {
   return (
     <>
-      <button
-        type="button"
-        className="butt-top"
-        onClick={() => setCompo(0)}
-      >{`< Aide`}</button>
+      <div className="button-top">
+        <button className="butt big" type="button" onClick={() => setCompo(0)}>
+          {`< Aide`}
+        </button>
+      </div>
+
       <main className="aide">
         Désolé, nous ne pouvons rien pour vous...
         <br />

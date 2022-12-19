@@ -29,11 +29,12 @@ function Favoris({ setCompo }) {
   const [occasions, setOccasions] = useState();
   return (
     <>
-      <button
-        type="button"
-        className="butt-top"
-        onClick={() => setCompo(0)}
-      >{`< Favoris`}</button>
+      <div className="button-top">
+        <button className="butt big" type="button" onClick={() => setCompo(0)}>
+          {`< Favoris`}
+        </button>
+      </div>
+
       <main className="favoris">
         <div className="occas">
           <h4>Ne manquez plus les occasions</h4>

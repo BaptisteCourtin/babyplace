@@ -18,7 +18,7 @@ function Page1() {
           garde, même pour le lendemain !
         </p>
       </main>
-      <div className="button-bas">
+      <div className="button-bas space">
         <Link to="/appli/search">
           <button className="butt" type="button">
             Passer

@@ -19,11 +19,12 @@ function MoyensPaiement({ setCompo }) {
   }
   return (
     <>
-      <button
-        type="button"
-        className="butt-top"
-        onClick={() => setCompo(0)}
-      >{`< Moyens De Paiement`}</button>
+      <div className="button-top">
+        <button className="butt big" type="button" onClick={() => setCompo(0)}>
+          {`< Moyens De Paiement`}
+        </button>
+      </div>
+
       <main className="moyens-paiements">
         <img src={CreditCard} alt="card" />
         <form>

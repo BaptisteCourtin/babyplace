@@ -25,11 +25,10 @@ function SeConnecter() {
               type="email"
               name="email"
               id="email"
-              placeholder="Email"
               value={data.email}
               onChange={(e) => updateFields({ email: e.target.value })}
             />
-            <p className="checkSymbol">&#x2713;</p>
+            <p>E mail</p>
           </label>
 
           <label htmlFor="mdp">
@@ -38,11 +37,10 @@ function SeConnecter() {
               type="text"
               name="mdp"
               id="mdp"
-              placeholder="Mot de passe"
               value={data.mdp}
               onChange={(e) => updateFields({ mdp: e.target.value })}
             />
-            <p className="checkSymbol">&#x2713;</p>
+            <p>Mot de passe</p>
           </label>
         </form>
       </main>

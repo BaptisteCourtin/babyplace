@@ -26,11 +26,11 @@ const tabResa = [
 function Reservations({ setCompo }) {
   return (
     <>
-      <button
-        type="button"
-        className="butt-top"
-        onClick={() => setCompo(0)}
-      >{`< Réservations`}</button>
+      <div className="button-top">
+        <button className="butt big" type="button" onClick={() => setCompo(0)}>
+          {`< Réservations`}
+        </button>
+      </div>
       <main className="favoris">
         {tabResa.map((each) => (
           <CardFavPlat each={each} />

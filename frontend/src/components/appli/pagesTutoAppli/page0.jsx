@@ -18,18 +18,16 @@ function Page0({ setCompo }) {
           Trouver un.e professionel.le de la garde d’enfant
         </p>
       </main>
-      <div className="button-bas">
+      <div className="button-bas space">
         <Link to="/appli/search">
           <button className="butt" type="button">
             Passer
           </button>
         </Link>
-        <div className="suivant">
-          <button className="butt" type="button" onClick={() => setCompo(3)}>
-            Suivant <span className="fleche">{`>`}</span>
-            <span className="round" />
-          </button>
-        </div>
+        <button className="butt" type="button" onClick={() => setCompo(3)}>
+          Suivant <span className="fleche">{`>`}</span>
+          <span className="round" />
+        </button>
       </div>
     </div>
   );

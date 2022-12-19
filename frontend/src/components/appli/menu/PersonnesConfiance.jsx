@@ -23,11 +23,11 @@ const tabFav = [
 function PersonnesConfiance({ setCompo }) {
   return (
     <>
-      <button
-        type="button"
-        className="butt-top"
-        onClick={() => setCompo(0)}
-      >{`< Personnes De Confiance`}</button>
+      <div className="button-top">
+        <button className="butt big" type="button" onClick={() => setCompo(0)}>
+          {`< Personnes De Confiance`}
+        </button>
+      </div>
       <main className="perso-confiance">
         {tabFav.map((each) => (
           <CardFavPlat each={each} />

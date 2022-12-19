@@ -15,7 +15,6 @@
     flex-direction: column;
     align-items: center;
     flex-grow: 1;
-    margin-top: 2rem;
 
     .title {
       font-size: $h1;
@@ -41,7 +40,7 @@
       overflow: hidden;
       background-color: $white;
       border-radius: 20px;
-      margin: 1.5rem 0;
+      margin-bottom: 1.5rem;
       position: relative;
       text-align: left;
 
@@ -111,7 +110,7 @@
       color: $white;
       .mini-logo {
         max-height: 50px;
-        margin-bottom: 1rem;
+        margin: 1rem 0;
       }
       .avatars {
         display: flex;
@@ -140,9 +139,5 @@
         }
       }
     }
-  }
-
-  .button-bas {
-    justify-content: flex-end;
   }
 }

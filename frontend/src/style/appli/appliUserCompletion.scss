@@ -46,47 +46,16 @@
       color: $gradient;
     }
 
-    form {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 0.5rem;
+    // enfant
 
-      h4 {
-        font-size: $h4;
-        font-weight: 500;
-        margin: 1rem 0 0.25rem;
-      }
-
-      div {
-        display: flex;
-        flex-direction: row;
-        gap: 0.5rem;
-
-        input {
-          border: 2px solid black;
-          border-radius: 5px;
-          padding: 0 0.5rem;
-        }
-
-        input:valid {
-          border: 2px solid $green;
-        }
-
-        .checkSymbol {
-          display: none;
-        }
-
-        input:valid + label + .checkSymbol {
-          font-size: 1.5rem;
-          color: $green;
-          display: initial;
-        }
-      }
+    input[type="date"] {
+      color: transparent;
+    }
+    input[type="date"]:focus,
+    input[type="date"]:valid {
+      color: black;
     }
 
-    // enfant
     .bebe {
       display: flex;
       justify-content: space-around;

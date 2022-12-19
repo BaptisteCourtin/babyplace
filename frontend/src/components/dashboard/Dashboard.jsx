@@ -46,7 +46,7 @@ function Dashboard() {
         donnees.avisProprete +
         donnees.avisSecurite) /
         5) *
-      10
+        10
     ) / 10;
 
   return (
