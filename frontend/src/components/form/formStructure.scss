@@ -123,7 +123,7 @@
         border: 2px solid $fifth;
       }
 
-      & input:valid + label {
+      & input:valid+label {
         color: $fifth;
       }
 
@@ -131,7 +131,7 @@
         display: none;
       }
 
-      & input:valid + label + p {
+      & input:valid+label+p {
         position: absolute;
         transform: translateX(28vw) translateY(6px);
         font-size: 2rem;
@@ -320,6 +320,47 @@
       }
     }
 
+    & .memeHoraire {
+      width: 100%;
+      margin: 1vh;
+
+      & input {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: 1.1em;
+        height: 1.1em;
+        border: 1px solid $grey;
+        border-radius: 30%;
+        transform: translateY(0.2em);
+        cursor: pointer;
+        margin: 0 4px;
+      }
+
+      & label {
+        margin: 4px;
+      }
+
+      & input:checked {
+        background-color: #fff;
+        position: relative;
+
+        &:before {
+          content: "\2713";
+          padding: 0 2px;
+          display: block;
+          color: $third;
+          font-size: initial;
+          font-weight: 800;
+          position: absolute;
+        }
+      }
+
+      & .horaireOuvert {
+        margin: 2vh 0;
+      }
+    }
+
     & .horaireOuvert {
       width: 55%;
       display: flex;
@@ -453,6 +494,11 @@
           color: $white;
           font-weight: 500;
           border-bottom: 1px solid transparent;
+        }
+
+        &__tile--active {
+          color: $second;
+          font-weight: 400;
         }
 
         & .selected {
@@ -777,7 +823,7 @@
     }
   }
 
-  & select + label {
+  & select+label {
     color: $grey;
     font-size: 0.9rem;
     position: absolute;
@@ -1082,7 +1128,7 @@
           max-width: 200px;
         }
 
-        & .innerToggle > p {
+        & .innerToggle>p {
           font-weight: 600;
         }
 
