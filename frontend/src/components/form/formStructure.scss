@@ -108,9 +108,11 @@
       & input {
         border-radius: 10px;
         padding: 20px 4px 4px;
+        margin: 0 4px;
         border: 1px solid $grey;
         height: 50px;
         position: relative;
+        width: 32vw;
       }
 
       & input:focus {
@@ -140,7 +142,7 @@
       & label {
         position: absolute;
         z-index: 2;
-        transform: translateY(6px) translateX(4px);
+        transform: translateY(6px) translateX(10px);
         font-weight: 800;
         color: $grey;
       }
@@ -316,25 +318,66 @@
         justify-content: space-between;
         align-items: center;
       }
+    }
+
+    & .memeHoraire {
+      width: 100%;
+      margin: 1vh;
+
+      & input {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: 1.1em;
+        height: 1.1em;
+        border: 1px solid $grey;
+        border-radius: 30%;
+        transform: translateY(0.2em);
+        cursor: pointer;
+        margin: 0 4px;
+      }
+
+      & label {
+        margin: 4px;
+      }
+
+      & input:checked {
+        background-color: #fff;
+        position: relative;
+
+        &:before {
+          content: "\2713";
+          padding: 0 2px;
+          display: block;
+          color: $third;
+          font-size: initial;
+          font-weight: 800;
+          position: absolute;
+        }
+      }
 
       & .horaireOuvert {
-        width: 55%;
-        display: flex;
-        gap: 1vw;
-        align-items: center;
-        text-align: center;
+        margin: 2vh 0;
+      }
+    }
 
-        & input {
-          border-radius: 10px;
-          border: 1px solid $third;
-          height: 30px;
-          padding-left: 6px;
-          min-width: 100px;
-        }
+    & .horaireOuvert {
+      width: 55%;
+      display: flex;
+      gap: 1vw;
+      align-items: center;
+      text-align: center;
 
-        & input:focus {
-          outline: 1.5px solid $third;
-        }
+      & input {
+        border-radius: 10px;
+        border: 1px solid $third;
+        height: 30px;
+        padding-left: 6px;
+        min-width: 100px;
+      }
+
+      & input:focus {
+        outline: 1.5px solid $third;
       }
     }
   }
@@ -452,6 +495,18 @@
           font-weight: 500;
           border-bottom: 1px solid transparent;
         }
+
+        &__tile--active {
+          color: $second;
+          font-weight: 400;
+        }
+
+        & .selected {
+          background-color: #f0f0f0;
+          color: $fourth;
+          font-weight: 500;
+          text-decoration: line-through;
+        }
       }
 
       & .notWorked {
@@ -509,6 +564,24 @@
         & span {
           font-weight: 400;
         }
+      }
+
+      & p {
+        margin: 3vh 0;
+      }
+
+      & .dispo,
+      .indispo {
+        padding: 0 10px;
+        border: 1px dashed grey;
+        margin-right: 4px;
+      }
+
+      & .indispo {
+        background-color: #f0f0f0;
+        color: $fourth;
+        text-decoration: line-through;
+        font-weight: 500;
       }
 
       & pre {
