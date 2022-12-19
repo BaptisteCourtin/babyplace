@@ -43,6 +43,10 @@
         margin: 0 1rem;
       }
 
+      .dispo p {
+        margin: 0;
+      }
+
       .horaire {
         background: $third;
         font-weight: 500;
@@ -66,34 +70,6 @@
             font-size: $h3;
           }
         }
-      }
-    }
-
-    .disponibilite {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-around;
-      gap: 10px 20px;
-
-      .each-jour {
-        width: 55px;
-        margin: 0;
-        padding: 0.25rem 0;
-      }
-
-      .daygreen .each-jour {
-        background-color: $fifth;
-        line-height: 25px;
-        text-align: center;
-        color: $white;
-      }
-      .daygray .each-jour {
-        background-color: $grey;
-        line-height: 25px;
-        text-align: center;
-        color: $white;
       }
     }
   }

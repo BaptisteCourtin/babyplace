@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { BsFillGridFill, BsSearch } from "react-icons/bs";
 import { AiOutlineUser, AiOutlineBell } from "react-icons/ai";
@@ -27,5 +28,9 @@ function Navbar({ setCompo }) {
     </div>
   );
 }
+
+Navbar.propTypes = {
+  setCompo: PropTypes.func,
+};
 
 export default Navbar;

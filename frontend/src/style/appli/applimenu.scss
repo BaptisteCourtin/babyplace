@@ -72,59 +72,25 @@
       }
 
       form {
-        width: 90%;
-        margin: 1rem;
-
-        label {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          gap: 1rem;
-
-          input {
-            background-color: $grey;
-            width: 85%;
-            height: 40px;
-            border-radius: 10px;
-            padding: 0.5rem;
-            margin-bottom: 1rem;
-            border: 2px transparent solid;
-
-            &:valid {
-              border-color: $green;
-            }
-          }
-
-          p {
-            display: none;
-          }
-
-          input:valid + p {
-            display: block;
-            transform: translateY(-10px);
-          }
-
-          input:valid + p {
-            font-size: 1.5rem;
-            color: $green;
-            display: block;
-          }
-        }
-
-        .check {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-
-          .p-check {
-            color: black;
-            font-size: 1rem;
-          }
-          input {
-            width: 1.2rem;
-          }
+        margin-top: 1rem;
+        .with-check {
+          width: 90%;
         }
       }
+    }
+
+    &.aide {
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  .button-bas {
+    background: $gradient;
+    .butt {
+      font-size: $h3;
+      font-weight: 500;
     }
   }
 }

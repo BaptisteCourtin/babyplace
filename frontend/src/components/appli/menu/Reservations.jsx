@@ -1,6 +1,7 @@
 import React from "react";
 import imgCreche from "@assets/img-time.svg";
 import CardFavPlat from "@components/appli/menu/CardFavPlat";
+import PropTypes from "prop-types";
 
 const tabResa = [
   {
@@ -39,5 +40,9 @@ function Reservations({ setCompo }) {
     </>
   );
 }
+
+Reservations.propTypes = {
+  setCompo: PropTypes.func.isRequired,
+};
 
 export default Reservations;

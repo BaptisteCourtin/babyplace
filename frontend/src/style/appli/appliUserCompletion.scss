@@ -47,15 +47,6 @@
     }
 
     // enfant
-
-    input[type="date"] {
-      color: transparent;
-    }
-    input[type="date"]:focus,
-    input[type="date"]:valid {
-      color: black;
-    }
-
     .bebe {
       display: flex;
       justify-content: space-around;

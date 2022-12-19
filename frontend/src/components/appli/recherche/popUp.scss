@@ -28,7 +28,7 @@
     padding: 1rem 2rem;
 
     background-color: $white;
-    color: black;
+    color: $second;
 
     display: flex;
     flex-direction: column;
@@ -37,9 +37,9 @@
 
     .retour {
       background: transparent;
-      color: black;
+      color: $second;
       font-size: 1rem;
-      border: 1px solid black;
+      border: 1px solid $second;
       width: max-content;
       position: absolute;
       top: 10px;

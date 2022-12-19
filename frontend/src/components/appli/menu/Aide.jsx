@@ -1,4 +1,6 @@
 import React from "react";
+import unicorn from "@assets/app parents/unicorn.jpg";
+import PropTypes from "prop-types";
 
 function Aide({ setCompo }) {
   return (
@@ -14,9 +16,16 @@ function Aide({ setCompo }) {
         <br />
         <br />
         Bonne chance
+        <br />
+        <br />
+        <img src={unicorn} alt="unicorn" />
       </main>
     </>
   );
 }
+
+Aide.propTypes = {
+  setCompo: PropTypes.func.isRequired,
+};
 
 export default Aide;

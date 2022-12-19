@@ -1,6 +1,7 @@
 import React from "react";
 import CardFavPlat from "@components/appli/menu/CardFavPlat";
 import imgCreche from "@assets/img-time.svg";
+import PropTypes from "prop-types";
 
 const tabFav = [
   {
@@ -36,5 +37,9 @@ function PersonnesConfiance({ setCompo }) {
     </>
   );
 }
+
+PersonnesConfiance.propTypes = {
+  setCompo: PropTypes.func.isRequired,
+};
 
 export default PersonnesConfiance;
