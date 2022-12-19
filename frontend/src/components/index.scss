@@ -11,7 +11,6 @@
 
 // --- appli ---
 @import "../style/appli/applituto.scss";
-
 @import "../style/appli/applimenu.scss";
 @import "../style/appli/applisearch.scss";
 @import "../style/appli/applifiltres.scss";
@@ -22,12 +21,14 @@
 @import "../style/appli/applinotif.scss";
 @import "../style/appli/applimessage.scss";
 
+@import "../components/appli/buttons.scss";
 @import "../components/appli/recherche/carteCreche.scss";
 @import "../components/appli/recherche/star.scss";
 @import "../components/appli/recherche/popUp.scss";
 @import "../components/appli/user/completion.scss";
 @import "../components/appli/navbar/navbarApp.scss";
 @import "../components/appli/profilplat.scss";
+@import "../components/appli/menu/cardFavPlat.scss";
 @import "../components/appli/filtres/toggle.scss";
 @import "../components/appli/filtres/check.scss";
 @import "../components/appli/filtres/appliPlaces.scss";

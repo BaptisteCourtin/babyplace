@@ -25,7 +25,8 @@ function Bienvenue({ setCompo }) {
           </button>
         </Link>
       </main>
-      <div className="button-bas">
+
+      <div className="button-bas right">
         <button type="button" className="butt" onClick={() => setCompo(2)}>
           Je complèterais plus tard<span className="fleche">{`>`}</span>
           <span className="round" />

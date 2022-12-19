@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 function Check({ setter, state, nom, p }) {
   return (
     <div className="with-check">
-      <label htmlFor={nom}>
+      <label htmlFor={nom} className="check">
         <input
           type="checkbox"
           name={nom}
@@ -12,7 +12,7 @@ function Check({ setter, state, nom, p }) {
           className="input-check"
           onChange={() => setter(!state)}
         />
-        <p>{p}</p>
+        <p className="p-check">{p}</p>
       </label>
     </div>
   );

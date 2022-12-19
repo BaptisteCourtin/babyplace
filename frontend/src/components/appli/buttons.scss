@@ -1,0 +1,105 @@
+// button en bas => shrink
+.button-bas {
+  color: $white;
+  width: 95%;
+  max-width: 500px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-top: 20px;
+
+  flex-grow: 0;
+  flex-shrink: 0;
+  z-index: 1;
+
+  .butt {
+    background-color: transparent;
+    padding: 0.2rem;
+    font-size: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    span.fleche {
+      padding-left: 1rem;
+    }
+
+    span.round {
+      position: absolute;
+      z-index: -1;
+      right: -5px;
+
+      height: 28px;
+      width: 28px;
+      margin-left: 0.5rem;
+      border-radius: 50%;
+      background-color: $third;
+    }
+  }
+}
+
+.button-top {
+  color: $white;
+  width: 95%;
+  max-width: 500px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  margin-top: 20px;
+  z-index: 1;
+
+  .butt {
+    background-color: transparent;
+    padding: 0.2rem;
+    font-size: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    span.fleche {
+      padding-right: 1rem;
+      z-index: 2;
+    }
+
+    span.round {
+      position: absolute;
+      z-index: 1;
+      left: -11px;
+
+      height: 28px;
+      width: 28px;
+      margin-left: 0.5rem;
+      border-radius: 50%;
+      background-color: $fourth;
+    }
+  }
+}
+
+.butt-top {
+  font-size: $h3;
+  font-weight: 600;
+  background-color: transparent;
+  margin: 1.5rem 1rem;
+  align-self: flex-start;
+}
+
+.button-bas {
+  font-weight: 600;
+  background: $gradient;
+  height: 70px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+}

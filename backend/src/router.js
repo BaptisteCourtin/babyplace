@@ -8,6 +8,17 @@ const horaires = require("./controllers/horaires.controllers");
 const calendrier = require("./controllers/calendrier.controllers");
 const dashboard = require("./controllers/dashboard.controllers");
 
+router.get("/structure/allapp", (req, res) => {
+  datasource
+    .query("SELECT * FROM structure")
+    .then(([s]) => {
+      res.json(s);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Erreur route /structure/allapp");
+    });
+});
 router.get("/horaires/:id", (req, res) => {
   datasource
     // prend les horaires selon l'id de la structure
@@ -20,17 +31,7 @@ router.get("/horaires/:id", (req, res) => {
       res.status(500).send("Erreur route /horaires/:id");
     });
 });
-router.get("/structure/allapp", (req, res) => {
-  datasource
-    .query("SELECT * FROM structure")
-    .then(([s]) => {
-      res.json(s);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Erreur route /structure/allapp");
-    });
-});
+
 router.get("/structure/all", structure.getStructureDataMess);
 
 router.get("/structure", structure.getStructure);
