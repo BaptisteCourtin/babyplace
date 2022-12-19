@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Proptypes from "prop-types";
 
 function Structure9({
@@ -11,10 +11,56 @@ function Structure9({
   dimancheOuvert,
   updateFields,
 }) {
+  const [memeHoraire, setMemeHoraire] = useState(true);
   return (
     <div className="structure9 page-left">
       <h4>Quels sont vos horaires d'ouverture ?</h4>
       <div className="pageContent">
+        <div className="inputContainer memeHoraire">
+          <input
+            type="checkbox"
+            checked={memeHoraire}
+            name="memeHoraire"
+            onChange={() => setMemeHoraire(!memeHoraire)}
+          />
+          <label htmlFor="memeHoraire">
+            Mêmes horaires pour tous les jours
+          </label>
+          {memeHoraire && (
+            <div className="horaireOuvert">
+              <p>Ouvert de </p>
+              <input
+                type="time"
+                name="horaireMin"
+                step="300"
+                onChange={(e) => {
+                  lundiOuvert && updateFields({ lundiMin: e });
+                  mardiOuvert && updateFields({ mardiMin: e });
+                  mercrediOuvert && updateFields({ mercrediMin: e });
+                  jeudiOuvert && updateFields({ jeudiMin: e });
+                  vendrediOuvert && updateFields({ vendrediMin: e });
+                  samediOuvert && updateFields({ samediMin: e });
+                  dimancheOuvert && updateFields({ dimancheMin: e });
+                }}
+              />
+              <p>à</p>
+              <input
+                type="time"
+                name="horaireMax"
+                step="300"
+                onChange={(e) => {
+                  lundiOuvert && updateFields({ lundiMax: e });
+                  mardiOuvert && updateFields({ mardiMax: e });
+                  mercrediOuvert && updateFields({ mercrediMax: e });
+                  jeudiOuvert && updateFields({ jeudiMax: e });
+                  vendrediOuvert && updateFields({ vendrediMax: e });
+                  samediOuvert && updateFields({ samediMax: e });
+                  dimancheOuvert && updateFields({ dimancheMax: e });
+                }}
+              />
+            </div>
+          )}
+        </div>
         <div className="toggleWrapper">
           <div className="with-toggle">
             <div className="innerToggle">
@@ -25,6 +71,7 @@ function Structure9({
                   className="input-toggle"
                   id="lundi"
                   name="lundi"
+                  checked={lundiOuvert}
                   onChange={() => updateFields({ lundiOuvert: !lundiOuvert })}
                 />
                 <label htmlFor="lundi" className="toggle">
@@ -32,7 +79,8 @@ function Structure9({
                 </label>
               </div>
             </div>
-            {lundiOuvert && (
+            {!lundiOuvert && <p>Fermé</p>}
+            {!memeHoraire && lundiOuvert ? (
               <div className="horaireOuvert">
                 <p>Ouvert de </p>
                 <input
@@ -49,6 +97,8 @@ function Structure9({
                   onChange={(e) => updateFields({ lundiMax: e })}
                 />
               </div>
+            ) : (
+              lundiOuvert && <p>Ouvert</p>
             )}
           </div>
           <div className="inputContainer with-toggle">
@@ -60,6 +110,7 @@ function Structure9({
                   id="mardi"
                   name="mardi"
                   className="input-toggle"
+                  checked={mardiOuvert}
                   onChange={() => updateFields({ mardiOuvert: !mardiOuvert })}
                 />
                 <label htmlFor="mardi" className="toggle">
@@ -67,7 +118,8 @@ function Structure9({
                 </label>
               </div>
             </div>
-            {mardiOuvert && (
+            {!mardiOuvert && <p>Fermé</p>}
+            {!memeHoraire && mardiOuvert ? (
               <div className="horaireOuvert">
                 <p>Ouvert de </p>
                 <input
@@ -84,6 +136,8 @@ function Structure9({
                   onChange={(e) => updateFields({ mardiMax: e })}
                 />
               </div>
+            ) : (
+              mardiOuvert && <p>Ouvert</p>
             )}
           </div>
           <div className="inputContainer with-toggle">
@@ -95,6 +149,7 @@ function Structure9({
                   id="mercredi"
                   className="input-toggle"
                   name="mercredi"
+                  checked={mercrediOuvert}
                   onChange={() =>
                     updateFields({ mercrediOuvert: !mercrediOuvert })
                   }
@@ -104,7 +159,8 @@ function Structure9({
                 </label>
               </div>
             </div>
-            {mercrediOuvert && (
+            {!mercrediOuvert && <p>Fermé</p>}
+            {!memeHoraire && mercrediOuvert ? (
               <div className="horaireOuvert">
                 <p>Ouvert de </p>
                 <input
@@ -121,6 +177,8 @@ function Structure9({
                   onChange={(e) => updateFields({ mercrediMax: e })}
                 />
               </div>
+            ) : (
+              mercrediOuvert && <p>Ouvert</p>
             )}
           </div>
           <div className="inputContainer with-toggle">
@@ -132,6 +190,7 @@ function Structure9({
                   id="jeudi"
                   className="input-toggle"
                   name="jeudi"
+                  checked={jeudiOuvert}
                   onChange={() => updateFields({ jeudiOuvert: !jeudiOuvert })}
                 />
                 <label htmlFor="jeudi" className="toggle">
@@ -139,7 +198,8 @@ function Structure9({
                 </label>
               </div>
             </div>
-            {jeudiOuvert && (
+            {!jeudiOuvert && <p>Fermé</p>}
+            {!memeHoraire && jeudiOuvert ? (
               <div className="horaireOuvert">
                 <p>Ouvert de </p>
                 <input
@@ -156,6 +216,8 @@ function Structure9({
                   onChange={(e) => updateFields({ jeudiMax: e })}
                 />
               </div>
+            ) : (
+              jeudiOuvert && <p>Ouvert</p>
             )}
           </div>
           <div className="inputContainer with-toggle">
@@ -167,6 +229,7 @@ function Structure9({
                   id="vendredi"
                   name="vendredi"
                   className="input-toggle"
+                  checked={vendrediOuvert}
                   onChange={() =>
                     updateFields({ vendrediOuvert: !vendrediOuvert })
                   }
@@ -176,7 +239,8 @@ function Structure9({
                 </label>
               </div>
             </div>
-            {vendrediOuvert && (
+            {!vendrediOuvert && <p>Fermé</p>}
+            {!memeHoraire && vendrediOuvert ? (
               <div className="horaireOuvert">
                 <p>Ouvert de </p>
                 <input
@@ -193,6 +257,8 @@ function Structure9({
                   onChange={(e) => updateFields({ vendrediMax: e })}
                 />
               </div>
+            ) : (
+              vendrediOuvert && <p>Ouvert</p>
             )}
           </div>
           <div className="inputContainer with-toggle">
@@ -204,6 +270,7 @@ function Structure9({
                   id="samedi"
                   className="input-toggle"
                   name="samedi"
+                  checked={samediOuvert}
                   onChange={() => updateFields({ samediOuvert: !samediOuvert })}
                 />
                 <label htmlFor="samedi" className="toggle">
@@ -211,7 +278,8 @@ function Structure9({
                 </label>
               </div>
             </div>
-            {samediOuvert && (
+            {!samediOuvert && <p>Fermé</p>}
+            {!memeHoraire && samediOuvert ? (
               <div className="horaireOuvert">
                 <p>Ouvert de </p>
                 <input
@@ -228,6 +296,8 @@ function Structure9({
                   onChange={(e) => updateFields({ samediMax: e })}
                 />
               </div>
+            ) : (
+              samediOuvert && <p>Ouvert</p>
             )}
           </div>
           <div className="inputContainer with-toggle">
@@ -239,6 +309,7 @@ function Structure9({
                   className="input-toggle"
                   id="dimanche"
                   name="dimanche"
+                  checked={dimancheOuvert}
                   onChange={() =>
                     updateFields({ dimancheOuvert: !dimancheOuvert })
                   }
@@ -248,7 +319,8 @@ function Structure9({
                 </label>
               </div>
             </div>
-            {dimancheOuvert && (
+            {!dimancheOuvert && <p>Fermé</p>}
+            {!memeHoraire && dimancheOuvert ? (
               <div className="horaireOuvert">
                 <p>Ouvert de </p>
                 <input
@@ -265,6 +337,8 @@ function Structure9({
                   onChange={(e) => updateFields({ dimancheMax: e })}
                 />
               </div>
+            ) : (
+              dimancheOuvert && <p>Ouvert</p>
             )}
           </div>
         </div>

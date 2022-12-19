@@ -108,9 +108,11 @@
       & input {
         border-radius: 10px;
         padding: 20px 4px 4px;
+        margin: 0 4px;
         border: 1px solid $grey;
         height: 50px;
         position: relative;
+        width: 32vw;
       }
 
       & input:focus {
@@ -140,7 +142,7 @@
       & label {
         position: absolute;
         z-index: 2;
-        transform: translateY(6px) translateX(4px);
+        transform: translateY(6px) translateX(10px);
         font-weight: 800;
         color: $grey;
       }
@@ -316,25 +318,25 @@
         justify-content: space-between;
         align-items: center;
       }
+    }
 
-      & .horaireOuvert {
-        width: 55%;
-        display: flex;
-        gap: 1vw;
-        align-items: center;
-        text-align: center;
+    & .horaireOuvert {
+      width: 55%;
+      display: flex;
+      gap: 1vw;
+      align-items: center;
+      text-align: center;
 
-        & input {
-          border-radius: 10px;
-          border: 1px solid $third;
-          height: 30px;
-          padding-left: 6px;
-          min-width: 100px;
-        }
+      & input {
+        border-radius: 10px;
+        border: 1px solid $third;
+        height: 30px;
+        padding-left: 6px;
+        min-width: 100px;
+      }
 
-        & input:focus {
-          outline: 1.5px solid $third;
-        }
+      & input:focus {
+        outline: 1.5px solid $third;
       }
     }
   }
@@ -451,6 +453,13 @@
           color: $white;
           font-weight: 500;
           border-bottom: 1px solid transparent;
+        }
+
+        & .selected {
+          background-color: #f0f0f0;
+          color: $fourth;
+          font-weight: 500;
+          text-decoration: line-through;
         }
       }
 
