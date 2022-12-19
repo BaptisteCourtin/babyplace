@@ -29,7 +29,7 @@ function LoginParams() {
   return (
     <section className="loginParams">
       <p>
-        Bienvenue <span>{donnees.Nom}</span>
+        Bienvenue <span>{donnees.nom}</span>
       </p>
       <div className="loginParamsTitle">
         <h2>

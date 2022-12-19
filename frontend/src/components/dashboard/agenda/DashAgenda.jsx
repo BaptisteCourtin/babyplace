@@ -80,6 +80,10 @@ function DashAgenda({ token, structureId, maxPlaces }) {
     updateStatus();
   };
 
+  let curDate = new Date()
+  curDate = `${curDate.getFullYear()}-${curDate.getMonth() + 1
+    }-${curDate.getDate()}`;
+
   const [clickedDay, setClickedDay] = useState(new Date());
   const date = `${clickedDay.getFullYear()}-${clickedDay.getMonth() + 1
     }-${clickedDay.getDate()}`;
@@ -92,6 +96,8 @@ function DashAgenda({ token, structureId, maxPlaces }) {
         <h2>Agenda</h2>
         <DashCalendar
           {...data}
+          dayDate={date}
+          calendar={calendar}
           clickedDay={clickedDay}
           setClickedDay={setClickedDay}
         />
@@ -104,7 +110,7 @@ function DashAgenda({ token, structureId, maxPlaces }) {
           {calendar
             .filter(
               (c) =>
-                c.structureId === structureId && c.date.split("T")[0] === date
+                c.structureId === structureId && c.date === date
             )
             .map((fc) =>
               fc.nbPlaces == -1 ? (
@@ -116,12 +122,6 @@ function DashAgenda({ token, structureId, maxPlaces }) {
                 <>
                   <div className="agendaPlacesLeft">
                     <p>
-                      {fc.nbPlaces < 4
-                        ? (<span className="agendaAlertSign" style={{ backgroundColor: 'rgba(239, 54, 114, 0.6)' }}>!</span>)
-                        : (<span className="agendaAlertSign" style={{
-                          backgroundColor: 'rgba(45, 205, 122, 0.6)'
-                        }}>+</span>)
-                      }
                       Il vous reste
                       <b> {fc.nbPlaces} </b>
                       places sur
@@ -150,22 +150,30 @@ function DashAgenda({ token, structureId, maxPlaces }) {
               )
             )}
         </div>
-        <ul className="agendaLegend">
-          <li>
-            <span />
-            Complet
-          </li>
-          <li>
-            <span />
-            Places restantes
-          </li>
-          <li>
-            <span />
-            Jour off
-          </li>
+        <ul className="agendaDaysFree">
+          {calendar
+            .filter((c) => c.structureId === structureId && c.date !== date && c.date > curDate && c.nbPlaces != -1)
+            .slice(0, 2)
+            .sort((a, b) => a.date.localeCompare(b.date))
+            .map((fc) => {
+              return (
+                <li>
+                  {fc.nbPlaces < 4
+                    ? (<span className="agendaAlertSign" style={{ backgroundColor: 'rgba(239, 54, 114, 0.6)' }}>!</span>)
+                    : (<span className="agendaAlertSign" style={{
+                      backgroundColor: 'rgba(45, 205, 122, 0.6)'
+                    }}>+</span>)
+                  }
+                  <p>
+                    Vous avez <span>{fc.nbPlaces}</span> places restantes le <span>{fc.date.split("-")[2]} / {fc.date.split("-")[1]} / {fc.date.split("-")[0]}</span>
+                  </p>
+                </li>
+              )
+            })
+          }
         </ul>
-      </section>
-    </div>
+      </section >
+    </div >
   );
 }
 
