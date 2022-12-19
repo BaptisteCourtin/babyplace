@@ -123,7 +123,7 @@
         border: 2px solid $fifth;
       }
 
-      & input:valid + label {
+      & input:valid+label {
         color: $fifth;
       }
 
@@ -131,7 +131,7 @@
         display: none;
       }
 
-      & input:valid + label + p {
+      & input:valid+label+p {
         position: absolute;
         transform: translateX(28vw) translateY(6px);
         font-size: 2rem;
@@ -382,7 +382,8 @@
     }
   }
 
-  & .structure10 {
+  & .structure10,
+  & .structure12 {
     & .pageContent {
       display: flex;
       flex-direction: column;
@@ -392,14 +393,14 @@
       & .inputContainer {
         display: flex;
         align-items: center;
-        gap: 2vw;
       }
 
       & input {
         border: 1px solid $third;
         border-radius: 10px;
-        padding: 4px;
-        width: 50px;
+        padding: 4px 1px 4px 4px;
+        margin: 0 8px;
+        width: 45px;
       }
 
       & input:focus {
@@ -486,8 +487,10 @@
               padding: 10px;
               background: none;
             }
+
           }
         }
+
 
         &__tile--now {
           background-color: $third;
@@ -499,9 +502,10 @@
         &__tile--active {
           color: $second;
           font-weight: 400;
+          border-radius: 0;
         }
 
-        & .selected {
+        & .select {
           background-color: #f0f0f0;
           color: $fourth;
           font-weight: 500;
@@ -520,6 +524,24 @@
 
     & .selected {
       background-color: $fifth;
+    }
+  }
+
+  & .structure12 {
+    & .pageContent {
+      & .inputContainer {
+        margin-top: 2vh;
+        max-width: 400px;
+        justify-content: space-between;
+      }
+
+      & input {
+        margin-left: 2vw;
+      }
+
+      & h5 {
+        margin-bottom: 2vh;
+      }
     }
   }
 
@@ -841,7 +863,7 @@
     }
   }
 
-  & select + label {
+  & select+label {
     color: $grey;
     font-size: 0.9rem;
     position: absolute;
@@ -1146,7 +1168,7 @@
           max-width: 200px;
         }
 
-        & .innerToggle > p {
+        & .innerToggle>p {
           font-weight: 600;
         }
 

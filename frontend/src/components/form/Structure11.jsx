@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
-import { AiFillCodeSandboxCircle } from "react-icons/ai";
 
 function Structure11({
   lundiOuvert,
@@ -15,9 +14,8 @@ function Structure11({
   const [closedDays, setClosedDays] = useState([]);
 
   const isOpenDay = (e) => {
-    const clickedDayFormated = `${e.getFullYear()}-${
-      e.getMonth() + 1
-    }-${e.getDate()}`;
+    const clickedDayFormated = `${e.getFullYear()}-${e.getMonth() + 1
+      }-${e.getDate()}`;
     if (closedDays.length > 0) {
       const indexOfDay = closedDays.indexOf(clickedDayFormated);
       if (indexOfDay !== -1) {
@@ -42,14 +40,13 @@ function Structure11({
       (date.getDay() === 6 && !samediOuvert) ||
       (date.getDay() === 0 && !dimancheOuvert)
     ) {
-      return "selected";
+      return "select";
     }
     if (closedDays.length > 0 && view === "month") {
-      const formatedDate = `${date.getFullYear()}-${
-        date.getMonth() + 1
-      }-${date.getDate()}`;
+      const formatedDate = `${date.getFullYear()}-${date.getMonth() + 1
+        }-${date.getDate()}`;
       if (closedDays.includes(formatedDate)) {
-        return "selected";
+        return "select";
       }
       return "";
     }

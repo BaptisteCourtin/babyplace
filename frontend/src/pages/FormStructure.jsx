@@ -13,9 +13,11 @@ import Structure8 from "../components/form/Structure8";
 import Structure9 from "../components/form/Structure9";
 import Structure10 from "../components/form/Structure10";
 import Structure11 from "../components/form/Structure11";
+import Structure12 from "../components/form/Structure12";
 import imgDossier from "../assets/img-dossier.svg";
 import imgCopie from "../assets/landing page/image2.svg";
 import selfie from "../assets/selfie.svg";
+import imgTime from "@assets/img-time.svg";
 import profilJM from "../assets/profilJM.png";
 import profilCPP from "../assets/profilCPP.jpg";
 import imgWoman from "../assets/img-woman.svg";
@@ -78,6 +80,11 @@ const INITIAL_DATA = {
   dimancheMax: "",
   dureeMin: 1,
   dureeMax: 1,
+  nbEmployes: 1,
+  maxPlaces: 1,
+  maxHandi: 0,
+  max18Mois: 0,
+  maxNuit: 0,
 };
 
 function FormStructure() {
@@ -111,6 +118,7 @@ function FormStructure() {
       <Structure9 {...data} updateFields={updateFields} />,
       <Structure10 {...data} updateFields={updateFields} />,
       <Structure11 {...data} updateFields={updateFields} />,
+      <Structure12 {...data} updateFields={updateFields} />,
     ]);
   return (
     <StructureContext.Provider value={{ structure, setStructure }}>
@@ -123,20 +131,21 @@ function FormStructure() {
                 {currentStepIndex === 0
                   ? "Structure d'accueil"
                   : currentStepIndex === 1 || currentStepIndex === 2
-                  ? "Photos"
-                  : currentStepIndex === 3 || currentStepIndex === 4
-                  ? "Présentation"
-                  : currentStepIndex === 5
-                  ? "Conditions d’utilisation"
-                  : currentStepIndex === 6 || currentStepIndex === 7
-                  ? "Paramètres de réservation"
-                  : currentStepIndex === 8
-                  ? "Horaires d'ouverture"
-                  : currentStepIndex === 9
-                  ? "Durée d'accueil"
-                  : currentStepIndex === 10
-                  ? "Calendrier et disponibilités"
-                  : ""}
+                    ? "Photos"
+                    : currentStepIndex === 3 || currentStepIndex === 4
+                      ? "Présentation"
+                      : currentStepIndex === 5
+                        ? "Conditions d’utilisation"
+                        : currentStepIndex === 6 || currentStepIndex === 7
+                          ? "Paramètres de réservation"
+                          : currentStepIndex === 8
+                            ? "Horaires d'ouverture"
+                            : currentStepIndex === 9
+                              ? "Durée d'accueil"
+                              : currentStepIndex === 10
+                                ? "Calendrier et disponibilités"
+                                : currentStepIndex === 11
+                                  ? "Nombre de places et agréments" : ""}
               </p>
             </div>
             <div>
@@ -210,8 +219,8 @@ function FormStructure() {
                         width="80%"
                         alt="illustration impression"
                       />
-                    ) : (
-                      (currentStepIndex === 8 || currentStepIndex === 9) && (
+                    ) :
+                      (currentStepIndex === 8 || currentStepIndex === 9) ? (
                         <img
                           src={imgWoman}
                           className="illustrationSection"
@@ -219,22 +228,27 @@ function FormStructure() {
                           alt="illustration femme horloge"
                         />
                       )
-                    )}
+                        : currentStepIndex === 11 && (
+                          <img
+                            src={imgTime}
+                            className="illustrationSection"
+                            width="80%"
+                            alt="illustration impression"
+                          />
+                        )}
 
                     <h4>
                       {currentStepIndex === 0
-                        ? "Choisissez votre catégorie d’annonce"
+                        ? "Choisissez votre catégorie d'annonce"
                         : currentStepIndex === 1
-                        ? "Veillez à ce que votre photo montre clairement votre visage"
-                        : currentStepIndex === 2
-                        ? "Conseils rapides pour des photos de qualité"
-                        : currentStepIndex === 3
-                        ? "Inspirez vous des annonces Babyplace"
-                        : currentStepIndex === 4
-                        ? "Valorisez votre expérience et vos services"
-                        : currentStepIndex === 10
-                        ? "Toutes les dates à venir sont disponibles, à moins de les bloquer ou de demander un préavis de réservation."
-                        : ""}
+                          ? "Veillez à ce que votre photo montre clairement votre visage"
+                          : currentStepIndex === 2
+                            ? "Conseils rapides pour des photos de qualité"
+                            : currentStepIndex === 3
+                              ? "Inspirez vous des annonces Babyplace"
+                              : currentStepIndex === 4
+                                ? "Valorisez votre expérience et vos services"
+                                : ""}
                     </h4>
                     {currentStepIndex === 3 && structure === "assmat" ? (
                       <div className="descExamples">
@@ -292,14 +306,18 @@ function FormStructure() {
                       {currentStepIndex === 0
                         ? "En sélectionnant les catégories adéquates, vous aidez les parents à savoir à quoi s'attendre concernant l'accueil de leur enfant au sein de votre structure."
                         : currentStepIndex === 2
-                        ? "Désencombrez votre pièce. \nUtilisez la lumière naturelle du jour et évitez le flash. \nPrenez des photos en mode paysage depuis les coins des pièces. \nCentrez la prise de vue à égale distance entre le sol et le plafond. \nMettez en valeur les équipements et jeux d'éveil."
-                        : currentStepIndex === 4
-                        ? "Il s'agit en général des services que les parents souhaitent retrouver pour l'accueil de leurs enfants. Vous pourrez en ajouter d'autres après la publication."
-                        : currentStepIndex === 8
-                        ? "Renseignez ici les horaires d'accueil habituels, ces horaires seront renseignés sur votre fiche de présentation. Cela ne concerne pas vos disponibilités et vos plages de réservation."
-                        : currentStepIndex === 9
-                        ? "Autorisez les séjours de courte ou longue durée"
-                        : ""}
+                          ? "Désencombrez votre pièce. \nUtilisez la lumière naturelle du jour et évitez le flash. \nPrenez des photos en mode paysage depuis les coins des pièces. \nCentrez la prise de vue à égale distance entre le sol et le plafond. \nMettez en valeur les équipements et jeux d'éveil."
+                          : currentStepIndex === 4
+                            ? "Il s'agit en général des services que les parents souhaitent retrouver pour l'accueil de leurs enfants. Vous pourrez en ajouter d'autres après la publication."
+                            : currentStepIndex === 8
+                              ? "Renseignez ici les horaires d'accueil habituels, ces horaires seront renseignés sur votre fiche de présentation. Cela ne concerne pas vos disponibilités et vos plages de réservation."
+                              : currentStepIndex === 9
+                                ? "Autorisez les séjours de courte ou longue durée"
+                                : currentStepIndex === 10
+                                  ? "Toutes les dates à venir sont disponibles, à moins de les bloquer ou de demander un préavis de réservation."
+                                  : currentStepIndex === 11
+                                    ? "Indiquez le nombre de places dont vous disposez au total, vous indiquerez les places actuellement disponibles ultérieurement"
+                                    : ""}
                     </pre>
                     {currentStepIndex === 5 && (
                       <img src={imgDossier} alt="dossiers" />
