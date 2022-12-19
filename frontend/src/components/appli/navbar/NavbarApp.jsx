@@ -6,11 +6,11 @@ import { BiMessageDetail } from "react-icons/bi";
 
 import { NavLink } from "react-router-dom";
 
-function Navbar() {
+function Navbar({ setCompo }) {
   return (
     <div className="navbar">
       <NavLink to="/appli/menu">
-        <BsFillGridFill className="img-nav" />
+        <BsFillGridFill className="img-nav" onClick={() => setCompo(0)} />
       </NavLink>
       <NavLink to="/appli/search">
         <BsSearch className="img-nav" />

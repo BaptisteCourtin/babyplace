@@ -1,0 +1,28 @@
+.appli-notif {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .card-notif {
+    width: 90%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px black solid;
+
+    p {
+      display: flex;
+      align-items: flex-start;
+
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      height: 49px;
+
+      padding-right: 1rem;
+    }
+  }
+}
