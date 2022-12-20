@@ -1,0 +1,37 @@
+.structure12 {
+  & .pageContent {
+    margin-bottom: 2vh;
+    margin-top: 4vh;
+    display: flex;
+    flex-direction: column;
+    gap: 4vh;
+
+    & .inputContainer {
+      display: flex;
+      align-items: center;
+      margin-top: 2vh;
+      max-width: 400px;
+      justify-content: space-between;
+    }
+
+    & input[type="number"] {
+      margin: 0 8px;
+      border: 1px solid $third;
+      border-radius: 10px;
+      padding: 4px 1px 4px 4px;
+      width: 45px;
+    }
+
+    & input[type="number"]:focus {
+      outline: 1.5px solid $third;
+    }
+
+    & label {
+      min-width: 150px;
+    }
+
+    & h5 {
+      margin-bottom: 2vh;
+    }
+  }
+}

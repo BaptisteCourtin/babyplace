@@ -2,6 +2,7 @@ import useMultistepForm from "@components/form/useMultistepForm";
 import React, { useState, useEffect } from "react";
 import { StructureContext } from "@components/context/StructureContext";
 import { ResaContext } from "@components/context/ResaContext";
+import imgTime from "@assets/img-time.svg";
 import Structure1 from "../components/form/Structure1";
 import Structure2 from "../components/form/Structure2";
 import Structure3 from "../components/form/Structure3";
@@ -13,6 +14,8 @@ import Structure8 from "../components/form/Structure8";
 import Structure9 from "../components/form/Structure9";
 import Structure10 from "../components/form/Structure10";
 import Structure11 from "../components/form/Structure11";
+import Structure12 from "../components/form/Structure12";
+import Structure13 from "../components/form/Structure13";
 import imgDossier from "../assets/img-dossier.svg";
 import imgCopie from "../assets/landing page/image2.svg";
 import selfie from "../assets/selfie.svg";
@@ -78,6 +81,19 @@ const INITIAL_DATA = {
   dimancheMax: "",
   dureeMin: 1,
   dureeMax: 1,
+  nbEmployes: 1,
+  maxPlaces: 1,
+  maxHandi: 0,
+  max18Mois: 0,
+  maxNuit: 0,
+  financementPaje: true,
+  tarifHeure: 0,
+  tarifHoraireSpec: 0,
+  indemnRepas: 0,
+  tarifAtelier: 0,
+  indemnEntretien: 0,
+  indemnKm: 0,
+  tarifHeureSup: 0,
 };
 
 function FormStructure() {
@@ -110,7 +126,9 @@ function FormStructure() {
       <Structure8 {...data} />,
       <Structure9 {...data} updateFields={updateFields} />,
       <Structure10 {...data} updateFields={updateFields} />,
-      <Structure11 {...data} updateFields={updateFields} />,
+      <Structure11 {...data} />,
+      <Structure12 {...data} updateFields={updateFields} />,
+      <Structure13 {...data} updateFields={updateFields} />,
     ]);
   return (
     <StructureContext.Provider value={{ structure, setStructure }}>
@@ -136,6 +154,10 @@ function FormStructure() {
                   ? "Durée d'accueil"
                   : currentStepIndex === 10
                   ? "Calendrier et disponibilités"
+                  : currentStepIndex === 11
+                  ? "Nombre de places et agréments"
+                  : currentStepIndex === 12
+                  ? "Tarifs"
                   : ""}
               </p>
             </div>
@@ -189,7 +211,7 @@ function FormStructure() {
                 )}
                 {showExplications && (
                   <div className="innerContainer">
-                    {currentStepIndex === 0 ? (
+                    {currentStepIndex === 0 || currentStepIndex === 5 ? (
                       <img
                         src={imgDossier}
                         className="illustrationSection"
@@ -210,20 +232,27 @@ function FormStructure() {
                         width="80%"
                         alt="illustration impression"
                       />
+                    ) : currentStepIndex === 9 || currentStepIndex === 12 ? (
+                      <img
+                        src={imgWoman}
+                        className="illustrationSection"
+                        width="80%"
+                        alt="illustration femme horloge"
+                      />
                     ) : (
-                      (currentStepIndex === 8 || currentStepIndex === 9) && (
+                      (currentStepIndex === 8 || currentStepIndex === 11) && (
                         <img
-                          src={imgWoman}
+                          src={imgTime}
                           className="illustrationSection"
                           width="80%"
-                          alt="illustration femme horloge"
+                          alt="illustration impression"
                         />
                       )
                     )}
 
                     <h4>
                       {currentStepIndex === 0
-                        ? "Choisissez votre catégorie d’annonce"
+                        ? "Choisissez votre catégorie d'annonce"
                         : currentStepIndex === 1
                         ? "Veillez à ce que votre photo montre clairement votre visage"
                         : currentStepIndex === 2
@@ -232,8 +261,8 @@ function FormStructure() {
                         ? "Inspirez vous des annonces Babyplace"
                         : currentStepIndex === 4
                         ? "Valorisez votre expérience et vos services"
-                        : currentStepIndex === 10
-                        ? "Toutes les dates à venir sont disponibles, à moins de les bloquer ou de demander un préavis de réservation."
+                        : currentStepIndex === 12
+                        ? "Commencez avec un prix plus bas pour attirer les réservations"
                         : ""}
                     </h4>
                     {currentStepIndex === 3 && structure === "assmat" ? (
@@ -299,11 +328,14 @@ function FormStructure() {
                         ? "Renseignez ici les horaires d'accueil habituels, ces horaires seront renseignés sur votre fiche de présentation. Cela ne concerne pas vos disponibilités et vos plages de réservation."
                         : currentStepIndex === 9
                         ? "Autorisez les séjours de courte ou longue durée"
+                        : currentStepIndex === 10
+                        ? "Toutes les dates à venir sont disponibles, à moins de les bloquer ou de demander un préavis de réservation."
+                        : currentStepIndex === 11
+                        ? "Indiquez le nombre de places dont vous disposez au total, vous indiquerez les places actuellement disponibles ultérieurement"
+                        : currentStepIndex === 12
+                        ? "Les nouveaux professionnels inscrits sur Babyplace commencent avec un prix plus bas pour attirer leurs premières réservations. Ils ont ainsi plus d’avis de la part de parents, ce qui leur permet de gagner en crédibilité."
                         : ""}
                     </pre>
-                    {currentStepIndex === 5 && (
-                      <img src={imgDossier} alt="dossiers" />
-                    )}
                   </div>
                 )}
               </div>

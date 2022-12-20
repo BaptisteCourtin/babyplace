@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
+import Proptypes from "prop-types";
 import Calendar from "react-calendar";
-import { AiFillCodeSandboxCircle } from "react-icons/ai";
 
 function Structure11({
   lundiOuvert,
@@ -10,7 +10,6 @@ function Structure11({
   vendrediOuvert,
   samediOuvert,
   dimancheOuvert,
-  updateFields,
 }) {
   const [closedDays, setClosedDays] = useState([]);
 
@@ -42,20 +41,22 @@ function Structure11({
       (date.getDay() === 6 && !samediOuvert) ||
       (date.getDay() === 0 && !dimancheOuvert)
     ) {
-      return "selected";
+      return "select";
     }
     if (closedDays.length > 0 && view === "month") {
       const formatedDate = `${date.getFullYear()}-${
         date.getMonth() + 1
       }-${date.getDate()}`;
       if (closedDays.includes(formatedDate)) {
-        return "selected";
+        return "select";
       }
       return "";
     }
   };
   return (
     <div className="structure11 page-left">
+      <h4>Calendrier de vos indisponibilités</h4>
+
       <div className="agendaSection">
         <Calendar
           showNeighboringMonth={false}
@@ -70,5 +71,13 @@ function Structure11({
     </div>
   );
 }
-
+Structure11.propTypes = {
+  lundiOuvert: Proptypes.node,
+  mardiOuvert: Proptypes.node,
+  mercrediOuvert: Proptypes.node,
+  jeudiOuvert: Proptypes.node,
+  vendrediOuvert: Proptypes.node,
+  samediOuvert: Proptypes.node,
+  dimancheOuvert: Proptypes.node,
+};
 export default Structure11;
