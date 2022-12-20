@@ -1,0 +1,77 @@
+.structure15 {
+    & .inputContainer {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 2vh;
+
+        & input[type="text"],
+        & input[type="date"] {
+            border-radius: 10px;
+            padding: 20px 4px 4px;
+            margin: 0 4px;
+            border: 1px solid $grey;
+            height: 50px;
+            position: relative;
+            width: 32vw;
+        }
+
+        & input:focus {
+            outline: 1.5px solid $third;
+        }
+
+        & input:valid {
+            border: 2px solid $fifth;
+        }
+
+        & input:valid+label {
+            color: $fifth;
+        }
+
+        .checkSymbol {
+            display: none;
+        }
+
+        & input:valid+label+p {
+            position: absolute;
+            transform: translateX(29vw) translateY(6px);
+            font-size: 2rem;
+            color: $fifth;
+            display: initial;
+        }
+
+        & label {
+            position: absolute;
+            z-index: 2;
+            transform: translateY(6px) translateX(10px);
+            font-weight: 600;
+            color: $grey;
+        }
+
+        & p {
+            padding-top: 4px;
+            margin-left: 8px;
+            font-size: 0.9rem;
+        }
+    }
+}
+
+@media screen and (max-width:1200px) {
+
+
+    .structure15 {
+
+        & .inputContainer {
+
+            & input[type="text"],
+            & input[type="date"] {
+                width: 80vw;
+                max-width: 500px;
+            }
+
+            & input:valid+label+p {
+                transform: translateX(69vw) translateY(6px);
+            }
+        }
+
+    }
+}
