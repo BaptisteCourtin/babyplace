@@ -27,8 +27,9 @@ const tabFav = [
 
 function AppliMessage() {
   return (
-    <div>
+    <div className="appli-message">
       <ProfilPlat />
+
       <main>
         {tabFav.map((each) => (
           <CardFavPlat each={each} />

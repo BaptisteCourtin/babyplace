@@ -9,7 +9,8 @@ const tabFav = [
     nom: "creche nb 1",
     note: 4.8,
     image: imgCreche,
-    texte: "description 1 c'est un peu long afin d'overflow",
+    texte:
+      "description 1 c'est un peu long afin d'overflow flow flow flow flow flow flow flow flow flow",
   },
   {
     nom: "creche nb 2",

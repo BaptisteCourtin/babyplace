@@ -1,23 +1,21 @@
 import React from "react";
-import CardFavPlat from "@components/appli/menu/CardFavPlat";
-import imgCreche from "@assets/img-time.svg";
 import PropTypes from "prop-types";
 
 const tabFav = [
   {
-    nom: "personne nb 1",
-    image: imgCreche,
-    texte: "messages envoyés à personne 1 et c'est trooooooooop looooong",
+    nom: "nom prenom",
+    email: "email personne 1",
+    tel: 606060606,
   },
   {
-    nom: "personne nb 2",
-    image: imgCreche,
-    texte: "messages envoyés à personne 2",
+    nom: "nom prenom",
+    email: "email personne 2",
+    tel: 604040404,
   },
   {
-    nom: "personne nb 3",
-    image: imgCreche,
-    texte: "mess",
+    nom: "nom prenom",
+    email: "email personne 3",
+    tel: 609090909,
   },
 ];
 
@@ -31,7 +29,11 @@ function PersonnesConfiance({ setCompo }) {
       </div>
       <main className="perso-confiance">
         {tabFav.map((each) => (
-          <CardFavPlat each={each} />
+          <div className="card-confiance">
+            <h3>{each.nom}</h3>
+            <p>{each.email}</p>
+            <p>0{each.tel}</p>
+          </div>
         ))}
       </main>
     </>

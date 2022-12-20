@@ -30,25 +30,26 @@ function AppliUserCompletion() {
 
   return (
     <div className="AppliUserCompletion">
-      <header>
-        <button type="button" className="button-head">
-          <Link to="/appli/user">{`< Ed Cannan`}</Link>
-        </button>
-        <div className="container-butt">
-          <button type="button" onClick={() => setCompo(0)}>
-            Enfants
+      <div className="container-header">
+        <header>
+          <button type="button" className="button-head">
+            <Link to="/appli/user">{`< Ed Cannan`}</Link>
           </button>
-          <button type="button" onClick={() => setCompo(1)}>
-            Parents
-          </button>
-          <button type="button" onClick={() => setCompo(2)}>
-            Inscriptions
-          </button>
-        </div>
-      </header>
+          <div className="container-butt">
+            <button type="button" onClick={() => setCompo(0)}>
+              Enfants
+            </button>
+            <button type="button" onClick={() => setCompo(1)}>
+              Parents
+            </button>
+            <button type="button" onClick={() => setCompo(2)}>
+              Inscriptions
+            </button>
+          </div>
+        </header>
+      </div>
 
-      {choixComposant()}
-
+      <div className="container-main">{choixComposant()}</div>
       <Navbar />
     </div>
   );

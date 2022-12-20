@@ -17,14 +17,14 @@ function SeConnecter({ setCompo }) {
 
   return (
     <div className="applituto connexion">
-      <button
-        type="button"
-        className="se-connecter"
-        onClick={() => setCompo(0)}
-      >
-        S'inscrire
-      </button>
       <main>
+        <button
+          type="button"
+          className="se-connecter"
+          onClick={() => setCompo(0)}
+        >
+          S'inscrire
+        </button>
         <h3>Se connecter</h3>
         <form>
           <label htmlFor="email">
