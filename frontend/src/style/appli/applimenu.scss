@@ -1,6 +1,7 @@
 .applimenu {
   min-height: 100vh;
   padding-bottom: 4rem;
+  background-color: $white;
 
   display: flex;
   flex-direction: column;
@@ -16,6 +17,15 @@
     width: 100%;
     max-width: 500px;
 
+    h3 {
+      font-size: $h4;
+      font-weight: 600;
+    }
+
+    p {
+      font-weight: 400;
+    }
+
     &.menu-base {
       align-items: flex-start;
       gap: 1.5rem;
@@ -24,10 +34,12 @@
       button {
         background-color: transparent;
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         font-size: $h4;
         font-weight: 500;
+        width: 100%;
+        padding: 0.2rem;
 
         .icon-menu {
           fill: $third;
@@ -38,7 +50,7 @@
 
     &.favoris {
       .occas {
-        background: $third;
+        background: rgba(127, 114, 242, 0.4);
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -46,23 +58,27 @@
         justify-content: center;
         gap: 0.5rem;
         padding: 1rem;
+        margin-bottom: 1rem;
+
         p {
           font-weight: 400;
-        }
-
-        .with-toggle {
-          display: flex;
-          align-items: center;
-          justify-content: center;
         }
       }
     }
 
     &.perso-confiance {
-      .card-fav-plat {
-        .texte {
-          width: 70%;
-        }
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .card-confiance {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        margin-left: 1rem;
+        padding-left: 0.5rem;
+        border-left: 1px $second solid;
       }
     }
 
@@ -72,59 +88,37 @@
       }
 
       form {
-        width: 90%;
-        margin: 1rem;
-
-        label {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          gap: 1rem;
-
-          input {
-            background-color: $grey;
-            width: 85%;
-            height: 40px;
-            border-radius: 10px;
-            padding: 0.5rem;
-            margin-bottom: 1rem;
-            border: 2px transparent solid;
-
-            &:valid {
-              border-color: $green;
-            }
-          }
-
-          p {
-            display: none;
-          }
-
-          input:valid + p {
-            display: block;
-            transform: translateY(-10px);
-          }
-
-          input:valid + p {
-            font-size: 1.5rem;
-            color: $green;
-            display: block;
-          }
-        }
-
-        .check {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-
-          .p-check {
-            color: black;
-            font-size: 1rem;
-          }
-          input {
-            width: 1.2rem;
-          }
+        margin-top: 1rem;
+        .with-check {
+          width: 90%;
         }
       }
+    }
+
+    &.aide {
+      img {
+        width: 100%;
+      }
+    }
+
+    &.reservation {
+      .card-fav-plat {
+        height: max-content;
+        .texte p {
+          width: 100%;
+          height: max-content;
+          white-space: pre-wrap;
+          padding-right: 0;
+        }
+      }
+    }
+  }
+
+  .button-bas {
+    background: $gradient;
+    .butt {
+      font-size: $h3;
+      font-weight: 500;
     }
   }
 }

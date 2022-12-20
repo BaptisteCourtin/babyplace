@@ -44,11 +44,9 @@ function CarteCreche({ data }) {
           <div className="info-creche">
             <div className="ville-prix">
               <p>ville à X mètres</p>
-              <p className="prix">{tarifHeure}€</p>
+              <p className="prix">{tarifHeure}€/heure</p>
             </div>
-            <div className="jours">
-              <BlocJour dataHorairesId={dataHorairesId} />
-            </div>
+            <BlocJour dataHorairesId={dataHorairesId} />
             <ul>
               <li>N’accepte que les profils vérifiés</li>
               <li>Période d’adaptation obligatoire</li>

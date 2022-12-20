@@ -7,15 +7,13 @@ function ChoixDates({ setCompo, photoProfil }) {
   return (
     <>
       <div className="button-top">
-        <div className="suivant">
-          <Link to="/appli/search">
-            <button className="butt" type="button" onClick={() => setCompo(2)}>
-              <span className="fleche">{`<`}</span>
-              Annuler
-              <span className="round" />
-            </button>
-          </Link>
-        </div>
+        <Link to="/appli/search">
+          <button className="butt" type="button" onClick={() => setCompo(2)}>
+            <span className="fleche">{`<`}</span>
+            Annuler
+            <span className="round" />
+          </button>
+        </Link>
       </div>
 
       <main className="choix-dates">
@@ -31,7 +29,7 @@ function ChoixDates({ setCompo, photoProfil }) {
         <AppliPlaces />
       </main>
 
-      <div className="button-bas">
+      <div className="button-bas right">
         <div className="suivant">
           <button className="butt" type="button" onClick={() => setCompo(2)}>
             Suivant <span className="fleche">{`>`}</span>

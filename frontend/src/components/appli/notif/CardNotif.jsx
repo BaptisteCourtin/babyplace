@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function CardNotif({ texte }) {
   return (
@@ -8,5 +9,9 @@ function CardNotif({ texte }) {
     </div>
   );
 }
+
+CardNotif.propTypes = {
+  setCompo: PropTypes.string.isRequired,
+};
 
 export default CardNotif;

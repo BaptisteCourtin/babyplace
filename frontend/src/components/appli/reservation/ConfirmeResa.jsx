@@ -29,15 +29,13 @@ function ConfirmeResa({ photoProfil }) {
           votre demande soit acceptée
         </p>
       </main>
-      <div className="button-bas">
-        <div className="suivant">
-          <Link to="/appli/search">
-            <button className="butt" type="button">
-              Suivant <span className="fleche">{`>`}</span>
-              <span className="round" />
-            </button>
-          </Link>
-        </div>
+      <div className="button-bas right">
+        <Link to="/appli/search">
+          <button className="butt" type="button">
+            Suivant <span className="fleche">{`>`}</span>
+            <span className="round" />
+          </button>
+        </Link>
       </div>
     </>
   );

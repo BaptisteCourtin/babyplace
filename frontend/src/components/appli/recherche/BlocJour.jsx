@@ -14,13 +14,13 @@ function BlocJour({ dataHorairesId }) {
   ];
 
   return (
-    <>
+    <div className="jours">
       {tabJour.map((each) => (
         <div className={each.check ? "daygreen" : "daygray"}>
           <p className="each-jour">{each.jour}</p>
         </div>
       ))}
-    </>
+    </div>
   );
 }
 

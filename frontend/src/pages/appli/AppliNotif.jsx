@@ -18,12 +18,12 @@ const tabNotif = [
 function AppliNotif() {
   return (
     <div className="appli-notif">
-      <button type="button" className="butt-top">
-        Notifications
-      </button>
-      {tabNotif.map((each) => (
-        <CardNotif texte={each.texte} />
-      ))}
+      <h3>Notifications</h3>
+      <main>
+        {tabNotif.map((each) => (
+          <CardNotif texte={each.texte} />
+        ))}
+      </main>
       <NavbarApp />
     </div>
   );

@@ -16,6 +16,7 @@ function PopUp({ data }) {
     if (visiblePopUp && !profilComplet) {
       return <PopUpProfilNonComplet setVisiblePopUp={setVisiblePopUp} />;
     }
+    return null;
   };
 
   return (
