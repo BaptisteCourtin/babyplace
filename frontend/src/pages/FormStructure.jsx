@@ -14,6 +14,7 @@ import Structure9 from "../components/form/Structure9";
 import Structure10 from "../components/form/Structure10";
 import Structure11 from "../components/form/Structure11";
 import Structure12 from "../components/form/Structure12";
+import Structure13 from "../components/form/Structure13";
 import imgDossier from "../assets/img-dossier.svg";
 import imgCopie from "../assets/landing page/image2.svg";
 import selfie from "../assets/selfie.svg";
@@ -85,6 +86,14 @@ const INITIAL_DATA = {
   maxHandi: 0,
   max18Mois: 0,
   maxNuit: 0,
+  financementPaje: true,
+  tarifHeure: 0,
+  tarifHoraireSpec: 0,
+  indemnRepas: 0,
+  tarifAtelier: 0,
+  indemnEntretien: 0,
+  indemnKm: 0,
+  tarifHeureSup: 0
 };
 
 function FormStructure() {
@@ -119,6 +128,7 @@ function FormStructure() {
       <Structure10 {...data} updateFields={updateFields} />,
       <Structure11 {...data} updateFields={updateFields} />,
       <Structure12 {...data} updateFields={updateFields} />,
+      <Structure13 {...data} updateFields={updateFields} />,
     ]);
   return (
     <StructureContext.Provider value={{ structure, setStructure }}>
@@ -145,7 +155,9 @@ function FormStructure() {
                               : currentStepIndex === 10
                                 ? "Calendrier et disponibilités"
                                 : currentStepIndex === 11
-                                  ? "Nombre de places et agréments" : ""}
+                                  ? "Nombre de places et agréments"
+                                  : currentStepIndex === 12
+                                    ? "Tarifs" : ""}
               </p>
             </div>
             <div>
@@ -198,7 +210,7 @@ function FormStructure() {
                 )}
                 {showExplications && (
                   <div className="innerContainer">
-                    {currentStepIndex === 0 ? (
+                    {(currentStepIndex === 0 || currentStepIndex === 5) ? (
                       <img
                         src={imgDossier}
                         className="illustrationSection"
@@ -220,7 +232,7 @@ function FormStructure() {
                         alt="illustration impression"
                       />
                     ) :
-                      (currentStepIndex === 8 || currentStepIndex === 9) ? (
+                      (currentStepIndex === 9 || currentStepIndex === 12) ? (
                         <img
                           src={imgWoman}
                           className="illustrationSection"
@@ -228,7 +240,7 @@ function FormStructure() {
                           alt="illustration femme horloge"
                         />
                       )
-                        : currentStepIndex === 11 && (
+                        : (currentStepIndex === 8 || currentStepIndex === 11) && (
                           <img
                             src={imgTime}
                             className="illustrationSection"
@@ -248,7 +260,8 @@ function FormStructure() {
                               ? "Inspirez vous des annonces Babyplace"
                               : currentStepIndex === 4
                                 ? "Valorisez votre expérience et vos services"
-                                : ""}
+                                : currentStepIndex === 12
+                                  ? "Commencez avec un prix plus bas pour attirer les réservations" : ""}
                     </h4>
                     {currentStepIndex === 3 && structure === "assmat" ? (
                       <div className="descExamples">
@@ -317,11 +330,9 @@ function FormStructure() {
                                   ? "Toutes les dates à venir sont disponibles, à moins de les bloquer ou de demander un préavis de réservation."
                                   : currentStepIndex === 11
                                     ? "Indiquez le nombre de places dont vous disposez au total, vous indiquerez les places actuellement disponibles ultérieurement"
-                                    : ""}
+                                    : currentStepIndex === 12
+                                      ? "Les nouveaux professionnels inscrits sur Babyplace commencent avec un prix plus bas pour attirer leurs premières réservations. Ils ont ainsi plus d’avis de la part de parents, ce qui leur permet de gagner en crédibilité." : ""}
                     </pre>
-                    {currentStepIndex === 5 && (
-                      <img src={imgDossier} alt="dossiers" />
-                    )}
                   </div>
                 )}
               </div>

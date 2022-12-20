@@ -20,7 +20,6 @@ const Structure12 = ({ nbEmployes, maxPlaces, maxHandi, max18Mois, maxNuit, upda
                         </div>
                     </div>}
                 <div>
-
                     <h5>Nombre de places ou agréments</h5>
                     <p>Au total, de combien de places disposez-vous ?</p>
                     <div className="inputContainer">
