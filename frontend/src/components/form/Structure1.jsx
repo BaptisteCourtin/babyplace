@@ -15,7 +15,7 @@ function Structure1({
   const { structure, setStructure } = useContext(StructureContext);
   const [typeCreche, setTypeCreche] = useState("");
   return (
-    <div className="page-left">
+    <div className="page-left structure1">
       <div className="typeContainer">
         <h4>Quel type d’accueil proposez-vous ?</h4>
         <div>

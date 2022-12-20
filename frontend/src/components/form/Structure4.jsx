@@ -3,12 +3,12 @@ import Proptypes from "prop-types";
 
 function Structure4({ description, updateFields }) {
   return (
-    <div className="page-left">
+    <div className="page-left structure4">
       <h4>Présentez vous auprès des parents</h4>
       <div className="pageContent">
         <p>
           Présentez vous et décrivez votre expérience. Indiquez les activités
-          d’éveil que vous proposez aux enfants, respect du rythme de l’enfant,
+          d'éveil que vous proposez aux enfants, respect du rythme de l'enfant,
           activités, sorties, pédagogie... Décrivez les espaces de jeu, le lieu
           de sommeil, les équipements dont vous disposez...
         </p>

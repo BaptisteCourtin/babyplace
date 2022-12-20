@@ -2,6 +2,7 @@ import useMultistepForm from "@components/form/useMultistepForm";
 import React, { useState, useEffect } from "react";
 import { StructureContext } from "@components/context/StructureContext";
 import { ResaContext } from "@components/context/ResaContext";
+import imgTime from "@assets/img-time.svg";
 import Structure1 from "../components/form/Structure1";
 import Structure2 from "../components/form/Structure2";
 import Structure3 from "../components/form/Structure3";
@@ -18,7 +19,6 @@ import Structure13 from "../components/form/Structure13";
 import imgDossier from "../assets/img-dossier.svg";
 import imgCopie from "../assets/landing page/image2.svg";
 import selfie from "../assets/selfie.svg";
-import imgTime from "@assets/img-time.svg";
 import profilJM from "../assets/profilJM.png";
 import profilCPP from "../assets/profilCPP.jpg";
 import imgWoman from "../assets/img-woman.svg";
@@ -93,7 +93,7 @@ const INITIAL_DATA = {
   tarifAtelier: 0,
   indemnEntretien: 0,
   indemnKm: 0,
-  tarifHeureSup: 0
+  tarifHeureSup: 0,
 };
 
 function FormStructure() {
@@ -126,7 +126,7 @@ function FormStructure() {
       <Structure8 {...data} />,
       <Structure9 {...data} updateFields={updateFields} />,
       <Structure10 {...data} updateFields={updateFields} />,
-      <Structure11 {...data} updateFields={updateFields} />,
+      <Structure11 {...data} />,
       <Structure12 {...data} updateFields={updateFields} />,
       <Structure13 {...data} updateFields={updateFields} />,
     ]);
@@ -141,23 +141,24 @@ function FormStructure() {
                 {currentStepIndex === 0
                   ? "Structure d'accueil"
                   : currentStepIndex === 1 || currentStepIndex === 2
-                    ? "Photos"
-                    : currentStepIndex === 3 || currentStepIndex === 4
-                      ? "Présentation"
-                      : currentStepIndex === 5
-                        ? "Conditions d’utilisation"
-                        : currentStepIndex === 6 || currentStepIndex === 7
-                          ? "Paramètres de réservation"
-                          : currentStepIndex === 8
-                            ? "Horaires d'ouverture"
-                            : currentStepIndex === 9
-                              ? "Durée d'accueil"
-                              : currentStepIndex === 10
-                                ? "Calendrier et disponibilités"
-                                : currentStepIndex === 11
-                                  ? "Nombre de places et agréments"
-                                  : currentStepIndex === 12
-                                    ? "Tarifs" : ""}
+                  ? "Photos"
+                  : currentStepIndex === 3 || currentStepIndex === 4
+                  ? "Présentation"
+                  : currentStepIndex === 5
+                  ? "Conditions d’utilisation"
+                  : currentStepIndex === 6 || currentStepIndex === 7
+                  ? "Paramètres de réservation"
+                  : currentStepIndex === 8
+                  ? "Horaires d'ouverture"
+                  : currentStepIndex === 9
+                  ? "Durée d'accueil"
+                  : currentStepIndex === 10
+                  ? "Calendrier et disponibilités"
+                  : currentStepIndex === 11
+                  ? "Nombre de places et agréments"
+                  : currentStepIndex === 12
+                  ? "Tarifs"
+                  : ""}
               </p>
             </div>
             <div>
@@ -210,7 +211,7 @@ function FormStructure() {
                 )}
                 {showExplications && (
                   <div className="innerContainer">
-                    {(currentStepIndex === 0 || currentStepIndex === 5) ? (
+                    {currentStepIndex === 0 || currentStepIndex === 5 ? (
                       <img
                         src={imgDossier}
                         className="illustrationSection"
@@ -231,37 +232,38 @@ function FormStructure() {
                         width="80%"
                         alt="illustration impression"
                       />
-                    ) :
-                      (currentStepIndex === 9 || currentStepIndex === 12) ? (
+                    ) : currentStepIndex === 9 || currentStepIndex === 12 ? (
+                      <img
+                        src={imgWoman}
+                        className="illustrationSection"
+                        width="80%"
+                        alt="illustration femme horloge"
+                      />
+                    ) : (
+                      (currentStepIndex === 8 || currentStepIndex === 11) && (
                         <img
-                          src={imgWoman}
+                          src={imgTime}
                           className="illustrationSection"
                           width="80%"
-                          alt="illustration femme horloge"
+                          alt="illustration impression"
                         />
                       )
-                        : (currentStepIndex === 8 || currentStepIndex === 11) && (
-                          <img
-                            src={imgTime}
-                            className="illustrationSection"
-                            width="80%"
-                            alt="illustration impression"
-                          />
-                        )}
+                    )}
 
                     <h4>
                       {currentStepIndex === 0
                         ? "Choisissez votre catégorie d'annonce"
                         : currentStepIndex === 1
-                          ? "Veillez à ce que votre photo montre clairement votre visage"
-                          : currentStepIndex === 2
-                            ? "Conseils rapides pour des photos de qualité"
-                            : currentStepIndex === 3
-                              ? "Inspirez vous des annonces Babyplace"
-                              : currentStepIndex === 4
-                                ? "Valorisez votre expérience et vos services"
-                                : currentStepIndex === 12
-                                  ? "Commencez avec un prix plus bas pour attirer les réservations" : ""}
+                        ? "Veillez à ce que votre photo montre clairement votre visage"
+                        : currentStepIndex === 2
+                        ? "Conseils rapides pour des photos de qualité"
+                        : currentStepIndex === 3
+                        ? "Inspirez vous des annonces Babyplace"
+                        : currentStepIndex === 4
+                        ? "Valorisez votre expérience et vos services"
+                        : currentStepIndex === 12
+                        ? "Commencez avec un prix plus bas pour attirer les réservations"
+                        : ""}
                     </h4>
                     {currentStepIndex === 3 && structure === "assmat" ? (
                       <div className="descExamples">
@@ -319,19 +321,20 @@ function FormStructure() {
                       {currentStepIndex === 0
                         ? "En sélectionnant les catégories adéquates, vous aidez les parents à savoir à quoi s'attendre concernant l'accueil de leur enfant au sein de votre structure."
                         : currentStepIndex === 2
-                          ? "Désencombrez votre pièce. \nUtilisez la lumière naturelle du jour et évitez le flash. \nPrenez des photos en mode paysage depuis les coins des pièces. \nCentrez la prise de vue à égale distance entre le sol et le plafond. \nMettez en valeur les équipements et jeux d'éveil."
-                          : currentStepIndex === 4
-                            ? "Il s'agit en général des services que les parents souhaitent retrouver pour l'accueil de leurs enfants. Vous pourrez en ajouter d'autres après la publication."
-                            : currentStepIndex === 8
-                              ? "Renseignez ici les horaires d'accueil habituels, ces horaires seront renseignés sur votre fiche de présentation. Cela ne concerne pas vos disponibilités et vos plages de réservation."
-                              : currentStepIndex === 9
-                                ? "Autorisez les séjours de courte ou longue durée"
-                                : currentStepIndex === 10
-                                  ? "Toutes les dates à venir sont disponibles, à moins de les bloquer ou de demander un préavis de réservation."
-                                  : currentStepIndex === 11
-                                    ? "Indiquez le nombre de places dont vous disposez au total, vous indiquerez les places actuellement disponibles ultérieurement"
-                                    : currentStepIndex === 12
-                                      ? "Les nouveaux professionnels inscrits sur Babyplace commencent avec un prix plus bas pour attirer leurs premières réservations. Ils ont ainsi plus d’avis de la part de parents, ce qui leur permet de gagner en crédibilité." : ""}
+                        ? "Désencombrez votre pièce. \nUtilisez la lumière naturelle du jour et évitez le flash. \nPrenez des photos en mode paysage depuis les coins des pièces. \nCentrez la prise de vue à égale distance entre le sol et le plafond. \nMettez en valeur les équipements et jeux d'éveil."
+                        : currentStepIndex === 4
+                        ? "Il s'agit en général des services que les parents souhaitent retrouver pour l'accueil de leurs enfants. Vous pourrez en ajouter d'autres après la publication."
+                        : currentStepIndex === 8
+                        ? "Renseignez ici les horaires d'accueil habituels, ces horaires seront renseignés sur votre fiche de présentation. Cela ne concerne pas vos disponibilités et vos plages de réservation."
+                        : currentStepIndex === 9
+                        ? "Autorisez les séjours de courte ou longue durée"
+                        : currentStepIndex === 10
+                        ? "Toutes les dates à venir sont disponibles, à moins de les bloquer ou de demander un préavis de réservation."
+                        : currentStepIndex === 11
+                        ? "Indiquez le nombre de places dont vous disposez au total, vous indiquerez les places actuellement disponibles ultérieurement"
+                        : currentStepIndex === 12
+                        ? "Les nouveaux professionnels inscrits sur Babyplace commencent avec un prix plus bas pour attirer leurs premières réservations. Ils ont ainsi plus d’avis de la part de parents, ce qui leur permet de gagner en crédibilité."
+                        : ""}
                     </pre>
                   </div>
                 )}

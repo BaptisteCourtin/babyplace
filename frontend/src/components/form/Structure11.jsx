@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Proptypes from "prop-types";
 import Calendar from "react-calendar";
 
 function Structure11({
@@ -9,13 +10,13 @@ function Structure11({
   vendrediOuvert,
   samediOuvert,
   dimancheOuvert,
-  updateFields,
 }) {
   const [closedDays, setClosedDays] = useState([]);
 
   const isOpenDay = (e) => {
-    const clickedDayFormated = `${e.getFullYear()}-${e.getMonth() + 1
-      }-${e.getDate()}`;
+    const clickedDayFormated = `${e.getFullYear()}-${
+      e.getMonth() + 1
+    }-${e.getDate()}`;
     if (closedDays.length > 0) {
       const indexOfDay = closedDays.indexOf(clickedDayFormated);
       if (indexOfDay !== -1) {
@@ -43,8 +44,9 @@ function Structure11({
       return "select";
     }
     if (closedDays.length > 0 && view === "month") {
-      const formatedDate = `${date.getFullYear()}-${date.getMonth() + 1
-        }-${date.getDate()}`;
+      const formatedDate = `${date.getFullYear()}-${
+        date.getMonth() + 1
+      }-${date.getDate()}`;
       if (closedDays.includes(formatedDate)) {
         return "select";
       }
@@ -53,6 +55,8 @@ function Structure11({
   };
   return (
     <div className="structure11 page-left">
+      <h4>Calendrier de vos indisponibilités</h4>
+
       <div className="agendaSection">
         <Calendar
           showNeighboringMonth={false}
@@ -67,5 +71,13 @@ function Structure11({
     </div>
   );
 }
-
+Structure11.propTypes = {
+  lundiOuvert: Proptypes.node,
+  mardiOuvert: Proptypes.node,
+  mercrediOuvert: Proptypes.node,
+  jeudiOuvert: Proptypes.node,
+  vendrediOuvert: Proptypes.node,
+  samediOuvert: Proptypes.node,
+  dimancheOuvert: Proptypes.node,
+};
 export default Structure11;
