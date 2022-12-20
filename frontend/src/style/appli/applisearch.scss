@@ -44,6 +44,10 @@
           }
         }
       }
+
+      .map {
+        background-color: transparent;
+      }
     }
   }
 
@@ -56,5 +60,16 @@
     margin-top: 0.5rem;
     gap: 0.5rem;
     width: 100%;
+
+    &.big-map {
+      width: 80%;
+      margin: 1rem auto;
+      height: 500px;
+      background-color: rgb(132, 132, 216);
+
+      .leaflet-container {
+        z-index: 1;
+      }
+    }
   }
 }
