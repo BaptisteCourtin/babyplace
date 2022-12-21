@@ -5,18 +5,30 @@ const getCalendrier = async (id) => {
     return result
 }
 
-const updateStatus = async (nbPlaces, id) => {
-    const [result] = await datasource.query("UPDATE structure SET nbPlaces = -1 WHERE structureId = ?", [id])
+const updateStatusClose = async (id) => {
+    const [result] = await datasource.query("UPDATE calendrier SET nbPlaces = -1 WHERE calendrierId = ?", [id])
+    return result
+}
+
+const updateStatusOpen = async (maxPlaces, id) => {
+    const [result] = await datasource.query("UPDATE calendrier SET nbPlaces = ? WHERE calendrierId = ?", [maxPlaces, id])
     return result
 }
 
 const updatePlaces = async (nbPlaces, id) => {
     const [result] = await datasource.query("UPDATE calendrier SET nbPlaces = ? WHERE calendrierId = ?", [nbPlaces, id])
-    console.log(result)
+    return result
+}
+
+const postDate = async (date, nbPlaces, structureId) => {
+    const [result] = await datasource.query("INSERT INTO calendrier (date, nbPlaces, structureId) VALUES (?, ?, ?)", [date, nbPlaces, structureId])
     return result
 }
 
 module.exports = {
     getCalendrier,
-    updatePlaces
+    updateStatusClose,
+    updateStatusOpen,
+    updatePlaces,
+    postDate
 };

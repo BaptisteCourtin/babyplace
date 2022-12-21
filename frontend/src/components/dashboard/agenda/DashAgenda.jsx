@@ -53,32 +53,67 @@ function DashAgenda({ token, structureId, maxPlaces }) {
       });
   };
 
+  const updatePlaces = () => {
+    axios
+      .put(
+        `http://localhost:5000/calendrier/places/${calendarIndex}`,
+        {
+          id: calendarIndex,
+          nbPlaces: places,
+        }
+      )
+      .then(getCalendar())
+  };
+
+  const updateStatusClose = () => {
+    axios
+      .put(
+        `http://localhost:5000/calendrier/places/close/${calendarIndex}`,
+        {
+          id: calendarIndex,
+        }
+      )
+      .then(
+        getCalendar(),
+        setPlaces('')
+      )
+  };
+
+  const updateStatusOpen = () => {
+    axios
+      .put(
+        `http://localhost:5000/calendrier/places/open/${calendarIndex}`,
+        {
+          id: calendarIndex,
+          maxPlaces: maxPlaces
+        }
+      )
+      .then(
+        getCalendar(),
+        setPlaces('')
+      )
+  };
+
+  const addDate = () => {
+    axios
+      .post(
+        `http://localhost:5000/calendrier/add`,
+        {
+          date: date,
+          nbPlaces: places,
+          structureId: structureId
+        }
+      )
+      .then(
+        getCalendar()
+      )
+  }
 
   useEffect(() => {
     getData();
     getHours();
     getCalendar();
   }, []);
-
-  const updatePlaces = async () => {
-    await axios.put(
-      `http://localhost:5000/calendrier/places/${calendarIndex}`,
-      {
-        id: calendarIndex,
-        nbPlaces: places,
-      }
-    );
-  };
-
-  const updateStatus = async () => {
-    await axios.put();
-  };
-
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    updateStatus();
-  };
 
   let curDate = new Date()
   curDate = `${curDate.getFullYear()}-${curDate.getMonth() + 1
@@ -99,6 +134,7 @@ function DashAgenda({ token, structureId, maxPlaces }) {
           dayDate={date}
           calendar={calendar}
           clickedDay={clickedDay}
+          setPlaces={setPlaces}
           setClickedDay={setClickedDay}
         />
       </section>
@@ -107,6 +143,12 @@ function DashAgenda({ token, structureId, maxPlaces }) {
           <h3>
             {day} {clickedDay.toLocaleDateString()}
           </h3>
+          {calendar.every((c) => c.structureId === structureId && c.date !== date) &&
+            <>
+              <button className="agendaPlacesWork" onClick={() => { setPlaces(-1); addDate(); }}>Repos</button>
+              <button className="agendaPlacesWork" onClick={() => { setPlaces(1); addDate(); }}>Places restantes</button>
+            </>
+          }
           {calendar
             .filter(
               (c) =>
@@ -116,7 +158,7 @@ function DashAgenda({ token, structureId, maxPlaces }) {
               fc.nbPlaces == -1 ? (
                 <>
                   <p>Vous ne travaillez pas 😀</p>
-                  <button className="agendaPlacesWork">Ouvrir</button>
+                  <button className="agendaPlacesWork" onClick={() => { setCalendarIndex(fc.calendrierId); updateStatusOpen(); }}>Ouvrir</button>
                 </>
               ) : (
                 <>
@@ -140,12 +182,12 @@ function DashAgenda({ token, structureId, maxPlaces }) {
                         setCalendarIndex(fc.calendrierId);
                       }}
                     />
-                    <button type="button" onClick={updatePlaces}>
+                    <button type="button" onClick={() => { updatePlaces(); setPlaces(''); }}>
                       Modifier
                     </button>
                   </div>
                   <p className="agendaPlacesChoice"><span>ou</span></p>
-                  <button className="agendaPlacesWork">Repos</button>
+                  <button className="agendaPlacesWork" onClick={() => { setCalendarIndex(fc.calendrierId); updateStatusClose(); }}>Repos</button>
                 </>
               )
             )}

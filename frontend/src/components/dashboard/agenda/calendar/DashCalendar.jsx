@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Calendar from "react-calendar";
 
-function DashCalendar({ calendar, dayDate, setClickedDay, clickedDay }) {
+function DashCalendar({ calendar, dayDate, setClickedDay, clickedDay, setPlaces }) {
   const value = new Date();
 
   const dayStatus = ({ date, view }) => {
@@ -17,7 +17,7 @@ function DashCalendar({ calendar, dayDate, setClickedDay, clickedDay }) {
       minDetail="month"
       maxDetail="month"
       minDate={value}
-      onClickDay={(e) => setClickedDay(e)}
+      onClickDay={(e) => { setClickedDay(e); setPlaces('') }}
       tileClassName={(e) => dayStatus(e)}
     />
   );
