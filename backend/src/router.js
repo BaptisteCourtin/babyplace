@@ -10,7 +10,9 @@ const dashboard = require("./controllers/dashboard.controllers");
 
 router.get("/structure/allapp", (req, res) => {
   datasource
-    .query("SELECT * FROM structure")
+    .query(
+      "SELECT * FROM structure AS s JOIN creche AS c ON s.structureId=c.structureId"
+    )
     .then(([s]) => {
       res.json(s);
     })

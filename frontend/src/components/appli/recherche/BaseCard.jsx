@@ -1,34 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import CarteCreche from "@components/appli/recherche/CarteCreche";
 import { Link } from "react-router-dom";
 import { FiMap } from "react-icons/fi";
 import { BiFilterAlt } from "react-icons/bi";
 
-import axios from "axios";
-
-function BaseCard({ setCompo }) {
-  const [tri, setTri] = useState("Recent");
-  const [structure, setStructure] = useState([]);
-
-  const Token =
-    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
-  const getStructure = () => {
-    axios
-      .get("http://localhost:5000/structure/allapp", {
-        headers: {
-          "x-token": Token,
-        },
-      })
-      .then((res) => {
-        setStructure(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-  useEffect(() => {
-    getStructure();
-  }, []);
+function BaseCard({ setCompo, setTri, tri, structure }) {
   return (
     <>
       <div className="content">

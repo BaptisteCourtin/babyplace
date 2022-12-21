@@ -38,6 +38,11 @@
     flex-direction: column;
     gap: 0.5rem;
 
+    .nom-structure {
+      font-size: $h3;
+      font-weight: 600;
+    }
+
     .ville-prix {
       display: flex;
       flex-direction: row;
