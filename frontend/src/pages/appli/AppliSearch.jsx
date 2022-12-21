@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
 import NavbarApp from "@components/appli/navbar/NavbarApp";
 import BaseCard from "@components/appli/recherche/BaseCard";
 import BaseMap from "@components/appli/recherche/BaseMap";
@@ -6,11 +8,50 @@ import BaseMap from "@components/appli/recherche/BaseMap";
 function AppliSearch() {
   const [compo, setCompo] = useState(0);
 
+  const [tri, setTri] = useState("Recent");
+  const [structure, setStructure] = useState([]);
+
+  const Token =
+    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+  const getStructure = () => {
+    axios
+      .get("http://localhost:5000/structure/allapp", {
+        headers: {
+          "x-token": Token,
+        },
+      })
+      .then((res) => {
+        setStructure(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  useEffect(() => {
+    getStructure();
+  }, []);
+
+  // console.log(structure);
+
   const choixComposant = () => {
     if (compo === 1) {
-      return <BaseMap setCompo={setCompo} />;
+      return (
+        <BaseMap
+          setCompo={setCompo}
+          setTri={setTri}
+          tri={tri}
+          structure={structure}
+        />
+      );
     }
-    return <BaseCard setCompo={setCompo} />;
+    return (
+      <BaseCard
+        setCompo={setCompo}
+        setTri={setTri}
+        tri={tri}
+        structure={structure}
+      />
+    );
   };
 
   return (
