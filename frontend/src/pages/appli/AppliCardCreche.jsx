@@ -8,7 +8,12 @@ function AppliCardCreche() {
   const location = useLocation();
   const { data, dataHorairesId } = location.state;
   const {
-    photoStructure1,
+    nom,
+    nomUsage,
+    nomNaissance,
+    prenom,
+
+    photoStructure2,
     tarifHeure,
     description,
 
@@ -45,12 +50,15 @@ function AppliCardCreche() {
   return (
     <div className="appli-card-creche">
       <header>
-        <Link to="/appli/search">{`< NOM CRECHE`}</Link>
+        <Link to="/appli/search">{`< ${
+          nom ||
+          (nomUsage ? `${prenom} ${nomUsage}` : `${prenom} ${nomNaissance}`)
+        }`}</Link>
       </header>
 
       <main>
         <div className="container-img">
-          <img src={photoStructure1} alt="img creche" />
+          <img src={photoStructure2} alt="img creche" />
           <Star
             com={data.avisCom}
             proprete={data.avisProprete}

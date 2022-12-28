@@ -53,11 +53,9 @@ function SeConnecter({ setCompo }) {
         </form>
       </main>
       <div className="button-bas">
-        <Link to="/appli/search">
-          <button className="butt" type="button">
-            Se connecter
-          </button>
-        </Link>
+        <button className="butt grad" type="button">
+          <Link to="/appli/search">Se connecter</Link>
+        </button>
       </div>
     </div>
   );

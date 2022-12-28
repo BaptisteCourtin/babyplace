@@ -85,9 +85,9 @@ function MoyensPaiement({ setCompo }) {
           />
         </form>
       </main>
-      <div className="button-bas grad">
-        <button className="butt" type="button">
-          Se connecter
+      <div className="button-bas">
+        <button className="butt grad" type="button" onClick={() => setCompo(0)}>
+          Enregistrer
         </button>
       </div>
     </>

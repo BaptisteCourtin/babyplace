@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { FiMap } from "react-icons/fi";
 import { BiFilterAlt } from "react-icons/bi";
 
-function BaseCard({ setCompo, setTri, tri, structure }) {
+function BaseCard({ setCompo, setTri, tri, Allstructure }) {
   return (
     <>
       <div className="content">
@@ -35,8 +35,8 @@ function BaseCard({ setCompo, setTri, tri, structure }) {
       </div>
 
       <main>
-        {structure.length !== 0 &&
-          structure
+        {Allstructure.length !== 0 &&
+          Allstructure
             // .filter(
             //   (each) => each.includes
             //   // each.sorte d'établissement contient au moins un des critère => creche ou assistance

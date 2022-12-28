@@ -13,41 +13,32 @@ function Filtres() {
 
   const choixComposant = () => {
     if (compo === 1) {
-      return <FilterSimple setFiltres={setFiltres} filtres={filtres} />;
+      return (
+        <FilterSimple
+          setFiltres={setFiltres}
+          filtres={filtres}
+          setCompo={setCompo}
+        />
+      );
     }
     if (compo === 2) {
-      return <DateHeure />;
+      return <DateHeure setCompo={setCompo} />;
     }
     if (compo === 3) {
-      return <Services />;
+      return <Services setCompo={setCompo} />;
     }
     if (compo === 4) {
-      return <Aggrements />;
+      return <Aggrements setCompo={setCompo} />;
     }
     if (compo === 5) {
-      return <Adresse />;
+      return <Adresse setCompo={setCompo} />;
     }
-    return <Base setCompo={setCompo} />;
+    return <Base filtres={filtres} setCompo={setCompo} />;
   };
 
   return (
     <div className="filtres" filtres={filtres}>
-      <header>
-        <button
-          type="button"
-          className="h2"
-          onClick={() => setCompo(0)}
-        >{`< Filtres`}</button>
-        <button type="button">RESET</button>
-      </header>
-
       {choixComposant()}
-
-      <button type="button" className="apply">
-        <Link to="/appli/search" state={{ filtres }}>
-          Appliquer
-        </Link>
-      </button>
     </div>
   );
 }

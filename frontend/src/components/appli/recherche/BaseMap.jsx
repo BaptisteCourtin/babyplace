@@ -1,17 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FiMap } from "react-icons/fi";
+import { BsCardList } from "react-icons/bs";
 import { BiFilterAlt } from "react-icons/bi";
 
+import { MapContainer, TileLayer } from "react-leaflet";
 import CardMarker from "./CardMarker";
 
-import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
 const center = [47.2113302, -1.5474466];
-function BaseMap({ setCompo, setTri, tri, structure }) {
-  // toutes les structures
-
+function BaseMap({ setCompo, setTri, tri, Allstructure }) {
+  console.log(Allstructure);
   return (
     <>
       <div className="content">
@@ -21,12 +20,15 @@ function BaseMap({ setCompo, setTri, tri, structure }) {
           <div className="left-filter">
             <div className="search-filtres">
               <Link to="/appli/search/filtres">
-                <span>{BiFilterAlt()}Filtres</span>
+                <span>
+                  <BiFilterAlt />
+                  Filtres
+                </span>
               </Link>
             </div>
           </div>
           <button className="map" type="button" onClick={() => setCompo(0)}>
-            <FiMap />
+            <BsCardList />
           </button>
         </div>
       </div>
@@ -34,15 +36,15 @@ function BaseMap({ setCompo, setTri, tri, structure }) {
       <main className="big-map">
         <MapContainer
           center={center}
-          zoom={10}
+          zoom={12}
           style={{ width: "100%", height: "100%" }}
         >
           <TileLayer
             url=" https://api.maptiler.com/maps/basic-v2/256/{z}/{x}/{y}.png?key=JV4eU3swHqD1YPZtc09q"
             attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
           />
-          {structure.map((each) => (
-            <CardMarker oneStructure={each} />
+          {Allstructure.map((each) => (
+            <CardMarker data={each} />
           ))}
         </MapContainer>
       </main>

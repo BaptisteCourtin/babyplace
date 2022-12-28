@@ -48,7 +48,7 @@ function PopUpProfilComplet({ setVisiblePopUp, data }) {
           uniquement sur ordonnance ou protocole.
         </p>
       </div>
-      <button type="button">
+      <button type="button" className="compris">
         <Link to="/appli/search/reservation" state={{ data }}>
           J'ai compris !
         </Link>
