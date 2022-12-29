@@ -66,6 +66,12 @@
             background-color: $third;
             color: $white;
           }
+
+          p {
+            font-size: $h3;
+            color: $second;
+            font-weight: 600;
+          }
         }
       }
     }

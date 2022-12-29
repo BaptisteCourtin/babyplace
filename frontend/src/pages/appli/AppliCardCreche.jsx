@@ -104,6 +104,7 @@ function AppliCardCreche() {
             {Jardin ? <p>0% pollution intérieure</p> : null}
             {Jardin ? <p>Repas maison</p> : null}
             {Jardin ? <p>produits d'hygiène fournis</p> : null} */}
+            {/* si ass mat */}
           </div>
 
           <div>
@@ -127,10 +128,10 @@ function AppliCardCreche() {
                 <span> {tarifHeure}€</span> / heure *
               </p>
               <p>
-                <span>{tarifHeure * 8}€</span> / jour *
+                <span>{tarifHeure * 10}€</span> / jour (10h)*
               </p>
             </div>
-            <PopUp data={data} />
+            <PopUp data={data} dataHorairesId={dataHorairesId} />
           </div>
         </div>
       </main>

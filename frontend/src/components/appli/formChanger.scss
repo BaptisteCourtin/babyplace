@@ -4,16 +4,25 @@
 .inscription,
 .moyens-paiements {
   form {
-    width: 100%;
-    padding-right: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
 
+    width: 90%;
+    flex-grow: 1;
+
     label:not(.check) {
       position: relative;
-      width: 90%;
+      width: 100%;
+
+      input {
+        color: transparent;
+      }
+      input:focus,
+      input:valid {
+        color: $second;
+      }
 
       input {
         border: 3px solid $second;
@@ -65,13 +74,6 @@
         }
       }
 
-      /* Chrome, Safari, Edge, Opera */
-      &::-webkit-outer-spin-button,
-      &::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-      }
-
       p {
         position: absolute;
         left: 10px;
@@ -81,12 +83,10 @@
         transition: 0.3s;
       }
 
-      input[type="date"] {
-        color: transparent;
-      }
-      input[type="date"]:focus,
-      input[type="date"]:valid {
-        color: $second;
+      .view-password {
+        position: absolute;
+        right: 10px;
+        top: 17px;
       }
     }
   }

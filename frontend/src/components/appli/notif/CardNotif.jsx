@@ -11,7 +11,7 @@ function CardNotif({ texte }) {
 }
 
 CardNotif.propTypes = {
-  setCompo: PropTypes.string.isRequired,
+  texte: PropTypes.string.isRequired,
 };
 
 export default CardNotif;

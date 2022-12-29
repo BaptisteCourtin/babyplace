@@ -31,8 +31,6 @@ function AppliSearch() {
     getStructure();
   }, []);
 
-  console.log(structure);
-
   const choixComposant = () => {
     if (compo === 1) {
       return (

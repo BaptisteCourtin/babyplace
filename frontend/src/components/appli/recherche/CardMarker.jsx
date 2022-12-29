@@ -6,14 +6,14 @@ import { Marker, Popup } from "react-leaflet";
 function CardMarker({ data }) {
   const { nom, nomUsage, nomNaissance, prenom } = data;
 
-  const [adresse, setAdresse] = useState();
+  const [adresseGPS, setAdresseGPS] = useState();
 
   // api convertir adresse en position gps
   const getAdresse = () => {
     axios
       .get(`https://api-adresse.data.gouv.fr/search/?q=${data.adresse}`)
       .then((res) => {
-        setAdresse(res.data.features[0].geometry.coordinates.reverse());
+        setAdresseGPS(res.data.features[0].geometry.coordinates.reverse());
       })
       .catch((err) => {
         console.error(err);
@@ -46,8 +46,8 @@ function CardMarker({ data }) {
   }, []);
 
   return (
-    adresse && (
-      <Marker position={adresse}>
+    adresseGPS && (
+      <Marker position={adresseGPS}>
         <Popup>
           <Link to="/appli/search/card" state={{ data, dataHorairesId }}>
             {nom ||
@@ -57,6 +57,11 @@ function CardMarker({ data }) {
           </Link>
         </Popup>
       </Marker>
+      // <Marker position={[0, 0]}>
+      //   <Popup>
+      //     A pretty CSS3 popup. <br /> Easily customizable.
+      //   </Popup>
+      // </Marker>
     )
   );
 }

@@ -12,6 +12,9 @@
   border-radius: 10px;
   z-index: 1;
 
+  flex-shrink: 0;
+  flex-grow: 0;
+
   &.right {
     justify-content: flex-end;
   }

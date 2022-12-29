@@ -68,10 +68,12 @@
       .prix-resa {
         display: flex;
         flex-direction: row;
+        align-items: center;
 
         .prix {
           display: flex;
           flex-direction: column;
+          gap: 0.5rem;
           font-weight: 600;
 
           span {
