@@ -29,6 +29,11 @@ function AppliCardCreche() {
     handi,
 
     jardin,
+    animaux,
+    nonFumeur,
+    zeroPollution,
+    repas,
+    hygiene,
 
     promenades,
     musique,
@@ -99,12 +104,12 @@ function AppliCardCreche() {
           <div>
             <h3>Accueil</h3>
             {jardin ? <p>Jardin</p> : null}
-            {/* {Jardin ? <p>Présence d'animaux</p> : null}
-            {Jardin ? <p>Foyer non-fumeur</p> : null}
-            {Jardin ? <p>0% pollution intérieure</p> : null}
-            {Jardin ? <p>Repas maison</p> : null}
-            {Jardin ? <p>produits d'hygiène fournis</p> : null} */}
             {/* si ass mat */}
+            {/* {animaux ? <p>Présence d'animaux</p> : null}
+            {nonFumeur ? <p>Foyer non-fumeur</p> : null}
+            {zeroPollution ? <p>0% pollution intérieure</p> : null}
+            {repas ? <p>Repas maison</p> : null}
+            {hygiene ? <p>produits d'hygiène fournis</p> : null} */}
           </div>
 
           <div>
@@ -133,6 +138,9 @@ function AppliCardCreche() {
             </div>
             <PopUp data={data} dataHorairesId={dataHorairesId} />
           </div>
+          <Link className="envoie-mess" to="/appli/message">
+            Envoyer un Message
+          </Link>
         </div>
       </main>
 
