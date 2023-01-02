@@ -119,7 +119,7 @@ function Connexion({ setCompo }) {
         </form>
       </main>
       <div className="button-bas">
-        <button type="button" className="butt" onClick={() => setCompo(1)}>
+        <button type="button" className="butt grad" onClick={() => setCompo(1)}>
           Créer un compte
         </button>
       </div>

@@ -3,7 +3,18 @@ import { Link } from "react-router-dom";
 import AppliPlaces from "@components/appli/filtres/AppliPlaces";
 import PropTypes from "prop-types";
 
-function ChoixDates({ setCompo, photoProfil }) {
+function ChoixDates({
+  setCompo,
+  setHeureMin,
+  setHeureMax,
+  setJour,
+  photoProfil,
+  nom,
+  nomUsage,
+  nomNaissance,
+  prenom,
+  dataHorairesId,
+}) {
   return (
     <>
       <div className="button-top">
@@ -22,11 +33,21 @@ function ChoixDates({ setCompo, photoProfil }) {
             <img src={photoProfil} alt="avatar" />
           </div>
           <div className="user-info">
-            <p>Demandez une place</p>
-            <h3>Creche P</h3>
+            <p>Demandez une place à</p>
+            <h3>
+              {nom ||
+                (nomUsage
+                  ? `${prenom} ${nomUsage}`
+                  : `${prenom} ${nomNaissance}`)}
+            </h3>
           </div>
         </div>
-        <AppliPlaces />
+        <AppliPlaces
+          dataHorairesId={dataHorairesId}
+          setHeureMin={setHeureMin}
+          setHeureMax={setHeureMax}
+          setJour={setJour}
+        />
       </main>
 
       <div className="button-bas right">

@@ -68,16 +68,32 @@
       .prix-resa {
         display: flex;
         flex-direction: row;
+        align-items: center;
 
         .prix {
           display: flex;
           flex-direction: column;
+          gap: 0.5rem;
           font-weight: 600;
 
           span {
             font-size: $h3;
           }
         }
+      }
+
+      .envoie-mess {
+        background: $gradient;
+        color: $white;
+        font-size: $h4;
+        font-weight: 500;
+        border-radius: 10px;
+        margin: 1rem 1rem 0;
+        height: 50px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     }
   }

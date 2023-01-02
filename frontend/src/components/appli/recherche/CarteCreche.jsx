@@ -6,7 +6,16 @@ import PropTypes from "prop-types";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 function CarteCreche({ data }) {
-  const { photoStructure1, tarifHeure, structureId, nom } = data;
+  const {
+    photoStructure1,
+    tarifHeure,
+    structureId,
+    nom,
+    nomUsage,
+    nomNaissance,
+    prenom,
+  } = data;
+
   const [likeCard, setLikeCard] = useState(true);
   // les horaires de chaques jour suivant l'id de la structure
   const [dataHorairesId, setDataHorairesId] = useState([]);
@@ -41,9 +50,16 @@ function CarteCreche({ data }) {
         )}
 
         <Link to="/appli/search/card" state={{ data, dataHorairesId }}>
-          <img src={photoStructure1} alt="img creche" />
+          <div className="container-img">
+            <img src={photoStructure1} alt="img creche" />
+            <p className="nom-structure">
+              {nom ||
+                (nomUsage
+                  ? `${prenom} ${nomUsage}`
+                  : `${prenom} ${nomNaissance}`)}
+            </p>
+          </div>
           <div className="info-creche">
-            <p className="nom-structure">{nom}</p>
             <div className="ville-prix">
               <p>ville à X mètres</p>
               <p className="prix">{tarifHeure}€/heure</p>

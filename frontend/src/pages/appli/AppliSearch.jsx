@@ -31,8 +31,6 @@ function AppliSearch() {
     getStructure();
   }, []);
 
-  // console.log(structure);
-
   const choixComposant = () => {
     if (compo === 1) {
       return (
@@ -40,7 +38,7 @@ function AppliSearch() {
           setCompo={setCompo}
           setTri={setTri}
           tri={tri}
-          structure={structure}
+          Allstructure={structure}
         />
       );
     }
@@ -49,7 +47,7 @@ function AppliSearch() {
         setCompo={setCompo}
         setTri={setTri}
         tri={tri}
-        structure={structure}
+        Allstructure={structure}
       />
     );
   };

@@ -12,14 +12,6 @@
     background: linear-gradient(rgb(240, 99, 167, 0.4), rgb(240, 99, 167, 0.8));
   }
 
-  img {
-    height: 145px;
-    width: 100%;
-    object-fit: cover;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-  }
-
   .like {
     position: absolute;
     right: 20px;
@@ -31,17 +23,34 @@
     cursor: pointer;
   }
 
+  .container-img {
+    position: relative;
+
+    img {
+      height: 145px;
+      width: 100%;
+      object-fit: cover;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+    }
+
+    .nom-structure {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+
+      font-size: $h3;
+      font-weight: 600;
+      color: $second;
+      text-shadow: 0px 0px 5px $white;
+    }
+  }
   .info-creche {
     padding: 0.5rem;
     background-color: $white;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-
-    .nom-structure {
-      font-size: $h3;
-      font-weight: 600;
-    }
 
     .ville-prix {
       display: flex;
