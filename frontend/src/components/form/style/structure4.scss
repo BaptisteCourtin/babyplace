@@ -1,0 +1,20 @@
+.structure4 {
+  & textarea {
+    width: 80%;
+    height: 30vh;
+    border: 1px solid $grey;
+    border-radius: 10px;
+    margin: 2vh 10% 0;
+    resize: none;
+    padding: 8px;
+  }
+
+  & legend {
+    text-align: center;
+    color: $grey;
+  }
+
+  & textarea:focus {
+    outline: 1.5px solid $third;
+  }
+}

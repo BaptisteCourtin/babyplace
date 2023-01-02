@@ -27,95 +27,77 @@ function FormEnfant() {
           <button type="button">Bébé 2</button>
         </div>
         <form>
-          <div>
-            <label htmlFor="nom">
-              <input
-                required
-                type="text"
-                name="nom"
-                id="nom"
-                placeholder="Nom"
-                value={data.nom}
-                onChange={(e) => updateFields({ nom: e.target.value })}
-              />
-            </label>
-            <p className="checkSymbol">&#x2713;</p>
-          </div>
+          <label htmlFor="nom">
+            <input
+              required
+              type="text"
+              name="nom"
+              id="nom"
+              value={data.nom}
+              onChange={(e) => updateFields({ nom: e.target.value })}
+            />
+            <p>Nom</p>
+          </label>
 
-          <div>
-            <label htmlFor="nom">
-              <input
-                required
-                type="text"
-                name="prenom"
-                id="prenom"
-                placeholder="Prenom"
-                value={data.prenom}
-                onChange={(e) => updateFields({ prenom: e.target.value })}
-              />
-            </label>
-            <p className="checkSymbol">&#x2713;</p>
-          </div>
+          <label htmlFor="nom">
+            <input
+              required
+              type="text"
+              name="prenom"
+              id="prenom"
+              value={data.prenom}
+              onChange={(e) => updateFields({ prenom: e.target.value })}
+            />
+            <p>Prenom</p>
+          </label>
 
-          <div>
-            <label htmlFor="naissance">
-              <input
-                required
-                type="date"
-                name="naissance"
-                id="naissance"
-                placeholder="Date de naissance"
-                value={data.naissance}
-                onChange={(e) => updateFields({ naissance: e.target.value })}
-              />
-            </label>
-            <p className="checkSymbol">&#x2713;</p>
-          </div>
+          <label htmlFor="naissance">
+            <input
+              required
+              type="date"
+              name="naissance"
+              id="naissance"
+              value={data.naissance}
+              onChange={(e) => updateFields({ naissance: e.target.value })}
+            />
+            <p>Date de naissance</p>
+          </label>
 
-          <div>
-            <label htmlFor="marcheur">
-              <input
-                required
-                type="text"
-                name="marcheur"
-                id="marcheur"
-                placeholder="Marcheur / Non marcheur"
-                value={data.marcheur}
-                onChange={(e) => updateFields({ marcheur: e.target.value })}
-              />
-            </label>
-            <p className="checkSymbol">&#x2713;</p>
-          </div>
+          <label htmlFor="marcheur">
+            <input
+              required
+              type="text"
+              name="marcheur"
+              id="marcheur"
+              value={data.marcheur}
+              onChange={(e) => updateFields({ marcheur: e.target.value })}
+            />
+            <p>Marcheur / Non marcheur</p>
+          </label>
 
-          <div>
-            <label htmlFor="allergies">
-              <input
-                required
-                type="text"
-                name="allergies"
-                id="allergies"
-                placeholder="Allergies"
-                value={data.allergies}
-                onChange={(e) => updateFields({ allergies: e.target.value })}
-              />
-            </label>
-            <p className="checkSymbol">&#x2713;</p>
-          </div>
+          <label htmlFor="allergies">
+            <input
+              required
+              type="text"
+              name="allergies"
+              id="allergies"
+              value={data.allergies}
+              onChange={(e) => updateFields({ allergies: e.target.value })}
+            />
+            <p>Allergies</p>
+          </label>
 
-          <div>
-            <label htmlFor="medecin">
-              <input
-                required
-                type="text"
-                name="medecin"
-                id="medecin"
-                placeholder="Médecin traitant"
-                value={data.medecin}
-                onChange={(e) => updateFields({ medecin: e.target.value })}
-              />
-            </label>
-            <p className="checkSymbol">&#x2713;</p>
-          </div>
+          <label htmlFor="medecin">
+            <input
+              required
+              type="text"
+              name="medecin"
+              id="medecin"
+              value={data.medecin}
+              onChange={(e) => updateFields({ medecin: e.target.value })}
+            />
+            <p>Médecin traitant</p>
+          </label>
         </form>
       </div>
     </main>

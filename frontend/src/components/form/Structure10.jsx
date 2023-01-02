@@ -35,8 +35,8 @@ function Structure10({ dureeMin, dureeMax, updateFields }) {
   );
 }
 Structure10.propTypes = {
-  dureeMin: Proptypes.string,
-  dureeMax: Proptypes.string,
+  dureeMin: Proptypes.node,
+  dureeMax: Proptypes.node,
   updateFields: Proptypes.func,
 };
 export default Structure10;

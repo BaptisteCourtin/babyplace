@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import moment from "moment";
 import DashCalendar from "./calendar/DashCalendar";
 
 function DashAgenda({ token, structureId, maxPlaces }) {
@@ -53,7 +54,6 @@ function DashAgenda({ token, structureId, maxPlaces }) {
       });
   };
 
-
   useEffect(() => {
     getData();
     getHours();
@@ -74,15 +74,15 @@ function DashAgenda({ token, structureId, maxPlaces }) {
     await axios.put();
   };
 
-
   const handleClick = (e) => {
     e.preventDefault();
     updateStatus();
   };
 
   const [clickedDay, setClickedDay] = useState(new Date());
-  const date = `${clickedDay.getFullYear()}-${clickedDay.getMonth() + 1
-    }-${clickedDay.getDate()}`;
+  const date = `${clickedDay.getFullYear()}-${
+    clickedDay.getMonth() + 1
+  }-${clickedDay.getDate()}`;
 
   const day = clickedDay.toLocaleDateString("fr-FR", { weekday: "long" });
 
@@ -116,12 +116,23 @@ function DashAgenda({ token, structureId, maxPlaces }) {
                 <>
                   <div className="agendaPlacesLeft">
                     <p>
-                      {fc.nbPlaces < 4
-                        ? (<span className="agendaAlertSign" style={{ backgroundColor: 'rgba(239, 54, 114, 0.6)' }}>!</span>)
-                        : (<span className="agendaAlertSign" style={{
-                          backgroundColor: 'rgba(45, 205, 122, 0.6)'
-                        }}>+</span>)
-                      }
+                      {fc.nbPlaces < 4 ? (
+                        <span
+                          className="agendaAlertSign"
+                          style={{ backgroundColor: "rgba(239, 54, 114, 0.6)" }}
+                        >
+                          !
+                        </span>
+                      ) : (
+                        <span
+                          className="agendaAlertSign"
+                          style={{
+                            backgroundColor: "rgba(45, 205, 122, 0.6)",
+                          }}
+                        >
+                          +
+                        </span>
+                      )}
                       Il vous reste
                       <b> {fc.nbPlaces} </b>
                       places sur
@@ -144,7 +155,9 @@ function DashAgenda({ token, structureId, maxPlaces }) {
                       Modifier
                     </button>
                   </div>
-                  <p className="agendaPlacesChoice"><span>ou</span></p>
+                  <p className="agendaPlacesChoice">
+                    <span>ou</span>
+                  </p>
                   <button className="agendaPlacesWork">Repos</button>
                 </>
               )

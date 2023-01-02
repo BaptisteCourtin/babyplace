@@ -11,7 +11,6 @@
 
 // --- appli ---
 @import "../style/appli/applituto.scss";
-
 @import "../style/appli/applimenu.scss";
 @import "../style/appli/applisearch.scss";
 @import "../style/appli/applifiltres.scss";
@@ -22,18 +21,36 @@
 @import "../style/appli/applinotif.scss";
 @import "../style/appli/applimessage.scss";
 
+@import "../components/appli/formChanger.scss";
+@import "../components/appli/buttons.scss";
 @import "../components/appli/recherche/carteCreche.scss";
+@import "../components/appli/recherche/blocJour.scss";
 @import "../components/appli/recherche/star.scss";
 @import "../components/appli/recherche/popUp.scss";
 @import "../components/appli/user/completion.scss";
 @import "../components/appli/navbar/navbarApp.scss";
 @import "../components/appli/profilplat.scss";
+@import "../components/appli/menu/cardFavPlat.scss";
 @import "../components/appli/filtres/toggle.scss";
 @import "../components/appli/filtres/check.scss";
 @import "../components/appli/filtres/appliPlaces.scss";
 
 // --- form ---
-@import "../components/form/formStructure.scss";
+@import "../components/form/style/formStructure.scss";
+@import "../components/form/style/structure1.scss";
+@import "../components/form/style/structure2.scss";
+@import "../components/form/style/structure3.scss";
+@import "../components/form/style/structure4.scss";
+@import "../components/form/style/structure5.scss";
+@import "../components/form/style/structure6.scss";
+@import "../components/form/style/structure7-8.scss";
+@import "../components/form/style/structure9.scss";
+@import "../components/form/style/structure10.scss";
+@import "../components/form/style/structure11.scss";
+@import "../components/form/style/structure12.scss";
+@import "../components/form/style/structure13.scss";
+@import "../components/form/style/structure14.scss";
+@import "../components/form/style/structure15.scss";
 
 // --- Messages ---
 @import "../components/messages/messages.scss";

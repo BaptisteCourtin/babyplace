@@ -1,0 +1,93 @@
+.connexion,
+.enfant,
+.parent,
+.inscription,
+.moyens-paiements {
+  form {
+    width: 100%;
+    padding-right: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    label:not(.check) {
+      position: relative;
+      width: 90%;
+
+      input {
+        border: 3px solid $second;
+        background-color: transparent;
+        border-radius: 10px;
+        padding: 0.5rem;
+        width: 100%;
+        height: 50px;
+        /* enleve la border de base */
+        outline: none;
+
+        &:focus {
+          border-color: $third;
+
+          & + p {
+            transform: translate(5px, -9px);
+            font-size: 13px;
+            padding: 0 5px;
+            color: $third;
+            border-right: 3px solid $third;
+            border-left: 3px solid $third;
+            border-radius: 5px;
+            line-height: 20px;
+            background-color: $white;
+          }
+        }
+
+        &:valid {
+          border-color: $green;
+
+          & + p {
+            transform: translate(5px, -9px);
+            font-size: 13px;
+            padding: 0 5px;
+            color: $green;
+            border-right: 3px solid $green;
+            border-left: 3px solid $green;
+            border-radius: 5px;
+            line-height: 20px;
+            background-color: $white;
+            transition: 0s;
+          }
+        }
+
+        &[type="number"]::-webkit-inner-spin-button,
+        &[type="number"]::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+      }
+
+      /* Chrome, Safari, Edge, Opera */
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      p {
+        position: absolute;
+        left: 10px;
+        top: 0px;
+        /* comme input height */
+        line-height: 50px;
+        transition: 0.3s;
+      }
+
+      input[type="date"] {
+        color: transparent;
+      }
+      input[type="date"]:focus,
+      input[type="date"]:valid {
+        color: $second;
+      }
+    }
+  }
+}

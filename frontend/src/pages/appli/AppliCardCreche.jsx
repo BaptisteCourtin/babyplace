@@ -75,8 +75,8 @@ function AppliCardCreche() {
             <p>Adresse : {adresse}</p>
           </div>
 
-          <h3>Disponibiltés</h3>
-          <div className="disponibilite">
+          <div className="dispo">
+            <h3>Disponibiltés</h3>
             <BlocJour dataHorairesId={dataHorairesId} />
           </div>
 
