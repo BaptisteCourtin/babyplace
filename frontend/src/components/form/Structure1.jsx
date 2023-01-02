@@ -17,7 +17,7 @@ function Structure1({
   return (
     <div className="page-left structure1">
       <div className="typeContainer">
-        <h4>Quel type d’accueil proposez-vous ?</h4>
+        <h4>Quel type d'accueil proposez-vous ?</h4>
         <div>
           <button
             type="button"

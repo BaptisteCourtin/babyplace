@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { StructureContext } from "@components/context/StructureContext";
+import StructureContext from "@components/context/StructureContext";
 import Proptypes from "prop-types";
 
 function Structure13({
