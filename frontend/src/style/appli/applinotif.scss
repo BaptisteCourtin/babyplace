@@ -5,6 +5,15 @@
   min-height: 100vh;
   background-color: $white;
 
+  .notif-container-grad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: $gradient;
+    width: 100%;
+    height: 100%;
+  }
+
   .logo {
     max-width: 130px;
   }
@@ -47,9 +56,7 @@
       max-width: 500px;
       padding: 1rem;
 
-      // card notif
       .card-notif {
-        border: 2px red solid;
         cursor: pointer;
         width: 100%;
         height: 80px;
@@ -77,13 +84,11 @@
   .notif-rejet,
   .notif-accepte {
     min-height: 100vh;
-    min-width: 100%;
-    background: $gradient;
+    width: 100%;
 
     display: flex;
     flex-direction: column;
     align-items: center;
-
     gap: 1rem;
     max-width: 500px;
     padding: 1rem;
@@ -92,13 +97,6 @@
   }
 
   .notif-note {
-    .row-img {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-    }
-
     form {
       flex-grow: 1;
 
@@ -123,7 +121,7 @@
       color: $second;
       font-size: $h3;
       font-weight: 600;
-      width: 70%;
+      width: 90%;
     }
   }
 
@@ -145,14 +143,16 @@
   .notif-paye {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     min-height: 100vh;
+    width: 100%;
+    max-width: 500px;
+    padding: 1rem;
 
     .moyens-paiements {
+      width: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
       flex-grow: 1;
 
@@ -171,6 +171,7 @@
 
     .button-bas {
       background: $gradient;
+
       .butt {
         font-size: $h3;
         font-weight: 500;
