@@ -318,7 +318,7 @@ function Structure13({
   );
 }
 Structure13.propTypes = {
-  financementPaje: Proptypes.node,
+  financementPaje: Proptypes.bool,
   tarifHeure: Proptypes.node,
   tarifHoraireSpec: Proptypes.node,
   indemnRepas: Proptypes.node,
