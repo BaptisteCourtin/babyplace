@@ -14,7 +14,6 @@ function Structure1({
   updateFields,
 }) {
   const { structure, setStructure } = useContext(StructureContext);
-  const [typeDeCreche, setTypeCreche] = useState("");
   return (
     <div className="page-left structure1">
       <div className="typeContainer">
@@ -51,7 +50,6 @@ function Structure1({
                 type="button"
                 className={typeCreche === "micro creche" ? "selected" : ""}
                 onClick={() => {
-                  setTypeCreche("micro creche");
                   updateFields({ typeCreche: "micro creche" });
                 }}
               >
@@ -63,7 +61,6 @@ function Structure1({
                   typeCreche === "creche d'entreprise" ? "selected" : ""
                 }
                 onClick={() => {
-                  setTypeCreche("creche d'entreprise");
                   updateFields({ typeCreche: "creche d'entreprise" });
                 }}
               >
@@ -73,7 +70,6 @@ function Structure1({
                 type="button"
                 className={typeCreche === "halte garderie" ? "selected" : ""}
                 onClick={() => {
-                  setTypeCreche("halte garderie");
                   updateFields({ typeCreche: "halte garderie" });
                 }}
               >
@@ -85,7 +81,6 @@ function Structure1({
                   typeCreche === "creche associative" ? "selected" : ""
                 }
                 onClick={() => {
-                  setTypeCreche("creche associative");
                   updateFields({ typeCreche: "creche associative" });
                 }}
               >
@@ -95,7 +90,6 @@ function Structure1({
                 type="button"
                 className={typeCreche === "multi accueil" ? "selected" : ""}
                 onClick={() => {
-                  setTypeCreche("multi accueil");
                   updateFields({ typeCreche: "multi accueil" });
                 }}
               >
@@ -105,7 +99,6 @@ function Structure1({
                 type="button"
                 className={typeCreche === "creche municipale" ? "selected" : ""}
                 onClick={() => {
-                  setTypeCreche("creche municipale");
                   updateFields({ typeCreche: "creche municipale" });
                 }}
               >
@@ -115,7 +108,6 @@ function Structure1({
                 type="button"
                 className={typeCreche === "creche collective" ? "selected" : ""}
                 onClick={() => {
-                  setTypeCreche("creche collective");
                   updateFields({ typeCreche: "creche collective" });
                 }}
               >
@@ -125,7 +117,6 @@ function Structure1({
                 type="button"
                 className={typeCreche === "creche parentale" ? "selected" : ""}
                 onClick={() => {
-                  setTypeCreche("creche parentale");
                   updateFields({ typeCreche: "creche parentale" });
                 }}
               >
@@ -272,7 +263,7 @@ function Structure1({
             </label>
             <p className="checkSymbol">&#x2713;</p>
             <p>
-              Les parents n’obtiendront l’adresse exacte qu’après avoir effectué
+              Les parents n'obtiendront l'adresse exacte qu'après avoir effectué
               la réservation
             </p>
           </div>
@@ -293,7 +284,7 @@ function Structure1({
             </label>
             <p className="checkSymbol">&#x2713;</p>
             <p>
-              Les parents n’obtiendront ce numéro qu’après avoir effectué la
+              Les parents n'obtiendront ce numéro qu'après avoir effectué la
               réservation
             </p>
           </div>
