@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import ResaContext from "@components/context/ResaContext";
+import Proptypes from "prop-types";
 
 function Structure14({ maxPlaces }) {
   const { resa } = useContext(ResaContext);
@@ -60,5 +61,7 @@ function Structure14({ maxPlaces }) {
     </div>
   );
 }
-
+Structure14.propTypes = {
+  maxPlaces: Proptypes.node,
+};
 export default Structure14;

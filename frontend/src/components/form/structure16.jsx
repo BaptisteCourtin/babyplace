@@ -5,7 +5,7 @@ function Structure16() {
   return (
     <div className="structure16 pageChoixResa">
       <div className="pageContent ">
-        <h4>Hourra !</h4>
+        <h4>Fin du formulaire d'inscription</h4>
         <p>
           Nous avons bien pris en compte tous les éléments pour paramétrer votre
           profil Babyplace.{" "}

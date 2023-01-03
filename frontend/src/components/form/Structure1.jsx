@@ -4,6 +4,7 @@ import StructureContext from "@components/context/StructureContext";
 
 function Structure1({
   typeStructure,
+  typeCreche,
   nomStructure,
   telephone,
   nomNaissance,
@@ -13,7 +14,7 @@ function Structure1({
   updateFields,
 }) {
   const { structure, setStructure } = useContext(StructureContext);
-  const [typeCreche, setTypeCreche] = useState("");
+  const [typeDeCreche, setTypeCreche] = useState("");
   return (
     <div className="page-left structure1">
       <div className="typeContainer">
@@ -303,6 +304,7 @@ function Structure1({
 }
 Structure1.propTypes = {
   typeStructure: Proptypes.string,
+  typeCreche: Proptypes.string,
   nomStructure: Proptypes.string,
   telephone: Proptypes.string,
   nomNaissance: Proptypes.string,
