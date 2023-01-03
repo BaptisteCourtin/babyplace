@@ -51,7 +51,7 @@ function CarteCreche({ data }) {
 
         <Link to="/appli/search/card" state={{ data, dataHorairesId }}>
           <div className="container-img">
-            <img src={photoStructure1} alt="img creche" />
+            <img src={photoStructure1} alt="img-creche" />
             <p className="nom-structure">
               {nom ||
                 (nomUsage
@@ -77,7 +77,7 @@ function CarteCreche({ data }) {
 }
 
 CarteCreche.propTypes = {
-  data: PropTypes.string.isRequired,
+  data: PropTypes.object.isRequired,
 };
 
 export default CarteCreche;

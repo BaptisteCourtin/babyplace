@@ -39,8 +39,8 @@ function PopUp({ data, dataHorairesId }) {
 }
 
 PopUp.propTypes = {
-  data: PropTypes.string.isRequired,
-  dataHorairesId: PropTypes.string.isRequired,
+  data: PropTypes.object.isRequired,
+  dataHorairesId: PropTypes.array.isRequired,
 };
 
 export default PopUp;

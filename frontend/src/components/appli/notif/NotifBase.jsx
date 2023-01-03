@@ -1,4 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+
 import NavbarApp from "@components/appli/navbar/NavbarApp";
 
 import CardNotif from "@components/appli/notif/CardNotif";
@@ -32,6 +35,21 @@ function NotifBase({ setCompo }) {
         {/* il faut map le texte de la notif => CardNotif et quand on clique dessus ça affiche la notif */}
         {/* => passer les data dans CardNotif puis dans les notifs */}
         {/* => ??? faire un choix composant avec des data qui changent ??? */}
+
+        <a href="https://www.pajemploi.urssaf.fr/pajewebinfo/cms/sites/pajewebinfo/accueil.html">
+          <div className="card-notif">
+            <p>Pensez à faire la déclaration PAJEMPLOI</p>
+            <span>{`>`}</span>
+          </div>
+        </a>
+
+        <Link to="/appli/message">
+          <div className="card-notif">
+            <p>Vous avez un message de XXX</p>
+            <span>{`>`}</span>
+          </div>
+        </Link>
+
         {tabNotif.map((each) => (
           <CardNotif
             setCompo={setCompo}
@@ -44,5 +62,9 @@ function NotifBase({ setCompo }) {
     </div>
   );
 }
+
+NotifBase.propTypes = {
+  setCompo: PropTypes.func.isRequired,
+};
 
 export default NotifBase;

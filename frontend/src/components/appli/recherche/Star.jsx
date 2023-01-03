@@ -48,8 +48,8 @@ function Star({ com, proprete, securite, eveil, horaires }) {
               readonly
             />
           </div>
-          {tabStar.map((each) => (
-            <BlocStar nom={each.nom} nbStar={each.nbStar} />
+          {tabStar.map((each, index) => (
+            <BlocStar nom={each.nom} nbStar={each.nbStar} key={index} />
           ))}
         </div>
       ) : (

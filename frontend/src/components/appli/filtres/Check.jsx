@@ -20,7 +20,7 @@ function Check({ setter, state, nom, p }) {
 
 Check.propTypes = {
   setter: PropTypes.func.isRequired,
-  state: PropTypes.string.isRequired,
+  state: PropTypes.bool.isRequired,
   nom: PropTypes.string.isRequired,
   p: PropTypes.string.isRequired,
 };

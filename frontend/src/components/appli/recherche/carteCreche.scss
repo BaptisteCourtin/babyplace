@@ -1,7 +1,6 @@
 .carte-creche {
   position: relative;
   padding: 0.6rem;
-  margin: 0 0.5rem;
   max-width: 340px;
   background: linear-gradient(
     rgba(127, 114, 242, 0.4),
@@ -25,9 +24,10 @@
 
   .container-img {
     position: relative;
+    height: 145px; // la ligne
 
     img {
-      height: 145px;
+      height: 100%;
       width: 100%;
       object-fit: cover;
       border-top-left-radius: 15px;
@@ -45,6 +45,7 @@
       text-shadow: 0px 0px 5px $white;
     }
   }
+
   .info-creche {
     padding: 0.5rem;
     background-color: $white;

@@ -20,8 +20,9 @@ function AppliUser() {
           nécessaire pour un accueil en crèche !
         </p>
         <div className="container-completion">
-          {tabCompletion.map((each) => (
+          {tabCompletion.map((each, index) => (
             <Completion
+              key={index}
               nom={each.nom}
               completion={each.completion}
               quelCompo={each.quelCompo}
