@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function BlocJour({ dataHorairesId }) {
-  // changer pour que lundi prenne Lundi et pas [0]
   const tabJour = [
     { jour: "Lun", check: dataHorairesId[0].ouvert },
     { jour: "Mar", check: dataHorairesId[1].ouvert },

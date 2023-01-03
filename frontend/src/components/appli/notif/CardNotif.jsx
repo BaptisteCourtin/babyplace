@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function CardNotif({ texte }) {
+function CardNotif({ setCompo, texte, compo }) {
   return (
-    <div className="card-notif">
+    <div className="card-notif" onClick={() => setCompo(compo)}>
       <p>{texte}</p>
       <span>{`>`}</span>
     </div>
@@ -11,7 +11,7 @@ function CardNotif({ texte }) {
 }
 
 CardNotif.propTypes = {
-  setCompo: PropTypes.string.isRequired,
+  texte: PropTypes.string.isRequired,
 };
 
 export default CardNotif;
