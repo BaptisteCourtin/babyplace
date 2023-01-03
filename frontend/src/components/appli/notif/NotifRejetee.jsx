@@ -14,7 +14,7 @@ function NotifRejetee() {
           <img src={avatar1} alt="img creche" className="avatar" />
         </div>
         <div className="text">
-          <h3>Dommage !</h3>
+          <h3 className="red">Dommage !</h3>
           <h4>Votre réservation est refusée</h4>
           <p>
             N’oubliez pas de compléter votre profil pour avoir plus de chance

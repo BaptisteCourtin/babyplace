@@ -115,8 +115,19 @@ function DemandeResa({
 
 DemandeResa.propTypes = {
   setCompo: PropTypes.func.isRequired,
+
+  heureMin: PropTypes.number.isRequired,
+  heureMax: PropTypes.number.isRequired,
+  jour: PropTypes.string.isRequired,
+  nom: PropTypes.string,
+  nomUsage: PropTypes.string,
+  nomNaissance: PropTypes.string,
+  prenom: PropTypes.string,
   photo3: PropTypes.string.isRequired,
-  tarif: PropTypes.number.isRequired,
+  indemnEntretien: PropTypes.number.isRequired,
+  indemnRepas: PropTypes.number.isRequired,
+  indemnKm: PropTypes.number.isRequired,
+  tarifHeure: PropTypes.number.isRequired,
 };
 
 export default DemandeResa;

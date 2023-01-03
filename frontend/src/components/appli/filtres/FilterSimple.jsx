@@ -62,6 +62,7 @@ function FilterSimple({ setCompo, setFiltres, filtres }) {
 }
 
 FilterSimple.propTypes = {
+  setCompo: PropTypes.func.isRequired,
   filtres: PropTypes.string.isRequired,
   setFiltres: PropTypes.func.isRequired,
 };

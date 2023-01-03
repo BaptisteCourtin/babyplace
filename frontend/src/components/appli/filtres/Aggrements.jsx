@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import Toggle from "./Toggle";
 
 function Aggrements({ setCompo }) {
@@ -39,5 +40,9 @@ function Aggrements({ setCompo }) {
     </>
   );
 }
+
+Aggrements.propTypes = {
+  setCompo: PropTypes.func.isRequired,
+};
 
 export default Aggrements;

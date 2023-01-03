@@ -1,6 +1,7 @@
 import React from "react";
 import logoBlanc from "@assets/logo-blanc.svg";
 import avatar1 from "@assets/avatar1.svg";
+import PropTypes from "prop-types";
 
 function NotifAcceptee({ setCompo }) {
   return (
@@ -13,7 +14,7 @@ function NotifAcceptee({ setCompo }) {
         </div>
 
         <div className="text">
-          <h3>Fantastique !</h3>
+          <h3 className="green">Fantastique !</h3>
 
           <p>
             La crèche Picoti Picota confirme accueillir votre enfant le Lundi 14
@@ -29,5 +30,9 @@ function NotifAcceptee({ setCompo }) {
     </div>
   );
 }
+
+NotifAcceptee.propTypes = {
+  setCompo: PropTypes.func.isRequired,
+};
 
 export default NotifAcceptee;

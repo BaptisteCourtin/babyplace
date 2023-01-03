@@ -14,8 +14,8 @@ function BlocJour({ dataHorairesId }) {
 
   return (
     <div className="jours">
-      {tabJour.map((each) => (
-        <div className={each.check ? "daygreen" : "daygray"}>
+      {tabJour.map((each, index) => (
+        <div key={index} className={each.check ? "daygreen" : "daygray"}>
           <p className="each-jour">{each.jour}</p>
         </div>
       ))}
@@ -24,7 +24,7 @@ function BlocJour({ dataHorairesId }) {
 }
 
 BlocJour.propTypes = {
-  dataHorairesId: PropTypes.string.isRequired,
+  dataHorairesId: PropTypes.array.isRequired,
 };
 
 export default BlocJour;
