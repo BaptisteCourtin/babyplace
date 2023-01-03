@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Proptypes from "prop-types";
 import Calendar from "react-calendar";
 
@@ -72,12 +72,12 @@ function Structure11({
   );
 }
 Structure11.propTypes = {
-  lundiOuvert: Proptypes.node,
-  mardiOuvert: Proptypes.node,
-  mercrediOuvert: Proptypes.node,
-  jeudiOuvert: Proptypes.node,
-  vendrediOuvert: Proptypes.node,
-  samediOuvert: Proptypes.node,
-  dimancheOuvert: Proptypes.node,
+  lundiOuvert: Proptypes.bool,
+  mardiOuvert: Proptypes.bool,
+  mercrediOuvert: Proptypes.bool,
+  jeudiOuvert: Proptypes.bool,
+  vendrediOuvert: Proptypes.bool,
+  samediOuvert: Proptypes.bool,
+  dimancheOuvert: Proptypes.bool,
 };
 export default Structure11;

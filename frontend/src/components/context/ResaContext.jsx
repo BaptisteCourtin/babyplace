@@ -1,3 +1,5 @@
 import { createContext } from "react";
 
-export const ResaContext = createContext("");
+const ResaContext = createContext("");
+
+export default ResaContext;

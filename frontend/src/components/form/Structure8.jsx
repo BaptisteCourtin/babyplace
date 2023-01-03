@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import imgCopie from "@assets/img-copie.svg";
 import imgTime from "@assets/img-time.svg";
 import imgDossier from "@assets/img-dossier.svg";
-import { ResaContext } from "@components/context/ResaContext";
+import ResaContext from "@components/context/ResaContext";
 
 function Structure8() {
   const { resa } = useContext(ResaContext);

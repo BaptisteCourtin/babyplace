@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { StructureContext } from "@components/context/StructureContext";
+import StructureContext from "@components/context/StructureContext";
 import Proptypes from "prop-types";
 
 function Structure13({
@@ -318,7 +318,7 @@ function Structure13({
   );
 }
 Structure13.propTypes = {
-  financementPaje: Proptypes.node,
+  financementPaje: Proptypes.bool,
   tarifHeure: Proptypes.node,
   tarifHoraireSpec: Proptypes.node,
   indemnRepas: Proptypes.node,
