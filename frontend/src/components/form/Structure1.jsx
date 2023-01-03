@@ -1,9 +1,10 @@
 import React, { useContext, useState } from "react";
 import Proptypes from "prop-types";
-import { StructureContext } from "@components/context/StructureContext";
+import StructureContext from "@components/context/StructureContext";
 
 function Structure1({
   typeStructure,
+  typeCreche,
   nomStructure,
   telephone,
   nomNaissance,
@@ -13,11 +14,11 @@ function Structure1({
   updateFields,
 }) {
   const { structure, setStructure } = useContext(StructureContext);
-  const [typeCreche, setTypeCreche] = useState("");
+  const [typeDeCreche, setTypeCreche] = useState("");
   return (
     <div className="page-left structure1">
       <div className="typeContainer">
-        <h4>Quel type d’accueil proposez-vous ?</h4>
+        <h4>Quel type d'accueil proposez-vous ?</h4>
         <div>
           <button
             type="button"
@@ -303,6 +304,7 @@ function Structure1({
 }
 Structure1.propTypes = {
   typeStructure: Proptypes.string,
+  typeCreche: Proptypes.string,
   nomStructure: Proptypes.string,
   telephone: Proptypes.string,
   nomNaissance: Proptypes.string,

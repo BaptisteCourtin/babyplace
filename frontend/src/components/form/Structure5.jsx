@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Proptypes from "prop-types";
-import { StructureContext } from "@components/context/StructureContext";
+import StructureContext from "@components/context/StructureContext";
 
 function Structure5({
   PCSC1,
