@@ -19,6 +19,10 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 function BaseMap({ setCompo, Allstructure }) {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
+  // --- position user ---
+  const [ville, setVille] = useState(); // donné par utilisateur
+  const [center, setCenter] = useState([47.21725, -1.55336]); // donné par api suivant ville ou position de base
+
   const getVraiPosition = () => {
     navigator.geolocation.getCurrentPosition(function (position) {
       setCenter([position.coords.latitude, position.coords.longitude]);
@@ -27,9 +31,6 @@ function BaseMap({ setCompo, Allstructure }) {
   useEffect(() => {
     getVraiPosition();
   }, []);
-
-  const [ville, setVille] = useState(); // donner par utilisateur
-  const [center, setCenter] = useState([47.21725, -1.55336]); // donner par api suivant ville ou position de base
 
   const handleVille = (e) => {
     e.preventDefault();
@@ -55,7 +56,6 @@ function BaseMap({ setCompo, Allstructure }) {
   });
   const pointer = new LeafIcon({
     iconUrl: redPointer,
-    // "http://leafletjs.com/examples/custom-icons/leaf-green.png"
   });
 
   return (
