@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import logo from "@assets/logo4.svg";
 import logotxt from "@assets/babyplaceTxt.svg";
 import up from "@assets/up.svg";
