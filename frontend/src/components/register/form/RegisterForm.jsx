@@ -19,7 +19,6 @@ function RegisterForm() {
   const handleClick = (e) => {
     e.preventDefault();
     if (email && password && checked) {
-      console.log(email, password);
       Axios.post("http://localhost:5000/inscription", {
         email,
         password,
