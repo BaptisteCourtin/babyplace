@@ -1,0 +1,305 @@
+.formTitleBar {
+  padding: 8px 5vw;
+  height: 7vh;
+  min-height: 33px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100vw;
+
+  & p {
+    color: #787885;
+    width: 30vw;
+    text-align: center;
+  }
+
+  & .leftPart {
+    display: flex;
+    align-items: center;
+  }
+
+  & h4 {
+    font-family: $display;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+}
+
+.pagination {
+  width: 100%;
+  margin: 0 auto;
+
+  & progress {
+    width: 100%;
+    height: 1.5vh;
+  }
+
+  & progress::-webkit-progress-bar {
+    background-color: #eee;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+  }
+
+  & progress::-webkit-progress-value {
+    background: $gradient;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
+  & progress[value]::-moz-progress-bar {
+    background: $gradient;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+}
+
+.formStructureContainer {
+  position: relative;
+  width: 90vw;
+  min-height: 91vh;
+  height: fit-content;
+  margin: 0 auto;
+  display: flex;
+
+  & .formStructure {
+    width: 50vw;
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: 5vw;
+    overflow: hidden;
+  }
+
+  & .page-left {
+    width: 100%;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 8px;
+
+    & h5 {
+      font-weight: 600;
+    }
+  }
+
+  & .explicationsContainer {
+    width: 50%;
+    height: 91vh;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    & .backButton {
+      border: none;
+      color: $third;
+      background-color: #eeeeee00;
+      padding: 8px;
+      margin: 1vh 0;
+    }
+
+    & .innerContainer {
+      padding: 24px;
+      background-color: white;
+      width: 45%;
+      max-width: 60%;
+      min-height: 30%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 12vh;
+
+      & h4 {
+        margin: 0 0 2vh;
+        font-size: 1.1rem;
+      }
+
+      & h5 {
+        font-weight: 600;
+        margin: 2vh 0 1vh;
+
+        & span {
+          font-weight: 400;
+        }
+      }
+
+      & p {
+        margin: 3vh 0;
+      }
+
+      & .dispo,
+      .indispo {
+        padding: 0 10px;
+        border: 1px dashed grey;
+        margin-right: 4px;
+      }
+
+      & .indispo {
+        background-color: #f0f0f0;
+        color: $fourth;
+        text-decoration: line-through;
+        font-weight: 500;
+      }
+
+      & pre {
+        max-width: 100%;
+        white-space: pre-wrap;
+      }
+    }
+
+    & .descExamples {
+      width: 100%;
+      margin: 1vh 0;
+      padding: 0;
+      min-height: 30%;
+      max-height: 80%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+
+    & .imgTitleContainer {
+      width: 100%;
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin: 2vh 0 1vh;
+
+      & img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  .buttonContainer {
+    margin-bottom: 2vh;
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+    justify-content: space-between;
+    align-self: flex-end;
+
+    button {
+      width: 150px;
+      height: 40px;
+      color: $white;
+      background: $third;
+      font-size: $h4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50px;
+      margin: 4px;
+      padding: 8px;
+      border: 1px solid $grey;
+    }
+
+    & .backButton {
+      border: none;
+      color: $third;
+      background-color: #eeeeee00;
+    }
+  }
+
+  h4 {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin: 2vh 0;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .formStructureContainer {
+    position: relative;
+    width: 90vw;
+    min-height: 91vh;
+    height: fit-content;
+    margin: 0 auto;
+    display: block;
+
+    & .formStructure {
+      width: 100%;
+    }
+
+    & h4 {
+      margin: 2vh 0 1vh;
+      text-align: center;
+    }
+
+    & .inputContainer {
+      width: 100%;
+    }
+
+    .buttonContainer {
+      margin-top: 2vh;
+    }
+
+    & .explicationsContainer {
+      width: 100%;
+      height: 40%;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 4vh;
+
+      & .innerContainer {
+        padding: 8px;
+        margin: 2vh;
+        width: 80vw;
+        min-width: 80%;
+        max-width: 100%;
+        min-height: 25%;
+        height: 25%;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      & img {
+        width: 30%;
+      }
+
+      & h5 {
+        font-weight: 600;
+        margin: 0;
+
+        & span {
+          font-weight: 400;
+        }
+      }
+
+      & pre {
+        max-width: 100%;
+        white-space: pre-wrap;
+        text-align: center;
+      }
+
+      & .imgTitleContainer {
+        width: 80vw;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        justify-content: center;
+        align-items: center;
+        margin: 0.5vh 0 0.5vh;
+      }
+
+      & p {
+        height: fit-content;
+      }
+
+      & .descExamples {
+        width: 80%;
+        gap: 2vw;
+        margin: 1vh 0;
+        padding: 0;
+        min-height: 30%;
+        max-height: 30%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+    }
+  }
+}

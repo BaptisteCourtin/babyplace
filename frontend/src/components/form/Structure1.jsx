@@ -1,9 +1,10 @@
 import React, { useContext, useState } from "react";
 import Proptypes from "prop-types";
-import { StructureContext } from "@components/context/StructureContext";
+import StructureContext from "@components/context/StructureContext";
 
 function Structure1({
   typeStructure,
+  typeCreche,
   nomStructure,
   telephone,
   nomNaissance,
@@ -13,11 +14,10 @@ function Structure1({
   updateFields,
 }) {
   const { structure, setStructure } = useContext(StructureContext);
-  const [typeCreche, setTypeCreche] = useState("");
   return (
-    <div className="page-left">
+    <div className="page-left structure1">
       <div className="typeContainer">
-        <h4>Quel type d’accueil proposez-vous ?</h4>
+        <h4>Quel type d'accueil proposez-vous ?</h4>
         <div>
           <button
             type="button"
@@ -50,7 +50,6 @@ function Structure1({
                 type="button"
                 className={typeCreche === "micro creche" ? "selected" : ""}
                 onClick={() => {
-                  setTypeCreche("micro creche");
                   updateFields({ typeCreche: "micro creche" });
                 }}
               >
@@ -62,7 +61,6 @@ function Structure1({
                   typeCreche === "creche d'entreprise" ? "selected" : ""
                 }
                 onClick={() => {
-                  setTypeCreche("creche d'entreprise");
                   updateFields({ typeCreche: "creche d'entreprise" });
                 }}
               >
@@ -72,7 +70,6 @@ function Structure1({
                 type="button"
                 className={typeCreche === "halte garderie" ? "selected" : ""}
                 onClick={() => {
-                  setTypeCreche("halte garderie");
                   updateFields({ typeCreche: "halte garderie" });
                 }}
               >
@@ -84,7 +81,6 @@ function Structure1({
                   typeCreche === "creche associative" ? "selected" : ""
                 }
                 onClick={() => {
-                  setTypeCreche("creche associative");
                   updateFields({ typeCreche: "creche associative" });
                 }}
               >
@@ -94,7 +90,6 @@ function Structure1({
                 type="button"
                 className={typeCreche === "multi accueil" ? "selected" : ""}
                 onClick={() => {
-                  setTypeCreche("multi accueil");
                   updateFields({ typeCreche: "multi accueil" });
                 }}
               >
@@ -104,7 +99,6 @@ function Structure1({
                 type="button"
                 className={typeCreche === "creche municipale" ? "selected" : ""}
                 onClick={() => {
-                  setTypeCreche("creche municipale");
                   updateFields({ typeCreche: "creche municipale" });
                 }}
               >
@@ -114,7 +108,6 @@ function Structure1({
                 type="button"
                 className={typeCreche === "creche collective" ? "selected" : ""}
                 onClick={() => {
-                  setTypeCreche("creche collective");
                   updateFields({ typeCreche: "creche collective" });
                 }}
               >
@@ -124,7 +117,6 @@ function Structure1({
                 type="button"
                 className={typeCreche === "creche parentale" ? "selected" : ""}
                 onClick={() => {
-                  setTypeCreche("creche parentale");
                   updateFields({ typeCreche: "creche parentale" });
                 }}
               >
@@ -271,7 +263,7 @@ function Structure1({
             </label>
             <p className="checkSymbol">&#x2713;</p>
             <p>
-              Les parents n’obtiendront l’adresse exacte qu’après avoir effectué
+              Les parents n'obtiendront l'adresse exacte qu'après avoir effectué
               la réservation
             </p>
           </div>
@@ -292,7 +284,7 @@ function Structure1({
             </label>
             <p className="checkSymbol">&#x2713;</p>
             <p>
-              Les parents n’obtiendront ce numéro qu’après avoir effectué la
+              Les parents n'obtiendront ce numéro qu'après avoir effectué la
               réservation
             </p>
           </div>
@@ -303,6 +295,7 @@ function Structure1({
 }
 Structure1.propTypes = {
   typeStructure: Proptypes.string,
+  typeCreche: Proptypes.string,
   nomStructure: Proptypes.string,
   telephone: Proptypes.string,
   nomNaissance: Proptypes.string,

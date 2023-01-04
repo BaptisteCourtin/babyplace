@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function BlocJour({ dataHorairesId }) {
-  // changer pour que lundi prenne Lundi et pas [0]
   const tabJour = [
     { jour: "Lun", check: dataHorairesId[0].ouvert },
     { jour: "Mar", check: dataHorairesId[1].ouvert },
@@ -14,18 +13,18 @@ function BlocJour({ dataHorairesId }) {
   ];
 
   return (
-    <>
-      {tabJour.map((each) => (
-        <div className={each.check ? "daygreen" : "daygray"}>
+    <div className="jours">
+      {tabJour.map((each, index) => (
+        <div key={index} className={each.check ? "daygreen" : "daygray"}>
           <p className="each-jour">{each.jour}</p>
         </div>
       ))}
-    </>
+    </div>
   );
 }
 
 BlocJour.propTypes = {
-  dataHorairesId: PropTypes.string.isRequired,
+  dataHorairesId: PropTypes.array.isRequired,
 };
 
 export default BlocJour;

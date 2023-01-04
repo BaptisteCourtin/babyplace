@@ -9,6 +9,7 @@ const INITIAL_DATA = {
   adresse: "",
   telephone: "",
   mdp: "",
+  mdp2: "",
 };
 
 function Connexion({ setCompo }) {
@@ -38,11 +39,10 @@ function Connexion({ setCompo }) {
               type="text"
               name="nom"
               id="nom"
-              placeholder="Nom"
               value={data.nom}
               onChange={(e) => updateFields({ nom: e.target.value })}
             />
-            <p className="checkSymbol">&#x2713;</p>
+            <p>Nom</p>
           </label>
 
           <label htmlFor="prenom">
@@ -51,24 +51,10 @@ function Connexion({ setCompo }) {
               type="text"
               name="prenom"
               id="prenom"
-              placeholder="Prenom"
               value={data.prenom}
               onChange={(e) => updateFields({ prenom: e.target.value })}
             />
-            <p className="checkSymbol">&#x2713;</p>
-          </label>
-
-          <label htmlFor="prenomEnfant">
-            <input
-              required
-              type="text"
-              name="prenomEnfant"
-              id="prenomEnfant"
-              placeholder="Prenom de l'enfant"
-              value={data.prenomEnfant}
-              onChange={(e) => updateFields({ prenomEnfant: e.target.value })}
-            />
-            <p className="checkSymbol">&#x2713;</p>
+            <p>Prenom</p>
           </label>
 
           <label htmlFor="email">
@@ -77,11 +63,10 @@ function Connexion({ setCompo }) {
               type="email"
               name="email"
               id="email"
-              placeholder="Email"
               value={data.email}
               onChange={(e) => updateFields({ email: e.target.value })}
             />
-            <p className="checkSymbol">&#x2713;</p>
+            <p>E mail</p>
           </label>
 
           <label htmlFor="adresse">
@@ -90,11 +75,10 @@ function Connexion({ setCompo }) {
               type="text"
               name="adresse"
               id="adresse"
-              placeholder="Adresse"
               value={data.adresse}
               onChange={(e) => updateFields({ adresse: e.target.value })}
             />
-            <p className="checkSymbol">&#x2713;</p>
+            <p>Adresse</p>
           </label>
 
           <label htmlFor="telephone">
@@ -103,11 +87,10 @@ function Connexion({ setCompo }) {
               type="text"
               name="telephone"
               id="telephone"
-              placeholder="Telephone mobile"
               value={data.telephone}
               onChange={(e) => updateFields({ telephone: e.target.value })}
             />
-            <p className="checkSymbol">&#x2713;</p>
+            <p>Telephone mobile</p>
           </label>
 
           <label htmlFor="mdp">
@@ -116,16 +99,27 @@ function Connexion({ setCompo }) {
               type="text"
               name="mdp"
               id="mdp"
-              placeholder="Mot de passe"
               value={data.mdp}
               onChange={(e) => updateFields({ mdp: e.target.value })}
             />
-            <p className="checkSymbol">&#x2713;</p>
+            <p>Mot de passe</p>
+          </label>
+
+          <label htmlFor="mdp2">
+            <input
+              required
+              type="text"
+              name="mdp2"
+              id="mdp2"
+              value={data.mdp2}
+              onChange={(e) => updateFields({ mdp2: e.target.value })}
+            />
+            <p>Réecrire Mot de passe</p>
           </label>
         </form>
       </main>
       <div className="button-bas">
-        <button type="button" className="butt" onClick={() => setCompo(1)}>
+        <button type="button" className="butt grad" onClick={() => setCompo(1)}>
           Créer un compte
         </button>
       </div>

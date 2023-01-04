@@ -6,7 +6,16 @@ import PropTypes from "prop-types";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 function CarteCreche({ data }) {
-  const { photoStructure1, tarifHeure, structureId } = data;
+  const {
+    photoStructure1,
+    tarifHeure,
+    structureId,
+    nom,
+    nomUsage,
+    nomNaissance,
+    prenom,
+  } = data;
+
   const [likeCard, setLikeCard] = useState(true);
   // les horaires de chaques jour suivant l'id de la structure
   const [dataHorairesId, setDataHorairesId] = useState([]);
@@ -39,16 +48,23 @@ function CarteCreche({ data }) {
         ) : (
           <AiOutlineHeart className="like" onClick={() => setLikeCard(true)} />
         )}
+
         <Link to="/appli/search/card" state={{ data, dataHorairesId }}>
-          <img src={photoStructure1} alt="img creche" />
+          <div className="container-img">
+            <img src={photoStructure1} alt="img-creche" />
+            <p className="nom-structure">
+              {nom ||
+                (nomUsage
+                  ? `${prenom} ${nomUsage}`
+                  : `${prenom} ${nomNaissance}`)}
+            </p>
+          </div>
           <div className="info-creche">
             <div className="ville-prix">
               <p>ville à X mètres</p>
-              <p className="prix">{tarifHeure}€</p>
+              <p className="prix">{tarifHeure}€/heure</p>
             </div>
-            <div className="jours">
-              <BlocJour dataHorairesId={dataHorairesId} />
-            </div>
+            <BlocJour dataHorairesId={dataHorairesId} />
             <ul>
               <li>N’accepte que les profils vérifiés</li>
               <li>Période d’adaptation obligatoire</li>
@@ -61,7 +77,7 @@ function CarteCreche({ data }) {
 }
 
 CarteCreche.propTypes = {
-  data: PropTypes.string.isRequired,
+  data: PropTypes.object.isRequired,
 };
 
 export default CarteCreche;

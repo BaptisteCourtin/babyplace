@@ -8,31 +8,16 @@ const horaires = require("./controllers/horaires.controllers");
 const calendrier = require("./controllers/calendrier.controllers");
 const dashboard = require("./controllers/dashboard.controllers");
 
-router.get("/horaires/:id", (req, res) => {
-  datasource
-    // prend les horaires selon l'id de la structure
-    .query(`SELECT * FROM horaires WHERE structureId = ?`, [req.params.id])
-    .then(([s]) => {
-      res.json(s);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Erreur route /horaires/:id");
-    });
-});
-router.get("/structure/allapp", (req, res) => {
-  datasource
-    .query("SELECT * FROM structure")
-    .then(([s]) => {
-      res.json(s);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Erreur route /structure/allapp");
-    });
-});
+// --- pour app ---
+
+router.get("/structure/allapp", structure.getAllStructures);
+router.get("/horaires/:id", horaires.getHorairesById);
+
+// --- --- ---
+
 router.get("/structure/all", structure.getStructureDataMess);
 
+// prend tout de structure where token
 router.get("/structure", structure.getStructure);
 router.get("/horaires", horaires.getHoraires);
 router.get("/calendrier/:id", calendrier.getCalendrier);
@@ -82,5 +67,43 @@ router.post("/auth", (req, res) => {
 });
 
 router.delete("/calendrier", calendrier.deleteDates)
+router.post("/authFamille", (req, res) => {
+  datasource
+    .query(
+      "SELECT * FROM famille AS f LEFT JOIN famille_structure AS fs ON f.familleId = fs.familleId LEFT JOIN parent AS p ON f.familleId = p.familleId WHERE f.email = ?",
+      [req.body.email]
+    )
+    // prendre famille - parents - enfants - famille_structure
+    // famille_structure => like
+    .then(([[user]]) => {
+      if (user && req.body.password === user.password) {
+        const start = Date.now();
+        const token = sha256(req.body.email + start);
+
+        datasource
+          .query(
+            "UPDATE famille SET token = ?, tokenStart = ? WHERE email = ?",
+            [token, start, user.email]
+          )
+          .then(() => {
+            res.status(200).send({
+              email: user.email,
+              token: token,
+              tokenStart: start,
+            });
+          })
+          .catch((err) => {
+            console.error(err);
+            res.status(500).send("Erreur de connexion");
+          });
+      } else {
+        res.status(401).send("Email ou mot de passe incorrect");
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Erreur de connexion");
+    });
+});
 
 module.exports = router;

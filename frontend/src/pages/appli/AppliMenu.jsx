@@ -32,9 +32,9 @@ function AppliMenu() {
 
   return (
     <div className="applimenu">
-      <div className="principale">{choixComposant()}</div>
+      {choixComposant()}
 
-      <NavbarApp />
+      <NavbarApp setCompo={setCompo} />
     </div>
   );
 }

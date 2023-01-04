@@ -3,7 +3,7 @@ import imgCopie from "@assets/img-copie.svg";
 import imgTime from "@assets/img-time.svg";
 import imgDossier from "@assets/img-dossier.svg";
 import Proptypes from "prop-types";
-import { ResaContext } from "@components/context/ResaContext";
+import ResaContext from "@components/context/ResaContext";
 
 function Structure7({ resaInst, updateFields }) {
   const { resa, setResa } = useContext(ResaContext);
@@ -94,7 +94,7 @@ function Structure7({ resaInst, updateFields }) {
   );
 }
 Structure7.propTypes = {
-  resaInst: Proptypes.bool,
+  resaInst: Proptypes.node,
   updateFields: Proptypes.func,
 };
 export default Structure7;

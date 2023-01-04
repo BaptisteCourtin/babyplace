@@ -8,7 +8,12 @@ function AppliCardCreche() {
   const location = useLocation();
   const { data, dataHorairesId } = location.state;
   const {
-    photoStructure1,
+    nom,
+    nomUsage,
+    nomNaissance,
+    prenom,
+
+    photoStructure2,
     tarifHeure,
     description,
 
@@ -24,6 +29,11 @@ function AppliCardCreche() {
     handi,
 
     jardin,
+    animaux,
+    nonFumeur,
+    zeroPollution,
+    repas,
+    hygiene,
 
     promenades,
     musique,
@@ -45,12 +55,15 @@ function AppliCardCreche() {
   return (
     <div className="appli-card-creche">
       <header>
-        <Link to="/appli/search">{`< NOM CRECHE`}</Link>
+        <Link to="/appli/search">{`< ${
+          nom ||
+          (nomUsage ? `${prenom} ${nomUsage}` : `${prenom} ${nomNaissance}`)
+        }`}</Link>
       </header>
 
       <main>
         <div className="container-img">
-          <img src={photoStructure1} alt="img creche" />
+          <img src={photoStructure2} alt="img creche" />
           <Star
             com={data.avisCom}
             proprete={data.avisProprete}
@@ -75,8 +88,8 @@ function AppliCardCreche() {
             <p>Adresse : {adresse}</p>
           </div>
 
-          <h3>Disponibiltés</h3>
-          <div className="disponibilite">
+          <div className="dispo">
+            <h3>Disponibiltés</h3>
             <BlocJour dataHorairesId={dataHorairesId} />
           </div>
 
@@ -91,11 +104,12 @@ function AppliCardCreche() {
           <div>
             <h3>Accueil</h3>
             {jardin ? <p>Jardin</p> : null}
-            {/* {Jardin ? <p>Présence d'animaux</p> : null}
-            {Jardin ? <p>Foyer non-fumeur</p> : null}
-            {Jardin ? <p>0% pollution intérieure</p> : null}
-            {Jardin ? <p>Repas maison</p> : null}
-            {Jardin ? <p>produits d'hygiène fournis</p> : null} */}
+            {/* si ass mat */}
+            {/* {animaux ? <p>Présence d'animaux</p> : null}
+            {nonFumeur ? <p>Foyer non-fumeur</p> : null}
+            {zeroPollution ? <p>0% pollution intérieure</p> : null}
+            {repas ? <p>Repas maison</p> : null}
+            {hygiene ? <p>produits d'hygiène fournis</p> : null} */}
           </div>
 
           <div>
@@ -119,11 +133,14 @@ function AppliCardCreche() {
                 <span> {tarifHeure}€</span> / heure *
               </p>
               <p>
-                <span>{tarifHeure * 8}€</span> / jour *
+                <span>{tarifHeure * 10}€</span> / jour (10h)*
               </p>
             </div>
-            <PopUp data={data} />
+            <PopUp data={data} dataHorairesId={dataHorairesId} />
           </div>
+          <Link className="envoie-mess" to="/appli/message">
+            Envoyer un Message
+          </Link>
         </div>
       </main>
 

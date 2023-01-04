@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Toggle from "./Toggle";
 
-function FilterSimple({ setFiltres, filtres }) {
+function FilterSimple({ setCompo, setFiltres, filtres }) {
   const [creche, setCreche] = useState(false);
   const [assistance, setAssistance] = useState(false);
   const [dispo, setDispo] = useState(false);
@@ -28,25 +28,41 @@ function FilterSimple({ setFiltres, filtres }) {
   }, [creche, assistance, dispo]);
 
   return (
-    <main className="filter-simple">
-      <Toggle setter={setCreche} state={creche} nom="creche" p="Crèche" />
-      <Toggle
-        setter={setAssistance}
-        state={assistance}
-        nom="assisstance"
-        p="Assisstant maternel"
-      />
-      <Toggle
-        setter={setDispo}
-        state={dispo}
-        nom="dispo"
-        p="Que les profils dispo"
-      />
-    </main>
+    <>
+      <header>
+        <button
+          type="button"
+          className="h2"
+          onClick={() => setCompo(0)}
+        >{`< Filtres Basiques`}</button>
+        <button type="button">RESET</button>
+      </header>
+
+      <main className="filter-simple">
+        <Toggle setter={setCreche} state={creche} nom="creche" p="Crèche" />
+        <Toggle
+          setter={setAssistance}
+          state={assistance}
+          nom="assisstance"
+          p="Assisstant maternel"
+        />
+        <Toggle
+          setter={setDispo}
+          state={dispo}
+          nom="dispo"
+          p="Que les profils dispo"
+        />
+      </main>
+
+      <button type="button" className="apply" onClick={() => setCompo(0)}>
+        Appliquer
+      </button>
+    </>
   );
 }
 
 FilterSimple.propTypes = {
+  setCompo: PropTypes.func.isRequired,
   filtres: PropTypes.string.isRequired,
   setFiltres: PropTypes.func.isRequired,
 };

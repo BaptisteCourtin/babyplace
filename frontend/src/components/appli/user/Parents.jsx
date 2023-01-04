@@ -28,184 +28,155 @@ function Parents() {
     <main className="parent">
       <h3>Dossier Parents</h3>
 
-      <div className="form-parent">
-        <form>
-          <h4>Parent 1</h4>
-          <div>
-            <label htmlFor="nom">
-              <input
-                required
-                type="text"
-                name="nom"
-                id="nom"
-                placeholder="Nom"
-                value={data.nom}
-                onChange={(e) => updateFields({ nom: e.target.value })}
-              />
-            </label>
-            <p className="checkSymbol">&#x2713;</p>
-          </div>
+      <form>
+        <h4>Parent 1</h4>
+        <label htmlFor="nom">
+          <input
+            required
+            type="text"
+            name="nom"
+            id="nom"
+            value={data.nom}
+            onChange={(e) => updateFields({ nom: e.target.value })}
+          />
+          <p>Nom</p>
+        </label>
 
-          <div>
-            <label htmlFor="prenom">
-              <input
-                required
-                type="text"
-                name="prenom"
-                id="prenom"
-                placeholder="Prenom"
-                value={data.prenom}
-                onChange={(e) => updateFields({ prenom: e.target.value })}
-              />
-            </label>
-            <p className="checkSymbol">&#x2713;</p>
-          </div>
-          <div>
-            <label htmlFor="profession">
-              <input
-                required
-                type="text"
-                name="profession"
-                id="profession"
-                placeholder="Profession"
-                value={data.profession}
-                onChange={(e) => updateFields({ profession: e.target.value })}
-              />
-            </label>
-            <p className="checkSymbol">&#x2713;</p>
-          </div>
-          <div>
-            <label htmlFor="tel">
-              <input
-                required
-                type="number"
-                name="tel"
-                id="tel"
-                placeholder="telephone portable"
-                value={data.tel}
-                onChange={(e) => updateFields({ tel: e.target.value })}
-              />
-            </label>
-            <p className="checkSymbol">&#x2713;</p>
-          </div>
-          <div>
-            <label htmlFor="mail">
-              <input
-                required
-                type="email"
-                name="mail"
-                id="mail"
-                placeholder="Mail"
-                value={data.mail}
-                onChange={(e) => updateFields({ mail: e.target.value })}
-              />
-            </label>
-            <p className="checkSymbol">&#x2713;</p>
-          </div>
-          <div>
-            <label htmlFor="adresse">
-              <input
-                required
-                type="text"
-                name="adresse"
-                id="adresse"
-                placeholder="Adresse"
-                value={data.adresse}
-                onChange={(e) => updateFields({ adresse: e.target.value })}
-              />
-            </label>
-            <p className="checkSymbol">&#x2713;</p>
-          </div>
-        </form>
+        <label htmlFor="prenom">
+          <input
+            required
+            type="text"
+            name="prenom"
+            id="prenom"
+            value={data.prenom}
+            onChange={(e) => updateFields({ prenom: e.target.value })}
+          />
+          <p>Prenom</p>
+        </label>
 
-        <form>
-          <h4>Parent 2</h4>
-          <div>
-            <label htmlFor="nom2">
-              <input
-                required
-                type="text"
-                name="nom2"
-                id="nom2"
-                placeholder="Nom"
-                value={data.nom2}
-                onChange={(e) => updateFields({ nom2: e.target.value })}
-              />
-            </label>
-            <p className="checkSymbol">&#x2713;</p>
-          </div>
-          <div>
-            <label htmlFor="prenom2">
-              <input
-                required
-                type="text"
-                name="prenom2"
-                id="prenom2"
-                placeholder="Prenom"
-                value={data.prenom2}
-                onChange={(e) => updateFields({ prenom2: e.target.value })}
-              />
-            </label>
-            <p className="checkSymbol">&#x2713;</p>
-          </div>
-          <div>
-            <label htmlFor="profession2">
-              <input
-                required
-                type="text"
-                name="profession2"
-                id="profession2"
-                placeholder="Profession"
-                value={data.profession2}
-                onChange={(e) => updateFields({ profession2: e.target.value })}
-              />
-            </label>
-            <p className="checkSymbol">&#x2713;</p>
-          </div>
-          <div>
-            <label htmlFor="tel2">
-              <input
-                required
-                type="number"
-                name="tel2"
-                id="tel2"
-                placeholder="telephone portable"
-                value={data.tel2}
-                onChange={(e) => updateFields({ tel2: e.target.value })}
-              />
-            </label>
-            <p className="checkSymbol">&#x2713;</p>
-          </div>
-          <div>
-            <label htmlFor="mail2">
-              <input
-                required
-                type="email"
-                name="mail2"
-                id="mail2"
-                placeholder="Mail"
-                value={data.mail2}
-                onChange={(e) => updateFields({ mail2: e.target.value })}
-              />
-            </label>
-            <p className="checkSymbol">&#x2713;</p>
-          </div>
-          <div>
-            <label htmlFor="adresse2">
-              <input
-                required
-                type="text"
-                name="adresse2"
-                id="adresse2"
-                placeholder="Adresse"
-                value={data.adresse2}
-                onChange={(e) => updateFields({ adresse2: e.target.value })}
-              />
-            </label>
-            <p className="checkSymbol">&#x2713;</p>
-          </div>
-        </form>
-      </div>
+        <label htmlFor="profession">
+          <input
+            required
+            type="text"
+            name="profession"
+            id="profession"
+            value={data.profession}
+            onChange={(e) => updateFields({ profession: e.target.value })}
+          />
+          <p>Profession</p>
+        </label>
+
+        <label htmlFor="tel">
+          <input
+            required
+            type="number"
+            name="tel"
+            id="tel"
+            value={data.tel}
+            onChange={(e) => updateFields({ tel: e.target.value })}
+          />
+          <p>telephone portable</p>
+        </label>
+
+        <label htmlFor="mail">
+          <input
+            required
+            type="email"
+            name="mail"
+            id="mail"
+            value={data.mail}
+            onChange={(e) => updateFields({ mail: e.target.value })}
+          />
+          <p>E mail</p>
+        </label>
+
+        <label htmlFor="adresse">
+          <input
+            required
+            type="text"
+            name="adresse"
+            id="adresse"
+            value={data.adresse}
+            onChange={(e) => updateFields({ adresse: e.target.value })}
+          />
+          <p>Adresse</p>
+        </label>
+      </form>
+
+      <form>
+        <h4>Parent 2</h4>
+        <label htmlFor="nom2">
+          <input
+            required
+            type="text"
+            name="nom2"
+            id="nom2"
+            value={data.nom2}
+            onChange={(e) => updateFields({ nom2: e.target.value })}
+          />
+          <p>Nom</p>
+        </label>
+
+        <label htmlFor="prenom2">
+          <input
+            required
+            type="text"
+            name="prenom2"
+            id="prenom2"
+            value={data.prenom2}
+            onChange={(e) => updateFields({ prenom2: e.target.value })}
+          />
+          <p>Prenom</p>
+        </label>
+
+        <label htmlFor="profession2">
+          <input
+            required
+            type="text"
+            name="profession2"
+            id="profession2"
+            value={data.profession2}
+            onChange={(e) => updateFields({ profession2: e.target.value })}
+          />
+          <p>Profession</p>
+        </label>
+
+        <label htmlFor="tel2">
+          <input
+            required
+            type="number"
+            name="tel2"
+            id="tel2"
+            value={data.tel2}
+            onChange={(e) => updateFields({ tel2: e.target.value })}
+          />
+          <p>telephone portable</p>
+        </label>
+
+        <label htmlFor="mail2">
+          <input
+            required
+            type="email"
+            name="mail2"
+            id="mail2"
+            value={data.mail2}
+            onChange={(e) => updateFields({ mail2: e.target.value })}
+          />
+          <p>E mail</p>
+        </label>
+
+        <label htmlFor="adresse2">
+          <input
+            required
+            type="text"
+            name="adresse2"
+            id="adresse2"
+            value={data.adresse2}
+            onChange={(e) => updateFields({ adresse2: e.target.value })}
+          />
+          <p>Adresse</p>
+        </label>
+      </form>
     </main>
   );
 }

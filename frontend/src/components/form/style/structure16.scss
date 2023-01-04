@@ -1,0 +1,34 @@
+.structure16 {
+  width: 100%;
+
+  & .pageContent {
+    display: flex;
+    flex-direction: column;
+    height: 70vh;
+    justify-content: center;
+
+    & h4 {
+      text-align: center;
+    }
+
+    & img {
+      width: 300px;
+      align-self: center;
+    }
+
+    & p {
+      margin: 1vh 10vw;
+      text-align: center;
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .structure16 {
+    & .pageContent {
+      & p {
+        margin: 1vh 2vw;
+      }
+    }
+  }
+}

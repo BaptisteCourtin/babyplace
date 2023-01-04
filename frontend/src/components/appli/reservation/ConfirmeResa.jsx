@@ -3,7 +3,16 @@ import { Link } from "react-router-dom";
 import logoBlanc from "@assets/logo-blanc.svg";
 import PropTypes from "prop-types";
 
-function ConfirmeResa({ photoProfil }) {
+function ConfirmeResa({
+  heureMin,
+  heureMax,
+  jour,
+  photoProfil,
+  nom,
+  nomUsage,
+  nomNaissance,
+  prenom,
+}) {
   return (
     <>
       <main className="confirme-resa">
@@ -14,8 +23,15 @@ function ConfirmeResa({ photoProfil }) {
         </div>
         <h3 className="title">Réservation</h3>
         <p className="sub-title">
-          Votre demande a bien été envoyée à la crèche Picoti Picota :<br />
-          <span>Lundi 14 septembre de 9h à 17h</span>
+          Votre demande a bien été envoyée à{" "}
+          {nom ||
+            (nomUsage
+              ? `${prenom} ${nomUsage}`
+              : `${prenom} ${nomNaissance}`)}{" "}
+          :<br />
+          <span>
+            {jour} de {heureMin}h à {heureMax}h
+          </span>
         </p>
 
         <div className="status-demande">
@@ -29,22 +45,27 @@ function ConfirmeResa({ photoProfil }) {
           votre demande soit acceptée
         </p>
       </main>
-      <div className="button-bas">
-        <div className="suivant">
-          <Link to="/appli/search">
-            <button className="butt" type="button">
-              Suivant <span className="fleche">{`>`}</span>
-              <span className="round" />
-            </button>
-          </Link>
-        </div>
+      <div className="button-bas right">
+        <Link to="/appli/search">
+          <button className="butt" type="button">
+            Suivant <span className="fleche">{`>`}</span>
+            <span className="round" />
+          </button>
+        </Link>
       </div>
     </>
   );
 }
 
 ConfirmeResa.propTypes = {
+  heureMin: PropTypes.number.isRequired,
+  heureMax: PropTypes.number.isRequired,
+  jour: PropTypes.string.isRequired,
   photoProfil: PropTypes.string.isRequired,
+  nom: PropTypes.string,
+  nomUsage: PropTypes.string,
+  nomNaissance: PropTypes.string,
+  prenom: PropTypes.string,
 };
 
 export default ConfirmeResa;

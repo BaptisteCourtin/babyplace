@@ -1,9 +1,14 @@
-const structureModels = require('../models/structure.models.js')
+const structureModels = require("../models/structure.models.js");
+
+const getAllStructures = async (req, res) => {
+  const result = await structureModels.getAllStructures(req);
+  return res.json(result);
+};
 
 const getStructure = async (req, res) => {
-    const result = await structureModels.getStructure(req)
-    return res.json(result)
-}
+  const result = await structureModels.getStructure(req);
+  return res.json(result);
+};
 
 const logout = async (req, res) => {
     const { token, tokenStart, id } = req.body
@@ -16,12 +21,13 @@ const logout = async (req, res) => {
 }
 
 const getStructureDataMess = async (req, res) => {
-    const result = await structureModels.getStructureDataMess()
-    return res.json(result)
-}
+  const result = await structureModels.getStructureDataMess(req);
+  return res.json(result);
+};
 
 module.exports = {
-    getStructure,
-    getStructureDataMess,
-    logout
-}
+  getStructure,
+  getStructureDataMess,
+  getAllStructures,
+  logout
+};

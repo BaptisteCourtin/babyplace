@@ -1,0 +1,36 @@
+.card-creche-map {
+  position: relative;
+  margin: 1rem 0.5rem;
+
+  .like {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 25px;
+    height: 25px;
+    fill: rgb(254, 30, 30);
+    z-index: 5;
+    cursor: pointer;
+  }
+
+  img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 20px;
+  }
+
+  .nom-structure {
+    font-weight: 600;
+    color: $second;
+    text-shadow: 0px 0px 5px $white;
+
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+  }
+
+  .slide {
+    width: 70%;
+  }
+}

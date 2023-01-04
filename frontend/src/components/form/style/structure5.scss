@@ -1,0 +1,108 @@
+.structure5 {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 90%;
+  width: 100%;
+
+  & .colonnePage5 {
+    display: flex;
+    gap: 4vw;
+    // align-items: center;
+  }
+
+  & .optionsLeft {
+    flex: 1;
+    width: 100%;
+  }
+
+  & .assmatOptionsRight {
+    flex: 1;
+    width: 100%;
+  }
+
+  & small {
+    font-size: 0.8rem;
+  }
+
+  & select {
+    width: 100%;
+    border: 1px solid $grey;
+    border-radius: 10px;
+    height: 50px;
+    padding-top: 24px;
+    padding-left: 12px;
+    margin: 0;
+  }
+
+  & select:focus {
+    outline: 1.5px solid $third;
+  }
+
+  & .inputContainer {
+    position: relative;
+  }
+
+  & input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 1.1em;
+    height: 1.1em;
+    border: 1px solid $grey;
+    border-radius: 30%;
+    transform: translateY(0.2em);
+    cursor: pointer;
+    margin-right: 4px;
+  }
+
+  & input:checked {
+    background-color: #fff;
+    position: relative;
+
+    &:before {
+      content: "\2713";
+      padding: 0 2px;
+      display: block;
+      color: $third;
+      font-size: initial;
+      font-weight: 800;
+      position: absolute;
+    }
+  }
+
+  & select + label {
+    color: $grey;
+    font-size: 0.9rem;
+    position: absolute;
+    top: 10px;
+    left: 16px;
+  }
+
+  & h5 {
+    font-weight: 600;
+  }
+
+  & .inputsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    margin: 2vh 0 1vh;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .structure5 {
+    & .colonnePage5 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+
+      & h5 {
+        margin-top: 1vh;
+      }
+    }
+  }
+}

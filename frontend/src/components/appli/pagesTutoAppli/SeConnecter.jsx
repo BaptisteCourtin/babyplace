@@ -1,23 +1,51 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import PropTypes from "prop-types";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
-const INITIAL_DATA = {
-  email: "",
-  mdp: "",
-};
+function SeConnecter({ setCompo }) {
+  const navigate = useNavigate();
 
-function SeConnecter() {
-  const [data, setData] = useState(INITIAL_DATA);
-  function updateFields(fields) {
-    setData((prev) => {
-      return { ...prev, ...fields };
-    });
-  }
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [typePwd, setTypePwd] = useState(true);
+
+  const handleConnection = (e) => {
+    e.preventDefault();
+    if (email && password) {
+      axios
+        .post("http://localhost:5000/authFamille", {
+          email,
+          password,
+        })
+        .then((ret) => {
+          const { token } = ret.data;
+
+          navigate("/appli/search", {
+            state: {
+              token,
+            },
+          });
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  };
 
   return (
     <div className="applituto connexion">
       <main>
+        <button
+          type="button"
+          className="se-connecter"
+          onClick={() => setCompo(0)}
+        >
+          S'inscrire
+        </button>
         <h3>Se connecter</h3>
+
         <form>
           <label htmlFor="email">
             <input
@@ -25,36 +53,50 @@ function SeConnecter() {
               type="email"
               name="email"
               id="email"
-              placeholder="Email"
-              value={data.email}
-              onChange={(e) => updateFields({ email: e.target.value })}
+              onChange={(event) => {
+                setEmail(event.target.value);
+              }}
             />
-            <p className="checkSymbol">&#x2713;</p>
+            <p>E mail</p>
           </label>
-
           <label htmlFor="mdp">
             <input
               required
-              type="text"
+              type={typePwd ? "password" : "text"}
               name="mdp"
               id="mdp"
-              placeholder="Mot de passe"
-              value={data.mdp}
-              onChange={(e) => updateFields({ mdp: e.target.value })}
+              onChange={(event) => {
+                setPassword(event.target.value);
+              }}
             />
-            <p className="checkSymbol">&#x2713;</p>
+            <p>Mot de passe</p>
+            <button
+              type="button"
+              className="view-password"
+              onClick={() => setTypePwd(!typePwd)}
+            >
+              {typePwd ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+            </button>
           </label>
         </form>
-      </main>
-      <div className="button-bas">
-        <Link to="/appli/search">
-          <button className="butt" type="button">
+        <div className="button-bas">
+          <button
+            className="butt grad"
+            type="submit"
+            onClick={(e) => {
+              handleConnection(e);
+            }}
+          >
             Se connecter
           </button>
-        </Link>
-      </div>
+        </div>
+      </main>
     </div>
   );
 }
+
+SeConnecter.propTypes = {
+  setCompo: PropTypes.func.isRequired,
+};
 
 export default SeConnecter;

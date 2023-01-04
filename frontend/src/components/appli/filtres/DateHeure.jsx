@@ -1,12 +1,32 @@
 import React from "react";
+import PropTypes from "prop-types";
 import AppliDashPlaces from "./AppliPlaces";
 
-function DateHeure() {
+function DateHeure({ setCompo }) {
   return (
-    <main className="date-heure">
-      <AppliDashPlaces />
-    </main>
+    <>
+      <header>
+        <button
+          type="button"
+          className="h2"
+          onClick={() => setCompo(0)}
+        >{`< Dates et Heures`}</button>
+        <button type="button">RESET</button>
+      </header>
+
+      <main className="date-heure">
+        <AppliDashPlaces />
+      </main>
+
+      <button type="button" className="apply" onClick={() => setCompo(0)}>
+        Appliquer
+      </button>
+    </>
   );
 }
+
+DateHeure.propTypes = {
+  setCompo: PropTypes.func.isRequired,
+};
 
 export default DateHeure;

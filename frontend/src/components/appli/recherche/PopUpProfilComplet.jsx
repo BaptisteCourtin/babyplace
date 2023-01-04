@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-function PopUpProfilComplet({ setVisiblePopUp, data }) {
+function PopUpProfilComplet({ setVisiblePopUp, data, dataHorairesId }) {
   return (
     <div className="pop">
       <button
@@ -48,18 +48,19 @@ function PopUpProfilComplet({ setVisiblePopUp, data }) {
           uniquement sur ordonnance ou protocole.
         </p>
       </div>
-      <button type="button">
-        <Link to="/appli/search/reservation" state={{ data }}>
+      <Link to="/appli/search/reservation" state={{ data, dataHorairesId }}>
+        <button type="button" className="compris">
           J'ai compris !
-        </Link>
-      </button>
+        </button>
+      </Link>
     </div>
   );
 }
 
 PopUpProfilComplet.propTypes = {
   setVisiblePopUp: PropTypes.func.isRequired,
-  data: PropTypes.string.isRequired,
+  data: PropTypes.object.isRequired,
+  dataHorairesId: PropTypes.array.isRequired,
 };
 
 export default PopUpProfilComplet;

@@ -29,7 +29,7 @@ function PopUpProfilNonComplet({ setVisiblePopUp }) {
         - une photocopie du livret de famille
         <br />- votre numéro d’allocataire CAF.
       </p>
-      <button type="button">
+      <button type="button" className="compris">
         <Link to="/appli/user/completion" state={{ quelCompo: 2 }}>
           Compléter mon dossier
         </Link>

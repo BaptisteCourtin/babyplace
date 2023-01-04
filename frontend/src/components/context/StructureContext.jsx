@@ -1,3 +1,5 @@
 import { createContext } from "react";
 
-export const StructureContext = createContext("");
+const StructureContext = createContext("");
+
+export default StructureContext;

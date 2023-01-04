@@ -4,7 +4,7 @@
   background-color: $white;
 
   .content {
-    padding: 0 1rem;
+    padding: 0 0.5rem;
 
     .lieu-date {
       width: 100%;
@@ -25,36 +25,78 @@
       .left-filter {
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         gap: 1rem;
-      }
+        height: 100%;
+        width: 100%;
 
-      button {
-        background-color: $grey;
-        position: relative;
-      }
+        .search-filtres,
+        .tri {
+          display: flex;
+          flex-wrap: nowrap;
+          justify-content: center;
+          align-items: center;
+          height: 100%;
 
-      .tri {
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: center;
-        align-items: center;
-
-        span {
-          margin-right: 0.25rem;
+          span {
+            margin-right: 0.25rem;
+          }
         }
+      }
+
+      .map {
+        background-color: transparent;
+      }
+    }
+  }
+
+  main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    margin: 1.5rem 0;
+    gap: 1.5rem;
+    width: 100%;
+
+    .map {
+      width: 80%;
+      margin: 1rem auto;
+      height: 500px;
+
+      .leaflet-container {
+        z-index: 1;
       }
     }
 
-    main {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 350px));
-      grid-auto-rows: 1fr;
-      justify-content: center;
+    .caroussel {
+      margin-bottom: 1rem;
+      height: 100%;
+    }
+  }
 
-      gap: 1rem;
-      width: 100%;
+  @media screen and (min-width: 650px) {
+    main.container-map {
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: row-reverse;
+      padding: 0 1rem;
+
+      .caroussel {
+        .carousel-root {
+          .carousel-slider {
+            height: 500px;
+            // comme la map
+
+            .slider-wrapper {
+              height: 100% !important;
+              // pour afficher plusieurs carte en version vertical
+            }
+          }
+        }
+      }
     }
   }
 }

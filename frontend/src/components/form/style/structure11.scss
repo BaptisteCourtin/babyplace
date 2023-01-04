@@ -1,0 +1,122 @@
+.structure11 {
+  & .agendaSection {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 20px 0;
+    background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
+    border-radius: 5px;
+
+    & h2 {
+      font-size: $h2;
+      font-weight: 500;
+      margin-left: 20px;
+    }
+
+    & .react-calendar {
+      height: fit-content;
+      max-width: 600px;
+      margin: 1vh auto;
+
+      &__navigation {
+        display: flex;
+        justify-content: space-evenly;
+
+        &__arrow {
+          background: none;
+          color: $third;
+          font-size: $h2;
+        }
+
+        &__prev2-button {
+          display: none;
+        }
+
+        &__label {
+          flex-grow: 0 !important;
+          background: $third;
+          padding: 5px 10px;
+          border-radius: 5px;
+
+          & span {
+            color: $white;
+            font-weight: 500;
+            text-transform: capitalize;
+          }
+        }
+
+        &__next2-button {
+          display: none;
+        }
+      }
+
+      &__month-view {
+        margin-top: 20px;
+
+        &__weekdays {
+          padding-bottom: 10px;
+          border-bottom: 1px solid $grey;
+
+          &__weekday {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            & abbr {
+              text-transform: capitalize;
+              text-decoration: none;
+            }
+          }
+        }
+
+        &__days {
+          &__day {
+            border-bottom: 1px dashed $second;
+            width: 50px;
+            height: 50px;
+            padding: 10px;
+            background: none;
+          }
+        }
+      }
+
+      &__tile--now {
+        background-color: $third;
+        color: $white;
+        font-weight: 500;
+        border-bottom: 1px solid transparent;
+      }
+
+      &__tile--active {
+        color: $second;
+        font-weight: 400;
+        border-radius: 0;
+      }
+
+      & .select {
+        background-color: #f0f0f0;
+        color: $fourth;
+        font-weight: 500;
+        text-decoration: line-through;
+      }
+    }
+
+    & .notWorked {
+      & .react-calendar__month-view__days {
+        & abbr {
+          opacity: 0.4;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .structure11 {
+    & .agendaSection {
+      & .react-calendar {
+        padding: 0;
+      }
+    }
+  }
+}

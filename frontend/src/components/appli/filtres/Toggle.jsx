@@ -23,7 +23,7 @@ function Toggle({ setter, state, nom, p }) {
 
 Toggle.propTypes = {
   setter: PropTypes.func.isRequired,
-  state: PropTypes.string.isRequired,
+  state: PropTypes.bool.isRequired,
   nom: PropTypes.string.isRequired,
   p: PropTypes.string.isRequired,
 };

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import moment from "moment";
 import DashCalendar from "./calendar/DashCalendar";
 
 function DashAgenda({ token, structureId, maxPlaces }) {
@@ -52,8 +53,6 @@ function DashAgenda({ token, structureId, maxPlaces }) {
         console.error(err);
       });
   };
-
-  console.log(calendar)
 
   const updatePlaces = () => {
     axios
@@ -114,8 +113,9 @@ function DashAgenda({ token, structureId, maxPlaces }) {
 
 
   const [clickedDay, setClickedDay] = useState(new Date());
-  const date = `${clickedDay.getFullYear()}-${clickedDay.getMonth() + 1
-    }-${clickedDay.getDate()}`;
+  const date = `${clickedDay.getFullYear()}-${
+    clickedDay.getMonth() + 1
+  }-${clickedDay.getDate()}`;
 
   const day = clickedDay.toLocaleDateString("fr-FR", { weekday: "long" });
 

@@ -15,6 +15,12 @@ export default defineConfig({
       "@utils": path.resolve(__dirname, "src/utils")
     },
   },
+  server: {
+    fs: {
+      // Allow serving files from one level up to the project root
+      allow: [".."],
+    },
+  },
   optimizeDeps: {
     esbuildOptions: {
       plugins: [esbuildCommonjs(["tiny-slider", "tiny-slider-react"])],

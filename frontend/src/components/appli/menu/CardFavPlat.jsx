@@ -11,9 +11,11 @@ function CardFavPlat({ each }) {
         <h4>{nom}</h4>
         <p>{texte}</p>
       </div>
-      <p className="note">
-        {note} <AiFillStar />
-      </p>
+      {note ? (
+        <p className="note">
+          {note} <AiFillStar />
+        </p>
+      ) : null}
     </div>
   );
 }

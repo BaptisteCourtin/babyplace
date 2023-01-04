@@ -9,7 +9,8 @@ const tabFav = [
     nom: "creche nb 1",
     note: 4.8,
     image: imgCreche,
-    texte: "description 1 c'est un peu long afin d'overflow",
+    texte:
+      "description 1 c'est un peu long afin d'overflow flow flow flow flow flow flow flow flow flow",
   },
   {
     nom: "creche nb 2",
@@ -29,11 +30,12 @@ function Favoris({ setCompo }) {
   const [occasions, setOccasions] = useState();
   return (
     <>
-      <button
-        type="button"
-        className="butt-top"
-        onClick={() => setCompo(0)}
-      >{`< Favoris`}</button>
+      <div className="button-top">
+        <button className="butt big" type="button" onClick={() => setCompo(0)}>
+          {`< Favoris`}
+        </button>
+      </div>
+
       <main className="favoris">
         <div className="occas">
           <h4>Ne manquez plus les occasions</h4>
@@ -44,8 +46,8 @@ function Favoris({ setCompo }) {
             p="Je souhaite obtenir des notifications en cas de disponibilités des structures favorites"
           />
         </div>
-        {tabFav.map((each) => (
-          <CardFavPlat each={each} />
+        {tabFav.map((each, index) => (
+          <CardFavPlat each={each} key={index} />
         ))}
       </main>
     </>

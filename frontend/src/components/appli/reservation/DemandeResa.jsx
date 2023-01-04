@@ -3,7 +3,21 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Toggle from "../filtres/Toggle";
 
-function DemandeResa({ setCompo, photo3, tarif }) {
+function DemandeResa({
+  setCompo,
+  heureMin,
+  heureMax,
+  jour,
+  nom,
+  nomUsage,
+  nomNaissance,
+  prenom,
+  photo3,
+  indemnEntretien,
+  indemnRepas,
+  indemnKm,
+  tarifHeure,
+}) {
   const [kilometre, setKilometre] = useState(false);
   const [entretien, setEntretien] = useState(false);
   const [repas, setRepas] = useState(false);
@@ -24,53 +38,65 @@ function DemandeResa({ setCompo, photo3, tarif }) {
       <main className="demande-resa">
         <div className="container-img">
           <img src={photo3} alt="img creche" />
-          {/* <Star
-            com={data.Avis_com}
-            proprete={data.Avis_proprete}
-            securite={data.Avis_securite}
-            eveil={data.Avis_eveil}
-            horaires={data.Avis_horaires}
-          /> */}
         </div>
 
         <div className="principale">
           <div className="text">
-            <h3>Demande de réservation Crèche Picoti Picota</h3>
-            <p>Date : lundi 14 septembre </p>
-            <p>Horaires : 9h-16h</p>
+            <h3>
+              Demande de réservation à{" "}
+              {nom ||
+                (nomUsage
+                  ? `${prenom} ${nomUsage}`
+                  : `${prenom} ${nomNaissance}`)}
+            </h3>
+            <p>Date : {jour} </p>
+            <p>
+              Horaires : {heureMin}h-{heureMax}h
+            </p>
           </div>
 
           <div className="tog">
             <Toggle
-              setter={setKilometre}
-              state={kilometre}
-              nom="kilometre"
-              p="Indemnité kilométrique (0.50€/km)"
-            />
-            <Toggle
-              setter={setEntretien}
-              state={entretien}
-              nom="entretien"
-              p="Indemnité d'entretien (3.5€)"
-            />
-            <Toggle
               setter={setRepas}
               state={repas}
               nom="repas"
-              p="Indemnité de repas (7€)"
+              p={`Indemnité de repas (${indemnRepas}€)`}
             />
+            {indemnKm ? (
+              <Toggle
+                setter={setKilometre}
+                state={kilometre}
+                nom="kilometre"
+                p={`Indemnité kilométrique (${indemnKm}€/km)`}
+              />
+            ) : null}
+            {indemnEntretien ? (
+              <Toggle
+                setter={setEntretien}
+                state={entretien}
+                nom="entretien"
+                p={`Indemnité d'entretien (${indemnEntretien}€)`}
+              />
+            ) : null}
           </div>
         </div>
 
         <div className="prix-resa">
           <div className="prix">
-            {/* faire par rapport au nb d'heure */}
             <p>
-              <span> {tarif * 8}€ *</span>
-              {/* rajouter les indemnitées */}
+              {/* indemnKm par rapport au km */}
+              <span>
+                {(
+                  tarifHeure * (heureMax - heureMin) +
+                  (kilometre && indemnKm) +
+                  (repas && indemnRepas) +
+                  (entretien && indemnEntretien)
+                ).toFixed(2)}
+                € *
+              </span>
             </p>
             <p>
-              <span>8h de garde</span>
+              <span>{heureMax - heureMin}h de garde</span>
             </p>
           </div>
           <button type="button" onClick={() => setCompo(3)}>
@@ -89,8 +115,19 @@ function DemandeResa({ setCompo, photo3, tarif }) {
 
 DemandeResa.propTypes = {
   setCompo: PropTypes.func.isRequired,
+
+  heureMin: PropTypes.number.isRequired,
+  heureMax: PropTypes.number.isRequired,
+  jour: PropTypes.string.isRequired,
+  nom: PropTypes.string,
+  nomUsage: PropTypes.string,
+  nomNaissance: PropTypes.string,
+  prenom: PropTypes.string,
   photo3: PropTypes.string.isRequired,
-  tarif: PropTypes.number.isRequired,
+  indemnEntretien: PropTypes.number.isRequired,
+  indemnRepas: PropTypes.number.isRequired,
+  indemnKm: PropTypes.number.isRequired,
+  tarifHeure: PropTypes.number.isRequired,
 };
 
 export default DemandeResa;

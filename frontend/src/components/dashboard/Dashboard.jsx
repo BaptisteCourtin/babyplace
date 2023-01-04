@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import DashNavbar from "./nav/DashNavbar";
 
 import DashReservations from "./reservations/DashReservations";
-import DashAgenda from "./agenda/DashAgenda";
+import DashAgenda from "./agenda/DashAgenda.jsx";
 import DashPlaces from "./places/DashPlaces";
 import Messages from "../messages/Messages";
 import axios from "axios";
@@ -58,7 +58,7 @@ function Dashboard() {
         donnees.avisProprete +
         donnees.avisSecurite) /
         5) *
-      10
+        10
     ) / 10;
 
   return (

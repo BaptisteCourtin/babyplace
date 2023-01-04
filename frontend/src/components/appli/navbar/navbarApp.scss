@@ -1,26 +1,34 @@
-.navbar {
-  background-color: $white;
+.container-navbar-app {
+  background: linear-gradient($grey, $white);
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 0.5rem 1rem;
-  background-color: $grey;
-  border-top: 1px black solid;
+  border-top: 0.5px $second solid;
+
+  display: flex;
+  justify-content: center;
 
   position: fixed;
   bottom: 0;
   z-index: 10;
 
-  .active {
-    color: $white;
-    background: $gradient;
-    border-radius: 10px;
-  }
+  .navbar {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-  .img-nav {
-    width: 40px;
-    height: 40px;
-    padding: 7px;
+    .img-nav {
+      width: 40px;
+      height: 40px;
+      padding: 7px;
+    }
+
+    .active {
+      color: $white;
+      background: $gradient;
+      border-radius: 10px;
+      box-shadow: 0 0 5px $second;
+    }
   }
 }

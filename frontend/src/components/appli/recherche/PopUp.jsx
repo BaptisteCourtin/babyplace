@@ -3,19 +3,24 @@ import PropTypes from "prop-types";
 import PopUpProfilComplet from "./PopUpProfilComplet";
 import PopUpProfilNonComplet from "./PopUpProfilNonComplet";
 
-function PopUp({ data }) {
+function PopUp({ data, dataHorairesId }) {
   const [visiblePopUp, setVisiblePopUp] = useState(false);
   const profilComplet = true;
 
   const choixComposant = () => {
     if (visiblePopUp && profilComplet) {
       return (
-        <PopUpProfilComplet setVisiblePopUp={setVisiblePopUp} data={data} />
+        <PopUpProfilComplet
+          setVisiblePopUp={setVisiblePopUp}
+          data={data}
+          dataHorairesId={dataHorairesId}
+        />
       );
     }
     if (visiblePopUp && !profilComplet) {
       return <PopUpProfilNonComplet setVisiblePopUp={setVisiblePopUp} />;
     }
+    return null;
   };
 
   return (
@@ -34,7 +39,8 @@ function PopUp({ data }) {
 }
 
 PopUp.propTypes = {
-  data: PropTypes.string.isRequired,
+  data: PropTypes.object.isRequired,
+  dataHorairesId: PropTypes.array.isRequired,
 };
 
 export default PopUp;
