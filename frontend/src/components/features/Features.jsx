@@ -10,9 +10,9 @@ import logoDave from '@assets/features/logoDave.png'
 
 const Features = () => {
     return (
-        <div className="features">
+        <div className="features" id="about">
             <NavbarLite />
-            <section id="about">
+            <section id="about-us">
                 <h3>A propos de nous</h3>
                 <div className='descriptionContainer'>
                     <div className='descriptionTxt'><p>
