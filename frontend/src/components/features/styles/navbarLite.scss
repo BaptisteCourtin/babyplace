@@ -1,0 +1,97 @@
+.navbarLite {
+    width: 100%;
+    height: 15vh;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & button {
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .logoContainerLite {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+
+        #logoCoeur {
+            width: 30px;
+            height: 30px;
+        }
+
+        #logotxt {
+            height: 30px;
+            margin-top: 2%;
+        }
+    }
+
+
+
+
+
+
+    .proLite {
+        & .navBtnLite {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: $h1;
+
+            & a {
+                padding: 10px 25px 10px 25px;
+                border: 1px solid transparent;
+                border-radius: 50px;
+
+                &:first-of-type {
+                    background-color: $third;
+                    color: $white;
+                    font-weight: 500;
+                    transition: 0.3s ease-in-out;
+
+                    &:hover {
+                        background: none;
+                        border: 1px solid $third;
+                        color: $second;
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .navbarLite {
+        width: 95%;
+
+        & .logoContainerLite {
+            & #logotxt {
+                display: none;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .navbarLite {
+        gap: 20px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .proLite {
+        & .navBtnLite {
+            flex-direction: column;
+            gap: 10px;
+            text-align: center;
+
+            & a {
+                width: 100%;
+            }
+        }
+    }
+}

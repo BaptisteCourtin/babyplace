@@ -50,7 +50,7 @@ export default function Home() {
           <section className="mainApp">
             <div className="mainAppText">
               <p>Ma place en crèche 0 papier !</p>
-              <p>Je télécharge l’app Babyplace !</p>
+              <p>Je me connecte à Babyplace !</p>
             </div>
             <img src={copie} alt="" />
           </section>
