@@ -52,7 +52,7 @@ function Footer({ userType }) {
             <ul>
               <li><HashLink to="/features#about">A propos</HashLink></li>
               <li><HashLink to="/features#profil">Nos Profil</HashLink></li>
-              <li><HashLink to="/features#technics">Caractéristiques</HashLink></li>
+              <li><HashLink to="/features#mentions">Mentions Légales</HashLink></li>
             </ul>
             <ul>
               <li><HashLink to="/contact#aide">Aide</HashLink></li>
