@@ -57,15 +57,14 @@
     justify-content: center;
     align-items: center;
 
-    margin-top: 0.5rem;
-    gap: 0.5rem;
+    margin: 1.5rem 0;
+    gap: 1.5rem;
     width: 100%;
 
     .map {
       width: 80%;
       margin: 1rem auto;
       height: 500px;
-      background-color: rgb(132, 132, 216);
 
       .leaflet-container {
         z-index: 1;
@@ -74,6 +73,30 @@
 
     .caroussel {
       margin-bottom: 1rem;
+      height: 100%;
+    }
+  }
+
+  @media screen and (min-width: 650px) {
+    main.container-map {
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: row-reverse;
+      padding: 0 1rem;
+
+      .caroussel {
+        .carousel-root {
+          .carousel-slider {
+            height: 500px;
+            // comme la map
+
+            .slider-wrapper {
+              height: 100% !important;
+              // pour afficher plusieurs carte en version vertical
+            }
+          }
+        }
+      }
     }
   }
 }

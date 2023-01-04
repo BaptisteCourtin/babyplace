@@ -1,8 +1,8 @@
 import React from "react";
 import Proptypes from "prop-types";
 
-function Structure2({ imageProfilSrc, updateFields }) {
-  // const [imageProfilSrc, setImageProfilSrc] = useState("https://via.placeholder.com/150");
+function Structure2({ imageProfilSrc, inputRef, updateFields }) {
+
   const updateImg = (e) => {
     // e.files contient un objet FileList
     const [picture] = e.target.files;
@@ -38,6 +38,7 @@ function Structure2({ imageProfilSrc, updateFields }) {
             type="file"
             id="avatar"
             name="avatar"
+            ref={inputRef}
             accept="image/png, image/jpg, image/jpeg"
             onChange={(e) => updateImg(e)}
           />

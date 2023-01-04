@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
@@ -37,8 +37,18 @@ function LoginForm() {
     }
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleClick(e);
+    }
+  };
+
   return (
     <section className="formCo">
+      <p className="formSwitch">
+        Vous n'avez pas de compte ?⠀
+        <Link to="/register">S'enregistrer</Link>
+      </p>
       <h2>Je me connecte</h2>
       <form>
         <input
@@ -46,9 +56,11 @@ function LoginForm() {
           name="email"
           id="email"
           placeholder="Email"
+          onKeyPress={handleKeyPress}
           onChange={(event) => {
             setEmail(event.target.value);
           }}
+          required
         />
         <div className="passwordInput">
           <input
@@ -56,16 +68,19 @@ function LoginForm() {
             name="pwd"
             id="pwd"
             placeholder="Password"
+            onKeyPress={handleKeyPress}
             onChange={(event) => {
               setPassword(event.target.value);
             }}
+            required
           />
           <button onClick={handlePwdClick}>
-            {typePwd ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+            {!typePwd ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
           </button>
         </div>
         <button
           type="submit"
+          className="btnSubmit"
           style={{
             opacity: !email || !password ? "0.7" : "1",
           }}

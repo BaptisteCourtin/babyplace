@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import Proptypes from "prop-types";
 import StructureContext from "@components/context/StructureContext";
 

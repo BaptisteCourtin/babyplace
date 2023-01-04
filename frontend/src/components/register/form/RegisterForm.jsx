@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { AiOutlineEye, AiOutlineEyeInvisible, AiOutlineCheck } from "react-icons/ai";
+import UserEmailContext from "@components/context/UserEmailContext";
+import toast from 'react-hot-toast';
 import Axios from "axios";
 
 function RegisterForm() {
   const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
+  const { userEmail, setUserEmail } = useContext(UserEmailContext);
   const [password, setPassword] = useState("");
   const [checked, setChecked] = useState(false);
   const [typePwd, setTypePwd] = useState(true);
+
+  const [pwdLength, setPwdLength] = useState(null);
 
   const handlePwdClick = (e) => {
     e.preventDefault();
@@ -18,7 +22,7 @@ function RegisterForm() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    if (email && password && checked) {
+    if (email && password && checked && pwdLength > 8) {
       Axios.post("http://localhost:5000/inscription", {
         email,
         password,
@@ -37,9 +41,18 @@ function RegisterForm() {
     }
   };
 
+  const handlePwdLength = (e) => {
+    e.preventDefault();
+    if (pwdLength < 8) {
+      toast.error("Mot de passe trop court")
+    }
+  }
+
+  console.log(pwdLength)
+
   return (
     <section className="formCo">
-      <p>
+      <p className="formSwitch">
         Vous avez déjà un compte ?⠀
         <Link to="/login">Se connecter</Link>
       </p>
@@ -51,8 +64,9 @@ function RegisterForm() {
           id="email"
           placeholder="Email"
           onChange={(event) => {
-            setEmail(event.target.value);
+            setEmail(event.target.value); setUserEmail(event.target.value)
           }}
+          required={true}
         />
         <div className="passwordInput">
           <input
@@ -60,20 +74,27 @@ function RegisterForm() {
             name="pwd"
             id="pwd"
             placeholder="Password"
-            onChange={(event) => {
+            onInput={(event) => {
               setPassword(event.target.value);
+              setPwdLength(password.length)
             }}
+            required={true}
           />
           <button onClick={handlePwdClick}>
-            {typePwd ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+            {!typePwd ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
           </button>
         </div>
+        <p className="passwordCondition" style={{
+          color:
+            pwdLength < 8 ? "#EF3672" : "#2dcd7a"
+        }}>{pwdLength >= 8 && <span style={{ color: "#2dcd7a" }}><AiOutlineCheck /></span>}Minimum 8 caractères</p>
         <div className="inputCheck">
           <input
             type="checkbox"
             name="useConditions"
             id="useConditions"
             onChange={() => setChecked(!checked)}
+            required={true}
           />
           <label htmlFor="useConditions">
             J'accepte les conditions d'utilisation
@@ -81,17 +102,20 @@ function RegisterForm() {
         </div>
         <button
           type="submit"
+          className="btnSubmit"
           style={{
             opacity: !email || !password || !checked ? "0.7" : "1",
           }}
+          disabled={!email || !password || !checked ? true : false}
           onClick={(e) => {
             handleClick(e);
+            handlePwdLength(e);
           }}
         >
           S'inscrire
         </button>
       </form>
-    </section>
+    </section >
   );
 }
 

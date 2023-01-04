@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import AppliDashPlaces from "./AppliPlaces";
 
 function DateHeure({ setCompo }) {
@@ -23,5 +24,9 @@ function DateHeure({ setCompo }) {
     </>
   );
 }
+
+DateHeure.propTypes = {
+  setCompo: PropTypes.func.isRequired,
+};
 
 export default DateHeure;

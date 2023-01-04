@@ -64,7 +64,15 @@ function ChoixDates({
 
 ChoixDates.propTypes = {
   setCompo: PropTypes.func.isRequired,
+  setHeureMin: PropTypes.func.isRequired,
+  setHeureMax: PropTypes.func.isRequired,
+  setJour: PropTypes.func.isRequired,
   photoProfil: PropTypes.string.isRequired,
+  nom: PropTypes.string,
+  nomUsage: PropTypes.string,
+  nomNaissance: PropTypes.string,
+  prenom: PropTypes.string,
+  dataHorairesId: PropTypes.array.isRequired,
 };
 
 export default ChoixDates;

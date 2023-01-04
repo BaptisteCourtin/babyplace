@@ -28,8 +28,8 @@ function PersonnesConfiance({ setCompo }) {
         </button>
       </div>
       <main className="perso-confiance">
-        {tabFav.map((each) => (
-          <div className="card-confiance">
+        {tabFav.map((each, index) => (
+          <div key={index} className="card-confiance">
             <h3>{each.nom}</h3>
             <p>{each.email}</p>
             <p>0{each.tel}</p>

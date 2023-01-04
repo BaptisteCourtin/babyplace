@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import TheCard from "../menu/TheCard";
 
 function NotifPaye({ setCompo }) {
@@ -14,5 +15,9 @@ function NotifPaye({ setCompo }) {
     </div>
   );
 }
+
+NotifPaye.propTypes = {
+  setCompo: PropTypes.func.isRequired,
+};
 
 export default NotifPaye;

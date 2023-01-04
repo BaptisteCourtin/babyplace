@@ -1,7 +1,9 @@
 import useMultistepForm from "@components/form/useMultistepForm";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
+import Axios from "axios";
 import StructureContext from "@components/context/StructureContext";
 import ResaContext from "@components/context/ResaContext";
+import UserEmailContext from "@components/context/ResaContext";
 import imgTime from "@assets/img-time.svg";
 import Structure1 from "../components/form/Structure1";
 import Structure2 from "../components/form/Structure2";
@@ -117,9 +119,11 @@ const INITIAL_DATA = {
 };
 
 function FormStructure() {
+  const inputRef = useRef(null);
   const [data, setData] = useState(INITIAL_DATA);
   const [structure, setStructure] = useState("");
   const [resa, setResa] = useState("");
+  const { userEmail } = useContext(UserEmailContext);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [showExplications, setShowExplications] = useState(true);
   const updateSize = () => {
@@ -137,7 +141,7 @@ function FormStructure() {
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
     useMultistepForm([
       <Structure1 {...data} updateFields={updateFields} />,
-      <Structure2 {...data} updateFields={updateFields} />,
+      <Structure2 {...data} inputRef={inputRef} updateFields={updateFields} />,
       <Structure3 {...data} updateFields={updateFields} />,
       <Structure4 {...data} updateFields={updateFields} />,
       <Structure5 {...data} updateFields={updateFields} />,
@@ -293,7 +297,46 @@ function FormStructure() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (!isLastStep) { next(); }
+    const { isCreche, typeCreche, nomStructure, telephone, nomNaissance, nomUsage, prenom, adresseStructure, description, PCSC1, nesting, motessori, handi, jardin, sorties, animaux, nonFumeur, zeroPollution, repas, hygiene, promenades, eveil, musique, art, bilingue, bibli, transport, albumPhoto, photoPonnecte, resaInst, lundiOuvert, mardiOuvert, mercrediOuvert, jeudiOuvert, vendrediOuvert, samediOuvert, dimancheOuvert, lundiMin, lundiMax, mardiMin, mardiMax, mercrediMin, mercrediMax, jeudiMin, jeudiMax, vendrediMin, vendrediMax, samediMin, samediMax, dimancheMin, dimancheMax, dureeMin, dureeMax, nbEmployes, maxPlaces, maxHandi, max18Mois, maxNuit, financementPaje, tarifHeure, tarifHoraireSpec, indemnRepas, tarifAtelier, indemnEntretien, indemnKm, tarifHeureSup, numSecu, numAgrement, dateAgrement, docPmi, siret, assHabitNom, assHabitNumero, assHabitAdresse, assAutoNom, assAutoNumero, assAutoAdresse, docIdentite, docVitale, docJustifDom, docDiplome, docRespCivile, docAssAuto } = data;
+    const email = userEmail;
+    if (!isLastStep) {
+      if (currentStepIndex === 0 && structure === "creche") {
+        Axios.put("http://localhost:5000/inscriptionCreche1", {
+          isCreche, typeCreche, nomStructure, adresseStructure, telephone, email
+        })
+          .then(next())
+          .catch((err) => {
+            console.error(err);
+          });
+      } else if (currentStepIndex === 0 && structure === "assmat") {
+        Axios.put("http://localhost:5000/inscriptionAssmat1", {
+          isCreche, nomNaissance, nomUsage, prenom, adresseStructure, telephone, email
+        })
+          .then(next())
+          .catch((err) => {
+            console.error(err);
+          });
+      } else if (currentStepIndex === 1) {
+        const formData = new FormData();
+        formData.append("avatar", inputRef.current.files[0]);
+        Axios.post("http://localhost:5000/photoProfil", formData)
+          .then((result) => {
+            console.log(result)
+            const photoProfil = `@backend/public/uploads/avatar/${result.data}`;
+            Axios.put("http://localhost:5000/photoProfil", {
+              photoProfil, email
+            })
+              .then(next())
+              .catch((err) => {
+                console.error(err);
+              })
+          }
+          )
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    }
   }
   return (
     <StructureContext.Provider value={{ structure, setStructure }}>
@@ -316,7 +359,7 @@ function FormStructure() {
           </div>
 
           <div className="formStructureContainer">
-            <form
+            <form encType="multipart/form-data"
               className={
                 currentStepIndex === 6 || currentStepIndex === 7 || isLastStep
                   ? "pageChoixResa"

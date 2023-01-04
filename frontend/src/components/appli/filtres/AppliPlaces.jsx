@@ -427,7 +427,7 @@ DashPlaces.propTypes = {
   setHeureMin: PropTypes.func.isRequired,
   setHeureMax: PropTypes.func.isRequired,
   setJour: PropTypes.func.isRequired,
-  dataHorairesId: PropTypes.string.isRequired,
+  dataHorairesId: PropTypes.array.isRequired,
 };
 
 export default DashPlaces;

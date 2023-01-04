@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import Check from "./Check";
 
 function Services({ setCompo }) {
@@ -155,5 +156,9 @@ function Services({ setCompo }) {
     </>
   );
 }
+
+Services.propTypes = {
+  setCompo: PropTypes.func.isRequired,
+};
 
 export default Services;

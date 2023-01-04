@@ -3,14 +3,20 @@ import PropTypes from "prop-types";
 
 function CardNotif({ setCompo, texte, compo }) {
   return (
-    <div className="card-notif" onClick={() => setCompo(compo)}>
+    <button
+      type="button"
+      className="card-notif"
+      onClick={() => setCompo(compo)}
+    >
       <p>{texte}</p>
       <span>{`>`}</span>
-    </div>
+    </button>
   );
 }
 
 CardNotif.propTypes = {
+  setCompo: PropTypes.func.isRequired,
+  compo: PropTypes.number.isRequired,
   texte: PropTypes.string.isRequired,
 };
 

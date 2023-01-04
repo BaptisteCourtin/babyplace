@@ -46,8 +46,8 @@ function Favoris({ setCompo }) {
             p="Je souhaite obtenir des notifications en cas de disponibilités des structures favorites"
           />
         </div>
-        {tabFav.map((each) => (
-          <CardFavPlat each={each} />
+        {tabFav.map((each, index) => (
+          <CardFavPlat each={each} key={index} />
         ))}
       </main>
     </>
