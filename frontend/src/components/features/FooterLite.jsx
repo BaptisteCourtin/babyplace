@@ -35,7 +35,7 @@ const FooterLite = () => {
                     <ul>
                         <li><HashLink smooth to={'/features#about'}>A propos </HashLink></li>
                         <li><HashLink smooth to={"/features#profil"} >Nos Profils </HashLink></li>
-                        <li><HashLink smooth to={"/features#technics"} >Caractéristiques </HashLink></li>
+                        <li><HashLink smooth to={"/features#mentions"} >Mentions Légales </HashLink></li>
                     </ul>
 
                     <ul>
