@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import PropTypes from "prop-types";
 
 function CardCrecheMap({ data }) {
   const { photoStructure1, structureId, nom, nomUsage, nomNaissance, prenom } =
@@ -52,5 +53,9 @@ function CardCrecheMap({ data }) {
     </div>
   );
 }
+
+CardCrecheMap.propTypes = {
+  data: PropTypes.object.isRequired,
+};
 
 export default CardCrecheMap;

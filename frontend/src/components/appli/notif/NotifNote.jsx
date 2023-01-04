@@ -1,11 +1,19 @@
 import React from "react";
 import logoBlanc from "@assets/logo-blanc.svg";
 import avatar1 from "@assets/avatar1.svg";
+import PropTypes from "prop-types";
 
 import Rating from "react-rating";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 
 function NotifNote({ setCompo }) {
+  const submitNote = () => {
+    // prendre les notes et le nombre de votes de cette structure
+    // calcul + update database
+    // pop up merci
+    setCompo(0);
+  };
+
   return (
     <div className="notif-container-grad">
       <div className="notif-note">
@@ -71,7 +79,7 @@ function NotifNote({ setCompo }) {
         </form>
 
         <div className="button-bas">
-          <button type="button" className="butt" onClick={() => setCompo(0)}>
+          <button type="submit" className="butt" onClick={() => submitNote()}>
             Envoyer
           </button>
         </div>
@@ -79,5 +87,9 @@ function NotifNote({ setCompo }) {
     </div>
   );
 }
+
+NotifNote.propTypes = {
+  setCompo: PropTypes.func.isRequired,
+};
 
 export default NotifNote;

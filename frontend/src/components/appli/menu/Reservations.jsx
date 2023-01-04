@@ -31,8 +31,8 @@ function Reservations({ setCompo }) {
         </button>
       </div>
       <main className="reservation">
-        {tabResa.map((each) => (
-          <CardFavPlat each={each} />
+        {tabResa.map((each, index) => (
+          <CardFavPlat each={each} key={index} />
         ))}
       </main>
     </>

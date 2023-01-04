@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { Marker, Popup } from "react-leaflet";
+import PropTypes from "prop-types";
 
 function CardMarker({ data }) {
   const { nom, nomUsage, nomNaissance, prenom } = data;
@@ -65,5 +66,9 @@ function CardMarker({ data }) {
     )
   );
 }
+
+CardMarker.propTypes = {
+  data: PropTypes.object.isRequired,
+};
 
 export default CardMarker;

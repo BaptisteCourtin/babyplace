@@ -3,8 +3,9 @@ import CarteCreche from "@components/appli/recherche/CarteCreche";
 import { Link } from "react-router-dom";
 import { FiMap } from "react-icons/fi";
 import { BiFilterAlt } from "react-icons/bi";
+import PropTypes from "prop-types";
 
-function BaseCard({ setCompo, setTri, tri, Allstructure }) {
+function BaseCard({ setCompo, Allstructure, setTri, tri }) {
   return (
     <>
       <div className="content">
@@ -35,7 +36,7 @@ function BaseCard({ setCompo, setTri, tri, Allstructure }) {
       </div>
 
       <main>
-        {Allstructure.length !== 0 &&
+        {Allstructure !== undefined &&
           Allstructure
             // .filter(
             //   (each) => each.includes
@@ -65,10 +66,15 @@ function BaseCard({ setCompo, setTri, tri, Allstructure }) {
               return 0;
             })
             // faire avec params depuis CarteCreche et une route en :id
-            .map((each) => <CarteCreche data={each} />)}
+            .map((each, index) => <CarteCreche data={each} key={index} />)}
       </main>
     </>
   );
 }
+
+BaseCard.propTypes = {
+  setCompo: PropTypes.func.isRequired,
+  Allstructure: PropTypes.array.isRequired,
+};
 
 export default BaseCard;

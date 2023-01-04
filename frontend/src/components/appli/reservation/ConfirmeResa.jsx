@@ -58,7 +58,14 @@ function ConfirmeResa({
 }
 
 ConfirmeResa.propTypes = {
+  heureMin: PropTypes.number.isRequired,
+  heureMax: PropTypes.number.isRequired,
+  jour: PropTypes.string.isRequired,
   photoProfil: PropTypes.string.isRequired,
+  nom: PropTypes.string,
+  nomUsage: PropTypes.string,
+  nomNaissance: PropTypes.string,
+  prenom: PropTypes.string,
 };
 
 export default ConfirmeResa;
