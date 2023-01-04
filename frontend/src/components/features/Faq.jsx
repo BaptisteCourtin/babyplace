@@ -1,9 +1,13 @@
 import React from 'react';
+import FooterLite from './FooterLite';
+import NavbarLite from './NavbarLite';
 
 function Faq(props) {
     return (
-        <div>
-            
+        <div className='faq'>
+            <NavbarLite />
+
+            <FooterLite />
         </div>
     );
 }

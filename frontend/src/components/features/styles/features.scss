@@ -26,10 +26,10 @@
         }
 
         .descriptionTxt {
-            font-size: 1.35em;
-
             p {
                 margin-top: 20px;
+                font-size: 1.25em;
+                line-height: 1.5em;
             }
 
             img {
@@ -41,11 +41,10 @@
     #profil {
         p {
             margin-top: 20px;
-            font-size: 1.35em;
+            font-size: 1.25em;
         }
 
         div {
-
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -80,9 +79,7 @@
                             font-weight: 600;
                             margin-top: -5px;
                             margin-left: -25px;
-
                         }
-
 
                         &:nth-of-type(1) {
                             background-color: rgba(45, 205, 122, 0.1);
@@ -102,7 +99,6 @@
                     }
                 }
             }
-
         }
     }
 
@@ -117,14 +113,14 @@
         padding-right: 100px;
 
         p {
-            font-size: 1.15em;
+            font-size: 1.25em;
             line-height: 1.5em;
         }
 
-        span {
+        h4 {
             font-weight: 700;
-
+            font-size: 1.5em;
+            padding-top: 30px;
         }
-
     }
 }

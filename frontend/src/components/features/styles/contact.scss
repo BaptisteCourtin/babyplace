@@ -1,0 +1,145 @@
+.contact {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    section {
+        padding-top: 40px;
+        width: 85%;
+        padding-bottom: 40px;
+
+        h3 {
+            font-weight: 700;
+            font-size: 2em;
+        }
+    }
+
+    #contact-us {
+
+        .formContact {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 40px 60px;
+            border: solid 1px $third;
+            padding: 60px 80px;
+            border-radius: 25px;
+
+            .formContainer {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: minmax(100px, auto);
+                column-gap: 100px;
+                width: 100%;
+
+                .divName {
+                    grid-column: 1;
+                    grid-row: 1;
+                    display: flex;
+                    flex-direction: column;
+
+                    .labelForm {
+                        width: 50%;
+                        height: 30px;
+                        font-weight: 500;
+                    }
+
+                    #userName {
+                        height: 30px;
+                        border: solid 1px $grey;
+                        border-radius: 10px;
+                        padding: 15px;
+                    }
+                }
+
+                .divFirstName {
+                    grid-column: 2;
+                    grid-row: 1;
+                    display: flex;
+                    flex-direction: column;
+
+                    .labelForm {
+                        width: 50%;
+                        height: 30px;
+                        font-weight: 500;
+                    }
+
+                    #userFirstName {
+                        height: 30px;
+                        border: solid 1px $grey;
+                        border-radius: 10px;
+                        padding: 15px;
+                    }
+                }
+
+                .divEmail {
+                    grid-column: 1 / 3;
+                    grid-row: 2;
+                    display: flex;
+                    flex-direction: column;
+                    height: 80px;
+
+                    .labelForm {
+                        width: 100%;
+                        height: 30px;
+                        font-weight: 500;
+                    }
+
+                    #userMail {
+                        height: 30px;
+                        border: solid 1px $grey;
+                        border-radius: 10px;
+                        padding: 15px;
+                    }
+                }
+
+                .divMessage {
+                    grid-column: 1/3;
+                    grid-row: 3;
+                    display: flex;
+                    flex-direction: column;
+                    height: auto;
+
+
+                    .labelForm {
+                        width: 100%;
+                        height: 30px;
+                        font-weight: 500;
+                    }
+
+                    #formulaireMessage {
+
+                        width: 100%;
+                        height: 150px;
+                        border: solid 1px $grey;
+                        border-radius: 10px;
+                        padding: 15px;
+                    }
+                }
+
+                .policyTextDiv {
+                    grid-column: 1/3;
+                    grid-row: 4;
+                    margin: 20px;
+                    display: inline;
+
+                    p {
+                        font-size: 1.25em;
+                        line-height: 1.5em;
+
+                        span {
+                            font-weight: 600;
+                            color: $third
+                        }
+
+                        :hover {
+                            color: $fourth
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
