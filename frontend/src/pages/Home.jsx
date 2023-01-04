@@ -8,7 +8,7 @@ import time from "@assets/img-time.svg";
 import key from "@assets/img-key.svg";
 import copie from "@assets/img-copie.svg";
 import imgInfo from "@assets/landing page/image2.svg";
-import useLocalStorage from "../utils/useLocalStorage";
+import useLocalStorage from "@utils/useLocalStorage";
 
 export default function Home() {
   const [carouselFirst, setCarouselFirst] = useState(true);

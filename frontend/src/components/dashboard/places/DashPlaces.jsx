@@ -17,7 +17,7 @@ function DashPlaces({
   handi,
   sorties,
   bilingue,
-  eveil
+  eveil,
 }) {
   const [toggleType, setToggleType] = useState(0);
   const [toggleDay, setToggleDay] = useState(null);
@@ -80,10 +80,7 @@ function DashPlaces({
       toggleDay: !toggleDay,
     };
     dataSubmit[selected] = !toggleDay;
-    await axios.put(
-      `http://localhost:5000/horaires/day/${dayId}`,
-      dataSubmit
-    );
+    await axios.put(`http://localhost:5000/horaires/day/${dayId}`, dataSubmit);
   };
 
   const updateHours = async () => {
@@ -163,10 +160,10 @@ function DashPlaces({
                   minValue={data[dayId].heureMin.split(":", 1)[0]}
                   maxValue={data[dayId].heureMax.split(":", 1)[0]}
                   step={1}
-                // onChange={(e) => {
-                //   handleInput(e);
-                //   updateHours();
-                // }}
+                  // onChange={(e) => {
+                  //   handleInput(e);
+                  //   updateHours();
+                  // }}
                 />
                 <div className="dashRangeValues">
                   <p>
@@ -183,7 +180,7 @@ function DashPlaces({
                   className="dashPlacesSubmit"
                   onClick={() => {
                     setToggleDay(!toggleDay);
-                    updateDay()
+                    updateDay();
                   }}
                 >
                   Repos
@@ -195,7 +192,7 @@ function DashPlaces({
                 className="dashNotWorking"
                 onClick={() => {
                   setToggleDay(!toggleDay);
-                  updateDay()
+                  updateDay();
                 }}
               >
                 Envie de travailler ?
@@ -305,25 +302,37 @@ function DashPlaces({
         </div>
         <ul className="dashPlacesCheckboxes">
           <li>
-            <input type="checkbox" id="check1" defaultChecked={handi === 1 && true} />
+            <input
+              type="checkbox"
+              id="check1"
+              defaultChecked={handi === 1 && true}
+            />
             <label htmlFor="check1">
               J'accueille des enfants en situation de handicap
             </label>
           </li>
           <li>
-            <input type="checkbox" id="check2" defaultChecked={sorties === 1 && true} />
-            <label htmlFor="check2">
-              Je propose des sorties
-            </label>
+            <input
+              type="checkbox"
+              id="check2"
+              defaultChecked={sorties === 1 && true}
+            />
+            <label htmlFor="check2">Je propose des sorties</label>
           </li>
           <li>
-            <input type="checkbox" id="check3" defaultChecked={bilingue === 1 && true} />
-            <label htmlFor="check3">
-              Je propose des activités bilingues
-            </label>
+            <input
+              type="checkbox"
+              id="check3"
+              defaultChecked={bilingue === 1 && true}
+            />
+            <label htmlFor="check3">Je propose des activités bilingues</label>
           </li>
           <li>
-            <input type="checkbox" id="check4" defaultChecked={eveil === 1 && true} />
+            <input
+              type="checkbox"
+              id="check4"
+              defaultChecked={eveil === 1 && true}
+            />
             <label htmlFor="check4">
               Je propose des activités musicales ou artistiques
             </label>

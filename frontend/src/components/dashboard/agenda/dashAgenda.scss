@@ -151,7 +151,7 @@
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
-  gap: 50px;
+  gap: 30px;
   padding: 20px 0;
   background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
   border-radius: 5px;
@@ -169,7 +169,7 @@
 
   & .react-calendar {
     padding: 0 70px;
-    height: 330px;
+    height: 300px;
 
     &__navigation {
       display: flex;

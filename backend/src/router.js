@@ -44,6 +44,8 @@ router.put("/calendrier/places/:id", calendrier.updatePlaces);
 router.put("/calendrier/places/close/:id", calendrier.updateStatusClose);
 router.put("/calendrier/places/open/:id", calendrier.updateStatusOpen);
 
+router.put("/logout/:id", structure.logout);
+
 router.post("/calendrier/add", calendrier.postDate);
 router.post("/auth", (req, res) => {
   datasource
@@ -78,5 +80,7 @@ router.post("/auth", (req, res) => {
       res.status(500).send("Erreur de connexion");
     });
 });
+
+router.delete("/calendrier", calendrier.deleteDates)
 
 module.exports = router;

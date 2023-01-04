@@ -1,11 +1,13 @@
 import Axios from "axios";
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function LoginParams() {
   const { state } = useLocation();
   const { token } = state;
   const [donnees, setDonnees] = useState({});
+
+  const navigate = useNavigate();
 
   const getData = () => {
     Axios.get("http://localhost:5000/structure", {
@@ -14,13 +16,17 @@ function LoginParams() {
       },
     })
       .then((ret) => {
-        console.warn(ret.data);
         setDonnees(ret.data[0]);
+        // if (ret.data[0]) {
+        //   setDonnees(ret.data[0]);
+        // } setDonnees(ret.data[1]);
       })
       .catch((err) => {
         console.error(err);
       });
   };
+
+  console.log(donnees);
 
   useEffect(() => {
     getData();
@@ -29,7 +35,7 @@ function LoginParams() {
   return (
     <section className="loginParams">
       <p>
-        Bienvenue <span>{donnees.nom}</span>
+        Bienvenue <span>{donnees.nom || donnees.prenom}</span>
       </p>
       <div className="loginParamsTitle">
         <h2>

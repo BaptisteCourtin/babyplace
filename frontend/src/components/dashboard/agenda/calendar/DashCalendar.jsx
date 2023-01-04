@@ -2,12 +2,21 @@ import React from "react";
 import PropTypes from "prop-types";
 import Calendar from "react-calendar";
 
-function DashCalendar({ calendar, dayDate, setClickedDay, clickedDay, setPlaces }) {
+function DashCalendar({
+  calendar,
+  dayDate,
+  setClickedDay,
+  clickedDay,
+  setPlaces,
+}) {
   const value = new Date();
 
   const dayStatus = ({ date, view }) => {
-    view === 'month' && calendar.filter(c => c.date === dayDate).map(fc => fc.nbPlaces == -1 ? "notWorked" : "notFull")
-  }
+    view === "month" &&
+      calendar && calendar
+        .filter((c) => c.date === dayDate)
+        .map((fc) => (fc.nbPlaces == -1 ? "notWorked" : "notFull"));
+  };
 
   return (
     <Calendar
@@ -17,7 +26,10 @@ function DashCalendar({ calendar, dayDate, setClickedDay, clickedDay, setPlaces 
       minDetail="month"
       maxDetail="month"
       minDate={value}
-      onClickDay={(e) => { setClickedDay(e); setPlaces('') }}
+      onClickDay={(e) => {
+        setClickedDay(e);
+        setPlaces("");
+      }}
       tileClassName={(e) => dayStatus(e)}
     />
   );

@@ -25,10 +25,16 @@ const postDate = async (date, nbPlaces, structureId) => {
     return result
 }
 
+const deleteDates = async (curDate) => {
+    const [result] = await datasource.query("DELETE FROM calendrier WHERE date < ?", [curDate])
+    return result
+}
+
 module.exports = {
     getCalendrier,
     updateStatusClose,
     updateStatusOpen,
     updatePlaces,
-    postDate
+    postDate,
+    deleteDates
 };

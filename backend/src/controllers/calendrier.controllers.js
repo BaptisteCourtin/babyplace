@@ -41,10 +41,16 @@ const postDate = async (req, res) => {
     calendrierModels.postDate(date, nbPlaces, structureId)
 }
 
+const deleteDates = async (req, res) => {
+    const curDate = req.query.date
+    calendrierModels.deleteDates(curDate)
+}
+
 module.exports = {
     getCalendrier,
     updateStatusClose,
     updateStatusOpen,
     updatePlaces,
-    postDate
+    postDate,
+    deleteDates
 }
