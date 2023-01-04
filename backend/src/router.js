@@ -10,8 +10,10 @@ const dashboard = require("./controllers/dashboard.controllers");
 
 // --- pour app ---
 
-router.get("/structure/allapp", structure.getAllStructures);
-router.get("/horaires/:id", horaires.getHorairesById);
+router.get("/structure/allapp", structure.getAllStructures); //search
+router.get("/horaires/:id", horaires.getHorairesById); //search
+router.get("/structure/:id", structure.getStructureById); //notes
+router.put("/structure/notes/:id", structure.updateNotes); //notes
 
 // --- --- ---
 

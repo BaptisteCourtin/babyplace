@@ -17,8 +17,6 @@ function AppliCardCreche() {
     tarifHeure,
     description,
 
-    // Heure_min,
-    // Heure_max,
     telephone,
     email,
     adresse,
@@ -44,13 +42,6 @@ function AppliCardCreche() {
     albumPhoto,
     photoConnecte,
   } = data;
-
-  // const [heureMax, setHeureMax] = useState(0);
-  // const [heureMin, setHeureMin] = useState(0);
-  // useEffect(() => {
-  //   setHeureMin(Heure_min / 60);
-  //   setHeureMax(Heure_max / 60);
-  // }, []);
 
   return (
     <div className="appli-card-creche">
@@ -80,10 +71,7 @@ function AppliCardCreche() {
           </div>
 
           <div className="horaire">
-            {/* <p>
-              Horaires : {heureMin}h-{heureMax}h
-            </p> */}
-            <p>Téléphone : 0{telephone}</p>
+            <p>Téléphone : {telephone}</p>
             <p>Mail : {email}</p>
             <p>Adresse : {adresse}</p>
           </div>
@@ -105,11 +93,11 @@ function AppliCardCreche() {
             <h3>Accueil</h3>
             {jardin ? <p>Jardin</p> : null}
             {/* si ass mat */}
-            {/* {animaux ? <p>Présence d'animaux</p> : null}
+            {animaux ? <p>Présence d'animaux</p> : null}
             {nonFumeur ? <p>Foyer non-fumeur</p> : null}
             {zeroPollution ? <p>0% pollution intérieure</p> : null}
             {repas ? <p>Repas maison</p> : null}
-            {hygiene ? <p>produits d'hygiène fournis</p> : null} */}
+            {hygiene ? <p>produits d'hygiène fournis</p> : null}
           </div>
 
           <div>

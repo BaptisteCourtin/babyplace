@@ -5,6 +5,13 @@ const getAllStructures = async (req, res) => {
   return res.json(result);
 };
 
+const getStructureById = async (req, res) => {
+  // console.log([req.params.id]);
+  const result = await structureModels.getStructureById(req);
+  // console.log("result :" + result);
+  return res.json(result);
+};
+
 const getStructure = async (req, res) => {
   const result = await structureModels.getStructure(req);
   return res.json(result);
@@ -16,8 +23,19 @@ const getStructureDataMess = async (req, res) => {
   return res.json(result);
 };
 
+const updateNotes = async (req, res) => {
+  const result = await structureModels.updateNotes(req);
+  if (result.affectedRows === 0) {
+    res.status(404).send("Not found");
+  } else {
+    res.sendStatus(204);
+  }
+};
+
 module.exports = {
   getStructure,
   getStructureDataMess,
   getAllStructures,
+  getStructureById,
+  updateNotes,
 };

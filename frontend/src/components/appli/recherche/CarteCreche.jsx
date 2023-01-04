@@ -7,6 +7,7 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 function CarteCreche({ data }) {
   const {
+    isCreche,
     photoStructure1,
     tarifHeure,
     structureId,
@@ -40,9 +41,17 @@ function CarteCreche({ data }) {
     getHorairesId();
   }, []);
 
+  const blueBg = {
+    background: "linear-gradient( #7f72f266, #7f72f2cc)",
+  };
+
+  const pinkBg = {
+    background: "linear-gradient( #f063a766, #f063a7cc)",
+  };
+
   return (
     dataHorairesId.length !== 0 && (
-      <div className="carte-creche">
+      <div className="carte-creche" style={isCreche ? blueBg : pinkBg}>
         {likeCard ? (
           <AiFillHeart className="like" onClick={() => setLikeCard(false)} />
         ) : (
