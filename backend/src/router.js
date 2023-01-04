@@ -26,7 +26,12 @@ router.put("/horaires/day/:id", horaires.updateDay);
 router.put("/dashboard/hours/:id", dashboard.updateHours);
 router.put("/dashboard/indemnRepas/:id", dashboard.updateIndemnRepas);
 router.put("/calendrier/places/:id", calendrier.updatePlaces);
+router.put("/calendrier/places/close/:id", calendrier.updateStatusClose);
+router.put("/calendrier/places/open/:id", calendrier.updateStatusOpen);
 
+router.put("/logout/:id", structure.logout);
+
+router.post("/calendrier/add", calendrier.postDate);
 router.post("/auth", (req, res) => {
   datasource
     .query("SELECT * FROM structure WHERE email = ?", [req.body.email])
@@ -61,6 +66,7 @@ router.post("/auth", (req, res) => {
     });
 });
 
+router.delete("/calendrier", calendrier.deleteDates)
 router.post("/authFamille", (req, res) => {
   datasource
     .query(

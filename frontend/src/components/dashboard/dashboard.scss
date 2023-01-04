@@ -53,6 +53,7 @@
           & .dashboardProfilePic {
             border: 1px solid $third;
             border-radius: 50%;
+            object-fit: cover;
           }
 
           & h1 {
@@ -92,6 +93,8 @@
           gap: 20px;
 
           & li {
+            max-height: 275px;
+
             & img {
               width: 100%;
               height: 100%;

@@ -11,11 +11,16 @@ const getAllStructures = async () => {
 
 const getStructure = async (req) => {
   const [result] = await datasource.query(
-    "SELECT * FROM structure AS s JOIN creche AS c ON s.structureId=c.structureId WHERE token = ?",
+    "SELECT * FROM structure AS s JOIN assMat AS a ON s.structureId=a.structureId WHERE token = ?",
     [req.headers["x-token"]]
   );
   return result;
 };
+
+const logout = async (token, tokenStart, id) => {
+  const [result] = await datasource.query("UPDATE structure SET token = ?, tokenStart = ? WHERE structureId = ?", [token, tokenStart, id])
+  return result
+}
 
 const getStructureDataMess = async (req) => {
   const [result] = await datasource.query(
@@ -27,5 +32,9 @@ const getStructureDataMess = async (req) => {
 module.exports = {
   getStructure,
   getStructureDataMess,
-  getAllStructures,
+  logout
 };
+
+// ; SELECT * FROM structure AS s JOIN assMat AS a ON s.structureId=a.structureId WHERE token = ?
+
+// JOIN creche AS c ON s.structureId=c.structureId
