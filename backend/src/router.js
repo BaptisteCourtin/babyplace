@@ -7,7 +7,6 @@ const structure = require("./controllers/structure.controllers");
 const horaires = require("./controllers/horaires.controllers");
 const calendrier = require("./controllers/calendrier.controllers");
 const dashboard = require("./controllers/dashboard.controllers");
-
 // --- pour app ---
 
 router.get("/structure/allapp", structure.getAllStructures);
@@ -26,6 +25,40 @@ router.put("/horaires/day/:id", horaires.updateDay);
 router.put("/dashboard/hours/:id", dashboard.updateHours);
 router.put("/dashboard/indemnRepas/:id", dashboard.updateIndemnRepas);
 router.put("/calendrier/places/:id", calendrier.updatePlaces);
+
+
+router.post("/inscription", (req, res) => {
+  const { email, password } = req.body;
+  datasource
+    .query("INSERT INTO structure(email, password) VALUES (?, ?)",
+      [email, password])
+    .then(([user]) => {
+      const start = Date.now();
+      const token = sha256(email + start);
+      datasource
+        .query(
+          "UPDATE structure SET token = ?, tokenStart = ? WHERE email = ?",
+          [token, start, email]
+        )
+        .then(() => {
+          res.status(200).send({
+            email: user.email,
+            token: token,
+            tokenStart: start,
+          });
+        })
+        .catch((err) => {
+          console.error(err);
+          res.status(500).send("Création de compte impossible");
+        });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Création de compte impossible");
+    });
+});
+
+
 
 router.post("/auth", (req, res) => {
   datasource

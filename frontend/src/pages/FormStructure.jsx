@@ -27,7 +27,7 @@ import profilCPP from "../assets/profilCPP.jpg";
 import imgWoman from "../assets/img-woman.svg";
 
 const INITIAL_DATA = {
-  typeStructure: "",
+  isCreche: "",
   typeCreche: "",
   nomStructure: "",
   telephone: "",
@@ -290,6 +290,11 @@ function FormStructure() {
         return "";
     }
   };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (!isLastStep) { next(); }
+  }
   return (
     <StructureContext.Provider value={{ structure, setStructure }}>
       <ResaContext.Provider value={{ resa, setResa }}>
@@ -317,6 +322,7 @@ function FormStructure() {
                   ? "pageChoixResa"
                   : "formStructure"
               }
+              onSubmit={(e) => onSubmit(e)}
             >
               {step}
               <div className="buttonContainer">
@@ -328,7 +334,7 @@ function FormStructure() {
                   <div> </div>
                 )}
                 {resa !== "" || currentStepIndex !== 6 ? (
-                  <button type="button" className="nextButton" onClick={next}>
+                  <button type="submit" className="nextButton">
                     {!isLastStep ? "Suivant" : "Fin"}
                   </button>
                 ) : (
@@ -337,8 +343,8 @@ function FormStructure() {
               </div>
             </form>
             {currentStepIndex !== 6 &&
-            currentStepIndex !== 7 &&
-            currentStepIndex !== 15 ? (
+              currentStepIndex !== 7 &&
+              currentStepIndex !== 15 ? (
               <div className="explicationsContainer">
                 {screenWidth < 1200 && (
                   <button

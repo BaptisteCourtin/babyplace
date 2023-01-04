@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import Axios from "axios";
 
 function RegisterForm() {
   const navigate = useNavigate();
@@ -18,7 +19,22 @@ function RegisterForm() {
   const handleClick = (e) => {
     e.preventDefault();
     if (email && password && checked) {
-      navigate("/structure/inscription-form");
+      console.log(email, password);
+      Axios.post("http://localhost:5000/inscription", {
+        email,
+        password,
+      })
+        .then((ret) => {
+          const { token } = ret.data;
+          navigate("/structure/inscription-form", {
+            state: {
+              token,
+            },
+          });
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     }
   };
 

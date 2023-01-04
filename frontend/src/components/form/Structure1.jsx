@@ -3,7 +3,7 @@ import Proptypes from "prop-types";
 import StructureContext from "@components/context/StructureContext";
 
 function Structure1({
-  typeStructure,
+  isCreche,
   typeCreche,
   nomStructure,
   telephone,
@@ -24,7 +24,7 @@ function Structure1({
             className={structure === "creche" ? "selected" : ""}
             onClick={() => {
               setStructure("creche");
-              updateFields({ typeStructure: "creche" });
+              updateFields({ isCreche: true });
             }}
           >
             Crèche
@@ -34,14 +34,14 @@ function Structure1({
             className={structure === "assmat" ? "selected" : ""}
             onClick={() => {
               setStructure("assmat");
-              updateFields({ typeStructure: "assmat" });
+              updateFields({ isCreche: false });
             }}
           >
             Assistante maternelle
           </button>
         </div>
       </div>
-      {typeStructure === "creche" && (
+      {isCreche === true && (
         <div className="creche">
           <div>
             <h4>Maintenant précisons les choses...</h4>
@@ -187,7 +187,7 @@ function Structure1({
           </div>
         </div>
       )}
-      {typeStructure === "assmat" && (
+      {isCreche === false && (
         <div className="assmat">
           <h4>Complétez et vérifiez vos informations</h4>
           <div className="inputsContainer">
@@ -294,7 +294,7 @@ function Structure1({
   );
 }
 Structure1.propTypes = {
-  typeStructure: Proptypes.string,
+  isCreche: Proptypes.node,
   typeCreche: Proptypes.string,
   nomStructure: Proptypes.string,
   telephone: Proptypes.string,
