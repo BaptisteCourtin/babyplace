@@ -29,7 +29,11 @@ function BaseCard({ setCompo, Allstructure, setTri, tri }) {
               </select>
             </div>
           </div>
-          <button className="map" type="button" onClick={() => setCompo(1)}>
+          <button
+            className="map-butt"
+            type="button"
+            onClick={() => setCompo(1)}
+          >
             <FiMap />
           </button>
         </div>
