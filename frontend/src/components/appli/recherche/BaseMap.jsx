@@ -1,42 +1,62 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import PropTypes from "prop-types";
 
 import { BsCardList } from "react-icons/bs";
 import { BiFilterAlt } from "react-icons/bi";
+import redPointer from "@assets/app parents/redPointer.png";
 
-import { MapContainer, TileLayer } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { Carousel } from "react-responsive-carousel";
 import CardMarker from "./CardMarker";
 import CardCrecheMap from "./CardCrecheMap";
 
 import "leaflet/dist/leaflet.css";
 
-import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 function BaseMap({ setCompo, Allstructure }) {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-  // demander la ville voulu pour changer la position de base de la carte
-  // faire un mini form
-  const center = [47.2113302, -1.5474466];
+  // --- position user ---
+  const [ville, setVille] = useState(); // donné par utilisateur
+  const [center, setCenter] = useState([47.21725, -1.55336]); // donné par api suivant ville ou position de base
 
-  // const [center, setCenter] = useState();
-  // // api convertir adresse en position gps
-  // const getAdresseCenter = () => {
-  //   axios
-  //     .get(`https://api-adresse.data.gouv.fr/search/?q=${data.adresse}`)
-  //     .then((res) => {
-  //       setCenter(res.data.features[0].geometry.coordinates.reverse());
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // };
+  const getVraiPosition = () => {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      setCenter([position.coords.latitude, position.coords.longitude]);
+    });
+  };
+  useEffect(() => {
+    getVraiPosition();
+  }, []);
 
-  // useEffect(() => {
-  //   getAdresseCenter();
-  // }, [ville]);
+  const handleVille = (e) => {
+    e.preventDefault();
+    // api convertir adresse en position gps
+    axios
+      .get(`https://api-adresse.data.gouv.fr/search/?q=${ville}`)
+      .then((res) => {
+        setCenter(res.data.features[0].geometry.coordinates.reverse());
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  // --- icon perso pour vous etes ici ---
+
+  const LeafIcon = L.Icon.extend({
+    options: {
+      iconSize: [25, 45],
+      iconAnchor: [12, 45],
+      popupAnchor: [0, -40],
+    },
+  });
+  const pointer = new LeafIcon({
+    iconUrl: redPointer,
+  });
 
   return (
     <>
@@ -53,8 +73,46 @@ function BaseMap({ setCompo, Allstructure }) {
                 </span>
               </Link>
             </div>
+
+            <div className="vrai-localisation">
+              <button
+                onClick={() => {
+                  getVraiPosition();
+                }}
+              >
+                Votre position
+              </button>
+            </div>
+
+            <form className="localisation">
+              <label htmlFor="ville">
+                <input
+                  required
+                  type="text"
+                  name="ville"
+                  id="ville"
+                  placeholder="une position"
+                  onChange={(event) => {
+                    setVille(event.target.value);
+                  }}
+                />
+              </label>
+              <button
+                className="butt-localisation"
+                type="submit"
+                onClick={(e) => {
+                  handleVille(e);
+                }}
+              >
+                Envoyer
+              </button>
+            </form>
           </div>
-          <button className="map" type="button" onClick={() => setCompo(0)}>
+          <button
+            className="map-butt"
+            type="button"
+            onClick={() => setCompo(0)}
+          >
             <BsCardList />
           </button>
         </div>
@@ -74,6 +132,9 @@ function BaseMap({ setCompo, Allstructure }) {
             {Allstructure.map((each, index) => (
               <CardMarker data={each} key={index} />
             ))}
+            <Marker position={center} icon={pointer}>
+              <Popup>Vous êtes par ici</Popup>
+            </Marker>
           </MapContainer>
         </div>
 

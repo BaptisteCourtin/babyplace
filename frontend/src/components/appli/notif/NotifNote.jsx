@@ -19,15 +19,15 @@ function NotifNote({ setCompo }) {
   const [noteHoraires, setNoteHoraires] = useState(0);
 
   const submitNote = () => {
-    let nbNotes = structureNotes.nbNotes;
+    let { nbNotes } = structureNotes;
 
-    let avisCom = structureNotes.avisCom * nbNotes + noteCom;
-    let avisEveil = structureNotes.avisEveil * nbNotes + noteEveil;
-    let avisHoraires = structureNotes.avisHoraires * nbNotes + noteHoraires;
-    let avisProprete = structureNotes.avisProprete * nbNotes + noteProprete;
-    let avisSecurite = structureNotes.avisSecurite * nbNotes + noteSecurite;
+    const avisCom = structureNotes.avisCom * nbNotes + noteCom;
+    const avisEveil = structureNotes.avisEveil * nbNotes + noteEveil;
+    const avisHoraires = structureNotes.avisHoraires * nbNotes + noteHoraires;
+    const avisProprete = structureNotes.avisProprete * nbNotes + noteProprete;
+    const avisSecurite = structureNotes.avisSecurite * nbNotes + noteSecurite;
 
-    let dataNewNotes = {
+    const dataNewNotes = {
       nbNotes: (nbNotes += 1),
       avisCom: (avisCom / nbNotes).toFixed(2),
       avisEveil: (avisEveil / nbNotes).toFixed(2),

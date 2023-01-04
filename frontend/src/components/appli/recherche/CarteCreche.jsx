@@ -5,7 +5,7 @@ import BlocJour from "@components/appli/recherche/BlocJour";
 import PropTypes from "prop-types";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
-function CarteCreche({ data }) {
+function CarteCreche({ data, userPosition }) {
   const {
     isCreche,
     photoStructure1,
@@ -15,12 +15,13 @@ function CarteCreche({ data }) {
     nomUsage,
     nomNaissance,
     prenom,
+    adresse,
   } = data;
 
   const [likeCard, setLikeCard] = useState(true);
+
   // les horaires de chaques jour suivant l'id de la structure
   const [dataHorairesId, setDataHorairesId] = useState([]);
-
   const Token =
     "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getHorairesId = () => {
@@ -37,9 +38,51 @@ function CarteCreche({ data }) {
         console.error(err);
       });
   };
+
+  const [center, setCenter] = useState([0, 0]);
+
+  const handleDistance = () => {
+    // api convertir adresse en position gps
+    axios
+      .get(`https://api-adresse.data.gouv.fr/search/?q=${adresse}`)
+      .then((res) => {
+        setCenter(res.data.features[0].geometry.coordinates.reverse());
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   useEffect(() => {
     getHorairesId();
+    handleDistance();
   }, []);
+
+  // --- calcul distance ---
+
+  function getDistance(origin, destination) {
+    // return distance in meters
+    let lat1 = toRadian(origin[0]),
+      lon1 = toRadian(origin[1]),
+      lat2 = toRadian(destination[0]),
+      lon2 = toRadian(destination[1]);
+
+    let deltaLat = lat2 - lat1;
+    let deltaLon = lon2 - lon1;
+
+    let a =
+      Math.pow(Math.sin(deltaLat / 2), 2) +
+      Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin(deltaLon / 2), 2);
+    let c = 2 * Math.asin(Math.sqrt(a));
+    let EARTH_RADIUS = 6371;
+    return c * EARTH_RADIUS * 1000;
+  }
+  function toRadian(degree) {
+    return (degree * Math.PI) / 180;
+  }
+  let distance = (getDistance(userPosition, center) / 1000).toFixed(2);
+
+  // ---
 
   const blueBg = {
     background: "linear-gradient( #7f72f266, #7f72f2cc)",
@@ -70,7 +113,7 @@ function CarteCreche({ data }) {
           </div>
           <div className="info-creche">
             <div className="ville-prix">
-              <p>ville à X mètres</p>
+              <p>à {distance} km</p>
               <p className="prix">{tarifHeure}€/heure</p>
             </div>
             <BlocJour dataHorairesId={dataHorairesId} />
