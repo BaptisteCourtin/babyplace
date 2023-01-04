@@ -13,7 +13,6 @@ const updateHours = async (req, res) => {
 
 const updateIndemnRepas = async (req, res) => {
     const { indemnRepas, id } = req.body
-    console.log(req.body)
     const result = await dashboardModels.updateIndemnRepas(indemnRepas, id)
     if (result.affectedRows === 0) {
         res.status(404).send("Not found")

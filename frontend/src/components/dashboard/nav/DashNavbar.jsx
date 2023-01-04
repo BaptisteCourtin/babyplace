@@ -11,13 +11,18 @@ import {
   MdLogout,
 } from "react-icons/md";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-function DashNavbar({ setToggle, token, structureId }) {
+function DashNavbar({ setToggle, structureId, setDashPage }) {
+  const navigate = useNavigate();
+
   const logout = () => {
     axios.put(`http://localhost:5000/logout/${structureId}`, {
       id: structureId,
-      token,
+      token: null,
+      tokenStart: null,
     });
+    navigate("/");
   };
 
   return (
@@ -31,31 +36,31 @@ function DashNavbar({ setToggle, token, structureId }) {
       <ul className="dashNavList">
         <li>
           <MdOutlineFormatListBulleted />
-          <button type="button" onClick={() => setToggle(1)}>
+          <button type="button" onClick={() => { setToggle(1); setDashPage(1) }}>
             Demandes
           </button>
         </li>
         <li>
           <MdOutlineCalendarToday />
-          <button type="button" onClick={() => setToggle(2)}>
+          <button type="button" onClick={() => { setToggle(2); setDashPage(2) }}>
             Agenda
           </button>
         </li>
         <li>
           <MdAccessTime />
-          <button type="button" onClick={() => setToggle(3)}>
+          <button type="button" onClick={() => { setToggle(3); setDashPage(3) }}>
             Horaires
           </button>
         </li>
         <li>
           <MdOutlineMarkAsUnread />
-          <button type="button" onClick={() => setToggle(5)}>
+          <button type="button" onClick={() => { setToggle(4); setDashPage(4) }}>
             Messagerie
           </button>
         </li>
       </ul>
       <div className="dashNavParams">
-        <button type="button" onClick={() => setToggle(4)}>
+        <button type="button" onClick={() => { setToggle(5); setDashPage(5) }}>
           <MdOutlineSettings />
           Paramètres
         </button>

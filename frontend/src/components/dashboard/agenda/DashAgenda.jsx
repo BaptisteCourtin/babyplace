@@ -44,7 +44,7 @@ function DashAgenda({ token, structureId, maxPlaces }) {
   const getCalendar = () => {
     axios
       .get(`http://localhost:5000/calendrier/${structureId}`, {
-        structureId,
+        id: structureId
       })
       .then((res) => {
         setCalendar(res.data);
@@ -54,30 +54,63 @@ function DashAgenda({ token, structureId, maxPlaces }) {
       });
   };
 
+  const updatePlaces = () => {
+    axios
+      .put(`http://localhost:5000/calendrier/places/${calendarIndex}`, {
+        id: calendarIndex,
+        nbPlaces: places,
+      })
+      .then(getCalendar());
+  };
+
+  const updateStatusClose = () => {
+    axios
+      .put(`http://localhost:5000/calendrier/places/close/${calendarIndex}`, {
+        id: calendarIndex,
+      })
+      .then(getCalendar(), setPlaces(""));
+  };
+
+  const updateStatusOpen = () => {
+    axios
+      .put(`http://localhost:5000/calendrier/places/open/${calendarIndex}`, {
+        id: calendarIndex,
+        maxPlaces,
+      })
+      .then(getCalendar(), setPlaces(""));
+  };
+
+  const addSleepDate = () => {
+    axios
+      .post(`http://localhost:5000/calendrier/add`, {
+        date,
+        nbPlaces: -1,
+        structureId,
+      })
+      .then(getCalendar());
+  };
+
+  const addWorkDate = () => {
+    setPlaces(1);
+    axios
+      .post(`http://localhost:5000/calendrier/add`, {
+        date,
+        nbPlaces: 1,
+        structureId,
+      })
+      .then(getCalendar());
+  };
+
   useEffect(() => {
     getData();
     getHours();
     getCalendar();
   }, []);
 
-  const updatePlaces = async () => {
-    await axios.put(
-      `http://localhost:5000/calendrier/places/${calendarIndex}`,
-      {
-        id: calendarIndex,
-        nbPlaces: places,
-      }
-    );
-  };
+  let curDate = new Date();
+  curDate = `${curDate.getFullYear()}-${curDate.getMonth() + 1
+    }-${curDate.getDate()}`;
 
-  const updateStatus = async () => {
-    await axios.put();
-  };
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    updateStatus();
-  };
 
   const [clickedDay, setClickedDay] = useState(new Date());
   const date = `${clickedDay.getFullYear()}-${
@@ -92,7 +125,10 @@ function DashAgenda({ token, structureId, maxPlaces }) {
         <h2>Agenda</h2>
         <DashCalendar
           {...data}
+          dayDate={date}
+          calendar={calendar}
           clickedDay={clickedDay}
+          setPlaces={setPlaces}
           setClickedDay={setClickedDay}
         />
       </section>
@@ -101,38 +137,38 @@ function DashAgenda({ token, structureId, maxPlaces }) {
           <h3>
             {day} {clickedDay.toLocaleDateString()}
           </h3>
+          {calendar.every(
+            (c) => c.structureId === structureId && c.date !== date
+          ) && (
+              <>
+                <button className="agendaPlacesWork" onClick={addSleepDate}>
+                  Repos
+                </button>
+                <button className="agendaPlacesWork" onClick={addWorkDate}>
+                  Places restantes
+                </button>
+              </>
+            )}
           {calendar
-            .filter(
-              (c) =>
-                c.structureId === structureId && c.date.split("T")[0] === date
-            )
+            .filter((c) => c.structureId === structureId && c.date === date)
             .map((fc) =>
               fc.nbPlaces == -1 ? (
                 <>
                   <p>Vous ne travaillez pas 😀</p>
-                  <button className="agendaPlacesWork">Ouvrir</button>
+                  <button
+                    className="agendaPlacesWork"
+                    onClick={() => {
+                      setCalendarIndex(fc.calendrierId);
+                      updateStatusOpen();
+                    }}
+                  >
+                    Ouvrir
+                  </button>
                 </>
               ) : (
                 <>
                   <div className="agendaPlacesLeft">
                     <p>
-                      {fc.nbPlaces < 4 ? (
-                        <span
-                          className="agendaAlertSign"
-                          style={{ backgroundColor: "rgba(239, 54, 114, 0.6)" }}
-                        >
-                          !
-                        </span>
-                      ) : (
-                        <span
-                          className="agendaAlertSign"
-                          style={{
-                            backgroundColor: "rgba(45, 205, 122, 0.6)",
-                          }}
-                        >
-                          +
-                        </span>
-                      )}
                       Il vous reste
                       <b> {fc.nbPlaces} </b>
                       places sur
@@ -151,31 +187,73 @@ function DashAgenda({ token, structureId, maxPlaces }) {
                         setCalendarIndex(fc.calendrierId);
                       }}
                     />
-                    <button type="button" onClick={updatePlaces}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        updatePlaces();
+                        setPlaces("");
+                      }}
+                    >
                       Modifier
                     </button>
                   </div>
                   <p className="agendaPlacesChoice">
                     <span>ou</span>
                   </p>
-                  <button className="agendaPlacesWork">Repos</button>
+                  <button
+                    className="agendaPlacesWork"
+                    onClick={() => {
+                      setCalendarIndex(fc.calendrierId);
+                      updateStatusClose();
+                    }}
+                  >
+                    Repos
+                  </button>
                 </>
               )
             )}
         </div>
-        <ul className="agendaLegend">
-          <li>
-            <span />
-            Complet
-          </li>
-          <li>
-            <span />
-            Places restantes
-          </li>
-          <li>
-            <span />
-            Jour off
-          </li>
+        <ul className="agendaDaysFree">
+          {calendar
+            .filter(
+              (c) =>
+                c.structureId === structureId &&
+                c.date !== date &&
+                c.date > curDate &&
+                c.nbPlaces != -1
+            )
+            .slice(0, 2)
+            .sort((a, b) => a.date.localeCompare(b.date))
+            .map((fc) => {
+              return (
+                <li>
+                  {fc.nbPlaces < 4 ? (
+                    <span
+                      className="agendaAlertSign"
+                      style={{ backgroundColor: "rgba(239, 54, 114, 0.6)" }}
+                    >
+                      !
+                    </span>
+                  ) : (
+                    <span
+                      className="agendaAlertSign"
+                      style={{
+                        backgroundColor: "rgba(45, 205, 122, 0.6)",
+                      }}
+                    >
+                      +
+                    </span>
+                  )}
+                  <p>
+                    Vous avez <span>{fc.nbPlaces}</span> places restantes le{" "}
+                    <span>
+                      {fc.date.split("-")[2]} / {fc.date.split("-")[1]} /{" "}
+                      {fc.date.split("-")[0]}
+                    </span>
+                  </p>
+                </li>
+              );
+            })}
         </ul>
       </section>
     </div>

@@ -14,6 +14,10 @@ function DashPlaces({
   indemnRepas,
   tarifHeure,
   tarifHoraireSpec,
+  handi,
+  sorties,
+  bilingue,
+  eveil,
 }) {
   const [toggleType, setToggleType] = useState(0);
   const [toggleDay, setToggleDay] = useState(null);
@@ -235,6 +239,7 @@ function DashPlaces({
                 >
                   <input
                     type="text"
+                    min={1}
                     value={indemn1}
                     onChange={(e) => setIndemn1(e.target.value)}
                   />
@@ -258,6 +263,7 @@ function DashPlaces({
                 >
                   <input
                     type="text"
+                    min={1}
                     value={indemn2}
                     onChange={(e) => setIndemn2(e.target.value)}
                   />
@@ -284,6 +290,7 @@ function DashPlaces({
               <input
                 type="number"
                 value={indemn3}
+                min={1}
                 onChange={(e) => {
                   setIndemn3(e.target.value);
                   updateIndemnRepas();
@@ -295,27 +302,39 @@ function DashPlaces({
         </div>
         <ul className="dashPlacesCheckboxes">
           <li>
-            <input type="checkbox" id="check1" />
+            <input
+              type="checkbox"
+              id="check1"
+              defaultChecked={handi === 1 && true}
+            />
             <label htmlFor="check1">
-              Je ne souhaite accueillir que des enfants déjà gardés
+              J'accueille des enfants en situation de handicap
             </label>
           </li>
           <li>
-            <input type="checkbox" id="check2" />
-            <label htmlFor="check2">
-              Je ne souhaite accueillir que des profils vérifiés
-            </label>
+            <input
+              type="checkbox"
+              id="check2"
+              defaultChecked={sorties === 1 && true}
+            />
+            <label htmlFor="check2">Je propose des sorties</label>
           </li>
           <li>
-            <input type="checkbox" id="check3" />
-            <label htmlFor="check3">
-              Je ne souhaite accueillir que des enfants de plus de 18 mois
-            </label>
+            <input
+              type="checkbox"
+              id="check3"
+              defaultChecked={bilingue === 1 && true}
+            />
+            <label htmlFor="check3">Je propose des activités bilingues</label>
           </li>
           <li>
-            <input type="checkbox" id="check4" />
+            <input
+              type="checkbox"
+              id="check4"
+              defaultChecked={eveil === 1 && true}
+            />
             <label htmlFor="check4">
-              Je ne souhaite accueillir que des enfants de moins de 18 mois
+              Je propose des activités musicales ou artistiques
             </label>
           </li>
         </ul>
