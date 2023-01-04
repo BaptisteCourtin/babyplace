@@ -36,31 +36,61 @@ function DashNavbar({ setToggle, structureId, setDashPage }) {
       <ul className="dashNavList">
         <li>
           <MdOutlineFormatListBulleted />
-          <button type="button" onClick={() => { setToggle(1); setDashPage(1) }}>
+          <button
+            type="button"
+            onClick={() => {
+              setToggle(1);
+              setDashPage(1);
+            }}
+          >
             Demandes
           </button>
         </li>
         <li>
           <MdOutlineCalendarToday />
-          <button type="button" onClick={() => { setToggle(2); setDashPage(2) }}>
+          <button
+            type="button"
+            onClick={() => {
+              setToggle(2);
+              setDashPage(2);
+            }}
+          >
             Agenda
           </button>
         </li>
         <li>
           <MdAccessTime />
-          <button type="button" onClick={() => { setToggle(3); setDashPage(3) }}>
+          <button
+            type="button"
+            onClick={() => {
+              setToggle(3);
+              setDashPage(3);
+            }}
+          >
             Horaires
           </button>
         </li>
         <li>
           <MdOutlineMarkAsUnread />
-          <button type="button" onClick={() => { setToggle(4); setDashPage(4) }}>
+          <button
+            type="button"
+            onClick={() => {
+              setToggle(4);
+              setDashPage(4);
+            }}
+          >
             Messagerie
           </button>
         </li>
       </ul>
       <div className="dashNavParams">
-        <button type="button" onClick={() => { setToggle(5); setDashPage(5) }}>
+        <button
+          type="button"
+          onClick={() => {
+            setToggle(5);
+            setDashPage(5);
+          }}
+        >
           <MdOutlineSettings />
           Paramètres
         </button>

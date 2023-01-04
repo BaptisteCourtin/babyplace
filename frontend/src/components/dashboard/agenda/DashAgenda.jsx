@@ -44,7 +44,7 @@ function DashAgenda({ token, structureId, maxPlaces }) {
   const getCalendar = () => {
     axios
       .get(`http://localhost:5000/calendrier/${structureId}`, {
-        id: structureId
+        id: structureId,
       })
       .then((res) => {
         setCalendar(res.data);
@@ -108,9 +108,9 @@ function DashAgenda({ token, structureId, maxPlaces }) {
   }, []);
 
   let curDate = new Date();
-  curDate = `${curDate.getFullYear()}-${curDate.getMonth() + 1
-    }-${curDate.getDate()}`;
-
+  curDate = `${curDate.getFullYear()}-${
+    curDate.getMonth() + 1
+  }-${curDate.getDate()}`;
 
   const [clickedDay, setClickedDay] = useState(new Date());
   const date = `${clickedDay.getFullYear()}-${
@@ -140,15 +140,15 @@ function DashAgenda({ token, structureId, maxPlaces }) {
           {calendar.every(
             (c) => c.structureId === structureId && c.date !== date
           ) && (
-              <>
-                <button className="agendaPlacesWork" onClick={addSleepDate}>
-                  Repos
-                </button>
-                <button className="agendaPlacesWork" onClick={addWorkDate}>
-                  Places restantes
-                </button>
-              </>
-            )}
+            <>
+              <button className="agendaPlacesWork" onClick={addSleepDate}>
+                Repos
+              </button>
+              <button className="agendaPlacesWork" onClick={addWorkDate}>
+                Places restantes
+              </button>
+            </>
+          )}
           {calendar
             .filter((c) => c.structureId === structureId && c.date === date)
             .map((fc) =>

@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { FiBell } from "react-icons/fi";
 import { AiFillStar, AiOutlinePhone, AiOutlineMail } from "react-icons/ai";
 import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
+import useLocalStorage from "@utils/useLocalStorage";
 import DashNavbar from "./nav/DashNavbar";
 
 import DashReservations from "./reservations/DashReservations";
 import DashAgenda from "./agenda/DashAgenda.jsx";
 import DashPlaces from "./places/DashPlaces";
 import Messages from "../messages/Messages";
-import axios from "axios";
-import useLocalStorage from "@utils/useLocalStorage";
 
 function Dashboard() {
   const { state } = useLocation();
@@ -40,15 +40,16 @@ function Dashboard() {
   };
 
   const deleteDates = (curDate) => {
-    axios
-      .delete(`http://localhost:5000/calendrier?date=${curDate}`)
-  }
+    axios.delete(`http://localhost:5000/calendrier?date=${curDate}`);
+  };
 
   useEffect(() => {
     let curDate = new Date();
-    curDate = `${curDate.getFullYear()}-${curDate.getMonth() + 1}-${curDate.getDate()}`;
-    deleteDates(curDate)
-  }, [])
+    curDate = `${curDate.getFullYear()}-${
+      curDate.getMonth() + 1
+    }-${curDate.getDate()}`;
+    deleteDates(curDate);
+  }, []);
 
   const reviews =
     Math.round(
@@ -67,12 +68,22 @@ function Dashboard() {
         <button type="button">
           <FiBell />
         </button>
-        <button type="button" onClick={() => { setToggle(0); setDashPage(0) }}>
+        <button
+          type="button"
+          onClick={() => {
+            setToggle(0);
+            setDashPage(0);
+          }}
+        >
           {donnees.nom || donnees.prenom}
         </button>
       </nav>
       <main>
-        <DashNavbar {...donnees} setToggle={setToggle} setDashPage={setDashPage} />
+        <DashNavbar
+          {...donnees}
+          setToggle={setToggle}
+          setDashPage={setDashPage}
+        />
         <section className="dashboardSection">
           {pageShown()}
           {toggle === 0 && (
@@ -109,7 +120,10 @@ function Dashboard() {
               <div className="dashboardProfileContact">
                 <p>
                   <AiOutlinePhone />
-                  {donnees.telephone.toString().match(/.{1,2}/g).join(" ")}
+                  {donnees.telephone
+                    .toString()
+                    .match(/.{1,2}/g)
+                    .join(" ")}
                 </p>
                 <p>
                   <AiOutlineMail />
