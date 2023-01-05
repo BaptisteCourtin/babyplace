@@ -64,7 +64,7 @@ const INITIAL_DATA = {
   transport: false,
   albumPhoto: false,
   photoConnecte: false,
-  resaInst: "",
+  resaInst: null,
   lundiOuvert: true,
   mardiOuvert: true,
   mercrediOuvert: true,
@@ -72,20 +72,20 @@ const INITIAL_DATA = {
   vendrediOuvert: true,
   samediOuvert: false,
   dimancheOuvert: false,
-  lundiMin: "",
-  lundiMax: "",
-  mardiMin: "",
-  mardiMax: "",
-  mercrediMin: "",
-  mercrediMax: "",
-  jeudiMin: "",
-  jeudiMax: "",
-  vendrediMin: "",
-  vendrediMax: "",
-  samediMin: "",
-  samediMax: "",
-  dimancheMin: "",
-  dimancheMax: "",
+  lundiMin: null,
+  lundiMax: null,
+  mardiMin: null,
+  mardiMax: null,
+  mercrediMin: null,
+  mercrediMax: null,
+  jeudiMin: null,
+  jeudiMax: null,
+  vendrediMin: null,
+  vendrediMax: null,
+  samediMin: null,
+  samediMax: null,
+  dimancheMin: null,
+  dimancheMax: null,
   dureeMin: 1,
   dureeMax: 1,
   nbEmployes: 1,
@@ -412,6 +412,15 @@ function FormStructure() {
       } else if (currentStepIndex === 6) {
         Axios.put("http://localhost:5000/resaInst", {
           resaInst, email
+        })
+          .then(next())
+          .catch((err) => {
+            console.error(err);
+          });
+      } else if (currentStepIndex === 8) {
+        console.log(lundiMin)
+        Axios.post("http://localhost:5000/horaires", {
+          lundiOuvert, mardiOuvert, mercrediOuvert, jeudiOuvert, vendrediOuvert, samediOuvert, dimancheOuvert, lundiMin, lundiMax, mardiMin, mardiMax, mercrediMin, mercrediMax, jeudiMin, jeudiMax, vendrediMin, vendrediMax, samediMin, samediMax, dimancheMin, dimancheMax, email
         })
           .then(next())
           .catch((err) => {

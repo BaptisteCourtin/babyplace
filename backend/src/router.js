@@ -309,6 +309,42 @@ router.put("/resaInst", (req, res) => {
     });
 });
 
+router.post("/horaires", (req, res) => {
+  const { lundiOuvert, mardiOuvert, mercrediOuvert, jeudiOuvert, vendrediOuvert, samediOuvert, dimancheOuvert, lundiMin, lundiMax, mardiMin, mardiMax, mercrediMin, mercrediMax, jeudiMin, jeudiMax, vendrediMin, vendrediMax, samediMin, samediMax, dimancheMin, dimancheMax, email } = req.body;
+  datasource.query("SELECT structureId from structure where email=?", [email])
+    .then(([[id]]) => {
+      const structureId = id.structureId;
+      datasource
+        .query("INSERT INTO horaires(jourSemaine, ouvert, heureMin, heureMax, jourId, structureId) VALUES('lundi', ?, ?, ?, 1, ?)",
+          [lundiOuvert, lundiMin, lundiMax, structureId]);
+      datasource
+        .query("INSERT INTO horaires(jourSemaine, ouvert, heureMin, heureMax, jourId, structureId) VALUES('mardi', ?, ?, ?, 2, ?)",
+          [mardiOuvert, mardiMin, mardiMax, structureId]);
+      datasource
+        .query("INSERT INTO horaires(jourSemaine, ouvert, heureMin, heureMax, jourId, structureId) VALUES('mercredi', ?, ?, ?, 3, ?)",
+          [mercrediOuvert, mercrediMin, mercrediMax, structureId]);
+      datasource
+        .query("INSERT INTO horaires(jourSemaine, ouvert, heureMin, heureMax, jourId, structureId) VALUES('jeudi', ?, ?, ?, 4, ?)",
+          [jeudiOuvert, jeudiMin, jeudiMax, structureId]);
+      datasource
+        .query("INSERT INTO horaires(jourSemaine, ouvert, heureMin, heureMax, jourId, structureId) VALUES('vendredi', ?, ?, ?, 5, ?)",
+          [vendrediOuvert, vendrediMin, vendrediMax, structureId]);
+      datasource
+        .query("INSERT INTO horaires(jourSemaine, ouvert, heureMin, heureMax, jourId, structureId) VALUES('samedi', ?, ?, ?, 6, ?)",
+          [samediOuvert, samediMin, samediMax, structureId]);
+      datasource
+        .query("INSERT INTO horaires(jourSemaine, ouvert, heureMin, heureMax, jourId, structureId) VALUES('dimanche', ?, ?, ?, 7, ?)",
+          [dimancheOuvert, dimancheMin, dimancheMax, structureId]);
+    })
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Modification impossible");
+    });
+});
+
 router.put("/logout/:id", structure.logout);
 
 router.post("/calendrier/add", calendrier.postDate);
