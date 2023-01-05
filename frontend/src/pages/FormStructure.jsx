@@ -461,10 +461,26 @@ function FormStructure() {
           .catch((err) => {
             console.error(err);
           });
-      }
-      else if (currentStepIndex === 11 && structure === "assmat") {
+      } else if (currentStepIndex === 11 && structure === "assmat") {
         Axios.put("http://localhost:5000/agrementsAssmat", {
           maxPlaces, maxHandi, max18Mois, maxNuit, email
+        })
+          .then(next())
+          .catch((err) => {
+            console.error(err);
+          });
+      } else if (currentStepIndex === 12 && structure === "creche") {
+        Axios.put("http://localhost:5000/tarifsCreche", {
+          financementPaje, tarifHeure, tarifHoraireSpec, indemnRepas, tarifAtelier, email
+        })
+          .then(next())
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+      else if (currentStepIndex === 12 && structure === "assmat") {
+        Axios.put("http://localhost:5000/tarifsAssmat", {
+          tarifHeure, tarifHoraireSpec, indemnRepas, indemnKm, indemnEntretien, tarifHeureSup, email
         })
           .then(next())
           .catch((err) => {
