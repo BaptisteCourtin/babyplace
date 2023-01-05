@@ -120,6 +120,9 @@ const INITIAL_DATA = {
 
 function FormStructure() {
   const inputRef = useRef(null);
+  const inputRef1 = useRef(null);
+  const inputRef2 = useRef(null);
+  const inputRef3 = useRef(null);
   const [data, setData] = useState(INITIAL_DATA);
   const [structure, setStructure] = useState("");
   const [resa, setResa] = useState("");
@@ -142,7 +145,7 @@ function FormStructure() {
     useMultistepForm([
       <Structure1 {...data} updateFields={updateFields} />,
       <Structure2 {...data} inputRef={inputRef} updateFields={updateFields} />,
-      <Structure3 {...data} updateFields={updateFields} />,
+      <Structure3 {...data} inputRef1={inputRef1} inputRef2={inputRef2} inputRef3={inputRef3} updateFields={updateFields} />,
       <Structure4 {...data} updateFields={updateFields} />,
       <Structure5 {...data} updateFields={updateFields} />,
       <Structure6 />,
@@ -321,7 +324,6 @@ function FormStructure() {
         formData.append("avatar", inputRef.current.files[0]);
         Axios.post("http://localhost:5000/photoProfil", formData)
           .then((result) => {
-            console.log(result)
             const photoProfil = `@backend/public/uploads/avatar/${result.data}`;
             Axios.put("http://localhost:5000/photoProfil", {
               photoProfil, email
@@ -332,6 +334,58 @@ function FormStructure() {
               })
           }
           )
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+      else if (currentStepIndex === 2) {
+        console.log(inputRef2.current, inputRef3.current)
+        const formData = new FormData();
+        formData.append("photo1", inputRef1.current.files[0]);
+        Axios.post("http://localhost:5000/photosStructure1", formData)
+          .then((result) => {
+            const photoStructure1 = `@backend/public/uploads/photosStructure/${result.data}`;
+            Axios.put("http://localhost:5000/photosStructure1", {
+              photoStructure1, email
+            })
+              .then(() => {
+                if (inputRef2.current.file) {
+                  const formData1 = new FormData();
+                  formData1.append("photo2", inputRef2.current.files[0]);
+                  Axios.post("http://localhost:5000/photosStructure", formData1)
+                    .then((result) => {
+                      const photoStructure1 = `@backend/public/uploads/photosStructure/${result.data}`;
+                      Axios.put("http://localhost:5000/photosStructure2", {
+                        photoStructure1, email
+                      })
+                    })
+                }
+              }).then(() => {
+                if (inputRef3.current.file) {
+                  const formData2 = new FormData();
+                  formData2.append("photo3", inputRef3.current.files[0]);
+                  Axios.post("http://localhost:5000/photosStructure2", formData2)
+                    .then((result) => {
+                      const photoStructure3 = `@backend/public/uploads/photosStructure/${result.data}`;
+                      Axios.put("http://localhost:5000/photosStructure3", {
+                        photoStructure3, email
+                      })
+                    })
+                }
+              }).then(next())
+              .catch((err) => {
+                console.error(err);
+              })
+          }
+          )
+          .catch((err) => {
+            console.error(err);
+          });
+      } else if (currentStepIndex === 3) {
+        Axios.put("http://localhost:5000/description", {
+          description, email
+        })
+          .then(next())
           .catch((err) => {
             console.error(err);
           });

@@ -159,6 +159,102 @@ router.put("/photoProfil", (req, res) => {
     });
 });
 
+const storagePhotos = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './public/uploads/photosStructure')
+  },
+  filename: (req, file, cb) => {
+    const date = new Date();
+    cb(null, "photo" + date.getMinutes() + Math.round(Math.random() * 1000) + ".jpeg")
+  }
+});
+
+const uploadPhotos = multer({ storage: storagePhotos });
+
+router.post("/photosStructure1", uploadPhotos.single("photo1"), (req, res) => {
+  res.send(req.file.filename);
+});
+
+router.put("/photosStructure1", (req, res) => {
+  const { photoStructure1, email } = req.body;
+  datasource
+    .query("UPDATE structure SET photoStructure1= ? WHERE email= ?",
+      [photoStructure1, email])
+    .then(([structure]) => {
+      if (structure.affectedRows === 0) {
+        res.status(404).send("Not Found");
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Modification impossible");
+    });
+});
+
+router.post("/photosStructure2", uploadPhotos.single("photo2"), (req, res) => {
+  res.send(req.file.filename);
+});
+
+router.put("/photosStructure2", (req, res) => {
+  const { photoStructure2, email } = req.body;
+  datasource
+    .query("UPDATE structure SET photoStructure2= ? WHERE email= ?",
+      [photoStructure2, email])
+    .then(([structure]) => {
+      if (structure.affectedRows === 0) {
+        res.status(404).send("Not Found");
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Modification impossible");
+    });
+});
+
+router.post("/photosStructure3", uploadPhotos.single("photo3"), (req, res) => {
+  res.send(req.file.filename);
+});
+
+router.put("/photosStructure3", (req, res) => {
+  const { photoStructure3, email } = req.body;
+  datasource
+    .query("UPDATE structure SET photoStructure3= ? WHERE email= ?",
+      [photoStructure3, email])
+    .then(([structure]) => {
+      if (structure.affectedRows === 0) {
+        res.status(404).send("Not Found");
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Modification impossible");
+    });
+});
+
+router.put("/description", (req, res) => {
+  const { description, email } = req.body;
+  datasource
+    .query("UPDATE structure SET description = ? WHERE email= ?",
+      [description, email])
+    .then(([structure]) => {
+      if (structure.affectedRows === 0) {
+        res.status(404).send("Not Found");
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Modification impossible");
+    });
+});
+
 router.put("/logout/:id", structure.logout);
 
 router.post("/calendrier/add", calendrier.postDate);
