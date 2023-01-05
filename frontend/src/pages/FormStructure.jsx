@@ -407,8 +407,16 @@ function FormStructure() {
           .catch((err) => {
             console.error(err);
           });
-      } else if (currentStepIndex === 5) {
+      } else if (currentStepIndex === 5 || currentStepIndex === 7) {
         next()
+      } else if (currentStepIndex === 6) {
+        Axios.put("http://localhost:5000/resaInst", {
+          resaInst, email
+        })
+          .then(next())
+          .catch((err) => {
+            console.error(err);
+          });
       }
     }
   }
