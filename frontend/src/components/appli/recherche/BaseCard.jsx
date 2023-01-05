@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import CarteCreche from "@components/appli/recherche/CarteCreche";
-import { Link } from "react-router-dom";
+import NavbarApp from "@components/appli/navbar/NavbarApp";
 import { FiMap } from "react-icons/fi";
 import { BiFilterAlt } from "react-icons/bi";
 import PropTypes from "prop-types";
 
-function BaseCard({ setCompo, Allstructure, setTri, tri }) {
+function BaseCard({
+  setCompo,
+  Allstructure,
+  dataBasique,
+  dataServices,
+  dataAggrements,
+}) {
+  const [tri, setTri] = useState("Recent");
+
   // --- position user ---
   const [ville, setVille] = useState();
   const [userPosition, setUserPosition] = useState([0, 0]);
@@ -40,11 +48,9 @@ function BaseCard({ setCompo, Allstructure, setTri, tri }) {
 
         <div className="appli-filtres">
           <div className="left-filter">
-            <div className="search-filtres">
-              <Link to="/appli/search/filtres">
-                <span>{BiFilterAlt()}Filtres</span>
-              </Link>
-            </div>
+            <button className="search-filtres" onClick={() => setCompo(3)}>
+              <span>{BiFilterAlt()}Filtres</span>
+            </button>
 
             <div className="tri">
               <span>{BiFilterAlt()}Tri :</span>
@@ -93,7 +99,7 @@ function BaseCard({ setCompo, Allstructure, setTri, tri }) {
           <button
             className="map-butt"
             type="button"
-            onClick={() => setCompo(1)}
+            onClick={() => setCompo(2)}
           >
             <FiMap />
           </button>
@@ -103,10 +109,48 @@ function BaseCard({ setCompo, Allstructure, setTri, tri }) {
       <main>
         {Allstructure !== undefined &&
           Allstructure
-            // .filter(
-            //   (each) => each.includes
-            //   // each.sorte d'établissement contient au moins un des critère => creche ou assistance
-            // )
+            // each = les données d'une creche
+            // dataXXX = les données des filtres
+
+            // creche, assmat ou les 2
+            .filter(
+              (each) =>
+                dataBasique.isCreche === each.isCreche ||
+                dataBasique.isCreche === 2
+            )
+            // false = tout le monde = pas de filtre
+            // true = filtrer pour avoir seulement ceux qui l'ont
+            .filter(
+              (each) =>
+                (dataServices.pcsc1 === false ||
+                  dataServices.pcsc1 == each.pcsc1) &&
+                (dataServices.handi === false ||
+                  dataServices.handi == each.handi) &&
+                (dataServices.bilingue === false ||
+                  dataServices.bilingue == each.bilingue) &&
+                (dataServices.jardin === false ||
+                  dataServices.jardin == each.jardin) &&
+                // si ass mat
+                (each.isCreche === 0
+                  ? (dataServices.animaux === false ||
+                      dataServices.animaux == each.animaux) &&
+                    (dataServices.nonFumeur === false ||
+                      dataServices.nonFumeur == each.nonFumeur) &&
+                    (dataServices.zeroPollution === false ||
+                      dataServices.zeroPollution == each.zeroPollution) &&
+                    (dataServices.hygiene === false ||
+                      dataServices.hygiene == each.hygiene) &&
+                    (dataServices.repas === false ||
+                      dataServices.repas == each.repas)
+                  : true)
+            )
+            .filter(
+              (each) =>
+                (dataAggrements.handi === false || each.maxHandi > 0) &&
+                (dataAggrements.mois === false || each.max18Mois > 0) &&
+                (dataAggrements.nuit === false || each.maxNuit > 0)
+            )
+
             .sort(function compare(a, b) {
               if (tri === "Prix croissant") {
                 if (a.tarifHeure < b.tarifHeure) return -1;
@@ -131,7 +175,6 @@ function BaseCard({ setCompo, Allstructure, setTri, tri }) {
               return 0;
               // sort par distance ???
             })
-            // faire avec params depuis CarteCreche et une route en :id
             .map((each, index) => (
               <CarteCreche
                 data={each}
@@ -140,6 +183,7 @@ function BaseCard({ setCompo, Allstructure, setTri, tri }) {
               />
             ))}
       </main>
+      <NavbarApp />
     </>
   );
 }
@@ -147,6 +191,9 @@ function BaseCard({ setCompo, Allstructure, setTri, tri }) {
 BaseCard.propTypes = {
   setCompo: PropTypes.func.isRequired,
   Allstructure: PropTypes.array.isRequired,
+  dataBasique: PropTypes.array.isRequired,
+  dataServices: PropTypes.array.isRequired,
+  dataAggrements: PropTypes.array.isRequired,
 };
 
 export default BaseCard;

@@ -1,42 +1,60 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import PropTypes from "prop-types";
 
-const tabFav = [
-  {
-    nom: "nom prenom",
-    email: "email personne 1",
-    tel: 606060606,
-  },
-  {
-    nom: "nom prenom",
-    email: "email personne 2",
-    tel: 604040404,
-  },
-  {
-    nom: "nom prenom",
-    email: "email personne 3",
-    tel: 609090909,
-  },
-];
-
 function PersonnesConfiance({ setCompo }) {
+  const [persoConf, setPersoConf] = useState([]);
+  const id = 1;
+
+  const Token =
+    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+  const getPersoConf = () => {
+    axios
+      .get(`http://localhost:5000/famille/conf/${id}`, {
+        headers: {
+          "x-token": Token,
+        },
+      })
+      .then((res) => {
+        setPersoConf(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  useEffect(() => {
+    getPersoConf();
+  }, []);
+
   return (
-    <>
-      <div className="button-top">
-        <button className="butt big" type="button" onClick={() => setCompo(0)}>
-          {`< Personnes De Confiance`}
-        </button>
-      </div>
-      <main className="perso-confiance">
-        {tabFav.map((each, index) => (
-          <div key={index} className="card-confiance">
-            <h3>{each.nom}</h3>
-            <p>{each.email}</p>
-            <p>0{each.tel}</p>
-          </div>
-        ))}
-      </main>
-    </>
+    persoConf !== undefined && (
+      <>
+        <div className="button-top">
+          <button
+            className="butt big"
+            type="button"
+            onClick={() => setCompo(0)}
+          >
+            {`< Personnes De Confiance`}
+          </button>
+        </div>
+
+        <main className="perso-confiance">
+          {persoConf.map((each, index) => (
+            <div key={index} className="card-confiance">
+              <h3>
+                {each.nom}
+                {each.prenom}
+              </h3>
+              <p>{each.email}</p>
+              <p>{each.tel}</p>
+            </div>
+          ))}
+        </main>
+
+        {/* button ajout / modifier */}
+      </>
+    )
   );
 }
 

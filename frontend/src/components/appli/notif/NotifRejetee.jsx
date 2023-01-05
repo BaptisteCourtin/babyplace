@@ -1,13 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import logoBlanc from "@assets/logo-blanc.svg";
 import avatar1 from "@assets/avatar1.svg";
 
-function NotifRejetee() {
+function NotifRejetee({ setCompo }) {
   return (
     <div className="notif-container-grad">
       <div className="notif-rejet">
+        <div className="button-top">
+          <button
+            className="butt big"
+            type="button"
+            onClick={() => setCompo(0)}
+          >
+            {`< Retour`}
+          </button>
+        </div>
         <img src={logoBlanc} alt="logo-blanc" className="logo" />
         <div className="avatars">
           <img src={avatar1} alt="img profil" className="avatar" />
@@ -32,5 +42,9 @@ function NotifRejetee() {
     </div>
   );
 }
+
+NotifRejetee.propTypes = {
+  setCompo: PropTypes.func.isRequired,
+};
 
 export default NotifRejetee;

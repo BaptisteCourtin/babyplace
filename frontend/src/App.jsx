@@ -6,7 +6,6 @@ import { Route, Routes } from "react-router-dom";
 import Appli from "@pages/appli/AppliTuto";
 import AppliMenu from "@pages/appli/AppliMenu";
 import AppliSearch from "@pages/appli/AppliSearch";
-import AppliSearchFiltres from "@pages/appli/AppliFiltres";
 import AppliCardCreche from "@pages/appli/AppliCardCreche";
 import AppliReservation from "@pages/appli/AppliReservation";
 import AppliUser from "@pages/appli/AppliUser";
@@ -41,7 +40,6 @@ function App() {
         <Route path="/appli" element={<Appli />} />
         <Route path="/appli/menu" element={<AppliMenu />} />
         <Route path="/appli/search" element={<AppliSearch />} />
-        <Route path="/appli/search/filtres" element={<AppliSearchFiltres />} />
         <Route path="/appli/search/card" element={<AppliCardCreche />} />
         <Route
           path="/appli/search/reservation"

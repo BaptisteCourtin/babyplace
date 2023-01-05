@@ -18,6 +18,17 @@ function NotifNote({ setCompo }) {
   const [noteProprete, setNoteProprete] = useState(0);
   const [noteHoraires, setNoteHoraires] = useState(0);
 
+  const updateNotes = (dataNewNotes) => {
+    axios.put(`http://localhost:5000/structure/notes/${id}`, {
+      nbNotes: dataNewNotes.nbNotes,
+      noteCom: dataNewNotes.avisCom,
+      noteProprete: dataNewNotes.avisProprete,
+      noteSecurite: dataNewNotes.avisSecurite,
+      noteEveil: dataNewNotes.avisEveil,
+      noteHoraires: dataNewNotes.avisHoraires,
+    });
+  };
+
   const submitNote = () => {
     let { nbNotes } = structureNotes;
 
@@ -43,17 +54,6 @@ function NotifNote({ setCompo }) {
     setCompo(0);
   };
 
-  const updateNotes = (dataNewNotes) => {
-    axios.put(`http://localhost:5000/structure/notes/${id}`, {
-      nbNotes: dataNewNotes.nbNotes,
-      noteCom: dataNewNotes.avisCom,
-      noteProprete: dataNewNotes.avisProprete,
-      noteSecurite: dataNewNotes.avisSecurite,
-      noteEveil: dataNewNotes.avisEveil,
-      noteHoraires: dataNewNotes.avisHoraires,
-    });
-  };
-
   const Token =
     "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getStructureById = () => {
@@ -76,6 +76,12 @@ function NotifNote({ setCompo }) {
 
   return (
     <div className="notif-container-grad">
+      <div className="button-top">
+        <button className="butt big" type="button" onClick={() => setCompo(0)}>
+          {`< Retour`}
+        </button>
+      </div>
+
       <div className="notif-note">
         <img src={logoBlanc} alt="logo-blanc" className="logo" />
         <div className="avatars">

@@ -7,6 +7,15 @@ function NotifAcceptee({ setCompo }) {
   return (
     <div className="notif-container-grad">
       <div className="notif-accepte">
+        <div className="button-top">
+          <button
+            className="butt big"
+            type="button"
+            onClick={() => setCompo(0)}
+          >
+            {`< Retour`}
+          </button>
+        </div>
         <img src={logoBlanc} alt="logo-blanc" className="logo" />
         <div className="avatars">
           <img src={avatar1} alt="img profil" className="avatar" />
