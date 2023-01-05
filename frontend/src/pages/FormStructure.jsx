@@ -418,9 +418,17 @@ function FormStructure() {
             console.error(err);
           });
       } else if (currentStepIndex === 8) {
-        console.log(lundiMin)
+
         Axios.post("http://localhost:5000/horaires", {
           lundiOuvert, mardiOuvert, mercrediOuvert, jeudiOuvert, vendrediOuvert, samediOuvert, dimancheOuvert, lundiMin, lundiMax, mardiMin, mardiMax, mercrediMin, mercrediMax, jeudiMin, jeudiMax, vendrediMin, vendrediMax, samediMin, samediMax, dimancheMin, dimancheMax, email
+        })
+          .then(next())
+          .catch((err) => {
+            console.error(err);
+          });
+      } else if (currentStepIndex === 9) {
+        Axios.put("http://localhost:5000/dureeAccueil", {
+          dureeMin, dureeMax, email
         })
           .then(next())
           .catch((err) => {

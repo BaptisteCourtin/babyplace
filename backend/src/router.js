@@ -345,6 +345,25 @@ router.post("/horaires", (req, res) => {
     });
 });
 
+router.put("/dureeAccueil", (req, res) => {
+  const { dureeMin, dureeMax, email } = req.body;
+  datasource
+    .query("UPDATE structure SET dureeMin = ?, dureeMax = ? WHERE email= ?",
+      [dureeMin, dureeMax, email])
+    .then(([structure]) => {
+      if (structure.affectedRows === 0) {
+        res.status(404).send("Not Found");
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Modification impossible");
+    });
+});
+
+
 router.put("/logout/:id", structure.logout);
 
 router.post("/calendrier/add", calendrier.postDate);
