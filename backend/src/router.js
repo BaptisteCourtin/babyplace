@@ -7,6 +7,7 @@ const structure = require("./controllers/structure.controllers");
 const horaires = require("./controllers/horaires.controllers");
 const calendrier = require("./controllers/calendrier.controllers");
 const dashboard = require("./controllers/dashboard.controllers");
+const famille = require("./controllers/famille.controllers");
 
 // --- pour app ---
 
@@ -14,6 +15,7 @@ router.get("/structure/allapp", structure.getAllStructures); //search
 router.get("/horaires/:id", horaires.getHorairesById); //search
 router.get("/structure/:id", structure.getStructureById); //notes
 router.put("/structure/notes/:id", structure.updateNotes); //notes
+router.get("/famille/conf/:id", famille.getPersoConfiance); //perso confiance
 
 // --- --- ---
 
@@ -68,7 +70,7 @@ router.post("/auth", (req, res) => {
     });
 });
 
-router.delete("/calendrier", calendrier.deleteDates)
+router.delete("/calendrier", calendrier.deleteDates);
 router.post("/authFamille", (req, res) => {
   datasource
     .query(

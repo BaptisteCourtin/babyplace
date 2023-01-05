@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
+import NavbarApp from "@components/appli/navbar/NavbarApp";
 import PropTypes from "prop-types";
 
 import { BsCardList } from "react-icons/bs";
@@ -16,7 +16,13 @@ import "leaflet/dist/leaflet.css";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
-function BaseMap({ setCompo, Allstructure }) {
+function BaseMap({
+  setCompo,
+  Allstructure,
+  dataBasique,
+  dataServices,
+  dataAggrements,
+}) {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   // --- position user ---
@@ -65,17 +71,17 @@ function BaseMap({ setCompo, Allstructure }) {
 
         <div className="appli-filtres">
           <div className="left-filter">
-            <div className="search-filtres">
-              <Link to="/appli/search/filtres">
-                <span>
-                  <BiFilterAlt />
-                  Filtres
-                </span>
-              </Link>
-            </div>
+            <button
+              className="search-filtres"
+              type="button"
+              onClick={() => setCompo(3)}
+            >
+              <span>{BiFilterAlt()}Filtres</span>
+            </button>
 
             <div className="vrai-localisation">
               <button
+                type="button"
                 onClick={() => {
                   getVraiPosition();
                 }}
@@ -129,9 +135,49 @@ function BaseMap({ setCompo, Allstructure }) {
               url="https://api.maptiler.com/maps/basic-v2/256/{z}/{x}/{y}.png?key=JV4eU3swHqD1YPZtc09q"
               attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
             />
-            {Allstructure.map((each, index) => (
-              <CardMarker data={each} key={index} />
-            ))}
+            {/* mettre les filtres ICI */}
+            {Allstructure
+              // creche, assmat ou les 2
+              .filter(
+                (each) =>
+                  dataBasique.isCreche === each.isCreche ||
+                  dataBasique.isCreche === 2
+              )
+              // false = tout le monde = pas de filtre
+              // true = filtrer pour avoir seulement ceux qui l'ont
+              .filter(
+                (each) =>
+                  (dataServices.pcsc1 === false ||
+                    dataServices.pcsc1 == each.pcsc1) &&
+                  (dataServices.handi === false ||
+                    dataServices.handi == each.handi) &&
+                  (dataServices.bilingue === false ||
+                    dataServices.bilingue == each.bilingue) &&
+                  (dataServices.jardin === false ||
+                    dataServices.jardin == each.jardin) &&
+                  // si ass mat
+                  (each.isCreche === 0
+                    ? (dataServices.animaux === false ||
+                        dataServices.animaux == each.animaux) &&
+                      (dataServices.nonFumeur === false ||
+                        dataServices.nonFumeur == each.nonFumeur) &&
+                      (dataServices.zeroPollution === false ||
+                        dataServices.zeroPollution == each.zeroPollution) &&
+                      (dataServices.hygiene === false ||
+                        dataServices.hygiene == each.hygiene) &&
+                      (dataServices.repas === false ||
+                        dataServices.repas == each.repas)
+                    : true)
+              )
+              .filter(
+                (each) =>
+                  (dataAggrements.handi === false || each.maxHandi > 0) &&
+                  (dataAggrements.mois === false || each.max18Mois > 0) &&
+                  (dataAggrements.nuit === false || each.maxNuit > 0)
+              )
+              .map((each, index) => (
+                <CardMarker data={each} key={index} />
+              ))}
             <Marker position={center} icon={pointer}>
               <Popup>Vous êtes par ici</Popup>
             </Marker>
@@ -150,12 +196,53 @@ function BaseMap({ setCompo, Allstructure }) {
             centerSlidePercentage={70}
             axis={screenWidth >= 650 ? "vertical" : "horizontal"}
           >
-            {Allstructure.map((each, index) => (
-              <CardCrecheMap data={each} key={index} />
-            ))}
+            {/* et mettre les filtres ICI AUSSI */}
+            {Allstructure
+              // creche, assmat ou les 2
+              .filter(
+                (each) =>
+                  dataBasique.isCreche === each.isCreche ||
+                  dataBasique.isCreche === 2
+              )
+              // false = tout le monde = pas de filtre
+              // true = filtrer pour avoir seulement ceux qui l'ont
+              .filter(
+                (each) =>
+                  (dataServices.pcsc1 === false ||
+                    dataServices.pcsc1 == each.pcsc1) &&
+                  (dataServices.handi === false ||
+                    dataServices.handi == each.handi) &&
+                  (dataServices.bilingue === false ||
+                    dataServices.bilingue == each.bilingue) &&
+                  (dataServices.jardin === false ||
+                    dataServices.jardin == each.jardin) &&
+                  // si ass mat
+                  (each.isCreche === 0
+                    ? (dataServices.animaux === false ||
+                        dataServices.animaux == each.animaux) &&
+                      (dataServices.nonFumeur === false ||
+                        dataServices.nonFumeur == each.nonFumeur) &&
+                      (dataServices.zeroPollution === false ||
+                        dataServices.zeroPollution == each.zeroPollution) &&
+                      (dataServices.hygiene === false ||
+                        dataServices.hygiene == each.hygiene) &&
+                      (dataServices.repas === false ||
+                        dataServices.repas == each.repas)
+                    : true)
+              )
+              .filter(
+                (each) =>
+                  (dataAggrements.handi === false || each.maxHandi > 0) &&
+                  (dataAggrements.mois === false || each.max18Mois > 0) &&
+                  (dataAggrements.nuit === false || each.maxNuit > 0)
+              )
+              .map((each, index) => (
+                <CardCrecheMap data={each} key={index} />
+              ))}
           </Carousel>
         </div>
       </main>
+      <NavbarApp />
     </>
   );
 }

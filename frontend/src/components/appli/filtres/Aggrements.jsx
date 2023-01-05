@@ -1,48 +1,47 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import Toggle from "./Toggle";
 
-function Aggrements({ setCompo }) {
-  const [handicape, setHandicape] = useState(false);
-  const [mois, setMois] = useState(false);
-  const [nuit, setNuit] = useState(false);
-
+function Aggrements({ setCompo, dataAggrements, setDataAggrements }) {
   return (
-    <>
+    <div className="filtres">
       <header>
         <button
           type="button"
           className="h2"
-          onClick={() => setCompo(0)}
+          onClick={() => setCompo(3)}
         >{`< Aggrements`}</button>
-        <button type="button">RESET</button>
       </header>
 
       <main className="aggrements">
+        {/* mettre le nom comme le state */}
         <Toggle
-          setter={setHandicape}
-          state={handicape}
-          nom="handicape"
+          setter={setDataAggrements}
+          state={dataAggrements.handi}
+          nom="handi"
           p="Enfant handicapé"
         />
         <Toggle
-          setter={setMois}
-          state={mois}
+          setter={setDataAggrements}
+          state={dataAggrements.mois}
           nom="mois"
           p="Enfant de moins de 18 mois"
         />
-        <Toggle setter={setNuit} state={nuit} nom="nuit" p="Accueil de nuit" />
+        <Toggle
+          setter={setDataAggrements}
+          state={dataAggrements.nuit}
+          nom="nuit"
+          p="Accueil de nuit"
+        />
       </main>
-
-      <button type="button" className="apply" onClick={() => setCompo(0)}>
-        Appliquer
-      </button>
-    </>
+    </div>
   );
 }
 
 Aggrements.propTypes = {
   setCompo: PropTypes.func.isRequired,
+  dataAggrements: PropTypes.object.isRequired,
+  setDataAggrements: PropTypes.func.isRequired,
 };
 
 export default Aggrements;
