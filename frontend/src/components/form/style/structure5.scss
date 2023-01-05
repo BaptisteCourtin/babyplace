@@ -72,12 +72,26 @@
     }
   }
 
-  & select + label {
+  & select+label {
     color: $grey;
     font-size: 0.9rem;
     position: absolute;
     top: 10px;
     left: 16px;
+  }
+
+  & input[type=number] {
+    border: 1px solid $grey;
+    border-radius: 10px;
+    height: 100%;
+    padding: 4px 1px 4px 4px;
+    margin: 0 8px;
+    width: 45px;
+    transform: translateY(0);
+  }
+
+  & input[type=number]:focus {
+    outline: 1.5px solid $third;
   }
 
   & h5 {

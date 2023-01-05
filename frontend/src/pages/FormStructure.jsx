@@ -44,10 +44,12 @@ const INITIAL_DATA = {
   description: "",
   PCSC1: false,
   nesting: false,
-  motessori: false,
+  montessori: false,
   handi: false,
   jardin: false,
   sorties: false,
+  experience: 0,
+  enfants: false,
   animaux: false,
   nonFumeur: false,
   zeroPollution: false,
@@ -61,7 +63,7 @@ const INITIAL_DATA = {
   bibli: false,
   transport: false,
   albumPhoto: false,
-  photoPonnecte: false,
+  photoConnecte: false,
   resaInst: "",
   lundiOuvert: true,
   mardiOuvert: true,
@@ -300,7 +302,7 @@ function FormStructure() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const { isCreche, typeCreche, nomStructure, telephone, nomNaissance, nomUsage, prenom, adresseStructure, description, PCSC1, nesting, motessori, handi, jardin, sorties, animaux, nonFumeur, zeroPollution, repas, hygiene, promenades, eveil, musique, art, bilingue, bibli, transport, albumPhoto, photoPonnecte, resaInst, lundiOuvert, mardiOuvert, mercrediOuvert, jeudiOuvert, vendrediOuvert, samediOuvert, dimancheOuvert, lundiMin, lundiMax, mardiMin, mardiMax, mercrediMin, mercrediMax, jeudiMin, jeudiMax, vendrediMin, vendrediMax, samediMin, samediMax, dimancheMin, dimancheMax, dureeMin, dureeMax, nbEmployes, maxPlaces, maxHandi, max18Mois, maxNuit, financementPaje, tarifHeure, tarifHoraireSpec, indemnRepas, tarifAtelier, indemnEntretien, indemnKm, tarifHeureSup, numSecu, numAgrement, dateAgrement, docPmi, siret, assHabitNom, assHabitNumero, assHabitAdresse, assAutoNom, assAutoNumero, assAutoAdresse, docIdentite, docVitale, docJustifDom, docDiplome, docRespCivile, docAssAuto } = data;
+    const { isCreche, typeCreche, nomStructure, telephone, nomNaissance, nomUsage, prenom, adresseStructure, description, PCSC1, nesting, montessori, handi, jardin, sorties, experience, enfants, animaux, nonFumeur, zeroPollution, repas, hygiene, promenades, eveil, musique, art, bilingue, bibli, transport, albumPhoto, photoConnecte, resaInst, lundiOuvert, mardiOuvert, mercrediOuvert, jeudiOuvert, vendrediOuvert, samediOuvert, dimancheOuvert, lundiMin, lundiMax, mardiMin, mardiMax, mercrediMin, mercrediMax, jeudiMin, jeudiMax, vendrediMin, vendrediMax, samediMin, samediMax, dimancheMin, dimancheMax, dureeMin, dureeMax, nbEmployes, maxPlaces, maxHandi, max18Mois, maxNuit, financementPaje, tarifHeure, tarifHoraireSpec, indemnRepas, tarifAtelier, indemnEntretien, indemnKm, tarifHeureSup, numSecu, numAgrement, dateAgrement, docPmi, siret, assHabitNom, assHabitNumero, assHabitAdresse, assAutoNom, assAutoNumero, assAutoAdresse, docIdentite, docVitale, docJustifDom, docDiplome, docRespCivile, docAssAuto } = data;
     const email = userEmail;
     if (!isLastStep) {
       if (currentStepIndex === 0 && structure === "creche") {
@@ -389,6 +391,24 @@ function FormStructure() {
           .catch((err) => {
             console.error(err);
           });
+      } else if (currentStepIndex === 4 && structure === "creche") {
+        Axios.put("http://localhost:5000/optionsAccueilCreche", {
+          PCSC1, nesting, montessori, handi, jardin, sorties, promenades, eveil, musique, art, bilingue, bibli, transport, albumPhoto, photoConnecte, email
+        })
+          .then(next())
+          .catch((err) => {
+            console.error(err);
+          });
+      } else if (currentStepIndex === 4 && structure === "assmat") {
+        Axios.put("http://localhost:5000/optionsAccueilAssmat", {
+          PCSC1, nesting, montessori, handi, jardin, sorties, promenades, eveil, musique, art, bilingue, bibli, transport, enfants, experience, animaux, nonFumeur, zeroPollution, repas, hygiene, albumPhoto, photoConnecte, email
+        })
+          .then(next())
+          .catch((err) => {
+            console.error(err);
+          });
+      } else if (currentStepIndex === 5) {
+        next()
       }
     }
   }
