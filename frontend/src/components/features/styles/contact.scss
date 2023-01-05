@@ -1,9 +1,10 @@
-.contact {
+.contact-form {
     width: 100%;
     height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: $second;
 
     section {
         padding-top: 40px;
@@ -16,7 +17,15 @@
         }
     }
 
-    #contact-us {
+    .aide {
+        p {
+            margin-top: 20px;
+            font-size: 1.25em;
+            line-height: 1.5em;
+        }
+    }
+
+    #contact {
 
         .formContact {
             display: flex;
@@ -138,6 +147,27 @@
                             color: $fourth
                         }
                     }
+                }
+            }
+
+            .navBtnLite {
+
+                display: flex;
+                align-items: flex-end;
+                justify-content: center;
+                gap: $h1;
+                padding: 10px 25px 10px 25px;
+                border: 1px solid transparent;
+                border-radius: 50px;
+                background-color: $third;
+                color: $white;
+                font-weight: 500;
+                transition: 0.3s ease-in-out;
+
+                &:hover {
+                    background: none;
+                    border: 1px solid $third;
+                    color: $second;
                 }
             }
         }

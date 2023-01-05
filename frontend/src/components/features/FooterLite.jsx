@@ -40,7 +40,7 @@ const FooterLite = () => {
                     <ul>
                         <li><HashLink smooth to={"/contact#aide"}>Aide</HashLink></li>
                         <li><HashLink smooth to={"/contact#contact"}>Contact</HashLink></li>
-                        <li><NavLink to="/faq">FAQ</NavLink></li>
+                        <li><HashLink smooth to={"/faq#faq"}>FAQ</HashLink></li>
 
                     </ul>
                 </div>

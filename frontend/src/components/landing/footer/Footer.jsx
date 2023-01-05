@@ -6,7 +6,6 @@ import up from "@assets/up.svg";
 import facebook from "@assets/facebook.svg";
 import twitter from "@assets/twitter.svg";
 import insta from "@assets/insta.svg";
-import { NavLink } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 
 function Footer({ userType }) {
@@ -57,7 +56,7 @@ function Footer({ userType }) {
             <ul>
               <li><HashLink to="/contact#aide">Aide</HashLink></li>
               <li><HashLink to="/contact#contact">Contact</HashLink></li>
-              <li><NavLink to="/faq">FAQ</NavLink></li>
+              <li><HashLink to="/faq#faq">FAQ</HashLink></li>
 
             </ul>
           </div>
