@@ -131,6 +131,7 @@ function FormStructure() {
   const { userEmail } = useContext(UserEmailContext);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [showExplications, setShowExplications] = useState(true);
+  const [closedDays, setClosedDays] = useState([]);
   const updateSize = () => {
     setScreenWidth(window.innerWidth);
     if (window.innerWidth < 1200) {
@@ -155,7 +156,7 @@ function FormStructure() {
       <Structure8 {...data} />,
       <Structure9 {...data} updateFields={updateFields} />,
       <Structure10 {...data} updateFields={updateFields} />,
-      <Structure11 {...data} />,
+      <Structure11 {...data} closedDays={closedDays} setClosedDays={setClosedDays} />,
       <Structure12 {...data} updateFields={updateFields} />,
       <Structure13 {...data} updateFields={updateFields} />,
       <Structure14 {...data} />,
@@ -429,6 +430,41 @@ function FormStructure() {
       } else if (currentStepIndex === 9) {
         Axios.put("http://localhost:5000/dureeAccueil", {
           dureeMin, dureeMax, email
+        })
+          .then(next())
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+      else if (currentStepIndex === 10) {
+        Axios.get(`http://localhost:5000/getStructureId?email=${email}`, { email })
+          .then((id) => {
+            const structureId = id.data.structureId;
+            closedDays.map((date) => {
+              Axios.post("http://localhost:5000/calendrier/add", {
+                date: date, nbPlaces: -1, structureId,
+              })
+                .catch((err) => {
+                  console.error(err);
+                })
+            })
+          }
+          ).then(next())
+          .catch((err) => {
+            console.error(err);
+          });
+      } else if (currentStepIndex === 11 && structure === "creche") {
+        Axios.put("http://localhost:5000/agrementsCreche", {
+          nbEmployes, maxPlaces, maxHandi, max18Mois, maxNuit, email
+        })
+          .then(next())
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+      else if (currentStepIndex === 11 && structure === "assmat") {
+        Axios.put("http://localhost:5000/agrementsAssmat", {
+          maxPlaces, maxHandi, max18Mois, maxNuit, email
         })
           .then(next())
           .catch((err) => {

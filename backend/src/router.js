@@ -363,6 +363,51 @@ router.put("/dureeAccueil", (req, res) => {
     });
 });
 
+router.get("/getStructureId", (req, res) => {
+  console.log(req.query.email)
+  datasource.query(
+    "SELECT structureId FROM structure WHERE email = ?",
+    [req.query.email]
+  ).then(([[result]]) => {
+    console.log(result)
+    res.send(result).status(200)
+  });
+})
+
+router.put("/agrementsCreche", (req, res) => {
+  const { nbEmployes, maxPlaces, maxHandi, max18Mois, maxNuit, email } = req.body;
+  datasource
+    .query("UPDATE structure INNER JOIN creche ON creche.structureId=structure.structureId SET nbEmployes= ?, maxPlaces= ?, maxHandi= ?, max18Mois= ?, maxNuit= ? WHERE email= ?",
+      [nbEmployes, maxPlaces, maxHandi, max18Mois, maxNuit, email])
+    .then(([structure]) => {
+      if (structure.affectedRows === 0) {
+        res.status(404).send("Not Found");
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Modification impossible");
+    });
+});
+router.put("/agrementsAssmat", (req, res) => {
+  const { maxPlaces, maxHandi, max18Mois, maxNuit, email } = req.body;
+  datasource
+    .query("UPDATE structure INNER JOIN assMat ON assMat.structureId=structure.structureId SET maxPlaces= ?, maxHandi= ?, max18Mois= ?, maxNuit= ? WHERE email= ?",
+      [maxPlaces, maxHandi, max18Mois, maxNuit, email])
+    .then(([structure]) => {
+      if (structure.affectedRows === 0) {
+        res.status(404).send("Not Found");
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Modification impossible");
+    });
+});
 
 router.put("/logout/:id", structure.logout);
 
