@@ -29,14 +29,14 @@ import profilCPP from "../assets/profilCPP.jpg";
 import imgWoman from "../assets/img-woman.svg";
 
 const INITIAL_DATA = {
-  isCreche: "",
-  typeCreche: "",
-  nomStructure: "",
-  telephone: "",
-  nomNaissance: "",
-  nomUsage: "",
-  prenom: "",
-  adresseStructure: "",
+  isCreche: null,
+  typeCreche: null,
+  nomStructure: null,
+  telephone: null,
+  nomNaissance: null,
+  nomUsage: null,
+  prenom: null,
+  adresseStructure: null,
   imageProfilSrc: "https://via.placeholder.com/150.png?text=photo",
   photo1Src: "https://via.placeholder.com/240x160.png?text=photo+1",
   photo2Src: "https://via.placeholder.com/240x160.png?text=photo+2",
@@ -101,23 +101,23 @@ const INITIAL_DATA = {
   indemnEntretien: 0,
   indemnKm: 0,
   tarifHeureSup: 0,
-  numSecu: "",
-  numAgrement: "",
-  dateAgrement: "",
-  docPmi: "",
-  siret: "",
-  assHabitNom: "",
-  assHabitNumero: "",
-  assHabitAdresse: "",
-  assAutoNom: "",
-  assAutoNumero: "",
-  assAutoAdresse: "",
-  docIdentite: "",
-  docVitale: "",
-  docJustifDom: "",
-  docDiplome: "",
-  docRespCivile: "",
-  docAssAuto: "",
+  numSecu: null,
+  numAgrement: null,
+  dateAgrement: null,
+  docPmi: null,
+  siret: null,
+  assHabitNom: null,
+  assHabitNumero: null,
+  assHabitAdresse: null,
+  assAutoNom: null,
+  assAutoNumero: null,
+  assAutoAdresse: null,
+  docIdentite: null,
+  docVitale: null,
+  docJustifDom: null,
+  docDiplome: null,
+  docRespCivile: null,
+  docAssAuto: null,
 };
 
 function FormStructure() {
@@ -125,6 +125,13 @@ function FormStructure() {
   const inputRef1 = useRef(null);
   const inputRef2 = useRef(null);
   const inputRef3 = useRef(null);
+  const inputRefPmi = useRef(null);
+  const inputRefCni = useRef(null);
+  const inputRefCpam = useRef(null);
+  const inputRefDom = useRef(null);
+  const inputRefDiplome = useRef(null);
+  const inputRefResp = useRef(null);
+  const inputRefAuto = useRef(null);
   const [data, setData] = useState(INITIAL_DATA);
   const [structure, setStructure] = useState("");
   const [resa, setResa] = useState("");
@@ -160,8 +167,8 @@ function FormStructure() {
       <Structure12 {...data} updateFields={updateFields} />,
       <Structure13 {...data} updateFields={updateFields} />,
       <Structure14 {...data} />,
-      <Structure15 {...data} updateFields={updateFields} />,
-      <Structure16 {...data} />,
+      <Structure15 {...data} inputRefPmi={inputRefPmi} inputRefCpam={inputRefCpam} inputRefCni={inputRefCni} inputRefDom={inputRefDom} inputRefDiplome={inputRefDiplome} inputRefAuto={inputRefAuto} inputRefResp={inputRefResp} updateFields={updateFields} />,
+      <Structure16 />,
     ]);
 
   const pageTitle = () => {
@@ -342,7 +349,6 @@ function FormStructure() {
           });
       }
       else if (currentStepIndex === 2) {
-        console.log(inputRef2.current, inputRef3.current)
         const formData = new FormData();
         formData.append("photo1", inputRef1.current.files[0]);
         Axios.post("http://localhost:5000/photosStructure1", formData)
@@ -408,7 +414,7 @@ function FormStructure() {
           .catch((err) => {
             console.error(err);
           });
-      } else if (currentStepIndex === 5 || currentStepIndex === 7) {
+      } else if (currentStepIndex === 5 || currentStepIndex === 7 || currentStepIndex === 13) {
         next()
       } else if (currentStepIndex === 6) {
         Axios.put("http://localhost:5000/resaInst", {
@@ -481,6 +487,31 @@ function FormStructure() {
       else if (currentStepIndex === 12 && structure === "assmat") {
         Axios.put("http://localhost:5000/tarifsAssmat", {
           tarifHeure, tarifHoraireSpec, indemnRepas, indemnKm, indemnEntretien, tarifHeureSup, email
+        })
+          .then(next())
+          .catch((err) => {
+            console.error(err);
+          });
+      } else if (currentStepIndex === 14 && structure === "creche") {
+        const formData = new FormData();
+        formData.append("docpmi", inputRefPmi.current.files[0]);
+        Axios.post("http://localhost:5000/justificatifPmi", formData)
+          .then((result) => {
+            const justif = `@backend/public/uploads/justificatifs/${result.data}`;
+            Axios.put("http://localhost:5000/verifsCreche", {
+              numAgrement, dateAgrement, justif, siret, email
+            }).catch((err) => {
+              console.error(err);
+            })
+          })
+          .then(next())
+          .catch((err) => {
+            console.error(err);
+          })
+
+      } else if (currentStepIndex === 14 && structure === "assmat") {
+        Axios.put("http://localhost:5000/verifsAssmat", {
+          numSecu, numAgrement, dateAgrement, docPmi, assHabitNom, assHabitNumero, assHabitAdresse, assAutoNom, assAutoNumero, assAutoAdresse, docIdentite, docVitale, docJustifDom, docDiplome, docRespCivile, docAssAuto, email
         })
           .then(next())
           .catch((err) => {

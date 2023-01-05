@@ -364,12 +364,10 @@ router.put("/dureeAccueil", (req, res) => {
 });
 
 router.get("/getStructureId", (req, res) => {
-  console.log(req.query.email)
   datasource.query(
     "SELECT structureId FROM structure WHERE email = ?",
     [req.query.email]
   ).then(([[result]]) => {
-    console.log(result)
     res.send(result).status(200)
   });
 })
@@ -391,6 +389,7 @@ router.put("/agrementsCreche", (req, res) => {
       res.status(500).send("Modification impossible");
     });
 });
+
 router.put("/agrementsAssmat", (req, res) => {
   const { maxPlaces, maxHandi, max18Mois, maxNuit, email } = req.body;
   datasource
@@ -444,6 +443,58 @@ router.put("/tarifsAssmat", (req, res) => {
       res.status(500).send("Modification impossible");
     });
 });
+
+const storageJustif = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './public/uploads/justificatifs')
+  },
+  filename: (req, file, cb) => {
+    const date = new Date();
+    cb(null, "doc" + date.getMinutes() + Math.round(Math.random() * 1000) + "." + file.originalname.split('.').slice(-1)[0])
+  }
+});
+const uploadJustif = multer({ storage: storageJustif });
+
+router.post("/justificatifPmi", uploadJustif.single('docpmi'), (req, res) => {
+  res.send(req.file.filename);
+});
+
+router.put("/verifsCreche", (req, res) => {
+  const { numAgrement, dateAgrement, justif, siret, email } = req.body;
+  datasource
+    .query("UPDATE structure INNER JOIN creche ON creche.structureId=structure.structureId SET numAgrement= ?, dateAgrement= ?, docPmi= ?, siret= ?  WHERE email= ?",
+      [numAgrement, dateAgrement, justif, siret, email])
+    .then(([structure]) => {
+      if (structure.affectedRows === 0) {
+        res.status(404).send("Not Found");
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Modification impossible");
+    });
+});
+
+router.put("/verifsAssmat", (req, res) => {
+  const { numSecu, numAgrement, dateAgrement, docPmi, assHabitNom, assHabitNumero, assHabitAdresse, assAutoNom, assAutoNumero, assAutoAdresse, docIdentite, docVitale, docJustifDom, docDiplome, docRespCivile, docAssAuto, email } = req.body;
+  datasource
+    .query("UPDATE structure INNER JOIN assMat ON assMat.structureId=structure.structureId SET numSecu= ?, numAgrement= ?, dateAgrement= ?, docPmi= ?, assHabitNom= ?, assHabitNumero= ?, assHabitAdresse= ?, assAutoNom= ?, assAutoNumero= ?, assAutoAdresse= ?, docIdentite= ?, docVitale= ?, docJustifDom= ?, docDiplome= ?, docRespCivile= ?, docAssAuto= ? WHERE email= ?",
+      [numSecu, numAgrement, dateAgrement, docPmi, assHabitNom, assHabitNumero, assHabitAdresse, assAutoNom, assAutoNumero, assAutoAdresse, docIdentite, docVitale, docJustifDom, docDiplome, docRespCivile, docAssAuto, email])
+    .then(([structure]) => {
+      if (structure.affectedRows === 0) {
+        res.status(404).send("Not Found");
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Modification impossible");
+    });
+});
+
 
 router.put("/logout/:id", structure.logout);
 
