@@ -24,6 +24,7 @@ function LoginParams() {
         })
           .then(res => {
             setDetails(res.data[0])
+            console.log(res.data[0])
             setUserType('assMat')
           })
       } else {

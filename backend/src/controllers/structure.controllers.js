@@ -9,7 +9,7 @@ const getStructures = async (req, res) => {
   const result = await structureModels.getStructures();
   return res.json(result);
 }
-  
+
 const getStructureById = async (req, res) => {
   const result = await structureModels.getStructureById(req);
   return res.json(result);

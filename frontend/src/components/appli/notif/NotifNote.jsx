@@ -58,7 +58,7 @@ function NotifNote({ setCompo }) {
     "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getStructureById = () => {
     axios
-      .get(`http://localhost:5000/structure/${id}`, {
+      .get(`http://localhost:5000/structure/notes/${id}`, {
         headers: {
           "x-token": Token,
         },

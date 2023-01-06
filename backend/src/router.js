@@ -15,7 +15,7 @@ const famille = require("./controllers/famille.controllers");
 
 router.get("/structure/allapp", structure.getAllStructures); //search
 router.get("/horaires/:id", horaires.getHorairesById); //search
-router.get("/structure/:id", structure.getStructureById); //notes
+router.get("/structure/notes/:id", structure.getStructureById); //notes
 router.put("/structure/notes/:id", structure.updateNotes); //notes
 router.get("/famille/conf/:id", famille.getPersoConfiance); //perso confiance
 router.put("/structure/signal/:id", structure.updateSignal); // signalement
