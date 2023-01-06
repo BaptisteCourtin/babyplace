@@ -18,6 +18,8 @@ import FormStructure from "@pages/FormStructure";
 
 import Dashboard from "@components/dashboard/Dashboard";
 import Home from "./pages/Home";
+import Admin from "@pages/Admin";
+import Stats from "@pages/Stats";
 
 function App() {
   return (
@@ -25,12 +27,16 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
 
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/stats" element={<Stats />} />
+
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/login-params" element={<Synthesis />} />
         <Route path="/dashboard" element={<Dashboard />} />
 
         <Route path="/appli" element={<Appli />} />
+
         <Route path="/appli/menu" element={<AppliMenu />} />
         <Route path="/appli/search" element={<AppliSearch />} />
         <Route path="/appli/search/filtres" element={<AppliSearchFiltres />} />

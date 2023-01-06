@@ -212,128 +212,180 @@
     flex-direction: column;
     gap: 20px;
 
-    & .dashPlacesPrices {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      padding: 20px 10px;
-      border-radius: 5px;
-      background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
-      box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
+    & details {
 
-      & h3 {
+      & summary {
+        margin-bottom: 10px;
         font-size: $h3;
-      }
+        font-weight: 500;
+        cursor: pointer;
 
-      & p {
-        width: 90%;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-
-        & span {
-          font-weight: 500;
+        &::selection {
+          background: none;
         }
-      }
-    }
 
-    & .dashPlacesOptions {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      padding: 20px 10px;
-      border-radius: 5px;
-      background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
-      box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
+        &::marker {
+          color: $third;
+        }
 
-      & h3 {
-        font-size: $h3;
       }
 
-      & .dashSwitchContainer {
-        display: grid;
-        grid-template-columns: 2fr 1fr 1fr;
-        align-items: center;
-        margin-left: 10px;
+      & .dashPlacesPrices {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px 10px;
+        border-radius: 5px;
+        background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
+        box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
 
-        & .dashSwitch {
-          position: relative;
-          display: inline-block;
-          width: 80px;
-          height: 24px;
+        & div {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
 
-          & input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-          }
+          & p {
+            width: 90%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
 
-          & input:checked + .dashSwitchSlider {
-            background-color: $third;
-          }
-
-          & input:checked + .dashSwitchSlider:before {
-            -webkit-transform: translateX(52px);
-            -ms-transform: translateX(52px);
-            transform: translateX(52px);
-          }
-
-          & .dashSwitchSlider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            border-radius: 34px;
-            transition: 0.3s ease-in-out;
-
-            &:before {
-              position: absolute;
-              content: "";
-              height: 20px;
-              width: 20px;
-              left: 4px;
-              bottom: 2px;
-              background-color: white;
-              border-radius: 50%;
-              transition: 0.3s ease-in-out;
+            & span {
+              font-weight: 500;
             }
           }
         }
+      }
 
-        & .dashOptionsPrices {
+      & .dashPlacesOptions {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px 10px;
+        border-radius: 5px;
+        background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
+        box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
+
+        & .dashSwitchContainer {
+          display: grid;
+          grid-template-columns: 2fr 1fr 1fr;
           align-items: center;
-          justify-content: center;
           gap: 5px;
-          height: 20px;
-          transition: 0.3s ease-in-out;
+          margin-left: 10px;
+
+          & .dashSwitch {
+            position: relative;
+            display: inline-block;
+            width: 80px;
+            height: 24px;
+
+            & input {
+              opacity: 0;
+              width: 0;
+              height: 0;
+            }
+
+            & input:checked+.dashSwitchSlider {
+              background-color: $third;
+            }
+
+            & input:checked+.dashSwitchSlider:before {
+              -webkit-transform: translateX(52px);
+              -ms-transform: translateX(52px);
+              transform: translateX(52px);
+            }
+
+            & .dashSwitchSlider {
+              position: absolute;
+              cursor: pointer;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background-color: #ccc;
+              border-radius: 34px;
+              transition: 0.3s ease-in-out;
+
+              &:before {
+                position: absolute;
+                content: "";
+                height: 20px;
+                width: 20px;
+                left: 4px;
+                bottom: 2px;
+                background-color: white;
+                border-radius: 50%;
+                transition: 0.3s ease-in-out;
+              }
+            }
+          }
+        }
+      }
+
+      & .dashPlacesCheckboxes {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px 10px;
+        border-radius: 5px;
+        background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
+        box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
+
+        & li {
+          display: flex;
 
           & input {
-            width: 50px;
-            outline: none;
-            border: 1px solid $third;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 1px solid $grey;
             border-radius: 5px;
-            text-align: end;
+            transform: translateY(0.2em);
+            cursor: pointer;
+          }
+
+          & input:checked {
+            background-color: $white;
+            position: relative;
+
+            &:before {
+              width: 100%;
+              height: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              content: "\2713";
+              border-radius: 5px;
+              color: $white;
+              background-color: $third;
+              font-weight: 700;
+            }
+          }
+
+          & label {
+            display: block;
+            margin-left: 10px;
           }
         }
       }
     }
+  }
+}
 
-    & .dashPlacesCheckboxes {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
+.dashOptionsPrices {
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  height: 20px;
+  transition: 0.3s ease-in-out;
 
-      & li {
-        display: flex;
-
-        & label {
-          display: block;
-          margin-left: 10px;
-        }
-      }
-    }
+  & input {
+    width: 50px;
+    outline: none;
+    border: 1px solid $third;
+    border-radius: 5px;
+    text-align: end;
   }
 }

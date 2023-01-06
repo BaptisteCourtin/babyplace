@@ -5,10 +5,11 @@ import Chat from "./Chat";
 
 const socket = io.connect("http://localhost:3001");
 
-function Messages({ nom, email, photoProfil, structureId }) {
+function Messages({ nom, prenom, email, photoProfil, structureId }) {
   const [room, setRoom] = useState("");
   const [title, setTitle] = useState("");
   const [strucData, setStrucData] = useState([]);
+  const [selected, setSelected] = useState(false)
 
   const getStructureForMess = () => {
     axios
@@ -49,17 +50,17 @@ function Messages({ nom, email, photoProfil, structureId }) {
               strucData
                 .filter((f) => !f.nom.includes(nom))
                 .map((element) => (
-                  <li className="contactList" key={element.crecheId}>
+                  <li className={selected && element.nom === title ? "selected contactList" : "contactList"} key={element.crecheId}>
                     <button
                       type="button"
-                      onClick={(e) => {
-                        e.preventDefault();
+                      onClick={() => {
+                        setSelected(true);
                         setRoom(structureId + element.crecheId);
                         setTitle(element.nom);
                       }}
                       id="btn-affiche-con"
                     >
-                      <img src={element.photoProfil} />
+                      {element.photoProfil && <img src={element.photoProfil} />}
                       {element.nom}
                     </button>
                   </li>
@@ -71,7 +72,7 @@ function Messages({ nom, email, photoProfil, structureId }) {
         {room != "" ? (
           <Chat
             socket={socket}
-            username={nom}
+            username={nom || prenom}
             room={room}
             title={title}
             joinRoom={joinRoom}

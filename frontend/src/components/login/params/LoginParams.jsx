@@ -1,45 +1,60 @@
-import Axios from "axios";
 import React, { useState, useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { Link, useLocation } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 function LoginParams() {
   const { state } = useLocation();
   const { token } = state;
   const [donnees, setDonnees] = useState({});
+  const [details, setDetails] = useState([]);
+  const [userType, setUserType] = useState(null);
 
-  const navigate = useNavigate();
-
-  const getData = () => {
-    Axios.get("http://localhost:5000/structure", {
-      headers: {
-        "x-token": token,
-      },
-    })
-      .then((ret) => {
-        setDonnees(ret.data[0]);
-        // if (ret.data[0]) {
-        //   setDonnees(ret.data[0]);
-        // } setDonnees(ret.data[1]);
+  const getData = async () => {
+    try {
+      const res = await axios.get("http://localhost:5000/structure", {
+        headers: {
+          "x-token": token,
+        },
       })
-      .catch((err) => {
-        console.error(err);
-      });
+      setDonnees(res.data[0]);
+      if (res.data[0].isCreche === 0) {
+        axios.get(`http://localhost:5000/structure/details?type=assMat&id=${res.data[0].structureId}`, {
+          id: res.data[0].structureId,
+        })
+          .then(res => {
+            setDetails(res.data[0])
+            setUserType('assMat')
+          })
+      } else {
+        axios.get(`http://localhost:5000/structure/details?type=creche&id=${res.data[0].structureId}`, {
+          id: res.data[0].structureId,
+        })
+          .then(res => {
+            setDetails(res.data[0])
+            setUserType('creche')
+          })
+      }
+    }
+    catch (err) {
+      toast.error(err.message)
+    }
   };
 
-  console.log(donnees);
-
   useEffect(() => {
-    getData();
+    getData()
   }, []);
+
+  const data = Object.assign(donnees, details)
 
   return (
     <section className="loginParams">
       <p>
-        Bienvenue <span>{donnees.nom || donnees.prenom}</span>
+        Bienvenue <span>{details.nom || details.prenom}</span>
       </p>
       <div className="loginParamsTitle">
         <h2>
-          Paramétrez votre profil et gérez vos annonces pour gagner de l’argent
+          Paramétrez votre profil et gérez vos annonces pour gagner de l'argent
           !
         </h2>
         <p>
@@ -71,7 +86,7 @@ function LoginParams() {
       <Link
         className="loginParamsBtn"
         to="/dashboard"
-        state={{ donnees: { ...donnees } }}
+        state={{ data: { ...data }, userType: userType }}
       >
         Continuer
       </Link>

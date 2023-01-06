@@ -34,9 +34,8 @@ function Chat({ socket, username, room, title, joinRoom }) {
         time: `${new Date(Date.now()).getHours()}:${new Date(
           Date.now()
         ).getMinutes()}`,
-        date: `${new Date(Date.now()).getFullYear()}-${
-          new Date(Date.now()).getMonth() + 1
-        }-${new Date(Date.now()).getUTCDate()}`,
+        date: `${new Date(Date.now()).getFullYear()} -${new Date(Date.now()).getMonth() + 1
+          } -${new Date(Date.now()).getUTCDate()} `,
       };
       saveMessage(messageData);
       await socket.emit("send_message", messageData);
