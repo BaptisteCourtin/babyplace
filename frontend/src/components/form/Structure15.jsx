@@ -95,7 +95,7 @@ function Structure15({
             <div className="inputsContainer">
               <div className="inputContainer">
                 <input
-                  required
+
                   type="text"
                   name="assHabitNom"
                   pattern=".{4,}"
@@ -115,7 +115,6 @@ function Structure15({
 
               <div className="inputContainer">
                 <input
-                  required
                   type="text"
                   name="assHabitNumero"
                   pattern=".{5,}"
@@ -134,10 +133,9 @@ function Structure15({
               </div>
               <div className="inputContainer">
                 <input
-                  required
                   type="text"
                   name="assHabitAdresse"
-                  pattern=".{15}"
+                  pattern=".{10,} [0-9]{5} .{3,}"
                   value={assHabitAdresse}
                   onChange={(e) =>
                     updateFields({ assHabitAdresse: e.target.value })
@@ -156,7 +154,6 @@ function Structure15({
             <div className="inputsContainer">
               <div className="inputContainer">
                 <input
-                  required
                   type="text"
                   name="assAutoNom"
                   pattern=".{4,}"
@@ -173,7 +170,7 @@ function Structure15({
               </div>
               <div className="inputContainer">
                 <input
-                  required
+
                   type="text"
                   name="assAutoNumero"
                   pattern=".{5,}"
@@ -192,10 +189,9 @@ function Structure15({
               </div>
               <div className="inputContainer">
                 <input
-                  required
                   type="text"
                   name="assAutoAdresse"
-                  pattern=".{15}"
+                  pattern=".{10,} [0-9]{5} .{3,}"
                   value={assAutoAdresse}
                   onChange={(e) =>
                     updateFields({ assAutoAdresse: e.target.value })
@@ -240,7 +236,6 @@ function Structure15({
                 séjour et autorisation de travail.{" "}
               </h5>
               <input
-                required
                 type="file"
                 id="docIdentite"
                 name="docIdentite"
@@ -274,7 +269,6 @@ function Structure15({
             <div className="docInputContainer">
               <h5>Justificatif de domicile</h5>
               <input
-                required
                 type="file"
                 id="docJustifDom"
                 name="docJustifDom"
@@ -293,7 +287,6 @@ function Structure15({
                 d'expériences (certificats de travail)
               </h5>
               <input
-                required
                 type="file"
                 id="docDiplome"
                 name="docDiplome"
@@ -328,7 +321,6 @@ function Structure15({
             <div className="docInputContainer">
               <h5>Assurance auto</h5>
               <input
-                required
                 type="file"
                 id="docAssAuto"
                 name="docAssAuto"

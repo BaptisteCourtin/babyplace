@@ -8,6 +8,7 @@ import Axios from "axios";
 function RegisterForm() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
+
   const { userEmail, setUserEmail } = useContext(UserEmailContext);
   const [password, setPassword] = useState("");
   const [checked, setChecked] = useState(false);
@@ -40,7 +41,9 @@ function RegisterForm() {
         });
     }
   };
-
+  const handleChange = (event) => {
+    setUserEmail(event.target.value)
+  }
   const handlePwdLength = (e) => {
     e.preventDefault();
     if (pwdLength < 8) {
@@ -64,7 +67,7 @@ function RegisterForm() {
           id="email"
           placeholder="Email"
           onChange={(event) => {
-            setEmail(event.target.value); setUserEmail(event.target.value)
+            setEmail(event.target.value); handleChange(event);
           }}
           required={true}
         />

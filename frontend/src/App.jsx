@@ -6,7 +6,7 @@ import { useState } from "react";
 
 import { Route, Routes } from "react-router-dom";
 
-import UserEmailContext from "@components/context/ResaContext";
+import UserEmailContext from "@components/context/UserEmailContext";
 
 import Appli from "@pages/appli/AppliTuto";
 import AppliMenu from "@pages/appli/AppliMenu";
@@ -26,6 +26,7 @@ import Home from "./pages/Home";
 
 function App() {
   const [userEmail, setUserEmail] = useState("paulette07@laposte.net");
+
   return (
     <div className="app">
       <UserEmailContext.Provider value={{ userEmail, setUserEmail }}>

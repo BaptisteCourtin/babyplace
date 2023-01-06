@@ -171,15 +171,15 @@ const storagePhotos = multer.diskStorage({
 
 const uploadPhotos = multer({ storage: storagePhotos });
 
-router.post("/photosStructure1", uploadPhotos.single("photo1"), (req, res) => {
-  res.send(req.file.filename);
+router.post("/photosStructure", uploadPhotos.fields([{ name: 'photo1', maxCount: 1 }, { name: 'photo2', maxCount: 1 }, { name: 'photo3', maxCount: 1 }]), (req, res) => {
+  res.send(req.files);
 });
 
-router.put("/photosStructure1", (req, res) => {
-  const { photoStructure1, email } = req.body;
+router.put("/photosStructure", (req, res) => {
+  const { photoStructure1, photoStructure2, photoStructure3, email } = req.body;
   datasource
-    .query("UPDATE structure SET photoStructure1= ? WHERE email= ?",
-      [photoStructure1, email])
+    .query("UPDATE structure SET photoStructure1= ?, photoStructure2= ?, photoStructure3= ? WHERE email= ?",
+      [photoStructure1, photoStructure2, photoStructure3, email])
     .then(([structure]) => {
       if (structure.affectedRows === 0) {
         res.status(404).send("Not Found");
@@ -193,49 +193,41 @@ router.put("/photosStructure1", (req, res) => {
     });
 });
 
-router.post("/photosStructure2", uploadPhotos.single("photo2"), (req, res) => {
-  res.send(req.file.filename);
-});
+// router.put("/photosStructure2", (req, res) => {
+//   const { photoStructure2, email } = req.body;
+//   datasource
+//     .query("UPDATE structure SET photoStructure2= ? WHERE email= ?",
+//       [photoStructure2, email])
+//     .then(([structure]) => {
+//       if (structure.affectedRows === 0) {
+//         res.status(404).send("Not Found");
+//       } else {
+//         res.sendStatus(204);
+//       }
+//     })
+//     .catch((err) => {
+//       console.error(err);
+//       res.status(500).send("Modification impossible");
+//     });
+// });
 
-router.put("/photosStructure2", (req, res) => {
-  const { photoStructure2, email } = req.body;
-  datasource
-    .query("UPDATE structure SET photoStructure2= ? WHERE email= ?",
-      [photoStructure2, email])
-    .then(([structure]) => {
-      if (structure.affectedRows === 0) {
-        res.status(404).send("Not Found");
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Modification impossible");
-    });
-});
-
-router.post("/photosStructure3", uploadPhotos.single("photo3"), (req, res) => {
-  res.send(req.file.filename);
-});
-
-router.put("/photosStructure3", (req, res) => {
-  const { photoStructure3, email } = req.body;
-  datasource
-    .query("UPDATE structure SET photoStructure3= ? WHERE email= ?",
-      [photoStructure3, email])
-    .then(([structure]) => {
-      if (structure.affectedRows === 0) {
-        res.status(404).send("Not Found");
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Modification impossible");
-    });
-});
+// router.put("/photosStructure3", (req, res) => {
+//   const { photoStructure3, email } = req.body;
+//   datasource
+//     .query("UPDATE structure SET photoStructure3= ? WHERE email= ?",
+//       [photoStructure3, email])
+//     .then(([structure]) => {
+//       if (structure.affectedRows === 0) {
+//         res.status(404).send("Not Found");
+//       } else {
+//         res.sendStatus(204);
+//       }
+//     })
+//     .catch((err) => {
+//       console.error(err);
+//       res.status(500).send("Modification impossible");
+//     });
+// });
 
 router.put("/description", (req, res) => {
   const { description, email } = req.body;
@@ -450,20 +442,20 @@ const storageJustif = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     const date = new Date();
-    cb(null, "doc" + date.getMinutes() + Math.round(Math.random() * 1000) + "." + file.originalname.split('.').slice(-1)[0])
+    cb(null, date.getMinutes() + Math.round(Math.random() * 1000) + file.originalname)
   }
 });
 const uploadJustif = multer({ storage: storageJustif });
 
-router.post("/justificatifPmi", uploadJustif.single('docpmi'), (req, res) => {
-  res.send(req.file.filename);
+router.post("/justificatifs", uploadJustif.fields([{ name: 'docpmi', maxCount: 1 }, { name: 'docIdentite', maxCount: 1 }, { name: 'docVitale', maxCount: 1 }, { name: 'docJustifDom', maxCount: 1 }, { name: 'docDiplome', maxCount: 1 }, { name: 'docRespCivile', maxCount: 1 }, { name: 'docAssAuto', maxCount: 1 },]), (req, res) => {
+  res.send(req.files);
 });
 
 router.put("/verifsCreche", (req, res) => {
-  const { numAgrement, dateAgrement, justif, siret, email } = req.body;
+  const { numAgrement, dateAgrement, docPmiSrc, siret, email } = req.body;
   datasource
     .query("UPDATE structure INNER JOIN creche ON creche.structureId=structure.structureId SET numAgrement= ?, dateAgrement= ?, docPmi= ?, siret= ?  WHERE email= ?",
-      [numAgrement, dateAgrement, justif, siret, email])
+      [numAgrement, dateAgrement, docPmiSrc, siret, email])
     .then(([structure]) => {
       if (structure.affectedRows === 0) {
         res.status(404).send("Not Found");
@@ -478,10 +470,10 @@ router.put("/verifsCreche", (req, res) => {
 });
 
 router.put("/verifsAssmat", (req, res) => {
-  const { numSecu, numAgrement, dateAgrement, docPmi, assHabitNom, assHabitNumero, assHabitAdresse, assAutoNom, assAutoNumero, assAutoAdresse, docIdentite, docVitale, docJustifDom, docDiplome, docRespCivile, docAssAuto, email } = req.body;
+  const { numSecu, numAgrement, dateAgrement, docPmiSrc, assHabitNom, assHabitNumero, assHabitAdresse, assAutoNom, assAutoNumero, assAutoAdresse, docCniSrc, docCpamSrc, docDomSrc, docDiplomeSrc, docRespSrc, docAutoSrc, email } = req.body;
   datasource
     .query("UPDATE structure INNER JOIN assMat ON assMat.structureId=structure.structureId SET numSecu= ?, numAgrement= ?, dateAgrement= ?, docPmi= ?, assHabitNom= ?, assHabitNumero= ?, assHabitAdresse= ?, assAutoNom= ?, assAutoNumero= ?, assAutoAdresse= ?, docIdentite= ?, docVitale= ?, docJustifDom= ?, docDiplome= ?, docRespCivile= ?, docAssAuto= ? WHERE email= ?",
-      [numSecu, numAgrement, dateAgrement, docPmi, assHabitNom, assHabitNumero, assHabitAdresse, assAutoNom, assAutoNumero, assAutoAdresse, docIdentite, docVitale, docJustifDom, docDiplome, docRespCivile, docAssAuto, email])
+      [numSecu, numAgrement, dateAgrement, docPmiSrc, assHabitNom, assHabitNumero, assHabitAdresse, assAutoNom, assAutoNumero, assAutoAdresse, docCniSrc, docCpamSrc, docDomSrc, docDiplomeSrc, docRespSrc, docAutoSrc, email])
     .then(([structure]) => {
       if (structure.affectedRows === 0) {
         res.status(404).send("Not Found");

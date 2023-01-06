@@ -1,5 +1,5 @@
 import { createContext } from "react";
 
-const UserEmailContext = createContext("paulette07@laposte.net");
+const UserEmailContext = createContext("");
 
 export default UserEmailContext;
