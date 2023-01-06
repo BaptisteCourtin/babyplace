@@ -46,9 +46,8 @@ function Dashboard() {
 
   useEffect(() => {
     let curDate = new Date();
-    curDate = `${curDate.getFullYear()}-${
-      curDate.getMonth() + 1
-    }-${curDate.getDate()}`;
+    curDate = `${curDate.getFullYear()}-${curDate.getMonth() + 1
+      }-${curDate.getDate()}`;
     deleteDates(curDate);
   }, []);
 
