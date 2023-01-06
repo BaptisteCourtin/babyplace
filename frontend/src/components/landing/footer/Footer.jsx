@@ -49,15 +49,26 @@ function Footer({ userType }) {
           </div>
           <div className="footerCenter">
             <ul>
-              <li><HashLink to="/features#about">A propos</HashLink></li>
-              <li><HashLink to="/features#profil">Nos Profil</HashLink></li>
-              <li><HashLink to="/features#mentions">Mentions Légales</HashLink></li>
+              <li>
+                <HashLink to="/features#about">A propos</HashLink>
+              </li>
+              <li>
+                <HashLink to="/features#profil">Nos Profil</HashLink>
+              </li>
+              <li>
+                <HashLink to="/features#mentions">Mentions Légales</HashLink>
+              </li>
             </ul>
             <ul>
-              <li><HashLink to="/contact#aide">Aide</HashLink></li>
-              <li><HashLink to="/contact#contact">Contact</HashLink></li>
-              <li><HashLink to="/faq#faq">FAQ</HashLink></li>
-
+              <li>
+                <HashLink to="/contact#aide">Aide</HashLink>
+              </li>
+              <li>
+                <HashLink to="/contact#contact">Contact</HashLink>
+              </li>
+              <li>
+                <HashLink to="/faq#faq">FAQ</HashLink>
+              </li>
             </ul>
           </div>
           <div className="footerRight">

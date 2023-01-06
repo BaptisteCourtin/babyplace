@@ -39,6 +39,7 @@ Toggle.propTypes = {
   state: PropTypes.bool.isRequired,
   nom: PropTypes.string.isRequired,
   p: PropTypes.string.isRequired,
+  classique: PropTypes.bool,
 };
 
 export default Toggle;

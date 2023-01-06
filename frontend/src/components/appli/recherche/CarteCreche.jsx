@@ -55,6 +55,10 @@ function CarteCreche({ data, userPosition }) {
 
   // --- calcul distance ---
 
+  function toRadian(degree) {
+    return (degree * Math.PI) / 180;
+  }
+
   function getDistance(origin, destination) {
     // return distance in meters
     const lat1 = toRadian(origin[0]);
@@ -72,9 +76,7 @@ function CarteCreche({ data, userPosition }) {
     const EARTH_RADIUS = 6371;
     return c * EARTH_RADIUS * 1000;
   }
-  function toRadian(degree) {
-    return (degree * Math.PI) / 180;
-  }
+
   const distance = (getDistance(userPosition, center) / 1000).toFixed(2);
 
   // ---

@@ -251,6 +251,9 @@ function BaseMap({
 BaseMap.propTypes = {
   setCompo: PropTypes.func.isRequired,
   Allstructure: PropTypes.array.isRequired,
+  dataBasique: PropTypes.object.isRequired,
+  dataServices: PropTypes.object.isRequired,
+  dataAggrements: PropTypes.object.isRequired,
 };
 
 export default BaseMap;
