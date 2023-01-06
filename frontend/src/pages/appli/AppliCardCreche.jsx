@@ -1,18 +1,23 @@
 import React from "react";
+import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
 import BlocJour from "@components/appli/recherche/BlocJour";
 import Star from "@components/appli/recherche/Star";
 import PopUp from "@components/appli/recherche/PopUp";
 
+import { MdReportProblem } from "react-icons/md";
+
 function AppliCardCreche() {
   const location = useLocation();
   const { data, dataHorairesId } = location.state;
   const {
+    structureId,
     nom,
     nomUsage,
     nomNaissance,
     prenom,
 
+    photoStructure1,
     photoStructure2,
     tarifHeure,
     description,
@@ -43,6 +48,10 @@ function AppliCardCreche() {
     photoConnecte,
   } = data;
 
+  const handleSignaler = () => {
+    axios.put(`http://localhost:5000/structure/signal/${structureId}`);
+  };
+
   return (
     <div className="appli-card-creche">
       <header>
@@ -54,13 +63,18 @@ function AppliCardCreche() {
 
       <main>
         <div className="container-img">
-          <img src={photoStructure2} alt="img creche" />
+          <img src={photoStructure2 || photoStructure1} alt="img creche" />
+          <button className="report" onClick={() => handleSignaler()}>
+            <MdReportProblem />
+            <p>{`Signaler`}</p>
+          </button>
           <Star
             com={data.avisCom}
             proprete={data.avisProprete}
             securite={data.avisSecurite}
             eveil={data.avisEveil}
             horaires={data.avisHoraires}
+            nbNotes={data.nbNotes}
           />
         </div>
 

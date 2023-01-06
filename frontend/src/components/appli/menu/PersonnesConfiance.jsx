@@ -43,8 +43,7 @@ function PersonnesConfiance({ setCompo }) {
           {persoConf.map((each, index) => (
             <div key={index} className="card-confiance">
               <h3>
-                {each.nom}
-                {each.prenom}
+                {each.prenom} {each.nom}
               </h3>
               <p>{each.email}</p>
               <p>{each.tel}</p>

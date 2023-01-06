@@ -31,6 +31,26 @@
     left: 10px;
   }
 
+  .star-all {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: $third;
+    color: $white;
+    padding: 0.5rem;
+    border-radius: 10px;
+  }
+
+  .prix {
+    position: absolute;
+    top: 50px;
+    left: 10px;
+    background-color: $fourth;
+    color: $white;
+    padding: 0.5rem;
+    border-radius: 10px;
+  }
+
   .slide {
     width: 70%;
   }

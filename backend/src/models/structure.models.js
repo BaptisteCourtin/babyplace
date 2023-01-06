@@ -2,7 +2,7 @@ const datasource = require("../../database");
 
 const getAllStructures = async () => {
   const [result] = await datasource.query(
-    "SELECT s.*, s.structureId, c.nom, a.nomUsage, a.nomNaissance, a.prenom, a.indemnKm, a.indemnEntretien, a.animaux, a.nonFumeur, a.zeroPollution, a.repas, a.hygiene FROM structure AS s LEFT JOIN creche AS c ON s.structureId = c.structureId LEFT JOIN assMat AS a ON s.structureId = a.structureId WHERE s.isVerify = 1"
+    "SELECT s.*, s.structureId, c.nom, a.nomUsage, a.nomNaissance, a.prenom, a.indemnKm, a.indemnEntretien, a.animaux, a.nonFumeur, a.zeroPollution, a.repas, a.hygiene FROM structure AS s LEFT JOIN creche AS c ON s.structureId = c.structureId LEFT JOIN assMat AS a ON s.structureId = a.structureId WHERE s.isVerify = 1 AND s.role = 'user'"
     // besoin de s.structureId pour pas de pb d'affichage => sinon creche n'ont pas d'id
     // ne pas prendre tous de c et a
   );
@@ -56,6 +56,14 @@ const updateNotes = async (req) => {
   return result;
 };
 
+const updateSignal = async (req) => {
+  const [result] = await datasource.query(
+    `UPDATE structure SET isSignaled = 1 WHERE structureId = ?`,
+    [req.params.id]
+  );
+  return result;
+};
+
 module.exports = {
   getStructure,
   getStructureDataMess,
@@ -63,8 +71,5 @@ module.exports = {
   getStructureById,
   updateNotes,
   logout,
+  updateSignal,
 };
-
-// ; SELECT * FROM structure AS s JOIN assMat AS a ON s.structureId=a.structureId WHERE token = ?
-
-// JOIN creche AS c ON s.structureId=c.structureId

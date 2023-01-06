@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart, AiFillStar } from "react-icons/ai";
 import PropTypes from "prop-types";
 
 function CardCrecheMap({ data }) {
-  const { photoStructure1, structureId, nom, nomUsage, nomNaissance, prenom } =
-    data;
+  const {
+    photoStructure1,
+    structureId,
+    nom,
+    nomUsage,
+    nomNaissance,
+    prenom,
+    tarifHeure,
+  } = data;
 
   const [likeCard, setLikeCard] = useState(true);
 
@@ -27,8 +34,27 @@ function CardCrecheMap({ data }) {
         console.error(err);
       });
   };
+
+  // --- star ---
+
+  const [nbStarMoyen, setNbStarMoyen] = useState(0);
+
+  const staring = () => {
+    setNbStarMoyen(
+      (
+        (data.avisCom +
+          data.avisProprete +
+          data.avisSecurite +
+          data.avisEveil +
+          data.avisHoraires) /
+        5
+      ).toFixed(1)
+    );
+  };
+
   useEffect(() => {
     getHorairesId();
+    staring();
   }, []);
 
   return (
@@ -48,6 +74,11 @@ function CardCrecheMap({ data }) {
                 ? `${prenom} ${nomUsage}`
                 : `${prenom} ${nomNaissance}`)}
           </p>
+          <div className="star-all">
+            {nbStarMoyen}
+            {AiFillStar()}
+          </div>
+          <p className="prix">{tarifHeure}€/heure</p>
         </div>
       </Link>
     </div>

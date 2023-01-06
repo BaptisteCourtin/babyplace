@@ -32,11 +32,6 @@ function Base({ setCompo }) {
           className="h3"
           onClick={() => setCompo(7)}
         >{`Aggréments >`}</button>
-        <button
-          type="button"
-          className="h3"
-          onClick={() => setCompo(8)}
-        >{`Adresse >`}</button>
       </main>
 
       <button type="button" className="apply" onClick={() => setCompo(0)}>
