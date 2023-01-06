@@ -17,12 +17,16 @@ function FormEnfant() {
     });
   }
 
+  // faire un get pour remplir le formulaire
+  // faire un put pour remplir la bdd quand on clique sur envoyer (rajouter envoyer)
+  // faire un bouton pour rajouter un enfant (+ caroussel de composant formulaire)
+
   return (
     <main className="enfant">
       <h3>Dossier Enfants</h3>
 
       <div className="bebe">
-        {/* caroussel ? */}
+        {/* caroussel + map ? */}
         <button type="button">Bébé 1</button>
         <button type="button">Bébé 2</button>
       </div>

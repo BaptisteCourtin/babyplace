@@ -5,6 +5,11 @@ const getPersoConfiance = async (req, res) => {
   return res.json(result);
 };
 
+const getDonneesFormParent = async (req, res) => {
+  const result = await familleModels.getDonneesFormParent(req);
+  return res.json(result);
+};
+
 const postReservation = async (req, res) => {
   const result = await familleModels.postReservation(req);
   return res.json(result);
@@ -13,4 +18,5 @@ const postReservation = async (req, res) => {
 module.exports = {
   getPersoConfiance,
   postReservation,
+  getDonneesFormParent,
 };

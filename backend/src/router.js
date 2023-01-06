@@ -14,9 +14,12 @@ const famille = require("./controllers/famille.controllers");
 router.get("/structure/allapp", structure.getAllStructures); //search
 router.get("/horaires/:id", horaires.getHorairesById); //search
 router.get("/structure/:id", structure.getStructureById); //notes
-router.put("/structure/notes/:id", structure.updateNotes); //notes
 router.get("/famille/conf/:id", famille.getPersoConfiance); //perso confiance
+router.get("/famille/formParent/:id", famille.getDonneesFormParent); //donnees du formulaire parent
+
+router.put("/structure/notes/:id", structure.updateNotes); //notes
 router.put("/structure/signal/:id", structure.updateSignal); // signalement
+
 router.post("/reservation", famille.postReservation); // signalement
 
 // --- --- ---

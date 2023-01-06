@@ -17,7 +17,7 @@ function BaseCard({
 
   // --- position user ---
   const [ville, setVille] = useState();
-  const [userPosition, setUserPosition] = useState([0, 0]);
+  const [userPosition, setUserPosition] = useState([47.2135655, -1.5496263]);
 
   const getVraiPosition = () => {
     navigator.geolocation.getCurrentPosition(function (position) {

@@ -8,6 +8,14 @@ const getPersoConfiance = async (req) => {
   return result;
 };
 
+const getDonneesFormParent = async (req) => {
+  const [[result]] = await datasource.query(
+    "SELECT p.nom1, p.nom2, p.prenom1, p.prenom2, p.profession1, p.profession2, p.email1, p.email2, p.telephone1, p.telephone2, p.adresse1, p.adresse2 FROM famille AS f LEFT JOIN parent AS p ON f.familleId = p.familleId WHERE f.familleId = ?",
+    [req.params.id]
+  );
+  return result;
+};
+
 const postReservation = async (req) => {
   const {
     structureId,
@@ -38,4 +46,5 @@ const postReservation = async (req) => {
 module.exports = {
   getPersoConfiance,
   postReservation,
+  getDonneesFormParent,
 };
