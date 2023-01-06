@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FooterLite from './FooterLite';
 import NavbarLite from './NavbarLite';
 import { HashLink } from 'react-router-hash-link';
+import Modal from './Modal';
 
 const Contact = () => {
+
+    const [isOpen, setIsOpen] = useState(false);
+
+
+    const openCloseModal = (e) => {
+        setIsOpen(!isOpen);
+    };
+
+
     return (
         <div className='contact-form' id='aide'>
             <NavbarLite />
@@ -21,23 +31,20 @@ const Contact = () => {
                         <div className='divName'>
                             <label className='labelForm' for="nom">Nom</label>
 
-                            <input id="userName" type="text" name="nom"
-                                required />
+                            <input id="userName" type="text" name="nom" />
                         </div>
                         <div className='divFirstName'>
                             <label className='labelForm' for="prenom">Prénom</label>
-                            <input id="userFirstName" type="text" name="prenom"
-                                required />
+                            <input id="userFirstName" type="text" name="prenom" />
                         </div>
                         <div className='divEmail'>
                             <label className='labelForm' for="email">E-mail</label>
-                            <input id="userMail" type="email" name="email"
-                                required />
+                            <input id="userMail" type="email" name="email" />
                         </div>
                         <div className='divMessage'>
                             <label className="labelForm" for="textearea">Message</label>
 
-                            <textarea name="formulaire-message" id="formulaireMessage" required></textarea>
+                            <textarea name="formulaire-message" id="formulaireMessage"></textarea>
                         </div>
 
                         <div className='policyTextDiv'>
@@ -47,13 +54,14 @@ const Contact = () => {
 
                     </div>
 
-                    <button className='navBtnLite'>Envoyer</button>
+                    <button className='navBtnLite' onClick={openCloseModal}>Envoyer</button>
 
                 </form>
 
             </section>
+            <Modal open={isOpen} closeModal={openCloseModal} />
             <FooterLite />
-        </div>
+        </div >
     );
 };
 
