@@ -27,7 +27,7 @@ const tabFav = [
 ];
 
 function Favoris({ setCompo }) {
-  const [occasions, setOccasions] = useState();
+  const [occasions, setOccasions] = useState(false);
   return (
     <>
       <div className="button-top">
@@ -44,6 +44,7 @@ function Favoris({ setCompo }) {
             state={occasions}
             nom="occasions"
             p="Je souhaite obtenir des notifications en cas de disponibilités des structures favorites"
+            classique={true}
           />
         </div>
         {tabFav.map((each, index) => (

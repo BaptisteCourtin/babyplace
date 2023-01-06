@@ -16,11 +16,10 @@ import AppliMessage from "@pages/appli/AppliMessage";
 import FormStructure from "@pages/FormStructure";
 
 import Dashboard from "@components/dashboard/Dashboard";
-import Home from "./pages/Home";
 import Features from "@components/features/Features";
 import Contact from "@components/features/Contact";
 import Faq from "@components/features/Faq";
-
+import Home from "./pages/Home";
 
 function App() {
   return (

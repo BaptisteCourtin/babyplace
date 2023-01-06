@@ -41,7 +41,7 @@ function DemandeResa({
     calculPrixTotal();
   }, [kilometre, entretien, repas]);
 
-  let enfantId = 1;
+  const enfantId = 1;
   const handleRequest = () => {
     axios.post(`http://localhost:5000/reservation`, {
       enfantId,
@@ -100,7 +100,7 @@ function DemandeResa({
               state={repas}
               nom="repas"
               p={`Indemnité de repas (${indemnRepas}€)`}
-              classique={true}
+              classique
             />
             {indemnKm ? (
               <Toggle
@@ -108,7 +108,7 @@ function DemandeResa({
                 state={kilometre}
                 nom="kilometre"
                 p={`Indemnité kilométrique (${indemnKm}€/km)`}
-                classique={true}
+                classique
               />
             ) : null}
             {indemnEntretien ? (
@@ -117,7 +117,7 @@ function DemandeResa({
                 state={entretien}
                 nom="entretien"
                 p={`Indemnité d'entretien (${indemnEntretien}€)`}
-                classique={true}
+                classique
               />
             ) : null}
           </div>
@@ -157,11 +157,13 @@ DemandeResa.propTypes = {
   nomUsage: PropTypes.string,
   nomNaissance: PropTypes.string,
   prenom: PropTypes.string,
+  photo1: PropTypes.string.isRequired,
   photo3: PropTypes.string.isRequired,
   indemnEntretien: PropTypes.number.isRequired,
   indemnRepas: PropTypes.number.isRequired,
   indemnKm: PropTypes.number.isRequired,
   tarifHeure: PropTypes.number.isRequired,
+  structureId: PropTypes.number.isRequired,
 };
 
 export default DemandeResa;

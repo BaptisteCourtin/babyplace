@@ -64,9 +64,13 @@ function AppliCardCreche() {
       <main>
         <div className="container-img">
           <img src={photoStructure2 || photoStructure1} alt="img creche" />
-          <button className="report" onClick={() => handleSignaler()}>
+          <button
+            type="button"
+            className="report"
+            onClick={() => handleSignaler()}
+          >
             <MdReportProblem />
-            <p>{`Signaler`}</p>
+            <p>Signaler</p>
           </button>
           <Star
             com={data.avisCom}

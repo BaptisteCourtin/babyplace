@@ -191,9 +191,9 @@ function BaseCard({
 BaseCard.propTypes = {
   setCompo: PropTypes.func.isRequired,
   Allstructure: PropTypes.array.isRequired,
-  dataBasique: PropTypes.array.isRequired,
-  dataServices: PropTypes.array.isRequired,
-  dataAggrements: PropTypes.array.isRequired,
+  dataBasique: PropTypes.object.isRequired,
+  dataServices: PropTypes.object.isRequired,
+  dataAggrements: PropTypes.object.isRequired,
 };
 
 export default BaseCard;

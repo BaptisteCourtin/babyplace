@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@originjs/vite-plugin-commonjs": "^1.0.3",
+    "axios": "^1.2.2",
+    "leaflet": "^1.9.3",
     "moodal": "^0.1.1",
     "multi-range-slider-react": "^2.0.2",
     "prop-types": "^15.8.1",
@@ -18,7 +20,9 @@
     "react-calendar": "^4.0.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
+    "react-leaflet": "^4.2.0",
     "react-rating": "^2.0.5",
+    "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.4.4",
     "react-router-hash-link": "^2.4.3",
     "sass": "^1.56.1",

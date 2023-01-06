@@ -70,6 +70,7 @@ Star.propTypes = {
   securite: PropTypes.number.isRequired,
   eveil: PropTypes.number.isRequired,
   horaires: PropTypes.number.isRequired,
+  nbNotes: PropTypes.number.isRequired,
 };
 
 export default Star;

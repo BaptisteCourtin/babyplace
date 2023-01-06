@@ -21,7 +21,7 @@ function CardFavPlat({ each }) {
 }
 
 CardFavPlat.propTypes = {
-  each: PropTypes.string.isRequired,
+  each: PropTypes.object.isRequired,
 };
 
 export default CardFavPlat;
