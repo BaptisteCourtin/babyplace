@@ -334,7 +334,7 @@ function FormStructure() {
         formData.append("avatar", inputRef.current.files[0]);
         Axios.post("http://localhost:5000/photoProfil", formData)
           .then((result) => {
-            const photoProfil = `@backend/public/uploads/avatar/${result.data}`;
+            const photoProfil = `http://localhost:5000/uploads/avatar/${result.data}`;
             Axios.put("http://localhost:5000/photoProfil", {
               photoProfil, email
             })
@@ -360,15 +360,15 @@ function FormStructure() {
             let photoStructure3 = null;
             if (result.data.photo1 !== undefined) {
               let photo1 = result.data.photo1[0].filename;
-              photoStructure1 = `@backend/public/uploads/photosStructure/${photo1}`;
+              photoStructure1 = `http://localhost:5000/uploads/photosStructure/${photo1}`;
             }
             if (result.data.photo2 !== undefined) {
               let photo2 = result.data.photo2[0].filename;
-              photoStructure2 = `@backend/public/uploads/photosStructure/${photo2}`;
+              photoStructure2 = `http://localhost:5000/uploads/photosStructure/${photo2}`;
             }
             if (result.data.photo3 !== undefined) {
               photo3 = result.data.photo3[0].filename;
-              photoStructure3 = `@backend/public/uploads/photosStructure/${photo3}`;
+              photoStructure3 = `http://localhost:5000/uploads/photosStructure/${photo3}`;
             }
             Axios.put("http://localhost:5000/photosStructure", {
               photoStructure1, photoStructure2, photoStructure3, email
@@ -507,31 +507,31 @@ function FormStructure() {
           .then((result) => {
             if (result.data.docpmi !== undefined) {
               let doc = result.data.docpmi[0].filename;
-              docPmiSrc = `@backend/public/uploads/photosStructure/${doc}`;
+              docPmiSrc = `http://localhost:5000/uploads/photosStructure/${doc}`;
             }
             if (result.data.docIdentite !== undefined) {
               let doc = result.data.docIdentite[0].filename;
-              docCniSrc = `@backend/public/uploads/photosStructure/${doc}`;
+              docCniSrc = `http://localhost:5000/uploads/photosStructure/${doc}`;
             }
             if (result.data.docVitale !== undefined) {
               let doc = result.data.docVitale[0].filename;
-              docCpamSrc = `@backend/public/uploads/photosStructure/${doc}`;
+              docCpamSrc = `http://localhost:5000/uploads/photosStructure/${doc}`;
             }
             if (result.data.docJustifDom !== undefined) {
               let doc = result.data.docJustifDom[0].filename;
-              docDomSrc = `@backend/public/uploads/photosStructure/${doc}`;
+              docDomSrc = `http://localhost:5000/uploads/photosStructure/${doc}`;
             }
             if (result.data.docDiplome !== undefined) {
               let doc = result.data.docDiplome[0].filename;
-              docDiplomeSrc = `@backend/public/uploads/photosStructure/${doc}`;
+              docDiplomeSrc = `http://localhost:5000/uploads/photosStructure/${doc}`;
             }
             if (result.data.docRespCivile !== undefined) {
               let doc = result.data.docRespCivile[0].filename;
-              docRespSrc = `@backend/public/uploads/photosStructure/${doc}`;
+              docRespSrc = `http://localhost:5000/uploads/photosStructure/${doc}`;
             }
             if (result.data.docAssAuto !== undefined) {
               let doc = result.data.docAssAuto[0].filename;
-              docAutoSrc = `@backend/public/uploads/photosStructure/${doc}`;
+              docAutoSrc = `http://localhost:5000/uploads/photosStructure/${doc}`;
             }
           }).then(() => {
             if (structure === "creche") {

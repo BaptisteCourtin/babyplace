@@ -42,7 +42,7 @@ function Admin() {
     useEffect(() => {
         getStructure()
     }, [])
-
+    console.log(data)
     return (
         <main className='admin'>
             <Nav />
