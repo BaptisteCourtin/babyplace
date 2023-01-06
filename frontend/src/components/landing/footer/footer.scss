@@ -1,0 +1,246 @@
+hr {
+  height: 1px;
+  background-color: $third;
+}
+
+.footer {
+  padding: 100px 0 20px;
+  width: 80%;
+  margin: 0 auto;
+
+  & .footerTop {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    margin-bottom: 100px;
+
+    & p {
+      font-size: 30px;
+    }
+
+    & div {
+      & p {
+        &:last-of-type {
+          margin-top: 10px;
+          color: $first;
+          font-size: $normal;
+        }
+      }
+    }
+
+    & .footerBtn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+
+      & button {
+        padding: 15px 30px;
+        border: 1px solid transparent;
+        border-radius: 50px;
+
+        &:first-of-type {
+          background-color: $fourth;
+          color: $white;
+          transition: 0.3s ease-in-out;
+
+          &:hover {
+            border: 1px solid $fourth;
+            background-color: transparent;
+            color: $second;
+          }
+        }
+
+        &:last-of-type {
+          background: none;
+          box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
+          transition: 0.3s ease-in-out;
+
+          &:hover {
+            border: 1px solid $third;
+            box-shadow: none;
+          }
+        }
+
+        & span {
+          font-size: $h4;
+          color: $third;
+        }
+      }
+    }
+  }
+
+  & .footerGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    & .footerLeft {
+      & .logoContainer {
+        width: 75%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        cursor: pointer;
+        gap: 15px;
+
+        #logoCoeur {
+          width: 17%;
+        }
+
+        #logotxt {
+          margin-top: 2%;
+          width: 80%;
+        }
+      }
+
+      & .footerAddress {
+        margin: 30px 0 10px;
+        font-size: $h4;
+        line-height: 1.5;
+      }
+
+      & .footerMail {
+        font-size: $small;
+      }
+    }
+
+    & .footerCenter {
+      display: flex;
+      justify-content: space-evenly;
+      gap: 70px;
+
+      & ul {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+
+        & li {
+          width: fit-content;
+          border-bottom: 1px solid transparent;
+          cursor: pointer;
+          transition: 0.3s ease-in-out;
+
+          &:hover {
+            border-bottom: 1px solid $second;
+          }
+        }
+
+        & div {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 10px;
+
+          & li {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: $grey;
+            color: $white;
+            font-size: $h4;
+
+            &:hover {
+              border-bottom: 1px solid transparent;
+            }
+          }
+        }
+      }
+    }
+
+    & .footerRight {
+      .socials {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        gap: 20px;
+
+        img {
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+  }
+
+  & .footerBottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+    line-height: 1.5;
+
+    & p {
+      font-size: $xs;
+    }
+
+    & button {
+      width: 30px;
+      height: 30px;
+      color: $white;
+      background: none;
+      font-size: $h4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      & img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .footer {
+    width: 95%;
+    padding-top: 50px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .footer {
+    & .footerTop {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 30px;
+      margin-bottom: 50px;
+
+      & div:first-of-type {
+        & p {
+          text-align: center;
+        }
+      }
+    }
+
+    & .footerGrid {
+      grid-template-columns: 1fr 1fr;
+
+      & .footerLeft {
+        display: none;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .footer {
+    & .footerGrid {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    & .footerBottom {
+      gap: 50px;
+    }
+  }
+}

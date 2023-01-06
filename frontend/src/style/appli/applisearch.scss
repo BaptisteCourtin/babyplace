@@ -1,0 +1,118 @@
+.applisearch {
+  padding-bottom: 4rem;
+  min-height: 100vh;
+  background-color: $white;
+
+  .content {
+    padding: 0 0.5rem;
+
+    .lieu-date {
+      width: 100%;
+      line-height: 50px;
+    }
+
+    .appli-filtres {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      width: 100%;
+      padding: 0.5rem;
+      background-color: $grey;
+
+      .left-filter {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 1rem;
+
+        .search-filtres,
+        .tri {
+          display: flex;
+          flex-wrap: nowrap;
+          justify-content: center;
+          align-items: center;
+          height: 100%;
+
+          span {
+            margin-right: 0.25rem;
+          }
+        }
+
+        .localisation,
+        .vrai-localisation {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 0.25rem;
+
+          input {
+            padding: 0 0.5rem;
+          }
+
+          button {
+            background-color: $white;
+            padding: 0.25rem;
+            border-radius: 5px;
+          }
+        }
+      }
+
+      .map-butt {
+        background-color: transparent;
+      }
+    }
+  }
+
+  main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    margin: 1.5rem 0;
+    gap: 1.5rem;
+    width: 100%;
+
+    .map {
+      width: 80%;
+      margin: 1rem auto;
+      height: 500px;
+
+      .leaflet-container {
+        z-index: 1;
+      }
+    }
+
+    .caroussel {
+      margin-bottom: 1rem;
+      height: 100%;
+    }
+  }
+
+  @media screen and (min-width: 650px) {
+    main.container-map {
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: row-reverse;
+      padding: 0 1rem;
+
+      .caroussel {
+        .carousel-root {
+          .carousel-slider {
+            height: 500px;
+            // comme la map
+
+            .slider-wrapper {
+              height: 100% !important;
+              // pour afficher plusieurs carte en version vertical
+            }
+          }
+        }
+      }
+    }
+  }
+}

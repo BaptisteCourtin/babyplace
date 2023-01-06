@@ -1,0 +1,25 @@
+.structure10 {
+  & .pageContent {
+    display: flex;
+    flex-direction: column;
+    gap: 4vh;
+    margin-top: 4vh;
+
+    & .inputContainer {
+      display: flex;
+      align-items: center;
+    }
+
+    & input {
+      border: 1px solid $third;
+      border-radius: 10px;
+      padding: 4px 1px 4px 4px;
+      margin: 0 8px;
+      width: 45px;
+    }
+
+    & input:focus {
+      outline: 1.5px solid $third;
+    }
+  }
+}

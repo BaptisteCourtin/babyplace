@@ -1,0 +1,96 @@
+.applituto {
+  background: $gradient;
+  min-height: 100vh;
+  text-align: center;
+  color: $white;
+  padding: 0 1rem 1rem 1rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &.connexion {
+    background: $white;
+    color: $second;
+
+    .button-bas {
+      background: $gradient;
+      .butt {
+        font-size: $h3;
+        font-weight: 500;
+      }
+    }
+
+    // button top right => page connection
+    .se-connecter {
+      position: absolute;
+      right: 1rem;
+      top: 1.5rem;
+      font-size: $h4;
+      font-weight: 500;
+      border: 1px $third solid;
+      padding: 0.5rem;
+      border-radius: 10px;
+    }
+  }
+
+  // main pour button en bas => grow
+  // besoin du parent en flex
+  main {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    position: relative;
+
+    img {
+      width: calc(100vw - 4rem);
+      max-width: 330px;
+      margin-top: 30px;
+    }
+
+    img.mini-logo {
+      max-height: 50px;
+    }
+
+    &.page1 img:nth-child(1) {
+      margin-top: -10px;
+    }
+
+    &.page1 img:nth-child(2) {
+      margin-top: -60px;
+    }
+
+    .title {
+      font-size: $h1;
+      font-weight: 700;
+      margin: 2rem;
+    }
+
+    .sub-title {
+      font-weight: 500;
+      font-size: 1.5rem;
+    }
+
+    .trouve {
+      margin-top: 2rem;
+    }
+
+    h3 {
+      font-size: $h3;
+      font-weight: 600;
+      margin: 5rem 0 2rem;
+    }
+
+    .dossier {
+      background-color: $orange;
+      padding: 0 1rem;
+      margin-top: 1rem;
+      height: 60px;
+      border-radius: 10px;
+      font-size: 20px;
+    }
+  }
+}

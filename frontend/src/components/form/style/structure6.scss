@@ -1,0 +1,15 @@
+.structure6 {
+  & h4 {
+    margin-bottom: 0.5vh;
+  }
+
+  & .pageContent {
+    & p {
+      margin: 1vh 0;
+    }
+
+    & h5 {
+      margin-top: 2vh;
+    }
+  }
+}

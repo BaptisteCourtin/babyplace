@@ -1,0 +1,377 @@
+@import "./nav/navbar.scss";
+@import "./header/header.scss";
+@import "./footer/footer.scss";
+
+.home {
+  width: 80%;
+  margin: 0 auto;
+  color: $second;
+
+  & h2 {
+    padding: 30px 0;
+    font-size: 40px;
+    text-align: center;
+    width: 70%;
+    margin: 0 auto 30px;
+  }
+
+  & .mainGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 120px;
+
+    & li {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 10px;
+      text-align: center;
+    }
+  }
+
+  & .mainApp {
+    margin: 100px 0;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 40px;
+    background-color: rgba(240, 99, 167, 0.2);
+    border-radius: 50px;
+
+    & .mainAppText {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      flex-direction: column;
+      gap: 30px;
+
+      & p {
+        font-size: $h2;
+      }
+    }
+  }
+
+  & .mainDesc {
+    margin-bottom: 100px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    text-align: center;
+    font-size: $h4;
+
+    & li {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: -10px 10px 10px rgba(75, 93, 104, 0.1);
+    }
+  }
+}
+
+.homePro {
+  & .homeProInfo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    width: 60%;
+    margin: 0 auto 100px;
+    padding: 20px 50px;
+    background-color: rgba(240, 99, 167, 0.2);
+    border-radius: 50px;
+
+    & img {
+      width: 100%;
+    }
+
+    & div {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      flex-direction: column;
+      gap: 30px;
+
+      & h2 {
+        font-size: $h2;
+      }
+
+      & p {
+        line-height: 1.5;
+      }
+    }
+  }
+
+  & .homeProGrid {
+    width: 80%;
+    margin: 0 auto 100px;
+
+    & .homeProGridTitle {
+      width: 80%;
+      margin: 0 auto 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 20px;
+      text-align: center;
+
+      & h2 {
+        font-size: $h2;
+      }
+    }
+
+    & ul {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+
+      & li {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        border-radius: 50px;
+        padding: 40px 20px 40px 0;
+
+        & img {
+          width: 100%;
+          margin-left: -50px;
+        }
+
+        & div {
+          & h3 {
+            font-size: $h3;
+          }
+
+          & p {
+            margin: 20px 0;
+          }
+
+          & button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            background: none;
+            font-weight: 500;
+            border-bottom: 1px solid transparent;
+            transition: 0.3s ease-in-out;
+
+            &:hover {
+              border-bottom: 1px solid $second;
+            }
+          }
+        }
+
+        &:nth-of-type(1) {
+          background-color: rgba(45, 205, 122, 0.1);
+        }
+
+        &:nth-of-type(2) {
+          background-color: rgba(240, 99, 167, 0.1);
+        }
+
+        &:nth-of-type(3) {
+          background-color: rgba(126, 114, 242, 0.1);
+        }
+
+        &:nth-of-type(4) {
+          background-color: rgba(33, 35, 83, 0.1);
+        }
+      }
+    }
+  }
+
+  & .homeProCarousel {
+    position: relative;
+    width: 80%;
+    margin: 0 auto 100px;
+    background-color: $third;
+    padding: 100px 90px;
+    border-radius: 50px;
+
+    & h2 {
+      margin-bottom: 50px;
+      font-size: 40px;
+      color: $white;
+    }
+  }
+
+  & .homeProTestimonies {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+
+    & li {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      flex-direction: column;
+      gap: 5px;
+      height: 230px;
+      position: relative;
+      padding: 50px 70px;
+      background-color: $white;
+      border-radius: 20px;
+
+      & p {
+        &:first-of-type {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          margin-bottom: 10px;
+          font-weight: 500;
+          font-size: $h4;
+
+          & img {
+            border-radius: 50%;
+          }
+        }
+      }
+
+      & span {
+        position: absolute;
+        bottom: 20px;
+        left: 70px;
+      }
+    }
+  }
+
+  & .homeProCarouselBtn {
+    position: absolute;
+    bottom: 5%;
+    right: 10%;
+    background: none;
+    font-size: 40px;
+    color: $white;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .home {
+    & .mainApp {
+      margin: 50px 0;
+    }
+
+    & .mainGrid {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 50px;
+
+      & li {
+        width: 60%;
+        margin: 0 auto;
+        flex-direction: row;
+      }
+    }
+  }
+
+  .homePro {
+    & .homeProInfo {
+      width: 85%;
+    }
+
+    & .homeProCarousel {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .home {
+    & .mainApp {
+      & img {
+        display: none;
+      }
+    }
+
+    & .mainDesc {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .homePro {
+    & .homeProInfo {
+      & div {
+        align-items: center;
+        justify-content: center;
+
+        & p {
+          display: none;
+        }
+      }
+    }
+
+    & .homeProGrid {
+      & ul {
+        width: 85%;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 30px;
+
+        & li {
+          grid-template-columns: 2fr 3fr;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .home {
+    width: 95%;
+
+    & .mainDesc {
+      display: flex;
+      flex-direction: column;
+    }
+
+    & .mainGrid {
+      & li {
+        width: 100%;
+
+        & img {
+          width: 45vw;
+        }
+      }
+    }
+  }
+
+  .homePro {
+    & .homeProInfo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      & h2 {
+        text-align: center;
+      }
+    }
+
+    & .homeProGrid {
+      width: 95%;
+      & ul {
+        & li {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          padding: 30px;
+
+          & img {
+            width: 80%;
+          }
+        }
+      }
+    }
+  }
+}

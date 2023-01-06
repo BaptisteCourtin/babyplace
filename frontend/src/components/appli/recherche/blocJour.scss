@@ -1,0 +1,53 @@
+.jours {
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  color: $white;
+
+  .each-jour {
+    width: 70px;
+    padding: 0.5rem;
+  }
+
+  .daygreen .each-jour {
+    background-color: $fifth;
+    text-align: center;
+  }
+  .daygray .each-jour {
+    background-color: $grey;
+    text-align: center;
+  }
+}
+
+// ---
+
+.disponibilite {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  gap: 10px 20px;
+
+  .each-jour {
+    width: 55px;
+    margin: 0;
+    padding: 0.25rem 0;
+  }
+
+  .daygreen .each-jour {
+    background-color: $fifth;
+    line-height: 25px;
+    text-align: center;
+    color: $white;
+  }
+  .daygray .each-jour {
+    background-color: $grey;
+    line-height: 25px;
+    text-align: center;
+    color: $white;
+  }
+}

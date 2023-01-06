@@ -1,0 +1,79 @@
+.carte-creche {
+  position: relative;
+  padding: 0.6rem;
+  max-width: 340px;
+
+  .like {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 25px;
+    height: 25px;
+    fill: rgb(254, 30, 30);
+    z-index: 5;
+    cursor: pointer;
+  }
+
+  .container-img {
+    position: relative;
+    height: 145px;
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+    }
+
+    .nom-structure {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+
+      font-size: $h3;
+      font-weight: 600;
+      color: $second;
+      text-shadow: 0px 0px 5px $white;
+    }
+
+    .star-all {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+
+      background-color: $third;
+      color: $white;
+      border-radius: 10px;
+      padding: 0.5rem;
+    }
+  }
+
+  .info-creche {
+    padding: 0.5rem;
+    background-color: $white;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .ville-prix {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      .prix {
+        font-weight: 900;
+        font-size: $h3;
+      }
+    }
+
+    ul {
+      list-style: outside;
+      margin-left: 1rem;
+      li {
+        margin-top: 0.5rem;
+      }
+    }
+  }
+}

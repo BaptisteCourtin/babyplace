@@ -1,0 +1,199 @@
+.header {
+  width: 85%;
+  height: 85vh;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 40px;
+
+  & h1 {
+    width: 80%;
+    font-size: 50px;
+    font-family: $display;
+    color: $second;
+  }
+
+  & .headerInputs {
+    width: 80%;
+    display: grid;
+    grid-template-areas: "inp1 inp2 inp3 button";
+
+    & input {
+      padding: $h4;
+      box-shadow: 0px 3px 0px rgba(75, 93, 104, 0.1);
+      background: #ffffff;
+      outline: none;
+
+      &:first-of-type {
+        border-bottom-left-radius: 50px;
+        border-top-left-radius: 50px;
+        grid-area: inp1;
+      }
+
+      &:nth-of-type(2) {
+        grid-area: inp2;
+      }
+
+      &:last-of-type {
+        border-bottom-right-radius: 50px;
+        border-top-right-radius: 50px;
+        grid-area: inp3;
+        z-index: 2;
+      }
+
+      &:focus {
+        &::placeholder {
+          color: $third;
+        }
+      }
+    }
+
+    & button {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 5px;
+      padding-right: 15px;
+      position: relative;
+      margin-left: -40px;
+      border-bottom-right-radius: 50px;
+      border-top-right-radius: 50px;
+      background-color: $third;
+      color: $white;
+      grid-area: button;
+      cursor: pointer;
+
+      & span {
+        font-size: $h4;
+      }
+    }
+  }
+}
+
+.headerPro {
+  width: 85%;
+  height: 85vh;
+  margin: 0 auto 100px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 160px;
+
+  & .headerProMain {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+    margin: 70px 0;
+    gap: 30px;
+
+    & h1 {
+      font-size: 80px;
+    }
+
+    & p {
+      line-height: 1.5;
+      font-size: $h4;
+    }
+
+    & button {
+      padding: 10px 25px 10px 25px;
+      background: $third;
+      color: $white;
+      border: 1px solid transparent;
+      border-radius: 50px;
+      font-weight: 500;
+      font-size: $h4;
+      transition: 0.3s ease-in-out;
+
+      &:hover {
+        background: none;
+        color: $second;
+        border: 1px solid $third;
+      }
+    }
+  }
+
+  & img {
+    height: 100%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .header {
+    width: 95%;
+
+    & .headerInputs {
+      grid-template-areas:
+        "inp1 inp2 inp3"
+        "button button button";
+      justify-content: center;
+      gap: 20px;
+
+      & input {
+        border-radius: 50px;
+        border: 1px solid $third;
+      }
+
+      & button {
+        width: fit-content;
+        justify-self: center;
+        padding: 15px 35px;
+        border-radius: 50px;
+        justify-content: center;
+        margin-left: 0;
+      }
+    }
+  }
+
+  .headerPro {
+    margin-bottom: 0;
+    align-items: center;
+
+    & .headerProMain {
+      margin: 0;
+    }
+
+    & img {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .header {
+    width: 95%;
+
+    & h1 {
+      width: 100%;
+    }
+
+    & .headerInputs {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+  }
+
+  .headerPro {
+    & .headerProMain {
+      & h1 {
+        font-size: 60px;
+      }
+
+      & p {
+        font-size: $normal;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .header {
+    & h1 {
+      font-size: $h1;
+    }
+  }
+}

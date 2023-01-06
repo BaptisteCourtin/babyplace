@@ -1,0 +1,125 @@
+.applimenu {
+  min-height: 100vh;
+  padding-bottom: 4rem;
+  background-color: $white;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    font-weight: 500;
+
+    width: 100%;
+    max-width: 500px;
+
+    h3 {
+      font-size: $h4;
+      font-weight: 600;
+    }
+
+    p {
+      font-weight: 400;
+    }
+
+    &.menu-base {
+      align-items: flex-start;
+      gap: 1.5rem;
+      padding: 0 1rem;
+
+      button {
+        background-color: transparent;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        font-size: $h4;
+        font-weight: 500;
+        width: 100%;
+        padding: 0.2rem;
+
+        .icon-menu {
+          fill: $third;
+          margin-right: 0.5rem;
+        }
+      }
+    }
+
+    &.favoris {
+      .occas {
+        background: rgba(127, 114, 242, 0.4);
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
+
+        p {
+          font-weight: 400;
+        }
+      }
+    }
+
+    &.perso-confiance {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .card-confiance {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        margin-left: 1rem;
+        padding-left: 0.5rem;
+        border-left: 1px $second solid;
+      }
+    }
+
+    &.moyens-paiements {
+      img {
+        width: 90%;
+      }
+
+      form {
+        margin-top: 1rem;
+
+        .with-check {
+          width: 90%;
+        }
+      }
+    }
+
+    &.aide {
+      img {
+        width: 100%;
+      }
+    }
+
+    &.reservation {
+      .card-fav-plat {
+        height: max-content;
+        .texte p {
+          width: 100%;
+          height: max-content;
+          white-space: pre-wrap;
+          padding-right: 0;
+        }
+      }
+    }
+  }
+
+  .button-bas {
+    background: $gradient;
+    .butt {
+      font-size: $h3;
+      font-weight: 500;
+    }
+  }
+}

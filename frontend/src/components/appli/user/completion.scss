@@ -1,0 +1,54 @@
+.bar-completion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem;
+  border-radius: 20px;
+  height: 70px;
+  overflow: hidden;
+  position: relative;
+
+  a {
+    width: 100%;
+  }
+
+  p {
+    display: flex;
+    align-items: center;
+    height: 70px;
+    color: $second;
+
+    span {
+      padding: 0 0.5rem;
+    }
+
+    &:nth-child(2) {
+      text-align: right;
+      position: absolute;
+      right: 0px;
+      top: 0;
+    }
+  }
+
+  &:nth-child(1) {
+    background-color: $blue;
+    p:nth-child(1) {
+      background-color: $blue;
+      filter: grayscale(0.5);
+    }
+  }
+  &:nth-child(2) {
+    background-color: $green;
+    p:nth-child(1) {
+      background-color: $green;
+      filter: grayscale(0.5);
+    }
+  }
+  &:nth-child(3) {
+    background-color: $orange;
+    p:nth-child(1) {
+      background-color: $orange;
+      filter: grayscale(0.5);
+    }
+  }
+}
