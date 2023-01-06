@@ -3,24 +3,7 @@ import StructureContext from "@components/context/StructureContext";
 import Proptypes from "prop-types";
 
 function Structure15({
-  numSecu,
-  numAgrement,
-  dateAgrement,
-  docPmi,
-  siret,
-  assHabitNom,
-  assHabitNumero,
-  assHabitAdresse,
-  assAutoNom,
-  assAutoNumero,
-  assAutoAdresse,
-  docIdentite,
-  docVitale,
-  docJustifDom,
-  docDiplome,
-  docRespCivile,
-  docAssAuto,
-  updateFields,
+  numSecu, numAgrement, dateAgrement, docPmi, siret, assHabitNom, assHabitNumero, assHabitAdresse, assAutoNom, assAutoNumero, assAutoAdresse, docIdentite, docVitale, docJustifDom, docDiplome, docRespCivile, docAssAuto, inputRefPmi, inputRefCpam, inputRefCni, inputRefDom, inputRefDiplome, inputRefAuto, inputRefResp, updateFields,
 }) {
   const { structure } = useContext(StructureContext);
 
@@ -112,7 +95,7 @@ function Structure15({
             <div className="inputsContainer">
               <div className="inputContainer">
                 <input
-                  required
+
                   type="text"
                   name="assHabitNom"
                   pattern=".{4,}"
@@ -132,7 +115,6 @@ function Structure15({
 
               <div className="inputContainer">
                 <input
-                  required
                   type="text"
                   name="assHabitNumero"
                   pattern=".{5,}"
@@ -151,10 +133,9 @@ function Structure15({
               </div>
               <div className="inputContainer">
                 <input
-                  required
                   type="text"
                   name="assHabitAdresse"
-                  pattern=".{15}"
+                  pattern=".{10,} [0-9]{5} .{3,}"
                   value={assHabitAdresse}
                   onChange={(e) =>
                     updateFields({ assHabitAdresse: e.target.value })
@@ -173,7 +154,6 @@ function Structure15({
             <div className="inputsContainer">
               <div className="inputContainer">
                 <input
-                  required
                   type="text"
                   name="assAutoNom"
                   pattern=".{4,}"
@@ -190,7 +170,7 @@ function Structure15({
               </div>
               <div className="inputContainer">
                 <input
-                  required
+
                   type="text"
                   name="assAutoNumero"
                   pattern=".{5,}"
@@ -209,10 +189,9 @@ function Structure15({
               </div>
               <div className="inputContainer">
                 <input
-                  required
                   type="text"
                   name="assAutoAdresse"
-                  pattern=".{15}"
+                  pattern=".{10,} [0-9]{5} .{3,}"
                   value={assAutoAdresse}
                   onChange={(e) =>
                     updateFields({ assAutoAdresse: e.target.value })
@@ -240,10 +219,11 @@ function Structure15({
           <input
             required
             type="file"
-            id="docPmi"
-            name="docPmi"
+            id="docpmi"
+            name="docpmi"
+            ref={inputRefPmi}
             accept="image/png, image/jpg, image/jpeg, .pdf"
-            onChange={(e) => updateFields({ docPmi: e.target.files[0] })}
+            onChange={() => updateFields({ docPmi: inputRefPmi.current.files[0].name.split('.').slice(-1)[0] })}
           />
           <label htmlFor="docPmi" />
           <p className="checkSymbol">&#x2713;</p>
@@ -256,13 +236,13 @@ function Structure15({
                 séjour et autorisation de travail.{" "}
               </h5>
               <input
-                required
                 type="file"
                 id="docIdentite"
                 name="docIdentite"
+                ref={inputRefCni}
                 accept="image/png, image/jpg, image/jpeg, .pdf"
-                onChange={(e) => {
-                  updateFields({ docIdentite: e.target.files[0] });
+                onChange={() => {
+                  updateFields({ docIdentite: inputRefCni.current.files[0].name.split('.').slice(-1)[0] });
                 }}
               />
               <label htmlFor="docIdentite" />
@@ -279,8 +259,9 @@ function Structure15({
                 type="file"
                 id="docVitale"
                 name="docVitale"
+                ref={inputRefCpam}
                 accept="image/png, image/jpg, image/jpeg, .pdf"
-                onChange={(e) => updateFields({ docVitale: e.target.files[0] })}
+                onChange={() => updateFields({ docVitale: inputRefCpam.current.files[0].name.split('.').slice(-1)[0] })}
               />
               <label htmlFor="docVitale" />
               <p className="checkSymbol">&#x2713;</p>
@@ -288,13 +269,13 @@ function Structure15({
             <div className="docInputContainer">
               <h5>Justificatif de domicile</h5>
               <input
-                required
                 type="file"
                 id="docJustifDom"
                 name="docJustifDom"
+                ref={inputRefDom}
                 accept="image/png, image/jpg, image/jpeg, .pdf"
-                onChange={(e) =>
-                  updateFields({ docJustifDom: e.target.files[0] })
+                onChange={() =>
+                  updateFields({ docJustifDom: inputRefPmi.current.files[0].name.split('.').slice(-1)[0] })
                 }
               />
               <label htmlFor="docJustifDom" />
@@ -306,13 +287,13 @@ function Structure15({
                 d'expériences (certificats de travail)
               </h5>
               <input
-                required
                 type="file"
                 id="docDiplome"
                 name="docDiplome"
+                ref={inputRefDiplome}
                 accept="image/png, image/jpg, image/jpeg, .pdf"
-                onChange={(e) =>
-                  updateFields({ docDiplome: e.target.files[0] })
+                onChange={() =>
+                  updateFields({ docDiplome: inputRefDiplome.current.files[0].name.split('.').slice(-1)[0] })
                 }
               />
               <label htmlFor="docDiplome" />
@@ -328,9 +309,10 @@ function Structure15({
                 type="file"
                 id="docRespCivile"
                 name="docRespCivile"
+                ref={inputRefResp}
                 accept="image/png, image/jpg, image/jpeg, .pdf"
-                onChange={(e) =>
-                  updateFields({ docRespCivile: e.target.files[0] })
+                onChange={() =>
+                  updateFields({ docRespCivile: inputRefResp.current.files[0].name.split('.').slice(-1)[0] })
                 }
               />
               <label htmlFor="docRespCivile" />
@@ -339,13 +321,13 @@ function Structure15({
             <div className="docInputContainer">
               <h5>Assurance auto</h5>
               <input
-                required
                 type="file"
                 id="docAssAuto"
                 name="docAssAuto"
+                ref={inputRefAuto}
                 accept="image/png, image/jpg, image/jpeg, .pdf"
-                onChange={(e) =>
-                  updateFields({ docAssAuto: e.target.files[0] })
+                onChange={() =>
+                  updateFields({ docAssAuto: inputRefAuto.current.files[0].name.split('.').slice(-1)[0] })
                 }
               />
               <label htmlFor="docAssAuto" />

@@ -1,7 +1,12 @@
 import Login from "@components/login/Login";
 import Synthesis from "@components/login/Synthesis";
 import Register from "@components/register/Register";
+
+import { useState } from "react";
+
 import { Route, Routes } from "react-router-dom";
+
+import UserEmailContext from "@components/context/UserEmailContext";
 
 import Appli from "@pages/appli/AppliTuto";
 import AppliMenu from "@pages/appli/AppliMenu";
@@ -20,12 +25,20 @@ import Features from "@components/features/Features";
 import Contact from "@components/features/Contact";
 import Faq from "@components/features/Faq";
 import Home from "./pages/Home";
+import Admin from "@pages/Admin";
+import Stats from "@pages/Stats";
 
 function App() {
+  const [userEmail, setUserEmail] = useState("paulette07@laposte.net");
+
   return (
     <div className="app">
+      <UserEmailContext.Provider value={{ userEmail, setUserEmail }}>
       <Routes>
         <Route path="/" element={<Home />} />
+
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/stats" element={<Stats />} />
 
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
@@ -37,6 +50,7 @@ function App() {
         <Route path="/faq" element={<Faq />} />
 
         <Route path="/appli" element={<Appli />} />
+
         <Route path="/appli/menu" element={<AppliMenu />} />
         <Route path="/appli/search" element={<AppliSearch />} />
         <Route path="/appli/search/card" element={<AppliCardCreche />} />
@@ -54,6 +68,8 @@ function App() {
 
         <Route path="/structure/inscription-form" element={<FormStructure />} />
       </Routes>
+            </UserEmailContext.Provider>
+
     </div>
   );
 }

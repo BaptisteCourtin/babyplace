@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  AiOutlineEye,
-  AiOutlineEyeInvisible,
-  AiOutlineCheck,
-} from "react-icons/ai";
-import toast from "react-hot-toast";
+
+import { AiOutlineEye, AiOutlineEyeInvisible, AiOutlineCheck } from "react-icons/ai";
+import UserEmailContext from "@components/context/UserEmailContext";
+import toast from 'react-hot-toast';
+import Axios from "axios";
+
 
 function RegisterForm() {
   const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
+
+  const { userEmail, setUserEmail } = useContext(UserEmailContext);
   const [password, setPassword] = useState("");
   const [checked, setChecked] = useState(false);
   const [typePwd, setTypePwd] = useState(true);
@@ -24,11 +25,28 @@ function RegisterForm() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    if (email && password && checked && pwdLength > 8) {
-      navigate("/structure/inscription-form");
+
+    if (email && password && checked && pwdLength >= 8) {
+      Axios.post("http://localhost:5000/inscription", {
+        email,
+        password,
+      })
+        .then((ret) => {
+          const { token } = ret.data;
+          navigate("/structure/inscription-form", {
+            state: {
+              token,
+            },
+          });
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     }
   };
-
+  const handleChange = (event) => {
+    setUserEmail(event.target.value)
+  }
   const handlePwdLength = (e) => {
     e.preventDefault();
     if (pwdLength < 8) {
@@ -52,7 +70,7 @@ function RegisterForm() {
           id="email"
           placeholder="Email"
           onChange={(event) => {
-            setEmail(event.target.value);
+            setEmail(event.target.value); handleChange(event);
           }}
           required
         />

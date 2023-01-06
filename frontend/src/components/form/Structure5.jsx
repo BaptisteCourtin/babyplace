@@ -7,6 +7,7 @@ function Structure5({
   nesting,
   montessori,
   handi,
+  experience,
   enfants,
   jardin,
   sorties,
@@ -191,19 +192,15 @@ function Structure5({
             <div className="inputsContainer">
               <h5>Expérience</h5>
               <div className="inputContainer">
-                <select
-                  id="experience"
-                  name="experience"
-                  onChange={(e) => updateFields({ experience: e.target.value })}
-                >
-                  <option value="">...</option>
-                  <option value="Moins d'1 an"> Moins d'1 an</option>
-                  <option value="1 - 2 ans"> 1 - 2 ans</option>
-                  <option value="3 - 5 ans"> 3 - 5 ans</option>
-                  <option value="5 - 10 ans"> 5 - 10 ans</option>
-                  <option value="Plus de 10 ans"> Plus de 10 ans</option>
-                </select>
                 <label htmlFor="experience">Années d'expérience</label>
+                <input
+                  type="number"
+                  min="0"
+                  max="60"
+                  name="experience"
+                  value={experience}
+                  onChange={(e) => updateFields({ experience: e.target.value })}
+                />
               </div>
               <div className="inputContainer">
                 <input

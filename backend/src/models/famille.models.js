@@ -1,5 +1,10 @@
 const datasource = require("../../database");
 
+const getFamille = async () => {
+  const [result] = await datasource.query("SELECT familleId FROM famille");
+  return result;
+};
+
 const getPersoConfiance = async (req) => {
   const [result] = await datasource.query(
     "SELECT * FROM personne_confiance WHERE familleId = ?",
@@ -47,4 +52,5 @@ module.exports = {
   getPersoConfiance,
   postReservation,
   getDonneesFormParent,
+  getFamille,
 };

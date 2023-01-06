@@ -1,7 +1,8 @@
 const horairesModels = require("../models/horaires.models.js");
 
 const getHorairesById = async (req, res) => {
-  const result = await horairesModels.getHorairesById(req);
+  const id = req.params.id
+  const result = await horairesModels.getHorairesById(id);
   return res.json(result);
 };
 

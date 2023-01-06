@@ -34,13 +34,13 @@ function Structure9({
                 name="horaireMin"
                 step="300"
                 onChange={(e) => {
-                  lundiOuvert && updateFields({ lundiMin: e });
-                  mardiOuvert && updateFields({ mardiMin: e });
-                  mercrediOuvert && updateFields({ mercrediMin: e });
-                  jeudiOuvert && updateFields({ jeudiMin: e });
-                  vendrediOuvert && updateFields({ vendrediMin: e });
-                  samediOuvert && updateFields({ samediMin: e });
-                  dimancheOuvert && updateFields({ dimancheMin: e });
+                  lundiOuvert && updateFields({ lundiMin: e.target.value });
+                  mardiOuvert && updateFields({ mardiMin: e.target.value });
+                  mercrediOuvert && updateFields({ mercrediMin: e.target.value });
+                  jeudiOuvert && updateFields({ jeudiMin: e.target.value });
+                  vendrediOuvert && updateFields({ vendrediMin: e.target.value });
+                  samediOuvert && updateFields({ samediMin: e.target.value });
+                  dimancheOuvert && updateFields({ dimancheMin: e.target.value });
                 }}
               />
               <p>à</p>
@@ -49,13 +49,13 @@ function Structure9({
                 name="horaireMax"
                 step="300"
                 onChange={(e) => {
-                  lundiOuvert && updateFields({ lundiMax: e });
-                  mardiOuvert && updateFields({ mardiMax: e });
-                  mercrediOuvert && updateFields({ mercrediMax: e });
-                  jeudiOuvert && updateFields({ jeudiMax: e });
-                  vendrediOuvert && updateFields({ vendrediMax: e });
-                  samediOuvert && updateFields({ samediMax: e });
-                  dimancheOuvert && updateFields({ dimancheMax: e });
+                  lundiOuvert && updateFields({ lundiMax: e.target.value });
+                  mardiOuvert && updateFields({ mardiMax: e.target.value });
+                  mercrediOuvert && updateFields({ mercrediMax: e.target.value });
+                  jeudiOuvert && updateFields({ jeudiMax: e.target.value });
+                  vendrediOuvert && updateFields({ vendrediMax: e.target.value });
+                  samediOuvert && updateFields({ samediMax: e.target.value });
+                  dimancheOuvert && updateFields({ dimancheMax: e.target.value });
                 }}
               />
             </div>
@@ -87,14 +87,14 @@ function Structure9({
                   type="time"
                   name="lundiMin"
                   step="300"
-                  onChange={(e) => updateFields({ lundiMin: e })}
+                  onChange={(e) => updateFields({ lundiMin: e.target.value })}
                 />
                 <p>à</p>
                 <input
                   type="time"
                   name="lundiMax"
                   step="300"
-                  onChange={(e) => updateFields({ lundiMax: e })}
+                  onChange={(e) => updateFields({ lundiMax: e.target.value })}
                 />
               </div>
             ) : (
@@ -126,14 +126,14 @@ function Structure9({
                   type="time"
                   name="mardiMin"
                   step="300"
-                  onChange={(e) => updateFields({ mardiMin: e })}
+                  onChange={(e) => updateFields({ mardiMin: e.target.value })}
                 />
                 <p>à</p>
                 <input
                   type="time"
                   name="mardiMax"
                   step="300"
-                  onChange={(e) => updateFields({ mardiMax: e })}
+                  onChange={(e) => updateFields({ mardiMax: e.target.value })}
                 />
               </div>
             ) : (
@@ -167,14 +167,14 @@ function Structure9({
                   type="time"
                   name="mercrediMin"
                   step="300"
-                  onChange={(e) => updateFields({ mercrediMin: e })}
+                  onChange={(e) => updateFields({ mercrediMin: e.target.value })}
                 />
                 <p>à</p>
                 <input
                   type="time"
                   name="mercrediMax"
                   step="300"
-                  onChange={(e) => updateFields({ mercrediMax: e })}
+                  onChange={(e) => updateFields({ mercrediMax: e.target.value })}
                 />
               </div>
             ) : (
@@ -206,14 +206,14 @@ function Structure9({
                   type="time"
                   name="jeudiMin"
                   step="300"
-                  onChange={(e) => updateFields({ jeudiMin: e })}
+                  onChange={(e) => updateFields({ jeudiMin: e.target.value })}
                 />
                 <p>à</p>
                 <input
                   type="time"
                   name="jeudiMax"
                   step="300"
-                  onChange={(e) => updateFields({ jeudiMax: e })}
+                  onChange={(e) => updateFields({ jeudiMax: e.target.value })}
                 />
               </div>
             ) : (
@@ -247,14 +247,14 @@ function Structure9({
                   type="time"
                   name="vendrediMin"
                   step="300"
-                  onChange={(e) => updateFields({ vendrediMin: e })}
+                  onChange={(e) => updateFields({ vendrediMin: e.target.value })}
                 />
                 <p>à</p>
                 <input
                   type="time"
                   name="vendrediMax"
                   step="300"
-                  onChange={(e) => updateFields({ vendrediMax: e })}
+                  onChange={(e) => updateFields({ vendrediMax: e.target.value })}
                 />
               </div>
             ) : (
@@ -286,14 +286,14 @@ function Structure9({
                   type="time"
                   name="samediMin"
                   step="300"
-                  onChange={(e) => updateFields({ samediMin: e })}
+                  onChange={(e) => updateFields({ samediMin: e.target.value })}
                 />
                 <p>à</p>
                 <input
                   type="time"
                   name="samediMax"
                   step="300"
-                  onChange={(e) => updateFields({ samediMax: e })}
+                  onChange={(e) => updateFields({ samediMax: e.target.value })}
                 />
               </div>
             ) : (
@@ -327,14 +327,14 @@ function Structure9({
                   type="time"
                   name="dimancheMin"
                   step="300"
-                  onChange={(e) => updateFields({ dimancheMin: e })}
+                  onChange={(e) => updateFields({ dimancheMin: e.target.value })}
                 />
                 <p>à</p>
                 <input
                   type="time"
                   name="dimancheMax"
                   step="300"
-                  onChange={(e) => updateFields({ dimancheMax: e })}
+                  onChange={(e) => updateFields({ dimancheMax: e.target.value })}
                 />
               </div>
             ) : (
