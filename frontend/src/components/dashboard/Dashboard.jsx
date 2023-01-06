@@ -9,7 +9,7 @@ import DashNavbar from "./nav/DashNavbar";
 import DashReservations from "./reservations/DashReservations";
 import DashAgenda from "./agenda/DashAgenda.jsx";
 import DashPlaces from "./places/DashPlaces";
-// import Messages from "../messages/Messages";
+import Messages from "../messages/Messages";
 
 function Dashboard() {
   const { state } = useLocation();
