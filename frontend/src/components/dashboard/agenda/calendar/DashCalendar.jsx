@@ -13,7 +13,8 @@ function DashCalendar({
 
   const dayStatus = ({ date, view }) => {
     view === "month" &&
-      calendar && calendar
+      calendar &&
+      calendar
         .filter((c) => c.date === dayDate)
         .map((fc) => (fc.nbPlaces == -1 ? "notWorked" : "notFull"));
   };

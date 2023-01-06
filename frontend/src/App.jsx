@@ -11,7 +11,6 @@ import UserEmailContext from "@components/context/UserEmailContext";
 import Appli from "@pages/appli/AppliTuto";
 import AppliMenu from "@pages/appli/AppliMenu";
 import AppliSearch from "@pages/appli/AppliSearch";
-import AppliSearchFiltres from "@pages/appli/AppliFiltres";
 import AppliCardCreche from "@pages/appli/AppliCardCreche";
 import AppliReservation from "@pages/appli/AppliReservation";
 import AppliUser from "@pages/appli/AppliUser";
@@ -22,7 +21,12 @@ import AppliMessage from "@pages/appli/AppliMessage";
 import FormStructure from "@pages/FormStructure";
 
 import Dashboard from "@components/dashboard/Dashboard";
+import Features from "@components/features/Features";
+import Contact from "@components/features/Contact";
+import Faq from "@components/features/Faq";
 import Home from "./pages/Home";
+import Admin from "@pages/Admin";
+import Stats from "@pages/Stats";
 
 function App() {
   const [userEmail, setUserEmail] = useState("paulette07@laposte.net");
@@ -30,36 +34,41 @@ function App() {
   return (
     <div className="app">
       <UserEmailContext.Provider value={{ userEmail, setUserEmail }}>
+      <Routes>
+        <Route path="/" element={<Home />} />
 
-        <Routes>
-          <Route path="/" element={<Home />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/stats" element={<Stats />} />
 
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/login-params" element={<Synthesis />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/login-params" element={<Synthesis />} />
+        <Route path="/dashboard" element={<Dashboard />} />
 
-          <Route path="/appli" element={<Appli />} />
-          <Route path="/appli/menu" element={<AppliMenu />} />
-          <Route path="/appli/search" element={<AppliSearch />} />
-          <Route path="/appli/search/filtres" element={<AppliSearchFiltres />} />
-          <Route path="/appli/search/card" element={<AppliCardCreche />} />
-          <Route
-            path="/appli/search/reservation"
-            element={<AppliReservation />}
-          />
-          <Route path="/appli/user" element={<AppliUser />} />
-          <Route
-            path="/appli/user/completion"
-            element={<AppliUserCompletion />}
-          />
-          <Route path="/appli/notif" element={<AppliNotif />} />
-          <Route path="/appli/message" element={<AppliMessage />} />
+        <Route path="/features" element={<Features />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/faq" element={<Faq />} />
 
-          <Route path="/structure/inscription-form" element={<FormStructure />} />
+        <Route path="/appli" element={<Appli />} />
 
-        </Routes>
-      </UserEmailContext.Provider>
+        <Route path="/appli/menu" element={<AppliMenu />} />
+        <Route path="/appli/search" element={<AppliSearch />} />
+        <Route path="/appli/search/card" element={<AppliCardCreche />} />
+        <Route
+          path="/appli/search/reservation"
+          element={<AppliReservation />}
+        />
+        <Route path="/appli/user" element={<AppliUser />} />
+        <Route
+          path="/appli/user/completion"
+          element={<AppliUserCompletion />}
+        />
+        <Route path="/appli/notif" element={<AppliNotif />} />
+        <Route path="/appli/message" element={<AppliMessage />} />
+
+        <Route path="/structure/inscription-form" element={<FormStructure />} />
+      </Routes>
+            </UserEmailContext.Provider>
 
     </div>
   );

@@ -1,13 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-function Base({ setCompo, filtres }) {
+function Base({ setCompo }) {
   return (
-    <>
+    <div className="filtres">
       <header>
-        <button type="button" className="h2">
-          <Link to="/appli/search">{`< Filtres`}</Link>
+        <button type="button" className="h2" onClick={() => setCompo(0)}>
+          {`< Filtres`}
         </button>
         <button type="button">RESET</button>
       </header>
@@ -16,36 +15,29 @@ function Base({ setCompo, filtres }) {
         <button
           type="button"
           className="h3"
-          onClick={() => setCompo(1)}
+          onClick={() => setCompo(4)}
         >{`Filtres Basiques >`}</button>
         <button
           type="button"
           className="h3"
-          onClick={() => setCompo(2)}
+          onClick={() => setCompo(5)}
         >{`Dates et Heures >`}</button>
         <button
           type="button"
           className="h3"
-          onClick={() => setCompo(3)}
+          onClick={() => setCompo(6)}
         >{`Services >`}</button>
         <button
           type="button"
           className="h3"
-          onClick={() => setCompo(4)}
+          onClick={() => setCompo(7)}
         >{`Aggréments >`}</button>
-        <button
-          type="button"
-          className="h3"
-          onClick={() => setCompo(5)}
-        >{`Adresse >`}</button>
       </main>
 
-      <button type="button" className="apply">
-        <Link to="/appli/search" state={{ filtres }}>
-          Retour à la recherche
-        </Link>
+      <button type="button" className="apply" onClick={() => setCompo(0)}>
+        Retour à la recherche
       </button>
-    </>
+    </div>
   );
 }
 

@@ -21,7 +21,7 @@ function CardMarker({ data }) {
       });
   };
 
-  // prendre horaires back pour passer dans card
+  // prendre horaires back pour passer dans card pour resa
   const [dataHorairesId, setDataHorairesId] = useState([]);
 
   const Token =
@@ -58,11 +58,6 @@ function CardMarker({ data }) {
           </Link>
         </Popup>
       </Marker>
-      // <Marker position={[0, 0]}>
-      //   <Popup>
-      //     A pretty CSS3 popup. <br /> Easily customizable.
-      //   </Popup>
-      // </Marker>
     )
   );
 }

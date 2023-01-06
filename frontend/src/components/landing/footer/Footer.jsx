@@ -6,6 +6,7 @@ import up from "@assets/up.svg";
 import facebook from "@assets/facebook.svg";
 import twitter from "@assets/twitter.svg";
 import insta from "@assets/insta.svg";
+import { HashLink } from "react-router-hash-link";
 
 function Footer({ userType }) {
   return (
@@ -48,16 +49,26 @@ function Footer({ userType }) {
           </div>
           <div className="footerCenter">
             <ul>
-              <li>A propos</li>
-              <li>Profil</li>
-              <li>Caractéristiques</li>
-              <li>Carières</li>
+              <li>
+                <HashLink to="/features#about">A propos</HashLink>
+              </li>
+              <li>
+                <HashLink to="/features#profil">Nos Profil</HashLink>
+              </li>
+              <li>
+                <HashLink to="/features#mentions">Mentions Légales</HashLink>
+              </li>
             </ul>
             <ul>
-              <li>Aide</li>
-              <li>Support</li>
-              <li>Guide</li>
-              <li>FAQ</li>
+              <li>
+                <HashLink to="/contact#aide">Aide</HashLink>
+              </li>
+              <li>
+                <HashLink to="/contact#contact">Contact</HashLink>
+              </li>
+              <li>
+                <HashLink to="/faq#faq">FAQ</HashLink>
+              </li>
             </ul>
           </div>
           <div className="footerRight">

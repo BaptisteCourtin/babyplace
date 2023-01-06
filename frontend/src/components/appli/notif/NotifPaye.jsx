@@ -5,6 +5,11 @@ import TheCard from "../menu/TheCard";
 function NotifPaye({ setCompo }) {
   return (
     <div className="notif-paye">
+      <div className="button-top">
+        <button className="butt big" type="button" onClick={() => setCompo(0)}>
+          {`< Retour`}
+        </button>
+      </div>
       <h3>XXX € à payer</h3>
       <TheCard />
       <div className="button-bas">

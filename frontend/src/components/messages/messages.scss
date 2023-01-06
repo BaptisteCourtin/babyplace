@@ -3,10 +3,8 @@
 .messages {
   width: auto;
   height: 95%;
-
   display: flex;
   margin: 20px;
-  background-color: #ffffff;
   border-radius: 5px;
 
   .messagesShortsAffich {
@@ -14,27 +12,32 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-
+    justify-content: space-between;
+    gap: 20px;
+    padding-bottom: 20px;
+    background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
     border-right: solid 2px $third;
+    border-radius: 5px;
 
     h2 {
-      margin: 30px;
+      padding: 20px 30px 20px 10px;
       font-weight: 900;
       font-size: 2em;
     }
 
     .userPart {
-      border-bottom: solid 10px rgba(230, 225, 225, 0.25);
       display: flex;
       align-items: center;
-      padding: 20px;
-
+      gap: 5px;
       height: fit-content;
       width: 100%;
+      padding-left: 10px;
 
       #profilImg {
         width: 60px;
         height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
       }
 
       .profilText {
@@ -55,13 +58,33 @@
     }
 
     .messages-affichage {
-      width: 90%;
-      height: 90%;
+      height: 100%;
+      overflow-y: scroll;
 
       .salonsMessages {
         .contactList {
           list-style: none;
-          margin: 20px;
+          padding: 20px;
+          border-bottom: 1px solid $third;
+
+          &:first-of-type {
+            border-top: 1px solid $third;
+          }
+
+          // &:last-of-type {
+          //   border-bottom: none;
+          // }
+        }
+
+        & .selected {
+          background-color: $third;
+          color: $white;
+
+          & #btn-affiche-con {
+            &:hover {
+              color: $white;
+            }
+          }
         }
 
         #btn-affiche-con {
@@ -71,22 +94,25 @@
           display: flex;
           padding: 5px;
           align-items: center;
-          border-radius: 6px;
-          font-weight: 600;
-          background: #ffffff;
+          font-weight: 700;
+          background: transparent;
           cursor: pointer;
-          transition: all 0.3s ease-in-out;
+          transition: 0.3s ease-in-out;
+
+          &::first-letter {
+            text-transform: uppercase;
+          }
 
           img {
             width: 50px;
             height: 50px;
-            border-radius: 25%;
+            border-radius: 50%;
           }
-        }
 
-        #btn-affiche-con:hover {
-          background: $third;
-          transform: scale(1.05);
+          &:hover {
+            color: $third;
+          }
+
         }
       }
     }
@@ -94,6 +120,7 @@
 }
 
 .conversationAffich {
-  margin: 20px 30px;
+  margin: 20px;
   width: 100%;
+  height: 100%;
 }

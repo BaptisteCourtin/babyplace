@@ -1,9 +1,11 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 import { AiOutlineEye, AiOutlineEyeInvisible, AiOutlineCheck } from "react-icons/ai";
 import UserEmailContext from "@components/context/UserEmailContext";
 import toast from 'react-hot-toast';
 import Axios from "axios";
+
 
 function RegisterForm() {
   const navigate = useNavigate();
@@ -23,7 +25,8 @@ function RegisterForm() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    if (email && password && checked && pwdLength > 8) {
+
+    if (email && password && checked && pwdLength >= 8) {
       Axios.post("http://localhost:5000/inscription", {
         email,
         password,
@@ -47,11 +50,11 @@ function RegisterForm() {
   const handlePwdLength = (e) => {
     e.preventDefault();
     if (pwdLength < 8) {
-      toast.error("Mot de passe trop court")
+      toast.error("Mot de passe trop court");
     }
-  }
+  };
 
-  console.log(pwdLength)
+  console.log(pwdLength);
 
   return (
     <section className="formCo">
@@ -69,7 +72,7 @@ function RegisterForm() {
           onChange={(event) => {
             setEmail(event.target.value); handleChange(event);
           }}
-          required={true}
+          required
         />
         <div className="passwordInput">
           <input
@@ -79,25 +82,34 @@ function RegisterForm() {
             placeholder="Password"
             onInput={(event) => {
               setPassword(event.target.value);
-              setPwdLength(password.length)
+              setPwdLength(password.length);
             }}
-            required={true}
+            required
           />
           <button onClick={handlePwdClick}>
             {!typePwd ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
           </button>
         </div>
-        <p className="passwordCondition" style={{
-          color:
-            pwdLength < 8 ? "#EF3672" : "#2dcd7a"
-        }}>{pwdLength >= 8 && <span style={{ color: "#2dcd7a" }}><AiOutlineCheck /></span>}Minimum 8 caractères</p>
+        <p
+          className="passwordCondition"
+          style={{
+            color: pwdLength < 8 ? "#EF3672" : "#2dcd7a",
+          }}
+        >
+          {pwdLength >= 8 && (
+            <span style={{ color: "#2dcd7a" }}>
+              <AiOutlineCheck />
+            </span>
+          )}
+          Minimum 8 caractères
+        </p>
         <div className="inputCheck">
           <input
             type="checkbox"
             name="useConditions"
             id="useConditions"
             onChange={() => setChecked(!checked)}
-            required={true}
+            required
           />
           <label htmlFor="useConditions">
             J'accepte les conditions d'utilisation
@@ -109,7 +121,7 @@ function RegisterForm() {
           style={{
             opacity: !email || !password || !checked ? "0.7" : "1",
           }}
-          disabled={!email || !password || !checked ? true : false}
+          disabled={!!(!email || !password || !checked)}
           onClick={(e) => {
             handleClick(e);
             handlePwdLength(e);
@@ -118,7 +130,7 @@ function RegisterForm() {
           S'inscrire
         </button>
       </form>
-    </section >
+    </section>
   );
 }
 

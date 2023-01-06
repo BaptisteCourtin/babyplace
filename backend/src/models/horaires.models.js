@@ -1,9 +1,9 @@
 const datasource = require("../../database");
 
-const getHorairesById = async (req) => {
+const getHorairesById = async (id) => {
   const [result] = await datasource.query(
     "SELECT * FROM horaires WHERE structureId = ?",
-    [req.params.id]
+    [id]
   );
   return result;
 };
