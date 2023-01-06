@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { FiBell } from "react-icons/fi";
 import { AiFillStar, AiOutlinePhone, AiOutlineMail } from "react-icons/ai";
 import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
+import useLocalStorage from "@utils/useLocalStorage";
 import DashNavbar from "./nav/DashNavbar";
 
 import DashReservations from "./reservations/DashReservations";
 import DashAgenda from "./agenda/DashAgenda.jsx";
 import DashPlaces from "./places/DashPlaces";
-import Messages from "../messages/Messages";
-import axios from "axios";
-import useLocalStorage from "@utils/useLocalStorage";
+// import Messages from "../messages/Messages";
 
 function Dashboard() {
   const { state } = useLocation();
@@ -33,6 +33,7 @@ function Dashboard() {
     if (toggle === 4) {
       return <Messages {...data} />;
     }
+
     if (toggle === 5) {
       return navigate("/structure/inscription-form");
     }
@@ -45,9 +46,11 @@ function Dashboard() {
 
   useEffect(() => {
     let curDate = new Date();
-    curDate = `${curDate.getFullYear()}-${curDate.getMonth() + 1}-${curDate.getDate()}`;
-    deleteDates(curDate)
-  }, [])
+    curDate = `${curDate.getFullYear()}-${
+      curDate.getMonth() + 1
+    }-${curDate.getDate()}`;
+    deleteDates(curDate);
+  }, []);
 
   const reviews =
     Math.round(

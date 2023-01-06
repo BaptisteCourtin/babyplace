@@ -9,12 +9,14 @@ function AppliReservation() {
   const { data, dataHorairesId } = location.state;
 
   const {
+    structureId,
     nom,
     nomUsage,
     nomNaissance,
     prenom,
 
     photoProfil,
+    photoStructure1,
     photoStructure3,
 
     tarifHeure,
@@ -40,11 +42,13 @@ function AppliReservation() {
           nomUsage={nomUsage}
           nomNaissance={nomNaissance}
           prenom={prenom}
+          photo1={photoStructure1}
           photo3={photoStructure3}
           tarifHeure={tarifHeure}
           indemnRepas={indemnRepas}
           indemnEntretien={indemnEntretien}
           indemnKm={indemnKm}
+          structureId={structureId}
         />
       );
     }

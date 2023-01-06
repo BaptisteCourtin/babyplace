@@ -8,6 +8,11 @@ const getAllStructures = async (req, res) => {
 const getStructures = async (req, res) => {
   const result = await structureModels.getStructures();
   return res.json(result);
+}
+  
+const getStructureById = async (req, res) => {
+  const result = await structureModels.getStructureById(req);
+  return res.json(result);
 };
 
 const getStructure = async (req, res) => {
@@ -74,6 +79,24 @@ const getStructureDataMess = async (req, res) => {
   return res.json(result);
 };
 
+const updateNotes = async (req, res) => {
+  const result = await structureModels.updateNotes(req);
+  if (result.affectedRows === 0) {
+    res.status(404).send("Not found");
+  } else {
+    res.sendStatus(204);
+  }
+};
+
+const updateSignal = async (req, res) => {
+  const result = await structureModels.updateSignal(req);
+  if (result.affectedRows === 0) {
+    res.status(404).send("Not found");
+  } else {
+    res.sendStatus(204);
+  }
+};
+
 module.exports = {
   getStructure,
   getStructures,
@@ -84,5 +107,8 @@ module.exports = {
   deleteRefused,
   getStructureDataMess,
   getAllStructures,
-  logout
+  getStructureById,
+  updateNotes,
+  logout,
+  updateSignal,
 };

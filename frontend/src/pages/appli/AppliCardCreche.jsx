@@ -1,24 +1,27 @@
 import React from "react";
+import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
 import BlocJour from "@components/appli/recherche/BlocJour";
 import Star from "@components/appli/recherche/Star";
 import PopUp from "@components/appli/recherche/PopUp";
 
+import { MdReportProblem } from "react-icons/md";
+
 function AppliCardCreche() {
   const location = useLocation();
   const { data, dataHorairesId } = location.state;
   const {
+    structureId,
     nom,
     nomUsage,
     nomNaissance,
     prenom,
 
+    photoStructure1,
     photoStructure2,
     tarifHeure,
     description,
 
-    // Heure_min,
-    // Heure_max,
     telephone,
     email,
     adresse,
@@ -45,12 +48,9 @@ function AppliCardCreche() {
     photoConnecte,
   } = data;
 
-  // const [heureMax, setHeureMax] = useState(0);
-  // const [heureMin, setHeureMin] = useState(0);
-  // useEffect(() => {
-  //   setHeureMin(Heure_min / 60);
-  //   setHeureMax(Heure_max / 60);
-  // }, []);
+  const handleSignaler = () => {
+    axios.put(`http://localhost:5000/structure/signal/${structureId}`);
+  };
 
   return (
     <div className="appli-card-creche">
@@ -63,13 +63,22 @@ function AppliCardCreche() {
 
       <main>
         <div className="container-img">
-          <img src={photoStructure2} alt="img creche" />
+          <img src={photoStructure2 || photoStructure1} alt="img creche" />
+          <button
+            type="button"
+            className="report"
+            onClick={() => handleSignaler()}
+          >
+            <MdReportProblem />
+            <p>Signaler</p>
+          </button>
           <Star
             com={data.avisCom}
             proprete={data.avisProprete}
             securite={data.avisSecurite}
             eveil={data.avisEveil}
             horaires={data.avisHoraires}
+            nbNotes={data.nbNotes}
           />
         </div>
 
@@ -80,10 +89,7 @@ function AppliCardCreche() {
           </div>
 
           <div className="horaire">
-            {/* <p>
-              Horaires : {heureMin}h-{heureMax}h
-            </p> */}
-            <p>Téléphone : 0{telephone}</p>
+            <p>Téléphone : {telephone}</p>
             <p>Mail : {email}</p>
             <p>Adresse : {adresse}</p>
           </div>
@@ -105,11 +111,11 @@ function AppliCardCreche() {
             <h3>Accueil</h3>
             {jardin ? <p>Jardin</p> : null}
             {/* si ass mat */}
-            {/* {animaux ? <p>Présence d'animaux</p> : null}
+            {animaux ? <p>Présence d'animaux</p> : null}
             {nonFumeur ? <p>Foyer non-fumeur</p> : null}
             {zeroPollution ? <p>0% pollution intérieure</p> : null}
             {repas ? <p>Repas maison</p> : null}
-            {hygiene ? <p>produits d'hygiène fournis</p> : null} */}
+            {hygiene ? <p>produits d'hygiène fournis</p> : null}
           </div>
 
           <div>

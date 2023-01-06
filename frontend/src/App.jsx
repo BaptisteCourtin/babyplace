@@ -6,7 +6,6 @@ import { Route, Routes } from "react-router-dom";
 import Appli from "@pages/appli/AppliTuto";
 import AppliMenu from "@pages/appli/AppliMenu";
 import AppliSearch from "@pages/appli/AppliSearch";
-import AppliSearchFiltres from "@pages/appli/AppliFiltres";
 import AppliCardCreche from "@pages/appli/AppliCardCreche";
 import AppliReservation from "@pages/appli/AppliReservation";
 import AppliUser from "@pages/appli/AppliUser";
@@ -17,6 +16,9 @@ import AppliMessage from "@pages/appli/AppliMessage";
 import FormStructure from "@pages/FormStructure";
 
 import Dashboard from "@components/dashboard/Dashboard";
+import Features from "@components/features/Features";
+import Contact from "@components/features/Contact";
+import Faq from "@components/features/Faq";
 import Home from "./pages/Home";
 import Admin from "@pages/Admin";
 import Stats from "@pages/Stats";
@@ -35,11 +37,14 @@ function App() {
         <Route path="/login-params" element={<Synthesis />} />
         <Route path="/dashboard" element={<Dashboard />} />
 
+        <Route path="/features" element={<Features />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/faq" element={<Faq />} />
+
         <Route path="/appli" element={<Appli />} />
 
         <Route path="/appli/menu" element={<AppliMenu />} />
         <Route path="/appli/search" element={<AppliSearch />} />
-        <Route path="/appli/search/filtres" element={<AppliSearchFiltres />} />
         <Route path="/appli/search/card" element={<AppliCardCreche />} />
         <Route
           path="/appli/search/reservation"

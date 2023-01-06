@@ -3,10 +3,11 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import BlocJour from "@components/appli/recherche/BlocJour";
 import PropTypes from "prop-types";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart, AiFillStar } from "react-icons/ai";
 
-function CarteCreche({ data }) {
+function CarteCreche({ data, userPosition }) {
   const {
+    isCreche,
     photoStructure1,
     tarifHeure,
     structureId,
@@ -14,12 +15,13 @@ function CarteCreche({ data }) {
     nomUsage,
     nomNaissance,
     prenom,
+    adresse,
   } = data;
 
   const [likeCard, setLikeCard] = useState(true);
+
   // les horaires de chaques jour suivant l'id de la structure
   const [dataHorairesId, setDataHorairesId] = useState([]);
-
   const Token =
     "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getHorairesId = () => {
@@ -36,13 +38,83 @@ function CarteCreche({ data }) {
         console.error(err);
       });
   };
+
+  const [center, setCenter] = useState([0, 0]);
+
+  const handleDistance = () => {
+    // api convertir adresse en position gps
+    axios
+      .get(`https://api-adresse.data.gouv.fr/search/?q=${adresse}`)
+      .then((res) => {
+        setCenter(res.data.features[0].geometry.coordinates.reverse());
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  // --- calcul distance ---
+
+  function toRadian(degree) {
+    return (degree * Math.PI) / 180;
+  }
+
+  function getDistance(origin, destination) {
+    // return distance in meters
+    const lat1 = toRadian(origin[0]);
+    const lon1 = toRadian(origin[1]);
+    const lat2 = toRadian(destination[0]);
+    const lon2 = toRadian(destination[1]);
+
+    const deltaLat = lat2 - lat1;
+    const deltaLon = lon2 - lon1;
+
+    const a =
+      Math.sin(deltaLat / 2) ** 2 +
+      Math.cos(lat1) * Math.cos(lat2) * Math.sin(deltaLon / 2) ** 2;
+    const c = 2 * Math.asin(Math.sqrt(a));
+    const EARTH_RADIUS = 6371;
+    return c * EARTH_RADIUS * 1000;
+  }
+
+  const distance = (getDistance(userPosition, center) / 1000).toFixed(2);
+
+  // ---
+
+  const [nbStarMoyen, setNbStarMoyen] = useState(0);
+
+  const staring = () => {
+    setNbStarMoyen(
+      (
+        (data.avisCom +
+          data.avisProprete +
+          data.avisSecurite +
+          data.avisEveil +
+          data.avisHoraires) /
+        5
+      ).toFixed(1)
+    );
+  };
+
+  // ---
+
+  const blueBg = {
+    background: "linear-gradient( #7f72f266, #7f72f2cc)",
+  };
+
+  const pinkBg = {
+    background: "linear-gradient( #f063a766, #f063a7cc)",
+  };
+
   useEffect(() => {
     getHorairesId();
+    handleDistance();
+    staring();
   }, []);
 
   return (
     dataHorairesId.length !== 0 && (
-      <div className="carte-creche">
+      <div className="carte-creche" style={isCreche ? blueBg : pinkBg}>
         {likeCard ? (
           <AiFillHeart className="like" onClick={() => setLikeCard(false)} />
         ) : (
@@ -58,10 +130,14 @@ function CarteCreche({ data }) {
                   ? `${prenom} ${nomUsage}`
                   : `${prenom} ${nomNaissance}`)}
             </p>
+            <div className="star-all">
+              {nbStarMoyen}
+              {AiFillStar()}
+            </div>
           </div>
           <div className="info-creche">
             <div className="ville-prix">
-              <p>ville à X mètres</p>
+              <p>à {distance} km</p>
               <p className="prix">{tarifHeure}€/heure</p>
             </div>
             <BlocJour dataHorairesId={dataHorairesId} />
