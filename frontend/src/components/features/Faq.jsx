@@ -71,7 +71,7 @@ function Faq(props) {
           <h4 id="3">Je suis tombé sur une page d'erreur 404, que faire ?</h4>
           <p>
             Nous vous invitons à nous signaler le problème via le{" "}
-            <HashLink to="contact#contact">formulaire de contact</HashLink>, en
+            <HashLink to="/contact#contact">formulaire de contact</HashLink>, en
             nous indiquant l'adresse de la page d'erreur, située en haut de
             votre navigateur et qui commence par «babyplace.fr». Veuillez aussi
             nous indiquer la page ou se trouvait le lien qui vous a mené à la
@@ -81,7 +81,7 @@ function Faq(props) {
 
           <h4 id="4">Comment poser des questions à l'équipe de Babyplace ?</h4>
           <p>
-            Le <HashLink to="contact#contact">formulaire de contact</HashLink>{" "}
+            Le <HashLink to="/contact#contact">formulaire de contact</HashLink>{" "}
             vous permet de contacter notre équipe en quelques clics, mais vous
             pouvez aussi poser vos questions via Twitter, en indiquant notre
             compte (@babyplace) dans votre message.
@@ -97,7 +97,7 @@ function Faq(props) {
           <p>
             Nous sommes ouverts à de nombreuses formes de partenariats, à
             condition que l'internaute soit respecté. Le{" "}
-            <HashLink to="contact#contact">formulaire de contact</HashLink> vous
+            <HashLink to="/contact#contact">formulaire de contact</HashLink> vous
             permet de nous décrire le partenariat que vous recherchez.
           </p>
 
@@ -108,7 +108,7 @@ function Faq(props) {
             Nous avons prévu plusieurs espaces permettant de diffuser ses
             publicités sur les pages de notre site, pour connaitre les formats
             possibles et les tarifs, utilisez le{" "}
-            <HashLink to="contact#contact">formulaire de contact</HashLink>.
+            <HashLink to="/contact#contact">formulaire de contact</HashLink>.
           </p>
         </div>
       </section>
