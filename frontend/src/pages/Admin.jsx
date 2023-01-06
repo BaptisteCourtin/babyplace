@@ -43,8 +43,6 @@ function Admin() {
         getStructure()
     }, [])
 
-    console.log(data)
-
     return (
         <main className='admin'>
             <Nav />
