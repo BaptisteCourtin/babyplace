@@ -5,7 +5,7 @@ import close from "@assets/dashboard/closed-sign.svg";
 import DashCalendar from "../../agenda/calendar/DashCalendar";
 
 
-function Agenda({ title, updateDay, horaires, toggleDay, selected, dayId }) {
+function Agenda({ title, updateDay, horaires, toggleDay, setToggleDay, selected, setSelected, dayId }) {
 
     const [toggleType, setToggleType] = useState(0);
     const [clickedDay, setClickedDay] = useState(new Date());

@@ -46,10 +46,6 @@ function DashPlaces({
     return false;
   });
 
-  const setValues = () => {
-
-  }
-
   const getData = async () => {
     try {
       const res = await axios
@@ -168,7 +164,9 @@ function DashPlaces({
         updateDay={updateDay}
         horaires={horaires}
         toggleDay={toggleDay}
+        setToggleDay={setToggleDay}
         selected={selected}
+        setSelected={setSelected}
         dayId={dayId}
       />
       <section className="dashPlacesParams">
