@@ -9,7 +9,7 @@ import DashNavbar from "./nav/DashNavbar";
 import DashReservations from "./reservations/DashReservations";
 import DashAgenda from "./agenda/DashAgenda.jsx";
 import DashPlaces from "./places/DashPlaces";
-import Messages from "../messages/Messages";
+// import Messages from "../messages/Messages";
 
 function Dashboard() {
   const { state } = useLocation();
@@ -31,9 +31,9 @@ function Dashboard() {
     if (toggle === 3) {
       return <DashPlaces type={type} {...donnees} title="Horaires" />;
     }
-    if (toggle === 4) {
-      return <Messages {...donnees} />;
-    }
+   // if (toggle === 4) {
+   //   return <Messages {...donnees} />;
+   // }
     if (toggle === 5) {
       return navigate("/structure/inscription-form");
     }
