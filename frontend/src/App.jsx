@@ -1,7 +1,12 @@
 import Login from "@components/login/Login";
 import Synthesis from "@components/login/Synthesis";
 import Register from "@components/register/Register";
+
+import { useState } from "react";
+
 import { Route, Routes } from "react-router-dom";
+
+import UserEmailContext from "@components/context/UserEmailContext";
 
 import Appli from "@pages/appli/AppliTuto";
 import AppliMenu from "@pages/appli/AppliMenu";
@@ -24,8 +29,11 @@ import Admin from "@pages/Admin";
 import Stats from "@pages/Stats";
 
 function App() {
+  const [userEmail, setUserEmail] = useState("paulette07@laposte.net");
+
   return (
     <div className="app">
+      <UserEmailContext.Provider value={{ userEmail, setUserEmail }}>
       <Routes>
         <Route path="/" element={<Home />} />
 
@@ -60,6 +68,8 @@ function App() {
 
         <Route path="/structure/inscription-form" element={<FormStructure />} />
       </Routes>
+            </UserEmailContext.Provider>
+
     </div>
   );
 }

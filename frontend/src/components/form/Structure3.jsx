@@ -1,7 +1,7 @@
 import React from "react";
 import Proptypes from "prop-types";
 
-function Structure3({ photo1Src, photo2Src, photo3Src, updateFields }) {
+function Structure3({ photo1Src, photo2Src, photo3Src, inputRef1, inputRef2, inputRef3, updateFields }) {
   const updateImg1 = (e) => {
     // e.files contient un objet FileList
     const [picture] = e.target.files;
@@ -62,6 +62,7 @@ function Structure3({ photo1Src, photo2Src, photo3Src, updateFields }) {
               type="file"
               id="photo1"
               name="photo1"
+              ref={inputRef1}
               accept="image/png, image/jpg, image/jpeg"
               onChange={(e) => updateImg1(e)}
             />
@@ -77,6 +78,7 @@ function Structure3({ photo1Src, photo2Src, photo3Src, updateFields }) {
               type="file"
               id="photo2"
               name="photo2"
+              ref={inputRef2}
               accept="image/png, image/jpg, image/jpeg"
               onChange={(e) => updateImg2(e)}
             />
@@ -92,6 +94,7 @@ function Structure3({ photo1Src, photo2Src, photo3Src, updateFields }) {
               type="file"
               id="photo3"
               name="photo3"
+              ref={inputRef3}
               accept="image/png, image/jpg, image/jpeg"
               onChange={(e) => updateImg3(e)}
             />
