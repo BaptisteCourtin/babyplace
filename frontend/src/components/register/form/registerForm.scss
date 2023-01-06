@@ -93,7 +93,7 @@
       transition: 0.3s ease-in-out;
 
       &:hover {
-        background: $white;
+        background: transparent;
         color: $third;
         border: 1px solid $third;
       }

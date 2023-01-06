@@ -5,12 +5,24 @@ const updateHours = async (heureMin, heureMax, structureId, jourId) => {
     return result
 }
 
-const updateIndemnRepas = async (indemnRepas, id) => {
-    const [result] = await datasource.query("UPDATE structure SET indemnRepas = ? WHERE structureId = ?", [indemnRepas, id])
+const updateTarif = async (table, tarif, tarifValue, id) => {
+    const [result] = await datasource.query(`UPDATE ${table} SET ${tarif} = ? WHERE structureId = ?`, [tarifValue, id])
+    return result
+}
+
+const updateIndemn = async (table, indemn, indemnValue, id) => {
+    const [result] = await datasource.query(`UPDATE ${table} SET ${indemn} = ? WHERE structureId = ?`, [indemnValue, id])
+    return result
+}
+
+const updateOptions = async (options, optionsValue, id) => {
+    const [result] = await datasource.query(`UPDATE structure SET ${options} = ? WHERE structureId = ?`, [optionsValue, id])
     return result
 }
 
 module.exports = {
     updateHours,
-    updateIndemnRepas,
+    updateTarif,
+    updateIndemn,
+    updateOptions
 }

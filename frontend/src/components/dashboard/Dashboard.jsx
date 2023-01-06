@@ -13,9 +13,8 @@ import DashPlaces from "./places/DashPlaces";
 
 function Dashboard() {
   const { state } = useLocation();
-  const { donnees } = state;
+  const { data, userType } = state;
 
-  const [type, setType] = useState("creche");
   const [dashPage, setDashPage] = useLocalStorage(0, "dashPage");
 
   const navigate = useNavigate();
@@ -26,22 +25,24 @@ function Dashboard() {
       return <DashReservations />;
     }
     if (toggle === 2) {
-      return <DashAgenda {...donnees} />;
+      return <DashAgenda {...data} />;
     }
     if (toggle === 3) {
-      return <DashPlaces type={type} {...donnees} title="Horaires" />;
+      return <DashPlaces userType={userType} structureId={data.structureId} title="Horaires" />;
     }
-   // if (toggle === 4) {
-   //   return <Messages {...donnees} />;
-   // }
+    if (toggle === 4) {
+      return <Messages {...data} />;
+    }
+
     if (toggle === 5) {
       return navigate("/structure/inscription-form");
     }
   };
 
-  const deleteDates = (curDate) => {
-    axios.delete(`http://localhost:5000/calendrier?date=${curDate}`);
-  };
+  const deleteDates = async (curDate) => {
+    await axios
+      .delete(`http://localhost:5000/calendrier?date=${curDate}`)
+  }
 
   useEffect(() => {
     let curDate = new Date();
@@ -53,13 +54,13 @@ function Dashboard() {
 
   const reviews =
     Math.round(
-      ((donnees.avisCom +
-        donnees.avisHoraires +
-        donnees.avisEveil +
-        donnees.avisProprete +
-        donnees.avisSecurite) /
+      ((data.avisCom +
+        data.avisHoraires +
+        data.avisEveil +
+        data.avisProprete +
+        data.avisSecurite) /
         5) *
-        10
+      10
     ) / 10;
 
   return (
@@ -68,22 +69,13 @@ function Dashboard() {
         <button type="button">
           <FiBell />
         </button>
-        <button
-          type="button"
-          onClick={() => {
-            setToggle(0);
-            setDashPage(0);
-          }}
-        >
-          {donnees.nom || donnees.prenom}
+        <button type="button" onClick={() => { setToggle(0); setDashPage(0) }}>
+          <img src={data.photoProfil} />
+          {data.nom || data.prenom}
         </button>
       </nav>
       <main>
-        <DashNavbar
-          {...donnees}
-          setToggle={setToggle}
-          setDashPage={setDashPage}
-        />
+        <DashNavbar {...data} setToggle={setToggle} setDashPage={setDashPage} />
         <section className="dashboardSection">
           {pageShown()}
           {toggle === 0 && (
@@ -91,43 +83,50 @@ function Dashboard() {
               <div className="dashboardProfile">
                 <img
                   className="dashboardProfilePic"
-                  src={donnees.photoProfil}
+                  src={data.photoProfil}
                   alt=""
                   width={70}
                   height={70}
                   loading="lazy"
                 />
-                <h1>
-                  {donnees.nom}
+                <h2>
+                  {data.nom}
                   <span>
                     {reviews}
                     <AiFillStar />
+                    ({data.nbNotes})
                   </span>
-                </h1>
+                </h2>
+                {userType ? (
+                  <h1>
+                    {data.nom}
+                  </h1>
+                ) : (
+                  <h1>
+                    {data.prenom} {data.nomUsage ?? data.nomNaissance}
+                  </h1>
+                )}
               </div>
-              <p className="dashboardProfilePres">{donnees.description}</p>
+              <p className="dashboardProfilePres">{data.description}</p>
               <ul className="dashboardProfilePicList">
                 <li>
-                  <img src={donnees.photoStructure1} alt="" loading="lazy" />
+                  <img src={data?.photoStructure1} alt="" loading="lazy" />
                 </li>
                 <li>
-                  <img src={donnees.photoStructure2} alt="" loading="lazy" />
+                  <img src={data?.photoStructure2} alt="" loading="lazy" />
                 </li>
                 <li>
-                  <img src={donnees.photoStructure3} alt="" loading="lazy" />
+                  <img src={data?.photoStructure3} alt="" loading="lazy" />
                 </li>
               </ul>
               <div className="dashboardProfileContact">
                 <p>
                   <AiOutlinePhone />
-                  {donnees.telephone
-                    .toString()
-                    .match(/.{1,2}/g)
-                    .join(" ")}
+                  {data.telephone.toString().match(/.{1,2}/g).join(" ")}
                 </p>
                 <p>
                   <AiOutlineMail />
-                  {donnees.email}
+                  {data.email}
                 </p>
                 <p />
               </div>
@@ -141,7 +140,7 @@ function Dashboard() {
           Crée avec <span>♥</span> Wild Code School x Babyplace
         </p>
       </footer>
-    </div>
+    </div >
   );
 }
 

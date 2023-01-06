@@ -24,7 +24,7 @@ function RegisterForm() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    if (email && password && checked && pwdLength > 8) {
+    if (email && password && checked && pwdLength >= 8) {
       navigate("/structure/inscription-form");
     }
   };

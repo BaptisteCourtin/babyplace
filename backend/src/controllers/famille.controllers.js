@@ -1,4 +1,9 @@
-const familleModels = require("../models/famille.models.js");
+const familleModels = require("../models/famille.models");
+
+const getFamille = async (req, res) => {
+    const result = await familleModels.getFamille()
+    return res.json(result)
+}
 
 const getPersoConfiance = async (req, res) => {
   const result = await familleModels.getPersoConfiance(req);
@@ -13,4 +18,5 @@ const postReservation = async (req, res) => {
 module.exports = {
   getPersoConfiance,
   postReservation,
+  getFamille
 };

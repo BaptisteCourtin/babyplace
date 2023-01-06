@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Axios from "axios";
+import axios from "axios";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { toast } from "react-hot-toast";
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -15,24 +16,35 @@ function LoginForm() {
     setTypePwd(!typePwd);
   };
 
+  const adminEmail = import.meta.env.VITE_ADMIN_EMAIL;
+  const adminPassword = import.meta.env.VITE_ADMIN_PWD;
+
   const handleClick = (e) => {
     e.preventDefault();
     if (email && password) {
-      Axios.post("http://localhost:5000/auth", {
+      axios.post("http://localhost:5000/auth", {
         email,
         password,
       })
-        .then((ret) => {
-          const { token } = ret.data;
-
-          navigate("/login-params", {
-            state: {
-              token,
-            },
-          });
+        .then((res) => {
+          if (email !== adminEmail && password !== adminPassword) {
+            const { token } = res.data;
+            navigate("/login-params", {
+              state: {
+                token
+              }
+            })
+          } else if (email === adminEmail && password === adminPassword) {
+            const { token } = res.data;
+            navigate("/admin", {
+              state: {
+                token
+              }
+            })
+          }
         })
         .catch((err) => {
-          console.error(err);
+          toast.error(err?.response?.data || err.message)
         });
     }
   };
