@@ -27,16 +27,13 @@ function BaseMap({
 
   // --- position user ---
   const [ville, setVille] = useState(); // donné par utilisateur
-  const [center, setCenter] = useState([47.21725, -1.55336]); // donné par api suivant ville ou position de base
+  const [center, setCenter] = useState([47.2135655, -1.5496263]); // donné par api suivant ville ou position de base // base à la wild
 
   const getVraiPosition = () => {
     navigator.geolocation.getCurrentPosition(function (position) {
       setCenter([position.coords.latitude, position.coords.longitude]);
     });
   };
-  useEffect(() => {
-    getVraiPosition();
-  }, []);
 
   const handleVille = (e) => {
     e.preventDefault();
@@ -50,6 +47,10 @@ function BaseMap({
         console.error(err);
       });
   };
+
+  useEffect(() => {
+    getVraiPosition();
+  }, []);
 
   // --- icon perso pour vous etes ici ---
 

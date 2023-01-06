@@ -6,9 +6,7 @@ const getAllStructures = async (req, res) => {
 };
 
 const getStructureById = async (req, res) => {
-  // console.log([req.params.id]);
   const result = await structureModels.getStructureById(req);
-  // console.log("result :" + result);
   return res.json(result);
 };
 
@@ -18,14 +16,14 @@ const getStructure = async (req, res) => {
 };
 
 const logout = async (req, res) => {
-    const { token, tokenStart, id } = req.body
-    const result = await structureModels.logout(token, tokenStart, id)
-    if (result.affectedRows === 0) {
-        res.status(404).send("Not found")
-    } else {
-        res.sendStatus(204)
-    }
-}
+  const { token, tokenStart, id } = req.body;
+  const result = await structureModels.logout(token, tokenStart, id);
+  if (result.affectedRows === 0) {
+    res.status(404).send("Not found");
+  } else {
+    res.sendStatus(204);
+  }
+};
 
 const getStructureDataMess = async (req, res) => {
   const result = await structureModels.getStructureDataMess(req);
@@ -41,11 +39,21 @@ const updateNotes = async (req, res) => {
   }
 };
 
+const updateSignal = async (req, res) => {
+  const result = await structureModels.updateSignal(req);
+  if (result.affectedRows === 0) {
+    res.status(404).send("Not found");
+  } else {
+    res.sendStatus(204);
+  }
+};
+
 module.exports = {
   getStructure,
   getStructureDataMess,
   getAllStructures,
   getStructureById,
   updateNotes,
-  logout
+  logout,
+  updateSignal,
 };

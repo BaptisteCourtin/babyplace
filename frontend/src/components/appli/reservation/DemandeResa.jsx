@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Toggle from "../filtres/Toggle";
@@ -12,15 +13,53 @@ function DemandeResa({
   nomUsage,
   nomNaissance,
   prenom,
+  photo1,
   photo3,
   indemnEntretien,
   indemnRepas,
   indemnKm,
   tarifHeure,
+  structureId,
 }) {
   const [kilometre, setKilometre] = useState(false);
   const [entretien, setEntretien] = useState(false);
   const [repas, setRepas] = useState(false);
+  const [prixTotal, setPrixTotal] = useState(0);
+
+  const calculPrixTotal = () => {
+    setPrixTotal(
+      (
+        tarifHeure * (heureMax - heureMin) +
+        (kilometre && indemnKm) +
+        (repas && indemnRepas) +
+        (entretien && indemnEntretien)
+      ).toFixed(2)
+    );
+  };
+
+  useEffect(() => {
+    calculPrixTotal();
+  }, [kilometre, entretien, repas]);
+
+  let enfantId = 1;
+  const handleRequest = () => {
+    axios.post(`http://localhost:5000/reservation`, {
+      enfantId,
+      structureId,
+      prixTotal,
+      dateArrivee: jour,
+      heureArrivee: heureMin,
+      dateDepart: jour,
+      heureDepart: heureMax,
+    });
+    // nom-prenom enfant
+    // age enfant
+    // nom-prenom parent
+    // % profil complet
+
+    // temps total
+    setCompo(3);
+  };
 
   return (
     <>
@@ -37,7 +76,7 @@ function DemandeResa({
       </div>
       <main className="demande-resa">
         <div className="container-img">
-          <img src={photo3} alt="img creche" />
+          <img src={photo3 || photo1} alt="img creche" />
         </div>
 
         <div className="principale">
@@ -61,6 +100,7 @@ function DemandeResa({
               state={repas}
               nom="repas"
               p={`Indemnité de repas (${indemnRepas}€)`}
+              classique={true}
             />
             {indemnKm ? (
               <Toggle
@@ -68,6 +108,7 @@ function DemandeResa({
                 state={kilometre}
                 nom="kilometre"
                 p={`Indemnité kilométrique (${indemnKm}€/km)`}
+                classique={true}
               />
             ) : null}
             {indemnEntretien ? (
@@ -76,6 +117,7 @@ function DemandeResa({
                 state={entretien}
                 nom="entretien"
                 p={`Indemnité d'entretien (${indemnEntretien}€)`}
+                classique={true}
               />
             ) : null}
           </div>
@@ -85,21 +127,13 @@ function DemandeResa({
           <div className="prix">
             <p>
               {/* indemnKm par rapport au km */}
-              <span>
-                {(
-                  tarifHeure * (heureMax - heureMin) +
-                  (kilometre && indemnKm) +
-                  (repas && indemnRepas) +
-                  (entretien && indemnEntretien)
-                ).toFixed(2)}
-                € *
-              </span>
+              <span>{prixTotal}€ *</span>
             </p>
             <p>
               <span>{heureMax - heureMin}h de garde</span>
             </p>
           </div>
-          <button type="button" onClick={() => setCompo(3)}>
+          <button type="button" onClick={() => handleRequest()}>
             Suivant
           </button>
         </div>

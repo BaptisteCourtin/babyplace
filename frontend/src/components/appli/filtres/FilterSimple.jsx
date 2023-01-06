@@ -21,19 +21,6 @@ function FilterSimple({ setCompo, dataBasique, setDataBasique }) {
       </header>
 
       <main className="filter-simple">
-        {/* mettre le nom comme le state */}
-        {/* <Toggle
-          setter={setDataBasique}
-          state={dataBasique.creche}
-          nom="creche"
-          p="Crèche"
-        />
-        <Toggle
-          setter={setDataBasique}
-          state={dataBasique.assistance}
-          nom="assistance"
-          p="Assisstant maternel"
-        /> */}
         <div className="tri">
           <span>quel type de structure : </span>
           <select id="isCreche" onChange={(e) => ChangeIsCreche(e)}>

@@ -5,7 +5,7 @@ import Rating from "react-rating";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 import BlocStar from "./BlocStar";
 
-function Star({ com, proprete, securite, eveil, horaires }) {
+function Star({ com, proprete, securite, eveil, horaires, nbNotes }) {
   const [visibleStar, setVisibleStar] = useState(false);
   const [nbStarMoyen, setNbStarMoyen] = useState(0);
 
@@ -39,7 +39,7 @@ function Star({ com, proprete, securite, eveil, horaires }) {
       {visibleStar ? (
         <div className="container-etoile">
           <div className="bloc-star">
-            Avis (256)
+            Avis ({nbNotes})
             <Rating
               className="rating"
               emptySymbol={AiOutlineStar()}

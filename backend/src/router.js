@@ -16,6 +16,8 @@ router.get("/horaires/:id", horaires.getHorairesById); //search
 router.get("/structure/:id", structure.getStructureById); //notes
 router.put("/structure/notes/:id", structure.updateNotes); //notes
 router.get("/famille/conf/:id", famille.getPersoConfiance); //perso confiance
+router.put("/structure/signal/:id", structure.updateSignal); // signalement
+router.post("/reservation", famille.postReservation); // signalement
 
 // --- --- ---
 

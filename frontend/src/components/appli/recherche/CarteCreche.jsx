@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import BlocJour from "@components/appli/recherche/BlocJour";
 import PropTypes from "prop-types";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart, AiFillStar } from "react-icons/ai";
 
 function CarteCreche({ data, userPosition }) {
   const {
@@ -53,11 +53,6 @@ function CarteCreche({ data, userPosition }) {
       });
   };
 
-  useEffect(() => {
-    getHorairesId();
-    handleDistance();
-  }, []);
-
   // --- calcul distance ---
 
   function getDistance(origin, destination) {
@@ -84,6 +79,23 @@ function CarteCreche({ data, userPosition }) {
 
   // ---
 
+  const [nbStarMoyen, setNbStarMoyen] = useState(0);
+
+  const staring = () => {
+    setNbStarMoyen(
+      (
+        (data.avisCom +
+          data.avisProprete +
+          data.avisSecurite +
+          data.avisEveil +
+          data.avisHoraires) /
+        5
+      ).toFixed(1)
+    );
+  };
+
+  // ---
+
   const blueBg = {
     background: "linear-gradient( #7f72f266, #7f72f2cc)",
   };
@@ -91,6 +103,12 @@ function CarteCreche({ data, userPosition }) {
   const pinkBg = {
     background: "linear-gradient( #f063a766, #f063a7cc)",
   };
+
+  useEffect(() => {
+    getHorairesId();
+    handleDistance();
+    staring();
+  }, []);
 
   return (
     dataHorairesId.length !== 0 && (
@@ -110,6 +128,10 @@ function CarteCreche({ data, userPosition }) {
                   ? `${prenom} ${nomUsage}`
                   : `${prenom} ${nomNaissance}`)}
             </p>
+            <div className="star-all">
+              {nbStarMoyen}
+              {AiFillStar()}
+            </div>
           </div>
           <div className="info-creche">
             <div className="ville-prix">

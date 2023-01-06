@@ -9,7 +9,6 @@ import FilterSimple from "@components/appli/filtres/FilterSimple";
 import DateHeure from "@components/appli/filtres/DateHeure";
 import Services from "@components/appli/filtres/Services";
 import Aggrements from "@components/appli/filtres/Aggrements";
-import Adresse from "@components/appli/filtres/Adresse";
 
 function AppliSearch() {
   const [compo, setCompo] = useState(0);
@@ -55,9 +54,9 @@ function AppliSearch() {
   });
 
   const [dataAggrements, setDataAggrements] = useState({
-    handi: false, // faire si maxHandi 0 ou +
-    mois: false, // max18Mois
-    nuit: false, // maxNuit
+    handi: false,
+    mois: false,
+    nuit: false,
   });
 
   // ---
@@ -106,9 +105,6 @@ function AppliSearch() {
           setDataAggrements={setDataAggrements}
         />
       );
-    }
-    if (compo === 8) {
-      return <Adresse setCompo={setCompo} />;
     }
     return (
       <BaseCard

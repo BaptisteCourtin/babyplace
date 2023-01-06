@@ -1,13 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Toggle({ setter, state, nom, p }) {
+function Toggle({ setter, state, nom, p, classique }) {
   const handleChange = (e) => {
-    const { name } = e.target;
-    setter((prevState) => ({
-      ...prevState,
-      [name]: !state,
-    }));
+    if (classique) {
+      setter(!state);
+    } else {
+      const { name } = e.target;
+      setter((prevState) => ({
+        ...prevState,
+        [name]: !state,
+      }));
+    }
   };
 
   return (
