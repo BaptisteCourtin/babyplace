@@ -22,11 +22,14 @@ router.get("/horaires/:id", horaires.getHorairesById); //search
 router.get("/structure/notes/:id", structure.getStructureById); //notes
 router.get("/famille/conf/:id", famille.getPersoConfiance); //perso confiance
 router.get("/famille/formParent/:id", famille.getDonneesFormParent); //donnees du formulaire parent
+router.get("/famille/formEnfant/:id", famille.getDonneesFormEnfant); //donnees du formulaire enfant
 
 router.put("/structure/notes/:id", structure.updateNotes); //notes
 router.put("/structure/signal/:id", structure.updateSignal); // signalement
+router.put("/formParent/:id", famille.updateFormParent); // formulaire parent
+router.put("/formEnfant/:id", famille.updateFormEnfant); // formulaire enfant
 
-router.post("/reservation", famille.postReservation); // signalement
+router.post("/reservation", famille.postReservation); // reservation
 
 // --- --- ---
 

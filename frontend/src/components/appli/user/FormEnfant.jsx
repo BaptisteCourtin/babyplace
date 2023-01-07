@@ -1,109 +1,192 @@
-import React, { useState } from "react";
-
-const INITIAL_DATA = {
-  nom: "",
-  prenom: "",
-  naissance: "",
-  allergies: "",
-  medecin: "",
-  marcheur: "",
-};
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 function FormEnfant() {
-  const [data, setData] = useState(INITIAL_DATA);
-  function updateFields(fields) {
-    setData((prev) => {
-      return { ...prev, ...fields };
-    });
-  }
+  // meme nom que bdd
+  const [initialData, setInitialData] = useState({
+    nom: "",
+    prenom: "",
+    dateNaissance: "",
+    marcheur: "",
+    allergies: "",
+    medecin: "",
+  });
 
-  // faire un get pour remplir le formulaire
-  // faire un put pour remplir la bdd quand on clique sur envoyer (rajouter envoyer)
+  // --- changer une donnée avec le form ---
+
+  const handleChange = (e) => {
+    const { name } = e.target;
+    setInitialData((prevState) => ({
+      ...prevState,
+      [name]: e.target.value,
+    }));
+  };
+
+  // --- les donnees qui sont dans la bdd ---
+
+  const [donneesForm, setDonneesForm] = useState();
+  const [donneesOK, setDonneesOK] = useState(false); // les donnees sont prises => mis dans initial data
+  const [finalOK, setFinalOK] = useState(false); // donnees mises dans initial => go visuel
+
+  let enfantId = 1;
+  const Token =
+    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+  const getDonneesForm = () => {
+    axios
+      .get(`http://localhost:5000/famille/formEnfant/${enfantId}`, {
+        headers: {
+          "x-token": Token,
+        },
+      })
+      .then((res) => {
+        setDonneesForm(res.data);
+        setDonneesOK(true);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  useEffect(() => {
+    getDonneesForm();
+  }, []);
+
+  // --- func pour changer initial value ---
+
+  const handleChangeInitial = (ligne) => {
+    // ne marche pas pour dateNaissance
+    if (donneesForm[ligne] !== null) {
+      setInitialData((prevState) => ({
+        ...prevState,
+        [ligne]: donneesForm[ligne],
+      }));
+    }
+  };
+
+  const remplirInitial = () => {
+    handleChangeInitial("nom");
+    handleChangeInitial("prenom");
+    console.log(donneesForm.dateNaissance);
+    handleChangeInitial("dateNaissance");
+    handleChangeInitial("marcheur");
+    handleChangeInitial("allergies");
+    handleChangeInitial("medecin");
+
+    setFinalOK(true);
+  };
+
+  // pour avoir les data du back
+  useEffect(() => {
+    if (donneesOK === true) {
+      remplirInitial();
+    }
+  }, [donneesOK]);
+
+  // --- func pour changer la bdd ---
+
+  const updateFormEnfant = () => {
+    axios.put(`http://localhost:5000/formEnfant/${enfantId}`, {
+      initialData,
+    });
+  };
+
   // faire un bouton pour rajouter un enfant (+ caroussel de composant formulaire)
+  // changer marcheur en toggle
+  // faire pour que la date marche
 
   return (
-    <main className="enfant">
-      <h3>Dossier Enfants</h3>
+    finalOK === true && (
+      <main className="enfant">
+        <h3>Dossier Enfants</h3>
 
-      <div className="bebe">
-        {/* caroussel + map ? */}
-        <button type="button">Bébé 1</button>
-        <button type="button">Bébé 2</button>
-      </div>
-      <form>
-        <label htmlFor="nom">
-          <input
-            required
-            type="text"
-            name="nom"
-            id="nom"
-            value={data.nom}
-            onChange={(e) => updateFields({ nom: e.target.value })}
-          />
-          <p>Nom</p>
-        </label>
+        <div className="bebe">
+          {/* caroussel + map ? */}
+          <button type="button">Bébé 1</button>
+          <button type="button">Bébé 2</button>
+        </div>
+        <form>
+          <label htmlFor="nom">
+            <input
+              required
+              type="text"
+              name="nom"
+              id="nom"
+              value={initialData.nom}
+              onChange={(e) => handleChange(e)}
+            />
+            <p>Nom</p>
+          </label>
 
-        <label htmlFor="prenom">
-          <input
-            required
-            type="text"
-            name="prenom"
-            id="prenom"
-            value={data.prenom}
-            onChange={(e) => updateFields({ prenom: e.target.value })}
-          />
-          <p>Prenom</p>
-        </label>
+          <label htmlFor="prenom">
+            <input
+              required
+              type="text"
+              name="prenom"
+              id="prenom"
+              value={initialData.prenom}
+              onChange={(e) => handleChange(e)}
+            />
+            <p>Prenom</p>
+          </label>
 
-        <label htmlFor="naissance">
-          <input
-            required
-            type="date"
-            name="naissance"
-            id="naissance"
-            value={data.naissance}
-            onChange={(e) => updateFields({ naissance: e.target.value })}
-          />
-          <p>Date de naissance</p>
-        </label>
+          <label htmlFor="naissance">
+            <input
+              required
+              type="date"
+              name="naissance"
+              id="naissance"
+              value={initialData.naissance}
+              onChange={(e) => handleChange(e)}
+            />
+            <p>Date de naissance</p>
+          </label>
 
-        <label htmlFor="marcheur">
-          <input
-            required
-            type="text"
-            name="marcheur"
-            id="marcheur"
-            value={data.marcheur}
-            onChange={(e) => updateFields({ marcheur: e.target.value })}
-          />
-          <p>Marcheur / Non marcheur</p>
-        </label>
+          <label htmlFor="marcheur">
+            <input
+              required
+              type="text"
+              name="marcheur"
+              id="marcheur"
+              value={initialData.marcheur}
+              onChange={(e) => handleChange(e)}
+            />
+            <p>Marcheur / Non marcheur</p>
+          </label>
 
-        <label htmlFor="allergies">
-          <input
-            required
-            type="text"
-            name="allergies"
-            id="allergies"
-            value={data.allergies}
-            onChange={(e) => updateFields({ allergies: e.target.value })}
-          />
-          <p>Allergies</p>
-        </label>
+          <label htmlFor="allergies">
+            <input
+              required
+              type="text"
+              name="allergies"
+              id="allergies"
+              value={initialData.allergies}
+              onChange={(e) => handleChange(e)}
+            />
+            <p>Allergies</p>
+          </label>
 
-        <label htmlFor="medecin">
-          <input
-            required
-            type="text"
-            name="medecin"
-            id="medecin"
-            value={data.medecin}
-            onChange={(e) => updateFields({ medecin: e.target.value })}
-          />
-          <p>Médecin traitant</p>
-        </label>
-      </form>
-    </main>
+          <label htmlFor="medecin">
+            <input
+              required
+              type="text"
+              name="medecin"
+              id="medecin"
+              value={initialData.medecin}
+              onChange={(e) => handleChange(e)}
+            />
+            <p>Médecin traitant</p>
+          </label>
+        </form>
+        <div className="button-bas">
+          <button
+            type="submit"
+            className="butt"
+            onClick={() => updateFormEnfant()}
+          >
+            Envoyer
+          </button>
+        </div>
+      </main>
+    )
   );
 }
 

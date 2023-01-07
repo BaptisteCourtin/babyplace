@@ -15,8 +15,67 @@ const getPersoConfiance = async (req) => {
 
 const getDonneesFormParent = async (req) => {
   const [[result]] = await datasource.query(
-    "SELECT p.nom1, p.nom2, p.prenom1, p.prenom2, p.profession1, p.profession2, p.email1, p.email2, p.telephone1, p.telephone2, p.adresse1, p.adresse2 FROM famille AS f LEFT JOIN parent AS p ON f.familleId = p.familleId WHERE f.familleId = ?",
+    "SELECT nom1, nom2, prenom1, prenom2, profession1, profession2, email1, email2, telephone1, telephone2, adresse1, adresse2 FROM parent WHERE parentId = ?",
     [req.params.id]
+  );
+  return result;
+};
+
+const getDonneesFormEnfant = async (req) => {
+  const [[result]] = await datasource.query(
+    "SELECT nom, prenom, dateNaissance, marcheur, allergies, medecin FROM enfant WHERE enfantId = ?",
+    [req.params.id]
+  );
+  return result;
+};
+
+const updateFormParent = async (req) => {
+  const {
+    nom1,
+    prenom1,
+    profession1,
+    telephone1,
+    email1,
+    adresse1,
+
+    nom2,
+    prenom2,
+    profession2,
+    telephone2,
+    email2,
+    adresse2,
+  } = req.body.initialData;
+
+  const [result] = await datasource.query(
+    `UPDATE parent SET nom1 = ? , prenom1 = ? , profession1 = ? , telephone1 = ? , email1 = ? , adresse1 = ? , nom2 = ? , prenom2 = ? , profession2 = ? , telephone2 = ? , email2 = ? , adresse2 = ? WHERE parentId = ?`,
+    [
+      nom1,
+      prenom1,
+      profession1,
+      telephone1,
+      email1,
+      adresse1,
+
+      nom2,
+      prenom2,
+      profession2,
+      telephone2,
+      email2,
+      adresse2,
+
+      req.params.id,
+    ]
+  );
+  return result;
+};
+
+const updateFormEnfant = async (req) => {
+  const { nom, prenom, dateNaissance, marcheur, allergies, medecin } =
+    req.body.initialData;
+
+  const [result] = await datasource.query(
+    `UPDATE enfant SET nom = ? , prenom = ? , dateNaissance = ? , marcheur = ? , allergies = ? , medecin = ? WHERE enfantId = ?`,
+    [nom, prenom, dateNaissance, marcheur, allergies, medecin, req.params.id]
   );
   return result;
 };
@@ -53,4 +112,7 @@ module.exports = {
   postReservation,
   getDonneesFormParent,
   getFamille,
+  updateFormParent,
+  updateFormEnfant,
+  getDonneesFormEnfant,
 };

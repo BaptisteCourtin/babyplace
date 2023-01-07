@@ -35,12 +35,12 @@ function Parents() {
   const [donneesOK, setDonneesOK] = useState(false); // les donnees sont prises => mis dans initial data
   const [finalOK, setFinalOK] = useState(false); // donnees mises dans initial => go visuel
 
-  let familleId = 1;
+  let parentId = 1;
   const Token =
     "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getDonneesForm = () => {
     axios
-      .get(`http://localhost:5000/famille/formParent/${familleId}`, {
+      .get(`http://localhost:5000/famille/formParent/${parentId}`, {
         headers: {
           "x-token": Token,
         },
@@ -99,9 +99,13 @@ function Parents() {
     }
   }, [donneesOK]);
 
-  // faire un get pour remplir le formulaire - mettre les données dans le initial-value
-  // faire un put pour remplir la bdd quand on clique sur envoyer (rajouter envoyer *2)
-  // les value en ternaire
+  // --- func pour changer la bdd ---
+
+  const updateFormParent = () => {
+    axios.put(`http://localhost:5000/formParent/${parentId}`, {
+      initialData,
+    });
+  };
 
   return (
     finalOK === true && (
@@ -257,6 +261,16 @@ function Parents() {
             <p>Adresse</p>
           </label>
         </form>
+
+        <div className="button-bas">
+          <button
+            type="submit"
+            className="butt"
+            onClick={() => updateFormParent()}
+          >
+            Envoyer
+          </button>
+        </div>
       </main>
     )
   );

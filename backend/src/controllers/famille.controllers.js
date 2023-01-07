@@ -12,8 +12,30 @@ const getPersoConfiance = async (req, res) => {
 
 const getDonneesFormParent = async (req, res) => {
   const result = await familleModels.getDonneesFormParent(req);
-  // console.log(result); // OK
   return res.json(result);
+};
+
+const getDonneesFormEnfant = async (req, res) => {
+  const result = await familleModels.getDonneesFormEnfant(req);
+  return res.json(result);
+};
+
+const updateFormParent = async (req, res) => {
+  const result = await familleModels.updateFormParent(req);
+  if (result.affectedRows === 0) {
+    res.status(404).send("Not found");
+  } else {
+    res.sendStatus(204);
+  }
+};
+
+const updateFormEnfant = async (req, res) => {
+  const result = await familleModels.updateFormEnfant(req);
+  if (result.affectedRows === 0) {
+    res.status(404).send("Not found");
+  } else {
+    res.sendStatus(204);
+  }
 };
 
 const postReservation = async (req, res) => {
@@ -25,5 +47,8 @@ module.exports = {
   getPersoConfiance,
   postReservation,
   getFamille,
+  updateFormParent,
   getDonneesFormParent,
+  updateFormEnfant,
+  getDonneesFormEnfant,
 };
