@@ -2,8 +2,39 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 function Parents() {
+  // meme nom que bdd
+  const [initialData, setInitialData] = useState({
+    nom1: "",
+    prenom1: "",
+    profession1: "",
+    telephone1: "",
+    email1: "",
+    adresse1: "",
+
+    nom2: "",
+    prenom2: "",
+    profession2: "",
+    telephone2: "",
+    email2: "",
+    adresse2: "",
+  });
+
+  // --- changer une donnée avec le form ---
+
+  const handleChange = (e) => {
+    const { name } = e.target;
+    setInitialData((prevState) => ({
+      ...prevState,
+      [name]: e.target.value,
+    }));
+  };
+
   // --- les donnees qui sont dans la bdd ---
-  const [DonneesForm, setDonneesForm] = useState();
+
+  const [donneesForm, setDonneesForm] = useState();
+  const [donneesOK, setDonneesOK] = useState(false); // les donnees sont prises => mis dans initial data
+  const [finalOK, setFinalOK] = useState(false); // donnees mises dans initial => go visuel
+
   let familleId = 1;
   const Token =
     "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
@@ -16,7 +47,7 @@ function Parents() {
       })
       .then((res) => {
         setDonneesForm(res.data);
-        console.log(res.data);
+        setDonneesOK(true);
       })
       .catch((err) => {
         console.error(err);
@@ -26,39 +57,54 @@ function Parents() {
     getDonneesForm();
   }, []);
 
-  // --- data visible --
+  // --- func pour changer initial value ---
 
-  const INITIAL_DATA = {
-    nom1: "",
-    prenom1: "",
-    profession1: "",
-    tel1: "",
-    mail1: "",
-    adresse1: "",
+  const handleChangeInitial = (ligne) => {
+    // console.log("ligne :" + ligne); // ok
+    // console.log("donnesForm 3 :" + donneesForm.nom1);
+    // console.log("donnesForm 4 :" + donneesForm[ligne]);
 
-    nom2: "",
-    prenom2: "",
-    profession2: "",
-    tel2: "",
-    mail2: "",
-    adresse2: "",
+    if (donneesForm[ligne] !== null) {
+      setInitialData((prevState) => ({
+        ...prevState,
+        [ligne]: donneesForm[ligne],
+      }));
+    }
   };
 
-  const [data, setData] = useState(INITIAL_DATA);
-  function updateFields(fields) {
-    setData((prev) => {
-      return { ...prev, ...fields };
-    });
-  }
+  const remplirInitial = () => {
+    // console.log("donnesForm 2 :" + donneesForm.nom1);
+
+    handleChangeInitial("nom1");
+    handleChangeInitial("prenom1");
+    handleChangeInitial("profession1");
+    handleChangeInitial("telephone1");
+    handleChangeInitial("email1");
+    handleChangeInitial("adresse1");
+
+    handleChangeInitial("nom2");
+    handleChangeInitial("prenom2");
+    handleChangeInitial("profession2");
+    handleChangeInitial("telephone2");
+    handleChangeInitial("email2");
+    handleChangeInitial("adresse2");
+
+    setFinalOK(true);
+  };
+
+  // pour avoir les data du back
+  useEffect(() => {
+    if (donneesOK === true) {
+      remplirInitial();
+    }
+  }, [donneesOK]);
 
   // faire un get pour remplir le formulaire - mettre les données dans le initial-value
   // faire un put pour remplir la bdd quand on clique sur envoyer (rajouter envoyer *2)
   // les value en ternaire
 
-  // --- les donnees à envoyer ---
-
   return (
-    DonneesForm && (
+    finalOK === true && (
       <main className="parent">
         <h3>Dossier Parents</h3>
 
@@ -70,8 +116,8 @@ function Parents() {
               type="text"
               name="nom1"
               id="nom1"
-              value={data.nom1}
-              onChange={(e) => updateFields({ nom: e.target.value })}
+              value={initialData.nom1}
+              onChange={(e) => handleChange(e)}
             />
             <p>Nom</p>
           </label>
@@ -82,8 +128,8 @@ function Parents() {
               type="text"
               name="prenom1"
               id="prenom1"
-              value={data.prenom1}
-              onChange={(e) => updateFields({ prenom1: e.target.value })}
+              value={initialData.prenom1}
+              onChange={(e) => handleChange(e)}
             />
             <p>Prenom</p>
           </label>
@@ -94,32 +140,32 @@ function Parents() {
               type="text"
               name="profession1"
               id="profession1"
-              value={data.profession1}
-              onChange={(e) => updateFields({ profession1: e.target.value })}
+              value={initialData.profession1}
+              onChange={(e) => handleChange(e)}
             />
             <p>Profession</p>
           </label>
 
-          <label htmlFor="tel1">
+          <label htmlFor="telephone1">
             <input
               required
               type="number"
-              name="tel1"
-              id="tel1"
-              value={data.tel1}
-              onChange={(e) => updateFields({ tel1: e.target.value })}
+              name="telephone1"
+              id="telephone1"
+              value={initialData.telephone1}
+              onChange={(e) => handleChange(e)}
             />
             <p>telephone portable</p>
           </label>
 
-          <label htmlFor="mail1">
+          <label htmlFor="email1">
             <input
               required
               type="email"
-              name="mail1"
-              id="mail1"
-              value={data.mail1}
-              onChange={(e) => updateFields({ mail1: e.target.value })}
+              name="email1"
+              id="email1"
+              value={initialData.email1}
+              onChange={(e) => handleChange(e)}
             />
             <p>E mail</p>
           </label>
@@ -130,8 +176,8 @@ function Parents() {
               type="text"
               name="adresse1"
               id="adresse1"
-              value={data.adresse1}
-              onChange={(e) => updateFields({ adresse1: e.target.value })}
+              value={initialData.adresse1}
+              onChange={(e) => handleChange(e)}
             />
             <p>Adresse</p>
           </label>
@@ -145,8 +191,8 @@ function Parents() {
               type="text"
               name="nom2"
               id="nom2"
-              value={data.nom2}
-              onChange={(e) => updateFields({ nom2: e.target.value })}
+              value={initialData.nom2}
+              onChange={(e) => handleChange(e)}
             />
             <p>Nom</p>
           </label>
@@ -157,8 +203,8 @@ function Parents() {
               type="text"
               name="prenom2"
               id="prenom2"
-              value={data.prenom2}
-              onChange={(e) => updateFields({ prenom2: e.target.value })}
+              value={initialData.prenom2}
+              onChange={(e) => handleChange(e)}
             />
             <p>Prenom</p>
           </label>
@@ -169,32 +215,32 @@ function Parents() {
               type="text"
               name="profession2"
               id="profession2"
-              value={data.profession2}
-              onChange={(e) => updateFields({ profession2: e.target.value })}
+              value={initialData.profession2}
+              onChange={(e) => handleChange(e)}
             />
             <p>Profession</p>
           </label>
 
-          <label htmlFor="tel2">
+          <label htmlFor="telephone2">
             <input
               required
               type="number"
-              name="tel2"
-              id="tel2"
-              value={data.tel2}
-              onChange={(e) => updateFields({ tel2: e.target.value })}
+              name="telephone2"
+              id="telephone2"
+              value={initialData.telephone2}
+              onChange={(e) => handleChange(e)}
             />
             <p>telephone portable</p>
           </label>
 
-          <label htmlFor="mail2">
+          <label htmlFor="email2">
             <input
               required
               type="email"
-              name="mail2"
-              id="mail2"
-              value={data.mail2}
-              onChange={(e) => updateFields({ mail2: e.target.value })}
+              name="email2"
+              id="email2"
+              value={initialData.email2}
+              onChange={(e) => handleChange(e)}
             />
             <p>E mail</p>
           </label>
@@ -205,8 +251,8 @@ function Parents() {
               type="text"
               name="adresse2"
               id="adresse2"
-              value={data.adresse2}
-              onChange={(e) => updateFields({ adresse2: e.target.value })}
+              value={initialData.adresse2}
+              onChange={(e) => handleChange(e)}
             />
             <p>Adresse</p>
           </label>

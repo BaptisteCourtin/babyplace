@@ -12,6 +12,7 @@ const getPersoConfiance = async (req, res) => {
 
 const getDonneesFormParent = async (req, res) => {
   const result = await familleModels.getDonneesFormParent(req);
+  // console.log(result); // OK
   return res.json(result);
 };
 
