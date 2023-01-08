@@ -64,12 +64,10 @@ function Parents() {
     // console.log("donnesForm 3 :" + donneesForm.nom1);
     // console.log("donnesForm 4 :" + donneesForm[ligne]);
 
-    if (donneesForm[ligne] !== null) {
-      setInitialData((prevState) => ({
-        ...prevState,
-        [ligne]: donneesForm[ligne],
-      }));
-    }
+    setInitialData((prevState) => ({
+      ...prevState,
+      [ligne]: donneesForm[ligne],
+    }));
   };
 
   const remplirInitial = () => {
@@ -284,7 +282,7 @@ function Parents() {
             className="butt"
             onClick={() => updateFormParent()}
           >
-            Envoyer
+            Enregistrer
           </button>
         </div>
       </main>

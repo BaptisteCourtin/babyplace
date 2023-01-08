@@ -25,6 +25,11 @@ const getPourcent = async (req, res) => {
   return res.json(result);
 };
 
+const getNomsEtIdEnfants = async (req, res) => {
+  const result = await familleModels.getNomsEtIdEnfants(req);
+  return res.json(result);
+};
+
 const updateFormParent = async (req, res) => {
   const result = await familleModels.updateFormParent(req);
   if (result.affectedRows === 0) {
@@ -48,6 +53,16 @@ const postReservation = async (req, res) => {
   return res.json(result);
 };
 
+const postNewEnfant = async (req, res) => {
+  const result = await familleModels.postNewEnfant(req);
+  return res.json(result);
+};
+
+const deleteEnfant = async (req, res) => {
+  const result = await familleModels.deleteEnfant(req);
+  return res.json(result);
+};
+
 module.exports = {
   getPersoConfiance,
   postReservation,
@@ -57,4 +72,7 @@ module.exports = {
   updateFormEnfant,
   getDonneesFormEnfant,
   getPourcent,
+  getNomsEtIdEnfants,
+  postNewEnfant,
+  deleteEnfant,
 };

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Toggle from "../filtres/Toggle";
 
 function FormEnfant() {
   // meme nom que bdd
@@ -22,15 +23,38 @@ function FormEnfant() {
     }));
   };
 
-  // --- les donnees qui sont dans la bdd ---
+  // --- prise des donnees qui sont dans la bdd ---
+
+  const [nomsEnfants, setNomsEnfants] = useState();
+
+  let familleId = 1;
+  const Token =
+    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+  const getNomsEnfants = () => {
+    axios
+      .get(`http://localhost:5000/famille/nomsEnfants/${familleId}`, {
+        headers: {
+          "x-token": Token,
+        },
+      })
+      .then((res) => {
+        setNomsEnfants(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  useEffect(() => {
+    getNomsEnfants();
+  }, []);
 
   const [donneesForm, setDonneesForm] = useState();
   const [donneesOK, setDonneesOK] = useState(false); // les donnees sont prises => mis dans initial data
   const [finalOK, setFinalOK] = useState(false); // donnees mises dans initial => go visuel
+  const [enfantId, setEnfantId] = useState(1);
 
-  let enfantId = 1;
-  const Token =
-    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+  // const Token =
+  //   "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getDonneesForm = () => {
     axios
       .get(`http://localhost:5000/famille/formEnfant/${enfantId}`, {
@@ -48,13 +72,18 @@ function FormEnfant() {
   };
   useEffect(() => {
     getDonneesForm();
-  }, []);
+  }, [enfantId]);
 
   // --- func pour changer initial value ---
 
   const handleChangeInitial = (ligne) => {
     // ne marche pas pour dateNaissance
-    if (donneesForm[ligne] !== null) {
+    if (donneesForm[ligne] === null) {
+      setInitialData((prevState) => ({
+        ...prevState,
+        [ligne]: "",
+      }));
+    } else {
       setInitialData((prevState) => ({
         ...prevState,
         [ligne]: donneesForm[ligne],
@@ -65,7 +94,6 @@ function FormEnfant() {
   const remplirInitial = () => {
     handleChangeInitial("nom");
     handleChangeInitial("prenom");
-    console.log(donneesForm.dateNaissance);
     handleChangeInitial("dateNaissance");
     handleChangeInitial("marcheur");
     handleChangeInitial("allergies");
@@ -79,6 +107,7 @@ function FormEnfant() {
     if (donneesOK === true) {
       remplirInitial();
     }
+    setDonneesOK(false);
   }, [donneesOK]);
 
   // --- func pour changer la bdd ---
@@ -102,21 +131,52 @@ function FormEnfant() {
     });
   };
 
-  // faire un bouton pour rajouter un enfant (+ caroussel de composant formulaire)
-  // quand on clique sur le button pour ajouter un enfant => post avec rien dedans => on peut update trkl apres
-  // button pour delete l'enfant
-  // changer marcheur en toggle
-  // faire pour que la date marche
+  // --- ajout enfant ---
+
+  const ajoutEnfant = () => {
+    console.log("click new enfant");
+    axios.post(`http://localhost:5000/famille/newEnfant`, {
+      familleId,
+      prenom: "nouveau enfant",
+    });
+  };
+  // asynchronisme de l'affichage
+
+  // --- supprimer enfant ---
+
+  const deleteEnfant = () => {
+    axios.delete(`http://localhost:5000/famille/deleteEnfant/${enfantId}`);
+  };
+  // asynchronisme de l'affichage
+
+  // faire du css
 
   return (
-    finalOK === true && (
+    finalOK === true &&
+    nomsEnfants !== undefined && (
       <main className="enfant">
         <h3>Dossier Enfants</h3>
 
         <div className="bebe">
-          {/* caroussel + map ? */}
-          <button type="button">Bébé 1</button>
-          <button type="button">Bébé 2</button>
+          <button
+            className="create-kid"
+            type="button"
+            onClick={() => ajoutEnfant()}
+          >
+            Ajouter un enfant
+          </button>
+
+          <button className="delete-kid" onClick={() => deleteEnfant()}>
+            Supprimer enfant
+          </button>
+
+          <div className="all-kid">
+            {nomsEnfants.map((each) => (
+              <button type="button" onClick={() => setEnfantId(each.enfantId)}>
+                {each.prenom}
+              </button>
+            ))}
+          </div>
         </div>
         <form>
           <label htmlFor="nom">
@@ -143,29 +203,24 @@ function FormEnfant() {
             <p>Prenom</p>
           </label>
 
-          <label htmlFor="naissance">
+          <label htmlFor="dateNaissance">
             <input
               required
               type="date"
-              name="naissance"
-              id="naissance"
-              value={initialData.naissance}
+              name="dateNaissance"
+              id="dateNaissance"
+              value={initialData.dateNaissance}
               onChange={(e) => handleChange(e)}
             />
             <p>Date de naissance</p>
           </label>
 
-          <label htmlFor="marcheur">
-            <input
-              required
-              type="text"
-              name="marcheur"
-              id="marcheur"
-              value={initialData.marcheur}
-              onChange={(e) => handleChange(e)}
-            />
-            <p>Marcheur / Non marcheur</p>
-          </label>
+          <Toggle
+            setter={setInitialData}
+            state={initialData.marcheur}
+            nom="marcheur"
+            p="Marcheur / Non marcheur"
+          />
 
           <label htmlFor="allergies">
             <input
@@ -197,7 +252,7 @@ function FormEnfant() {
             className="butt"
             onClick={() => updateFormEnfant()}
           >
-            Envoyer
+            Enregistrer
           </button>
         </div>
       </main>

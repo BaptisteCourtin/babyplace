@@ -4,7 +4,6 @@ const getAllStructures = async () => {
   const [result] = await datasource.query(
     "SELECT s.*, s.structureId, c.nom, a.nomUsage, a.nomNaissance, a.prenom, a.indemnKm, a.indemnEntretien, a.animaux, a.nonFumeur, a.zeroPollution, a.repas, a.hygiene FROM structure AS s LEFT JOIN creche AS c ON s.structureId = c.structureId LEFT JOIN assMat AS a ON s.structureId = a.structureId WHERE s.isVerify = 1 AND s.role = 'user'"
     // besoin de s.structureId pour pas de pb d'affichage => sinon creche n'ont pas d'id
-    // ne pas prendre tous de c et a
   );
   return result;
 };

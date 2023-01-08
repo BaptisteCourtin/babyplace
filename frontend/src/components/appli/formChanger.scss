@@ -12,7 +12,7 @@
     width: 90%;
     flex-grow: 1;
 
-    label:not(.check) {
+    label:not(.check):not(.toggle) {
       position: relative;
       width: 100%;
 

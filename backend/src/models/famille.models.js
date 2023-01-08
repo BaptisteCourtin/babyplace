@@ -37,6 +37,14 @@ const getPourcent = async (req) => {
   return result;
 };
 
+const getNomsEtIdEnfants = async (req) => {
+  const [result] = await datasource.query(
+    "SELECT prenom, enfantId FROM enfant WHERE familleId = ?",
+    [req.params.id]
+  );
+  return result;
+};
+
 const updateFormParent = async (req) => {
   const {
     nom1,
@@ -125,6 +133,22 @@ const postReservation = async (req) => {
   return result;
 };
 
+const postNewEnfant = async (req) => {
+  const [result] = await datasource.query(
+    "INSERT INTO enfant (familleId, prenom) VALUES (?, ?)",
+    [req.body.familleId, req.body.prenom]
+  );
+  return result;
+};
+
+const deleteEnfant = async (req) => {
+  const [result] = await datasource.query(
+    "DELETE FROM enfant WHERE enfantId = ?",
+    [req.params.id]
+  );
+  return result;
+};
+
 module.exports = {
   getPersoConfiance,
   postReservation,
@@ -134,4 +158,7 @@ module.exports = {
   updateFormEnfant,
   getDonneesFormEnfant,
   getPourcent,
+  getNomsEtIdEnfants,
+  postNewEnfant,
+  deleteEnfant,
 };

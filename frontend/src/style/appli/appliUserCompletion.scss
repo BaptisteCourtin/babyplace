@@ -69,11 +69,11 @@
 
       // enfant
       .bebe {
-        width: 100%;
+        width: 90%;
         display: flex;
-        justify-content: space-around;
-        align-items: center;
+        gap: 1.5rem;
         margin: 1rem 0;
+        overflow-x: scroll;
 
         button {
           background-color: $third;
