@@ -23,6 +23,7 @@ router.get("/structure/notes/:id", structure.getStructureById); //notes
 router.get("/famille/conf/:id", famille.getPersoConfiance); //perso confiance
 router.get("/famille/formParent/:id", famille.getDonneesFormParent); //donnees du formulaire parent
 router.get("/famille/formEnfant/:id", famille.getDonneesFormEnfant); //donnees du formulaire enfant
+router.get("/famille/pourcent/:id", famille.getPourcent); // pourcent des formulaire
 
 router.put("/structure/notes/:id", structure.updateNotes); //notes
 router.put("/structure/signal/:id", structure.updateSignal); // signalement

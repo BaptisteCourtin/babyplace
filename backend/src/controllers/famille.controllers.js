@@ -20,6 +20,11 @@ const getDonneesFormEnfant = async (req, res) => {
   return res.json(result);
 };
 
+const getPourcent = async (req, res) => {
+  const result = await familleModels.getPourcent(req);
+  return res.json(result);
+};
+
 const updateFormParent = async (req, res) => {
   const result = await familleModels.updateFormParent(req);
   if (result.affectedRows === 0) {
@@ -51,4 +56,5 @@ module.exports = {
   getDonneesFormParent,
   updateFormEnfant,
   getDonneesFormEnfant,
+  getPourcent,
 };

@@ -29,6 +29,14 @@ const getDonneesFormEnfant = async (req) => {
   return result;
 };
 
+const getPourcent = async (req) => {
+  const [[result]] = await datasource.query(
+    "SELECT p.pourcentFormParent , e.pourcentFormEnfant , f.pourcentFormInscription FROM famille AS f INNER JOIN parent AS p ON f.familleId = p.familleId INNER JOIN enfant AS e ON f.familleId = e.familleId  WHERE f.familleId = ?",
+    [req.params.id]
+  );
+  return result;
+};
+
 const updateFormParent = async (req) => {
   const {
     nom1,
@@ -47,7 +55,7 @@ const updateFormParent = async (req) => {
   } = req.body.initialData;
 
   const [result] = await datasource.query(
-    `UPDATE parent SET nom1 = ? , prenom1 = ? , profession1 = ? , telephone1 = ? , email1 = ? , adresse1 = ? , nom2 = ? , prenom2 = ? , profession2 = ? , telephone2 = ? , email2 = ? , adresse2 = ? WHERE parentId = ?`,
+    `UPDATE parent SET nom1 = ? , prenom1 = ? , profession1 = ? , telephone1 = ? , email1 = ? , adresse1 = ? , nom2 = ? , prenom2 = ? , profession2 = ? , telephone2 = ? , email2 = ? , adresse2 = ?, pourcentFormParent = ? WHERE parentId = ?`,
     [
       nom1,
       prenom1,
@@ -63,6 +71,7 @@ const updateFormParent = async (req) => {
       email2,
       adresse2,
 
+      req.body.pourcent,
       req.params.id,
     ]
   );
@@ -74,8 +83,17 @@ const updateFormEnfant = async (req) => {
     req.body.initialData;
 
   const [result] = await datasource.query(
-    `UPDATE enfant SET nom = ? , prenom = ? , dateNaissance = ? , marcheur = ? , allergies = ? , medecin = ? WHERE enfantId = ?`,
-    [nom, prenom, dateNaissance, marcheur, allergies, medecin, req.params.id]
+    `UPDATE enfant SET nom = ? , prenom = ? , dateNaissance = ? , marcheur = ? , allergies = ? , medecin = ? , pourcentFormEnfant = ? WHERE enfantId = ?`,
+    [
+      nom,
+      prenom,
+      dateNaissance,
+      marcheur,
+      allergies,
+      medecin,
+      req.body.pourcent,
+      req.params.id,
+    ]
   );
   return result;
 };
@@ -115,4 +133,5 @@ module.exports = {
   updateFormParent,
   updateFormEnfant,
   getDonneesFormEnfant,
+  getPourcent,
 };

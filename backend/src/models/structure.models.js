@@ -10,9 +10,9 @@ const getAllStructures = async () => {
 };
 
 const getStructures = async () => {
-  const [result] = await datasource.query("SELECT * FROM structure")
+  const [result] = await datasource.query("SELECT * FROM structure");
   return result;
-}
+};
 
 const getStructureById = async (req) => {
   const [result] = await datasource.query(
@@ -31,29 +31,43 @@ const getStructure = async (req) => {
 };
 
 const getStructureType = async (id, type) => {
-  const [result] = await datasource.query(`SELECT * FROM structure AS s JOIN ${type} AS t ON s.structureId=t.structureId WHERE s.structureId = ?`, [id]);
+  const [result] = await datasource.query(
+    `SELECT * FROM structure AS s JOIN ${type} AS t ON s.structureId=t.structureId WHERE s.structureId = ?`,
+    [id]
+  );
   return result;
-}
+};
 
 const getStructureDetails = async (req, type, id) => {
-  const [result] = await datasource.query(`SELECT * FROM ${type} WHERE structureId = ?`, [id])
+  const [result] = await datasource.query(
+    `SELECT * FROM ${type} WHERE structureId = ?`,
+    [id]
+  );
   return result;
-}
+};
 
 const getNotVerified = async () => {
-  const [result] = await datasource.query(`SELECT *, s.structureId FROM structure AS s LEFT JOIN creche AS t ON s.structureId = t.structureId LEFT JOIN assMat AS a ON s.structureId=a.structureId WHERE isVerify = 0 OR isSignaled = 1`)
+  const [result] = await datasource.query(
+    `SELECT *, s.structureId FROM structure AS s LEFT JOIN creche AS t ON s.structureId = t.structureId LEFT JOIN assMat AS a ON s.structureId=a.structureId WHERE isVerify = 0 OR isSignaled = 1`
+  );
   return result;
-}
+};
 
 const updateVerified = async (id) => {
-  const [result] = await datasource.query("UPDATE structure SET isVerify = 1, isSignaled = 0 WHERE structureId = ?", [id])
+  const [result] = await datasource.query(
+    "UPDATE structure SET isVerify = 1, isSignaled = 0 WHERE structureId = ?",
+    [id]
+  );
   return result;
-}
+};
 
 const deleteRefused = async (id, type) => {
-  const [result] = await datasource.query(`DELETE FROM ${type} WHERE structureId = ?; DELETE FROM calendrier WHERE structureId = ?; DELETE FROM horaires WHERE structureID = ?; DELETE FROM structure WHERE structureId = ?`, [id, id, id, id])
+  const [result] = await datasource.query(
+    `DELETE FROM ${type} WHERE structureId = ?; DELETE FROM calendrier WHERE structureId = ?; DELETE FROM horaires WHERE structureID = ?; DELETE FROM structure WHERE structureId = ?`,
+    [id, id, id, id]
+  );
   return result;
-}
+};
 
 const logout = async (token, tokenStart, id) => {
   const [result] = await datasource.query(

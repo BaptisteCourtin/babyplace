@@ -83,13 +83,28 @@ function FormEnfant() {
 
   // --- func pour changer la bdd ---
 
+  const calculPourcent = () => {
+    let pourcent = 0;
+    for (let prop in initialData) {
+      if (initialData[prop] !== "") {
+        console.log(`obj.${prop} = ${initialData[prop]}`);
+        pourcent += 1;
+      }
+    }
+    return (pourcent * 100) / 6;
+  };
+
   const updateFormEnfant = () => {
+    let pourcent = calculPourcent();
     axios.put(`http://localhost:5000/formEnfant/${enfantId}`, {
       initialData,
+      pourcent,
     });
   };
 
   // faire un bouton pour rajouter un enfant (+ caroussel de composant formulaire)
+  // quand on clique sur le button pour ajouter un enfant => post avec rien dedans => on peut update trkl apres
+  // button pour delete l'enfant
   // changer marcheur en toggle
   // faire pour que la date marche
 

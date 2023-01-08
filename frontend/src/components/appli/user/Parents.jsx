@@ -101,11 +101,27 @@ function Parents() {
 
   // --- func pour changer la bdd ---
 
+  const calculPourcent = () => {
+    let pourcent = 0;
+    for (let prop in initialData) {
+      if (initialData[prop] !== "") {
+        console.log(`obj.${prop} = ${initialData[prop]}`);
+        pourcent += 1;
+      }
+    }
+    return (pourcent * 100) / 12;
+  };
+
   const updateFormParent = () => {
+    let pourcent = calculPourcent();
     axios.put(`http://localhost:5000/formParent/${parentId}`, {
       initialData,
+      pourcent,
     });
   };
+
+  // ajouter le poucentage de completion dans la bdd à partir d'ici pour la page user
+  // => obliger de prendre les infos à partir des pages de form
 
   return (
     finalOK === true && (
