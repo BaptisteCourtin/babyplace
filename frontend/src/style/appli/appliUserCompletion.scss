@@ -68,17 +68,61 @@
       }
 
       // enfant
-      .bebe {
+      .kid {
         width: 90%;
         display: flex;
-        gap: 1.5rem;
-        margin: 1rem 0;
-        overflow-x: scroll;
+        flex-direction: column;
+        margin: 1rem 0 2rem;
+        gap: 1rem;
 
-        button {
-          background-color: $third;
-          border-radius: 10px;
-          padding: 7px;
+        .action-kid {
+          font-size: $h4;
+          font-weight: 500;
+
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 1rem;
+
+          button {
+            background-color: $blue;
+            border-radius: 10px;
+            padding: 7px;
+          }
+
+          .create-kid {
+            color: $green;
+          }
+          .delete-kid {
+            color: red;
+          }
+        }
+
+        .all-kid {
+          margin-bottom: 1rem;
+
+          .carousel-root {
+            width: 100%;
+            ul.slider {
+              li.slide {
+                // ne pas mettre margin ici
+                .prenom-container {
+                  padding: 0.25rem; // important pour avoir des espaces et que le caroussel fonctionne
+                  button {
+                    height: 60px;
+                    width: 100%;
+                    word-wrap: break-word;
+                  }
+                }
+              }
+            }
+          }
+
+          button {
+            background-color: $third;
+            border-radius: 10px;
+            padding: 7px;
+          }
         }
       }
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Toggle from "../filtres/Toggle";
+import { Carousel } from "react-responsive-carousel";
 
 function FormEnfant() {
   // meme nom que bdd
@@ -157,26 +158,63 @@ function FormEnfant() {
       <main className="enfant">
         <h3>Dossier Enfants</h3>
 
-        <div className="bebe">
-          <button
-            className="create-kid"
-            type="button"
-            onClick={() => ajoutEnfant()}
-          >
-            Ajouter un enfant
-          </button>
+        <div className="kid">
+          <div className="action-kid">
+            <button
+              className="create-kid"
+              type="button"
+              onClick={() => ajoutEnfant()}
+            >
+              Ajouter un enfant
+            </button>
 
-          <button className="delete-kid" onClick={() => deleteEnfant()}>
-            Supprimer enfant
-          </button>
+            <button className="delete-kid" onClick={() => deleteEnfant()}>
+              Supprimer enfant
+            </button>
+          </div>
 
           <div className="all-kid">
-            {nomsEnfants.map((each) => (
-              <button type="button" onClick={() => setEnfantId(each.enfantId)}>
-                {each.prenom}
-              </button>
-            ))}
+            <Carousel
+              showArrows={false}
+              infiniteLoop={false}
+              showIndicators={false}
+              showStatus={false}
+              showThumbs={false}
+              emulateTouch
+              centerMode
+              centerSlidePercentage={40}
+            >
+              {nomsEnfants.map((each) => (
+                <div className="prenom-container">
+                  <button
+                    type="button"
+                    onClick={() => setEnfantId(each.enfantId)}
+                  >
+                    {each.prenom}
+                  </button>
+                </div>
+              ))}
+            </Carousel>
           </div>
+
+          {/* <div className="caroussel">
+          <Carousel
+            showArrows={false}
+            infiniteLoop={false}
+            showIndicators={false}
+            showStatus={false}
+            showThumbs={false}
+            emulateTouch
+            centerMode
+            centerSlidePercentage={70}
+            axis={screenWidth >= 650 ? "vertical" : "horizontal"}
+          >
+            {Allstructure
+              .map((each, index) => (
+                <CardCrecheMap data={each} key={index} />
+              ))}
+          </Carousel>
+        </div> */}
         </div>
         <form>
           <label htmlFor="nom">
