@@ -35,12 +35,12 @@ function Parents() {
   const [donneesOK, setDonneesOK] = useState(false); // les donnees sont prises => mis dans initial data
   const [finalOK, setFinalOK] = useState(false); // donnees mises dans initial => go visuel
 
-  let parentId = 1;
+  let familleId = 1;
   const Token =
     "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getDonneesForm = () => {
     axios
-      .get(`http://localhost:5000/famille/formParent/${parentId}`, {
+      .get(`http://localhost:5000/famille/formParent/${familleId}`, {
         headers: {
           "x-token": Token,
         },
@@ -59,33 +59,27 @@ function Parents() {
 
   // --- func pour changer initial value ---
 
-  const handleChangeInitial = (ligne) => {
-    // console.log("ligne :" + ligne); // ok
-    // console.log("donnesForm 3 :" + donneesForm.nom1);
-    // console.log("donnesForm 4 :" + donneesForm[ligne]);
-
+  const handleChangeInitial = (ligne, tab) => {
     setInitialData((prevState) => ({
       ...prevState,
-      [ligne]: donneesForm[ligne],
+      [`${ligne}${tab + 1}`]: donneesForm[tab][ligne],
     }));
   };
 
   const remplirInitial = () => {
-    // console.log("donnesForm 2 :" + donneesForm.nom1);
+    handleChangeInitial("nom", 0);
+    handleChangeInitial("prenom", 0);
+    handleChangeInitial("profession", 0);
+    handleChangeInitial("telephone", 0);
+    handleChangeInitial("email", 0);
+    handleChangeInitial("adresse", 0);
 
-    handleChangeInitial("nom1");
-    handleChangeInitial("prenom1");
-    handleChangeInitial("profession1");
-    handleChangeInitial("telephone1");
-    handleChangeInitial("email1");
-    handleChangeInitial("adresse1");
-
-    handleChangeInitial("nom2");
-    handleChangeInitial("prenom2");
-    handleChangeInitial("profession2");
-    handleChangeInitial("telephone2");
-    handleChangeInitial("email2");
-    handleChangeInitial("adresse2");
+    handleChangeInitial("nom", 1);
+    handleChangeInitial("prenom", 1);
+    handleChangeInitial("profession", 1);
+    handleChangeInitial("telephone", 1);
+    handleChangeInitial("email", 1);
+    handleChangeInitial("adresse", 1);
 
     setFinalOK(true);
   };
@@ -103,17 +97,24 @@ function Parents() {
     let pourcent = 0;
     for (let prop in initialData) {
       if (initialData[prop] !== "") {
-        console.log(`obj.${prop} = ${initialData[prop]}`);
         pourcent += 1;
       }
     }
-    return (pourcent * 100) / 12;
+    return parseInt((pourcent * 100) / 12);
+    // !!! pour 2 parents !!!
   };
 
-  const updateFormParent = () => {
+  const updateFormParent = (place) => {
+    let parentId = donneesForm[place - 1].parentId;
     let pourcent = calculPourcent();
     axios.put(`http://localhost:5000/formParent/${parentId}`, {
-      initialData,
+      nom: initialData[`nom${place}`],
+      prenom: initialData[`prenom${place}`],
+      profession: initialData[`profession${place}`],
+      telephone: initialData[`telephone${place}`],
+      email: initialData[`email${place}`],
+      adresse: initialData[`adresse${place}`],
+
       pourcent,
     });
   };
@@ -201,6 +202,16 @@ function Parents() {
           </label>
         </form>
 
+        <div className="button-bas">
+          <button
+            type="submit"
+            className="butt"
+            onClick={() => updateFormParent(1)}
+          >
+            Enregistrer
+          </button>
+        </div>
+
         <form>
           <h4>Parent 2</h4>
           <label htmlFor="nom2">
@@ -280,7 +291,7 @@ function Parents() {
           <button
             type="submit"
             className="butt"
-            onClick={() => updateFormParent()}
+            onClick={() => updateFormParent(2)}
           >
             Enregistrer
           </button>

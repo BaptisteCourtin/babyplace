@@ -117,7 +117,6 @@ function FormEnfant() {
     let pourcent = 0;
     for (let prop in initialData) {
       if (initialData[prop] !== "") {
-        console.log(`obj.${prop} = ${initialData[prop]}`);
         pourcent += 1;
       }
     }
@@ -149,8 +148,6 @@ function FormEnfant() {
     axios.delete(`http://localhost:5000/famille/deleteEnfant/${enfantId}`);
   };
   // asynchronisme de l'affichage
-
-  // faire du css
 
   return (
     finalOK === true &&
@@ -196,25 +193,6 @@ function FormEnfant() {
               ))}
             </Carousel>
           </div>
-
-          {/* <div className="caroussel">
-          <Carousel
-            showArrows={false}
-            infiniteLoop={false}
-            showIndicators={false}
-            showStatus={false}
-            showThumbs={false}
-            emulateTouch
-            centerMode
-            centerSlidePercentage={70}
-            axis={screenWidth >= 650 ? "vertical" : "horizontal"}
-          >
-            {Allstructure
-              .map((each, index) => (
-                <CardCrecheMap data={each} key={index} />
-              ))}
-          </Carousel>
-        </div> */}
         </div>
         <form>
           <label htmlFor="nom">

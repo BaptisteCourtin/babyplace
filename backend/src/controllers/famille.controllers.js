@@ -20,6 +20,11 @@ const getDonneesFormEnfant = async (req, res) => {
   return res.json(result);
 };
 
+const getDonneesFormInscription = async (req, res) => {
+  const result = await familleModels.getDonneesFormInscription(req);
+  return res.json(result);
+};
+
 const getPourcent = async (req, res) => {
   const result = await familleModels.getPourcent(req);
   return res.json(result);
@@ -75,4 +80,5 @@ module.exports = {
   getNomsEtIdEnfants,
   postNewEnfant,
   deleteEnfant,
+  getDonneesFormInscription,
 };

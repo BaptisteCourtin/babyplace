@@ -14,14 +14,22 @@ const getPersoConfiance = async (req) => {
 };
 
 const getDonneesFormParent = async (req) => {
-  const [[result]] = await datasource.query(
-    "SELECT nom1, nom2, prenom1, prenom2, profession1, profession2, email1, email2, telephone1, telephone2, adresse1, adresse2 FROM parent WHERE parentId = ?",
+  const [result] = await datasource.query(
+    "SELECT p.nom, p.prenom, p.profession, p.email, p.telephone, p.adresse, p.parentId FROM famille AS f INNER JOIN parent AS p ON f.familleId=p.familleId WHERE f.familleId = ?",
     [req.params.id]
   );
   return result;
 };
 
 const getDonneesFormEnfant = async (req) => {
+  const [[result]] = await datasource.query(
+    "SELECT nom, prenom, dateNaissance, marcheur, allergies, medecin FROM enfant WHERE enfantId = ?",
+    [req.params.id]
+  );
+  return result;
+};
+
+const getDonneesFormInscription = async (req) => {
   const [[result]] = await datasource.query(
     "SELECT nom, prenom, dateNaissance, marcheur, allergies, medecin FROM enfant WHERE enfantId = ?",
     [req.params.id]
@@ -46,41 +54,20 @@ const getNomsEtIdEnfants = async (req) => {
 };
 
 const updateFormParent = async (req) => {
-  const {
-    nom1,
-    prenom1,
-    profession1,
-    telephone1,
-    email1,
-    adresse1,
-
-    nom2,
-    prenom2,
-    profession2,
-    telephone2,
-    email2,
-    adresse2,
-  } = req.body.initialData;
+  const { nom, prenom, profession, telephone, email, adresse } = req.body;
 
   const [result] = await datasource.query(
-    `UPDATE parent SET nom1 = ? , prenom1 = ? , profession1 = ? , telephone1 = ? , email1 = ? , adresse1 = ? , nom2 = ? , prenom2 = ? , profession2 = ? , telephone2 = ? , email2 = ? , adresse2 = ?, pourcentFormParent = ? WHERE parentId = ?`,
+    `UPDATE parent SET nom = ? , prenom = ? , profession = ? , telephone = ? , email = ? , adresse = ? , pourcentFormParent = ? WHERE parentId = ?`,
     [
-      nom1,
-      prenom1,
-      profession1,
-      telephone1,
-      email1,
-      adresse1,
+      nom,
+      prenom,
+      profession,
+      telephone,
+      email,
+      adresse,
 
-      nom2,
-      prenom2,
-      profession2,
-      telephone2,
-      email2,
-      adresse2,
-
-      req.body.pourcent,
-      req.params.id,
+      parseInt(req.body.pourcent),
+      parseInt(req.params.id),
     ]
   );
   return result;
@@ -161,4 +148,5 @@ module.exports = {
   getNomsEtIdEnfants,
   postNewEnfant,
   deleteEnfant,
+  getDonneesFormInscription,
 };
