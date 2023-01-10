@@ -1,9 +1,14 @@
 const datasource = require("../../database");
 
 const getFamille = async () => {
-    const [result] = await datasource.query("SELECT familleId FROM famille")
-    return result
+  const [result] = await datasource.query("SELECT familleId FROM famille")
+  return result
 }
+
+const getFamilleDataMess = async (req) => {
+  const [result] = await datasource.query("SELECT * FROM famille");
+  return result;
+};
 
 const getPersoConfiance = async (req) => {
   const [result] = await datasource.query(
@@ -43,5 +48,7 @@ const postReservation = async (req) => {
 module.exports = {
   getPersoConfiance,
   postReservation,
-  getFamille
+  getFamille,
+  getFamilleDataMess
+
 };

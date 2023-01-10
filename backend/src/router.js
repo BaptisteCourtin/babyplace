@@ -25,9 +25,10 @@ router.get("/famille/conf/:id", famille.getPersoConfiance); //perso confiance
 router.put("/structure/signal/:id", structure.updateSignal); // signalement
 router.post("/reservation", famille.postReservation); // signalement
 
-// --- --- ---
+// --- pour messagerie ---
 
 router.get("/structure/all", structure.getStructureDataMess);
+router.get("/famille/all", famille.getFamilleDataMess);
 
 //Routes for dashboard + admin page start
 router.get("/structure", structure.getStructure);

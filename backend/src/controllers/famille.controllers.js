@@ -1,8 +1,8 @@
 const familleModels = require("../models/famille.models");
 
 const getFamille = async (req, res) => {
-    const result = await familleModels.getFamille()
-    return res.json(result)
+  const result = await familleModels.getFamille()
+  return res.json(result)
 }
 
 const getPersoConfiance = async (req, res) => {
@@ -15,8 +15,14 @@ const postReservation = async (req, res) => {
   return res.json(result);
 };
 
+const getFamilleDataMess = async (req, res) => {
+  const result = await familleModels.getFamilleDataMess(req);
+  return res.json(result);
+};
+
 module.exports = {
   getPersoConfiance,
   postReservation,
-  getFamille
+  getFamille,
+  getFamilleDataMess
 };

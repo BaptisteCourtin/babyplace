@@ -65,7 +65,7 @@ const logout = async (token, tokenStart, id) => {
 
 const getStructureDataMess = async (req) => {
   const [result] = await datasource.query(
-    "SELECT c.crecheId, c.nom, s.photoProfil FROM structure AS s JOIN creche AS c ON s.structureId=c.structureId WHERE s.isVerify = 1"
+    "SELECT * FROM structure AS s JOIN creche AS c ON s.structureId=c.structureId WHERE s.isVerify = 1"
   );
   return result;
 };
