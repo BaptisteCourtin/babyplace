@@ -5,7 +5,7 @@ import imgDossier from "@assets/img-dossier.svg";
 import Proptypes from "prop-types";
 import ResaContext from "@components/context/ResaContext";
 
-function Structure7({ resaInst, updateFields }) {
+function Structure7({ updateFields }) {
   const { resa, setResa } = useContext(ResaContext);
   return (
     <div>
