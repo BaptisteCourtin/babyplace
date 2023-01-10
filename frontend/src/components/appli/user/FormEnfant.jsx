@@ -78,7 +78,6 @@ function FormEnfant() {
   // --- func pour changer initial value ---
 
   const handleChangeInitial = (ligne) => {
-    // ne marche pas pour dateNaissance
     if (donneesForm[ligne] === null) {
       setInitialData((prevState) => ({
         ...prevState,

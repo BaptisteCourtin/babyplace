@@ -30,8 +30,8 @@ const getDonneesFormEnfant = async (req) => {
 };
 
 const getDonneesFormInscription = async (req) => {
-  const [[result]] = await datasource.query(
-    "SELECT nom, prenom, dateNaissance, marcheur, allergies, medecin FROM enfant WHERE enfantId = ?",
+  const [result] = await datasource.query(
+    "SELECT p.docJustifRevenus, p.docDeclaRevenus, p.docSituationPro, p.docJustifDom, p.numCaf, p.numSecu FROM famille AS f INNER JOIN parent AS p ON f.familleId=p.familleId WHERE f.familleId = ?",
     [req.params.id]
   );
   return result;

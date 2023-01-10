@@ -70,22 +70,26 @@ router.post(
   }
 );
 
-// change nom fichier dans bdd
+// change nom fichier puis mise dans bdd
 router.put("/formInscription/docParentChangeName/:id", (req, res) => {
   const {
     docJustifRevenus1,
     docDeclaRevenus1,
     docSituationPro1,
     docJustifDom1,
+    numCaf1,
+    numSecu1,
   } = req.body;
   datasource
     .query(
-      "UPDATE parent SET docJustifRevenus=?, docDeclaRevenus=?, docSituationPro=?, docJustifDom=? WHERE parentId=?",
+      "UPDATE parent SET docJustifRevenus=?, docDeclaRevenus=?, docSituationPro=?, docJustifDom=?, numCaf=?, numSecu=? WHERE parentId=?",
       [
         docJustifRevenus1,
         docDeclaRevenus1,
         docSituationPro1,
         docJustifDom1,
+        numCaf1,
+        numSecu1,
         req.params.id,
       ]
     )
