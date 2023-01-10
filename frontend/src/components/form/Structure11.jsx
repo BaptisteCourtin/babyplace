@@ -11,12 +11,12 @@ function Structure11({
   samediOuvert,
   dimancheOuvert,
   closedDays,
-  setClosedDays
+  setClosedDays,
 }) {
-
   const isOpenDay = (e) => {
-    const clickedDayFormated = `${e.getFullYear()}-${e.getMonth() + 1
-      }-${e.getDate()}`;
+    const clickedDayFormated = `${e.getFullYear()}-${
+      e.getMonth() + 1
+    }-${e.getDate()}`;
     if (closedDays.length > 0) {
       const indexOfDay = closedDays.indexOf(clickedDayFormated);
       if (indexOfDay !== -1) {
@@ -44,8 +44,9 @@ function Structure11({
       return "select";
     }
     if (closedDays.length > 0 && view === "month") {
-      const formatedDate = `${date.getFullYear()}-${date.getMonth() + 1
-        }-${date.getDate()}`;
+      const formatedDate = `${date.getFullYear()}-${
+        date.getMonth() + 1
+      }-${date.getDate()}`;
       if (closedDays.includes(formatedDate)) {
         return "select";
       }

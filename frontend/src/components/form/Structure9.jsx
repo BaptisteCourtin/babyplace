@@ -36,11 +36,14 @@ function Structure9({
                 onChange={(e) => {
                   lundiOuvert && updateFields({ lundiMin: e.target.value });
                   mardiOuvert && updateFields({ mardiMin: e.target.value });
-                  mercrediOuvert && updateFields({ mercrediMin: e.target.value });
+                  mercrediOuvert &&
+                    updateFields({ mercrediMin: e.target.value });
                   jeudiOuvert && updateFields({ jeudiMin: e.target.value });
-                  vendrediOuvert && updateFields({ vendrediMin: e.target.value });
+                  vendrediOuvert &&
+                    updateFields({ vendrediMin: e.target.value });
                   samediOuvert && updateFields({ samediMin: e.target.value });
-                  dimancheOuvert && updateFields({ dimancheMin: e.target.value });
+                  dimancheOuvert &&
+                    updateFields({ dimancheMin: e.target.value });
                 }}
               />
               <p>à</p>
@@ -51,11 +54,14 @@ function Structure9({
                 onChange={(e) => {
                   lundiOuvert && updateFields({ lundiMax: e.target.value });
                   mardiOuvert && updateFields({ mardiMax: e.target.value });
-                  mercrediOuvert && updateFields({ mercrediMax: e.target.value });
+                  mercrediOuvert &&
+                    updateFields({ mercrediMax: e.target.value });
                   jeudiOuvert && updateFields({ jeudiMax: e.target.value });
-                  vendrediOuvert && updateFields({ vendrediMax: e.target.value });
+                  vendrediOuvert &&
+                    updateFields({ vendrediMax: e.target.value });
                   samediOuvert && updateFields({ samediMax: e.target.value });
-                  dimancheOuvert && updateFields({ dimancheMax: e.target.value });
+                  dimancheOuvert &&
+                    updateFields({ dimancheMax: e.target.value });
                 }}
               />
             </div>
@@ -167,14 +173,18 @@ function Structure9({
                   type="time"
                   name="mercrediMin"
                   step="300"
-                  onChange={(e) => updateFields({ mercrediMin: e.target.value })}
+                  onChange={(e) =>
+                    updateFields({ mercrediMin: e.target.value })
+                  }
                 />
                 <p>à</p>
                 <input
                   type="time"
                   name="mercrediMax"
                   step="300"
-                  onChange={(e) => updateFields({ mercrediMax: e.target.value })}
+                  onChange={(e) =>
+                    updateFields({ mercrediMax: e.target.value })
+                  }
                 />
               </div>
             ) : (
@@ -247,14 +257,18 @@ function Structure9({
                   type="time"
                   name="vendrediMin"
                   step="300"
-                  onChange={(e) => updateFields({ vendrediMin: e.target.value })}
+                  onChange={(e) =>
+                    updateFields({ vendrediMin: e.target.value })
+                  }
                 />
                 <p>à</p>
                 <input
                   type="time"
                   name="vendrediMax"
                   step="300"
-                  onChange={(e) => updateFields({ vendrediMax: e.target.value })}
+                  onChange={(e) =>
+                    updateFields({ vendrediMax: e.target.value })
+                  }
                 />
               </div>
             ) : (
@@ -327,14 +341,18 @@ function Structure9({
                   type="time"
                   name="dimancheMin"
                   step="300"
-                  onChange={(e) => updateFields({ dimancheMin: e.target.value })}
+                  onChange={(e) =>
+                    updateFields({ dimancheMin: e.target.value })
+                  }
                 />
                 <p>à</p>
                 <input
                   type="time"
                   name="dimancheMax"
                   step="300"
-                  onChange={(e) => updateFields({ dimancheMax: e.target.value })}
+                  onChange={(e) =>
+                    updateFields({ dimancheMax: e.target.value })
+                  }
                 />
               </div>
             ) : (

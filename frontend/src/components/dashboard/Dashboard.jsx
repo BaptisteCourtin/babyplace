@@ -28,7 +28,13 @@ function Dashboard() {
       return <DashAgenda {...data} />;
     }
     if (toggle === 3) {
-      return <DashPlaces userType={userType} structureId={data.structureId} title="Horaires" />;
+      return (
+        <DashPlaces
+          userType={userType}
+          structureId={data.structureId}
+          title="Horaires"
+        />
+      );
     }
     if (toggle === 4) {
       return <Messages {...data} />;
@@ -40,14 +46,14 @@ function Dashboard() {
   };
 
   const deleteDates = async (curDate) => {
-    await axios
-      .delete(`http://localhost:5000/calendrier?date=${curDate}`)
-  }
+    await axios.delete(`http://localhost:5000/calendrier?date=${curDate}`);
+  };
 
   useEffect(() => {
     let curDate = new Date();
-    curDate = `${curDate.getFullYear()}-${curDate.getMonth() + 1
-      }-${curDate.getDate()}`;
+    curDate = `${curDate.getFullYear()}-${
+      curDate.getMonth() + 1
+    }-${curDate.getDate()}`;
     deleteDates(curDate);
   }, []);
 
@@ -59,7 +65,7 @@ function Dashboard() {
         data.avisProprete +
         data.avisSecurite) /
         5) *
-      10
+        10
     ) / 10;
 
   return (
@@ -68,7 +74,13 @@ function Dashboard() {
         <button type="button">
           <FiBell />
         </button>
-        <button type="button" onClick={() => { setToggle(0); setDashPage(0) }}>
+        <button
+          type="button"
+          onClick={() => {
+            setToggle(0);
+            setDashPage(0);
+          }}
+        >
           <img src={data.photoProfil} />
           {data.nom || data.prenom}
         </button>
@@ -92,14 +104,11 @@ function Dashboard() {
                   {data.nom}
                   <span>
                     {reviews}
-                    <AiFillStar />
-                    ({data.nbNotes})
+                    <AiFillStar />({data.nbNotes})
                   </span>
                 </h2>
                 {userType ? (
-                  <h1>
-                    {data.nom}
-                  </h1>
+                  <h1>{data.nom}</h1>
                 ) : (
                   <h1>
                     {data.prenom} {data.nomUsage ?? data.nomNaissance}
@@ -121,7 +130,10 @@ function Dashboard() {
               <div className="dashboardProfileContact">
                 <p>
                   <AiOutlinePhone />
-                  {data.telephone.toString().match(/.{1,2}/g).join(" ")}
+                  {data.telephone
+                    .toString()
+                    .match(/.{1,2}/g)
+                    .join(" ")}
                 </p>
                 <p>
                   <AiOutlineMail />
@@ -139,7 +151,7 @@ function Dashboard() {
           Crée avec <span>♥</span> Wild Code School x Babyplace
         </p>
       </footer>
-    </div >
+    </div>
   );
 }
 

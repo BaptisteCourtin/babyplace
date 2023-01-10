@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import DashCalendar from "./calendar/DashCalendar";
 import { toast } from "react-hot-toast";
+import DashCalendar from "./calendar/DashCalendar";
 
 function DashAgenda({ token, structureId, maxPlaces }) {
   const [data, setData] = useState([]);
@@ -13,118 +13,119 @@ function DashAgenda({ token, structureId, maxPlaces }) {
 
   const getData = async () => {
     try {
-      const res = await axios
-        .get("http://localhost:5000/structure", {
-          headers: {
-            "x-token": token,
-          },
-        })
+      const res = await axios.get("http://localhost:5000/structure", {
+        headers: {
+          "x-token": token,
+        },
+      });
       setData(res.data[0]);
-    }
-    catch (err) {
-      toast.error(err.message)
+    } catch (err) {
+      toast.error(err.message);
     }
   };
 
   const getHours = async () => {
     try {
-      const res = await axios
-        .get(`http://localhost:5000/horaires`, {
-          headers: {
-            "x-token": token,
-          },
-        })
-      setHours(res.data)
-    }
-    catch (err) {
-      toast.error(err.message)
+      const res = await axios.get(`http://localhost:5000/horaires`, {
+        headers: {
+          "x-token": token,
+        },
+      });
+      setHours(res.data);
+    } catch (err) {
+      toast.error(err.message);
     }
   };
 
   const getCalendar = async () => {
     try {
-      const res = await axios
-        .get(`http://localhost:5000/calendrier/${structureId}`, {
-          id: structureId
-        })
+      const res = await axios.get(
+        `http://localhost:5000/calendrier/${structureId}`,
+        {
+          id: structureId,
+        }
+      );
       setCalendar(res.data);
-    }
-    catch (err) {
-      toast.error(err.message)
+    } catch (err) {
+      toast.error(err.message);
     }
   };
 
   const updatePlaces = async () => {
     try {
-      await axios
-        .put(`http://localhost:5000/calendrier/places/${calendarIndex}`, {
+      await axios.put(
+        `http://localhost:5000/calendrier/places/${calendarIndex}`,
+        {
           id: calendarIndex,
           nbPlaces: places,
-        })
-      toast.success("Vos places ont bien été modifiées")
-      getCalendar()
+        }
+      );
+      toast.success("Vos places ont bien été modifiées");
+      getCalendar();
     } catch (err) {
-      toast.error(err.message)
+      toast.error(err.message);
     }
   };
 
   const updateStatusClose = async (calendarIndex) => {
     try {
-      await axios
-        .put(`http://localhost:5000/calendrier/places/close/${calendarIndex}`, {
+      await axios.put(
+        `http://localhost:5000/calendrier/places/close/${calendarIndex}`,
+        {
           id: calendarIndex,
-        })
-      toast.success("Bon repos")
-      getCalendar()
-      setPlaces("")
+        }
+      );
+      toast.success("Bon repos");
+      getCalendar();
+      setPlaces("");
     } catch (err) {
-      toast.error(err.message)
+      toast.error(err.message);
     }
   };
 
   const updateStatusOpen = async (calendarIndex) => {
     try {
-      await axios
-        .put(`http://localhost:5000/calendrier/places/open/${calendarIndex}`, {
+      await axios.put(
+        `http://localhost:5000/calendrier/places/open/${calendarIndex}`,
+        {
           id: calendarIndex,
           maxPlaces,
-        })
-      toast.success("Travaillez bien")
-      getCalendar()
-      setPlaces("")
+        }
+      );
+      toast.success("Travaillez bien");
+      getCalendar();
+      setPlaces("");
     } catch (err) {
-      toast.error(err.message)
+      toast.error(err.message);
     }
   };
 
   const addSleepDate = async () => {
     try {
-      await axios
-        .post(`http://localhost:5000/calendrier/add`, {
-          date,
-          nbPlaces: -1,
-          structureId,
-        }),
+      await axios.post(`http://localhost:5000/calendrier/add`, {
+        date,
+        nbPlaces: -1,
+        structureId,
+      }),
         toast.success("Bon repos"),
-        getCalendar()
+        getCalendar();
     } catch (err) {
-      toast.error(err.message)
+      toast.error(err.message);
     }
   };
 
   const addWorkDate = async () => {
     try {
       setPlaces(1);
-      await axios
-        .post(`http://localhost:5000/calendrier/add`, {
-          date,
-          nbPlaces: 1,
-          structureId,
-        })
+      await axios.post(`http://localhost:5000/calendrier/add`, {
+        date,
+        nbPlaces: 1,
+        structureId,
+      });
       toast.success("Travaillez bien");
-      getCalendar()
+      getCalendar();
     } catch (err) {
-      toast.error(err.message)
+      toast.error(err.message);
     }
   };
 
@@ -140,8 +141,9 @@ function DashAgenda({ token, structureId, maxPlaces }) {
   }-${curDate.getDate()}`;
 
   const [clickedDay, setClickedDay] = useState(new Date());
-  const date = `${clickedDay.getFullYear()}-${clickedDay.getMonth() + 1
-    }-${clickedDay.getDate()}`;
+  const date = `${clickedDay.getFullYear()}-${
+    clickedDay.getMonth() + 1
+  }-${clickedDay.getDate()}`;
 
   const day = clickedDay.toLocaleDateString("fr-FR", { weekday: "long" });
 

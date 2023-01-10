@@ -35,7 +35,7 @@ function Parents() {
   const [donneesOK, setDonneesOK] = useState(false); // les donnees sont prises => mis dans initial data
   const [finalOK, setFinalOK] = useState(false); // donnees mises dans initial => go visuel
 
-  let familleId = 1;
+  const familleId = 1;
   const Token =
     "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getDonneesForm = () => {
@@ -95,7 +95,7 @@ function Parents() {
 
   const calculPourcent = () => {
     let pourcent = 0;
-    for (let prop in initialData) {
+    for (const prop in initialData) {
       if (initialData[prop] !== "") {
         pourcent += 1;
       }
@@ -105,8 +105,8 @@ function Parents() {
   };
 
   const updateFormParent = (place) => {
-    let parentId = donneesForm[place - 1].parentId;
-    let pourcent = calculPourcent();
+    const { parentId } = donneesForm[place - 1];
+    const pourcent = calculPourcent();
     axios.put(`http://localhost:5000/formParent/${parentId}`, {
       nom: initialData[`nom${place}`],
       prenom: initialData[`prenom${place}`],

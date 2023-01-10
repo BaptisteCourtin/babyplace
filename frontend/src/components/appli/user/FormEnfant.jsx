@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Toggle from "../filtres/Toggle";
 import { Carousel } from "react-responsive-carousel";
+import Toggle from "../filtres/Toggle";
 
 function FormEnfant() {
   // meme nom que bdd
@@ -28,7 +28,7 @@ function FormEnfant() {
 
   const [nomsEnfants, setNomsEnfants] = useState();
 
-  let familleId = 1;
+  const familleId = 1;
   const Token =
     "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getNomsEnfants = () => {
@@ -115,7 +115,7 @@ function FormEnfant() {
 
   const calculPourcent = () => {
     let pourcent = 0;
-    for (let prop in initialData) {
+    for (const prop in initialData) {
       if (initialData[prop] !== "") {
         pourcent += 1;
       }
@@ -124,7 +124,7 @@ function FormEnfant() {
   };
 
   const updateFormEnfant = () => {
-    let pourcent = calculPourcent();
+    const pourcent = calculPourcent();
     axios.put(`http://localhost:5000/formEnfant/${enfantId}`, {
       initialData,
       pourcent,

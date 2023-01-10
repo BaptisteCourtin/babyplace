@@ -1,11 +1,14 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { AiOutlineEye, AiOutlineEyeInvisible, AiOutlineCheck } from "react-icons/ai";
+import {
+  AiOutlineEye,
+  AiOutlineEyeInvisible,
+  AiOutlineCheck,
+} from "react-icons/ai";
 import UserEmailContext from "@components/context/UserEmailContext";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 import Axios from "axios";
-
 
 function RegisterForm() {
   const navigate = useNavigate();
@@ -45,8 +48,8 @@ function RegisterForm() {
     }
   };
   const handleChange = (event) => {
-    setUserEmail(event.target.value)
-  }
+    setUserEmail(event.target.value);
+  };
   const handlePwdLength = (e) => {
     e.preventDefault();
     if (pwdLength < 8) {
@@ -70,7 +73,8 @@ function RegisterForm() {
           id="email"
           placeholder="Email"
           onChange={(event) => {
-            setEmail(event.target.value); handleChange(event);
+            setEmail(event.target.value);
+            handleChange(event);
           }}
           required
         />

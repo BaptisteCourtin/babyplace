@@ -14,6 +14,7 @@ const dashboard = require("./controllers/dashboard.controllers");
 const assMat = require("./controllers/assMat.controllers");
 const creche = require("./controllers/creche.controllers");
 const famille = require("./controllers/famille.controllers");
+const parent = require("./controllers/parent.controllers");
 
 // --- pour app ---
 
@@ -36,6 +37,70 @@ router.post("/reservation", famille.postReservation); // reservation
 router.post("/famille/newEnfant", famille.postNewEnfant); // nouveau enfant
 
 router.delete("/famille/deleteEnfant/:id", famille.deleteEnfant); // delete enfant
+
+// mettre dans uploads
+router.post(
+  "/formInscription/docParent",
+  multer({
+    storage: multer.diskStorage({
+      destination: (req, file, cb) => {
+        cb(null, "./public/uploads/formInscriptionParents");
+      },
+      filename: (req, file, cb) => {
+        const date = new Date();
+        cb(
+          null,
+          Math.round(Math.random() * 1000) +
+            `${date.getMinutes()}${date.getSeconds()}` +
+            Math.round(Math.random() * 1000) +
+            file.originalname
+          // nom avec des chiffres + nom d'origine du fichier
+        );
+      },
+    }),
+  }).fields([
+    // nom envoyer par formData
+    { name: "docJustifRevenus", maxCount: 1 },
+    { name: "docDeclaRevenus", maxCount: 1 },
+    { name: "docSituationPro", maxCount: 1 },
+    { name: "docJustifDom", maxCount: 1 },
+  ]),
+  (req, res) => {
+    res.send(req.files);
+  }
+);
+
+// change nom fichier dans bdd
+router.put("/formInscription/docParentChangeName/:id", (req, res) => {
+  const {
+    docJustifRevenus1,
+    docDeclaRevenus1,
+    docSituationPro1,
+    docJustifDom1,
+  } = req.body;
+  datasource
+    .query(
+      "UPDATE parent SET docJustifRevenus=?, docDeclaRevenus=?, docSituationPro=?, docJustifDom=? WHERE parentId=?",
+      [
+        docJustifRevenus1,
+        docDeclaRevenus1,
+        docSituationPro1,
+        docJustifDom1,
+        req.params.id,
+      ]
+    )
+    .then(([parent]) => {
+      if (parent.affectedRows === 0) {
+        res.status(404).send("Not Found");
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Modification impossible");
+    });
+});
 
 // --- --- ---
 
