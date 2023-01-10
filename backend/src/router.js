@@ -14,7 +14,6 @@ const dashboard = require("./controllers/dashboard.controllers");
 const assMat = require("./controllers/assMat.controllers");
 const creche = require("./controllers/creche.controllers");
 const famille = require("./controllers/famille.controllers");
-const parent = require("./controllers/parent.controllers");
 
 // --- pour app ---
 
@@ -39,7 +38,7 @@ router.post("/famille/newEnfant", famille.postNewEnfant); // nouveau enfant
 router.delete("/famille/deleteEnfant/:id", famille.deleteEnfant); // delete enfant
 
 // FORM INSCRIPTION PARENT (juste le where qui change)
-// mettre dans uploads
+// mettre dans uploads et change nom
 router.post(
   "/formInscription/docParent",
   multer({
@@ -54,6 +53,7 @@ router.post(
           Math.round(Math.random() * 1000) +
             `${date.getMinutes()}${date.getSeconds()}` +
             Math.round(Math.random() * 1000) +
+            "-qws-" +
             file.originalname
           // nom avec des chiffres + nom d'origine du fichier
         );
@@ -71,8 +71,7 @@ router.post(
   }
 );
 
-// FORM INSCRIPTION PARENT (juste le where qui change)
-// change nom fichier puis mise dans bdd
+// mise dans bdd
 router.put("/formInscription/docParentChangeName/:id", (req, res) => {
   const {
     docJustifRevenus,
@@ -109,7 +108,7 @@ router.put("/formInscription/docParentChangeName/:id", (req, res) => {
 });
 
 // FORM INSCRIPTION FAMILLE
-// mettre dans uploads
+// mettre dans uploads et change nom
 router.post(
   "/formInscription/docFamille",
   multer({
@@ -124,6 +123,7 @@ router.post(
           Math.round(Math.random() * 1000) +
             `${date.getMinutes()}${date.getSeconds()}` +
             Math.round(Math.random() * 1000) +
+            "-qws-" +
             file.originalname
           // nom avec des chiffres + nom d'origine du fichier
         );
@@ -141,8 +141,7 @@ router.post(
   }
 );
 
-// FORM INSCRIPTION FAMILLE
-// change nom fichier puis mise dans bdd
+// mise dans bdd
 router.put("/formInscription/docFamilleChangeName/:id", (req, res) => {
   const { docAssurParent, docRib, docAutoImage, docDivorce } = req.body;
   datasource

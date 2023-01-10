@@ -21,10 +21,10 @@ function Inscription() {
     numCaf2: "",
     numSecu2: "",
 
-    docAssurParent: null,
-    docRib: null,
-    docAutoImage: null,
-    docDivorce: null,
+    docAssurParent1: null,
+    docRib1: null,
+    docAutoImage1: null,
+    docDivorce1: null,
   });
 
   function updateFields(fields) {
@@ -43,6 +43,7 @@ function Inscription() {
     "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getDonneesForm = () => {
     axios
+      // !!! prend 2 fois les doc de famille car 2 parents et les données sont dans un tableau
       .get(`http://localhost:5000/famille/formInscription/${familleId}`, {
         headers: {
           "x-token": Token,
@@ -122,12 +123,12 @@ function Inscription() {
     e.preventDefault();
     // desctructure pour avoir parentId
     const { parentId } = donneesForm[num - 1];
-    console.log(parentId);
     const formData = new FormData();
 
     // que des if car pas obliger de tous mettre tout de suite
 
     if (num === 1) {
+      // si current !== null ET initial !== null
       if (docJustifRevenus1Src.current !== null) {
         formData.append(
           // nom envoyer dans router
@@ -178,33 +179,32 @@ function Inscription() {
     axios
       // mise dans uploads
       .post("http://localhost:5000/formInscription/docParent", formData)
+
+      // mise dans bdd
+      // mettre seulement ce qui n'est pas déjà dans la bdd
       .then((result) => {
         let docJustifRevenus = null;
         let docDeclaRevenus = null;
         let docSituationPro = null;
         let docJustifDom = null;
-        // nom dans la bdd
-        if (result.data.docJustifRevenus !== undefined) {
-          // nom dans la bdd
-          const doc = result.data.docJustifRevenus[0].filename;
-          // nom du let juste au dessus
-          docJustifRevenus = `http://localhost:5000/uploads/formInscriptionParents/${doc}`;
-        }
-        if (result.data.docDeclaRevenus !== undefined) {
-          const doc = result.data.docDeclaRevenus[0].filename;
-          docDeclaRevenus = `http://localhost:5000/uploads/formInscriptionParents/${doc}`;
-        }
-        if (result.data.docSituationPro !== undefined) {
-          const doc = result.data.docSituationPro[0].filename;
-          docSituationPro = `http://localhost:5000/uploads/formInscriptionParents/${doc}`;
-        }
-        if (result.data.docJustifDom !== undefined) {
-          const doc = result.data.docJustifDom[0].filename;
-          docJustifDom = `http://localhost:5000/uploads/formInscriptionParents/${doc}`;
-        }
 
-        // change nom des fichiers + mise dans bdd
         if (num === 1) {
+          docJustifRevenus = result.data.docJustifRevenus
+            ? result.data.docJustifRevenus[0].filename
+            : initialData.docJustifRevenus1;
+
+          docDeclaRevenus = result.data.docDeclaRevenus
+            ? result.data.docDeclaRevenus[0].filename
+            : initialData.docDeclaRevenus1;
+
+          docSituationPro = result.data.docSituationPro
+            ? result.data.docSituationPro[0].filename
+            : initialData.docSituationPro1;
+
+          docJustifDom = result.data.docJustifDom
+            ? result.data.docJustifDom[0].filename
+            : initialData.docJustifDom1;
+
           axios
             .put(
               `http://localhost:5000/formInscription/docParentChangeName/${parentId}`,
@@ -223,7 +223,24 @@ function Inscription() {
               console.error(err);
             });
         }
+
         if (num === 2) {
+          docJustifRevenus = result.data.docJustifRevenus
+            ? result.data.docJustifRevenus[0].filename
+            : initialData.docJustifRevenus2;
+
+          docDeclaRevenus = result.data.docDeclaRevenus
+            ? result.data.docDeclaRevenus[0].filename
+            : initialData.docDeclaRevenus2;
+
+          docSituationPro = result.data.docSituationPro
+            ? result.data.docSituationPro[0].filename
+            : initialData.docSituationPro2;
+
+          docJustifDom = result.data.docJustifDom
+            ? result.data.docJustifDom[0].filename
+            : initialData.docJustifDom2;
+
           axios
             .put(
               `http://localhost:5000/formInscription/docParentChangeName/${parentId}`,
@@ -266,34 +283,31 @@ function Inscription() {
       formData.append("docDivorce", docDivorceSrc.current.files[0]);
     }
 
+    // mise dans uploads
     axios
-      // mise dans uploads
       .post("http://localhost:5000/formInscription/docFamille", formData)
+
+      // mise dans bdd
+      // mettre seulement ce qui n'est pas déjà dans la bdd
+
       .then((result) => {
-        let docAssurParent = null;
-        let docRib = null;
-        let docAutoImage = null;
-        let docDivorce = null;
-        // nom dans bdd
-        if (result.data.docAssurParent !== undefined) {
-          // nom dans la bdd
-          const doc = result.data.docAssurParent[0].filename;
-          // nom du let juste au dessus
-          docAssurParent = `http://localhost:5000/uploads/formInscriptionFamille/${doc}`;
-        }
-        if (result.data.docRib !== undefined) {
-          const doc = result.data.docRib[0].filename;
-          docRib = `http://localhost:5000/uploads/formInscriptionFamille/${doc}`;
-        }
-        if (result.data.docAutoImage !== undefined) {
-          const doc = result.data.docAutoImage[0].filename;
-          docAutoImage = `http://localhost:5000/uploads/formInscriptionFamille/${doc}`;
-        }
-        if (result.data.docDivorce !== undefined) {
-          const doc = result.data.docDivorce[0].filename;
-          docDivorce = `http://localhost:5000/uploads/formInscriptionFamille/${doc}`;
-        }
-        // change nom des fichiers + mise dans bdd
+        console.log(result);
+        let docAssurParent = result.data.docAssurParent
+          ? result.data.docAssurParent[0].filename
+          : initialData.docAssurParent1;
+
+        let docRib = result.data.docRib
+          ? result.data.docRib[0].filename
+          : initialData.docRib1;
+
+        let docAutoImage = result.data.docAutoImage
+          ? result.data.docAutoImage[0].filename
+          : initialData.docAutoImage1;
+
+        let docDivorce = result.data.docDivorce
+          ? result.data.docDivorce[0].filename
+          : initialData.docDivorce1;
+
         axios
           .put(
             `http://localhost:5000/formInscription/docFamilleChangeName/${familleId}`,
@@ -319,6 +333,19 @@ function Inscription() {
       <main className="inscription">
         <h3>Dossier Inscription</h3>
         <form>
+          {/* --- */}
+
+          {/* {initialData.docJustifRevenus1 !== null ? (
+            <label htmlFor="docJustifRevenus1">
+              <input
+                type="text"
+                name="docJustifRevenus1"
+                id="docJustifRevenus1"
+                value={initialData.docJustifRevenus1}
+              />
+              <p>Justificatif de revenu (moins de 3 mois)</p>
+            </label>
+          ) : ( */}
           <label htmlFor="docJustifRevenus1">
             <input
               type="file"
@@ -336,6 +363,10 @@ function Inscription() {
             />
             <p>Justificatif de revenu (moins de 3 mois)</p>
           </label>
+          {/* )} */}
+
+          {/* --- */}
+
           <label htmlFor="docDeclaRevenus1">
             <input
               type="file"
