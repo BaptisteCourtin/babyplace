@@ -38,6 +38,7 @@ router.post("/famille/newEnfant", famille.postNewEnfant); // nouveau enfant
 
 router.delete("/famille/deleteEnfant/:id", famille.deleteEnfant); // delete enfant
 
+// FORM INSCRIPTION PARENT (juste le where qui change)
 // mettre dans uploads
 router.post(
   "/formInscription/docParent",
@@ -70,28 +71,84 @@ router.post(
   }
 );
 
+// FORM INSCRIPTION PARENT (juste le where qui change)
 // change nom fichier puis mise dans bdd
 router.put("/formInscription/docParentChangeName/:id", (req, res) => {
   const {
-    docJustifRevenus1,
-    docDeclaRevenus1,
-    docSituationPro1,
-    docJustifDom1,
-    numCaf1,
-    numSecu1,
+    docJustifRevenus,
+    docDeclaRevenus,
+    docSituationPro,
+    docJustifDom,
+    numCaf,
+    numSecu,
   } = req.body;
   datasource
     .query(
       "UPDATE parent SET docJustifRevenus=?, docDeclaRevenus=?, docSituationPro=?, docJustifDom=?, numCaf=?, numSecu=? WHERE parentId=?",
       [
-        docJustifRevenus1,
-        docDeclaRevenus1,
-        docSituationPro1,
-        docJustifDom1,
-        numCaf1,
-        numSecu1,
+        docJustifRevenus,
+        docDeclaRevenus,
+        docSituationPro,
+        docJustifDom,
+        numCaf,
+        numSecu,
         req.params.id,
       ]
+    )
+    .then(([parent]) => {
+      if (parent.affectedRows === 0) {
+        res.status(404).send("Not Found");
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Modification impossible");
+    });
+});
+
+// FORM INSCRIPTION FAMILLE
+// mettre dans uploads
+router.post(
+  "/formInscription/docFamille",
+  multer({
+    storage: multer.diskStorage({
+      destination: (req, file, cb) => {
+        cb(null, "./public/uploads/formInscriptionFamille");
+      },
+      filename: (req, file, cb) => {
+        const date = new Date();
+        cb(
+          null,
+          Math.round(Math.random() * 1000) +
+            `${date.getMinutes()}${date.getSeconds()}` +
+            Math.round(Math.random() * 1000) +
+            file.originalname
+          // nom avec des chiffres + nom d'origine du fichier
+        );
+      },
+    }),
+  }).fields([
+    // nom envoyer par formData
+    { name: "docAssurParent", maxCount: 1 },
+    { name: "docRib", maxCount: 1 },
+    { name: "docAutoImage", maxCount: 1 },
+    { name: "docDivorce", maxCount: 1 },
+  ]),
+  (req, res) => {
+    res.send(req.files);
+  }
+);
+
+// FORM INSCRIPTION FAMILLE
+// change nom fichier puis mise dans bdd
+router.put("/formInscription/docFamilleChangeName/:id", (req, res) => {
+  const { docAssurParent, docRib, docAutoImage, docDivorce } = req.body;
+  datasource
+    .query(
+      "UPDATE famille SET docAssurParent=?, docRib=?, docAutoImage=?, docDivorce=? WHERE familleId=?",
+      [docAssurParent, docRib, docAutoImage, docDivorce, req.params.id]
     )
     .then(([parent]) => {
       if (parent.affectedRows === 0) {

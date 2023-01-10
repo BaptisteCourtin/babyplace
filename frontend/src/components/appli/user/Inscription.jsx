@@ -3,7 +3,6 @@ import axios from "axios";
 
 function Inscription() {
   const familleId = 1;
-  const parentId = 1;
 
   // sert pour le updateFields
   // servira peut etre pour le get
@@ -109,105 +108,201 @@ function Inscription() {
   const docSituationPro1Src = useRef(null);
   const docJustifDom1Src = useRef(null);
 
-  // const docJustifRevenus2Src = useRef(null);
-  // const docDeclaRevenus2Src = useRef(null);
-  // const docSituationPro2Src = useRef(null);
-  // const docJustifDom2Src = useRef(null);
+  const docJustifRevenus2Src = useRef(null);
+  const docDeclaRevenus2Src = useRef(null);
+  const docSituationPro2Src = useRef(null);
+  const docJustifDom2Src = useRef(null);
 
-  // const docAssurParentSrc = useRef(null);
-  // const docRibSrc = useRef(null);
-  // const docAutoImageSrc = useRef(null);
-  // const docDivorceSrc = useRef(null);
+  const docAssurParentSrc = useRef(null);
+  const docRibSrc = useRef(null);
+  const docAutoImageSrc = useRef(null);
+  const docDivorceSrc = useRef(null);
 
-  const SubmitFormParent = (e) => {
+  const SubmitFormParent = (e, num) => {
     e.preventDefault();
+    // desctructure pour avoir parentId
+    const { parentId } = donneesForm[num - 1];
+    console.log(parentId);
     const formData = new FormData();
 
     // que des if car pas obliger de tous mettre tout de suite
-    if (docJustifRevenus1Src.current !== null) {
-      formData.append(
-        // nom envoyer dans router
-        "docJustifRevenus",
-        // nom du useref
-        docJustifRevenus1Src.current.files[0]
-      );
+
+    if (num === 1) {
+      if (docJustifRevenus1Src.current !== null) {
+        formData.append(
+          // nom envoyer dans router
+          "docJustifRevenus",
+          // nom du useref
+          docJustifRevenus1Src.current.files[0]
+        );
+      }
+      if (docDeclaRevenus1Src.current !== null) {
+        formData.append(
+          "docDeclaRevenus",
+          docDeclaRevenus1Src.current.files[0]
+        );
+      }
+      if (docSituationPro1Src.current !== null) {
+        formData.append(
+          "docSituationPro",
+          docSituationPro1Src.current.files[0]
+        );
+      }
+      if (docJustifDom1Src.current !== null) {
+        formData.append("docJustifDom", docJustifDom1Src.current.files[0]);
+      }
+    } else if (num === 2) {
+      if (docJustifRevenus2Src.current !== null) {
+        formData.append(
+          "docJustifRevenus",
+          docJustifRevenus2Src.current.files[0]
+        );
+      }
+      if (docDeclaRevenus2Src.current !== null) {
+        formData.append(
+          "docDeclaRevenus",
+          docDeclaRevenus2Src.current.files[0]
+        );
+      }
+      if (docSituationPro2Src.current !== null) {
+        formData.append(
+          "docSituationPro",
+          docSituationPro2Src.current.files[0]
+        );
+      }
+      if (docJustifDom2Src.current !== null) {
+        formData.append("docJustifDom", docJustifDom2Src.current.files[0]);
+      }
     }
-    if (docDeclaRevenus1Src.current !== null) {
-      formData.append("docDeclaRevenus", docDeclaRevenus1Src.current.files[0]);
-    }
-    if (docSituationPro1Src.current !== null) {
-      formData.append("docSituationPro", docSituationPro1Src.current.files[0]);
-    }
-    if (docJustifDom1Src.current !== null) {
-      formData.append("docJustifDom", docJustifDom1Src.current.files[0]);
-    }
-    // ---
-    // if (inputRefCni.current !== null) {
-    //   formData.append("docJustifRevenus2", docJustifRevenus2.current.files[0]);
-    // }
-    // if (inputRefCni.current !== null) {
-    //   formData.append("docDeclaRevenus2", docDeclaRevenus2.current.files[0]);
-    // }
-    // if (inputRefCpam.current !== null) {
-    //   formData.append("docSituationPro2", docSituationPro2.current.files[0]);
-    // }
-    // if (inputRefDom.current !== null) {
-    //   formData.append("docJustifDom2", docJustifDom2.current.files[0]);
-    // }
-    // // ---
-    // if (inputRefCni.current !== null) {
-    //   formData.append("docAssurParent", docAssurParent.current.files[0]);
-    // }
-    // if (inputRefCni.current !== null) {
-    //   formData.append("docRib", docRib.current.files[0]);
-    // }
-    // if (inputRefCpam.current !== null) {
-    //   formData.append("docAutoImage", docAutoImage.current.files[0]);
-    // }
-    // if (inputRefDom.current !== null) {
-    //   formData.append("docDivorce", docDivorce.current.files[0]);
-    // }
 
     axios
       // mise dans uploads
       .post("http://localhost:5000/formInscription/docParent", formData)
       .then((result) => {
-        let docJustifRevenus1 = null;
-        let docDeclaRevenus1 = null;
-        let docSituationPro1 = null;
-        let docJustifDom1 = null;
-        // nom dans bdd
+        let docJustifRevenus = null;
+        let docDeclaRevenus = null;
+        let docSituationPro = null;
+        let docJustifDom = null;
+        // nom dans la bdd
         if (result.data.docJustifRevenus !== undefined) {
           // nom dans la bdd
           const doc = result.data.docJustifRevenus[0].filename;
           // nom du let juste au dessus
-          docJustifRevenus1 = `http://localhost:5000/uploads/formInscriptionParents/${doc}`;
+          docJustifRevenus = `http://localhost:5000/uploads/formInscriptionParents/${doc}`;
         }
         if (result.data.docDeclaRevenus !== undefined) {
           const doc = result.data.docDeclaRevenus[0].filename;
-          docDeclaRevenus1 = `http://localhost:5000/uploads/formInscriptionParents/${doc}`;
+          docDeclaRevenus = `http://localhost:5000/uploads/formInscriptionParents/${doc}`;
         }
         if (result.data.docSituationPro !== undefined) {
           const doc = result.data.docSituationPro[0].filename;
-          docSituationPro1 = `http://localhost:5000/uploads/formInscriptionParents/${doc}`;
+          docSituationPro = `http://localhost:5000/uploads/formInscriptionParents/${doc}`;
         }
         if (result.data.docJustifDom !== undefined) {
           const doc = result.data.docJustifDom[0].filename;
-          docJustifDom1 = `http://localhost:5000/uploads/formInscriptionParents/${doc}`;
+          docJustifDom = `http://localhost:5000/uploads/formInscriptionParents/${doc}`;
+        }
+
+        // change nom des fichiers + mise dans bdd
+        if (num === 1) {
+          axios
+            .put(
+              `http://localhost:5000/formInscription/docParentChangeName/${parentId}`,
+              {
+                // nom des let
+                docJustifRevenus,
+                docDeclaRevenus,
+                docSituationPro,
+                docJustifDom,
+                // nom initial data
+                numCaf: initialData.numCaf1,
+                numSecu: initialData.numSecu1,
+              }
+            )
+            .catch((err) => {
+              console.error(err);
+            });
+        }
+        if (num === 2) {
+          axios
+            .put(
+              `http://localhost:5000/formInscription/docParentChangeName/${parentId}`,
+              {
+                // nom des let
+                docJustifRevenus,
+                docDeclaRevenus,
+                docSituationPro,
+                docJustifDom,
+                // nom initial data
+                numCaf: initialData.numCaf2,
+                numSecu: initialData.numSecu2,
+              }
+            )
+            .catch((err) => {
+              console.error(err);
+            });
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const SubmitFormFamille = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+
+    // que des if car pas obliger de tous mettre tout de suite
+    if (docAssurParentSrc.current !== null) {
+      formData.append("docAssurParent", docAssurParentSrc.current.files[0]);
+    }
+    if (docRibSrc.current !== null) {
+      formData.append("docRib", docRibSrc.current.files[0]);
+    }
+    if (docAutoImageSrc.current !== null) {
+      formData.append("docAutoImage", docAutoImageSrc.current.files[0]);
+    }
+    if (docDivorceSrc.current !== null) {
+      formData.append("docDivorce", docDivorceSrc.current.files[0]);
+    }
+
+    axios
+      // mise dans uploads
+      .post("http://localhost:5000/formInscription/docFamille", formData)
+      .then((result) => {
+        let docAssurParent = null;
+        let docRib = null;
+        let docAutoImage = null;
+        let docDivorce = null;
+        // nom dans bdd
+        if (result.data.docAssurParent !== undefined) {
+          // nom dans la bdd
+          const doc = result.data.docAssurParent[0].filename;
+          // nom du let juste au dessus
+          docAssurParent = `http://localhost:5000/uploads/formInscriptionFamille/${doc}`;
+        }
+        if (result.data.docRib !== undefined) {
+          const doc = result.data.docRib[0].filename;
+          docRib = `http://localhost:5000/uploads/formInscriptionFamille/${doc}`;
+        }
+        if (result.data.docAutoImage !== undefined) {
+          const doc = result.data.docAutoImage[0].filename;
+          docAutoImage = `http://localhost:5000/uploads/formInscriptionFamille/${doc}`;
+        }
+        if (result.data.docDivorce !== undefined) {
+          const doc = result.data.docDivorce[0].filename;
+          docDivorce = `http://localhost:5000/uploads/formInscriptionFamille/${doc}`;
         }
         // change nom des fichiers + mise dans bdd
         axios
           .put(
-            `http://localhost:5000/formInscription/docParentChangeName/${parentId}`,
+            `http://localhost:5000/formInscription/docFamilleChangeName/${familleId}`,
             {
               // nom des let
-              docJustifRevenus1,
-              docDeclaRevenus1,
-              docSituationPro1,
-              docJustifDom1,
-              // nom initial data
-              numCaf1: initialData.numCaf1,
-              numSecu1: initialData.numSecu1,
+              docAssurParent,
+              docRib,
+              docAutoImage,
+              docDivorce,
             }
           )
           .catch((err) => {
@@ -223,46 +318,24 @@ function Inscription() {
     finalOK === true && (
       <main className="inscription">
         <h3>Dossier Inscription</h3>
-
         <form>
-          {initialData.docJustifRevenus1 ? (
-            <label htmlFor="docJustifRevenus1">
-              <input
-                type="text"
-                accept="image/png, image/jpg, image/jpeg, .pdf"
-                name="docJustifRevenus1"
-                id="docJustifRevenus1"
-                value={initialData.docJustifRevenus1}
-                // onChange={() => {
-                //   updateFields({
-                //     docJustifRevenus1: docJustifRevenus1Src.current.files[0].name
-                //       .split(".")
-                //       .slice(-1)[0],
-                //   });
-                // }}
-              />
-              <p>Justificatif de revenu (moins de 3 mois)</p>
-            </label>
-          ) : (
-            <label htmlFor="docJustifRevenus1">
-              <input
-                type="file"
-                accept="image/png, image/jpg, image/jpeg, .pdf"
-                name="docJustifRevenus1"
-                id="docJustifRevenus1"
-                ref={docJustifRevenus1Src}
-                onChange={() => {
-                  updateFields({
-                    docJustifRevenus1:
-                      docJustifRevenus1Src.current.files[0].name
-                        .split(".")
-                        .slice(-1)[0],
-                  });
-                }}
-              />
-              <p>Justificatif de revenu (moins de 3 mois)</p>
-            </label>
-          )}
+          <label htmlFor="docJustifRevenus1">
+            <input
+              type="file"
+              accept="image/png, image/jpg, image/jpeg, .pdf"
+              name="docJustifRevenus1"
+              id="docJustifRevenus1"
+              ref={docJustifRevenus1Src}
+              onChange={() => {
+                updateFields({
+                  docJustifRevenus1: docJustifRevenus1Src.current.files[0].name
+                    .split(".")
+                    .slice(-1)[0],
+                });
+              }}
+            />
+            <p>Justificatif de revenu (moins de 3 mois)</p>
+          </label>
           <label htmlFor="docDeclaRevenus1">
             <input
               type="file"
@@ -341,178 +414,200 @@ function Inscription() {
           <button
             type="submit"
             className="butt"
-            onClick={(e) => SubmitFormParent(e)}
+            onClick={(e) => SubmitFormParent(e, 1)}
           >
             Enregistrer
           </button>
         </div>
+        {/* --------------------------------------- */}
+        <form>
+          <label htmlFor="docJustifRevenus2">
+            <input
+              type="file"
+              accept="image/png, image/jpg, image/jpeg, .pdf"
+              name="docJustifRevenus2"
+              id="docJustifRevenus2"
+              ref={docJustifRevenus2Src}
+              onChange={() => {
+                updateFields({
+                  docJustifRevenus2: docJustifRevenus2Src.current.files[0].name
+                    .split(".")
+                    .slice(-1)[0],
+                });
+              }}
+            />
+            <p>Justificatif de revenu (moins de 3 mois)</p>
+          </label>
 
+          <label htmlFor="docDeclaRevenus2">
+            <input
+              type="file"
+              accept="image/png, image/jpg, image/jpeg, .pdf"
+              name="docDeclaRevenus2"
+              id="docDeclaRevenus2"
+              ref={docDeclaRevenus2Src}
+              onChange={() => {
+                updateFields({
+                  docDeclaRevenus2: docDeclaRevenus2Src.current.files[0].name
+                    .split(".")
+                    .slice(-1)[0],
+                });
+              }}
+            />
+            <p>Déclaration de revenu (année en cours)</p>
+          </label>
+
+          <label htmlFor="docSituationPro2">
+            <input
+              type="file"
+              accept="image/png, image/jpg, image/jpeg, .pdf"
+              name="docSituationPro2"
+              id="docSituationPro2"
+              ref={docSituationPro2Src}
+              onChange={() => {
+                updateFields({
+                  docSituationPro2: docSituationPro2Src.current.files[0].name
+                    .split(".")
+                    .slice(-1)[0],
+                });
+              }}
+            />
+            <p>Justificatif de situation professionnel</p>
+          </label>
+
+          <label htmlFor="docJustifDom2">
+            <input
+              type="file"
+              accept="image/png, image/jpg, image/jpeg, .pdf"
+              name="docJustifDom2"
+              id="docJustifDom2"
+              ref={docJustifDom2Src}
+              onChange={() => {
+                updateFields({
+                  docJustifDom2: docJustifDom2Src.current.files[0].name
+                    .split(".")
+                    .slice(-1)[0],
+                });
+              }}
+            />
+            <p>Justificatif de domicile</p>
+          </label>
+          <label htmlFor="numCaf2">
+            <input
+              required
+              type="text"
+              name="numCaf2"
+              id="numCaf2"
+              value={initialData.numCaf2}
+              onChange={(e) => handleChange(e)}
+            />
+            <p>Numéro Allocataire CAF</p>
+          </label>
+          <label htmlFor="numSecu2">
+            <input
+              required
+              type="text"
+              name="numSecu2"
+              id="numSecu2"
+              value={initialData.numSecu2}
+              onChange={(e) => handleChange(e)}
+            />
+            <p>Numéro de sécurité sociale</p>
+          </label>
+        </form>
+        <div className="button-bas">
+          <button
+            type="submit"
+            className="butt"
+            onClick={(e) => SubmitFormParent(e, 2)}
+          >
+            Enregistrer
+          </button>
+        </div>
         {/* --------------------------------------- */}
 
-        {/* <form>
-        <label htmlFor="docJustifRevenus2">
-          <input
-            type="file"
-            accept="image/png, image/jpg, image/jpeg, .pdf"
-            name="docJustifRevenus2"
-            id="docJustifRevenus2"
-            ref={docJustifRevenus2Src}
-            onChange={() => {
-              updateFields({
-                docJustifRevenus2: docJustifRevenus2Src.current.files[0].name
-                  .split(".")
-                  .slice(-1)[0],
-              });
-            }}
-          />
-          <p>Justificatif de revenu (moins de 3 mois)</p>
-        </label>
+        <form>
+          <label htmlFor="docAssurParent">
+            <input
+              type="file"
+              accept="image/png, image/jpg, image/jpeg, .pdf"
+              name="docAssurParent"
+              id="docAssurParent"
+              ref={docAssurParentSrc}
+              onChange={() => {
+                updateFields({
+                  docAssurParent: docAssurParentSrc.current.files[0].name
+                    .split(".")
+                    .slice(-1)[0],
+                });
+              }}
+            />
+            <p>Numéro de sécurité sociale</p>
+          </label>
 
-        <label htmlFor="docDeclaRevenus2">
-          <input
-            type="file"
-            accept="image/png, image/jpg, image/jpeg, .pdf"
-            name="docDeclaRevenus2"
-            id="docDeclaRevenus2"
-            ref={docDeclaRevenus2Src}
-            onChange={() => {
-              updateFields({
-                docDeclaRevenus2: docDeclaRevenus2Src.current.files[0].name
-                  .split(".")
-                  .slice(-1)[0],
-              });
-            }}
-          />
-          <p>Déclaration de revenu (année en cours)</p>
-        </label>
+          <label htmlFor="docRib">
+            <input
+              type="file"
+              accept="image/png, image/jpg, image/jpeg, .pdf"
+              name="docRib"
+              id="docRib"
+              ref={docRibSrc}
+              onChange={() => {
+                updateFields({
+                  docRib: docRibSrc.current.files[0].name
+                    .split(".")
+                    .slice(-1)[0],
+                });
+              }}
+            />
+            <p>RIB</p>
+          </label>
 
-        <label htmlFor="docSituationPro2">
-          <input
-            type="file"
-            accept="image/png, image/jpg, image/jpeg, .pdf"
-            name="docSituationPro2"
-            id="docSituationPro2"
-            ref={docSituationPro2Src}
-            onChange={() => {
-              updateFields({
-                docSituationPro2: docSituationPro2Src.current.files[0].name
-                  .split(".")
-                  .slice(-1)[0],
-              });
-            }}
-          />
-          <p>Justificatif de situation professionnel</p>
-        </label>
+          <label htmlFor="docAutoImage">
+            <input
+              type="file"
+              accept="image/png, image/jpg, image/jpeg, .pdf"
+              name="docAutoImage"
+              id="docAutoImage"
+              ref={docAutoImageSrc}
+              onChange={() => {
+                updateFields({
+                  docAutoImage: docAutoImageSrc.current.files[0].name
+                    .split(".")
+                    .slice(-1)[0],
+                });
+              }}
+            />
+            <p>Autoristaion photo et video</p>
+          </label>
 
-        <label htmlFor="docJustifDom2">
-          <input
-            type="file"
-            accept="image/png, image/jpg, image/jpeg, .pdf"
-            name="docJustifDom2"
-            id="docJustifDom2"
-            ref={docJustifDom2Src}
-            onChange={() => {
-              updateFields({
-                docJustifDom2: docJustifDom2Src.current.files[0].name
-                  .split(".")
-                  .slice(-1)[0],
-              });
-            }}
-          />
-          <p>Justificatif de domicile</p>
-        </label>
-        <label htmlFor="numCaf2">
-          <input
-            type="text"
-            name="numCaf2"
-            id="numCaf2"
-            value={initialData.allergies}
-            onChange={(e) => handleChange(e)}
-          />
-          <p>Numéro Allocataire CAF</p>
-        </label>
-        <label htmlFor="numSecu2">
-          <input
-            type="text"
-            name="numSecu2"
-            id="numSecu2"
-            value={initialData.medecin}
-            onChange={(e) => handleChange(e)}
-          />
-          <p>Numéro de sécurité sociale</p>
-        </label>
-      </form> 
-
-      <div className="button-bas">
-        <button
-          type="submit"
-          className="butt"
-          onClick={(e) => SubmitFormParent(e)}
-        >
-          Enregistrer
-        </button>
-      </div> */}
-
-        {/* --------------------------------------- */}
-
-        {/* <form>
-        <label htmlFor="docAssurParent">
-          <input
-            type="file"
-            accept="image/png, image/jpg, image/jpeg, .pdf"
-            name="docAssurParent"
-            id="docAssurParent"
-            value={initialData.nom}
-            onChange={(e) => handleChange(e)}
-          />
-          <p>Numéro de sécurité sociale</p>
-        </label>
-
-        <label htmlFor="docRib">
-          <input
-            type="file"
-            accept="image/png, image/jpg, image/jpeg, .pdf"
-            name="docRib"
-            id="docRib"
-            value={initialData.prenom}
-            onChange={(e) => handleChange(e)}
-          />
-          <p>RIB</p>
-        </label>
-
-        <label htmlFor="docAutoImage">
-          <input
-            type="file"
-            accept="image/png, image/jpg, image/jpeg, .pdf"
-            name="docAutoImage"
-            id="docAutoImage"
-            value={initialData.dateNaissance}
-            onChange={(e) => handleChange(e)}
-          />
-          <p>Autoristaion photo et video</p>
-        </label>
-
-        <label htmlFor="docDivorce">
-          <input
-            type="file"
-            accept="image/png, image/jpg, image/jpeg, .pdf"
-            name="docDivorce"
-            id="docDivorce"
-            value={initialData.dateNaissance}
-            onChange={(e) => handleChange(e)}
-          />
-          <p>Copie du jugement de divorce</p>
-        </label>
-      </form>
-      <div className="button-bas">
-        <button
-          type="submit"
-          className="butt"
-          onClick={(e) => SubmitFormFamille(e)}
-        >
-          Enregistrer
-        </button>
-      </div> */}
+          <label htmlFor="docDivorce">
+            <input
+              type="file"
+              accept="image/png, image/jpg, image/jpeg, .pdf"
+              name="docDivorce"
+              id="docDivorce"
+              ref={docDivorceSrc}
+              onChange={() => {
+                updateFields({
+                  docDivorce: docDivorceSrc.current.files[0].name
+                    .split(".")
+                    .slice(-1)[0],
+                });
+              }}
+            />
+            <p>Copie du jugement de divorce</p>
+          </label>
+        </form>
+        <div className="button-bas">
+          <button
+            type="submit"
+            className="butt"
+            onClick={(e) => SubmitFormFamille(e)}
+          >
+            Enregistrer
+          </button>
+        </div>
       </main>
     )
   );
