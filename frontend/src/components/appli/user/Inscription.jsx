@@ -4,8 +4,7 @@ import axios from "axios";
 function Inscription() {
   const familleId = 1;
 
-  // sert pour le updateFields
-  // servira peut etre pour le get
+  // sert pour le updateFields et le get
   const [initialData, setInitialData] = useState({
     docJustifRevenus1: null,
     docDeclaRevenus1: null,
@@ -27,15 +26,15 @@ function Inscription() {
     docDivorce1: null,
   });
 
-  function updateFields(fields) {
-    setInitialData((prev) => {
-      return { ...prev, ...fields };
-    });
-  }
+  // function updateFields(fields) {
+  //   setData((prev) => {
+  //     return { ...prev, ...fields };
+  //   });
+  // }
 
   // --- prise info bdd ---
 
-  const [donneesForm, setDonneesForm] = useState();
+  const [donneesForm, setDonneesForm] = useState(); // pris dans bdd
   const [donneesOK, setDonneesOK] = useState(false); // les donnees sont prises => mis dans initial data
   const [finalOK, setFinalOK] = useState(false); // donnees mises dans initial => go visuel
 
@@ -63,6 +62,7 @@ function Inscription() {
 
   // --- func pour changer initial value ---
 
+  // met le back dans initial
   const handleChangeInitial = (ligne, tab) => {
     setInitialData((prevState) => ({
       ...prevState,
@@ -71,6 +71,7 @@ function Inscription() {
   };
 
   const remplirInitial = () => {
+    console.log("donneesForm go initial : ");
     console.log(donneesForm);
 
     handleChangeInitial("docJustifRevenus", 0);
@@ -128,7 +129,7 @@ function Inscription() {
     // que des if car pas obliger de tous mettre tout de suite
 
     if (num === 1) {
-      // si current !== null ET initial !== null
+      // si current !== null
       if (docJustifRevenus1Src.current !== null) {
         formData.append(
           // nom envoyer dans router
@@ -177,7 +178,7 @@ function Inscription() {
     }
 
     axios
-      // mise dans uploads
+      // mise dans uploads // formData contient les noms des fichiers des Src
       .post("http://localhost:5000/formInscription/docParent", formData)
 
       // mise dans bdd
@@ -291,7 +292,6 @@ function Inscription() {
       // mettre seulement ce qui n'est pas déjà dans la bdd
 
       .then((result) => {
-        console.log(result);
         let docAssurParent = result.data.docAssurParent
           ? result.data.docAssurParent[0].filename
           : initialData.docAssurParent1;
@@ -335,89 +335,130 @@ function Inscription() {
         <form>
           {/* --- */}
 
-          {/* {initialData.docJustifRevenus1 !== null ? (
+          {/* initialData se reset avant l'enregistrement */}
+          {initialData.docJustifRevenus1 !== null ? (
+            <>
+              <button
+                type="button"
+                onClick={() => (initialData.docJustifRevenus1 = null)}
+              >
+                Supp
+              </button>
+              <button type="button">
+                <a
+                  href="http://localhost:5000/public/uploads/formInscriptionParents/${}"
+                  target="_blank"
+                ></a>
+                Nom.pdf
+              </button>
+            </>
+          ) : (
             <label htmlFor="docJustifRevenus1">
               <input
-                type="text"
+                type="file"
+                accept="image/png, image/jpg, image/jpeg, .pdf"
                 name="docJustifRevenus1"
                 id="docJustifRevenus1"
-                value={initialData.docJustifRevenus1}
+                ref={docJustifRevenus1Src}
               />
               <p>Justificatif de revenu (moins de 3 mois)</p>
             </label>
-          ) : ( */}
-          <label htmlFor="docJustifRevenus1">
-            <input
-              type="file"
-              accept="image/png, image/jpg, image/jpeg, .pdf"
-              name="docJustifRevenus1"
-              id="docJustifRevenus1"
-              ref={docJustifRevenus1Src}
-              onChange={() => {
-                updateFields({
-                  docJustifRevenus1: docJustifRevenus1Src.current.files[0].name
-                    .split(".")
-                    .slice(-1)[0],
-                });
-              }}
-            />
-            <p>Justificatif de revenu (moins de 3 mois)</p>
-          </label>
-          {/* )} */}
+          )}
 
           {/* --- */}
 
-          <label htmlFor="docDeclaRevenus1">
-            <input
-              type="file"
-              accept="image/png, image/jpg, image/jpeg, .pdf"
-              name="docDeclaRevenus1"
-              id="docDeclaRevenus1"
-              ref={docDeclaRevenus1Src}
-              onChange={() => {
-                updateFields({
-                  docDeclaRevenus1: docDeclaRevenus1Src.current.files[0].name
-                    .split(".")
-                    .slice(-1)[0],
-                });
-              }}
-            />
-            <p>Déclaration de revenu (année en cours)</p>
-          </label>
-          <label htmlFor="docSituationPro1">
-            <input
-              type="file"
-              accept="image/png, image/jpg, image/jpeg, .pdf"
-              name="docSituationPro1"
-              id="docSituationPro1"
-              ref={docSituationPro1Src}
-              onChange={() => {
-                updateFields({
-                  docSituationPro1: docSituationPro1Src.current.files[0].name
-                    .split(".")
-                    .slice(-1)[0],
-                });
-              }}
-            />
-            <p>Justificatif de situation professionnel</p>
-          </label>
-          <label htmlFor="docJustifDom1">
-            <input
-              type="file"
-              accept="image/png, image/jpg, image/jpeg, .pdf"
-              name="docJustifDom1"
-              id="docJustifDom1"
-              ref={docJustifDom1Src}
-              onChange={() => {
-                updateFields({
-                  docJustifDom1: docJustifDom1Src.current.files[0].name
-                    .split(".")
-                    .slice(-1)[0],
-                });
-              }}
-            />
-            <p>Justificatif de domicile</p>
-          </label>
+          {initialData.docDeclaRevenus1 !== null ? (
+            <>
+              <button
+                type="button"
+                onClick={() => (initialData.docDeclaRevenus1 = null)}
+              >
+                Supp
+              </button>
+              <button type="button">
+                <a
+                  href="http://localhost:5000/public/uploads/formInscriptionParents/${}"
+                  target="_blank"
+                ></a>
+                Nom.pdf
+              </button>
+            </>
+          ) : (
+            <label htmlFor="docDeclaRevenus1">
+              <input
+                type="file"
+                accept="image/png, image/jpg, image/jpeg, .pdf"
+                name="docDeclaRevenus1"
+                id="docDeclaRevenus1"
+                ref={docDeclaRevenus1Src}
+                onChange={() => {
+                  updateFields({
+                    docDeclaRevenus1: docDeclaRevenus1Src.current.files[0].name,
+                  });
+                }}
+              />
+              <p>Déclaration de revenu (année en cours)</p>
+            </label>
+          )}
+
+          {initialData.docSituationPro1 !== null ? (
+            <>
+              <button
+                type="button"
+                onClick={() => (initialData.docSituationPro1 = null)}
+              >
+                Supp
+              </button>
+              <button type="button">
+                <a
+                  href="http://localhost:5000/public/uploads/formInscriptionParents/${}"
+                  target="_blank"
+                ></a>
+                Nom.pdf
+              </button>
+            </>
+          ) : (
+            <label htmlFor="docSituationPro1">
+              <input
+                type="file"
+                accept="image/png, image/jpg, image/jpeg, .pdf"
+                name="docSituationPro1"
+                id="docSituationPro1"
+                ref={docSituationPro1Src}
+              />
+              <p>Justificatif de situation professionnel</p>
+            </label>
+          )}
+
+          {initialData.docJustifDom1 !== null ? (
+            <>
+              <button
+                type="button"
+                onClick={() => (initialData.docJustifDom1 = null)}
+              >
+                Supp
+              </button>
+              <button type="button">
+                <a
+                  href="http://localhost:5000/public/uploads/formInscriptionParents/${}"
+                  target="_blank"
+                ></a>
+                Nom.pdf
+              </button>
+            </>
+          ) : (
+            <label htmlFor="docJustifDom1">
+              <input
+                type="file"
+                accept="image/png, image/jpg, image/jpeg, .pdf"
+                name="docJustifDom1"
+                id="docJustifDom1"
+                ref={docJustifDom1Src}
+              />
+              <p>Justificatif de domicile</p>
+            </label>
+          )}
+
           <label htmlFor="numCaf1">
             <input
               required
@@ -452,77 +493,122 @@ function Inscription() {
         </div>
         {/* --------------------------------------- */}
         <form>
-          <label htmlFor="docJustifRevenus2">
-            <input
-              type="file"
-              accept="image/png, image/jpg, image/jpeg, .pdf"
-              name="docJustifRevenus2"
-              id="docJustifRevenus2"
-              ref={docJustifRevenus2Src}
-              onChange={() => {
-                updateFields({
-                  docJustifRevenus2: docJustifRevenus2Src.current.files[0].name
-                    .split(".")
-                    .slice(-1)[0],
-                });
-              }}
-            />
-            <p>Justificatif de revenu (moins de 3 mois)</p>
-          </label>
+          {initialData.docJustifRevenus2 !== null ? (
+            <>
+              <button
+                type="button"
+                onClick={() => (initialData.docJustifRevenus2 = null)}
+              >
+                Supp
+              </button>
+              <button type="button">
+                <a
+                  href="http://localhost:5000/public/uploads/formInscriptionParents/${}"
+                  target="_blank"
+                ></a>
+                Nom.pdf
+              </button>
+            </>
+          ) : (
+            <label htmlFor="docJustifRevenus2">
+              <input
+                type="file"
+                accept="image/png, image/jpg, image/jpeg, .pdf"
+                name="docJustifRevenus2"
+                id="docJustifRevenus2"
+                ref={docJustifRevenus2Src}
+              />
+              <p>Justificatif de revenu (moins de 3 mois)</p>
+            </label>
+          )}
 
-          <label htmlFor="docDeclaRevenus2">
-            <input
-              type="file"
-              accept="image/png, image/jpg, image/jpeg, .pdf"
-              name="docDeclaRevenus2"
-              id="docDeclaRevenus2"
-              ref={docDeclaRevenus2Src}
-              onChange={() => {
-                updateFields({
-                  docDeclaRevenus2: docDeclaRevenus2Src.current.files[0].name
-                    .split(".")
-                    .slice(-1)[0],
-                });
-              }}
-            />
-            <p>Déclaration de revenu (année en cours)</p>
-          </label>
+          {initialData.docDeclaRevenus2 !== null ? (
+            <>
+              <button
+                type="button"
+                onClick={() => (initialData.docDeclaRevenus2 = null)}
+              >
+                Supp
+              </button>
+              <button type="button">
+                <a
+                  href="http://localhost:5000/public/uploads/formInscriptionParents/${}"
+                  target="_blank"
+                ></a>
+                Nom.pdf
+              </button>
+            </>
+          ) : (
+            <label htmlFor="docDeclaRevenus2">
+              <input
+                type="file"
+                accept="image/png, image/jpg, image/jpeg, .pdf"
+                name="docDeclaRevenus2"
+                id="docDeclaRevenus2"
+                ref={docDeclaRevenus2Src}
+              />
+              <p>Déclaration de revenu (année en cours)</p>
+            </label>
+          )}
 
-          <label htmlFor="docSituationPro2">
-            <input
-              type="file"
-              accept="image/png, image/jpg, image/jpeg, .pdf"
-              name="docSituationPro2"
-              id="docSituationPro2"
-              ref={docSituationPro2Src}
-              onChange={() => {
-                updateFields({
-                  docSituationPro2: docSituationPro2Src.current.files[0].name
-                    .split(".")
-                    .slice(-1)[0],
-                });
-              }}
-            />
-            <p>Justificatif de situation professionnel</p>
-          </label>
+          {initialData.docSituationPro2 !== null ? (
+            <>
+              <button
+                type="button"
+                onClick={() => (initialData.docSituationPro2 = null)}
+              >
+                Supp
+              </button>
+              <button type="button">
+                <a
+                  href="http://localhost:5000/public/uploads/formInscriptionParents/${}"
+                  target="_blank"
+                ></a>
+                Nom.pdf
+              </button>
+            </>
+          ) : (
+            <label htmlFor="docSituationPro2">
+              <input
+                type="file"
+                accept="image/png, image/jpg, image/jpeg, .pdf"
+                name="docSituationPro2"
+                id="docSituationPro2"
+                ref={docSituationPro2Src}
+              />
+              <p>Justificatif de situation professionnel</p>
+            </label>
+          )}
 
-          <label htmlFor="docJustifDom2">
-            <input
-              type="file"
-              accept="image/png, image/jpg, image/jpeg, .pdf"
-              name="docJustifDom2"
-              id="docJustifDom2"
-              ref={docJustifDom2Src}
-              onChange={() => {
-                updateFields({
-                  docJustifDom2: docJustifDom2Src.current.files[0].name
-                    .split(".")
-                    .slice(-1)[0],
-                });
-              }}
-            />
-            <p>Justificatif de domicile</p>
-          </label>
+          {initialData.docJustifDom2 !== null ? (
+            <>
+              <button
+                type="button"
+                onClick={() => (initialData.docJustifDom2 = null)}
+              >
+                Supp
+              </button>
+              <button type="button">
+                <a
+                  href="http://localhost:5000/public/uploads/formInscriptionParents/${}"
+                  target="_blank"
+                ></a>
+                Nom.pdf
+              </button>
+            </>
+          ) : (
+            <label htmlFor="docJustifDom2">
+              <input
+                type="file"
+                accept="image/png, image/jpg, image/jpeg, .pdf"
+                name="docJustifDom2"
+                id="docJustifDom2"
+                ref={docJustifDom2Src}
+              />
+              <p>Justificatif de domicile</p>
+            </label>
+          )}
+
           <label htmlFor="numCaf2">
             <input
               required
@@ -558,77 +644,121 @@ function Inscription() {
         {/* --------------------------------------- */}
 
         <form>
-          <label htmlFor="docAssurParent">
-            <input
-              type="file"
-              accept="image/png, image/jpg, image/jpeg, .pdf"
-              name="docAssurParent"
-              id="docAssurParent"
-              ref={docAssurParentSrc}
-              onChange={() => {
-                updateFields({
-                  docAssurParent: docAssurParentSrc.current.files[0].name
-                    .split(".")
-                    .slice(-1)[0],
-                });
-              }}
-            />
-            <p>Numéro de sécurité sociale</p>
-          </label>
+          {initialData.docAssurParent1 !== null ? (
+            <>
+              <button
+                type="button"
+                onClick={() => (initialData.docAssurParent1 = null)}
+              >
+                Supp
+              </button>
+              <button type="button">
+                <a
+                  href="http://localhost:5000/public/uploads/formInscriptionParents/${}"
+                  target="_blank"
+                ></a>
+                Nom.pdf
+              </button>
+            </>
+          ) : (
+            <label htmlFor="docAssurParent">
+              <input
+                type="file"
+                accept="image/png, image/jpg, image/jpeg, .pdf"
+                name="docAssurParent"
+                id="docAssurParent"
+                ref={docAssurParentSrc}
+              />
+              <p>Numéro de sécurité sociale</p>
+            </label>
+          )}
 
-          <label htmlFor="docRib">
-            <input
-              type="file"
-              accept="image/png, image/jpg, image/jpeg, .pdf"
-              name="docRib"
-              id="docRib"
-              ref={docRibSrc}
-              onChange={() => {
-                updateFields({
-                  docRib: docRibSrc.current.files[0].name
-                    .split(".")
-                    .slice(-1)[0],
-                });
-              }}
-            />
-            <p>RIB</p>
-          </label>
+          {initialData.docRib1 !== null ? (
+            <>
+              <button
+                type="button"
+                onClick={() => (initialData.docRib1 = null)}
+              >
+                Supp
+              </button>
+              <button type="button">
+                <a
+                  href="http://localhost:5000/public/uploads/formInscriptionParents/${}"
+                  target="_blank"
+                ></a>
+                Nom.pdf
+              </button>
+            </>
+          ) : (
+            <label htmlFor="docRib">
+              <input
+                type="file"
+                accept="image/png, image/jpg, image/jpeg, .pdf"
+                name="docRib"
+                id="docRib"
+                ref={docRibSrc}
+              />
+              <p>RIB</p>
+            </label>
+          )}
 
-          <label htmlFor="docAutoImage">
-            <input
-              type="file"
-              accept="image/png, image/jpg, image/jpeg, .pdf"
-              name="docAutoImage"
-              id="docAutoImage"
-              ref={docAutoImageSrc}
-              onChange={() => {
-                updateFields({
-                  docAutoImage: docAutoImageSrc.current.files[0].name
-                    .split(".")
-                    .slice(-1)[0],
-                });
-              }}
-            />
-            <p>Autoristaion photo et video</p>
-          </label>
+          {initialData.docAutoImage1 !== null ? (
+            <>
+              <button
+                type="button"
+                onClick={() => (initialData.docAutoImage1 = null)}
+              >
+                Supp
+              </button>
+              <button type="button">
+                <a
+                  href="http://localhost:5000/public/uploads/formInscriptionParents/${}"
+                  target="_blank"
+                ></a>
+                Nom.pdf
+              </button>
+            </>
+          ) : (
+            <label htmlFor="docAutoImage">
+              <input
+                type="file"
+                accept="image/png, image/jpg, image/jpeg, .pdf"
+                name="docAutoImage"
+                id="docAutoImage"
+                ref={docAutoImageSrc}
+              />
+              <p>Autoristaion photo et video</p>
+            </label>
+          )}
 
-          <label htmlFor="docDivorce">
-            <input
-              type="file"
-              accept="image/png, image/jpg, image/jpeg, .pdf"
-              name="docDivorce"
-              id="docDivorce"
-              ref={docDivorceSrc}
-              onChange={() => {
-                updateFields({
-                  docDivorce: docDivorceSrc.current.files[0].name
-                    .split(".")
-                    .slice(-1)[0],
-                });
-              }}
-            />
-            <p>Copie du jugement de divorce</p>
-          </label>
+          {initialData.docDivorce1 !== null ? (
+            <>
+              <button
+                type="button"
+                onClick={() => (initialData.docDivorce1 = null)}
+              >
+                Supp
+              </button>
+              <button type="button">
+                <a
+                  href="http://localhost:5000/public/uploads/formInscriptionParents/${}"
+                  target="_blank"
+                ></a>
+                Nom.pdf
+              </button>
+            </>
+          ) : (
+            <label htmlFor="docDivorce">
+              <input
+                type="file"
+                accept="image/png, image/jpg, image/jpeg, .pdf"
+                name="docDivorce"
+                id="docDivorce"
+                ref={docDivorceSrc}
+              />
+              <p>Copie du jugement de divorce</p>
+            </label>
+          )}
         </form>
         <div className="button-bas">
           <button
