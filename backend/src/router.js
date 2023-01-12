@@ -65,6 +65,8 @@ router.post(
     { name: "docDeclaRevenus", maxCount: 1 },
     { name: "docSituationPro", maxCount: 1 },
     { name: "docJustifDom", maxCount: 1 },
+    { name: "numCaf", maxCount: 1 },
+    { name: "numSecu", maxCount: 1 },
   ]),
   (req, res) => {
     res.send(req.files);

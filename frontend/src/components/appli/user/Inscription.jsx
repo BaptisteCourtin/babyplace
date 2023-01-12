@@ -10,15 +10,15 @@ function Inscription() {
     docDeclaRevenus1: null,
     docSituationPro1: null,
     docJustifDom1: null,
-    numCaf1: "",
-    numSecu1: "",
+    numCaf1: null,
+    numSecu1: null,
 
     docJustifRevenus2: null,
     docDeclaRevenus2: null,
     docSituationPro2: null,
     docJustifDom2: null,
-    numCaf2: "",
-    numSecu2: "",
+    numCaf2: null,
+    numSecu2: null,
 
     docAssurParent1: null,
     docRib1: null,
@@ -109,11 +109,15 @@ function Inscription() {
   const docDeclaRevenus1Src = useRef(null);
   const docSituationPro1Src = useRef(null);
   const docJustifDom1Src = useRef(null);
+  const numCaf1Src = useRef(null);
+  const numSecu1Src = useRef(null);
 
   const docJustifRevenus2Src = useRef(null);
   const docDeclaRevenus2Src = useRef(null);
   const docSituationPro2Src = useRef(null);
   const docJustifDom2Src = useRef(null);
+  const numCaf2Src = useRef(null);
+  const numSecu2Src = useRef(null);
 
   const docAssurParentSrc = useRef(null);
   const docRibSrc = useRef(null);
@@ -153,6 +157,12 @@ function Inscription() {
       if (docJustifDom1Src.current !== null) {
         formData.append("docJustifDom", docJustifDom1Src.current.files[0]);
       }
+      if (numCaf1Src.current !== null) {
+        formData.append("numCaf", numCaf1Src.current.files[0]);
+      }
+      if (numSecu1Src.current !== null) {
+        formData.append("numSecu", numSecu1Src.current.files[0]);
+      }
     } else if (num === 2) {
       if (docJustifRevenus2Src.current !== null) {
         formData.append(
@@ -175,6 +185,12 @@ function Inscription() {
       if (docJustifDom2Src.current !== null) {
         formData.append("docJustifDom", docJustifDom2Src.current.files[0]);
       }
+      if (numCaf2Src.current !== null) {
+        formData.append("numCaf", numCaf2Src.current.files[0]);
+      }
+      if (numSecu2Src.current !== null) {
+        formData.append("numSecu", numSecu2Src.current.files[0]);
+      }
     }
 
     axios
@@ -188,6 +204,8 @@ function Inscription() {
         let docDeclaRevenus = null;
         let docSituationPro = null;
         let docJustifDom = null;
+        let numCaf = null;
+        let numSecu = null;
 
         if (num === 1) {
           docJustifRevenus = result.data.docJustifRevenus
@@ -206,6 +224,14 @@ function Inscription() {
             ? result.data.docJustifDom[0].filename
             : initialData.docJustifDom1;
 
+          numCaf = result.data.numCaf
+            ? result.data.numCaf[0].filename
+            : initialData.numCaf1;
+
+          numSecu = result.data.numSecu
+            ? result.data.numSecu[0].filename
+            : initialData.numSecu1;
+
           axios
             .put(
               `http://localhost:5000/formInscription/docParentChangeName/${parentId}`,
@@ -215,9 +241,8 @@ function Inscription() {
                 docDeclaRevenus,
                 docSituationPro,
                 docJustifDom,
-                // nom initial data
-                numCaf: initialData.numCaf1,
-                numSecu: initialData.numSecu1,
+                numCaf,
+                numSecu,
               }
             )
             .catch((err) => {
@@ -242,6 +267,14 @@ function Inscription() {
             ? result.data.docJustifDom[0].filename
             : initialData.docJustifDom2;
 
+          numCaf = result.data.numCaf
+            ? result.data.numCaf[0].filename
+            : initialData.numCaf2;
+
+          numSecu = result.data.numSecu
+            ? result.data.numSecu[0].filename
+            : initialData.numSecu2;
+
           axios
             .put(
               `http://localhost:5000/formInscription/docParentChangeName/${parentId}`,
@@ -251,9 +284,8 @@ function Inscription() {
                 docDeclaRevenus,
                 docSituationPro,
                 docJustifDom,
-                // nom initial data
-                numCaf: initialData.numCaf2,
-                numSecu: initialData.numSecu2,
+                numCaf,
+                numSecu,
               }
             )
             .catch((err) => {
@@ -292,19 +324,19 @@ function Inscription() {
       // mettre seulement ce qui n'est pas déjà dans la bdd
 
       .then((result) => {
-        let docAssurParent = result.data.docAssurParent
+        const docAssurParent = result.data.docAssurParent
           ? result.data.docAssurParent[0].filename
           : initialData.docAssurParent1;
 
-        let docRib = result.data.docRib
+        const docRib = result.data.docRib
           ? result.data.docRib[0].filename
           : initialData.docRib1;
 
-        let docAutoImage = result.data.docAutoImage
+        const docAutoImage = result.data.docAutoImage
           ? result.data.docAutoImage[0].filename
           : initialData.docAutoImage1;
 
-        let docDivorce = result.data.docDivorce
+        const docDivorce = result.data.docDivorce
           ? result.data.docDivorce[0].filename
           : initialData.docDivorce1;
 
@@ -333,155 +365,201 @@ function Inscription() {
       <main className="inscription">
         <h3>Dossier Inscription</h3>
         <form>
-          {/* --- */}
+          <div className="champ">
+            <p>Justificatif de revenu (moins de 3 mois)</p>
+            {initialData.docJustifRevenus1 !== null ? (
+              <div className="with-init">
+                <button
+                  type="button"
+                  onClick={() => (initialData.docJustifRevenus1 = null)}
+                >
+                  Supp
+                </button>
 
-          {/* initialData se reset avant l'enregistrement */}
-          {initialData.docJustifRevenus1 !== null ? (
-            <>
-              <button
-                type="button"
-                onClick={() => (initialData.docJustifRevenus1 = null)}
-              >
-                Supp
-              </button>
-              <button type="button">
                 <a
-                  href="http://localhost:5000/public/uploads/formInscriptionParents/${}"
+                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.docJustifRevenus1}`}
                   target="_blank"
-                ></a>
-                Nom.pdf
-              </button>
-            </>
-          ) : (
-            <label htmlFor="docJustifRevenus1">
-              <input
-                type="file"
-                accept="image/png, image/jpg, image/jpeg, .pdf"
-                name="docJustifRevenus1"
-                id="docJustifRevenus1"
-                ref={docJustifRevenus1Src}
-              />
-              <p>Justificatif de revenu (moins de 3 mois)</p>
-            </label>
-          )}
+                  rel="noreferrer"
+                >
+                  {initialData.docJustifRevenus1.split("-qws-")[1]}
+                </a>
+              </div>
+            ) : (
+              <label htmlFor="docJustifRevenus1">
+                <input
+                  type="file"
+                  accept="image/png, image/jpg, image/jpeg, .pdf"
+                  name="docJustifRevenus1"
+                  id="docJustifRevenus1"
+                  ref={docJustifRevenus1Src}
+                />
+              </label>
+            )}
+          </div>
 
-          {/* --- */}
+          <div className="champ">
+            <p>Déclaration de revenu (année en cours)</p>
+            {initialData.docDeclaRevenus1 !== null ? (
+              <div className="with-init">
+                <button
+                  type="button"
+                  onClick={() => (initialData.docDeclaRevenus1 = null)}
+                >
+                  Supp
+                </button>
 
-          {initialData.docDeclaRevenus1 !== null ? (
-            <>
-              <button
-                type="button"
-                onClick={() => (initialData.docDeclaRevenus1 = null)}
-              >
-                Supp
-              </button>
-              <button type="button">
                 <a
-                  href="http://localhost:5000/public/uploads/formInscriptionParents/${}"
+                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.docDeclaRevenus1}`}
                   target="_blank"
-                ></a>
-                Nom.pdf
-              </button>
-            </>
-          ) : (
-            <label htmlFor="docDeclaRevenus1">
-              <input
-                type="file"
-                accept="image/png, image/jpg, image/jpeg, .pdf"
-                name="docDeclaRevenus1"
-                id="docDeclaRevenus1"
-                ref={docDeclaRevenus1Src}
-                onChange={() => {
-                  updateFields({
-                    docDeclaRevenus1: docDeclaRevenus1Src.current.files[0].name,
-                  });
-                }}
-              />
-              <p>Déclaration de revenu (année en cours)</p>
-            </label>
-          )}
+                  rel="noreferrer"
+                >
+                  {initialData.docJustifRevenus1.split("-qws-")[1]}
+                </a>
+              </div>
+            ) : (
+              <label htmlFor="docDeclaRevenus1">
+                <input
+                  type="file"
+                  accept="image/png, image/jpg, image/jpeg, .pdf"
+                  name="docDeclaRevenus1"
+                  id="docDeclaRevenus1"
+                  ref={docDeclaRevenus1Src}
+                  onChange={() => {
+                    updateFields({
+                      docDeclaRevenus1:
+                        docDeclaRevenus1Src.current.files[0].name,
+                    });
+                  }}
+                />
+              </label>
+            )}
+          </div>
+          <div className="champ">
+            <p>Justificatif de situation professionnel</p>
+            {initialData.docSituationPro1 !== null ? (
+              <div className="with-init">
+                <button
+                  type="button"
+                  onClick={() => (initialData.docSituationPro1 = null)}
+                >
+                  Supp
+                </button>
 
-          {initialData.docSituationPro1 !== null ? (
-            <>
-              <button
-                type="button"
-                onClick={() => (initialData.docSituationPro1 = null)}
-              >
-                Supp
-              </button>
-              <button type="button">
                 <a
-                  href="http://localhost:5000/public/uploads/formInscriptionParents/${}"
+                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.docSituationPro1}`}
                   target="_blank"
-                ></a>
-                Nom.pdf
-              </button>
-            </>
-          ) : (
-            <label htmlFor="docSituationPro1">
-              <input
-                type="file"
-                accept="image/png, image/jpg, image/jpeg, .pdf"
-                name="docSituationPro1"
-                id="docSituationPro1"
-                ref={docSituationPro1Src}
-              />
-              <p>Justificatif de situation professionnel</p>
-            </label>
-          )}
+                  rel="noreferrer"
+                >
+                  {initialData.docSituationPro1.split("-qws-")[1]}
+                </a>
+              </div>
+            ) : (
+              <label htmlFor="docSituationPro1">
+                <input
+                  type="file"
+                  accept="image/png, image/jpg, image/jpeg, .pdf"
+                  name="docSituationPro1"
+                  id="docSituationPro1"
+                  ref={docSituationPro1Src}
+                />
+              </label>
+            )}
+          </div>
+          <div className="champ">
+            <p>Justificatif de domicile</p>
+            {initialData.docJustifDom1 !== null ? (
+              <div className="with-init">
+                <button
+                  type="button"
+                  onClick={() => (initialData.docJustifDom1 = null)}
+                >
+                  Supp
+                </button>
 
-          {initialData.docJustifDom1 !== null ? (
-            <>
-              <button
-                type="button"
-                onClick={() => (initialData.docJustifDom1 = null)}
-              >
-                Supp
-              </button>
-              <button type="button">
                 <a
-                  href="http://localhost:5000/public/uploads/formInscriptionParents/${}"
+                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.docJustifDom1}`}
                   target="_blank"
-                ></a>
-                Nom.pdf
-              </button>
-            </>
-          ) : (
-            <label htmlFor="docJustifDom1">
-              <input
-                type="file"
-                accept="image/png, image/jpg, image/jpeg, .pdf"
-                name="docJustifDom1"
-                id="docJustifDom1"
-                ref={docJustifDom1Src}
-              />
-              <p>Justificatif de domicile</p>
-            </label>
-          )}
-
-          <label htmlFor="numCaf1">
-            <input
-              required
-              type="number"
-              name="numCaf1"
-              id="numCaf1"
-              value={initialData.numCaf1}
-              onChange={(e) => updateFields({ numCaf1: e.target.value })}
-            />
+                  rel="noreferrer"
+                >
+                  {initialData.docJustifDom1.split("-qws-")[1]}
+                </a>
+              </div>
+            ) : (
+              <label htmlFor="docJustifDom1">
+                <input
+                  type="file"
+                  accept="image/png, image/jpg, image/jpeg, .pdf"
+                  name="docJustifDom1"
+                  id="docJustifDom1"
+                  ref={docJustifDom1Src}
+                />
+              </label>
+            )}
+          </div>
+          <div className="champ">
             <p>Numéro Allocataire CAF</p>
-          </label>
-          <label htmlFor="numSecu1">
-            <input
-              required
-              type="number"
-              name="numSecu1"
-              id="numSecu1"
-              value={initialData.numSecu1}
-              onChange={(e) => updateFields({ numSecu1: e.target.value })}
-            />
+            {initialData.numCaf1 !== null ? (
+              <div className="with-init">
+                <button
+                  type="button"
+                  onClick={() => (initialData.numCaf1 = null)}
+                >
+                  Supp
+                </button>
+
+                <a
+                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.numCaf1}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {initialData.numCaf1.split("-qws-")[1]}
+                </a>
+              </div>
+            ) : (
+              <label htmlFor="numCaf1">
+                <input
+                  type="file"
+                  accept="image/png, image/jpg, image/jpeg, .pdf"
+                  name="numCaf1"
+                  id="numCaf1"
+                  ref={numCaf1Src}
+                />
+              </label>
+            )}
+          </div>
+          <div className="champ">
             <p>Numéro de sécurité sociale</p>
-          </label>
+            {initialData.numSecu1 !== null ? (
+              <div className="with-init">
+                <button
+                  type="button"
+                  onClick={() => (initialData.numSecu1 = null)}
+                >
+                  Supp
+                </button>
+
+                <a
+                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.numSecu1}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {initialData.numSecu1.split("-qws-")[1]}
+                </a>
+              </div>
+            ) : (
+              <label htmlFor="numSecu1">
+                <input
+                  type="file"
+                  accept="image/png, image/jpg, image/jpeg, .pdf"
+                  name="numSecu1"
+                  id="numSecu1"
+                  ref={numSecu1Src}
+                />
+              </label>
+            )}
+          </div>
         </form>
+
         <div className="button-bas">
           <button
             type="submit"
@@ -493,145 +571,194 @@ function Inscription() {
         </div>
         {/* --------------------------------------- */}
         <form>
-          {initialData.docJustifRevenus2 !== null ? (
-            <>
-              <button
-                type="button"
-                onClick={() => (initialData.docJustifRevenus2 = null)}
-              >
-                Supp
-              </button>
-              <button type="button">
-                <a
-                  href="http://localhost:5000/public/uploads/formInscriptionParents/${}"
-                  target="_blank"
-                ></a>
-                Nom.pdf
-              </button>
-            </>
-          ) : (
-            <label htmlFor="docJustifRevenus2">
-              <input
-                type="file"
-                accept="image/png, image/jpg, image/jpeg, .pdf"
-                name="docJustifRevenus2"
-                id="docJustifRevenus2"
-                ref={docJustifRevenus2Src}
-              />
-              <p>Justificatif de revenu (moins de 3 mois)</p>
-            </label>
-          )}
+          <div className="champ">
+            <p>Justificatif de revenu (moins de 3 mois)</p>
+            {initialData.docJustifRevenus2 !== null ? (
+              <div className="with-init">
+                <button
+                  type="button"
+                  onClick={() => (initialData.docJustifRevenus2 = null)}
+                >
+                  Supp
+                </button>
 
-          {initialData.docDeclaRevenus2 !== null ? (
-            <>
-              <button
-                type="button"
-                onClick={() => (initialData.docDeclaRevenus2 = null)}
-              >
-                Supp
-              </button>
-              <button type="button">
                 <a
-                  href="http://localhost:5000/public/uploads/formInscriptionParents/${}"
+                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.docJustifRevenus2}`}
                   target="_blank"
-                ></a>
-                Nom.pdf
-              </button>
-            </>
-          ) : (
-            <label htmlFor="docDeclaRevenus2">
-              <input
-                type="file"
-                accept="image/png, image/jpg, image/jpeg, .pdf"
-                name="docDeclaRevenus2"
-                id="docDeclaRevenus2"
-                ref={docDeclaRevenus2Src}
-              />
-              <p>Déclaration de revenu (année en cours)</p>
-            </label>
-          )}
+                  rel="noreferrer"
+                >
+                  {initialData.docJustifRevenus2.split("-qws-")[1]}
+                </a>
+              </div>
+            ) : (
+              <label htmlFor="docJustifRevenus2">
+                <input
+                  type="file"
+                  accept="image/png, image/jpg, image/jpeg, .pdf"
+                  name="docJustifRevenus2"
+                  id="docJustifRevenus2"
+                  ref={docJustifRevenus2Src}
+                />
+              </label>
+            )}
+          </div>
+          <div className="champ">
+            <p>Déclaration de revenu (année en cours)</p>
+            {initialData.docDeclaRevenus2 !== null ? (
+              <div className="with-init">
+                <button
+                  type="button"
+                  onClick={() => (initialData.docDeclaRevenus2 = null)}
+                >
+                  Supp
+                </button>
 
-          {initialData.docSituationPro2 !== null ? (
-            <>
-              <button
-                type="button"
-                onClick={() => (initialData.docSituationPro2 = null)}
-              >
-                Supp
-              </button>
-              <button type="button">
                 <a
-                  href="http://localhost:5000/public/uploads/formInscriptionParents/${}"
+                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.docDeclaRevenus2}`}
                   target="_blank"
-                ></a>
-                Nom.pdf
-              </button>
-            </>
-          ) : (
-            <label htmlFor="docSituationPro2">
-              <input
-                type="file"
-                accept="image/png, image/jpg, image/jpeg, .pdf"
-                name="docSituationPro2"
-                id="docSituationPro2"
-                ref={docSituationPro2Src}
-              />
-              <p>Justificatif de situation professionnel</p>
-            </label>
-          )}
+                  rel="noreferrer"
+                >
+                  {initialData.docDeclaRevenus2.split("-qws-")[1]}
+                </a>
+              </div>
+            ) : (
+              <label htmlFor="docDeclaRevenus2">
+                <input
+                  type="file"
+                  accept="image/png, image/jpg, image/jpeg, .pdf"
+                  name="docDeclaRevenus2"
+                  id="docDeclaRevenus2"
+                  ref={docDeclaRevenus2Src}
+                />
+              </label>
+            )}
+          </div>
+          <div className="champ">
+            <p>Justificatif de situation professionnel</p>
+            {initialData.docSituationPro2 !== null ? (
+              <div className="with-init">
+                <button
+                  type="button"
+                  onClick={() => (initialData.docSituationPro2 = null)}
+                >
+                  Supp
+                </button>
 
-          {initialData.docJustifDom2 !== null ? (
-            <>
-              <button
-                type="button"
-                onClick={() => (initialData.docJustifDom2 = null)}
-              >
-                Supp
-              </button>
-              <button type="button">
                 <a
-                  href="http://localhost:5000/public/uploads/formInscriptionParents/${}"
+                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.docSituationPro2}`}
                   target="_blank"
-                ></a>
-                Nom.pdf
-              </button>
-            </>
-          ) : (
-            <label htmlFor="docJustifDom2">
-              <input
-                type="file"
-                accept="image/png, image/jpg, image/jpeg, .pdf"
-                name="docJustifDom2"
-                id="docJustifDom2"
-                ref={docJustifDom2Src}
-              />
-              <p>Justificatif de domicile</p>
-            </label>
-          )}
+                  rel="noreferrer"
+                >
+                  {initialData.docSituationPro2.split("-qws-")[1]}
+                </a>
+              </div>
+            ) : (
+              <label htmlFor="docSituationPro2">
+                <input
+                  type="file"
+                  accept="image/png, image/jpg, image/jpeg, .pdf"
+                  name="docSituationPro2"
+                  id="docSituationPro2"
+                  ref={docSituationPro2Src}
+                />
+              </label>
+            )}
+          </div>
+          <div className="champ">
+            <p>Justificatif de domicile</p>
+            {initialData.docJustifDom2 !== null ? (
+              <div className="with-init">
+                <button
+                  type="button"
+                  onClick={() => (initialData.docJustifDom2 = null)}
+                >
+                  Supp
+                </button>
 
-          <label htmlFor="numCaf2">
-            <input
-              required
-              type="text"
-              name="numCaf2"
-              id="numCaf2"
-              value={initialData.numCaf2}
-              onChange={(e) => handleChange(e)}
-            />
+                <a
+                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.docJustifDom2}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {initialData.docJustifDom2.split("-qws-")[1]}
+                </a>
+              </div>
+            ) : (
+              <label htmlFor="docJustifDom2">
+                <input
+                  type="file"
+                  accept="image/png, image/jpg, image/jpeg, .pdf"
+                  name="docJustifDom2"
+                  id="docJustifDom2"
+                  ref={docJustifDom2Src}
+                />
+              </label>
+            )}
+          </div>
+          <div className="champ">
             <p>Numéro Allocataire CAF</p>
-          </label>
-          <label htmlFor="numSecu2">
-            <input
-              required
-              type="text"
-              name="numSecu2"
-              id="numSecu2"
-              value={initialData.numSecu2}
-              onChange={(e) => handleChange(e)}
-            />
+            {initialData.numCaf2 !== null ? (
+              <div className="with-init">
+                <button
+                  type="button"
+                  onClick={() => (initialData.numCaf2 = null)}
+                >
+                  Supp
+                </button>
+
+                <a
+                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.numCaf2}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {initialData.numCaf2.split("-qws-")[1]}
+                </a>
+              </div>
+            ) : (
+              <label htmlFor="numCaf2">
+                <input
+                  type="file"
+                  accept="image/png, image/jpg, image/jpeg, .pdf"
+                  name="numCaf2"
+                  id="numCaf2"
+                  ref={numCaf2Src}
+                />
+              </label>
+            )}
+          </div>
+          <div className="champ">
             <p>Numéro de sécurité sociale</p>
-          </label>
+            {initialData.numSecu2 !== null ? (
+              <div className="with-init">
+                <button
+                  type="button"
+                  onClick={() => (initialData.numSecu2 = null)}
+                >
+                  Supp
+                </button>
+
+                <a
+                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.numSecu2}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {initialData.numSecu2.split("-qws-")[1]}
+                </a>
+              </div>
+            ) : (
+              <label htmlFor="numSecu2">
+                <input
+                  type="file"
+                  accept="image/png, image/jpg, image/jpeg, .pdf"
+                  name="numSecu2"
+                  id="numSecu2"
+                  ref={numSecu2Src}
+                />
+              </label>
+            )}
+          </div>
         </form>
+
         <div className="button-bas">
           <button
             type="submit"
@@ -644,121 +771,130 @@ function Inscription() {
         {/* --------------------------------------- */}
 
         <form>
-          {initialData.docAssurParent1 !== null ? (
-            <>
-              <button
-                type="button"
-                onClick={() => (initialData.docAssurParent1 = null)}
-              >
-                Supp
-              </button>
-              <button type="button">
-                <a
-                  href="http://localhost:5000/public/uploads/formInscriptionParents/${}"
-                  target="_blank"
-                ></a>
-                Nom.pdf
-              </button>
-            </>
-          ) : (
-            <label htmlFor="docAssurParent">
-              <input
-                type="file"
-                accept="image/png, image/jpg, image/jpeg, .pdf"
-                name="docAssurParent"
-                id="docAssurParent"
-                ref={docAssurParentSrc}
-              />
-              <p>Numéro de sécurité sociale</p>
-            </label>
-          )}
+          <div className="champ">
+            <p>Numéro de sécurité sociale</p>
+            {initialData.docAssurParent1 !== null ? (
+              <div className="with-init">
+                <button
+                  type="button"
+                  onClick={() => (initialData.docAssurParent1 = null)}
+                >
+                  Supp
+                </button>
 
-          {initialData.docRib1 !== null ? (
-            <>
-              <button
-                type="button"
-                onClick={() => (initialData.docRib1 = null)}
-              >
-                Supp
-              </button>
-              <button type="button">
                 <a
-                  href="http://localhost:5000/public/uploads/formInscriptionParents/${}"
+                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.docAssurParent1}`}
                   target="_blank"
-                ></a>
-                Nom.pdf
-              </button>
-            </>
-          ) : (
-            <label htmlFor="docRib">
-              <input
-                type="file"
-                accept="image/png, image/jpg, image/jpeg, .pdf"
-                name="docRib"
-                id="docRib"
-                ref={docRibSrc}
-              />
-              <p>RIB</p>
-            </label>
-          )}
+                  rel="noreferrer"
+                >
+                  {initialData.docAssurParent1.split("-qws-")[1]}
+                </a>
+              </div>
+            ) : (
+              <label htmlFor="docAssurParent">
+                <input
+                  type="file"
+                  accept="image/png, image/jpg, image/jpeg, .pdf"
+                  name="docAssurParent"
+                  id="docAssurParent"
+                  ref={docAssurParentSrc}
+                />
+              </label>
+            )}
+          </div>
+          <div className="champ">
+            <p>RIB</p>
+            {initialData.docRib1 !== null ? (
+              <div className="with-init">
+                <button
+                  type="button"
+                  onClick={() => (initialData.docRib1 = null)}
+                >
+                  Supp
+                </button>
 
-          {initialData.docAutoImage1 !== null ? (
-            <>
-              <button
-                type="button"
-                onClick={() => (initialData.docAutoImage1 = null)}
-              >
-                Supp
-              </button>
-              <button type="button">
                 <a
-                  href="http://localhost:5000/public/uploads/formInscriptionParents/${}"
+                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.docRib1}`}
                   target="_blank"
-                ></a>
-                Nom.pdf
-              </button>
-            </>
-          ) : (
-            <label htmlFor="docAutoImage">
-              <input
-                type="file"
-                accept="image/png, image/jpg, image/jpeg, .pdf"
-                name="docAutoImage"
-                id="docAutoImage"
-                ref={docAutoImageSrc}
-              />
-              <p>Autoristaion photo et video</p>
-            </label>
-          )}
+                  rel="noreferrer"
+                >
+                  {initialData.docRib1.split("-qws-")[1]}
+                </a>
+              </div>
+            ) : (
+              <label htmlFor="docRib">
+                <input
+                  type="file"
+                  accept="image/png, image/jpg, image/jpeg, .pdf"
+                  name="docRib"
+                  id="docRib"
+                  ref={docRibSrc}
+                />
+              </label>
+            )}
+          </div>
+          <div className="champ">
+            <p>Autoristaion photo et video</p>
+            {initialData.docAutoImage1 !== null ? (
+              <div className="with-init">
+                <button
+                  type="button"
+                  onClick={() => (initialData.docAutoImage1 = null)}
+                >
+                  Supp
+                </button>
 
-          {initialData.docDivorce1 !== null ? (
-            <>
-              <button
-                type="button"
-                onClick={() => (initialData.docDivorce1 = null)}
-              >
-                Supp
-              </button>
-              <button type="button">
                 <a
-                  href="http://localhost:5000/public/uploads/formInscriptionParents/${}"
+                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.docAutoImage1}`}
                   target="_blank"
-                ></a>
-                Nom.pdf
-              </button>
-            </>
-          ) : (
-            <label htmlFor="docDivorce">
-              <input
-                type="file"
-                accept="image/png, image/jpg, image/jpeg, .pdf"
-                name="docDivorce"
-                id="docDivorce"
-                ref={docDivorceSrc}
-              />
-              <p>Copie du jugement de divorce</p>
-            </label>
-          )}
+                  rel="noreferrer"
+                >
+                  {initialData.docAutoImage1.split("-qws-")[1]}
+                </a>
+              </div>
+            ) : (
+              <label htmlFor="docAutoImage">
+                <input
+                  type="file"
+                  accept="image/png, image/jpg, image/jpeg, .pdf"
+                  name="docAutoImage"
+                  id="docAutoImage"
+                  ref={docAutoImageSrc}
+                />
+              </label>
+            )}
+          </div>
+          <div className="champ">
+            <p>Copie du jugement de divorce</p>
+            {initialData.docDivorce1 !== null ? (
+              <div className="with-init">
+                <button
+                  type="button"
+                  onClick={() => (initialData.docDivorce1 = null)}
+                >
+                  Supp
+                </button>
+
+                <a
+                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.docDivorce1}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {initialData.docDivorce1.split("-qws-")[1]}
+                </a>
+              </div>
+            ) : (
+              <label htmlFor="docDivorce">
+                <input
+                  type="file"
+                  accept="image/png, image/jpg, image/jpeg, .pdf"
+                  name="docDivorce"
+                  id="docDivorce"
+                  ref={docDivorceSrc}
+                />
+              </label>
+            )}
+          </div>
         </form>
         <div className="button-bas">
           <button
