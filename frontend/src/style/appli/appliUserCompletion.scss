@@ -67,6 +67,17 @@
         color: $gradient;
       }
 
+      h4 {
+        font-size: $h3;
+        font-weight: 500;
+        padding-top: 2rem;
+        margin-top: 2rem;
+        border-top: 2px $second solid;
+        width: 90%;
+        color: $third;
+        text-align: center;
+      }
+
       // enfant
       .kid {
         width: 90%;
@@ -138,36 +149,46 @@
         gap: 1.5rem;
         margin-top: 1.5rem;
 
-        p {
-          width: 100%;
-          font-size: $h4;
-          font-weight: 600;
-        }
+        .champ {
+          border: 1px $second solid;
+          border-radius: 10px;
+          background-color: $grey;
+          padding: 0.5rem 0;
 
-        .with-init {
-          display: flex;
-          justify-content: space-evenly;
-
-          button {
-            color: $white;
-            font-weight: 500;
-            background-color: red;
-            padding: 0.5rem;
-            border-radius: 10px;
+          p {
+            text-align: center;
+            width: 100%;
+            font-size: $h4;
+            font-weight: 600;
           }
 
-          a {
-            color: $white;
-            font-weight: 500;
-            background-color: $green;
-            padding: 0.5rem;
-            border-radius: 10px;
-          }
-        }
+          .with-init {
+            display: flex;
+            justify-content: space-evenly;
+            padding: 0.25rem;
 
-        label {
-          input {
-            width: 100%; // important
+            button {
+              color: $white;
+              font-weight: 500;
+              background-color: red;
+              padding: 0.5rem;
+              border-radius: 10px;
+            }
+
+            a {
+              color: $white;
+              font-weight: 500;
+              background-color: $green;
+              padding: 0.5rem;
+              border-radius: 10px;
+            }
+          }
+
+          label {
+            input {
+              width: 100%; // important
+              padding: 0.5rem;
+            }
           }
         }
       }
