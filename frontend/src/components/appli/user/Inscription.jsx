@@ -26,12 +26,6 @@ function Inscription() {
     docDivorce1: null,
   });
 
-  // function updateFields(fields) {
-  //   setData((prev) => {
-  //     return { ...prev, ...fields };
-  //   });
-  // }
-
   // --- prise info bdd ---
 
   const [donneesForm, setDonneesForm] = useState(); // pris dans bdd
@@ -71,9 +65,6 @@ function Inscription() {
   };
 
   const remplirInitial = () => {
-    console.log("donneesForm go initial : ");
-    console.log(donneesForm);
-
     handleChangeInitial("docJustifRevenus", 0);
     handleChangeInitial("docDeclaRevenus", 0);
     handleChangeInitial("docSituationPro", 0);
@@ -133,7 +124,6 @@ function Inscription() {
     // que des if car pas obliger de tous mettre tout de suite
 
     if (num === 1) {
-      // si current !== null
       if (docJustifRevenus1Src.current !== null) {
         formData.append(
           // nom envoyer dans router
@@ -231,26 +221,7 @@ function Inscription() {
           numSecu = result.data.numSecu
             ? result.data.numSecu[0].filename
             : initialData.numSecu1;
-
-          axios
-            .put(
-              `http://localhost:5000/formInscription/docParentChangeName/${parentId}`,
-              {
-                // nom des let
-                docJustifRevenus,
-                docDeclaRevenus,
-                docSituationPro,
-                docJustifDom,
-                numCaf,
-                numSecu,
-              }
-            )
-            .catch((err) => {
-              console.error(err);
-            });
-        }
-
-        if (num === 2) {
+        } else if (num === 2) {
           docJustifRevenus = result.data.docJustifRevenus
             ? result.data.docJustifRevenus[0].filename
             : initialData.docJustifRevenus2;
@@ -274,24 +245,24 @@ function Inscription() {
           numSecu = result.data.numSecu
             ? result.data.numSecu[0].filename
             : initialData.numSecu2;
-
-          axios
-            .put(
-              `http://localhost:5000/formInscription/docParentChangeName/${parentId}`,
-              {
-                // nom des let
-                docJustifRevenus,
-                docDeclaRevenus,
-                docSituationPro,
-                docJustifDom,
-                numCaf,
-                numSecu,
-              }
-            )
-            .catch((err) => {
-              console.error(err);
-            });
         }
+
+        axios
+          .put(
+            `http://localhost:5000/formInscription/docParentChangeName/${parentId}`,
+            {
+              // nom des let
+              docJustifRevenus,
+              docDeclaRevenus,
+              docSituationPro,
+              docJustifDom,
+              numCaf,
+              numSecu,
+            }
+          )
+          .catch((err) => {
+            console.error(err);
+          });
       })
       .catch((err) => {
         console.error(err);
@@ -360,10 +331,12 @@ function Inscription() {
       });
   };
 
+  // ??? essayer de faire un map ???
   return (
     finalOK === true && (
       <main className="inscription">
         <h3>Dossier Inscription</h3>
+        <h4>Parent 1</h4>
         <form>
           <div className="champ">
             <p>Justificatif de revenu (moins de 3 mois)</p>
@@ -424,12 +397,6 @@ function Inscription() {
                   name="docDeclaRevenus1"
                   id="docDeclaRevenus1"
                   ref={docDeclaRevenus1Src}
-                  onChange={() => {
-                    updateFields({
-                      docDeclaRevenus1:
-                        docDeclaRevenus1Src.current.files[0].name,
-                    });
-                  }}
                 />
               </label>
             )}
@@ -570,6 +537,7 @@ function Inscription() {
           </button>
         </div>
         {/* --------------------------------------- */}
+        <h4>Parent 2</h4>
         <form>
           <div className="champ">
             <p>Justificatif de revenu (moins de 3 mois)</p>
@@ -769,7 +737,7 @@ function Inscription() {
           </button>
         </div>
         {/* --------------------------------------- */}
-
+        <h4>Fichiers Communs</h4>
         <form>
           <div className="champ">
             <p>Numéro de sécurité sociale</p>
