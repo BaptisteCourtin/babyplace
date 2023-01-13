@@ -22,29 +22,30 @@ function LoginForm() {
   const handleClick = (e) => {
     e.preventDefault();
     if (email && password) {
-      axios.post("http://localhost:5000/auth", {
-        email,
-        password,
-      })
+      axios
+        .post("http://localhost:5000/auth", {
+          email,
+          password,
+        })
         .then((res) => {
           if (email !== adminEmail && password !== adminPassword) {
             const { token } = res.data;
             navigate("/login-params", {
               state: {
-                token
-              }
-            })
+                token,
+              },
+            });
           } else if (email === adminEmail && password === adminPassword) {
             const { token } = res.data;
             navigate("/admin", {
               state: {
-                token
-              }
-            })
+                token,
+              },
+            });
           }
         })
         .catch((err) => {
-          toast.error(err?.response?.data || err.message)
+          toast.error(err?.response?.data || err.message);
         });
     }
   };

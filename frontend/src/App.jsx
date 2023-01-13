@@ -24,9 +24,9 @@ import Dashboard from "@components/dashboard/Dashboard";
 import Features from "@components/features/Features";
 import Contact from "@components/features/Contact";
 import Faq from "@components/features/Faq";
-import Home from "./pages/Home";
 import Admin from "@pages/Admin";
 import Stats from "@pages/Stats";
+import Home from "@pages/Home";
 import AppliChat from "@pages/appli/AppliChat";
 import Aide from "@components/appli/menu/Aide";
 
@@ -69,7 +69,6 @@ function App() {
 
           <Route path="/appli/message" element={<AppliMessage />} />
           <Route path="/appli/message/room" element={<AppliChat />} />
-
 
           <Route path="/structure/inscription-form" element={<FormStructure />} />
         </Routes>

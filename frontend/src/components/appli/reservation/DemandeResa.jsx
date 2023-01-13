@@ -52,12 +52,6 @@ function DemandeResa({
       dateDepart: jour,
       heureDepart: heureMax,
     });
-    // nom-prenom enfant
-    // age enfant
-    // nom-prenom parent
-    // % profil complet
-
-    // temps total
     setCompo(3);
   };
 

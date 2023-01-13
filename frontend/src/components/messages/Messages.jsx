@@ -10,7 +10,7 @@ function Messages({ nom, prenom, email, photoProfil, structureId }) {
   const [room, setRoom] = useState("");
   const [title, setTitle] = useState("");
   const [strucData, setStrucData] = useState([]);
-  const [selected, setSelected] = useState(false)
+  const [selected, setSelected] = useState(false);
 
   const getStructureForMess = () => {
     axios

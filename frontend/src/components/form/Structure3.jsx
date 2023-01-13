@@ -1,7 +1,15 @@
 import React from "react";
 import Proptypes from "prop-types";
 
-function Structure3({ photo1Src, photo2Src, photo3Src, inputRef1, inputRef2, inputRef3, updateFields }) {
+function Structure3({
+  photo1Src,
+  photo2Src,
+  photo3Src,
+  inputRef1,
+  inputRef2,
+  inputRef3,
+  updateFields,
+}) {
   const updateImg1 = (e) => {
     // e.files contient un objet FileList
     const [picture] = e.target.files;
