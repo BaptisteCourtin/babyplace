@@ -20,6 +20,7 @@ function AppliUser() {
         },
       })
       .then((res) => {
+        console.log(res.data);
         setPourcentFormParent(res.data.pourcentFormParent);
         setPourcentFormEnfant(res.data.pourcentFormEnfant);
         setPourcentFormInscription(res.data.pourcentFormInscription);

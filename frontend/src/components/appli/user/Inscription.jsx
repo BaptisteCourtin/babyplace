@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import OneFormInscr from "./OneFormInscr";
 
 function Inscription() {
   const familleId = 1;
@@ -25,6 +26,14 @@ function Inscription() {
     docAutoImage1: null,
     docDivorce1: null,
   });
+
+  const handleSupp = (e) => {
+    const { name } = e.target;
+    setInitialData((prevState) => ({
+      ...prevState,
+      [name]: null,
+    }));
+  };
 
   // --- prise info bdd ---
 
@@ -338,193 +347,48 @@ function Inscription() {
         <h3>Dossier Inscription</h3>
         <h4>Parent 1</h4>
         <form>
-          <div className="champ">
-            <p>Justificatif de revenu (moins de 3 mois)</p>
-            {initialData.docJustifRevenus1 !== null ? (
-              <div className="with-init">
-                <button
-                  type="button"
-                  onClick={() => (initialData.docJustifRevenus1 = null)}
-                >
-                  Supp
-                </button>
-
-                <a
-                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.docJustifRevenus1}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {initialData.docJustifRevenus1.split("-qws-")[1]}
-                </a>
-              </div>
-            ) : (
-              <label htmlFor="docJustifRevenus1">
-                <input
-                  type="file"
-                  accept="image/png, image/jpg, image/jpeg, .pdf"
-                  name="docJustifRevenus1"
-                  id="docJustifRevenus1"
-                  ref={docJustifRevenus1Src}
-                />
-              </label>
-            )}
-          </div>
-
-          <div className="champ">
-            <p>Déclaration de revenu (année en cours)</p>
-            {initialData.docDeclaRevenus1 !== null ? (
-              <div className="with-init">
-                <button
-                  type="button"
-                  onClick={() => (initialData.docDeclaRevenus1 = null)}
-                >
-                  Supp
-                </button>
-
-                <a
-                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.docDeclaRevenus1}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {initialData.docJustifRevenus1.split("-qws-")[1]}
-                </a>
-              </div>
-            ) : (
-              <label htmlFor="docDeclaRevenus1">
-                <input
-                  type="file"
-                  accept="image/png, image/jpg, image/jpeg, .pdf"
-                  name="docDeclaRevenus1"
-                  id="docDeclaRevenus1"
-                  ref={docDeclaRevenus1Src}
-                />
-              </label>
-            )}
-          </div>
-          <div className="champ">
-            <p>Justificatif de situation professionnel</p>
-            {initialData.docSituationPro1 !== null ? (
-              <div className="with-init">
-                <button
-                  type="button"
-                  onClick={() => (initialData.docSituationPro1 = null)}
-                >
-                  Supp
-                </button>
-
-                <a
-                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.docSituationPro1}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {initialData.docSituationPro1.split("-qws-")[1]}
-                </a>
-              </div>
-            ) : (
-              <label htmlFor="docSituationPro1">
-                <input
-                  type="file"
-                  accept="image/png, image/jpg, image/jpeg, .pdf"
-                  name="docSituationPro1"
-                  id="docSituationPro1"
-                  ref={docSituationPro1Src}
-                />
-              </label>
-            )}
-          </div>
-          <div className="champ">
-            <p>Justificatif de domicile</p>
-            {initialData.docJustifDom1 !== null ? (
-              <div className="with-init">
-                <button
-                  type="button"
-                  onClick={() => (initialData.docJustifDom1 = null)}
-                >
-                  Supp
-                </button>
-
-                <a
-                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.docJustifDom1}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {initialData.docJustifDom1.split("-qws-")[1]}
-                </a>
-              </div>
-            ) : (
-              <label htmlFor="docJustifDom1">
-                <input
-                  type="file"
-                  accept="image/png, image/jpg, image/jpeg, .pdf"
-                  name="docJustifDom1"
-                  id="docJustifDom1"
-                  ref={docJustifDom1Src}
-                />
-              </label>
-            )}
-          </div>
-          <div className="champ">
-            <p>Numéro Allocataire CAF</p>
-            {initialData.numCaf1 !== null ? (
-              <div className="with-init">
-                <button
-                  type="button"
-                  onClick={() => (initialData.numCaf1 = null)}
-                >
-                  Supp
-                </button>
-
-                <a
-                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.numCaf1}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {initialData.numCaf1.split("-qws-")[1]}
-                </a>
-              </div>
-            ) : (
-              <label htmlFor="numCaf1">
-                <input
-                  type="file"
-                  accept="image/png, image/jpg, image/jpeg, .pdf"
-                  name="numCaf1"
-                  id="numCaf1"
-                  ref={numCaf1Src}
-                />
-              </label>
-            )}
-          </div>
-          <div className="champ">
-            <p>Numéro de sécurité sociale</p>
-            {initialData.numSecu1 !== null ? (
-              <div className="with-init">
-                <button
-                  type="button"
-                  onClick={() => (initialData.numSecu1 = null)}
-                >
-                  Supp
-                </button>
-
-                <a
-                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.numSecu1}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {initialData.numSecu1.split("-qws-")[1]}
-                </a>
-              </div>
-            ) : (
-              <label htmlFor="numSecu1">
-                <input
-                  type="file"
-                  accept="image/png, image/jpg, image/jpeg, .pdf"
-                  name="numSecu1"
-                  id="numSecu1"
-                  ref={numSecu1Src}
-                />
-              </label>
-            )}
-          </div>
+          <OneFormInscr
+            init={initialData.docJustifRevenus1}
+            src={docJustifRevenus1Src}
+            nomDoc={"docJustifRevenus1"}
+            handleSupp={handleSupp}
+            p="Justificatif de revenu (moins de 3 mois)"
+          />
+          <OneFormInscr
+            init={initialData.docDeclaRevenus1}
+            src={docDeclaRevenus1Src}
+            nomDoc={"docDeclaRevenus1"}
+            handleSupp={handleSupp}
+            p="Déclaration de revenu (année en cours)"
+          />
+          <OneFormInscr
+            init={initialData.docSituationPro1}
+            src={docSituationPro1Src}
+            nomDoc={"docSituationPro1"}
+            handleSupp={handleSupp}
+            p="Justificatif de situation professionnel"
+          />
+          <OneFormInscr
+            init={initialData.docJustifDom1}
+            src={docJustifDom1Src}
+            nomDoc={"docJustifDom1"}
+            handleSupp={handleSupp}
+            p="Justificatif de domicile"
+          />
+          <OneFormInscr
+            init={initialData.numCaf1}
+            src={numCaf1Src}
+            nomDoc={"numCaf1"}
+            handleSupp={handleSupp}
+            p="Numéro Allocataire CAF"
+          />
+          <OneFormInscr
+            init={initialData.numSecu1}
+            src={numSecu1Src}
+            nomDoc={"numSecu1"}
+            handleSupp={handleSupp}
+            p="Numéro de sécurité sociale"
+          />
         </form>
 
         <div className="button-bas">
@@ -539,192 +403,48 @@ function Inscription() {
         {/* --------------------------------------- */}
         <h4>Parent 2</h4>
         <form>
-          <div className="champ">
-            <p>Justificatif de revenu (moins de 3 mois)</p>
-            {initialData.docJustifRevenus2 !== null ? (
-              <div className="with-init">
-                <button
-                  type="button"
-                  onClick={() => (initialData.docJustifRevenus2 = null)}
-                >
-                  Supp
-                </button>
-
-                <a
-                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.docJustifRevenus2}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {initialData.docJustifRevenus2.split("-qws-")[1]}
-                </a>
-              </div>
-            ) : (
-              <label htmlFor="docJustifRevenus2">
-                <input
-                  type="file"
-                  accept="image/png, image/jpg, image/jpeg, .pdf"
-                  name="docJustifRevenus2"
-                  id="docJustifRevenus2"
-                  ref={docJustifRevenus2Src}
-                />
-              </label>
-            )}
-          </div>
-          <div className="champ">
-            <p>Déclaration de revenu (année en cours)</p>
-            {initialData.docDeclaRevenus2 !== null ? (
-              <div className="with-init">
-                <button
-                  type="button"
-                  onClick={() => (initialData.docDeclaRevenus2 = null)}
-                >
-                  Supp
-                </button>
-
-                <a
-                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.docDeclaRevenus2}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {initialData.docDeclaRevenus2.split("-qws-")[1]}
-                </a>
-              </div>
-            ) : (
-              <label htmlFor="docDeclaRevenus2">
-                <input
-                  type="file"
-                  accept="image/png, image/jpg, image/jpeg, .pdf"
-                  name="docDeclaRevenus2"
-                  id="docDeclaRevenus2"
-                  ref={docDeclaRevenus2Src}
-                />
-              </label>
-            )}
-          </div>
-          <div className="champ">
-            <p>Justificatif de situation professionnel</p>
-            {initialData.docSituationPro2 !== null ? (
-              <div className="with-init">
-                <button
-                  type="button"
-                  onClick={() => (initialData.docSituationPro2 = null)}
-                >
-                  Supp
-                </button>
-
-                <a
-                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.docSituationPro2}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {initialData.docSituationPro2.split("-qws-")[1]}
-                </a>
-              </div>
-            ) : (
-              <label htmlFor="docSituationPro2">
-                <input
-                  type="file"
-                  accept="image/png, image/jpg, image/jpeg, .pdf"
-                  name="docSituationPro2"
-                  id="docSituationPro2"
-                  ref={docSituationPro2Src}
-                />
-              </label>
-            )}
-          </div>
-          <div className="champ">
-            <p>Justificatif de domicile</p>
-            {initialData.docJustifDom2 !== null ? (
-              <div className="with-init">
-                <button
-                  type="button"
-                  onClick={() => (initialData.docJustifDom2 = null)}
-                >
-                  Supp
-                </button>
-
-                <a
-                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.docJustifDom2}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {initialData.docJustifDom2.split("-qws-")[1]}
-                </a>
-              </div>
-            ) : (
-              <label htmlFor="docJustifDom2">
-                <input
-                  type="file"
-                  accept="image/png, image/jpg, image/jpeg, .pdf"
-                  name="docJustifDom2"
-                  id="docJustifDom2"
-                  ref={docJustifDom2Src}
-                />
-              </label>
-            )}
-          </div>
-          <div className="champ">
-            <p>Numéro Allocataire CAF</p>
-            {initialData.numCaf2 !== null ? (
-              <div className="with-init">
-                <button
-                  type="button"
-                  onClick={() => (initialData.numCaf2 = null)}
-                >
-                  Supp
-                </button>
-
-                <a
-                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.numCaf2}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {initialData.numCaf2.split("-qws-")[1]}
-                </a>
-              </div>
-            ) : (
-              <label htmlFor="numCaf2">
-                <input
-                  type="file"
-                  accept="image/png, image/jpg, image/jpeg, .pdf"
-                  name="numCaf2"
-                  id="numCaf2"
-                  ref={numCaf2Src}
-                />
-              </label>
-            )}
-          </div>
-          <div className="champ">
-            <p>Numéro de sécurité sociale</p>
-            {initialData.numSecu2 !== null ? (
-              <div className="with-init">
-                <button
-                  type="button"
-                  onClick={() => (initialData.numSecu2 = null)}
-                >
-                  Supp
-                </button>
-
-                <a
-                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.numSecu2}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {initialData.numSecu2.split("-qws-")[1]}
-                </a>
-              </div>
-            ) : (
-              <label htmlFor="numSecu2">
-                <input
-                  type="file"
-                  accept="image/png, image/jpg, image/jpeg, .pdf"
-                  name="numSecu2"
-                  id="numSecu2"
-                  ref={numSecu2Src}
-                />
-              </label>
-            )}
-          </div>
+          <OneFormInscr
+            init={initialData.docJustifRevenus2}
+            src={docJustifRevenus2Src}
+            nomDoc={"docJustifRevenus2"}
+            handleSupp={handleSupp}
+            p="Justificatif de revenu (moins de 3 mois)"
+          />
+          <OneFormInscr
+            init={initialData.docDeclaRevenus2}
+            src={docDeclaRevenus2Src}
+            nomDoc={"docDeclaRevenus2"}
+            handleSupp={handleSupp}
+            p="Déclaration de revenu (année en cours)"
+          />
+          <OneFormInscr
+            init={initialData.docSituationPro2}
+            src={docSituationPro2Src}
+            nomDoc={"docSituationPro2"}
+            handleSupp={handleSupp}
+            p="Justificatif de situation professionnel"
+          />
+          <OneFormInscr
+            init={initialData.docJustifDom2}
+            src={docJustifDom2Src}
+            nomDoc={"docJustifDom2"}
+            handleSupp={handleSupp}
+            p="Justificatif de domicile"
+          />
+          <OneFormInscr
+            init={initialData.numCaf2}
+            src={numCaf2Src}
+            nomDoc={"numCaf2"}
+            handleSupp={handleSupp}
+            p="Numéro Allocataire CAF"
+          />
+          <OneFormInscr
+            init={initialData.numSecu2}
+            src={numSecu2Src}
+            nomDoc={"numSecu2"}
+            handleSupp={handleSupp}
+            p="Numéro de sécurité sociale"
+          />
         </form>
 
         <div className="button-bas">
@@ -739,130 +459,34 @@ function Inscription() {
         {/* --------------------------------------- */}
         <h4>Fichiers Communs</h4>
         <form>
-          <div className="champ">
-            <p>Numéro de sécurité sociale</p>
-            {initialData.docAssurParent1 !== null ? (
-              <div className="with-init">
-                <button
-                  type="button"
-                  onClick={() => (initialData.docAssurParent1 = null)}
-                >
-                  Supp
-                </button>
-
-                <a
-                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.docAssurParent1}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {initialData.docAssurParent1.split("-qws-")[1]}
-                </a>
-              </div>
-            ) : (
-              <label htmlFor="docAssurParent">
-                <input
-                  type="file"
-                  accept="image/png, image/jpg, image/jpeg, .pdf"
-                  name="docAssurParent"
-                  id="docAssurParent"
-                  ref={docAssurParentSrc}
-                />
-              </label>
-            )}
-          </div>
-          <div className="champ">
-            <p>RIB</p>
-            {initialData.docRib1 !== null ? (
-              <div className="with-init">
-                <button
-                  type="button"
-                  onClick={() => (initialData.docRib1 = null)}
-                >
-                  Supp
-                </button>
-
-                <a
-                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.docRib1}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {initialData.docRib1.split("-qws-")[1]}
-                </a>
-              </div>
-            ) : (
-              <label htmlFor="docRib">
-                <input
-                  type="file"
-                  accept="image/png, image/jpg, image/jpeg, .pdf"
-                  name="docRib"
-                  id="docRib"
-                  ref={docRibSrc}
-                />
-              </label>
-            )}
-          </div>
-          <div className="champ">
-            <p>Autoristaion photo et video</p>
-            {initialData.docAutoImage1 !== null ? (
-              <div className="with-init">
-                <button
-                  type="button"
-                  onClick={() => (initialData.docAutoImage1 = null)}
-                >
-                  Supp
-                </button>
-
-                <a
-                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.docAutoImage1}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {initialData.docAutoImage1.split("-qws-")[1]}
-                </a>
-              </div>
-            ) : (
-              <label htmlFor="docAutoImage">
-                <input
-                  type="file"
-                  accept="image/png, image/jpg, image/jpeg, .pdf"
-                  name="docAutoImage"
-                  id="docAutoImage"
-                  ref={docAutoImageSrc}
-                />
-              </label>
-            )}
-          </div>
-          <div className="champ">
-            <p>Copie du jugement de divorce</p>
-            {initialData.docDivorce1 !== null ? (
-              <div className="with-init">
-                <button
-                  type="button"
-                  onClick={() => (initialData.docDivorce1 = null)}
-                >
-                  Supp
-                </button>
-
-                <a
-                  href={`http://localhost:5000/uploads/formInscriptionParents/${initialData.docDivorce1}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {initialData.docDivorce1.split("-qws-")[1]}
-                </a>
-              </div>
-            ) : (
-              <label htmlFor="docDivorce">
-                <input
-                  type="file"
-                  accept="image/png, image/jpg, image/jpeg, .pdf"
-                  name="docDivorce"
-                  id="docDivorce"
-                  ref={docDivorceSrc}
-                />
-              </label>
-            )}
-          </div>
+          <OneFormInscr
+            init={initialData.docAssurParent1}
+            src={docAssurParentSrc}
+            nomDoc={"docAssurParent1"}
+            handleSupp={handleSupp}
+            p="Numéro de sécurité sociale"
+          />
+          <OneFormInscr
+            init={initialData.docRib1}
+            src={docRibSrc}
+            nomDoc={"docRib1"}
+            handleSupp={handleSupp}
+            p="RIB"
+          />
+          <OneFormInscr
+            init={initialData.docAutoImage1}
+            src={docAutoImageSrc}
+            nomDoc={"docAutoImage1"}
+            handleSupp={handleSupp}
+            p="Autoristaion photo et video"
+          />
+          <OneFormInscr
+            init={initialData.docDivorce1}
+            src={docDivorceSrc}
+            nomDoc={"docDivorce1"}
+            handleSupp={handleSupp}
+            p="Copie du jugement de divorce"
+          />
         </form>
         <div className="button-bas">
           <button
