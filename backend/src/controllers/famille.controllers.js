@@ -27,6 +27,7 @@ const getDonneesFormInscription = async (req, res) => {
 
 const getPourcent = async (req, res) => {
   const result = await familleModels.getPourcent(req);
+  // console.log(result);
   return res.json(result);
 };
 

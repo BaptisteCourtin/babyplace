@@ -7,7 +7,9 @@ import Completion from "@components/appli/user/Completion";
 function AppliUser() {
   const [pourcentFormParent, setPourcentFormParent] = useState(0);
   const [pourcentFormEnfant, setPourcentFormEnfant] = useState(0);
-  const [pourcentFormInscription, setPourcentFormInscription] = useState(10);
+  const [truePourcentEnfant, setTruePourcentEnfant] = useState(0);
+  const [pourcentFormInscription, setPourcentFormInscription] = useState(0);
+  const [truePourcentInscription, setTruePourcentInscription] = useState(0);
 
   const familleId = 1;
   const Token =
@@ -21,9 +23,9 @@ function AppliUser() {
       })
       .then((res) => {
         console.log(res.data);
-        setPourcentFormParent(res.data.pourcentFormParent);
-        setPourcentFormEnfant(res.data.pourcentFormEnfant);
-        setPourcentFormInscription(res.data.pourcentFormInscription);
+        setPourcentFormParent(res.data[0][0].pourcentFormParent);
+        setPourcentFormEnfant(res.data[1]);
+        // setPourcentFormInscription(res.data[2]);
       })
       .catch((err) => {
         console.error(err);
@@ -33,10 +35,42 @@ function AppliUser() {
     getPourcentForm();
   }, []);
 
+  // --- pour avoir le vrai pourcent des enfants ---
+
+  const getTruePourcentEnfant = () => {
+    let pourcent = 0;
+    let nbTime = 0;
+    for (const i in pourcentFormEnfant) {
+      pourcent += pourcentFormEnfant[i].pourcentFormEnfant;
+      nbTime += 1;
+    }
+    setTruePourcentEnfant(parseInt(pourcent / nbTime));
+  };
+
+  useEffect(() => {
+    getTruePourcentEnfant();
+  }, [pourcentFormEnfant]);
+
+  // const getTruePourcentInscription = () => {
+  //   let pourcent = 0;
+  //   let nbTime = 0;
+  //   for (const i in pourcentFormInscription) {
+  //     pourcent += pourcentFormInscription[i].pourcentFormInscription;
+  //     nbTime += 1;
+  //   }
+  //   setTruePourcentInscription(parseInt(pourcent / nbTime));
+  // };
+
+  // useEffect(() => {
+  //   getTruePourcentInscription();
+  // }, [pourcentFormInscription]);
+
+  // ---
+
   const tabCompletion = [
     {
       nom: "Dossier Enfant",
-      completion: pourcentFormEnfant,
+      completion: truePourcentEnfant,
       quelCompo: 0,
     },
     {

@@ -38,9 +38,9 @@ const getDonneesFormInscription = async (req) => {
 };
 
 const getPourcent = async (req) => {
-  const [[result]] = await datasource.query(
-    "SELECT p.pourcentFormParent , e.pourcentFormEnfant , f.pourcentFormInscription FROM famille AS f INNER JOIN parent AS p ON f.familleId = p.familleId INNER JOIN enfant AS e ON f.familleId = e.familleId  WHERE f.familleId = ?",
-    [req.params.id]
+  const [result] = await datasource.query(
+    "SELECT pourcentFormParent FROM parent WHERE familleId = ? ; SELECT pourcentFormEnfant FROM enfant WHERE familleId = ? ",
+    [req.params.id, req.params.id]
   );
   return result;
 };

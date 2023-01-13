@@ -340,7 +340,6 @@ function Inscription() {
       });
   };
 
-  // ??? essayer de faire un map ???
   return (
     finalOK === true && (
       <main className="inscription">
