@@ -352,6 +352,7 @@ function Inscription() {
             nomDoc={"docJustifRevenus1"}
             handleSupp={handleSupp}
             p="Justificatif de revenu (moins de 3 mois)"
+            what={1}
           />
           <OneFormInscr
             init={initialData.docDeclaRevenus1}
@@ -359,6 +360,7 @@ function Inscription() {
             nomDoc={"docDeclaRevenus1"}
             handleSupp={handleSupp}
             p="Déclaration de revenu (année en cours)"
+            what={1}
           />
           <OneFormInscr
             init={initialData.docSituationPro1}
@@ -366,6 +368,7 @@ function Inscription() {
             nomDoc={"docSituationPro1"}
             handleSupp={handleSupp}
             p="Justificatif de situation professionnel"
+            what={1}
           />
           <OneFormInscr
             init={initialData.docJustifDom1}
@@ -373,6 +376,7 @@ function Inscription() {
             nomDoc={"docJustifDom1"}
             handleSupp={handleSupp}
             p="Justificatif de domicile"
+            what={1}
           />
           <OneFormInscr
             init={initialData.numCaf1}
@@ -380,6 +384,7 @@ function Inscription() {
             nomDoc={"numCaf1"}
             handleSupp={handleSupp}
             p="Numéro Allocataire CAF"
+            what={1}
           />
           <OneFormInscr
             init={initialData.numSecu1}
@@ -387,6 +392,7 @@ function Inscription() {
             nomDoc={"numSecu1"}
             handleSupp={handleSupp}
             p="Numéro de sécurité sociale"
+            what={1}
           />
         </form>
 
@@ -408,6 +414,7 @@ function Inscription() {
             nomDoc={"docJustifRevenus2"}
             handleSupp={handleSupp}
             p="Justificatif de revenu (moins de 3 mois)"
+            what={1}
           />
           <OneFormInscr
             init={initialData.docDeclaRevenus2}
@@ -415,6 +422,7 @@ function Inscription() {
             nomDoc={"docDeclaRevenus2"}
             handleSupp={handleSupp}
             p="Déclaration de revenu (année en cours)"
+            what={1}
           />
           <OneFormInscr
             init={initialData.docSituationPro2}
@@ -422,6 +430,7 @@ function Inscription() {
             nomDoc={"docSituationPro2"}
             handleSupp={handleSupp}
             p="Justificatif de situation professionnel"
+            what={1}
           />
           <OneFormInscr
             init={initialData.docJustifDom2}
@@ -429,6 +438,7 @@ function Inscription() {
             nomDoc={"docJustifDom2"}
             handleSupp={handleSupp}
             p="Justificatif de domicile"
+            what={1}
           />
           <OneFormInscr
             init={initialData.numCaf2}
@@ -436,6 +446,7 @@ function Inscription() {
             nomDoc={"numCaf2"}
             handleSupp={handleSupp}
             p="Numéro Allocataire CAF"
+            what={1}
           />
           <OneFormInscr
             init={initialData.numSecu2}
@@ -443,6 +454,7 @@ function Inscription() {
             nomDoc={"numSecu2"}
             handleSupp={handleSupp}
             p="Numéro de sécurité sociale"
+            what={1}
           />
         </form>
 
@@ -464,6 +476,7 @@ function Inscription() {
             nomDoc={"docAssurParent1"}
             handleSupp={handleSupp}
             p="Numéro de sécurité sociale"
+            what={2}
           />
           <OneFormInscr
             init={initialData.docRib1}
@@ -471,6 +484,7 @@ function Inscription() {
             nomDoc={"docRib1"}
             handleSupp={handleSupp}
             p="RIB"
+            what={2}
           />
           <OneFormInscr
             init={initialData.docAutoImage1}
@@ -478,6 +492,7 @@ function Inscription() {
             nomDoc={"docAutoImage1"}
             handleSupp={handleSupp}
             p="Autoristaion photo et video"
+            what={2}
           />
           <OneFormInscr
             init={initialData.docDivorce1}
@@ -485,6 +500,7 @@ function Inscription() {
             nomDoc={"docDivorce1"}
             handleSupp={handleSupp}
             p="Copie du jugement de divorce"
+            what={2}
           />
         </form>
         <div className="button-bas">
