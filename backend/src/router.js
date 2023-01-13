@@ -164,9 +164,10 @@ router.put("/formInscription/docFamilleChangeName/:id", (req, res) => {
     });
 });
 
-// --- --- ---
+// --- pour messagerie ---
 
 router.get("/structure/all", structure.getStructureDataMess);
+router.get("/famille/all", famille.getFamilleDataMess);
 
 //Routes for dashboard + admin page start
 router.get("/structure", structure.getStructure);

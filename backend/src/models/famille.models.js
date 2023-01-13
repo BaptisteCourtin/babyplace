@@ -5,6 +5,11 @@ const getFamille = async () => {
   return result;
 };
 
+const getFamilleDataMess = async (req) => {
+  const [result] = await datasource.query("SELECT * FROM famille");
+  return result;
+};
+
 const getPersoConfiance = async (req) => {
   const [result] = await datasource.query(
     "SELECT * FROM personne_confiance WHERE familleId = ?",
@@ -149,4 +154,5 @@ module.exports = {
   postNewEnfant,
   deleteEnfant,
   getDonneesFormInscription,
+  getFamilleDataMess
 };

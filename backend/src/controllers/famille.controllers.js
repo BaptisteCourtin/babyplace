@@ -69,6 +69,11 @@ const deleteEnfant = async (req, res) => {
   return res.json(result);
 };
 
+const getFamilleDataMess = async (req, res) => {
+  const result = await familleModels.getFamilleDataMess(req);
+  return res.json(result);
+};
+
 module.exports = {
   getPersoConfiance,
   postReservation,
@@ -82,4 +87,5 @@ module.exports = {
   postNewEnfant,
   deleteEnfant,
   getDonneesFormInscription,
+  getFamilleDataMess
 };

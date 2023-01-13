@@ -26,7 +26,9 @@ import Contact from "@components/features/Contact";
 import Faq from "@components/features/Faq";
 import Admin from "@pages/Admin";
 import Stats from "@pages/Stats";
-import Home from "./pages/Home";
+import Home from "@pages/Home";
+import AppliChat from "@pages/appli/AppliChat";
+import Aide from "@components/appli/menu/Aide";
 
 function App() {
   const [userEmail, setUserEmail] = useState("paulette07@laposte.net");
@@ -64,14 +66,14 @@ function App() {
             element={<AppliUserCompletion />}
           />
           <Route path="/appli/notif" element={<AppliNotif />} />
-          <Route path="/appli/message" element={<AppliMessage />} />
 
-          <Route
-            path="/structure/inscription-form"
-            element={<FormStructure />}
-          />
+          <Route path="/appli/message" element={<AppliMessage />} />
+          <Route path="/appli/message/room" element={<AppliChat />} />
+
+          <Route path="/structure/inscription-form" element={<FormStructure />} />
         </Routes>
       </UserEmailContext.Provider>
+
     </div>
   );
 }

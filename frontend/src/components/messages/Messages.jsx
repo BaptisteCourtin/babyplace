@@ -3,6 +3,7 @@ import io from "socket.io-client";
 import axios from "axios";
 import Chat from "./Chat";
 
+
 const socket = io.connect("http://localhost:3001");
 
 function Messages({ nom, prenom, email, photoProfil, structureId }) {
@@ -13,8 +14,9 @@ function Messages({ nom, prenom, email, photoProfil, structureId }) {
 
   const getStructureForMess = () => {
     axios
-      .get("http://localhost:5000/structure/all")
+      .get("http://localhost:5000/famille/all")
       .then((ret) => {
+        console.log(ret.data);
         setStrucData(ret.data);
       })
       .catch((err) => {
@@ -48,27 +50,20 @@ function Messages({ nom, prenom, email, photoProfil, structureId }) {
           <div className="salonsMessages">
             {strucData &&
               strucData
-                .filter((f) => !f.nom.includes(nom))
+                .filter((f) => !f.email.includes(email))
                 .map((element) => (
-                  <li
-                    className={
-                      selected && element.nom === title
-                        ? "selected contactList"
-                        : "contactList"
-                    }
-                    key={element.crecheId}
-                  >
+                  <li className={selected && element.email === title ? "selected contactList" : "contactList"} key={element.familleId}>
                     <button
                       type="button"
                       onClick={() => {
                         setSelected(true);
-                        setRoom(structureId + element.crecheId);
-                        setTitle(element.nom);
+                        setRoom(structureId + element.familleId);
+                        setTitle(element.email);
                       }}
                       id="btn-affiche-con"
                     >
-                      {element.photoProfil && <img src={element.photoProfil} />}
-                      {element.nom}
+                      {/* {element.photoProfil && <img src={element.photoProfil} />} */}
+                      {element.email}
                     </button>
                   </li>
                 ))}
