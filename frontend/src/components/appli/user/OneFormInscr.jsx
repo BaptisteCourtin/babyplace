@@ -1,6 +1,14 @@
 import React from "react";
 
-const OneFormInscr = ({ init, src, nomDoc, handleSupp, p }) => {
+const OneFormInscr = ({ init, src, nomDoc, handleSupp, p, what }) => {
+  let That = "";
+  if (what === 1) {
+    That = "Parents";
+  }
+  if (what === 2) {
+    That = "Famille";
+  }
+
   return (
     <div className="champ">
       <p>{p}</p>
@@ -11,7 +19,7 @@ const OneFormInscr = ({ init, src, nomDoc, handleSupp, p }) => {
           </button>
 
           <a
-            href={`http://localhost:5000/uploads/formInscriptionParents/${init}`}
+            href={`http://localhost:5000/uploads/formInscription${That}/${init}`}
             target="_blank"
             rel="noreferrer"
           >
