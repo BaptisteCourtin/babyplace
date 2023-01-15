@@ -25,9 +25,10 @@ function AppliReservation() {
     indemnRepas,
   } = data;
 
-  const [heureMin, setHeureMin] = useState(0);
-  const [heureMax, setHeureMax] = useState(24);
+  const [heureMin, setHeureMin] = useState("24:00");
+  const [heureMax, setHeureMax] = useState("00:00");
   const [jour, setJour] = useState("Lundi");
+  const [isOccasionnel, setIsOccasionnel] = useState(0);
 
   const [compo, setCompo] = useState(0);
   const choixComposant = () => {
@@ -38,6 +39,7 @@ function AppliReservation() {
           heureMin={heureMin}
           heureMax={heureMax}
           jour={jour}
+          isOccasionnel={isOccasionnel}
           nom={nom}
           nomUsage={nomUsage}
           nomNaissance={nomNaissance}
@@ -69,6 +71,11 @@ function AppliReservation() {
     return (
       <ChoixDates
         setCompo={setCompo}
+        heureMax={heureMax}
+        heureMin={heureMin}
+        jour={jour}
+        setIsOccasionnel={setIsOccasionnel}
+        isOccasionnel={isOccasionnel}
         setHeureMin={setHeureMin}
         setHeureMax={setHeureMax}
         setJour={setJour}
