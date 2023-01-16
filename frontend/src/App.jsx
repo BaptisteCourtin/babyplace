@@ -29,6 +29,7 @@ import Stats from "@pages/Stats";
 import Home from "@pages/Home";
 import AppliChat from "@pages/appli/AppliChat";
 import Aide from "@components/appli/menu/Aide";
+import MessageAdmin from "@components/dashboard/admin/MessageAdmin";
 
 function App() {
   const [userEmail, setUserEmail] = useState("paulette07@laposte.net");
@@ -41,6 +42,7 @@ function App() {
 
           <Route path="/admin" element={<Admin />} />
           <Route path="/stats" element={<Stats />} />
+          <Route path="/admin/messages" element={<MessageAdmin />} />
 
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />

@@ -10,6 +10,7 @@ const structure = require("./controllers/structure.controllers");
 const horaires = require("./controllers/horaires.controllers");
 const calendrier = require("./controllers/calendrier.controllers");
 const dashboard = require("./controllers/dashboard.controllers");
+const messageAdmin = require("./controllers/messageAdmin.controllers");
 
 const assMat = require("./controllers/assMat.controllers");
 const creche = require("./controllers/creche.controllers");
@@ -26,6 +27,7 @@ router.get("/famille/formEnfant/:id", famille.getDonneesFormEnfant); //donnees d
 router.get("/famille/nomsEnfants/:id", famille.getNomsEtIdEnfants); // noms et id des enfants
 router.get("/famille/formInscription/:id", famille.getDonneesFormInscription); //donnees du formulaire inscription
 router.get("/famille/pourcent/:id", famille.getPourcent); // pourcent des formulaire
+router.get("/contact/message/all", messageAdmin.getAllMessageToAdmin); // recupérer tous les message pour le dashboard admin
 
 router.put("/structure/notes/:id", structure.updateNotes); //notes
 router.put("/structure/signal/:id", structure.updateSignal); // signalement
@@ -34,6 +36,7 @@ router.put("/formEnfant/:id", famille.updateFormEnfant); // formulaire enfant
 
 router.post("/reservation", famille.postReservation); // reservation
 router.post("/famille/newEnfant", famille.postNewEnfant); // nouveau enfant
+router.post("/contact/message", messageAdmin.postMessageToAdmin); // nouveau message pour l'admin
 
 router.delete("/famille/deleteEnfant/:id", famille.deleteEnfant); // delete enfant
 
@@ -51,10 +54,10 @@ router.post(
         cb(
           null,
           Math.round(Math.random() * 1000) +
-            `${date.getMinutes()}${date.getSeconds()}` +
-            Math.round(Math.random() * 1000) +
-            "-qws-" +
-            file.originalname
+          `${date.getMinutes()}${date.getSeconds()}` +
+          Math.round(Math.random() * 1000) +
+          "-qws-" +
+          file.originalname
           // nom avec des chiffres + nom d'origine du fichier
         );
       },
@@ -123,10 +126,10 @@ router.post(
         cb(
           null,
           Math.round(Math.random() * 1000) +
-            `${date.getMinutes()}${date.getSeconds()}` +
-            Math.round(Math.random() * 1000) +
-            "-qws-" +
-            file.originalname
+          `${date.getMinutes()}${date.getSeconds()}` +
+          Math.round(Math.random() * 1000) +
+          "-qws-" +
+          file.originalname
           // nom avec des chiffres + nom d'origine du fichier
         );
       },

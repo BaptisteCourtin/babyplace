@@ -19,6 +19,9 @@ function Nav() {
         <li>
           <Link to="/stats">Stats</Link>
         </li>
+        <li>
+          <Link to="/admin/messages">Messages</Link>
+        </li>
       </ul>
     </nav>
   );
