@@ -28,6 +28,8 @@ router.get("/famille/nomsEnfants/:id", famille.getNomsEtIdEnfants); // noms et i
 router.get("/famille/formInscription/:id", famille.getDonneesFormInscription); //donnees du formulaire inscription
 router.get("/famille/pourcent/:id", famille.getPourcent); // pourcent des formulaire
 router.get("/contact/message/all", messageAdmin.getAllMessageToAdmin); // recupérer tous les message pour le dashboard admin
+router.get("/calendrier/whereMoins/:id", calendrier.getCalendrierMoins); // calendrier par id wher nbPlaces = -1
+
 
 router.put("/structure/notes/:id", structure.updateNotes); //notes
 router.put("/structure/signal/:id", structure.updateSignal); // signalement
@@ -41,7 +43,7 @@ router.post("/contact/message", messageAdmin.postMessageToAdmin); // nouveau mes
 router.delete("/famille/deleteEnfant/:id", famille.deleteEnfant); // delete enfant
 router.delete("/contact/message/all/:id", messageAdmin.deleteMessagebyId); // delete message from admin dashboard
 
-// FORM INSCRIPTION PARENT (juste le where qui change)
+// FORM INSCRIPTION CHAQUE PARENT (juste le where qui change)
 // mettre dans uploads et change nom
 router.post(
   "/formInscription/docParent",

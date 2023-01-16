@@ -31,6 +31,7 @@ import AppliChat from "@pages/appli/AppliChat";
 import Aide from "@components/appli/menu/Aide";
 import MessageAdmin from "@components/dashboard/admin/MessageAdmin";
 
+
 function App() {
   const [userEmail, setUserEmail] = useState("paulette07@laposte.net");
 
@@ -72,10 +73,12 @@ function App() {
           <Route path="/appli/message" element={<AppliMessage />} />
           <Route path="/appli/message/room" element={<AppliChat />} />
 
-          <Route path="/structure/inscription-form" element={<FormStructure />} />
+          <Route
+            path="/structure/inscription-form"
+            element={<FormStructure />}
+          />
         </Routes>
       </UserEmailContext.Provider>
-
     </div>
   );
 }

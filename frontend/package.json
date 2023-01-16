@@ -12,6 +12,7 @@
   "dependencies": {
     "@originjs/vite-plugin-commonjs": "^1.0.3",
     "axios": "^1.2.2",
+    "date-fns": "^2.29.3",
     "leaflet": "^1.9.3",
     "moodal": "^0.1.1",
     "multi-range-slider-react": "^2.0.2",

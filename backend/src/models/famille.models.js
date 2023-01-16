@@ -103,6 +103,7 @@ const postReservation = async (req) => {
     structureId,
     enfantId,
     prixTotal,
+    isOccasionnel,
     dateArrivee,
     heureArrivee,
     dateDepart,
@@ -110,12 +111,12 @@ const postReservation = async (req) => {
   } = req.body;
 
   const [result] = await datasource.query(
-    "INSERT INTO reservation (structureId, enfantId, prixTotal, dateArrivee, heureArrivee, dateDepart, heureDepart) VALUES (?, ?, ?, ?, ?, ?, ?)",
-
+    "INSERT INTO reservation (structureId, enfantId, prixTotal, isOccasionnel, dateArrivee, heureArrivee, dateDepart, heureDepart) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
     [
       structureId,
       enfantId,
       prixTotal,
+      isOccasionnel,
       dateArrivee,
       heureArrivee,
       dateDepart,
@@ -154,5 +155,5 @@ module.exports = {
   postNewEnfant,
   deleteEnfant,
   getDonneesFormInscription,
-  getFamilleDataMess
+  getFamilleDataMess,
 };
