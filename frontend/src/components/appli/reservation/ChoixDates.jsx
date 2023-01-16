@@ -26,6 +26,8 @@ function ChoixDates({
   console.log(jour);
   console.log("thismin" + thisMinHeure);
   console.log("thismax" + thisMaxHeure);
+  console.log("mymin" + heureMin);
+  console.log("mymax" + heureMax);
 
   return (
     <>

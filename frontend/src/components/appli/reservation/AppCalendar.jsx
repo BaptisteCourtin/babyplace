@@ -113,30 +113,6 @@ function AppCalendar({
           </div>
 
           <div className="choose-hour">
-            <p>Réserver de </p>
-            <div className="horaireOuvert">
-              <TimePicker
-                value={"00:00"}
-                clearIcon={null}
-                disableClock={true}
-                minTime={thisMinHeure}
-                maxTime={thisMaxHeure}
-                onChange={(e) => {
-                  setHeureMin(e);
-                }}
-              />
-              <p>à</p>
-              <TimePicker
-                value={"00:00"}
-                clearIcon={null}
-                disableClock={true}
-                minTime={thisMinHeure}
-                maxTime={thisMaxHeure}
-                onChange={(e) => {
-                  setHeureMax(e);
-                }}
-              />
-            </div>
             <div className="calendar-logo">
               <p>
                 <img src={open} alt="open" /> Ouvre à : {thisMinHeure}H
@@ -144,6 +120,28 @@ function AppCalendar({
               <p>
                 <img src={close} alt="close" /> Ferme à: {thisMaxHeure}H
               </p>
+            </div>
+            <div className="my-hour">
+              <p>Réserver de </p>
+              <div className="horaireOuvert">
+                <input
+                  type="time"
+                  min={thisMinHeure}
+                  max={thisMaxHeure}
+                  onChange={(e) => {
+                    setHeureMin(e.target.value);
+                  }}
+                ></input>
+                <p>à</p>
+                <input
+                  type="time"
+                  min={thisMinHeure}
+                  max={thisMaxHeure}
+                  onChange={(e) => {
+                    setHeureMax(e.target.value);
+                  }}
+                ></input>
+              </div>
             </div>
           </div>
         </div>
@@ -169,30 +167,6 @@ function AppCalendar({
           </p>
 
           <div className="choose-hour">
-            <p>Réserver de </p>
-            <div className="horaireOuvert">
-              <TimePicker
-                value={"00:00"}
-                clearIcon={null}
-                disableClock={true}
-                minTime={thisMinHeure}
-                maxTime={thisMaxHeure}
-                onChange={(e) => {
-                  setHeureMin(e);
-                }}
-              />
-              <p>à</p>
-              <TimePicker
-                value={"00:00"}
-                clearIcon={null}
-                disableClock={true}
-                minTime={thisMinHeure}
-                maxTime={thisMaxHeure}
-                onChange={(e) => {
-                  setHeureMax(e);
-                }}
-              />
-            </div>
             <div className="calendar-logo">
               <p>
                 <img src={open} alt="open" /> Ouvre à : {thisMinHeure}H
@@ -200,6 +174,28 @@ function AppCalendar({
               <p>
                 <img src={close} alt="close" /> Ferme à: {thisMaxHeure}H
               </p>
+            </div>
+            <div className="my-hour">
+              <p>Réserver de </p>
+              <div className="horaireOuvert">
+                <input
+                  type="time"
+                  min={thisMinHeure}
+                  max={thisMaxHeure}
+                  onChange={(e) => {
+                    setHeureMin(e.target.value);
+                  }}
+                ></input>
+                <p>à</p>
+                <input
+                  type="time"
+                  min={thisMinHeure}
+                  max={thisMaxHeure}
+                  onChange={(e) => {
+                    setHeureMax(e.target.value);
+                  }}
+                ></input>
+              </div>
             </div>
           </div>
         </div>

@@ -120,32 +120,34 @@ function AppliPlaces({ dataDateHeure, setDataDateHeure }) {
           </div>
 
           <div className="choose-hour">
-            <p>
+            <p className="zzz">
               {`Vous avez choisi ->`} <span>{dataDateHeure.jour}</span>
             </p>
-            <p>Ouvert de </p>
-            <div className="horaireOuvert">
-              <TimePicker
-                value={dataDateHeure.heureMin}
-                clearIcon={null}
-                disableClock={true}
-                minTime={"00:00"}
-                maxTime={"23:59"}
-                onChange={(e) => {
-                  ChangeDateHeure(e, "heureMin");
-                }}
-              />
-              <p>à</p>
-              <TimePicker
-                value={dataDateHeure.heureMax}
-                clearIcon={null}
-                disableClock={true}
-                minTime={"00:00"}
-                maxTime={"23:59"}
-                onChange={(e) => {
-                  ChangeDateHeure(e, "heureMax");
-                }}
-              />
+            <div className="my-hour">
+              <p>Ouvert de </p>
+              <div className="horaireOuvert">
+                <TimePicker
+                  value={dataDateHeure.heureMin}
+                  clearIcon={null}
+                  disableClock={true}
+                  minTime={"00:00"}
+                  maxTime={"23:59"}
+                  onChange={(e) => {
+                    ChangeDateHeure(e, "heureMin");
+                  }}
+                />
+                <p>à</p>
+                <TimePicker
+                  value={dataDateHeure.heureMax}
+                  clearIcon={null}
+                  disableClock={true}
+                  minTime={"00:00"}
+                  maxTime={"23:59"}
+                  onChange={(e) => {
+                    ChangeDateHeure(e, "heureMax");
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -171,29 +173,31 @@ function AppliPlaces({ dataDateHeure, setDataDateHeure }) {
           </p>
 
           <div className="choose-hour">
-            <p>Réserver de </p>
-            <div className="horaireOuvert">
-              <TimePicker
-                value={dataDateHeure.heureMin}
-                clearIcon={null}
-                disableClock={true}
-                minTime={"00:00"}
-                maxTime={"23:59"}
-                onChange={(e) => {
-                  ChangeDateHeure(e, "heureMin");
-                }}
-              />
-              <p>à</p>
-              <TimePicker
-                value={dataDateHeure.heureMax}
-                clearIcon={null}
-                disableClock={true}
-                minTime={"00:00"}
-                maxTime={"23:59"}
-                onChange={(e) => {
-                  ChangeDateHeure(e, "heureMax");
-                }}
-              />
+            <div className="my-hour">
+              <p>Ouvert de </p>
+              <div className="horaireOuvert">
+                <TimePicker
+                  value={dataDateHeure.heureMin}
+                  clearIcon={null}
+                  disableClock={true}
+                  minTime={"00:00"}
+                  maxTime={"23:59"}
+                  onChange={(e) => {
+                    ChangeDateHeure(e, "heureMin");
+                  }}
+                />
+                <p>à</p>
+                <TimePicker
+                  value={dataDateHeure.heureMax}
+                  clearIcon={null}
+                  disableClock={true}
+                  minTime={"00:00"}
+                  maxTime={"23:59"}
+                  onChange={(e) => {
+                    ChangeDateHeure(e, "heureMax");
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>
