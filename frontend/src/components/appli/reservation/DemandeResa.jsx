@@ -138,8 +138,7 @@ function DemandeResa({
                   heureMax.split(":")[1] - heureMin.split(":")[1] >= 0
                     ? heureMax.split(":")[1] - heureMin.split(":")[1]
                     : 60 - heureMax.split(":")[1] - heureMin.split(":")[1]
-                }`}
-                h de garde
+                } h de garde`}
               </span>
             </p>
           </div>

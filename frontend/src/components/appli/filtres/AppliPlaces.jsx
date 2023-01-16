@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import TimePicker from "react-time-picker";
 import Calendar from "react-calendar";
 
 import PropTypes from "prop-types";
@@ -120,32 +119,28 @@ function AppliPlaces({ dataDateHeure, setDataDateHeure }) {
           </div>
 
           <div className="choose-hour">
-            <p>
+            <p className="zzz">
               {`Vous avez choisi ->`} <span>{dataDateHeure.jour}</span>
             </p>
-            <p>Ouvert de </p>
-            <div className="horaireOuvert">
-              <TimePicker
-                value={dataDateHeure.heureMin}
-                clearIcon={null}
-                disableClock={true}
-                minTime={"00:00"}
-                maxTime={"23:59"}
-                onChange={(e) => {
-                  ChangeDateHeure(e, "heureMin");
-                }}
-              />
-              <p>à</p>
-              <TimePicker
-                value={dataDateHeure.heureMax}
-                clearIcon={null}
-                disableClock={true}
-                minTime={"00:00"}
-                maxTime={"23:59"}
-                onChange={(e) => {
-                  ChangeDateHeure(e, "heureMax");
-                }}
-              />
+            <div className="my-hour">
+              <p>Ouvert de </p>
+              <div className="horaireOuvert">
+                <input
+                  type="time"
+                  value={dataDateHeure.heureMin}
+                  onChange={(e) => {
+                    ChangeDateHeure(e, "heureMin");
+                  }}
+                ></input>
+                <p>à</p>
+                <input
+                  type="time"
+                  value={dataDateHeure.heureMin}
+                  onChange={(e) => {
+                    ChangeDateHeure(e, "heureMax");
+                  }}
+                ></input>
+              </div>
             </div>
           </div>
         </div>
@@ -171,29 +166,25 @@ function AppliPlaces({ dataDateHeure, setDataDateHeure }) {
           </p>
 
           <div className="choose-hour">
-            <p>Réserver de </p>
-            <div className="horaireOuvert">
-              <TimePicker
-                value={dataDateHeure.heureMin}
-                clearIcon={null}
-                disableClock={true}
-                minTime={"00:00"}
-                maxTime={"23:59"}
-                onChange={(e) => {
-                  ChangeDateHeure(e, "heureMin");
-                }}
-              />
-              <p>à</p>
-              <TimePicker
-                value={dataDateHeure.heureMax}
-                clearIcon={null}
-                disableClock={true}
-                minTime={"00:00"}
-                maxTime={"23:59"}
-                onChange={(e) => {
-                  ChangeDateHeure(e, "heureMax");
-                }}
-              />
+            <div className="my-hour">
+              <p>Ouvert de </p>
+              <div className="horaireOuvert">
+                <input
+                  type="time"
+                  value={dataDateHeure.heureMin}
+                  onChange={(e) => {
+                    ChangeDateHeure(e, "heureMin");
+                  }}
+                ></input>
+                <p>à</p>
+                <input
+                  type="time"
+                  value={dataDateHeure.heureMin}
+                  onChange={(e) => {
+                    ChangeDateHeure(e, "heureMax");
+                  }}
+                ></input>
+              </div>
             </div>
           </div>
         </div>
