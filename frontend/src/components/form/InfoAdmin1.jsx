@@ -13,7 +13,61 @@ function Structure1({
   adresseStructure,
   updateFields,
 }) {
-  const { structure, setStructure } = useContext(StructureContext);
+ const { structure, setStructure } = useContext(StructureContext);
+const postStructure=()=>{
+  if (structure === "creche") {
+   Axios.get(`${import.meta.env.VITE_PATH}/crecheExist?email=${email}`, { email })
+     .then((result) => {
+       if (result.data.structureId === undefined) {
+         Axios.put(`${import.meta.env.VITE_PATH}/inscriptionCreche1`, {
+           isCreche, typeCreche, nomStructure, adresseStructure, telephone, email
+         })
+           .then(closePage? navigate("/", {}) : next())
+           .catch((err) => {
+             console.error(err);
+           });
+       }
+       else {
+         Axios.post(`${import.meta.env.VITE_PATH}/inscriptionCreche1`, {
+           isCreche, typeCreche, nomStructure, adresseStructure, telephone, email
+         })
+           .then(closePage? navigate("/", {}) : next())
+           .catch((err) => {
+             console.error(err);
+           })
+       }
+     })
+     .catch((err) => {
+       console.error(err);
+     })
+ } else if (structure === "assmat") {
+   Axios.get(`${import.meta.env.VITE_PATH}/assmatExist?email=${email}`, { email })
+     .then((result) => {
+       if (result.data.structureId === undefined) {
+         Axios.put(`${import.meta.env.VITE_PATH}/inscriptionAssmat1`, {
+           isCreche, nomNaissance, nomUsage, prenom, adresseStructure, telephone, email
+         })
+           .then(closePage? navigate("/", {}) : next())
+           .catch((err) => {
+             console.error(err);
+           });
+       }
+       else {
+         Axios.post(`${import.meta.env.VITE_PATH}/inscriptionAssmat1`, {
+           isCreche, nomNaissance, nomUsage, prenom, adresseStructure, telephone, email
+         })
+           .then(closePage? navigate("/", {}) : next())
+           .catch((err) => {
+             console.error(err);
+           })
+       }
+     })
+     .catch((err) => {
+       console.error(err);
+     })
+    }
+}
+
   return (
     <div className="page-left structure1">
       <div className="typeContainer">

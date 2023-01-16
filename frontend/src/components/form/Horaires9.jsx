@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Proptypes, { bool, number, oneOfType } from "prop-types";
+import Axios from "axios";
 
 function Structure9({
   lundiOuvert,
@@ -23,9 +24,92 @@ function Structure9({
   samediMax,
   dimancheMin,
   dimancheMax,
+  structureId,
+  setData,
+  setHorairesExist,
   updateFields,
 }) {
   const [memeHoraire, setMemeHoraire] = useState(true);
+const getHoraires = () =>{
+       Axios.get(`${import.meta.env.VITE_PATH}/horairesExist?id=${structureId}`, { structureId })
+            .then((result) => {
+             if (result.data.length > 0) { setHorairesExist(true) }
+       else { setHorairesExist(false) }
+              for (let i = 0; i < result.data.length; i++) {
+                if (result.data[i].jourId === 1) {
+                  setData((prev) => {
+                    return {
+                      ...prev,
+                      lundiOuvert: result.data[i].ouvert,
+                      lundiMin: result.data[i].heureMin,
+                      lundiMax: result.data[i].heureMax,
+                    }
+                  });
+                } else if (result.data[i].jourId === 2) {
+                  setData((prev) => {
+                    return {
+                      ...prev,
+                      mardiOuvert: result.data[i].ouvert,
+                      mardiMin: result.data[i].heureMin,
+                      mardiMax: result.data[i].heureMax,
+                    }
+                  })
+                } else if (result.data[i].jourId === 3) {
+                  setData((prev) => {
+                    return {
+                      ...prev,
+                      mercrediOuvert: result.data[i].ouvert,
+                      mercrediMin: result.data[i].heureMin,
+                      mercrediMax: result.data[i].heureMax,
+                    }
+                  })
+                } else if (result.data[i].jourId === 4) {
+                  setData((prev) => {
+                    return {
+                      ...prev,
+                      jeudiOuvert: result.data[i].ouvert,
+                      jeudiMin: result.data[i].heureMin,
+                      jeudiMax: result.data[i].heureMax,
+                    }
+                  })
+                } else if (result.data[i].jourId === 5) {
+                  setData((prev) => {
+                    return {
+                      ...prev,
+                      vendrediOuvert: result.data[i].ouvert,
+                      vendrediMin: result.data[i].heureMin,
+                      vendrediMax: result.data[i].heureMax,
+                    }
+                  })
+                } else if (result.data[i].jourId === 6) {
+                  setData((prev) => {
+                    return {
+                      ...prev,
+                      samediOuvert: result.data[i].ouvert,
+                      samediMin: result.data[i].heureMin,
+                      samediMax: result.data[i].heureMax,
+                    }
+                  })
+                } else if (result.data[i].jourId === 7) {
+                  setData((prev) => {
+                    return {
+                      ...prev,
+                      dimancheOuvert: result.data[i].ouvert,
+                      dimancheMin: result.data[i].heureMin,
+                      dimancheMax: result.data[i].heureMax,
+                    }
+                  })
+                }
+              }
+            })
+            .catch((err) => {
+              console.error(err);
+            })
+}
+useEffect(()=>{
+  getHoraires()
+}, [])
+
   return (
     <div className="structure9 page-left">
       <h4>Quels sont vos horaires d'ouverture ?</h4>

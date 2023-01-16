@@ -22,7 +22,7 @@ function LoginForm() {
   const handleClick = (e) => {
     e.preventDefault();
     if (email && password) {
-      axios.post("http://localhost:5000/auth", {
+      axios.post(`${import.meta.env.VITE_PATH}/auth`, {
         email,
         password,
       })
