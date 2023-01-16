@@ -39,6 +39,7 @@ router.post("/famille/newEnfant", famille.postNewEnfant); // nouveau enfant
 router.post("/contact/message", messageAdmin.postMessageToAdmin); // nouveau message pour l'admin
 
 router.delete("/famille/deleteEnfant/:id", famille.deleteEnfant); // delete enfant
+router.delete("/contact/message/all/:id", messageAdmin.deleteMessagebyId); // delete message from admin dashboard
 
 // FORM INSCRIPTION PARENT (juste le where qui change)
 // mettre dans uploads et change nom

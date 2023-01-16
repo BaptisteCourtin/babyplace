@@ -18,13 +18,13 @@ const MessageAdmin = () => {
             });
     };
 
-    // const deleteMessage =(id)=>{
-    //     axios.
-    // }
+    const deleteMessage = (id) => {
+        axios.delete(`http://localhost:5000/contact/message/all/${id}`);
+    };
 
     useEffect(() => {
         getAllMessage();
-    }, [])
+    }, [deleteMessage])
 
     return (
         <div className="messageAdmin">
@@ -41,7 +41,12 @@ const MessageAdmin = () => {
                                 </div>
                                 <div className='optionSelected'>{element.optionSelected}</div>
                                 <div className='messageListAdminBody'>{element.texte}</div>
-                                {/* <AiFillCloseCircle id="messageAdminCloseBtn" onClick={deleteMessage} /> */}
+                                <button
+                                    type="button"
+                                    onClick={() => deleteMessage(element.id)}
+                                >
+                                    <AiFillCloseCircle id="messageAdminCloseBtn" />
+                                </button>
                             </div>
                         </li>
                     ))}

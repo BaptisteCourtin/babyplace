@@ -10,7 +10,13 @@ const getAllMessageToAdmin = async (req, res) => {
   return res.json(result);
 };
 
+const deleteMessagebyId = async (req, res) => {
+  const result = await messageAdminModels.deleteMessagebyId(req);
+  return res.json(result);
+};
+
 module.exports = {
   postMessageToAdmin,
-  getAllMessageToAdmin
+  getAllMessageToAdmin,
+  deleteMessagebyId
 };

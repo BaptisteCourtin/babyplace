@@ -7,13 +7,22 @@ const postMessageToAdmin = async (req) => {
     );
     return result;
 };
+
 const getAllMessageToAdmin = async () => {
     const [result] = await datasource.query(
         "SELECT * FROM message_for_admin");
     return result
 };
 
+const deleteMessagebyId = async (req) => {
+    const [result] = await datasource.query(
+        `DELETE FROM message_for_admin WHERE id = ?`, [req.params.id]
+    );
+    return result;
+}
+
 module.exports = {
     postMessageToAdmin,
-    getAllMessageToAdmin
+    getAllMessageToAdmin,
+    deleteMessagebyId
 };
