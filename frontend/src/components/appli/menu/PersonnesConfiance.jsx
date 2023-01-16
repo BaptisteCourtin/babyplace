@@ -10,7 +10,7 @@ function PersonnesConfiance({ setCompo }) {
     "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getPersoConf = () => {
     axios
-      .get(`http://localhost:5000/famille/conf/${id}`, {
+      .get(`${import.meta.env.VITE_PATH}/famille/conf/${id}`, {
         headers: {
           "x-token": Token,
         },

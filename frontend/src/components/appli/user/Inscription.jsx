@@ -46,11 +46,14 @@ function Inscription() {
   const getDonneesForm = () => {
     axios
       // !!! prend 2 fois les doc de famille car 2 parents et les données sont dans un tableau
-      .get(`http://localhost:5000/famille/formInscription/${familleId}`, {
-        headers: {
-          "x-token": Token,
-        },
-      })
+      .get(
+        `${import.meta.env.VITE_PATH}/famille/formInscription/${familleId}`,
+        {
+          headers: {
+            "x-token": Token,
+          },
+        }
+      )
       .then((res) => {
         setDonneesForm(res.data);
         setDonneesOK(true);

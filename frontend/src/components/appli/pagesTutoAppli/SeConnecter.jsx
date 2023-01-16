@@ -15,7 +15,7 @@ function SeConnecter({ setCompo }) {
     e.preventDefault();
     if (email && password) {
       axios
-        .post("http://localhost:5000/authFamille", {
+        .post(`${import.meta.env.VITE_PATH}/authFamille`, {
           email,
           password,
         })

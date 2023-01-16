@@ -46,7 +46,7 @@ function DemandeResa({
 
   const enfantId = 1;
   const handleRequest = () => {
-    axios.post(`http://localhost:5000/reservation`, {
+    axios.post(`${import.meta.env.VITE_PATH}/reservation`, {
       enfantId,
       structureId,
       prixTotal,

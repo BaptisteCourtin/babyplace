@@ -33,7 +33,7 @@ function FormEnfant() {
     "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getNomsEnfants = () => {
     axios
-      .get(`http://localhost:5000/famille/nomsEnfants/${familleId}`, {
+      .get(`${import.meta.env.VITE_PATH}/famille/nomsEnfants/${familleId}`, {
         headers: {
           "x-token": Token,
         },
@@ -58,7 +58,7 @@ function FormEnfant() {
   //   "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getDonneesForm = () => {
     axios
-      .get(`http://localhost:5000/famille/formEnfant/${enfantId}`, {
+      .get(`${import.meta.env.VITE_PATH}/famille/formEnfant/${enfantId}`, {
         headers: {
           "x-token": Token,
         },

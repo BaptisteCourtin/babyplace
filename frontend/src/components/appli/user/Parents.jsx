@@ -40,7 +40,7 @@ function Parents() {
     "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getDonneesForm = () => {
     axios
-      .get(`http://localhost:5000/famille/formParent/${familleId}`, {
+      .get(`${import.meta.env.VITE_PATH}/famille/formParent/${familleId}`, {
         headers: {
           "x-token": Token,
         },
