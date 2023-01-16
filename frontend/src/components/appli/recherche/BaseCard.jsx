@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 function BaseCard({
   setCompo,
   Allstructure,
+  // filtres
   dataBasique,
   dataDateHeure,
   dataServices,

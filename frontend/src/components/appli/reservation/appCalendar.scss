@@ -146,6 +146,10 @@
     }
 
     .react-calendar {
+      .disable-day {
+        background-color: red;
+      }
+
       &__navigation {
         display: flex;
         justify-content: space-evenly;

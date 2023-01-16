@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import TimePicker from "react-time-picker";
 import Calendar from "react-calendar";
 
 import PropTypes from "prop-types";
@@ -126,27 +125,21 @@ function AppliPlaces({ dataDateHeure, setDataDateHeure }) {
             <div className="my-hour">
               <p>Ouvert de </p>
               <div className="horaireOuvert">
-                <TimePicker
+                <input
+                  type="time"
                   value={dataDateHeure.heureMin}
-                  clearIcon={null}
-                  disableClock={true}
-                  minTime={"00:00"}
-                  maxTime={"23:59"}
                   onChange={(e) => {
                     ChangeDateHeure(e, "heureMin");
                   }}
-                />
+                ></input>
                 <p>à</p>
-                <TimePicker
-                  value={dataDateHeure.heureMax}
-                  clearIcon={null}
-                  disableClock={true}
-                  minTime={"00:00"}
-                  maxTime={"23:59"}
+                <input
+                  type="time"
+                  value={dataDateHeure.heureMin}
                   onChange={(e) => {
                     ChangeDateHeure(e, "heureMax");
                   }}
-                />
+                ></input>
               </div>
             </div>
           </div>
@@ -176,27 +169,21 @@ function AppliPlaces({ dataDateHeure, setDataDateHeure }) {
             <div className="my-hour">
               <p>Ouvert de </p>
               <div className="horaireOuvert">
-                <TimePicker
+                <input
+                  type="time"
                   value={dataDateHeure.heureMin}
-                  clearIcon={null}
-                  disableClock={true}
-                  minTime={"00:00"}
-                  maxTime={"23:59"}
                   onChange={(e) => {
                     ChangeDateHeure(e, "heureMin");
                   }}
-                />
+                ></input>
                 <p>à</p>
-                <TimePicker
-                  value={dataDateHeure.heureMax}
-                  clearIcon={null}
-                  disableClock={true}
-                  minTime={"00:00"}
-                  maxTime={"23:59"}
+                <input
+                  type="time"
+                  value={dataDateHeure.heureMin}
                   onChange={(e) => {
                     ChangeDateHeure(e, "heureMax");
                   }}
-                />
+                ></input>
               </div>
             </div>
           </div>

@@ -19,15 +19,17 @@ function ChoixDates({
   nomNaissance,
   prenom,
   dataHorairesId,
+  dataCalendarId,
 }) {
   const [thisMinHeure, setThisMinHeure] = useState();
   const [thisMaxHeure, setThisMaxHeure] = useState();
 
-  console.log(jour);
-  console.log("thismin" + thisMinHeure);
-  console.log("thismax" + thisMaxHeure);
-  console.log("mymin" + heureMin);
-  console.log("mymax" + heureMax);
+  // console.log(dataCalendarId);
+  // console.log(jour);
+  // console.log("thismin" + thisMinHeure);
+  // console.log("thismax" + thisMaxHeure);
+  // console.log("mymin" + heureMin);
+  // console.log("mymax" + heureMax);
 
   return (
     <>
@@ -68,6 +70,7 @@ function ChoixDates({
           thisMinHeure={thisMinHeure}
           thisMaxHeure={thisMaxHeure}
           dataHorairesId={dataHorairesId}
+          dataCalendarId={dataCalendarId}
         />
       </main>
 

@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
-import TimePicker from "react-time-picker";
+import React, { useState } from "react";
 import Calendar from "react-calendar";
+import parseISO from "date-fns/parseISO";
+import compareAsc from "date-fns/compareAsc";
 
 import open from "@assets/dashboard/open-sign.svg";
 import close from "@assets/dashboard/closed-sign.svg";
@@ -19,8 +20,10 @@ function AppCalendar({
   thisMinHeure,
   thisMaxHeure,
   dataHorairesId,
+  dataCalendarId,
 }) {
   // const { jourSemaine, ouvert, heureMin, heureMax} = dataHorairesId;
+  // {date} = dataCalendarId;
 
   const value = new Date(); // date de base occas
 
@@ -34,7 +37,6 @@ function AppCalendar({
 
   const [clickedDay, setClickedDay] = useState(new Date());
   const afficheDate = () => {
-    console.log(clickedDay);
     let jour = clickedDay.toString();
     jour = jour.split(" ");
     let jourLong = `${jour[2]} ${jour[1]}  ${jour[3]}`;
@@ -64,6 +66,58 @@ function AppCalendar({
     }
 
     return jourLong;
+  };
+
+  // --- enlever des jours ---
+
+  const EnleverCase = ({ date }) => {
+    if (
+      (date.getDay() === 1 && dataHorairesId[0].ouvert === 0) ||
+      (date.getDay() === 2 && dataHorairesId[1].ouvert === 0) ||
+      (date.getDay() === 3 && dataHorairesId[2].ouvert === 0) ||
+      (date.getDay() === 4 && dataHorairesId[3].ouvert === 0) ||
+      (date.getDay() === 5 && dataHorairesId[4].ouvert === 0) ||
+      (date.getDay() === 6 && dataHorairesId[5].ouvert === 0) ||
+      (date.getDay() === 0 && dataHorairesId[6].ouvert === 0)
+    ) {
+      return true;
+    }
+
+    if (dataCalendarId[0]) {
+      let result = false;
+      for (let i = 0; i < dataCalendarId.length; i++) {
+        if (compareAsc(date, parseISO(dataCalendarId[i].date)) === 0) {
+          result = true;
+        }
+      }
+      return result;
+    }
+  };
+
+  // --- classname et couleur des cases ---
+
+  const CaseClassName = ({ date, view }) => {
+    if (
+      (date.getDay() === 1 && dataHorairesId[0].ouvert === 0) ||
+      (date.getDay() === 2 && dataHorairesId[1].ouvert === 0) ||
+      (date.getDay() === 3 && dataHorairesId[2].ouvert === 0) ||
+      (date.getDay() === 4 && dataHorairesId[3].ouvert === 0) ||
+      (date.getDay() === 5 && dataHorairesId[4].ouvert === 0) ||
+      (date.getDay() === 6 && dataHorairesId[5].ouvert === 0) ||
+      (date.getDay() === 0 && dataHorairesId[6].ouvert === 0)
+    ) {
+      return "disable-day";
+    }
+
+    if (dataCalendarId[0]) {
+      let result = "";
+      for (let i = 0; i < dataCalendarId.length; i++) {
+        if (compareAsc(date, parseISO(dataCalendarId[i].date)) === 0) {
+          result = "disable-day";
+        }
+      }
+      return result;
+    }
   };
 
   return (
@@ -160,6 +214,8 @@ function AppCalendar({
             onClickDay={(e) => {
               setClickedDay(e);
             }}
+            tileDisabled={(e) => EnleverCase(e)}
+            tileClassName={(e) => CaseClassName(e)}
           />
 
           <p>

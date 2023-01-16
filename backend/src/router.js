@@ -25,7 +25,8 @@ router.get("/famille/formParent/:id", famille.getDonneesFormParent); //donnees d
 router.get("/famille/formEnfant/:id", famille.getDonneesFormEnfant); //donnees du formulaire enfant
 router.get("/famille/nomsEnfants/:id", famille.getNomsEtIdEnfants); // noms et id des enfants
 router.get("/famille/formInscription/:id", famille.getDonneesFormInscription); //donnees du formulaire inscription
-router.get("/famille/pourcent/:id", famille.getPourcent); // pourcent des formulaire
+router.get("/famille/pourcent/:id", famille.getPourcent); // pourcent des formulaires
+router.get("/calendrier/whereMoins/:id", calendrier.getCalendrierMoins); // calendrier par id wher nbPlaces = -1
 
 router.put("/structure/notes/:id", structure.updateNotes); //notes
 router.put("/structure/signal/:id", structure.updateSignal); // signalement
@@ -37,7 +38,7 @@ router.post("/famille/newEnfant", famille.postNewEnfant); // nouveau enfant
 
 router.delete("/famille/deleteEnfant/:id", famille.deleteEnfant); // delete enfant
 
-// FORM INSCRIPTION PARENT (juste le where qui change)
+// FORM INSCRIPTION CHAQUE PARENT (juste le where qui change)
 // mettre dans uploads et change nom
 router.post(
   "/formInscription/docParent",
