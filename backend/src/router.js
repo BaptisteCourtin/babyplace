@@ -10,6 +10,7 @@ const structure = require("./controllers/structure.controllers");
 const horaires = require("./controllers/horaires.controllers");
 const calendrier = require("./controllers/calendrier.controllers");
 const dashboard = require("./controllers/dashboard.controllers");
+const messageAdmin = require("./controllers/messageAdmin.controllers");
 
 const assMat = require("./controllers/assMat.controllers");
 const creche = require("./controllers/creche.controllers");
@@ -25,8 +26,10 @@ router.get("/famille/formParent/:id", famille.getDonneesFormParent); //donnees d
 router.get("/famille/formEnfant/:id", famille.getDonneesFormEnfant); //donnees du formulaire enfant
 router.get("/famille/nomsEnfants/:id", famille.getNomsEtIdEnfants); // noms et id des enfants
 router.get("/famille/formInscription/:id", famille.getDonneesFormInscription); //donnees du formulaire inscription
-router.get("/famille/pourcent/:id", famille.getPourcent); // pourcent des formulaires
+router.get("/famille/pourcent/:id", famille.getPourcent); // pourcent des formulaire
+router.get("/contact/message/all", messageAdmin.getAllMessageToAdmin); // recupérer tous les message pour le dashboard admin
 router.get("/calendrier/whereMoins/:id", calendrier.getCalendrierMoins); // calendrier par id wher nbPlaces = -1
+
 
 router.put("/structure/notes/:id", structure.updateNotes); //notes
 router.put("/structure/signal/:id", structure.updateSignal); // signalement
@@ -35,8 +38,10 @@ router.put("/formEnfant/:id", famille.updateFormEnfant); // formulaire enfant
 
 router.post("/reservation", famille.postReservation); // reservation
 router.post("/famille/newEnfant", famille.postNewEnfant); // nouveau enfant
+router.post("/contact/message", messageAdmin.postMessageToAdmin); // nouveau message pour l'admin
 
 router.delete("/famille/deleteEnfant/:id", famille.deleteEnfant); // delete enfant
+router.delete("/contact/message/all/:id", messageAdmin.deleteMessagebyId); // delete message from admin dashboard
 
 // FORM INSCRIPTION CHAQUE PARENT (juste le where qui change)
 // mettre dans uploads et change nom
@@ -52,10 +57,10 @@ router.post(
         cb(
           null,
           Math.round(Math.random() * 1000) +
-            `${date.getMinutes()}${date.getSeconds()}` +
-            Math.round(Math.random() * 1000) +
-            "-qws-" +
-            file.originalname
+          `${date.getMinutes()}${date.getSeconds()}` +
+          Math.round(Math.random() * 1000) +
+          "-qws-" +
+          file.originalname
           // nom avec des chiffres + nom d'origine du fichier
         );
       },
@@ -124,10 +129,10 @@ router.post(
         cb(
           null,
           Math.round(Math.random() * 1000) +
-            `${date.getMinutes()}${date.getSeconds()}` +
-            Math.round(Math.random() * 1000) +
-            "-qws-" +
-            file.originalname
+          `${date.getMinutes()}${date.getSeconds()}` +
+          Math.round(Math.random() * 1000) +
+          "-qws-" +
+          file.originalname
           // nom avec des chiffres + nom d'origine du fichier
         );
       },
