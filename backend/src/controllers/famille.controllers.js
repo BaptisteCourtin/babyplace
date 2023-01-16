@@ -87,5 +87,5 @@ module.exports = {
   postNewEnfant,
   deleteEnfant,
   getDonneesFormInscription,
-  getFamilleDataMess
+  getFamilleDataMess,
 };

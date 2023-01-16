@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import AppliDashPlaces from "./AppliPlaces";
 
-function DateHeure({ setCompo }) {
+function DateHeure({ setCompo, dataDateHeure, setDataDateHeure }) {
   return (
     <div className="filtres">
       <header>
@@ -14,12 +14,11 @@ function DateHeure({ setCompo }) {
       </header>
 
       <main className="date-heure">
-        <AppliDashPlaces />
+        <AppliDashPlaces
+          dataDateHeure={dataDateHeure}
+          setDataDateHeure={setDataDateHeure}
+        />
       </main>
-
-      <button type="button" className="apply" onClick={() => setCompo(0)}>
-        Appliquer
-      </button>
     </div>
   );
 }
