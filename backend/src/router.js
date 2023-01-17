@@ -416,6 +416,20 @@ router.get("/calendrierExist", (req, res) => {
     res.status(500).send("Accès impossible");
   });
 })
+
+router.delete("/calendrierIndispo", (req, res) => {
+  const { structureId, date } = req.query
+  datasource.query(
+    "DELETE FROM calendrier WHERE structureId= ? AND date = ?",
+    [structureId, date]
+  ).then((result) => {
+    res.sendStatus(200)
+  }).catch((err) => {
+    console.error(err);
+    res.status(500).send("Suppression impossible");
+  });
+})
+
 router.get("/horairesExist", (req, res) => {
   datasource.query(
     "SELECT * FROM horaires WHERE structureId= ?",

@@ -39,7 +39,7 @@
       border: 2px solid $fifth;
     }
 
-    & input:valid + label {
+    & input:valid+label {
       color: $fifth;
     }
 
@@ -47,7 +47,7 @@
       display: none;
     }
 
-    & input:valid + label + p {
+    & input:valid+label+p {
       position: absolute;
       transform: translateX(170px) translateY(6px);
       font-size: 2rem;
@@ -95,7 +95,7 @@
       margin-bottom: 0.5vh;
     }
 
-    & input[type="file"]:valid + label + p {
+    & input[type="file"]:valid+label+p {
       position: absolute;
       right: 0;
       top: 8px;
@@ -104,7 +104,7 @@
       display: initial;
     }
 
-    & input[type="file"]:valid + label {
+    & input[type="file"]:valid+label {
       display: none;
     }
 
@@ -120,16 +120,17 @@
   }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1000px) {
   .structure15 {
     & .inputContainer {
+
       & input[type="text"],
       & input[type="date"] {
         width: 80vw;
         max-width: 500px;
       }
 
-      & input:valid + label + p {
+      & input:valid+label+p {
         transform: translateX(69vw) translateY(6px);
       }
     }

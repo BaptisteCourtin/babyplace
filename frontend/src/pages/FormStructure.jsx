@@ -139,14 +139,13 @@ function FormStructure() {
   const [structure, setStructure] = useState("");
   const [resa, setResa] = useState("");
   const { userEmail } = useContext(UserEmailContext);
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const [showExplications, setShowExplications] = useState(true);
+  const [showExplications, setShowExplications] = useState(window.innerWidth > 1000 ? true : false);
   const [closedDays, setClosedDays] = useState([]);
   const [structureId, setStructureId] = useState(null);
   const [horairesExist, setHorairesExist] = useState(null);
-  const [closePage, setClosePage] = useState(false)
+  const [closePage, setClosePage] = useState(false);
+
   const updateSize = () => {
-    setScreenWidth(window.innerWidth);
     if (window.innerWidth < 1200) {
       setShowExplications(false);
     } else setShowExplications(true);
@@ -535,6 +534,7 @@ function FormStructure() {
       assAutoNom,
       assAutoNumero,
       assAutoAdresse,
+      indispo
     } = data;
     const email = userEmail;
     if (!isLastStep) {
@@ -710,22 +710,28 @@ function FormStructure() {
           });
       }
       else if (currentStepIndex === 10) {
-        Axios.get(`${import.meta.env.VITE_PATH}/getStructureId?email=${email}`, { email })
-          .then((id) => {
-            const { structureId } = id.data;
-            closedDays.map((date) => {
-              Axios.post(`${import.meta.env.VITE_PATH}/calendrier/add`, {
-                date: date, nbPlaces: -1, structureId,
-              })
-                .catch((err) => {
-                  console.error(err);
-                })
+        closedDays.map((date) => {
+          if (indispo.indexOf(date) === -1) {
+            Axios.post(`${import.meta.env.VITE_PATH}/calendrier/add`, {
+              date: date, nbPlaces: -1, structureId,
             })
+              .catch((err) => {
+                console.error(err);
+              })
           }
-          ).then(closePage ? navigate("/", {}) : next())
-          .catch((err) => {
-            console.error(err);
-          });
+        });
+        indispo.map((value) => {
+          console.log(closedDays.indexOf(value))
+          if (closedDays.indexOf(value) === -1) {
+            let date = value;
+            console.log(date)
+            Axios.delete(`${import.meta.env.VITE_PATH}/calendrierIndispo/?structureId=${structureId}&date=${date}`, [structureId, date])
+              .catch((err) => {
+                console.error(err);
+              });
+          }
+        });
+        closePage ? navigate("/", {}) : next()
       } else if (currentStepIndex === 11 && structure === "creche") {
         Axios.put(`${import.meta.env.VITE_PATH}/agrementsCreche`, {
           nbEmployes, maxPlaces, maxHandi, max18Mois, maxNuit, email
@@ -881,7 +887,7 @@ function FormStructure() {
               currentStepIndex !== 7 &&
               currentStepIndex !== 15 ? (
               <div className="explicationsContainer">
-                {screenWidth < 1200 && (
+                {window.innerWidth < 1000 && (
                   <button
                     type="button"
                     className="backButton"
