@@ -443,59 +443,58 @@ function FormStructure() {
     const { isCreche, typeCreche, nomStructure, telephone, nomNaissance, nomUsage, prenom, adresseStructure, description, PCSC1, nesting, montessori, handi, jardin, sorties, experience, enfants, animaux, nonFumeur, zeroPollution, repas, hygiene, promenades, eveil, musique, art, bilingue, bibli, transport, albumPhoto, photoConnecte, resaInst, lundiOuvert, mardiOuvert, mercrediOuvert, jeudiOuvert, vendrediOuvert, samediOuvert, dimancheOuvert, lundiMin, lundiMax, mardiMin, mardiMax, mercrediMin, mercrediMax, jeudiMin, jeudiMax, vendrediMin, vendrediMax, samediMin, samediMax, dimancheMin, dimancheMax, dureeMin, dureeMax, nbEmployes, maxPlaces, maxHandi, max18Mois, maxNuit, financementPaje, tarifHeure, tarifHoraireSpec, indemnRepas, tarifAtelier, indemnEntretien, indemnKm, tarifHeureSup, numSecu, numAgrement, dateAgrement, siret, assHabitNom, assHabitNumero, assHabitAdresse, assAutoNom, assAutoNumero, assAutoAdresse } = data;
     const email = userEmail;
     if (!isLastStep) {
-      // if (currentStepIndex === 0 && structure === "creche") {
-      //   Axios.get(`${import.meta.env.VITE_PATH}/crecheExist?email=${email}`, { email })
-      //     .then((result) => {
-      //       if (result.data.structureId === undefined) {
-      //         Axios.put(`${import.meta.env.VITE_PATH}/inscriptionCreche1`, {
-      //           isCreche, typeCreche, nomStructure, adresseStructure, telephone, email
-      //         })
-      //           .then(closePage? navigate("/", {}) : next())
-      //           .catch((err) => {
-      //             console.error(err);
-      //           });
-      //       }
-      //       else {
-      //         Axios.post(`${import.meta.env.VITE_PATH}/inscriptionCreche1`, {
-      //           isCreche, typeCreche, nomStructure, adresseStructure, telephone, email
-      //         })
-      //           .then(closePage? navigate("/", {}) : next())
-      //           .catch((err) => {
-      //             console.error(err);
-      //           })
-      //       }
-      //     })
-      //     .catch((err) => {
-      //       console.error(err);
-      //     })
-      // } else if (currentStepIndex === 0 && structure === "assmat") {
-      //   Axios.get(`${import.meta.env.VITE_PATH}/assmatExist?email=${email}`, { email })
-      //     .then((result) => {
-      //       if (result.data.structureId === undefined) {
-      //         Axios.put(`${import.meta.env.VITE_PATH}/inscriptionAssmat1`, {
-      //           isCreche, nomNaissance, nomUsage, prenom, adresseStructure, telephone, email
-      //         })
-      //           .then(closePage? navigate("/", {}) : next())
-      //           .catch((err) => {
-      //             console.error(err);
-      //           });
-      //       }
-      //       else {
-      //         Axios.post(`${import.meta.env.VITE_PATH}/inscriptionAssmat1`, {
-      //           isCreche, nomNaissance, nomUsage, prenom, adresseStructure, telephone, email
-      //         })
-      //           .then(closePage? navigate("/", {}) : next())
-      //           .catch((err) => {
-      //             console.error(err);
-      //           })
-      //       }
-      //     })
-      //     .catch((err) => {
-      //       console.error(err);
-      //     })
-      // } 
-      // else 
-      if (currentStepIndex === 1) {
+      if (currentStepIndex === 0 && structure === "creche") {
+        Axios.get(`${import.meta.env.VITE_PATH}/crecheExist?email=${email}`, { email })
+          .then((result) => {
+            if (result.data.structureId === undefined) {
+              Axios.put(`${import.meta.env.VITE_PATH}/inscriptionCreche1`, {
+                isCreche, typeCreche, nomStructure, adresseStructure, telephone, email
+              })
+                .then(closePage ? navigate("/", {}) : next())
+                .catch((err) => {
+                  console.error(err);
+                });
+            }
+            else {
+              Axios.post(`${import.meta.env.VITE_PATH}/inscriptionCreche1`, {
+                isCreche, typeCreche, nomStructure, adresseStructure, telephone, email
+              })
+                .then(closePage ? navigate("/", {}) : next())
+                .catch((err) => {
+                  console.error(err);
+                })
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          })
+      } else if (currentStepIndex === 0 && structure === "assmat") {
+        Axios.get(`${import.meta.env.VITE_PATH}/assmatExist?email=${email}`, { email })
+          .then((result) => {
+            if (result.data.structureId === undefined) {
+              Axios.put(`${import.meta.env.VITE_PATH}/inscriptionAssmat1`, {
+                isCreche, nomNaissance, nomUsage, prenom, adresseStructure, telephone, email
+              })
+                .then(closePage ? navigate("/", {}) : next())
+                .catch((err) => {
+                  console.error(err);
+                });
+            }
+            else {
+              Axios.post(`${import.meta.env.VITE_PATH}/inscriptionAssmat1`, {
+                isCreche, nomNaissance, nomUsage, prenom, adresseStructure, telephone, email
+              })
+                .then(closePage ? navigate("/", {}) : next())
+                .catch((err) => {
+                  console.error(err);
+                })
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          })
+      }
+      else if (currentStepIndex === 1) {
         const formData = new FormData();
         if (inputRef !== null) {
           formData.append("avatar", inputRef.current.files[0]);

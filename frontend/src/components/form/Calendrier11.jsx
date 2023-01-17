@@ -16,7 +16,7 @@ function Structure11({
   structureId,
   setData
 }) {
-const getCalendrier=()=>{
+  const getCalendrier = () => {
     Axios.get(`${import.meta.env.VITE_PATH}/calendrierExist?id=${structureId}`, { structureId })
       .then((result) => {
         let indispo = [];
@@ -35,7 +35,7 @@ const getCalendrier=()=>{
       .catch((err) => {
         console.error(err);
       })
-}
+  }
   const isOpenDay = (e) => {
     const clickedDayFormated = `${e.getFullYear()}-${e.getMonth() + 1
       }-${e.getDate()}`;
@@ -74,7 +74,7 @@ const getCalendrier=()=>{
       return "";
     }
   };
-  useEffect(()=>{
+  useEffect(() => {
     getCalendrier()
   }, [])
   return (

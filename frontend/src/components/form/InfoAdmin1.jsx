@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Proptypes from "prop-types";
+import Proptypes, { bool, node, oneOfType } from "prop-types";
 import StructureContext from "@components/context/StructureContext";
 
 function Structure1({
@@ -13,60 +13,7 @@ function Structure1({
   adresseStructure,
   updateFields,
 }) {
- const { structure, setStructure } = useContext(StructureContext);
-const postStructure=()=>{
-  if (structure === "creche") {
-   Axios.get(`${import.meta.env.VITE_PATH}/crecheExist?email=${email}`, { email })
-     .then((result) => {
-       if (result.data.structureId === undefined) {
-         Axios.put(`${import.meta.env.VITE_PATH}/inscriptionCreche1`, {
-           isCreche, typeCreche, nomStructure, adresseStructure, telephone, email
-         })
-           .then(closePage? navigate("/", {}) : next())
-           .catch((err) => {
-             console.error(err);
-           });
-       }
-       else {
-         Axios.post(`${import.meta.env.VITE_PATH}/inscriptionCreche1`, {
-           isCreche, typeCreche, nomStructure, adresseStructure, telephone, email
-         })
-           .then(closePage? navigate("/", {}) : next())
-           .catch((err) => {
-             console.error(err);
-           })
-       }
-     })
-     .catch((err) => {
-       console.error(err);
-     })
- } else if (structure === "assmat") {
-   Axios.get(`${import.meta.env.VITE_PATH}/assmatExist?email=${email}`, { email })
-     .then((result) => {
-       if (result.data.structureId === undefined) {
-         Axios.put(`${import.meta.env.VITE_PATH}/inscriptionAssmat1`, {
-           isCreche, nomNaissance, nomUsage, prenom, adresseStructure, telephone, email
-         })
-           .then(closePage? navigate("/", {}) : next())
-           .catch((err) => {
-             console.error(err);
-           });
-       }
-       else {
-         Axios.post(`${import.meta.env.VITE_PATH}/inscriptionAssmat1`, {
-           isCreche, nomNaissance, nomUsage, prenom, adresseStructure, telephone, email
-         })
-           .then(closePage? navigate("/", {}) : next())
-           .catch((err) => {
-             console.error(err);
-           })
-       }
-     })
-     .catch((err) => {
-       console.error(err);
-     })
-    }
-}
+  const { structure, setStructure } = useContext(StructureContext);
 
   return (
     <div className="page-left structure1">
@@ -348,7 +295,10 @@ const postStructure=()=>{
   );
 }
 Structure1.propTypes = {
-  isCreche: Proptypes.node,
+  isCreche: oneOfType([
+    bool,
+    node
+  ]),
   typeCreche: Proptypes.string,
   nomStructure: Proptypes.string,
   telephone: Proptypes.string,
