@@ -15,6 +15,8 @@ const messageAdmin = require("./controllers/messageAdmin.controllers");
 const assMat = require("./controllers/assMat.controllers");
 const creche = require("./controllers/creche.controllers");
 const famille = require("./controllers/famille.controllers");
+const messagerie = require("./controllers/messagerie.controllers");
+
 
 // --- pour app ---
 
@@ -29,6 +31,7 @@ router.get("/famille/formInscription/:id", famille.getDonneesFormInscription); /
 router.get("/famille/pourcent/:id", famille.getPourcent); // pourcent des formulaire
 router.get("/contact/message/all", messageAdmin.getAllMessageToAdmin); // recupérer tous les message pour le dashboard admin
 router.get("/calendrier/whereMoins/:id", calendrier.getCalendrierMoins); // calendrier par id wher nbPlaces = -1
+router.get("/messages/recup/:room", messagerie.getAllMessageFromDb); // recupération des message pour le chat
 
 
 router.put("/structure/notes/:id", structure.updateNotes); //notes
@@ -39,6 +42,7 @@ router.put("/formEnfant/:id", famille.updateFormEnfant); // formulaire enfant
 router.post("/reservation", famille.postReservation); // reservation
 router.post("/famille/newEnfant", famille.postNewEnfant); // nouveau enfant
 router.post("/contact/message", messageAdmin.postMessageToAdmin); // nouveau message pour l'admin
+router.post("/messages/sauvegarde", messagerie.saveMessageInDb); // sauvegarde des messages du chat dans la db
 
 router.delete("/famille/deleteEnfant/:id", famille.deleteEnfant); // delete enfant
 router.delete("/contact/message/all/:id", messageAdmin.deleteMessagebyId); // delete message from admin dashboard
