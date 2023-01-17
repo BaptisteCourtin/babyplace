@@ -40,10 +40,12 @@
     gap: 25px;
 
     & li {
+      padding: 5px 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 5px;
+      border-radius: 50px;
 
       & button {
         border-bottom: 1px solid transparent;
@@ -52,6 +54,17 @@
 
         &:hover {
           border-bottom: 1px solid $white;
+        }
+      }
+    }
+
+    & .selected {
+      background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
+      color: $third;
+
+      & button {
+        &:hover {
+          border-bottom: 1px solid transparent;
         }
       }
     }

@@ -4,88 +4,70 @@ import PropTypes from "prop-types";
 import DashCalendar from "./calendar/DashCalendar";
 import { toast } from "react-hot-toast";
 
-function DashAgenda({ token, structureId, maxPlaces }) {
-  const [data, setData] = useState([]);
+function DashAgenda({ structureId, maxPlaces }) {
   const [hours, setHours] = useState([]);
   const [calendar, setCalendar] = useState([]);
   const [calendarIndex, setCalendarIndex] = useState(null);
   const [places, setPlaces] = useState(null);
 
-  const getData = async () => {
-    try {
-      const res = await axios
-        .get("http://localhost:5000/structure", {
-          headers: {
-            "x-token": token,
-          },
-        })
-      setData(res.data[0]);
-    }
-    catch (err) {
-      toast.error(err.message)
-    }
-  };
-
   const getHours = async () => {
     try {
       const res = await axios
-        .get(`http://localhost:5000/horaires`, {
-          headers: {
-            "x-token": token,
-          },
+        .get(`${import.meta.env.VITE_PATH}/horaires/${structureId}`, {
+          id: structureId
         })
       setHours(res.data)
     }
     catch (err) {
-      toast.error(err.message)
+      console.error(err.message)
     }
   };
 
   const getCalendar = async () => {
     try {
       const res = await axios
-        .get(`http://localhost:5000/calendrier/${structureId}`, {
+        .get(`${import.meta.env.VITE_PATH}/calendrier/${structureId}`, {
           id: structureId
         })
       setCalendar(res.data);
     }
     catch (err) {
-      toast.error(err.message)
+      console.error(err.message)
     }
   };
 
   const updatePlaces = async () => {
     try {
       await axios
-        .put(`http://localhost:5000/calendrier/places/${calendarIndex}`, {
+        .put(`${import.meta.env.VITE_PATH}/calendrier/places/${calendarIndex}`, {
           id: calendarIndex,
           nbPlaces: places,
         })
       toast.success("Vos places ont bien été modifiées")
       getCalendar()
     } catch (err) {
-      toast.error(err.message)
+      console.error(err.message)
     }
   };
 
   const updateStatusClose = async (calendarIndex) => {
     try {
       await axios
-        .put(`http://localhost:5000/calendrier/places/close/${calendarIndex}`, {
+        .put(`${import.meta.env.VITE_PATH}/calendrier/places/close/${calendarIndex}`, {
           id: calendarIndex,
         })
       toast.success("Bon repos")
       getCalendar()
       setPlaces("")
     } catch (err) {
-      toast.error(err.message)
+      console.error(err.message)
     }
   };
 
   const updateStatusOpen = async (calendarIndex) => {
     try {
       await axios
-        .put(`http://localhost:5000/calendrier/places/open/${calendarIndex}`, {
+        .put(`${import.meta.env.VITE_PATH}/calendrier/places/open/${calendarIndex}`, {
           id: calendarIndex,
           maxPlaces,
         })
@@ -93,51 +75,62 @@ function DashAgenda({ token, structureId, maxPlaces }) {
       getCalendar()
       setPlaces("")
     } catch (err) {
-      toast.error(err.message)
+      console.error(err.message)
     }
   };
 
   const addSleepDate = async () => {
     try {
       await axios
-        .post(`http://localhost:5000/calendrier/add`, {
+        .post(`${import.meta.env.VITE_PATH}/calendrier/add`, {
           date,
           nbPlaces: -1,
           structureId,
-        }),
-        toast.success("Bon repos"),
-        getCalendar()
+        })
+      toast.success("Bon repos")
+      getCalendar()
     } catch (err) {
-      toast.error(err.message)
+      console.error(err.message)
     }
   };
 
   const addWorkDate = async () => {
     try {
-      setPlaces(1);
+      setPlaces(1)
       await axios
-        .post(`http://localhost:5000/calendrier/add`, {
+        .post(`${import.meta.env.VITE_PATH}/calendrier/add`, {
           date,
           nbPlaces: 1,
           structureId,
         })
-      toast.success("Travaillez bien");
+      toast.success("Travaillez bien")
       getCalendar()
     } catch (err) {
-      toast.error(err.message)
+      console.error(err.message)
     }
   };
 
+  const fullDate = async (calendarIndex) => {
+    try {
+      await axios
+        .delete(`${import.meta.env.VITE_PATH}/calendrier/${calendarIndex}`, {
+          id: calendarIndex
+        })
+      toast.success("C'est noté")
+      getCalendar()
+    } catch (err) {
+      console.error(err.message)
+    }
+  }
+
   useEffect(() => {
-    getData();
     getHours();
     getCalendar();
   }, []);
 
   let curDate = new Date();
-  curDate = `${curDate.getFullYear()}-${
-    curDate.getMonth() + 1
-  }-${curDate.getDate()}`;
+  curDate = `${curDate.getFullYear()}-${curDate.getMonth() + 1
+    }-${curDate.getDate()}`;
 
   const [clickedDay, setClickedDay] = useState(new Date());
   const date = `${clickedDay.getFullYear()}-${clickedDay.getMonth() + 1
@@ -150,9 +143,6 @@ function DashAgenda({ token, structureId, maxPlaces }) {
       <section className="agendaSection">
         <h2>Agenda</h2>
         <DashCalendar
-          {...data}
-          dayDate={date}
-          calendar={calendar}
           clickedDay={clickedDay}
           setPlaces={setPlaces}
           setClickedDay={setClickedDay}
@@ -166,15 +156,15 @@ function DashAgenda({ token, structureId, maxPlaces }) {
           {calendar.every(
             (c) => c.structureId === structureId && c.date !== date
           ) && (
-            <>
-              <button className="agendaPlacesWork" onClick={addSleepDate}>
-                Repos
-              </button>
-              <button className="agendaPlacesWork" onClick={addWorkDate}>
-                Places restantes
-              </button>
-            </>
-          )}
+              <>
+                <button type="button" className="agendaPlacesWork" onClick={() => addSleepDate()}>
+                  Repos
+                </button>
+                <button type="button" className="agendaPlacesWork" onClick={() => addWorkDate()}>
+                  Places restantes
+                </button>
+              </>
+            )}
           {calendar
             .filter((c) => c.structureId === structureId && c.date === date)
             .map((fc) =>
@@ -233,6 +223,14 @@ function DashAgenda({ token, structureId, maxPlaces }) {
                   >
                     Repos
                   </button>
+                  <button
+                    className="agendaPlacesWork"
+                    onClick={() => {
+                      fullDate(fc.calendrierId)
+                    }}
+                  >
+                    Complet
+                  </button>
                 </>
               )
             )}
@@ -243,7 +241,7 @@ function DashAgenda({ token, structureId, maxPlaces }) {
               (c) =>
                 c.structureId === structureId &&
                 c.date !== date &&
-                c.date > curDate &&
+                Date.parse(c.date) > Date.parse(curDate) &&
                 c.nbPlaces != -1
             )
             .slice(0, 2)

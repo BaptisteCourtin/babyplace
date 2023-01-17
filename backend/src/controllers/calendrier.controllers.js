@@ -38,12 +38,31 @@ const updatePlaces = async (req, res) => {
 
 const postDate = async (req, res) => {
     const { date, nbPlaces, structureId } = req.body
-    calendrierModels.postDate(date, nbPlaces, structureId)
+    const result = await calendrierModels.postDate(date, nbPlaces, structureId)
+    if (result.affectedRows === 0) {
+        res.status(404).send("Not found")
+    } else {
+        res.sendStatus(204)
+    }
 }
 
 const deleteDates = async (req, res) => {
-    const curDate = req.query.date
-    calendrierModels.deleteDates(curDate)
+    const result = await calendrierModels.deleteDates()
+    if (result.affectedRows === 0) {
+        res.status(404).send("Not found")
+    } else {
+        res.sendStatus(204)
+    }
+}
+
+const fullDate = async (req, res) => {
+    const { id } = req.params
+    const result = await calendrierModels.fullDate(id)
+    if (result.affectedRows === 0) {
+        res.status(404).send("Not found")
+    } else {
+        res.sendStatus(204)
+    }
 }
 
 module.exports = {
@@ -52,5 +71,6 @@ module.exports = {
     updateStatusOpen,
     updatePlaces,
     postDate,
-    deleteDates
+    deleteDates,
+    fullDate
 }

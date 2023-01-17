@@ -50,6 +50,28 @@ const updateVerified = async (id) => {
   return result;
 }
 
+const updateImages = async (id, value, file, table) => {
+  const [result] = await datasource.query(`UPDATE ${table} SET ${value} = ? WHERE structureId = ?`, [file, id])
+  return result;
+}
+
+const updateInfos = async (id, table, nom, nomNaissance, nomUsage, prenom, adresse, email, telephone, description) => {
+  if (table === 'assMat') {
+    const [result] = await datasource.query(`UPDATE assMat SET nomNaissance = ?, nomUsage = ?, prenom = ? WHERE structureId = ?`, [nomNaissance, nomUsage, prenom, id])
+    return result;
+  } else if (table === 'creche') {
+    const [result] = await datasource.query(`UPDATE creche SET nom = ? WHERE structureId = ?`, [nom, id])
+    return result;
+  }
+  const [result] = await datasource.query(`UPDATE structure SET adresse = ?, email = ?, telephone = ?, description = ? WHERE structureId = ?`, [adresse, email, telephone, description, id])
+  return result;
+}
+
+const updatePwd = async (id, pwd) => {
+  const [result] = await datasource.query(`UPDATE structure SET password = ? WHERE structureId = ?`, [pwd, id])
+  return result;
+}
+
 const deleteRefused = async (id, type) => {
   const [result] = await datasource.query(`DELETE FROM ${type} WHERE structureId = ?; DELETE FROM calendrier WHERE structureId = ?; DELETE FROM horaires WHERE structureID = ?; DELETE FROM structure WHERE structureId = ?`, [id, id, id, id])
   return result;
@@ -105,7 +127,10 @@ module.exports = {
   getStructureDataMess,
   getAllStructures,
   getStructureById,
+  updateInfos,
+  updatePwd,
   updateNotes,
+  updateImages,
   logout,
   updateSignal,
 };

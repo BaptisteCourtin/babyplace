@@ -3,16 +3,64 @@ import MultiRangeSlider from "multi-range-slider-react";
 import open from "@assets/dashboard/open-sign.svg";
 import close from "@assets/dashboard/closed-sign.svg";
 import DashCalendar from "../../agenda/calendar/DashCalendar";
+import axios from 'axios';
+import { toast } from 'react-hot-toast';
+import { useEffect } from 'react';
 
 
-function Agenda({ title, updateDay, horaires, toggleDay, setToggleDay, selected, setSelected, dayId }) {
+function Agenda({ structureId, getHoraires, horaires, toggleDay, setToggleDay, selected, setSelected, dayId, setDayId }) {
 
     const [toggleType, setToggleType] = useState(0);
     const [clickedDay, setClickedDay] = useState(new Date());
+    const [hoursOpen, setHoursOpen] = useState(null);
+    const [hoursClose, setHoursClose] = useState(null);
+
+    const updateHours = async (value, type, state) => {
+        try {
+            type(value)
+            await axios.put(`${import.meta.env.VITE_PATH}/dashboard/hours/${structureId}`, {
+                id: structureId,
+                value: value,
+                state: state,
+                jourId: dayId,
+            })
+            toast.success("Vos horaires ont bien été modifiés", {
+                id: 'horaires',
+                duration: 2000
+            })
+        } catch (err) {
+            console.error(err.message)
+        }
+    };
+
+    const updateDay = async (value) => {
+        setToggleDay(!toggleDay)
+        try {
+            await axios.put(`${import.meta.env.VITE_PATH}/horaires/day/${dayId}`, {
+                id: dayId,
+                structureId: structureId,
+                value: value
+            });
+            toast.success("Vos préférences ont bien été modifiées")
+            getHoraires()
+        } catch (err) {
+            console.error(err.message)
+        }
+    };
+
+    useEffect(() => {
+        getHoraires()
+    }, [hoursOpen, hoursClose])
+
+    const onDayChange = (jour, status, id) => {
+        setSelected(jour)
+        setToggleDay(status)
+        setDayId(id - 1)
+    }
 
     return (
         <section className="agendaSection">
-            <h2>{title}</h2>
+            <h2>Agenda</h2>
             <div className="dashPlacesType">
                 <button
                     type="button"
@@ -40,9 +88,7 @@ function Agenda({ title, updateDay, horaires, toggleDay, setToggleDay, selected,
                                     id={h.jourSemaine}
                                     value={h.jourSemaine}
                                     onChange={() => {
-                                        setSelected(h.jourSemaine);
-                                        setToggleDay(h.ouvert);
-                                        setDayId(h.jourId);
+                                        onDayChange(h.jourSemaine, h.ouvert, h.jourId)
                                     }}
                                 />
                                 <label
@@ -56,33 +102,33 @@ function Agenda({ title, updateDay, horaires, toggleDay, setToggleDay, selected,
                     </ul>
                     {toggleDay ? (
                         <>
-                            <MultiRangeSlider
-                                min={0}
-                                max={23}
-                                minValue={horaires[dayId].heureMin.split(":", 1)[0]}
-                                maxValue={horaires[dayId].heureMax.split(":", 1)[0]}
-                                step={1}
-                            // onChange={(e) => {
-                            //   handleInput(e);
-                            //   updateHours();
-                            // }}
-                            />
+                            <div className='dashRangeInput'>
+                                <input
+                                    type="time"
+                                    value={horaires[dayId].heureMin}
+                                    step="300"
+                                    onChange={(e) => updateHours(e.target.value, setHoursOpen, 'heureMin')} />
+                                <span> - </span>
+                                <input
+                                    type="time"
+                                    value={horaires[dayId].heureMax}
+                                    step="300"
+                                    onChange={(e) => updateHours(e.target.value, setHoursClose, 'heureMax')} />
+                            </div>
                             <div className="dashRangeValues">
                                 <p>
                                     <img src={open} alt="" /> Ouverture : {horaires[dayId].heureMin}
                                     H
                                 </p>
                                 <p>
-                                    <img src={close} alt="" /> Fermeture :{" "}
-                                    {horaires[dayId].heureMax}H
+                                    <img src={close} alt="" /> Fermeture : {horaires[dayId].heureMax}H
                                 </p>
                             </div>
                             <button
                                 type="button"
                                 className="dashPlacesSubmit"
                                 onClick={() => {
-                                    setToggleDay(!toggleDay);
-                                    updateDay();
+                                    updateDay(0);
                                 }}
                             >
                                 Repos
@@ -93,8 +139,7 @@ function Agenda({ title, updateDay, horaires, toggleDay, setToggleDay, selected,
                             type="button"
                             className="dashNotWorking"
                             onClick={() => {
-                                setToggleDay(!toggleDay);
-                                updateDay();
+                                updateDay(1);
                             }}
                         >
                             Envie de travailler ?
