@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import Proptypes from "prop-types";
+import React, { useState, useEffect } from "react";
+import Proptypes, { bool, number, oneOfType } from "prop-types";
 import Calendar from "react-calendar";
+import Axios from "axios";
 
 function Structure11({
   lundiOuvert,
@@ -12,11 +13,32 @@ function Structure11({
   dimancheOuvert,
   closedDays,
   setClosedDays,
+  structureId,
+  setData
 }) {
+  const getCalendrier = () => {
+    Axios.get(`${import.meta.env.VITE_PATH}/calendrierExist?id=${structureId}`, { structureId })
+      .then((result) => {
+        let indispo = [];
+        if (result.data.length > 0) {
+          for (let i = 0; i < result.data.length; i++) {
+            indispo.push(result.data[i].date)
+          }
+        }
+        setClosedDays(indispo);
+        setData((prev) => {
+          return {
+            ...prev, indispo: indispo
+          }
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+  }
   const isOpenDay = (e) => {
-    const clickedDayFormated = `${e.getFullYear()}-${
-      e.getMonth() + 1
-    }-${e.getDate()}`;
+    const clickedDayFormated = `${e.getFullYear()}-${e.getMonth() + 1
+      }-${e.getDate()}`;
     if (closedDays.length > 0) {
       const indexOfDay = closedDays.indexOf(clickedDayFormated);
       if (indexOfDay !== -1) {
@@ -44,15 +66,17 @@ function Structure11({
       return "select";
     }
     if (closedDays.length > 0 && view === "month") {
-      const formatedDate = `${date.getFullYear()}-${
-        date.getMonth() + 1
-      }-${date.getDate()}`;
+      const formatedDate = `${date.getFullYear()}-${date.getMonth() + 1
+        }-${date.getDate()}`;
       if (closedDays.includes(formatedDate)) {
         return "select";
       }
       return "";
     }
   };
+  useEffect(() => {
+    getCalendrier()
+  }, [])
   return (
     <div className="structure11 page-left">
       <h4>Calendrier de vos indisponibilités</h4>
@@ -60,6 +84,7 @@ function Structure11({
       <div className="agendaSection">
         <Calendar
           showNeighboringMonth={false}
+          minDate={new Date()}
           minDetail="month"
           maxDetail="month"
           onClickDay={(e) => {
@@ -72,12 +97,33 @@ function Structure11({
   );
 }
 Structure11.propTypes = {
-  lundiOuvert: Proptypes.bool,
-  mardiOuvert: Proptypes.bool,
-  mercrediOuvert: Proptypes.bool,
-  jeudiOuvert: Proptypes.bool,
-  vendrediOuvert: Proptypes.bool,
-  samediOuvert: Proptypes.bool,
-  dimancheOuvert: Proptypes.bool,
+  lundiOuvert: oneOfType([
+    bool,
+    number
+  ]),
+  mardiOuvert: oneOfType([
+    bool,
+    number
+  ]),
+  mercrediOuvert: oneOfType([
+    bool,
+    number
+  ]),
+  jeudiOuvert: oneOfType([
+    bool,
+    number
+  ]),
+  vendrediOuvert: oneOfType([
+    bool,
+    number
+  ]),
+  samediOuvert: oneOfType([
+    bool,
+    number
+  ]),
+  dimancheOuvert: oneOfType([
+    bool,
+    number
+  ]),
 };
 export default Structure11;

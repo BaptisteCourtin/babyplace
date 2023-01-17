@@ -41,15 +41,17 @@ function Structure5({
                 type="checkbox"
                 id="psci"
                 name="psci"
+                checked={PCSC1}
                 onChange={() => updateFields({ PCSC1: !PCSC1 })}
               />
-              <label htmlFor="psci">Formation premiers secours (PCSC1)</label>
+              <label htmlFor="psci">Formation premiers secours (PSC1)</label>
             </div>
             <div className="inputContainer">
               <input
                 type="checkbox"
                 id="nesting"
                 name="nesting"
+                checked={nesting}
                 onChange={() => updateFields({ nesting: !nesting })}
               />
               <label htmlFor="nesting">
@@ -61,6 +63,7 @@ function Structure5({
                 type="checkbox"
                 id="montessori"
                 name="montessori"
+                checked={montessori}
                 onChange={() => updateFields({ montessori: !montessori })}
               />
               <label htmlFor="montessori">
@@ -72,6 +75,7 @@ function Structure5({
                 type="checkbox"
                 id="handi"
                 name="handi"
+                checked={handi}
                 onChange={() => updateFields({ handi: !handi })}
               />
               <label htmlFor="handi">
@@ -86,6 +90,7 @@ function Structure5({
                 type="checkbox"
                 id="promenades"
                 name="promenades"
+                checked={promenades}
                 onChange={() => updateFields({ promenades: !promenades })}
               />
               <label htmlFor="promenades">Promenades</label>
@@ -95,6 +100,7 @@ function Structure5({
                 type="checkbox"
                 id="jardin"
                 name="jardin"
+                checked={jardin}
                 onChange={() => updateFields({ jardin: !jardin })}
               />
               <label htmlFor="jardin">Espace extérieur / jardin</label>
@@ -104,6 +110,7 @@ function Structure5({
                 type="checkbox"
                 id="sorties"
                 name="sorties"
+                checked={sorties}
                 onChange={() => updateFields({ sorties: !sorties })}
               />
               <label htmlFor="sorties">Sorties extérieures</label>
@@ -113,6 +120,7 @@ function Structure5({
                 type="checkbox"
                 id="eveil"
                 name="eveil"
+                checked={eveil}
                 onChange={() => updateFields({ eveil: !eveil })}
               />
               <label htmlFor="eveil">Activités d'éveil</label>
@@ -122,6 +130,7 @@ function Structure5({
                 type="checkbox"
                 id="musique"
                 name="musique"
+                checked={musique}
                 onChange={() => updateFields({ musique: !musique })}
               />
               <label htmlFor="musique">Atelier musique</label>
@@ -131,6 +140,7 @@ function Structure5({
                 type="checkbox"
                 id="art"
                 name="art"
+                checked={art}
                 onChange={() => updateFields({ art: !art })}
               />
               <label htmlFor="art">Activité artistique</label>
@@ -140,6 +150,7 @@ function Structure5({
                 type="checkbox"
                 id="bilingue"
                 name="bilingue"
+                checked={bilingue}
                 onChange={() => updateFields({ bilingue: !bilingue })}
               />
               <label htmlFor="bilingue">Bilingue/internationale</label>
@@ -149,6 +160,7 @@ function Structure5({
                 type="checkbox"
                 id="bibli"
                 name="bibli"
+                checked={bibli}
                 onChange={() => updateFields({ bibli: !bibli })}
               />
               <label htmlFor="bibli">Bibliothèque / Ludothèque / RAM</label>
@@ -158,6 +170,7 @@ function Structure5({
                 type="checkbox"
                 id="transport"
                 name="transport"
+                checked={transport}
                 onChange={() => updateFields({ transport: !transport })}
               />
               <label htmlFor="transport">Transport d'enfant</label>
@@ -170,6 +183,7 @@ function Structure5({
                 type="checkbox"
                 id="albumPhoto"
                 name="albumPhoto"
+                checked={albumPhoto}
                 onChange={() => updateFields({ albumPhoto: !albumPhoto })}
               />
               <label htmlFor="albumPhoto">Album photo</label>
@@ -179,6 +193,7 @@ function Structure5({
                 type="checkbox"
                 id="photoConnecte"
                 name="photoConnecte"
+                checked={photoConnecte}
                 onChange={() => updateFields({ photoConnecte: !photoConnecte })}
               />
               <label htmlFor="photoConnecte">
@@ -207,6 +222,7 @@ function Structure5({
                   type="checkbox"
                   id="enfants"
                   name="enfants"
+                  checked={enfants}
                   onChange={() => updateFields({ enfants: !enfants })}
                 />
                 <label htmlFor="enfants">
@@ -222,6 +238,7 @@ function Structure5({
                   type="checkbox"
                   id="animaux"
                   name="animaux"
+                  checked={animaux}
                   onChange={() => updateFields({ animaux: !animaux })}
                 />
                 <label htmlFor="animaux">Présence d’animaux</label>
@@ -231,6 +248,7 @@ function Structure5({
                   type="checkbox"
                   id="nonFumeur"
                   name="nonFumeur"
+                  checked={nonFumeur}
                   onChange={() => updateFields({ nonFumeur: !nonFumeur })}
                 />
                 <label htmlFor="nonFumeur">Foyer non fumeur</label>
@@ -240,6 +258,7 @@ function Structure5({
                   type="checkbox"
                   id="zeroPollution"
                   name="zeroPollution"
+                  checked={zeroPollution}
                   onChange={() =>
                     updateFields({ zeroPollution: !zeroPollution })
                   }
@@ -257,6 +276,7 @@ function Structure5({
                   type="checkbox"
                   id="repas"
                   name="repas"
+                  checked={repas}
                   onChange={() => updateFields({ repas: !repas })}
                 />
                 <label htmlFor="repas">Je fais les repas maison</label>
@@ -266,6 +286,7 @@ function Structure5({
                   type="checkbox"
                   id="hygiene"
                   name="hygiene"
+                  checked={hygiene}
                   onChange={() => updateFields({ hygiene: !hygiene })}
                 />
                 <label htmlFor="hygiene">
@@ -281,27 +302,27 @@ function Structure5({
   );
 }
 Structure5.propTypes = {
-  PCSC1: Proptypes.bool,
-  nesting: Proptypes.bool,
-  montessori: Proptypes.bool,
-  handi: Proptypes.bool,
-  enfants: Proptypes.bool,
-  jardin: Proptypes.bool,
-  sorties: Proptypes.bool,
-  animaux: Proptypes.bool,
-  nonFumeur: Proptypes.bool,
-  zeroPollution: Proptypes.bool,
-  repas: Proptypes.bool,
-  hygiene: Proptypes.bool,
-  promenades: Proptypes.bool,
-  eveil: Proptypes.bool,
-  musique: Proptypes.bool,
-  art: Proptypes.bool,
-  bilingue: Proptypes.bool,
-  bibli: Proptypes.bool,
-  transport: Proptypes.bool,
-  albumPhoto: Proptypes.bool,
-  photoConnecte: Proptypes.bool,
+  PCSC1: Proptypes.node,
+  nesting: Proptypes.node,
+  montessori: Proptypes.node,
+  handi: Proptypes.node,
+  enfants: Proptypes.node,
+  jardin: Proptypes.node,
+  sorties: Proptypes.node,
+  animaux: Proptypes.node,
+  nonFumeur: Proptypes.node,
+  zeroPollution: Proptypes.node,
+  repas: Proptypes.node,
+  hygiene: Proptypes.node,
+  promenades: Proptypes.node,
+  eveil: Proptypes.node,
+  musique: Proptypes.node,
+  art: Proptypes.node,
+  bilingue: Proptypes.node,
+  bibli: Proptypes.node,
+  transport: Proptypes.node,
+  albumPhoto: Proptypes.node,
+  photoConnecte: Proptypes.node,
   updateFields: Proptypes.func,
 };
 export default Structure5;
