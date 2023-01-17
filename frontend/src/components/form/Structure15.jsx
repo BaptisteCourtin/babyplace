@@ -3,7 +3,31 @@ import StructureContext from "@components/context/StructureContext";
 import Proptypes from "prop-types";
 
 function Structure15({
-  numSecu, numAgrement, dateAgrement, docPmi, siret, assHabitNom, assHabitNumero, assHabitAdresse, assAutoNom, assAutoNumero, assAutoAdresse, docIdentite, docVitale, docJustifDom, docDiplome, docRespCivile, docAssAuto, inputRefPmi, inputRefCpam, inputRefCni, inputRefDom, inputRefDiplome, inputRefAuto, inputRefResp, updateFields,
+  numSecu,
+  numAgrement,
+  dateAgrement,
+  docPmi,
+  siret,
+  assHabitNom,
+  assHabitNumero,
+  assHabitAdresse,
+  assAutoNom,
+  assAutoNumero,
+  assAutoAdresse,
+  docIdentite,
+  docVitale,
+  docJustifDom,
+  docDiplome,
+  docRespCivile,
+  docAssAuto,
+  inputRefPmi,
+  inputRefCpam,
+  inputRefCni,
+  inputRefDom,
+  inputRefDiplome,
+  inputRefAuto,
+  inputRefResp,
+  updateFields,
 }) {
   const { structure } = useContext(StructureContext);
 
@@ -95,7 +119,6 @@ function Structure15({
             <div className="inputsContainer">
               <div className="inputContainer">
                 <input
-
                   type="text"
                   name="assHabitNom"
                   pattern=".{4,}"
@@ -170,7 +193,6 @@ function Structure15({
               </div>
               <div className="inputContainer">
                 <input
-
                   type="text"
                   name="assAutoNumero"
                   pattern=".{5,}"
@@ -223,7 +245,13 @@ function Structure15({
             name="docpmi"
             ref={inputRefPmi}
             accept="image/png, image/jpg, image/jpeg, .pdf"
-            onChange={() => updateFields({ docPmi: inputRefPmi.current.files[0].name.split('.').slice(-1)[0] })}
+            onChange={() =>
+              updateFields({
+                docPmi: inputRefPmi.current.files[0].name
+                  .split(".")
+                  .slice(-1)[0],
+              })
+            }
           />
           <label htmlFor="docPmi" />
           <p className="checkSymbol">&#x2713;</p>
@@ -242,7 +270,11 @@ function Structure15({
                 ref={inputRefCni}
                 accept="image/png, image/jpg, image/jpeg, .pdf"
                 onChange={() => {
-                  updateFields({ docIdentite: inputRefCni.current.files[0].name.split('.').slice(-1)[0] });
+                  updateFields({
+                    docIdentite: inputRefCni.current.files[0].name
+                      .split(".")
+                      .slice(-1)[0],
+                  });
                 }}
               />
               <label htmlFor="docIdentite" />
@@ -261,7 +293,13 @@ function Structure15({
                 name="docVitale"
                 ref={inputRefCpam}
                 accept="image/png, image/jpg, image/jpeg, .pdf"
-                onChange={() => updateFields({ docVitale: inputRefCpam.current.files[0].name.split('.').slice(-1)[0] })}
+                onChange={() =>
+                  updateFields({
+                    docVitale: inputRefCpam.current.files[0].name
+                      .split(".")
+                      .slice(-1)[0],
+                  })
+                }
               />
               <label htmlFor="docVitale" />
               <p className="checkSymbol">&#x2713;</p>
@@ -275,7 +313,11 @@ function Structure15({
                 ref={inputRefDom}
                 accept="image/png, image/jpg, image/jpeg, .pdf"
                 onChange={() =>
-                  updateFields({ docJustifDom: inputRefPmi.current.files[0].name.split('.').slice(-1)[0] })
+                  updateFields({
+                    docJustifDom: inputRefPmi.current.files[0].name
+                      .split(".")
+                      .slice(-1)[0],
+                  })
                 }
               />
               <label htmlFor="docJustifDom" />
@@ -293,7 +335,11 @@ function Structure15({
                 ref={inputRefDiplome}
                 accept="image/png, image/jpg, image/jpeg, .pdf"
                 onChange={() =>
-                  updateFields({ docDiplome: inputRefDiplome.current.files[0].name.split('.').slice(-1)[0] })
+                  updateFields({
+                    docDiplome: inputRefDiplome.current.files[0].name
+                      .split(".")
+                      .slice(-1)[0],
+                  })
                 }
               />
               <label htmlFor="docDiplome" />
@@ -312,7 +358,11 @@ function Structure15({
                 ref={inputRefResp}
                 accept="image/png, image/jpg, image/jpeg, .pdf"
                 onChange={() =>
-                  updateFields({ docRespCivile: inputRefResp.current.files[0].name.split('.').slice(-1)[0] })
+                  updateFields({
+                    docRespCivile: inputRefResp.current.files[0].name
+                      .split(".")
+                      .slice(-1)[0],
+                  })
                 }
               />
               <label htmlFor="docRespCivile" />
@@ -327,7 +377,11 @@ function Structure15({
                 ref={inputRefAuto}
                 accept="image/png, image/jpg, image/jpeg, .pdf"
                 onChange={() =>
-                  updateFields({ docAssAuto: inputRefAuto.current.files[0].name.split('.').slice(-1)[0] })
+                  updateFields({
+                    docAssAuto: inputRefAuto.current.files[0].name
+                      .split(".")
+                      .slice(-1)[0],
+                  })
                 }
               />
               <label htmlFor="docAssAuto" />

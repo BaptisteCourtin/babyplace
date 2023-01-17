@@ -1,163 +1,161 @@
 .admin {
+  & .adminSection {
+    padding: 15px;
 
-    & .adminSection {
-        padding: 15px;
-
-        & h2 {
-            margin-bottom: 20px;
-            font-size: $h2;
-            font-weight: 700;
-        }
-
-        & ul {
-            width: 90%;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-
-            & li {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                align-items: center;
-                padding: 20px;
-                border: 2px solid $third;
-                border-radius: 5px;
-
-                & .adminSectionImg {
-
-                    & img {
-                        margin-bottom: 5px;
-                        width: 75px;
-                        height: 75px;
-                        border: 1px solid $third;
-                        border-radius: 50%;
-                        object-fit: cover;
-                    }
-
-                    & p {
-                        width: 50%;
-                        font-weight: 500;
-                    }
-                }
-
-                & .adminSectionInfos {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 10px;
-
-                    & p {
-                        & span {
-                            display: block;
-                            font-weight: 500;
-                        }
-                    }
-                }
-
-                & .adminSectionBtn {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                    gap: 5px;
-
-                    & .btnApproved {
-                        padding: 5px 0;
-                        width: 50%;
-                        background-color: $fifth;
-                        color: $white;
-                        font-weight: 500;
-                        border: 1px solid transparent;
-                        border-radius: 5px;
-                        transition: 0.3s ease-in-out;
-
-                        &:hover {
-                            border: 1px solid $fifth;
-                            background-color: transparent;
-                            color: $fifth;
-                        }
-                    }
-
-                    & .btnRefused {
-                        padding: 5px 0;
-                        width: 50%;
-                        background-color: $seventh;
-                        color: $white;
-                        font-weight: 500;
-                        border: 1px solid transparent;
-                        border-radius: 5px;
-                        transition: 0.3s ease-in-out;
-
-                        &:hover {
-                            border: 1px solid $seventh;
-                            background-color: transparent;
-                            color: $seventh;
-                        }
-                    }
-                }
-            }
-        }
+    & h2 {
+      margin-bottom: 20px;
+      font-size: $h2;
+      font-weight: 700;
     }
+
+    & ul {
+      width: 90%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      & li {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        align-items: center;
+        padding: 20px;
+        border: 2px solid $third;
+        border-radius: 5px;
+
+        & .adminSectionImg {
+          & img {
+            margin-bottom: 5px;
+            width: 75px;
+            height: 75px;
+            border: 1px solid $third;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+
+          & p {
+            width: 50%;
+            font-weight: 500;
+          }
+        }
+
+        & .adminSectionInfos {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+
+          & p {
+            & span {
+              display: block;
+              font-weight: 500;
+            }
+          }
+        }
+
+        & .adminSectionBtn {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 5px;
+
+          & .btnApproved {
+            padding: 5px 0;
+            width: 50%;
+            background-color: $fifth;
+            color: $white;
+            font-weight: 500;
+            border: 1px solid transparent;
+            border-radius: 5px;
+            transition: 0.3s ease-in-out;
+
+            &:hover {
+              border: 1px solid $fifth;
+              background-color: transparent;
+              color: $fifth;
+            }
+          }
+
+          & .btnRefused {
+            padding: 5px 0;
+            width: 50%;
+            background-color: $seventh;
+            color: $white;
+            font-weight: 500;
+            border: 1px solid transparent;
+            border-radius: 5px;
+            transition: 0.3s ease-in-out;
+
+            &:hover {
+              border: 1px solid $seventh;
+              background-color: transparent;
+              color: $seventh;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 .stats {
-    & .statsNumbers {
-        padding: 15px;
+  & .statsNumbers {
+    padding: 15px;
 
-        & h2 {
-            margin-bottom: 20px;
-            font-size: $h2;
-            font-weight: 700;
-        }
-
-        & ul {
-            display: flex;
-            align-items: center;
-            justify-content: space-evenly;
-
-            & li {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-direction: column;
-                gap: 5px;
-                height: 120px;
-                width: 120px;
-                padding: 15px;
-                border: 1px solid $second;
-                border-radius: 5px;
-                font-size: $h4;
-
-                & span {
-                    font-size: $h1;
-                    font-weight: 700;
-                }
-            }
-        }
+    & h2 {
+      margin-bottom: 20px;
+      font-size: $h2;
+      font-weight: 700;
     }
+
+    & ul {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+
+      & li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 5px;
+        height: 120px;
+        width: 120px;
+        padding: 15px;
+        border: 1px solid $second;
+        border-radius: 5px;
+        font-size: $h4;
+
+        & span {
+          font-size: $h1;
+          font-weight: 700;
+        }
+      }
+    }
+  }
 }
 
 .adminNav {
-    background: $third;
+  background: $third;
 
-    & ul {
-        width: 95%;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: start;
-        gap: 20px;
-        padding: 15px;
+  & ul {
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 20px;
+    padding: 15px;
 
-        & img {
-            width: 20px;
-            height: 20px;
-        }
-
-        & li {
-            color: $white;
-            font-size: $normal;
-            font-weight: 500;
-        }
+    & img {
+      width: 20px;
+      height: 20px;
     }
+
+    & li {
+      color: $white;
+      font-size: $normal;
+      font-weight: 500;
+    }
+  }
 }

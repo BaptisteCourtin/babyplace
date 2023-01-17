@@ -67,29 +67,29 @@
   word-break: break-word;
 }
 
-#you {
+#other {
   justify-content: flex-start;
 }
 
-#you .message-content {
+#other .message-content {
   justify-content: flex-start;
 }
 
-#you .message-meta {
+#other .message-meta {
   justify-content: flex-start;
   margin-left: 5px;
 }
 
-#other {
+#you {
   justify-content: flex-end;
 }
 
-#other .message-content {
+#you .message-content {
   justify-content: flex-end;
   background-color: #7e72f2;
 }
 
-#other .message-meta {
+#you .message-meta {
   justify-content: flex-end;
   margin-left: 5px;
 }

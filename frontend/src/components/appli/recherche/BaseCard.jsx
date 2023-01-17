@@ -9,7 +9,9 @@ import PropTypes from "prop-types";
 function BaseCard({
   setCompo,
   Allstructure,
+  // filtres
   dataBasique,
+  dataDateHeure,
   dataServices,
   dataAggrements,
 }) {
@@ -17,7 +19,7 @@ function BaseCard({
 
   // --- position user ---
   const [ville, setVille] = useState();
-  const [userPosition, setUserPosition] = useState([0, 0]);
+  const [userPosition, setUserPosition] = useState([47.2135655, -1.5496263]);
 
   const getVraiPosition = () => {
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -106,6 +108,7 @@ function BaseCard({
         </div>
       </div>
 
+      {/* filtrer selon heure - date */}
       <main>
         {Allstructure !== undefined &&
           Allstructure
@@ -118,6 +121,14 @@ function BaseCard({
                 dataBasique.isCreche === each.isCreche ||
                 dataBasique.isCreche === 2
             )
+
+            //   const [dataDateHeure, setDataDateHeure] = useState({
+            //   heureMin: "00:00",
+            //   heureMax: "23:59",
+            //   jour: "",
+            // });
+            // .filter((each) => dataDateHeure.heureMin === each.heureMin)
+
             // false = tout le monde = pas de filtre
             // true = filtrer pour avoir seulement ceux qui l'ont
             .filter(

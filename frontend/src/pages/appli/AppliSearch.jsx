@@ -41,6 +41,12 @@ function AppliSearch() {
     dispo: false,
   });
 
+  const [dataDateHeure, setDataDateHeure] = useState({
+    heureMin: "00:00",
+    heureMax: "23:59",
+    jour: "",
+  });
+
   const [dataServices, setDataServices] = useState({
     pcsc1: false,
     handi: false,
@@ -68,6 +74,7 @@ function AppliSearch() {
           setCompo={setCompo}
           Allstructure={structure}
           dataBasique={dataBasique}
+          dataDateHeure={dataDateHeure}
           dataServices={dataServices}
           dataAggrements={dataAggrements}
         />
@@ -86,7 +93,13 @@ function AppliSearch() {
       );
     }
     if (compo === 5) {
-      return <DateHeure setCompo={setCompo} />;
+      return (
+        <DateHeure
+          setCompo={setCompo}
+          dataDateHeure={dataDateHeure}
+          setDataDateHeure={setDataDateHeure}
+        />
+      );
     }
     if (compo === 6) {
       return (
@@ -111,6 +124,7 @@ function AppliSearch() {
         setCompo={setCompo}
         Allstructure={structure}
         dataBasique={dataBasique}
+        dataDateHeure={dataDateHeure}
         dataServices={dataServices}
         dataAggrements={dataAggrements}
       />

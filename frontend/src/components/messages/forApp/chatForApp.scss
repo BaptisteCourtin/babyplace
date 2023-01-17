@@ -1,0 +1,155 @@
+.chat-windowForApp {
+    width: 100%;
+    height: 100%;
+}
+
+.chat-windowForApp p {
+    margin: 0;
+}
+
+.chat-windowForApp .chat-headerForApp {
+    height: 45px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background: #7e72f2;
+    position: relative;
+    cursor: pointer;
+}
+
+.chat-windowForApp .chat-headerForApp p {
+    display: flex;
+    align-items: center;
+    padding: 0 1em 0 1em;
+    color: #fff;
+    font-weight: 700;
+    line-height: 45px;
+}
+
+#returnIcon {
+    margin-right: 10px;
+    padding-top: 2px;
+    transform: scale(1.25);
+}
+
+.chat-windowForApp .chat-bodyForApp {
+    height: 80%;
+    border: 1px solid #7e72f2;
+    background: #fff;
+
+    position: relative;
+}
+
+.chat-windowForApp .chat-bodyForApp .message-containerForApp {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.chat-windowForApp .chat-bodyForApp .message-containerForApp::-webkit-scrollbar {
+    display: none;
+}
+
+.chat-windowForApp .chat-bodyForApp .messageForApp {
+    height: auto;
+    padding: 10px;
+    display: flex;
+}
+
+.chat-windowForApp .chat-bodyForApp .messageForApp .message-contentForApp {
+    width: fit-content;
+    height: fit-content;
+    background-color: #f063a7;
+    border-radius: 50px;
+    color: white;
+    display: flex;
+    align-items: center;
+    margin: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+#other {
+    justify-content: flex-start;
+}
+
+#other .message-contentForApp {
+    justify-content: flex-start;
+}
+
+#other .message-metaForApp {
+    justify-content: flex-start;
+    margin-left: 5px;
+}
+
+#you {
+    justify-content: flex-end;
+}
+
+#you .message-contentForApp {
+    justify-content: flex-end;
+    background-color: #7e72f2;
+}
+
+#you .message-metaForApp {
+    justify-content: flex-end;
+    margin-left: 5px;
+}
+
+.message-metaForApp #author {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.chat-windowForApp .chat-bodyForApp .messageForApp .message-metaForApp {
+    display: flex;
+    font-size: 12px;
+}
+
+.chat-windowForApp .chat-footerForApp {
+    height: 40px;
+    border: 1px solid #7e72f2;
+    border-top: none;
+    display: flex;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.chat-windowForApp .chat-footerForApp input {
+    height: 100%;
+    flex: 85%;
+    border: 0;
+    padding: 0 0.7em;
+    font-size: 1em;
+    border-right: 1px dotted #7e72f2;
+    border-bottom-left-radius: 5px;
+
+    outline: none;
+    font-family: "Open Sans", sans-serif;
+}
+
+.chat-windowForApp .chat-footerForApp button {
+    border: 0;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    flex: 15%;
+    height: 100%;
+    background: transparent;
+    outline: none;
+    font-size: 25px;
+    color: lightgray;
+}
+
+.chat-windowForApp .chat-footerForApp button:hover {
+    color: #f063a7;
+}
+
+.hide {
+    opacity: 0 !important;
+}

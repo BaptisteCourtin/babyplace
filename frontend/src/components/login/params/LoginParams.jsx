@@ -16,37 +16,43 @@ function LoginParams() {
         headers: {
           "x-token": token,
         },
-      })
+      });
       setDonnees(res.data[0]);
       if (res.data[0].isCreche === 0) {
-        axios.get(`http://localhost:5000/structure/details?type=assMat&id=${res.data[0].structureId}`, {
-          id: res.data[0].structureId,
-        })
-          .then(res => {
-            setDetails(res.data[0])
-            console.log(res.data[0])
-            setUserType('assMat')
-          })
+        axios
+          .get(
+            `http://localhost:5000/structure/details?type=assMat&id=${res.data[0].structureId}`,
+            {
+              id: res.data[0].structureId,
+            }
+          )
+          .then((res) => {
+            setDetails(res.data[0]);
+            setUserType("assMat");
+          });
       } else {
-        axios.get(`http://localhost:5000/structure/details?type=creche&id=${res.data[0].structureId}`, {
-          id: res.data[0].structureId,
-        })
-          .then(res => {
-            setDetails(res.data[0])
-            setUserType('creche')
-          })
+        axios
+          .get(
+            `http://localhost:5000/structure/details?type=creche&id=${res.data[0].structureId}`,
+            {
+              id: res.data[0].structureId,
+            }
+          )
+          .then((res) => {
+            setDetails(res.data[0]);
+            setUserType("creche");
+          });
       }
-    }
-    catch (err) {
-      toast.error(err.message)
+    } catch (err) {
+      toast.error(err.message);
     }
   };
 
   useEffect(() => {
-    getData()
+    getData();
   }, []);
 
-  const data = Object.assign(donnees, details)
+  const data = Object.assign(donnees, details);
 
   return (
     <section className="loginParams">
@@ -87,7 +93,7 @@ function LoginParams() {
       <Link
         className="loginParamsBtn"
         to="/dashboard"
-        state={{ data: { ...data }, userType: userType }}
+        state={{ data: { ...data }, userType }}
       >
         Continuer
       </Link>

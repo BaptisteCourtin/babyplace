@@ -2,7 +2,6 @@ import React from "react";
 import Proptypes from "prop-types";
 
 function Structure2({ imageProfilSrc, inputRef, updateFields }) {
-
   const updateImg = (e) => {
     // e.files contient un objet FileList
     const [picture] = e.target.files;

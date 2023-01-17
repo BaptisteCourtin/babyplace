@@ -155,7 +155,13 @@ function FormStructure() {
     useMultistepForm([
       <Structure1 {...data} updateFields={updateFields} />,
       <Structure2 {...data} inputRef={inputRef} updateFields={updateFields} />,
-      <Structure3 {...data} inputRef1={inputRef1} inputRef2={inputRef2} inputRef3={inputRef3} updateFields={updateFields} />,
+      <Structure3
+        {...data}
+        inputRef1={inputRef1}
+        inputRef2={inputRef2}
+        inputRef3={inputRef3}
+        updateFields={updateFields}
+      />,
       <Structure4 {...data} updateFields={updateFields} />,
       <Structure5 {...data} updateFields={updateFields} />,
       <Structure6 />,
@@ -163,11 +169,25 @@ function FormStructure() {
       <Structure8 {...data} />,
       <Structure9 {...data} updateFields={updateFields} />,
       <Structure10 {...data} updateFields={updateFields} />,
-      <Structure11 {...data} closedDays={closedDays} setClosedDays={setClosedDays} />,
+      <Structure11
+        {...data}
+        closedDays={closedDays}
+        setClosedDays={setClosedDays}
+      />,
       <Structure12 {...data} updateFields={updateFields} />,
       <Structure13 {...data} updateFields={updateFields} />,
       <Structure14 {...data} />,
-      <Structure15 {...data} inputRefPmi={inputRefPmi} inputRefCpam={inputRefCpam} inputRefCni={inputRefCni} inputRefDom={inputRefDom} inputRefDiplome={inputRefDiplome} inputRefAuto={inputRefAuto} inputRefResp={inputRefResp} updateFields={updateFields} />,
+      <Structure15
+        {...data}
+        inputRefPmi={inputRefPmi}
+        inputRefCpam={inputRefCpam}
+        inputRefCni={inputRefCni}
+        inputRefDom={inputRefDom}
+        inputRefDiplome={inputRefDiplome}
+        inputRefAuto={inputRefAuto}
+        inputRefResp={inputRefResp}
+        updateFields={updateFields}
+      />,
       <Structure16 />,
     ]);
 
@@ -310,12 +330,96 @@ function FormStructure() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const { isCreche, typeCreche, nomStructure, telephone, nomNaissance, nomUsage, prenom, adresseStructure, description, PCSC1, nesting, montessori, handi, jardin, sorties, experience, enfants, animaux, nonFumeur, zeroPollution, repas, hygiene, promenades, eveil, musique, art, bilingue, bibli, transport, albumPhoto, photoConnecte, resaInst, lundiOuvert, mardiOuvert, mercrediOuvert, jeudiOuvert, vendrediOuvert, samediOuvert, dimancheOuvert, lundiMin, lundiMax, mardiMin, mardiMax, mercrediMin, mercrediMax, jeudiMin, jeudiMax, vendrediMin, vendrediMax, samediMin, samediMax, dimancheMin, dimancheMax, dureeMin, dureeMax, nbEmployes, maxPlaces, maxHandi, max18Mois, maxNuit, financementPaje, tarifHeure, tarifHoraireSpec, indemnRepas, tarifAtelier, indemnEntretien, indemnKm, tarifHeureSup, numSecu, numAgrement, dateAgrement, siret, assHabitNom, assHabitNumero, assHabitAdresse, assAutoNom, assAutoNumero, assAutoAdresse } = data;
+    const {
+      isCreche,
+      typeCreche,
+      nomStructure,
+      telephone,
+      nomNaissance,
+      nomUsage,
+      prenom,
+      adresseStructure,
+      description,
+      PCSC1,
+      nesting,
+      montessori,
+      handi,
+      jardin,
+      sorties,
+      experience,
+      enfants,
+      animaux,
+      nonFumeur,
+      zeroPollution,
+      repas,
+      hygiene,
+      promenades,
+      eveil,
+      musique,
+      art,
+      bilingue,
+      bibli,
+      transport,
+      albumPhoto,
+      photoConnecte,
+      resaInst,
+      lundiOuvert,
+      mardiOuvert,
+      mercrediOuvert,
+      jeudiOuvert,
+      vendrediOuvert,
+      samediOuvert,
+      dimancheOuvert,
+      lundiMin,
+      lundiMax,
+      mardiMin,
+      mardiMax,
+      mercrediMin,
+      mercrediMax,
+      jeudiMin,
+      jeudiMax,
+      vendrediMin,
+      vendrediMax,
+      samediMin,
+      samediMax,
+      dimancheMin,
+      dimancheMax,
+      dureeMin,
+      dureeMax,
+      nbEmployes,
+      maxPlaces,
+      maxHandi,
+      max18Mois,
+      maxNuit,
+      financementPaje,
+      tarifHeure,
+      tarifHoraireSpec,
+      indemnRepas,
+      tarifAtelier,
+      indemnEntretien,
+      indemnKm,
+      tarifHeureSup,
+      numSecu,
+      numAgrement,
+      dateAgrement,
+      siret,
+      assHabitNom,
+      assHabitNumero,
+      assHabitAdresse,
+      assAutoNom,
+      assAutoNumero,
+      assAutoAdresse,
+    } = data;
     const email = userEmail;
     if (!isLastStep) {
       if (currentStepIndex === 0 && structure === "creche") {
         Axios.put("http://localhost:5000/inscriptionCreche1", {
-          isCreche, typeCreche, nomStructure, adresseStructure, telephone, email
+          isCreche,
+          typeCreche,
+          nomStructure,
+          adresseStructure,
+          telephone,
+          email,
         })
           .then(next())
           .catch((err) => {
@@ -323,7 +427,13 @@ function FormStructure() {
           });
       } else if (currentStepIndex === 0 && structure === "assmat") {
         Axios.put("http://localhost:5000/inscriptionAssmat1", {
-          isCreche, nomNaissance, nomUsage, prenom, adresseStructure, telephone, email
+          isCreche,
+          nomNaissance,
+          nomUsage,
+          prenom,
+          adresseStructure,
+          telephone,
+          email,
         })
           .then(next())
           .catch((err) => {
@@ -336,34 +446,39 @@ function FormStructure() {
           .then((result) => {
             const photoProfil = `@backend/public/uploads/avatar/${result.data}`;
             Axios.put("http://localhost:5000/photoProfil", {
-              photoProfil, email
+              photoProfil,
+              email,
             })
               .then(next())
               .catch((err) => {
                 console.error(err);
-              })
-          }
-          )
+              });
+          })
           .catch((err) => {
             console.error(err);
           });
-      }
-      else if (currentStepIndex === 2) {
+      } else if (currentStepIndex === 2) {
         const formData = new FormData();
-        if (inputRef1 !== null) { formData.append("photo1", inputRef1.current.files[0]) };
-        if (inputRef2 !== null) { formData.append("photo2", inputRef2.current.files[0]) };
-        if (inputRef3 !== null) { formData.append("photo3", inputRef3.current.files[0]) };
+        if (inputRef1 !== null) {
+          formData.append("photo1", inputRef1.current.files[0]);
+        }
+        if (inputRef2 !== null) {
+          formData.append("photo2", inputRef2.current.files[0]);
+        }
+        if (inputRef3 !== null) {
+          formData.append("photo3", inputRef3.current.files[0]);
+        }
         Axios.post("http://localhost:5000/photosStructure", formData)
           .then((result) => {
             let photoStructure1 = null;
             let photoStructure2 = null;
             let photoStructure3 = null;
             if (result.data.photo1 !== undefined) {
-              let photo1 = result.data.photo1[0].filename;
+              const photo1 = result.data.photo1[0].filename;
               photoStructure1 = `@backend/public/uploads/photosStructure/${photo1}`;
             }
             if (result.data.photo2 !== undefined) {
-              let photo2 = result.data.photo2[0].filename;
+              const photo2 = result.data.photo2[0].filename;
               photoStructure2 = `@backend/public/uploads/photosStructure/${photo2}`;
             }
             if (result.data.photo3 !== undefined) {
@@ -371,23 +486,25 @@ function FormStructure() {
               photoStructure3 = `@backend/public/uploads/photosStructure/${photo3}`;
             }
             Axios.put("http://localhost:5000/photosStructure", {
-              photoStructure1, photoStructure2, photoStructure3, email
-            }
-            )
+              photoStructure1,
+              photoStructure2,
+              photoStructure3,
+              email,
+            })
               .then(() => {
-                next()
+                next();
               })
               .catch((err) => {
                 console.error(err);
-              })
-          }
-          )
+              });
+          })
           .catch((err) => {
             console.error(err);
           });
       } else if (currentStepIndex === 3) {
         Axios.put("http://localhost:5000/description", {
-          description, email
+          description,
+          email,
         })
           .then(next())
           .catch((err) => {
@@ -395,7 +512,22 @@ function FormStructure() {
           });
       } else if (currentStepIndex === 4 && structure === "creche") {
         Axios.put("http://localhost:5000/optionsAccueilCreche", {
-          PCSC1, nesting, montessori, handi, jardin, sorties, promenades, eveil, musique, art, bilingue, bibli, transport, albumPhoto, photoConnecte, email
+          PCSC1,
+          nesting,
+          montessori,
+          handi,
+          jardin,
+          sorties,
+          promenades,
+          eveil,
+          musique,
+          art,
+          bilingue,
+          bibli,
+          transport,
+          albumPhoto,
+          photoConnecte,
+          email,
         })
           .then(next())
           .catch((err) => {
@@ -403,26 +535,73 @@ function FormStructure() {
           });
       } else if (currentStepIndex === 4 && structure === "assmat") {
         Axios.put("http://localhost:5000/optionsAccueilAssmat", {
-          PCSC1, nesting, montessori, handi, jardin, sorties, promenades, eveil, musique, art, bilingue, bibli, transport, enfants, experience, animaux, nonFumeur, zeroPollution, repas, hygiene, albumPhoto, photoConnecte, email
+          PCSC1,
+          nesting,
+          montessori,
+          handi,
+          jardin,
+          sorties,
+          promenades,
+          eveil,
+          musique,
+          art,
+          bilingue,
+          bibli,
+          transport,
+          enfants,
+          experience,
+          animaux,
+          nonFumeur,
+          zeroPollution,
+          repas,
+          hygiene,
+          albumPhoto,
+          photoConnecte,
+          email,
         })
           .then(next())
           .catch((err) => {
             console.error(err);
           });
-      } else if (currentStepIndex === 5 || currentStepIndex === 7 || currentStepIndex === 13) {
-        next()
+      } else if (
+        currentStepIndex === 5 ||
+        currentStepIndex === 7 ||
+        currentStepIndex === 13
+      ) {
+        next();
       } else if (currentStepIndex === 6) {
         Axios.put("http://localhost:5000/resaInst", {
-          resaInst, email
+          resaInst,
+          email,
         })
           .then(next())
           .catch((err) => {
             console.error(err);
           });
       } else if (currentStepIndex === 8) {
-
         Axios.post("http://localhost:5000/horaires", {
-          lundiOuvert, mardiOuvert, mercrediOuvert, jeudiOuvert, vendrediOuvert, samediOuvert, dimancheOuvert, lundiMin, lundiMax, mardiMin, mardiMax, mercrediMin, mercrediMax, jeudiMin, jeudiMax, vendrediMin, vendrediMax, samediMin, samediMax, dimancheMin, dimancheMax, email
+          lundiOuvert,
+          mardiOuvert,
+          mercrediOuvert,
+          jeudiOuvert,
+          vendrediOuvert,
+          samediOuvert,
+          dimancheOuvert,
+          lundiMin,
+          lundiMax,
+          mardiMin,
+          mardiMax,
+          mercrediMin,
+          mercrediMax,
+          jeudiMin,
+          jeudiMax,
+          vendrediMin,
+          vendrediMax,
+          samediMin,
+          samediMax,
+          dimancheMin,
+          dimancheMax,
+          email,
         })
           .then(next())
           .catch((err) => {
@@ -430,33 +609,42 @@ function FormStructure() {
           });
       } else if (currentStepIndex === 9) {
         Axios.put("http://localhost:5000/dureeAccueil", {
-          dureeMin, dureeMax, email
+          dureeMin,
+          dureeMax,
+          email,
         })
           .then(next())
           .catch((err) => {
             console.error(err);
           });
-      }
-      else if (currentStepIndex === 10) {
-        Axios.get(`http://localhost:5000/getStructureId?email=${email}`, { email })
+      } else if (currentStepIndex === 10) {
+        Axios.get(`http://localhost:5000/getStructureId?email=${email}`, {
+          email,
+        })
           .then((id) => {
-            const structureId = id.data.structureId;
+            const { structureId } = id.data;
             closedDays.map((date) => {
               Axios.post("http://localhost:5000/calendrier/add", {
-                date: date, nbPlaces: -1, structureId,
-              })
-                .catch((err) => {
-                  console.error(err);
-                })
-            })
-          }
-          ).then(next())
+                date,
+                nbPlaces: -1,
+                structureId,
+              }).catch((err) => {
+                console.error(err);
+              });
+            });
+          })
+          .then(next())
           .catch((err) => {
             console.error(err);
           });
       } else if (currentStepIndex === 11 && structure === "creche") {
         Axios.put("http://localhost:5000/agrementsCreche", {
-          nbEmployes, maxPlaces, maxHandi, max18Mois, maxNuit, email
+          nbEmployes,
+          maxPlaces,
+          maxHandi,
+          max18Mois,
+          maxNuit,
+          email,
         })
           .then(next())
           .catch((err) => {
@@ -464,7 +652,11 @@ function FormStructure() {
           });
       } else if (currentStepIndex === 11 && structure === "assmat") {
         Axios.put("http://localhost:5000/agrementsAssmat", {
-          maxPlaces, maxHandi, max18Mois, maxNuit, email
+          maxPlaces,
+          maxHandi,
+          max18Mois,
+          maxNuit,
+          email,
         })
           .then(next())
           .catch((err) => {
@@ -472,16 +664,26 @@ function FormStructure() {
           });
       } else if (currentStepIndex === 12 && structure === "creche") {
         Axios.put("http://localhost:5000/tarifsCreche", {
-          financementPaje, tarifHeure, tarifHoraireSpec, indemnRepas, tarifAtelier, email
+          financementPaje,
+          tarifHeure,
+          tarifHoraireSpec,
+          indemnRepas,
+          tarifAtelier,
+          email,
         })
           .then(next())
           .catch((err) => {
             console.error(err);
           });
-      }
-      else if (currentStepIndex === 12 && structure === "assmat") {
+      } else if (currentStepIndex === 12 && structure === "assmat") {
         Axios.put("http://localhost:5000/tarifsAssmat", {
-          tarifHeure, tarifHoraireSpec, indemnRepas, indemnKm, indemnEntretien, tarifHeureSup, email
+          tarifHeure,
+          tarifHoraireSpec,
+          indemnRepas,
+          indemnKm,
+          indemnEntretien,
+          tarifHeureSup,
+          email,
         })
           .then(next())
           .catch((err) => {
@@ -497,69 +699,100 @@ function FormStructure() {
         let docAutoSrc = null;
         const formData = new FormData();
         formData.append("docpmi", inputRefPmi.current.files[0]);
-        if (inputRefCni.current !== null) { formData.append("docIdentite", inputRefCni.current.files[0]) };
-        if (inputRefCpam.current !== null) { formData.append("docVitale", inputRefCpam.current.files[0]) };
-        if (inputRefDom.current !== null) { formData.append("docJustifDom", inputRefDom.current.files[0]) };
-        if (inputRefDiplome.current !== null) { formData.append("docDiplome", inputRefDiplome.current.files[0]) };
-        if (inputRefResp.current !== null) { formData.append("docRespCivile", inputRefResp.current.files[0]) };
-        if (inputRefAuto.current !== null) { formData.append("docAssAuto", inputRefAuto.current.files[0]) };
+        if (inputRefCni.current !== null) {
+          formData.append("docIdentite", inputRefCni.current.files[0]);
+        }
+        if (inputRefCpam.current !== null) {
+          formData.append("docVitale", inputRefCpam.current.files[0]);
+        }
+        if (inputRefDom.current !== null) {
+          formData.append("docJustifDom", inputRefDom.current.files[0]);
+        }
+        if (inputRefDiplome.current !== null) {
+          formData.append("docDiplome", inputRefDiplome.current.files[0]);
+        }
+        if (inputRefResp.current !== null) {
+          formData.append("docRespCivile", inputRefResp.current.files[0]);
+        }
+        if (inputRefAuto.current !== null) {
+          formData.append("docAssAuto", inputRefAuto.current.files[0]);
+        }
         Axios.post("http://localhost:5000/justificatifs", formData)
           .then((result) => {
             if (result.data.docpmi !== undefined) {
-              let doc = result.data.docpmi[0].filename;
+              const doc = result.data.docpmi[0].filename;
               docPmiSrc = `@backend/public/uploads/photosStructure/${doc}`;
             }
             if (result.data.docIdentite !== undefined) {
-              let doc = result.data.docIdentite[0].filename;
+              const doc = result.data.docIdentite[0].filename;
               docCniSrc = `@backend/public/uploads/photosStructure/${doc}`;
             }
             if (result.data.docVitale !== undefined) {
-              let doc = result.data.docVitale[0].filename;
+              const doc = result.data.docVitale[0].filename;
               docCpamSrc = `@backend/public/uploads/photosStructure/${doc}`;
             }
             if (result.data.docJustifDom !== undefined) {
-              let doc = result.data.docJustifDom[0].filename;
+              const doc = result.data.docJustifDom[0].filename;
               docDomSrc = `@backend/public/uploads/photosStructure/${doc}`;
             }
             if (result.data.docDiplome !== undefined) {
-              let doc = result.data.docDiplome[0].filename;
+              const doc = result.data.docDiplome[0].filename;
               docDiplomeSrc = `@backend/public/uploads/photosStructure/${doc}`;
             }
             if (result.data.docRespCivile !== undefined) {
-              let doc = result.data.docRespCivile[0].filename;
+              const doc = result.data.docRespCivile[0].filename;
               docRespSrc = `@backend/public/uploads/photosStructure/${doc}`;
             }
             if (result.data.docAssAuto !== undefined) {
-              let doc = result.data.docAssAuto[0].filename;
+              const doc = result.data.docAssAuto[0].filename;
               docAutoSrc = `@backend/public/uploads/photosStructure/${doc}`;
             }
-          }).then(() => {
+          })
+          .then(() => {
             if (structure === "creche") {
               Axios.put("http://localhost:5000/verifsCreche", {
-                numAgrement, dateAgrement, docPmiSrc, siret, email
+                numAgrement,
+                dateAgrement,
+                docPmiSrc,
+                siret,
+                email,
               })
                 .catch((err) => {
                   console.error(err);
                 })
-                .then(next())
+                .then(next());
             } else if (structure === "assmat") {
               Axios.put("http://localhost:5000/verifsAssmat", {
-                numSecu, numAgrement, dateAgrement, docPmiSrc, assHabitNom, assHabitNumero, assHabitAdresse, assAutoNom, assAutoNumero, assAutoAdresse, docCniSrc, docCpamSrc, docDomSrc, docDiplomeSrc, docRespSrc, docAutoSrc, email
+                numSecu,
+                numAgrement,
+                dateAgrement,
+                docPmiSrc,
+                assHabitNom,
+                assHabitNumero,
+                assHabitAdresse,
+                assAutoNom,
+                assAutoNumero,
+                assAutoAdresse,
+                docCniSrc,
+                docCpamSrc,
+                docDomSrc,
+                docDiplomeSrc,
+                docRespSrc,
+                docAutoSrc,
+                email,
               })
                 .then(next())
                 .catch((err) => {
                   console.error(err);
-                })
+                });
             }
           })
           .catch((err) => {
             console.error(err);
-          })
-
-
+          });
       }
     }
-  }
+  };
 
   return (
     <StructureContext.Provider value={{ structure, setStructure }}>
@@ -582,7 +815,8 @@ function FormStructure() {
           </div>
 
           <div className="formStructureContainer">
-            <form encType="multipart/form-data"
+            <form
+              encType="multipart/form-data"
               className={
                 currentStepIndex === 6 || currentStepIndex === 7 || isLastStep
                   ? "pageChoixResa"
@@ -609,8 +843,8 @@ function FormStructure() {
               </div>
             </form>
             {currentStepIndex !== 6 &&
-              currentStepIndex !== 7 &&
-              currentStepIndex !== 15 ? (
+            currentStepIndex !== 7 &&
+            currentStepIndex !== 15 ? (
               <div className="explicationsContainer">
                 {screenWidth < 1200 && (
                   <button

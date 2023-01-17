@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Scrolltobottom from "react-scroll-to-bottom";
 import axios from "axios";
 import moment from "moment";
+import { toast } from "react-hot-toast";
 
 function Chat({ socket, username, room, title, joinRoom }) {
   const [currentMessage, setCurrentMessage] = useState("");
@@ -50,20 +51,18 @@ function Chat({ socket, username, room, title, joinRoom }) {
     });
   }, [socket]);
 
-  const getMessagesFromRoom = () => {
-    axios
-      .get("http://localhost:5000/messages/recup", {
+  const getMessagesFromRoom = async () => {
+    try {
+      const result = await axios.get(`http://localhost:5000/messages/recup/${room}`, {
         headers: {
           room,
         },
-      })
-      .then((ret) => {
-        console.warn(ret.data);
-        setMessageListData(ret.data[0]);
-      })
-      .catch((err) => {
-        console.error(err);
       });
+      console.log(result.data);
+      setMessageListData(result.data);
+    } catch (err) {
+      toast.error(err.message);
+    };
   };
 
   useEffect(() => {
