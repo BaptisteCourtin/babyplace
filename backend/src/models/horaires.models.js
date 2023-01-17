@@ -2,7 +2,7 @@ const datasource = require("../../database");
 
 const getHorairesById = async (id) => {
   const [result] = await datasource.query(
-    "SELECT * FROM horaires WHERE structureId = ?",
+    "SELECT * FROM horaires WHERE structureId = ? ORDER BY jourId",
     [id]
   );
   return result;

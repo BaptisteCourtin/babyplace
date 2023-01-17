@@ -79,7 +79,7 @@ function CarteCreche({ data, userPosition }) {
 
   const distance = (getDistance(userPosition, center) / 1000).toFixed(2);
 
-  // ---
+  // --- avis moyen ---
 
   const [nbStarMoyen, setNbStarMoyen] = useState(0);
 

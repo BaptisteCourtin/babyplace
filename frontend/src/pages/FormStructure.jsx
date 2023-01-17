@@ -287,7 +287,13 @@ function FormStructure() {
     useMultistepForm([
       <Structure1 {...data} updateFields={updateFields} />,
       <Structure2 {...data} inputRef={inputRef} updateFields={updateFields} />,
-      <Structure3 {...data} inputRef1={inputRef1} inputRef2={inputRef2} inputRef3={inputRef3} updateFields={updateFields} />,
+      <Structure3
+        {...data}
+        inputRef1={inputRef1}
+        inputRef2={inputRef2}
+        inputRef3={inputRef3}
+        updateFields={updateFields}
+      />,
       <Structure4 {...data} updateFields={updateFields} />,
       <Structure5 {...data} updateFields={updateFields} />,
       <Structure6 />,
@@ -299,7 +305,17 @@ function FormStructure() {
       <Structure12 {...data} updateFields={updateFields} />,
       <Structure13 {...data} updateFields={updateFields} />,
       <Structure14 {...data} />,
-      <Structure15 {...data} inputRefPmi={inputRefPmi} inputRefCpam={inputRefCpam} inputRefCni={inputRefCni} inputRefDom={inputRefDom} inputRefDiplome={inputRefDiplome} inputRefAuto={inputRefAuto} inputRefResp={inputRefResp} updateFields={updateFields} />,
+      <Structure15
+        {...data}
+        inputRefPmi={inputRefPmi}
+        inputRefCpam={inputRefCpam}
+        inputRefCni={inputRefCni}
+        inputRefDom={inputRefDom}
+        inputRefDiplome={inputRefDiplome}
+        inputRefAuto={inputRefAuto}
+        inputRefResp={inputRefResp}
+        updateFields={updateFields}
+      />,
       <Structure16 />,
     ]);
   const pageTitle = () => {
@@ -440,7 +456,86 @@ function FormStructure() {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    const { isCreche, typeCreche, nomStructure, telephone, nomNaissance, nomUsage, prenom, adresseStructure, description, PCSC1, nesting, montessori, handi, jardin, sorties, experience, enfants, animaux, nonFumeur, zeroPollution, repas, hygiene, promenades, eveil, musique, art, bilingue, bibli, transport, albumPhoto, photoConnecte, resaInst, lundiOuvert, mardiOuvert, mercrediOuvert, jeudiOuvert, vendrediOuvert, samediOuvert, dimancheOuvert, lundiMin, lundiMax, mardiMin, mardiMax, mercrediMin, mercrediMax, jeudiMin, jeudiMax, vendrediMin, vendrediMax, samediMin, samediMax, dimancheMin, dimancheMax, dureeMin, dureeMax, nbEmployes, maxPlaces, maxHandi, max18Mois, maxNuit, financementPaje, tarifHeure, tarifHoraireSpec, indemnRepas, tarifAtelier, indemnEntretien, indemnKm, tarifHeureSup, numSecu, numAgrement, dateAgrement, siret, assHabitNom, assHabitNumero, assHabitAdresse, assAutoNom, assAutoNumero, assAutoAdresse } = data;
+    const {
+      isCreche,
+      typeCreche,
+      nomStructure,
+      telephone,
+      nomNaissance,
+      nomUsage,
+      prenom,
+      adresseStructure,
+      description,
+      PCSC1,
+      nesting,
+      montessori,
+      handi,
+      jardin,
+      sorties,
+      experience,
+      enfants,
+      animaux,
+      nonFumeur,
+      zeroPollution,
+      repas,
+      hygiene,
+      promenades,
+      eveil,
+      musique,
+      art,
+      bilingue,
+      bibli,
+      transport,
+      albumPhoto,
+      photoConnecte,
+      resaInst,
+      lundiOuvert,
+      mardiOuvert,
+      mercrediOuvert,
+      jeudiOuvert,
+      vendrediOuvert,
+      samediOuvert,
+      dimancheOuvert,
+      lundiMin,
+      lundiMax,
+      mardiMin,
+      mardiMax,
+      mercrediMin,
+      mercrediMax,
+      jeudiMin,
+      jeudiMax,
+      vendrediMin,
+      vendrediMax,
+      samediMin,
+      samediMax,
+      dimancheMin,
+      dimancheMax,
+      dureeMin,
+      dureeMax,
+      nbEmployes,
+      maxPlaces,
+      maxHandi,
+      max18Mois,
+      maxNuit,
+      financementPaje,
+      tarifHeure,
+      tarifHoraireSpec,
+      indemnRepas,
+      tarifAtelier,
+      indemnEntretien,
+      indemnKm,
+      tarifHeureSup,
+      numSecu,
+      numAgrement,
+      dateAgrement,
+      siret,
+      assHabitNom,
+      assHabitNumero,
+      assHabitAdresse,
+      assAutoNom,
+      assAutoNumero,
+      assAutoAdresse,
+    } = data;
     const email = userEmail;
     if (!isLastStep) {
       if (currentStepIndex === 0 && structure === "creche") {
@@ -511,14 +606,12 @@ function FormStructure() {
               .then(closePage ? navigate("/", {}) : next())
               .catch((err) => {
                 console.error(err);
-              })
-          }
-          )
+              });
+          })
           .catch((err) => {
             console.error(err);
           });
-      }
-      else if (currentStepIndex === 2) {
+      } else if (currentStepIndex === 2) {
         const formData = new FormData();
         if (inputRef1 !== null) { formData.append("photo1", inputRef1.current.files[0]) };
         if (inputRef2 !== null) { formData.append("photo2", inputRef2.current.files[0]) };
@@ -549,9 +642,8 @@ function FormStructure() {
               })
               .catch((err) => {
                 console.error(err);
-              })
-          }
-          )
+              });
+          })
           .catch((err) => {
             console.error(err);
           });
@@ -620,7 +712,7 @@ function FormStructure() {
       else if (currentStepIndex === 10) {
         Axios.get(`${import.meta.env.VITE_PATH}/getStructureId?email=${email}`, { email })
           .then((id) => {
-            const structureId = id.data.structureId;
+            const { structureId } = id.data;
             closedDays.map((date) => {
               Axios.post(`${import.meta.env.VITE_PATH}/calendrier/add`, {
                 date: date, nbPlaces: -1, structureId,
@@ -713,7 +805,8 @@ function FormStructure() {
               let doc = result.data.docAssAuto[0].filename;
               docAutoSrc = `${import.meta.env.VITE_PATH}/uploads/photosStructure/${doc}`;
             }
-          }).then(() => {
+          })
+          .then(() => {
             if (structure === "creche") {
               Axios.put(`${import.meta.env.VITE_PATH}/verifsCreche`, {
                 numAgrement, dateAgrement, docPmiSrc, siret, email
@@ -729,7 +822,7 @@ function FormStructure() {
                 .then(closePage ? navigate("/", {}) : next())
                 .catch((err) => {
                   console.error(err);
-                })
+                });
             }
           })
           .catch((err) => {
