@@ -9,6 +9,7 @@ function Chat({ socket, username, room, title, joinRoom }) {
   const [messageList, setMessageList] = useState([]);
   const [messageListData, setMessageListData] = useState([]);
 
+
   const saveMessage = (messageData) => {
     const { room, author, message, date } = messageData;
     axios
@@ -19,6 +20,7 @@ function Chat({ socket, username, room, title, joinRoom }) {
         date,
       })
       .then((res) => {
+        logged
         console.log(res.data);
       })
       .catch((err) => {
@@ -58,7 +60,6 @@ function Chat({ socket, username, room, title, joinRoom }) {
           room,
         },
       });
-      console.log(result.data);
       setMessageListData(result.data);
     } catch (err) {
       toast.error(err.message);
