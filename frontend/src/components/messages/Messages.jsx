@@ -50,7 +50,7 @@ function Messages({ nom, prenom, email, photoProfil, structureId }) {
           <div className="salonsMessages">
             {strucData &&
               strucData
-                .filter((f) => !f.email.includes(email))
+                // .filter((f) => !f.email.includes(email))
                 .map((element) => (
                   <li className={selected && element.email === title ? "selected contactList" : "contactList"} key={element.familleId}>
                     <button
