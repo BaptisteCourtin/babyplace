@@ -235,6 +235,42 @@ router.post("/inscription", (req, res) => {
     });
 });
 
+router.get("/getCrecheInfo", (req, res) => {
+  datasource.query(
+    "SELECT * FROM structure INNER JOIN creche ON creche.structureId=structure.structureId WHERE email = ?",
+    [req.query.email]
+  ).then(([[result]]) => {
+    res.send(result).status(200)
+  }).catch((err) => {
+    console.error(err);
+    res.status(500).send("Accès impossible");
+  });
+})
+
+router.get("/getAssmatInfo", (req, res) => {
+  datasource.query(
+    "SELECT * FROM structure INNER JOIN assMat ON assMat.structureId=structure.structureId WHERE email = ?",
+    [req.query.email]
+  ).then(([[result]]) => {
+    res.send(result).status(200)
+  }).catch((err) => {
+    console.error(err);
+    res.status(500).send("Accès impossible");
+  });
+})
+
+router.get("/crecheExist", (req, res) => {
+  datasource.query(
+    "SELECT creche.structureId FROM structure INNER JOIN creche ON creche.structureId=structure.structureId WHERE email = ?",
+    [req.query.email]
+  ).then(([[result]]) => {
+    res.send(result).status(200)
+  }).catch((err) => {
+    console.error(err);
+    res.status(500).send("Accès impossible");
+  });
+})
+
 router.put("/inscriptionCreche1", (req, res) => {
   const {
     isCreche,
@@ -277,6 +313,35 @@ router.put("/inscriptionCreche1", (req, res) => {
       res.status(500).send("Modification impossible");
     });
 });
+router.post("/inscriptionCreche1", (req, res) => {
+  const { isCreche, typeCreche, nomStructure, adresseStructure, telephone, email } = req.body;
+  datasource
+    .query("UPDATE structure INNER JOIN creche ON creche.structureId=structure.structureId SET isCreche = ?, adresse = ?, telephone= ?, type=?, nom=? WHERE email= ?",
+      [isCreche, adresseStructure, telephone, typeCreche, nomStructure, email])
+    .then(([structure]) => {
+      if (structure.affectedRows === 0) {
+        res.status(404).send("Not Found");
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Modification impossible");
+    });
+});
+
+router.get("/assmatExist", (req, res) => {
+  datasource.query(
+    "SELECT assMat.structureId FROM structure INNER JOIN assMat ON assMat.structureId=structure.structureId WHERE email = ?",
+    [req.query.email]
+  ).then(([[result]]) => {
+    res.send(result).status(200)
+  }).catch((err) => {
+    console.error(err);
+    res.status(500).send("Accès impossible");
+  });
+})
 
 router.put("/inscriptionAssmat1", (req, res) => {
   const {
@@ -322,6 +387,47 @@ router.put("/inscriptionAssmat1", (req, res) => {
     });
 });
 
+router.post("/inscriptionAssmat1", (req, res) => {
+  const { isCreche, nomNaissance, nomUsage, prenom, adresseStructure, telephone, email } = req.body;
+  datasource
+    .query("UPDATE structure INNER JOIN assMat ON assMat.structureId=structure.structureId SET isCreche = ?, adresse = ?, telephone= ?, nomNaissance=?, nomUsage=?, prenom=? WHERE email= ?",
+      [isCreche, adresseStructure, telephone, nomNaissance, nomUsage, prenom, email])
+    .then(([structure]) => {
+      if (structure.affectedRows === 0) {
+        res.status(404).send("Not Found");
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Modification impossible");
+    });
+});
+
+router.get("/calendrierExist", (req, res) => {
+  datasource.query(
+    "SELECT calendrier.date FROM calendrier WHERE structureId= ? AND nbPlaces=-1",
+    [req.query.id]
+  ).then(([result]) => {
+    res.send(result).status(200)
+  }).catch((err) => {
+    console.error(err);
+    res.status(500).send("Accès impossible");
+  });
+})
+router.get("/horairesExist", (req, res) => {
+  datasource.query(
+    "SELECT * FROM horaires WHERE structureId= ?",
+    [req.query.id]
+  ).then(([result]) => {
+    res.send(result).status(200)
+  }).catch((err) => {
+    console.error(err);
+    res.status(500).send("Accès impossible");
+  });
+})
+
 const storageAvatar = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "./public/uploads/avatar");
@@ -338,7 +444,7 @@ const storageAvatar = multer.diskStorage({
 const uploadAvatar = multer({ storage: storageAvatar });
 
 router.post("/photoProfil", uploadAvatar.single("avatar"), (req, res) => {
-  res.send(req.file.filename);
+  res.send(req.file);
 });
 
 router.put("/photoProfil", (req, res) => {
@@ -407,42 +513,6 @@ router.put("/photosStructure", (req, res) => {
       res.status(500).send("Modification impossible");
     });
 });
-
-// router.put("/photosStructure2", (req, res) => {
-//   const { photoStructure2, email } = req.body;
-//   datasource
-//     .query("UPDATE structure SET photoStructure2= ? WHERE email= ?",
-//       [photoStructure2, email])
-//     .then(([structure]) => {
-//       if (structure.affectedRows === 0) {
-//         res.status(404).send("Not Found");
-//       } else {
-//         res.sendStatus(204);
-//       }
-//     })
-//     .catch((err) => {
-//       console.error(err);
-//       res.status(500).send("Modification impossible");
-//     });
-// });
-
-// router.put("/photosStructure3", (req, res) => {
-//   const { photoStructure3, email } = req.body;
-//   datasource
-//     .query("UPDATE structure SET photoStructure3= ? WHERE email= ?",
-//       [photoStructure3, email])
-//     .then(([structure]) => {
-//       if (structure.affectedRows === 0) {
-//         res.status(404).send("Not Found");
-//       } else {
-//         res.sendStatus(204);
-//       }
-//     })
-//     .catch((err) => {
-//       console.error(err);
-//       res.status(500).send("Modification impossible");
-//     });
-// });
 
 router.put("/description", (req, res) => {
   const { description, email } = req.body;
@@ -673,6 +743,34 @@ router.post("/horaires", (req, res) => {
     });
 });
 
+router.put("/horaires", async (req, res) => {
+  const { lundiOuvert, mardiOuvert, mercrediOuvert, jeudiOuvert, vendrediOuvert, samediOuvert, dimancheOuvert, lundiMin, lundiMax, mardiMin, mardiMax, mercrediMin, mercrediMax, jeudiMin, jeudiMax, vendrediMin, vendrediMax, samediMin, samediMax, dimancheMin, dimancheMax, structureId } = req.body;
+  try {
+    await datasource
+      .query("UPDATE horaires SET ouvert=?, heureMin=?, heureMax=? WHERE jourId=1 AND structureId=?",
+        [lundiOuvert, lundiMin, lundiMax, structureId])
+    await datasource
+      .query("UPDATE horaires SET ouvert=?, heureMin=?, heureMax=? WHERE jourId=2 AND structureId=?",
+        [mardiOuvert, mardiMin, mardiMax, structureId])
+    await datasource
+      .query("UPDATE horaires SET ouvert=?, heureMin=?, heureMax=? WHERE jourId=3 AND structureId=?",
+        [mercrediOuvert, mercrediMin, mercrediMax, structureId])
+    await datasource
+      .query("UPDATE horaires SET ouvert=?, heureMin=?, heureMax=? WHERE jourId=4 AND structureId=?",
+        [jeudiOuvert, jeudiMin, jeudiMax, structureId])
+    await datasource
+      .query("UPDATE horaires SET ouvert=?, heureMin=?, heureMax=? WHERE jourId=5 AND structureId=?",
+        [vendrediOuvert, vendrediMin, vendrediMax, structureId])
+    await datasource
+      .query("UPDATE horaires SET ouvert=?, heureMin=?, heureMax=? WHERE jourId=6 AND structureId=?",
+        [samediOuvert, samediMin, samediMax, structureId])
+    await datasource
+      .query("UPDATE horaires SET ouvert=?, heureMin=?, heureMax=? WHERE jourId=7 AND structureId=?",
+        [dimancheOuvert, dimancheMin, dimancheMax, structureId])
+  }
+  catch (err) { console.error(err) }
+})
+
 router.put("/dureeAccueil", (req, res) => {
   const { dureeMin, dureeMax, email } = req.body;
   datasource
@@ -695,14 +793,16 @@ router.put("/dureeAccueil", (req, res) => {
 });
 
 router.get("/getStructureId", (req, res) => {
-  datasource
-    .query("SELECT structureId FROM structure WHERE email = ?", [
-      req.query.email,
-    ])
-    .then(([[result]]) => {
-      res.send(result).status(200);
-    });
-});
+  datasource.query(
+    "SELECT structureId FROM structure WHERE email = ?",
+    [req.query.email]
+  ).then(([[result]]) => {
+    res.send(result).status(200)
+  }).catch((err) => {
+    console.error(err);
+    res.status(500).send("Accès impossible");
+  });
+})
 
 router.put("/agrementsCreche", (req, res) => {
   const { nbEmployes, maxPlaces, maxHandi, max18Mois, maxNuit, email } =

@@ -5,28 +5,29 @@ import StructureContext from "@components/context/StructureContext";
 import ResaContext from "@components/context/ResaContext";
 import UserEmailContext from "@components/context/UserEmailContext";
 import imgTime from "@assets/img-time.svg";
-import Structure1 from "../components/form/Structure1";
-import Structure2 from "../components/form/Structure2";
-import Structure3 from "../components/form/Structure3";
-import Structure4 from "../components/form/Structure4";
-import Structure5 from "../components/form/Structure5";
-import Structure6 from "../components/form/Structure6";
-import Structure7 from "../components/form/Structure7";
-import Structure8 from "../components/form/Structure8";
-import Structure9 from "../components/form/Structure9";
-import Structure10 from "../components/form/Structure10";
-import Structure11 from "../components/form/Structure11";
-import Structure12 from "../components/form/Structure12";
-import Structure13 from "../components/form/Structure13";
-import Structure14 from "../components/form/Structure14";
-import Structure15 from "../components/form/Structure15";
-import Structure16 from "../components/form/Structure16";
+import Structure1 from "../components/form/InfoAdmin1";
+import Structure2 from "../components/form/PhotoProfil2";
+import Structure3 from "../components/form/PhotosStructure3";
+import Structure4 from "../components/form/Description4";
+import Structure5 from "../components/form/Formation5";
+import Structure6 from "../components/form/Conditions6";
+import Structure7 from "../components/form/ChoixResa7";
+import Structure8 from "../components/form/RecapResa8";
+import Structure9 from "../components/form/Horaires9";
+import Structure10 from "../components/form/Duree10";
+import Structure11 from "../components/form/Calendrier11";
+import Structure12 from "../components/form/NbPlaces12";
+import Structure13 from "../components/form/Tarifs13";
+import Structure14 from "../components/form/RecapFinal14";
+import Structure15 from "../components/form/Justificatifs15";
+import Structure16 from "../components/form/FinFormulaire16";
 import imgDossier from "../assets/img-dossier.svg";
 import imgCopie from "../assets/landing page/image2.svg";
 import selfie from "../assets/selfie.svg";
 import profilJM from "../assets/profilJM.png";
 import profilCPP from "../assets/profilCPP.jpg";
 import imgWoman from "../assets/img-woman.svg";
+import { useNavigate } from "react-router-dom";
 
 const INITIAL_DATA = {
   isCreche: null,
@@ -86,6 +87,7 @@ const INITIAL_DATA = {
   samediMax: null,
   dimancheMin: null,
   dimancheMax: null,
+  indispo: [],
   dureeMin: 1,
   dureeMax: 1,
   nbEmployes: 1,
@@ -121,6 +123,7 @@ const INITIAL_DATA = {
 };
 
 function FormStructure() {
+  const navigate = useNavigate();
   const inputRef = useRef(null);
   const inputRef1 = useRef(null);
   const inputRef2 = useRef(null);
@@ -139,6 +142,9 @@ function FormStructure() {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [showExplications, setShowExplications] = useState(true);
   const [closedDays, setClosedDays] = useState([]);
+  const [structureId, setStructureId] = useState(null);
+  const [horairesExist, setHorairesExist] = useState(null);
+  const [closePage, setClosePage] = useState(false)
   const updateSize = () => {
     setScreenWidth(window.innerWidth);
     if (window.innerWidth < 1200) {
@@ -151,6 +157,132 @@ function FormStructure() {
       return { ...prev, ...fields };
     });
   }
+  useEffect(() => {
+    if (structure === "creche") {
+      Axios.get(`${import.meta.env.VITE_PATH}/getCrecheInfo?email=${userEmail}`, { userEmail })
+        .then((result) => {
+          setStructureId(result.data.structureId);
+          setData((prev) => {
+            return {
+              ...prev,
+              isCreche: result.data.isCreche,
+              typeCreche: result.data.type,
+              financementPaje: result.data.financementPaje,
+              telephone: result.data.telephone,
+              nomStructure: result.data.nom,
+              adresseStructure: result.data.adresse,
+              description: result.data.description,
+              PCSC1: result.data.pcsc1,
+              nesting: result.data.nesting,
+              montessori: result.data.montessori,
+              handi: result.data.handi,
+              jardin: result.data.jardin,
+              sorties: result.data.sorties,
+              promenades: result.data.promenades,
+              eveil: result.data.eveil,
+              musique: result.data.musique,
+              art: result.data.art,
+              bilingue: result.data.bilingue,
+              bibli: result.data.bibli,
+              transport: result.data.transport,
+              albumPhoto: result.data.albumPhoto,
+              photoConnecte: result.data.photoConnecte,
+              resaInst: result.data.resaInst,
+              dureeMin: result.data.dureeMin,
+              dureeMax: result.data.dureeMax,
+              nbEmployes: result.data.nbEmployes,
+              maxPlaces: result.data.maxPlaces,
+              maxHandi: result.data.maxHandi,
+              max18Mois: result.data.max18Mois,
+              maxNuit: result.data.maxNuit,
+              tarifHeure: result.data.tarifHeure,
+              tarifHoraireSpec: result.data.tarifHoraireSpec,
+              indemnRepas: result.data.indemnRepas,
+              tarifAtelier: result.data.tarifAtelier,
+              siret: result.data.siret,
+              numAgrement: result.data.numAgrement,
+              dateAgrement: result.data.dateAgrement,
+              docPmi: result.data.docPmi,
+            }
+          })
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+    }
+    else if (structure === "assmat") {
+      Axios.get(`${import.meta.env.VITE_PATH}/getAssmatInfo?email=${userEmail}`, { userEmail })
+        .then((result) => {
+          setStructureId(result.data.structureId);
+          setData((prev) => {
+            return {
+              ...prev,
+              isCreche: result.data.isCreche,
+              telephone: result.data.telephone,
+              nomNaissance: result.data.nomNaissance,
+              nomUsage: result.data.nomUsage,
+              prenom: result.data.prenom,
+              adresseStructure: result.data.adresse,
+              description: result.data.description,
+              PCSC1: result.data.pcsc1,
+              nesting: result.data.nesting,
+              montessori: result.data.montessori,
+              handi: result.data.handi,
+              jardin: result.data.jardin,
+              sorties: result.data.sorties,
+              experience: result.data.experience,
+              enfants: result.data.enfants,
+              animaux: result.data.animaux,
+              nonFumeur: result.data.nonFumeur,
+              zeroPollution: result.data.zeroPollution,
+              repas: result.data.repas,
+              hygiene: result.data.hygiene,
+              promenades: result.data.promenades,
+              eveil: result.data.eveil,
+              musique: result.data.musique,
+              art: result.data.art,
+              bilingue: result.data.bilingue,
+              bibli: result.data.bibli,
+              transport: result.data.transport,
+              albumPhoto: result.data.albumPhoto,
+              photoConnecte: result.data.photoConnecte,
+              resaInst: result.data.resaInst,
+              dureeMin: result.data.dureeMin,
+              dureeMax: result.data.dureeMax,
+              maxPlaces: result.data.maxPlaces,
+              maxHandi: result.data.maxHandi,
+              max18Mois: result.data.max18Mois,
+              maxNuit: result.data.maxNuit,
+              tarifHeure: result.data.tarifHeure,
+              tarifHoraireSpec: result.data.tarifHoraireSpec,
+              indemnRepas: result.data.indemnRepas,
+              indemnEntretien: result.data.indemnEntretien,
+              indemnKm: result.data.indemnKm,
+              tarifHeureSup: result.data.tarifHeureSup,
+              numSecu: result.data.numSecu,
+              numAgrement: result.data.numAgrement,
+              dateAgrement: result.data.dateAgrement,
+              docPmi: result.data.docPmi,
+              assHabitNom: result.data.assHabitNom,
+              assHabitNumero: result.data.assHabitNumero,
+              assHabitAdresse: result.data.assHabitAdresse,
+              assAutoNom: result.data.assAutoNom,
+              assAutoNumero: result.data.assAutoNumero,
+              assAutoAdresse: result.data.assAutoAdresse,
+              docIdentite: result.data.docIdentite,
+              docVitale: result.data.docVitale,
+              docJustifDom: result.data.docJustifDom,
+              docDiplome: result.data.docDiplome,
+              docRespCivile: result.data.docRespCivile,
+              docAssAuto: result.data.docAssAuto,
+            }
+          })
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+    }
+  }, [structure])
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
     useMultistepForm([
       <Structure1 {...data} updateFields={updateFields} />,
@@ -167,13 +299,9 @@ function FormStructure() {
       <Structure6 />,
       <Structure7 {...data} updateFields={updateFields} />,
       <Structure8 {...data} />,
-      <Structure9 {...data} updateFields={updateFields} />,
+      <Structure9 {...data} structureId={structureId} setData={setData} updateFields={updateFields} setHorairesExist={setHorairesExist} />,
       <Structure10 {...data} updateFields={updateFields} />,
-      <Structure11
-        {...data}
-        closedDays={closedDays}
-        setClosedDays={setClosedDays}
-      />,
+      <Structure11 {...data} closedDays={closedDays} setClosedDays={setClosedDays} structureId={structureId} setData={setData} />,
       <Structure12 {...data} updateFields={updateFields} />,
       <Structure13 {...data} updateFields={updateFields} />,
       <Structure14 {...data} />,
@@ -190,7 +318,6 @@ function FormStructure() {
       />,
       <Structure16 />,
     ]);
-
   const pageTitle = () => {
     switch (currentStepIndex) {
       case 0:
@@ -327,7 +454,6 @@ function FormStructure() {
         return "";
     }
   };
-
   const onSubmit = (e) => {
     e.preventDefault();
     const {
@@ -413,43 +539,71 @@ function FormStructure() {
     const email = userEmail;
     if (!isLastStep) {
       if (currentStepIndex === 0 && structure === "creche") {
-        Axios.put("http://localhost:5000/inscriptionCreche1", {
-          isCreche,
-          typeCreche,
-          nomStructure,
-          adresseStructure,
-          telephone,
-          email,
-        })
-          .then(next())
-          .catch((err) => {
-            console.error(err);
-          });
-      } else if (currentStepIndex === 0 && structure === "assmat") {
-        Axios.put("http://localhost:5000/inscriptionAssmat1", {
-          isCreche,
-          nomNaissance,
-          nomUsage,
-          prenom,
-          adresseStructure,
-          telephone,
-          email,
-        })
-          .then(next())
-          .catch((err) => {
-            console.error(err);
-          });
-      } else if (currentStepIndex === 1) {
-        const formData = new FormData();
-        formData.append("avatar", inputRef.current.files[0]);
-        Axios.post("http://localhost:5000/photoProfil", formData)
+        Axios.get(`${import.meta.env.VITE_PATH}/crecheExist?email=${email}`, { email })
           .then((result) => {
-            const photoProfil = `@backend/public/uploads/avatar/${result.data}`;
-            Axios.put("http://localhost:5000/photoProfil", {
-              photoProfil,
-              email,
+            if (result.data.structureId === undefined) {
+              Axios.put(`${import.meta.env.VITE_PATH}/inscriptionCreche1`, {
+                isCreche, typeCreche, nomStructure, adresseStructure, telephone, email
+              })
+                .then(closePage ? navigate("/", {}) : next())
+                .catch((err) => {
+                  console.error(err);
+                });
+            }
+            else {
+              Axios.post(`${import.meta.env.VITE_PATH}/inscriptionCreche1`, {
+                isCreche, typeCreche, nomStructure, adresseStructure, telephone, email
+              })
+                .then(closePage ? navigate("/", {}) : next())
+                .catch((err) => {
+                  console.error(err);
+                })
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          })
+      } else if (currentStepIndex === 0 && structure === "assmat") {
+        Axios.get(`${import.meta.env.VITE_PATH}/assmatExist?email=${email}`, { email })
+          .then((result) => {
+            if (result.data.structureId === undefined) {
+              Axios.put(`${import.meta.env.VITE_PATH}/inscriptionAssmat1`, {
+                isCreche, nomNaissance, nomUsage, prenom, adresseStructure, telephone, email
+              })
+                .then(closePage ? navigate("/", {}) : next())
+                .catch((err) => {
+                  console.error(err);
+                });
+            }
+            else {
+              Axios.post(`${import.meta.env.VITE_PATH}/inscriptionAssmat1`, {
+                isCreche, nomNaissance, nomUsage, prenom, adresseStructure, telephone, email
+              })
+                .then(closePage ? navigate("/", {}) : next())
+                .catch((err) => {
+                  console.error(err);
+                })
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          })
+      }
+      else if (currentStepIndex === 1) {
+        const formData = new FormData();
+        if (inputRef !== null) {
+          formData.append("avatar", inputRef.current.files[0]);
+        }
+        Axios.post(`${import.meta.env.VITE_PATH}/photoProfil`, formData)
+          .then((result) => {
+            let photoProfil = null;
+            if (result.data !== undefined) {
+              photoProfil = `${import.meta.env.VITE_PATH}/uploads/avatar/${result.data.filename}`;
+            }
+            Axios.put(`${import.meta.env.VITE_PATH}/photoProfil`, {
+              photoProfil, email
             })
-              .then(next())
+              .then(closePage ? navigate("/", {}) : next())
               .catch((err) => {
                 console.error(err);
               });
@@ -459,40 +613,32 @@ function FormStructure() {
           });
       } else if (currentStepIndex === 2) {
         const formData = new FormData();
-        if (inputRef1 !== null) {
-          formData.append("photo1", inputRef1.current.files[0]);
-        }
-        if (inputRef2 !== null) {
-          formData.append("photo2", inputRef2.current.files[0]);
-        }
-        if (inputRef3 !== null) {
-          formData.append("photo3", inputRef3.current.files[0]);
-        }
-        Axios.post("http://localhost:5000/photosStructure", formData)
+        if (inputRef1 !== null) { formData.append("photo1", inputRef1.current.files[0]) };
+        if (inputRef2 !== null) { formData.append("photo2", inputRef2.current.files[0]) };
+        if (inputRef3 !== null) { formData.append("photo3", inputRef3.current.files[0]) };
+        Axios.post(`${import.meta.env.VITE_PATH}/photosStructure`, formData)
           .then((result) => {
             let photoStructure1 = null;
             let photoStructure2 = null;
             let photoStructure3 = null;
             if (result.data.photo1 !== undefined) {
-              const photo1 = result.data.photo1[0].filename;
-              photoStructure1 = `@backend/public/uploads/photosStructure/${photo1}`;
+              let photo1 = result.data.photo1[0].filename;
+              photoStructure1 = `${import.meta.env.VITE_PATH}/uploads/photosStructure/${photo1}`;
             }
             if (result.data.photo2 !== undefined) {
-              const photo2 = result.data.photo2[0].filename;
-              photoStructure2 = `@backend/public/uploads/photosStructure/${photo2}`;
+              let photo2 = result.data.photo2[0].filename;
+              photoStructure2 = `${import.meta.env.VITE_PATH}/uploads/photosStructure/${photo2}`;
             }
             if (result.data.photo3 !== undefined) {
               photo3 = result.data.photo3[0].filename;
-              photoStructure3 = `@backend/public/uploads/photosStructure/${photo3}`;
+              photoStructure3 = `${import.meta.env.VITE_PATH}/uploads/photosStructure/${photo3}`;
             }
-            Axios.put("http://localhost:5000/photosStructure", {
-              photoStructure1,
-              photoStructure2,
-              photoStructure3,
-              email,
-            })
+            Axios.put(`${import.meta.env.VITE_PATH}/photosStructure`, {
+              photoStructure1, photoStructure2, photoStructure3, email
+            }
+            )
               .then(() => {
-                next();
+                closePage ? navigate("/", {}) : next()
               })
               .catch((err) => {
                 console.error(err);
@@ -502,190 +648,114 @@ function FormStructure() {
             console.error(err);
           });
       } else if (currentStepIndex === 3) {
-        Axios.put("http://localhost:5000/description", {
-          description,
-          email,
+        Axios.put(`${import.meta.env.VITE_PATH}/description`, {
+          description, email
         })
-          .then(next())
+          .then(closePage ? navigate("/", {}) : next())
           .catch((err) => {
             console.error(err);
           });
       } else if (currentStepIndex === 4 && structure === "creche") {
-        Axios.put("http://localhost:5000/optionsAccueilCreche", {
-          PCSC1,
-          nesting,
-          montessori,
-          handi,
-          jardin,
-          sorties,
-          promenades,
-          eveil,
-          musique,
-          art,
-          bilingue,
-          bibli,
-          transport,
-          albumPhoto,
-          photoConnecte,
-          email,
+        Axios.put(`${import.meta.env.VITE_PATH}/optionsAccueilCreche`, {
+          PCSC1, nesting, montessori, handi, jardin, sorties, promenades, eveil, musique, art, bilingue, bibli, transport, albumPhoto, photoConnecte, email
         })
-          .then(next())
+          .then(closePage ? navigate("/", {}) : next())
           .catch((err) => {
             console.error(err);
           });
       } else if (currentStepIndex === 4 && structure === "assmat") {
-        Axios.put("http://localhost:5000/optionsAccueilAssmat", {
-          PCSC1,
-          nesting,
-          montessori,
-          handi,
-          jardin,
-          sorties,
-          promenades,
-          eveil,
-          musique,
-          art,
-          bilingue,
-          bibli,
-          transport,
-          enfants,
-          experience,
-          animaux,
-          nonFumeur,
-          zeroPollution,
-          repas,
-          hygiene,
-          albumPhoto,
-          photoConnecte,
-          email,
+        Axios.put(`${import.meta.env.VITE_PATH}/optionsAccueilAssmat`, {
+          PCSC1, nesting, montessori, handi, jardin, sorties, promenades, eveil, musique, art, bilingue, bibli, transport, enfants, experience, animaux, nonFumeur, zeroPollution, repas, hygiene, albumPhoto, photoConnecte, email
         })
-          .then(next())
+          .then(closePage ? navigate("/", {}) : next())
           .catch((err) => {
             console.error(err);
           });
-      } else if (
-        currentStepIndex === 5 ||
-        currentStepIndex === 7 ||
-        currentStepIndex === 13
-      ) {
-        next();
+      } else if (currentStepIndex === 5 || currentStepIndex === 7 || currentStepIndex === 13) {
+        closePage ? navigate("/", {}) : next()
       } else if (currentStepIndex === 6) {
-        Axios.put("http://localhost:5000/resaInst", {
-          resaInst,
-          email,
+        Axios.put(`${import.meta.env.VITE_PATH}/resaInst`, {
+          resaInst, email
         })
-          .then(next())
+          .then(closePage ? navigate("/", {}) : next())
           .catch((err) => {
             console.error(err);
           });
       } else if (currentStepIndex === 8) {
-        Axios.post("http://localhost:5000/horaires", {
-          lundiOuvert,
-          mardiOuvert,
-          mercrediOuvert,
-          jeudiOuvert,
-          vendrediOuvert,
-          samediOuvert,
-          dimancheOuvert,
-          lundiMin,
-          lundiMax,
-          mardiMin,
-          mardiMax,
-          mercrediMin,
-          mercrediMax,
-          jeudiMin,
-          jeudiMax,
-          vendrediMin,
-          vendrediMax,
-          samediMin,
-          samediMax,
-          dimancheMin,
-          dimancheMax,
-          email,
-        })
-          .then(next())
-          .catch((err) => {
-            console.error(err);
-          });
+
+        if (!horairesExist) {
+          Axios.post(`${import.meta.env.VITE_PATH}/horaires`, {
+            lundiOuvert, mardiOuvert, mercrediOuvert, jeudiOuvert, vendrediOuvert, samediOuvert, dimancheOuvert, lundiMin, lundiMax, mardiMin, mardiMax, mercrediMin, mercrediMax, jeudiMin, jeudiMax, vendrediMin, vendrediMax, samediMin, samediMax, dimancheMin, dimancheMax, email
+          })
+            .then(closePage ? navigate("/", {}) : next())
+            .catch((err) => {
+              console.error(err);
+            });
+        } else {
+          Axios.put(`${import.meta.env.VITE_PATH}/horaires`, {
+            lundiOuvert, mardiOuvert, mercrediOuvert, jeudiOuvert, vendrediOuvert, samediOuvert, dimancheOuvert, lundiMin, lundiMax, mardiMin, mardiMax, mercrediMin, mercrediMax, jeudiMin, jeudiMax, vendrediMin, vendrediMax, samediMin, samediMax, dimancheMin, dimancheMax, structureId
+          })
+            .then(closePage ? navigate("/", {}) : next())
+            .catch((err) => {
+              console.error(err);
+            })
+        }
       } else if (currentStepIndex === 9) {
-        Axios.put("http://localhost:5000/dureeAccueil", {
-          dureeMin,
-          dureeMax,
-          email,
+        Axios.put(`${import.meta.env.VITE_PATH}/dureeAccueil`, {
+          dureeMin, dureeMax, email
         })
-          .then(next())
+          .then(closePage ? navigate("/", {}) : next())
           .catch((err) => {
             console.error(err);
           });
-      } else if (currentStepIndex === 10) {
-        Axios.get(`http://localhost:5000/getStructureId?email=${email}`, {
-          email,
-        })
+      }
+      else if (currentStepIndex === 10) {
+        Axios.get(`${import.meta.env.VITE_PATH}/getStructureId?email=${email}`, { email })
           .then((id) => {
             const { structureId } = id.data;
             closedDays.map((date) => {
-              Axios.post("http://localhost:5000/calendrier/add", {
-                date,
-                nbPlaces: -1,
-                structureId,
-              }).catch((err) => {
-                console.error(err);
-              });
-            });
-          })
-          .then(next())
+              Axios.post(`${import.meta.env.VITE_PATH}/calendrier/add`, {
+                date: date, nbPlaces: -1, structureId,
+              })
+                .catch((err) => {
+                  console.error(err);
+                })
+            })
+          }
+          ).then(closePage ? navigate("/", {}) : next())
           .catch((err) => {
             console.error(err);
           });
       } else if (currentStepIndex === 11 && structure === "creche") {
-        Axios.put("http://localhost:5000/agrementsCreche", {
-          nbEmployes,
-          maxPlaces,
-          maxHandi,
-          max18Mois,
-          maxNuit,
-          email,
+        Axios.put(`${import.meta.env.VITE_PATH}/agrementsCreche`, {
+          nbEmployes, maxPlaces, maxHandi, max18Mois, maxNuit, email
         })
-          .then(next())
+          .then(closePage ? navigate("/", {}) : next())
           .catch((err) => {
             console.error(err);
           });
       } else if (currentStepIndex === 11 && structure === "assmat") {
-        Axios.put("http://localhost:5000/agrementsAssmat", {
-          maxPlaces,
-          maxHandi,
-          max18Mois,
-          maxNuit,
-          email,
+        Axios.put(`${import.meta.env.VITE_PATH}/agrementsAssmat`, {
+          maxPlaces, maxHandi, max18Mois, maxNuit, email
         })
-          .then(next())
+          .then(closePage ? navigate("/", {}) : next())
           .catch((err) => {
             console.error(err);
           });
       } else if (currentStepIndex === 12 && structure === "creche") {
-        Axios.put("http://localhost:5000/tarifsCreche", {
-          financementPaje,
-          tarifHeure,
-          tarifHoraireSpec,
-          indemnRepas,
-          tarifAtelier,
-          email,
+        Axios.put(`${import.meta.env.VITE_PATH}/tarifsCreche`, {
+          financementPaje, tarifHeure, tarifHoraireSpec, indemnRepas, tarifAtelier, email
         })
-          .then(next())
+          .then(closePage ? navigate("/", {}) : next())
           .catch((err) => {
             console.error(err);
           });
-      } else if (currentStepIndex === 12 && structure === "assmat") {
-        Axios.put("http://localhost:5000/tarifsAssmat", {
-          tarifHeure,
-          tarifHoraireSpec,
-          indemnRepas,
-          indemnKm,
-          indemnEntretien,
-          tarifHeureSup,
-          email,
+      }
+      else if (currentStepIndex === 12 && structure === "assmat") {
+        Axios.put(`${import.meta.env.VITE_PATH}/tarifsAssmat`, {
+          tarifHeure, tarifHoraireSpec, indemnRepas, indemnKm, indemnEntretien, tarifHeureSup, email
         })
-          .then(next())
+          .then(closePage ? navigate("/", {}) : next())
           .catch((err) => {
             console.error(err);
           });
@@ -699,89 +769,57 @@ function FormStructure() {
         let docAutoSrc = null;
         const formData = new FormData();
         formData.append("docpmi", inputRefPmi.current.files[0]);
-        if (inputRefCni.current !== null) {
-          formData.append("docIdentite", inputRefCni.current.files[0]);
-        }
-        if (inputRefCpam.current !== null) {
-          formData.append("docVitale", inputRefCpam.current.files[0]);
-        }
-        if (inputRefDom.current !== null) {
-          formData.append("docJustifDom", inputRefDom.current.files[0]);
-        }
-        if (inputRefDiplome.current !== null) {
-          formData.append("docDiplome", inputRefDiplome.current.files[0]);
-        }
-        if (inputRefResp.current !== null) {
-          formData.append("docRespCivile", inputRefResp.current.files[0]);
-        }
-        if (inputRefAuto.current !== null) {
-          formData.append("docAssAuto", inputRefAuto.current.files[0]);
-        }
-        Axios.post("http://localhost:5000/justificatifs", formData)
+        if (inputRefCni.current !== null) { formData.append("docIdentite", inputRefCni.current.files[0]) };
+        if (inputRefCpam.current !== null) { formData.append("docVitale", inputRefCpam.current.files[0]) };
+        if (inputRefDom.current !== null) { formData.append("docJustifDom", inputRefDom.current.files[0]) };
+        if (inputRefDiplome.current !== null) { formData.append("docDiplome", inputRefDiplome.current.files[0]) };
+        if (inputRefResp.current !== null) { formData.append("docRespCivile", inputRefResp.current.files[0]) };
+        if (inputRefAuto.current !== null) { formData.append("docAssAuto", inputRefAuto.current.files[0]) };
+        Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
           .then((result) => {
             if (result.data.docpmi !== undefined) {
-              const doc = result.data.docpmi[0].filename;
-              docPmiSrc = `@backend/public/uploads/photosStructure/${doc}`;
+              let doc = result.data.docpmi[0].filename;
+              docPmiSrc = `${import.meta.env.VITE_PATH}/uploads/photosStructure/${doc}`;
             }
             if (result.data.docIdentite !== undefined) {
-              const doc = result.data.docIdentite[0].filename;
-              docCniSrc = `@backend/public/uploads/photosStructure/${doc}`;
+              let doc = result.data.docIdentite[0].filename;
+              docCniSrc = `${import.meta.env.VITE_PATH}/uploads/photosStructure/${doc}`;
             }
             if (result.data.docVitale !== undefined) {
-              const doc = result.data.docVitale[0].filename;
-              docCpamSrc = `@backend/public/uploads/photosStructure/${doc}`;
+              let doc = result.data.docVitale[0].filename;
+              docCpamSrc = `${import.meta.env.VITE_PATH}/uploads/photosStructure/${doc}`;
             }
             if (result.data.docJustifDom !== undefined) {
-              const doc = result.data.docJustifDom[0].filename;
-              docDomSrc = `@backend/public/uploads/photosStructure/${doc}`;
+              let doc = result.data.docJustifDom[0].filename;
+              docDomSrc = `${import.meta.env.VITE_PATH}/uploads/photosStructure/${doc}`;
             }
             if (result.data.docDiplome !== undefined) {
-              const doc = result.data.docDiplome[0].filename;
-              docDiplomeSrc = `@backend/public/uploads/photosStructure/${doc}`;
+              let doc = result.data.docDiplome[0].filename;
+              docDiplomeSrc = `${import.meta.env.VITE_PATH}/uploads/photosStructure/${doc}`;
             }
             if (result.data.docRespCivile !== undefined) {
-              const doc = result.data.docRespCivile[0].filename;
-              docRespSrc = `@backend/public/uploads/photosStructure/${doc}`;
+              let doc = result.data.docRespCivile[0].filename;
+              docRespSrc = `${import.meta.env.VITE_PATH}/uploads/photosStructure/${doc}`;
             }
             if (result.data.docAssAuto !== undefined) {
-              const doc = result.data.docAssAuto[0].filename;
-              docAutoSrc = `@backend/public/uploads/photosStructure/${doc}`;
+              let doc = result.data.docAssAuto[0].filename;
+              docAutoSrc = `${import.meta.env.VITE_PATH}/uploads/photosStructure/${doc}`;
             }
           })
           .then(() => {
             if (structure === "creche") {
-              Axios.put("http://localhost:5000/verifsCreche", {
-                numAgrement,
-                dateAgrement,
-                docPmiSrc,
-                siret,
-                email,
+              Axios.put(`${import.meta.env.VITE_PATH}/verifsCreche`, {
+                numAgrement, dateAgrement, docPmiSrc, siret, email
               })
                 .catch((err) => {
                   console.error(err);
                 })
-                .then(next());
+                .then(closePage ? navigate("/", {}) : next())
             } else if (structure === "assmat") {
-              Axios.put("http://localhost:5000/verifsAssmat", {
-                numSecu,
-                numAgrement,
-                dateAgrement,
-                docPmiSrc,
-                assHabitNom,
-                assHabitNumero,
-                assHabitAdresse,
-                assAutoNom,
-                assAutoNumero,
-                assAutoAdresse,
-                docCniSrc,
-                docCpamSrc,
-                docDomSrc,
-                docDiplomeSrc,
-                docRespSrc,
-                docAutoSrc,
-                email,
+              Axios.put(`${import.meta.env.VITE_PATH}/verifsAssmat`, {
+                numSecu, numAgrement, dateAgrement, docPmiSrc, assHabitNom, assHabitNumero, assHabitAdresse, assAutoNom, assAutoNumero, assAutoAdresse, docCniSrc, docCpamSrc, docDomSrc, docDiplomeSrc, docRespSrc, docAutoSrc, email
               })
-                .then(next())
+                .then(closePage ? navigate("/", {}) : next())
                 .catch((err) => {
                   console.error(err);
                 });
@@ -789,22 +827,21 @@ function FormStructure() {
           })
           .catch((err) => {
             console.error(err);
-          });
+          })
       }
     }
-  };
-
+  }
   return (
     <StructureContext.Provider value={{ structure, setStructure }}>
       <ResaContext.Provider value={{ resa, setResa }}>
-        <div className="formContainer">
+        <form encType="multipart/form-data" className="formContainer" onSubmit={(e) => onSubmit(e)}>
           <div className="formTitleBar">
             <div className="leftPart">
               <h4>Babyplace</h4>
               <p> {pageTitle()} </p>
             </div>
             <div>
-              <p>Enregistrer et quitter</p>
+              <button type="submit" onClick={() => setClosePage(true)}>Enregistrer et quitter</button>
             </div>
           </div>
           <div className="pagination">
@@ -815,14 +852,12 @@ function FormStructure() {
           </div>
 
           <div className="formStructureContainer">
-            <form
-              encType="multipart/form-data"
+            <div
               className={
                 currentStepIndex === 6 || currentStepIndex === 7 || isLastStep
                   ? "pageChoixResa"
                   : "formStructure"
               }
-              onSubmit={(e) => onSubmit(e)}
             >
               {step}
               <div className="buttonContainer">
@@ -841,10 +876,10 @@ function FormStructure() {
                   ""
                 )}
               </div>
-            </form>
+            </div>
             {currentStepIndex !== 6 &&
-            currentStepIndex !== 7 &&
-            currentStepIndex !== 15 ? (
+              currentStepIndex !== 7 &&
+              currentStepIndex !== 15 ? (
               <div className="explicationsContainer">
                 {screenWidth < 1200 && (
                   <button
@@ -919,7 +954,7 @@ function FormStructure() {
               ""
             )}
           </div>
-        </div>
+        </form>
       </ResaContext.Provider>
     </StructureContext.Provider>
   );
