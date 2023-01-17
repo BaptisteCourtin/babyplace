@@ -13,6 +13,8 @@ function ConfirmeResa({
   nomNaissance,
   prenom,
 }) {
+  // prendre image user
+
   return (
     <>
       <main className="confirme-resa">

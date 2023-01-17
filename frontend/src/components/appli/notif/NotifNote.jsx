@@ -9,7 +9,7 @@ import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 
 function NotifNote({ setCompo }) {
   // --- get ---
-  const id = 6;
+  const id = 6; // mettre l'id  de la structure suivant le clic de la notif
   const [structureNotes, setStructureNotes] = useState();
 
   const Token =

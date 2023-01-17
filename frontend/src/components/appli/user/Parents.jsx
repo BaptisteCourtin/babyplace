@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import FamilleContext from "@components/context/FamilleContext";
 
 function Parents() {
+  const { familleId } = useContext(FamilleContext);
+
   // meme nom que bdd
   const [initialData, setInitialData] = useState({
     nom1: "",
@@ -35,7 +38,6 @@ function Parents() {
   const [donneesOK, setDonneesOK] = useState(false); // les donnees sont prises => mis dans initial data
   const [finalOK, setFinalOK] = useState(false); // donnees mises dans initial => go visuel
 
-  const familleId = 1;
   const Token =
     "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getDonneesForm = () => {

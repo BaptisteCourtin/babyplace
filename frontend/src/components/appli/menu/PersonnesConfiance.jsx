@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
+import FamilleContext from "@components/context/FamilleContext";
 
 function PersonnesConfiance({ setCompo }) {
   const [persoConf, setPersoConf] = useState([]);
-  const id = 1;
+  const { familleId } = useContext(FamilleContext);
 
   const Token =
     "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getPersoConf = () => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/famille/conf/${id}`, {
+      .get(`${import.meta.env.VITE_PATH}/famille/conf/${familleId}`, {
         headers: {
           "x-token": Token,
         },

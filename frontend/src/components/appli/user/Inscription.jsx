@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import axios from "axios";
 import OneFormInscr from "./OneFormInscr";
+import FamilleContext from "@components/context/FamilleContext";
 
 function Inscription() {
-  const familleId = 1;
+  const { familleId } = useContext(FamilleContext);
 
   // sert pour le updateFields et le get
   const [initialData, setInitialData] = useState({
