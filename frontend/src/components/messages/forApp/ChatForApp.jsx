@@ -4,6 +4,7 @@ import axios from "axios";
 import moment from "moment";
 import { AiFillLeftCircle } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 function ChatForApp({ socket, username, room, title, joinRoom }) {
   const [currentMessage, setCurrentMessage] = useState("");
@@ -53,20 +54,17 @@ function ChatForApp({ socket, username, room, title, joinRoom }) {
     });
   }, [socket]);
 
-  const getMessagesFromRoom = () => {
-    axios
-      .get("http://localhost:5000/messages/recup", {
+  const getMessagesFromRoom = async () => {
+    try {
+      const result = await axios.get(`http://localhost:5000/messages/recup/${room}`, {
         headers: {
           room,
         },
-      })
-      .then((ret) => {
-        console.warn(ret.data);
-        setMessageListData(ret.data[0]);
-      })
-      .catch((err) => {
-        console.error(err);
       });
+      setMessageListData(result.data);
+    } catch (err) {
+      toast.error(err.message);
+    };
   };
 
   useEffect(() => {
