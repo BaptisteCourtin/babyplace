@@ -7,11 +7,6 @@ function BlocStar({ nom, nbStar }) {
   return (
     <div className="bloc-star">
       {nom}
-      {/* <Rating
-        emptySymbol={AiOutlineStar()}
-        fullSymbol={AiFillStar()}
-        fractions={2}
-      /> */}
       <Rating
         className="rating"
         emptySymbol={AiOutlineStar()}

@@ -1,24 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
-
-const INITIAL_DATA = {
-  nom: "",
-  prenom: "",
-  prenomEnfant: "",
-  email: "",
-  adresse: "",
-  telephone: "",
-  mdp: "",
-  mdp2: "",
-};
+import axios from "axios";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import FamilleContext from "@components/context/FamilleContext";
 
 function Connexion({ setCompo }) {
-  const [data, setData] = useState(INITIAL_DATA);
-  function updateFields(fields) {
-    setData((prev) => {
-      return { ...prev, ...fields };
-    });
-  }
+  const navigate = useNavigate();
+  const { setFamilleId } = useContext(FamilleContext);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
+
+  const [typePwd, setTypePwd] = useState(true);
+  const [typePwd2, setTypePwd2] = useState(true);
+
+  const handleInscription = (e) => {
+    e.preventDefault();
+    if (email && password === password2) {
+      console.log(email, password);
+      axios
+        .post(`${import.meta.env.VITE_PATH}/inscriptionAppFamille`, {
+          email,
+          password,
+        })
+        .then((ret) => {
+          const { token, familleId } = ret.data;
+
+          setFamilleId(familleId);
+          sessionStorage.setItem("BabyPlacefamilleId", familleId);
+
+          navigate("/appli/search", {
+            state: {
+              token,
+            },
+          });
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  };
 
   return (
     <div className="applituto connexion">
@@ -33,93 +56,66 @@ function Connexion({ setCompo }) {
         <h3>Création de compte</h3>
 
         <form>
-          <label htmlFor="nom">
-            <input
-              required
-              type="text"
-              name="nom"
-              id="nom"
-              value={data.nom}
-              onChange={(e) => updateFields({ nom: e.target.value })}
-            />
-            <p>Nom</p>
-          </label>
-
-          <label htmlFor="prenom">
-            <input
-              required
-              type="text"
-              name="prenom"
-              id="prenom"
-              value={data.prenom}
-              onChange={(e) => updateFields({ prenom: e.target.value })}
-            />
-            <p>Prenom</p>
-          </label>
-
           <label htmlFor="email">
             <input
               required
               type="email"
               name="email"
               id="email"
-              value={data.email}
-              onChange={(e) => updateFields({ email: e.target.value })}
+              onChange={(event) => {
+                setEmail(event.target.value);
+              }}
             />
             <p>E mail</p>
-          </label>
-
-          <label htmlFor="adresse">
-            <input
-              required
-              type="text"
-              name="adresse"
-              id="adresse"
-              value={data.adresse}
-              onChange={(e) => updateFields({ adresse: e.target.value })}
-            />
-            <p>Adresse</p>
-          </label>
-
-          <label htmlFor="telephone">
-            <input
-              required
-              type="text"
-              name="telephone"
-              id="telephone"
-              value={data.telephone}
-              onChange={(e) => updateFields({ telephone: e.target.value })}
-            />
-            <p>Telephone mobile</p>
           </label>
 
           <label htmlFor="mdp">
             <input
               required
-              type="text"
+              type={typePwd ? "password" : "text"}
               name="mdp"
               id="mdp"
-              value={data.mdp}
-              onChange={(e) => updateFields({ mdp: e.target.value })}
+              onChange={(event) => {
+                setPassword(event.target.value);
+              }}
             />
             <p>Mot de passe</p>
+            <button
+              type="button"
+              className="view-password"
+              onClick={() => setTypePwd(!typePwd)}
+            >
+              {typePwd ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+            </button>
           </label>
 
           <label htmlFor="mdp2">
             <input
               required
-              type="text"
+              type={typePwd2 ? "password" : "text"}
               name="mdp2"
               id="mdp2"
-              value={data.mdp2}
-              onChange={(e) => updateFields({ mdp2: e.target.value })}
+              onChange={(event) => {
+                setPassword2(event.target.value);
+              }}
             />
-            <p>Réecrire Mot de passe</p>
+            <p>Réécrir Mot de passe</p>
+            <button
+              type="button"
+              className="view-password"
+              onClick={() => setTypePwd2(!typePwd2)}
+            >
+              {typePwd2 ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+            </button>
           </label>
         </form>
       </main>
       <div className="button-bas">
-        <button type="button" className="butt grad" onClick={() => setCompo(1)}>
+        <button
+          type="button"
+          className="butt grad"
+          onClick={(e) => handleInscription(e)}
+        >
           Créer un compte
         </button>
       </div>

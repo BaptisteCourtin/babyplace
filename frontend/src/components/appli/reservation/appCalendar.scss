@@ -147,7 +147,13 @@
 
     .react-calendar {
       .disable-day {
-        background-color: red;
+        background-color: $grey;
+
+        abbr {
+          opacity: 0.6;
+          color: $fourth;
+          text-decoration: line-through;
+        }
       }
 
       &__navigation {
@@ -184,6 +190,7 @@
 
       &__month-view {
         margin-top: 20px;
+
         &__weekdays {
           padding-bottom: 10px;
           border-bottom: 1px solid $grey;

@@ -9,14 +9,14 @@ import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 
 function NotifNote({ setCompo }) {
   // --- get ---
-  const id = 6;
+  const id = 6; // mettre l'id  de la structure suivant le clic de la notif
   const [structureNotes, setStructureNotes] = useState();
 
   const Token =
     "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getStructureById = () => {
     axios
-      .get(`http://localhost:5000/structure/notes/${id}`, {
+      .get(`${import.meta.env.VITE_PATH}/structure/notes/${id}`, {
         headers: {
           "x-token": Token,
         },
@@ -41,7 +41,7 @@ function NotifNote({ setCompo }) {
   const [noteHoraires, setNoteHoraires] = useState(0);
 
   const updateNotes = (dataNewNotes) => {
-    axios.put(`http://localhost:5000/structure/notes/${id}`, {
+    axios.put(`${import.meta.env.VITE_PATH}/structure/notes/${id}`, {
       nbNotes: dataNewNotes.nbNotes,
       noteCom: dataNewNotes.avisCom,
       noteProprete: dataNewNotes.avisProprete,

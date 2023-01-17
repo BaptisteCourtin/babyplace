@@ -19,7 +19,9 @@ const OneFormInscr = ({ init, src, nomDoc, handleSupp, p, what }) => {
           </button>
 
           <a
-            href={`http://localhost:5000/uploads/formInscription${That}/${init}`}
+            href={`${
+              import.meta.env.VITE_PATH
+            }/uploads/formInscription${That}/${init}`}
             target="_blank"
             rel="noreferrer"
           >

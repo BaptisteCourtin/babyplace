@@ -32,11 +32,14 @@ function AppliReservation() {
     "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getCalendar = () => {
     axios
-      .get(`http://localhost:5000/calendrier/whereMoins/${structureId}`, {
-        headers: {
-          "x-token": Token,
-        },
-      })
+      .get(
+        `${import.meta.env.VITE_PATH}/calendrier/whereMoins/${structureId}`,
+        {
+          headers: {
+            "x-token": Token,
+          },
+        }
+      )
       .then((res) => {
         setDataCalendarId(res.data);
       })

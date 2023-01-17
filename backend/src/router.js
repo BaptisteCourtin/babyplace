@@ -20,6 +20,97 @@ const messagerie = require("./controllers/messagerie.controllers");
 
 // --- pour app ---
 
+// form inscription au début de l'app
+router.post("/inscriptionAppFamille", (req, res) => {
+  const { email, password } = req.body;
+  datasource
+    .query("INSERT INTO famille(email, password) VALUES (?, ?)", [
+      email,
+      password,
+    ])
+    .then(([thisFamille]) => {
+      if (thisFamille.affectedRows === 0) {
+        res.status(404).send("Not Found");
+      } else {
+        datasource
+          .query("SELECT familleId from famille where email=?", [email])
+          .then(([[id]]) => {
+            datasource
+              .query(
+                "INSERT INTO parent (familleId) VALUES(?) ; INSERT INTO parent (familleId) VALUES(?) ; INSERT INTO enfant (familleId) VALUES(?)",
+                [id.familleId, id.familleId, id.familleId]
+              )
+              .then(() => {
+                const start = Date.now();
+                const token = sha256(email + start);
+                datasource
+                  .query(
+                    "UPDATE famille SET token = ?, tokenStart = ? WHERE email = ?",
+                    [token, start, email]
+                  )
+                  .then(() => {
+                    res.status(200).send({
+                      familleId: id.familleId,
+                      token: token,
+                      tokenStart: start,
+                    });
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                    res.status(500).send("Création de compte impossible");
+                  });
+              })
+              .catch((err) => {
+                console.error(err);
+                res.status(500).send("insert parent impossible");
+              });
+          });
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Création de compte impossible");
+    });
+});
+
+// authentification de la famille
+router.post("/authFamille", (req, res) => {
+  datasource
+    .query("SELECT familleId, password FROM famille WHERE email = ?", [
+      req.body.email,
+    ])
+    .then(([[user]]) => {
+      console.log(user);
+      if (user && req.body.password === user.password) {
+        const start = Date.now();
+        const token = sha256(req.body.email + start);
+
+        datasource
+          .query(
+            "UPDATE famille SET token = ?, tokenStart = ? WHERE email = ?",
+            [token, start, user.email]
+          )
+          .then(() => {
+            res.status(200).send({
+              familleId: user.familleId,
+              token: token,
+              tokenStart: start,
+            });
+          })
+          .catch((err) => {
+            console.error(err);
+            res.status(500).send("Erreur de connexion");
+          });
+      } else {
+        res.status(401).send("Email ou mot de passe incorrect");
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Erreur de connexion");
+    });
+});
+
 router.get("/structure/allapp", structure.getAllStructures); //search
 router.get("/horaires/:id", horaires.getHorairesById); //search
 router.get("/structure/notes/:id", structure.getStructureById); //notes
@@ -1039,45 +1130,6 @@ router.post("/auth", async (req, res) => {
         datasource
           .query(
             "UPDATE structure SET token = ?, tokenStart = ? WHERE email = ?",
-            [token, start, user.email]
-          )
-          .then(() => {
-            res.status(200).send({
-              email: user.email,
-              token: token,
-              tokenStart: start,
-            });
-          })
-          .catch((err) => {
-            console.error(err);
-            res.status(500).send("Erreur de connexion");
-          });
-      } else {
-        res.status(401).send("Email ou mot de passe incorrect");
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Erreur de connexion");
-    });
-});
-
-router.post("/authFamille", (req, res) => {
-  datasource
-    .query(
-      "SELECT * FROM famille AS f LEFT JOIN famille_structure AS fs ON f.familleId = fs.familleId LEFT JOIN parent AS p ON f.familleId = p.familleId WHERE f.email = ?",
-      [req.body.email]
-    )
-    // prendre famille - parents - enfants - famille_structure
-    // famille_structure => like
-    .then(([[user]]) => {
-      if (user && req.body.password === user.password) {
-        const start = Date.now();
-        const token = sha256(req.body.email + start);
-
-        datasource
-          .query(
-            "UPDATE famille SET token = ?, tokenStart = ? WHERE email = ?",
             [token, start, user.email]
           )
           .then(() => {
