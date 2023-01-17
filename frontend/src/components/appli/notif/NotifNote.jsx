@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 
 import Rating from "react-rating";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
+import { toast } from "react-hot-toast";
 
 function NotifNote({ setCompo }) {
   // --- get ---
@@ -71,7 +72,7 @@ function NotifNote({ setCompo }) {
 
     updateNotes(dataNewNotes);
 
-    // faire une pop up merci
+    toast.success("Merci de votre dévotion à notre cause 😈");
 
     setCompo(0);
   };

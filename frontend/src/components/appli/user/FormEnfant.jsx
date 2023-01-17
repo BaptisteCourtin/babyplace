@@ -155,6 +155,8 @@ function FormEnfant() {
     nomsEnfants !== undefined && (
       <main className="enfant">
         <h3>Dossier Enfants</h3>
+        <br />
+        <p>N'oubliez pas d'enregistrer vos informations.</p>
 
         <div className="kid">
           <div className="action-kid">

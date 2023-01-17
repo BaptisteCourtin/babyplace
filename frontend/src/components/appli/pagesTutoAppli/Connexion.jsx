@@ -54,6 +54,10 @@ function Connexion({ setCompo }) {
           Se connecter
         </button>
         <h3>Création de compte</h3>
+        <p>
+          Nous vous déconseillons d'utiliser un mot de passe que vous utilisez
+          réellement
+        </p>
 
         <form>
           <label htmlFor="email">
