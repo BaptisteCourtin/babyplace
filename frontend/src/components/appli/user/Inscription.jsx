@@ -348,6 +348,11 @@ function Inscription() {
     finalOK === true && (
       <main className="inscription">
         <h3>Dossier Inscription</h3>
+        <br />
+        <p>N'oubliez pas d'enregistrer vos informations.</p>
+        <p>❗Même quand vous supprimez un fichier.</p>
+        <br />
+        <p>Vous verez les modifications quand vous reviendrez sur cette page</p>
         <h4>Parent 1</h4>
         <form>
           <OneFormInscr

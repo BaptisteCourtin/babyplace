@@ -129,6 +129,8 @@ function Parents() {
     finalOK === true && (
       <main className="parent">
         <h3>Dossier Parents</h3>
+        <br />
+        <p>N'oubliez pas d'enregistrer vos informations.</p>
 
         <form>
           <h4>Parent 1</h4>
