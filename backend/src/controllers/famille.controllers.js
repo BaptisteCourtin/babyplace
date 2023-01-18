@@ -31,6 +31,11 @@ const getPourcent = async (req, res) => {
   return res.json(result);
 };
 
+const getFamilleInfo = async (req, res) => {
+  const result = await familleModels.getFamilleInfo(req);
+  return res.json(result);
+};
+
 const getNomsEtIdEnfants = async (req, res) => {
   const result = await familleModels.getNomsEtIdEnfants(req);
   return res.json(result);
@@ -100,4 +105,5 @@ module.exports = {
   getFamilleDataMess,
   postNewConfiance,
   deleteConfiance,
+  getFamilleInfo,
 };

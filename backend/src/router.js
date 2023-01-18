@@ -118,8 +118,9 @@ router.get("/famille/formEnfant/:id", famille.getDonneesFormEnfant); //donnees d
 router.get("/famille/nomsEnfants/:id", famille.getNomsEtIdEnfants); // noms et id des enfants
 router.get("/famille/formInscription/:id", famille.getDonneesFormInscription); //donnees du formulaire inscription
 router.get("/famille/pourcent/:id", famille.getPourcent); // pourcent des formulaire
+router.get("/famille/info/:id", famille.getFamilleInfo); // info famille (noms + photo)
 router.get("/contact/message/all", messageAdmin.getAllMessageToAdmin); // recupérer tous les message pour le dashboard admin
-router.get("/calendrier/whereMoins/:id", calendrier.getCalendrierMoins); // calendrier par id wher nbPlaces = -1
+router.get("/calendrier/whereMoins/:id", calendrier.getCalendrierMoins); // calendrier par id where nbPlaces = -1
 router.get("/messages/recup/:room", messagerie.getAllMessageFromDb); // recupération des message pour le chat
 
 router.put("/structure/notes/:id", structure.updateNotes); //notes
@@ -253,6 +254,58 @@ router.put("/formInscription/docFamilleChangeName/:id", (req, res) => {
     )
     .then(([parent]) => {
       if (parent.affectedRows === 0) {
+        res.status(404).send("Not Found");
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Modification impossible");
+    });
+});
+
+// PHOTO DE PROFIL FAMILLE
+// mettre dans uploads et change nom
+router.post(
+  "/famille/photoProfil",
+  multer({
+    storage: multer.diskStorage({
+      destination: (req, file, cb) => {
+        cb(null, "./public/uploads/photoFamille");
+      },
+      filename: (req, file, cb) => {
+        const date = new Date();
+        cb(
+          null,
+          Math.round(Math.random() * 1000) +
+            `${date.getMinutes()}${date.getSeconds()}` +
+            Math.round(Math.random() * 1000) +
+            "-qws-" +
+            file.originalname
+          // nom avec des chiffres + nom d'origine du fichier
+        );
+      },
+    }),
+  }).fields([
+    // nom envoyer par formData
+    { name: "photoFamille", maxCount: 1 },
+  ]),
+  (req, res) => {
+    res.send(req.files);
+  }
+);
+
+// mise dans bdd
+router.put("/famille/photoProfil/:id", (req, res) => {
+  const { photoFamille } = req.body;
+  datasource
+    .query("UPDATE famille SET photoProfilFamille=? WHERE familleId=?", [
+      photoFamille,
+      req.params.id,
+    ])
+    .then(([famille]) => {
+      if (famille.affectedRows === 0) {
         res.status(404).send("Not Found");
       } else {
         res.sendStatus(204);

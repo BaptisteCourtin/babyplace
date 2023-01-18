@@ -44,7 +44,15 @@ const getDonneesFormInscription = async (req) => {
 
 const getPourcent = async (req) => {
   const [result] = await datasource.query(
-    "SELECT pourcentFormParent FROM parent WHERE familleId = ? ; SELECT pourcentFormEnfant FROM enfant WHERE familleId = ? ",
+    "SELECT pourcentFormParent, nom, prenom FROM parent WHERE familleId = ? ; SELECT pourcentFormEnfant FROM enfant WHERE familleId = ? ; SELECT photoProfilFamille FROM famille WHERE familleId = ? ",
+    [req.params.id, req.params.id, req.params.id]
+  );
+  return result;
+};
+
+const getFamilleInfo = async (req) => {
+  const [result] = await datasource.query(
+    "SELECT nom, prenom FROM parent WHERE familleId = ? ; SELECT photoProfilFamille FROM famille WHERE familleId = ? ",
     [req.params.id, req.params.id]
   );
   return result;
@@ -175,4 +183,5 @@ module.exports = {
   getFamilleDataMess,
   deleteConfiance,
   postNewConfiance,
+  getFamilleInfo,
 };
