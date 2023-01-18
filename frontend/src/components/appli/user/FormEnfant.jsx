@@ -30,8 +30,8 @@ function FormEnfant() {
 
   // --- prise des donnees qui sont dans la bdd ---
 
-  const [nomsEnfants, setNomsEnfants] = useState();
-  const [enfantId, setEnfantId] = useState(1); // mettre l'id du premier enfant dans le usestate
+  const [nomsEnfants, setNomsEnfants] = useState(); // les prenoms des enfants
+  const [enfantId, setEnfantId] = useState(0); // mettre l'id du premier enfant dans le usestate
 
   const Token =
     "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
@@ -54,7 +54,7 @@ function FormEnfant() {
     getNomsEnfants();
   }, []);
 
-  const [donneesForm, setDonneesForm] = useState();
+  const [donneesForm, setDonneesForm] = useState(); // les donnees des form
   const [donneesOK, setDonneesOK] = useState(false); // les donnees sont prises => mis dans initial data
   const [finalOK, setFinalOK] = useState(false); // donnees mises dans initial => go visuel
 
@@ -75,7 +75,7 @@ function FormEnfant() {
   };
   useEffect(() => {
     getDonneesForm();
-  }, [enfantId]);
+  }, [enfantId, nomsEnfants]); // met le bon form
 
   // --- func pour changer initial value ---
 
@@ -126,7 +126,7 @@ function FormEnfant() {
 
   const updateFormEnfant = () => {
     const pourcent = calculPourcent();
-    axios.put(`http://localhost:5000/formEnfant/${enfantId}`, {
+    axios.put(`${import.meta.env.VITE_PATH}/formEnfant/${enfantId}`, {
       initialData,
       pourcent,
     });
@@ -135,18 +135,24 @@ function FormEnfant() {
   // --- ajout enfant ---
 
   const ajoutEnfant = () => {
-    console.log("click new enfant");
-    axios.post(`http://localhost:5000/famille/newEnfant`, {
-      familleId,
-      prenom: "nouveau enfant",
-    });
+    axios
+      .post(`${import.meta.env.VITE_PATH}/famille/newEnfant`, {
+        familleId,
+      })
+      .then(() => {
+        getNomsEnfants();
+      });
   };
   // asynchronisme de l'affichage
 
   // --- supprimer enfant ---
 
   const deleteEnfant = () => {
-    axios.delete(`http://localhost:5000/famille/deleteEnfant/${enfantId}`);
+    axios
+      .delete(`${import.meta.env.VITE_PATH}/famille/deleteEnfant/${enfantId}`)
+      .then(() => {
+        getNomsEnfants();
+      });
   };
   // asynchronisme de l'affichage
 

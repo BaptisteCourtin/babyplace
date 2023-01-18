@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import axios from "axios";
 import NavbarApp from "@components/appli/navbar/NavbarApp";
 import avatar from "@assets/avatar1.svg";
@@ -11,6 +11,10 @@ function AppliUser() {
   const [truePourcentEnfant, setTruePourcentEnfant] = useState(0);
   const [pourcentFormInscription, setPourcentFormInscription] = useState(0);
   const [truePourcentInscription, setTruePourcentInscription] = useState(0);
+
+  const [imageProfil, setImageProfil] = useState(null);
+  const [nomPrenom, setNomPrenom] = useState(false);
+  const [donneesOK, setDonneesOK] = useState(false);
 
   const { familleId } = useContext(FamilleContext);
   const Token =
@@ -27,6 +31,11 @@ function AppliUser() {
         setPourcentFormParent(res.data[0][0].pourcentFormParent);
         setPourcentFormEnfant(res.data[1]);
         // setPourcentFormInscription(res.data[2]);
+        setImageProfil(res.data[2][0].photoProfilFamille);
+        setNomPrenom(res.data[0]);
+      })
+      .then(() => {
+        setDonneesOK(true);
       })
       .catch((err) => {
         console.error(err);
@@ -34,7 +43,7 @@ function AppliUser() {
   };
   useEffect(() => {
     getPourcentForm();
-  }, []);
+  }, [familleId]);
 
   // --- pour avoir le vrai pourcent des enfants ---
 
@@ -66,6 +75,33 @@ function AppliUser() {
   //   getTruePourcentInscription();
   // }, [pourcentFormInscription]);
 
+  // --- upload image profil---
+
+  const docImgProfil = useRef(null);
+
+  const SubmitPhotoFamille = () => {
+    const formData = new FormData();
+    formData.append("photoFamille", docImgProfil.current.files[0]);
+
+    axios
+      .post("http://localhost:5000/famille/photoProfil", formData)
+      .then((result) => {
+        axios
+          .put(`http://localhost:5000/famille/photoProfil/${familleId}`, {
+            photoFamille: result.data.photoFamille[0].filename,
+          })
+          .then(() => {
+            setImageProfil(result.data.photoFamille[0].filename);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   // ---
 
   const tabCompletion = [
@@ -87,27 +123,65 @@ function AppliUser() {
   ];
 
   return (
-    <div className="appli-user">
-      <main>
-        <img src={avatar} alt="avatar" />
-        <h3>Ed Cannan</h3>
-        <p>
-          Mettez toutes les chances de votre côté Un profil complet est
-          nécessaire pour un accueil en crèche !
-        </p>
-        <div className="container-completion">
-          {tabCompletion.map((each, index) => (
-            <Completion
-              key={index}
-              nom={each.nom}
-              completion={each.completion}
-              quelCompo={each.quelCompo}
+    donneesOK === true && (
+      <div className="appli-user">
+        <main>
+          <label htmlFor="img-profil">
+            <input
+              type="file"
+              accept="image/png, image/jpg, image/jpeg"
+              name="img-profil"
+              id="img-profil"
+              ref={docImgProfil}
+              onChange={() => SubmitPhotoFamille()}
             />
-          ))}
-        </div>
-      </main>
-      <NavbarApp />
-    </div>
+            <img
+              src={
+                imageProfil
+                  ? `${
+                      import.meta.env.VITE_PATH
+                    }/uploads/photoFamille/${imageProfil}`
+                  : avatar
+              }
+              alt="avatar"
+            />
+          </label>
+          <h3>
+            {nomPrenom[0].prenom || nomPrenom[0].nom
+              ? `
+            ${nomPrenom[0].prenom ? nomPrenom[0].prenom : ""} 
+            ${nomPrenom[0].nom ? nomPrenom[0].nom : ""}`
+              : ""}
+
+            {nomPrenom[1].prenom || nomPrenom[1].nom
+              ? nomPrenom[0].prenom || nomPrenom[0].nom
+                ? ` & 
+                ${nomPrenom[1].prenom ? nomPrenom[1].prenom : ""} 
+                ${nomPrenom[1].nom ? nomPrenom[1].nom : ""}`
+                : `
+            ${nomPrenom[1].prenom ? nomPrenom[1].prenom : ""} 
+            ${nomPrenom[1].nom ? nomPrenom[1].nom : ""}`
+              : ""}
+          </h3>
+          <p>
+            Mettez toutes les chances de votre côté Un profil complet est
+            nécessaire pour un accueil en crèche !
+          </p>
+
+          <div className="container-completion">
+            {tabCompletion.map((each, index) => (
+              <Completion
+                key={index}
+                nom={each.nom}
+                completion={each.completion}
+                quelCompo={each.quelCompo}
+              />
+            ))}
+          </div>
+        </main>
+        <NavbarApp />
+      </div>
+    )
   );
 }
 

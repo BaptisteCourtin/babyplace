@@ -45,6 +45,7 @@ function Inscription() {
   const Token =
     "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getDonneesForm = () => {
+    console.log("getForm");
     axios
       // !!! prend 2 fois les doc de famille car 2 parents et les données sont dans un tableau
       .get(
@@ -57,6 +58,8 @@ function Inscription() {
       )
       .then((res) => {
         setDonneesForm(res.data);
+      })
+      .then(() => {
         setDonneesOK(true);
       })
       .catch((err) => {
@@ -105,6 +108,7 @@ function Inscription() {
     if (donneesOK === true) {
       remplirInitial();
     }
+    setDonneesOK(false);
   }, [donneesOK]);
 
   // --- changer une donnée avec le form ---

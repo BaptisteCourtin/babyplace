@@ -44,7 +44,15 @@ const getDonneesFormInscription = async (req) => {
 
 const getPourcent = async (req) => {
   const [result] = await datasource.query(
-    "SELECT pourcentFormParent FROM parent WHERE familleId = ? ; SELECT pourcentFormEnfant FROM enfant WHERE familleId = ? ",
+    "SELECT pourcentFormParent, nom, prenom FROM parent WHERE familleId = ? ; SELECT pourcentFormEnfant FROM enfant WHERE familleId = ? ; SELECT photoProfilFamille FROM famille WHERE familleId = ? ",
+    [req.params.id, req.params.id, req.params.id]
+  );
+  return result;
+};
+
+const getFamilleInfo = async (req) => {
+  const [result] = await datasource.query(
+    "SELECT nom, prenom FROM parent WHERE familleId = ? ; SELECT photoProfilFamille FROM famille WHERE familleId = ? ",
     [req.params.id, req.params.id]
   );
   return result;
@@ -128,8 +136,17 @@ const postReservation = async (req) => {
 
 const postNewEnfant = async (req) => {
   const [result] = await datasource.query(
-    "INSERT INTO enfant (familleId, prenom) VALUES (?, ?)",
-    [req.body.familleId, req.body.prenom]
+    "INSERT INTO enfant (familleId) VALUES (?)",
+    [req.body.familleId]
+  );
+  return result;
+};
+
+const postNewConfiance = async (req) => {
+  const { familleId, prenom, nom, tel, email } = req.body;
+  const [result] = await datasource.query(
+    "INSERT INTO personne_confiance (familleId, prenom, nom, tel, email) VALUES (?, ?, ?, ?, ?)",
+    [familleId, prenom, nom, tel, email]
   );
   return result;
 };
@@ -137,6 +154,14 @@ const postNewEnfant = async (req) => {
 const deleteEnfant = async (req) => {
   const [result] = await datasource.query(
     "DELETE FROM enfant WHERE enfantId = ?",
+    [req.params.id]
+  );
+  return result;
+};
+
+const deleteConfiance = async (req) => {
+  const [result] = await datasource.query(
+    "DELETE FROM personne_confiance WHERE confianceId = ?",
     [req.params.id]
   );
   return result;
@@ -156,4 +181,7 @@ module.exports = {
   deleteEnfant,
   getDonneesFormInscription,
   getFamilleDataMess,
+  deleteConfiance,
+  postNewConfiance,
+  getFamilleInfo,
 };
