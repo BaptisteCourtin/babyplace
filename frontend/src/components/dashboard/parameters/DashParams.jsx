@@ -4,7 +4,6 @@ import { toast } from 'react-hot-toast'
 import ReactModal from "react-modal";
 import { useNavigate } from 'react-router-dom';
 import logo from '@assets/logo5.svg';
-import e from 'cors';
 
 function DashParams({ type, structureId, photoProfil, photoStructure1, photoStructure2, photoStructure3, nom, prenom, nomUsage, nomNaissance, adresse, email, telephone, description, userType, getData, docPmi, docIdentite, docVitale, docJustifDom, docDiplome, docRespCivile, docAssAuto }) {
 
@@ -42,7 +41,7 @@ function DashParams({ type, structureId, photoProfil, photoStructure1, photoStru
         try {
             docData = new FormData()
             docData.append('file', ref.current.files[0])
-            const res = await axios.post(`${import.meta.env.VITE_PATH}/dashboard/docs`, docData)
+            const res = await axios.post(`${import.meta.env.VITE_PATH}/uploads`, docData)
             fileName = res.data
             await axios.put(`${import.meta.env.VITE_PATH}/dashboard/docs/`, {
                 id: structureId,
@@ -152,7 +151,7 @@ function DashParams({ type, structureId, photoProfil, photoStructure1, photoStru
             <h2>Paramètres</h2>
             <div className='dashParamsProfilContainer'>
                 <div className='dashParamsProfil'>
-                    <img src={`${import.meta.env.VITE_PATH}${photoProfil}`} alt="" />
+                    <img src={photoProfil} alt="" />
                     <input
                         type="file"
                         ref={photoProfilRef}
@@ -268,10 +267,15 @@ function DashParams({ type, structureId, photoProfil, photoStructure1, photoStru
                 </form>
             </details>
             <details className='dashParamsImages'>
+                <p className='dashParamsFormats'>
+                    Cliquez sur une image pour la modifier
+                    <br />
+                    Formats acceptés: <span>jpg / jpeg / png</span>
+                </p>
                 <summary>Vos photos</summary>
                 <ul>
                     <li>
-                        <img src={`${import.meta.env.VITE_PATH}${photoStructure1}`} alt="" />
+                        <img src={photoStructure1} alt="" />
                         <input
                             type="file"
                             ref={photoStructure1Ref}
@@ -280,7 +284,7 @@ function DashParams({ type, structureId, photoProfil, photoStructure1, photoStru
                         />
                     </li>
                     <li>
-                        <img src={`${import.meta.env.VITE_PATH}${photoStructure2}`} alt="" />
+                        <img src={photoStructure2} alt="" />
                         <input
                             type="file"
                             ref={photoStructure2Ref}
@@ -289,7 +293,7 @@ function DashParams({ type, structureId, photoProfil, photoStructure1, photoStru
                         />
                     </li>
                     <li>
-                        <img src={`${import.meta.env.VITE_PATH}${photoStructure3}`} alt="" />
+                        <img src={photoStructure3} alt="" />
                         <input
                             type="file"
                             ref={photoStructure3Ref}
@@ -316,7 +320,7 @@ function DashParams({ type, structureId, photoProfil, photoStructure1, photoStru
                                 />
                             </div>
                             <a
-                                href={`${import.meta.env.VITE_PATH}${docPmi}`} target="_blank"
+                                href={docPmi} target="_blank"
                                 rel="noopener noreferrer"
                             >
                                 Fichier actuel
@@ -334,7 +338,7 @@ function DashParams({ type, structureId, photoProfil, photoStructure1, photoStru
                                 />
                             </div>
                             <a
-                                href={`${import.meta.env.VITE_PATH}${docIdentite}`} target="_blank"
+                                href={docIdentite} target="_blank"
                                 rel="noopener noreferrer"
                             >
                                 Fichier actuel
@@ -352,7 +356,7 @@ function DashParams({ type, structureId, photoProfil, photoStructure1, photoStru
                                 />
                             </div>
                             <a
-                                href={`${import.meta.env.VITE_PATH}${docVitale}`} target="_blank"
+                                href={docVitale} target="_blank"
                                 rel="noopener noreferrer"
                             >
                                 Fichier actuel
@@ -370,7 +374,7 @@ function DashParams({ type, structureId, photoProfil, photoStructure1, photoStru
                                 />
                             </div>
                             <a
-                                href={`${import.meta.env.VITE_PATH}${docJustifDom}`} target="_blank"
+                                href={docJustifDom} target="_blank"
                                 rel="noopener noreferrer"
                             >
                                 Fichier actuel
@@ -388,7 +392,7 @@ function DashParams({ type, structureId, photoProfil, photoStructure1, photoStru
                                 />
                             </div>
                             <a
-                                href={`${import.meta.env.VITE_PATH}${docDiplome}`} target="_blank"
+                                href={docDiplome} target="_blank"
                                 rel="noopener noreferrer"
                             >
                                 Fichier actuel
@@ -406,7 +410,7 @@ function DashParams({ type, structureId, photoProfil, photoStructure1, photoStru
                                 />
                             </div>
                             <a
-                                href={`${import.meta.env.VITE_PATH}${docRespCivile}`} target="_blank"
+                                href={docRespCivile} target="_blank"
                                 rel="noopener noreferrer"
                             >
                                 Fichier actuel
@@ -424,7 +428,7 @@ function DashParams({ type, structureId, photoProfil, photoStructure1, photoStru
                                 />
                             </div>
                             <a
-                                href={`${import.meta.env.VITE_PATH}${docAssAuto}`} target="_blank"
+                                href={docAssAuto} target="_blank"
                                 rel="noopener noreferrer"
                             >
                                 Fichier actuel
@@ -445,7 +449,7 @@ function DashParams({ type, structureId, photoProfil, photoStructure1, photoStru
                                 />
                             </div>
                             <a
-                                href={`${import.meta.env.VITE_PATH}${docPmi}`} target="_blank"
+                                href={docPmi} target="_blank"
                                 rel="noopener noreferrer"
                             >
                                 Fichier actuel
@@ -456,7 +460,7 @@ function DashParams({ type, structureId, photoProfil, photoStructure1, photoStru
                 }
             </details >
             <details className='dashParamsDanger'>
-                <summary>Zone dangereuse</summary>
+                <summary>Votre gestion de compte</summary>
                 <form onSubmit={(e) => { updatePassword(e) }}>
                     <ul>
                         <li>

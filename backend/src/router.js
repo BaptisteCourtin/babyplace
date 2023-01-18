@@ -6,6 +6,7 @@ const fs = require("fs");
 const multer = require("multer");
 const upload = multer({ dest: "public/uploads/" });
 const { v4: uuidv4 } = require("uuid");
+const uploadDoc = require('./helpers/helper')
 
 const structure = require("./controllers/structure.controllers");
 const horaires = require("./controllers/horaires.controllers");
@@ -61,7 +62,18 @@ router.put("/calendrier/places/open/:id", calendrier.updateStatusOpen);
 router.put("/logout/:id", structure.logout);
 
 router.post("/calendrier/add", calendrier.postDate);
-router.post("/dashboard/docs", upload.single(`file`), structure.uploadProfil)
+router.post("/dashboard/docs", upload.single(`file`), structure.uploadProfil);
+router.post('/uploads', async (req, res, next) => {
+  try {
+    const file = req.file
+    const result = await uploadDoc(file)
+    res
+      .status(200)
+      .json(result)
+  } catch (error) {
+    next(error)
+  }
+})
 
 router.delete("/calendrier", calendrier.deleteDates);
 router.delete("/calendrier/:id", calendrier.fullDate)

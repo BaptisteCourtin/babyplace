@@ -3,16 +3,15 @@ import { FiBell } from "react-icons/fi";
 import { AiFillStar, AiOutlinePhone, AiOutlineMail } from "react-icons/ai";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import useLocalStorage from "@utils/useLocalStorage";
 import { toast } from "react-hot-toast";
 import ReactModal from "react-modal";
 
-const DashNavbar = lazy(() => import("./nav/DashNavbar"));
-const DashReservations = lazy(() => import("./reservations/DashReservations"));
-const DashAgenda = lazy(() => import("./agenda/DashAgenda.jsx"));
-const DashPlaces = lazy(() => import("./places/DashPlaces"));
-const Messages = lazy(() => import("../messages/Messages"));
-const DashParams = lazy(() => import("./parameters/DashParams"));
+import DashNavbar from "./nav/DashNavbar";
+import DashReservations from "./reservations/DashReservations";
+import DashAgenda from "./agenda/DashAgenda.jsx";
+import DashPlaces from "./places/DashPlaces";
+import Messages from "../messages/Messages";
+import DashParams from "./parameters/DashParams";
 
 function Dashboard() {
   const { state } = useLocation();
@@ -60,38 +59,28 @@ function Dashboard() {
   const pageShown = () => {
     if (toggle === 1) {
       return (
-        <Suspense fallback={<div>Loading ...</div>}>
-          <DashReservations {...data} />
-        </Suspense>
+        <DashReservations {...data} />
       );
     }
     if (toggle === 2) {
       return (
-        <Suspense fallback={<div>Loading ...</div>}>
-          <DashAgenda structureId={data.structureId} maxPlaces={data.maxPlaces} />
-        </Suspense>
+        <DashAgenda structureId={data.structureId} maxPlaces={data.maxPlaces} />
       );
     }
     if (toggle === 3) {
       return (
-        <Suspense fallback={<div>Loading ...</div>}>
-          <DashPlaces userType={userType} structureId={data.structureId} />
-        </Suspense>
+        <DashPlaces userType={userType} structureId={data.structureId} />
       );
     }
     if (toggle === 4) {
       return (
-        <Suspense fallback={<div>Loading ...</div>}>
-          <Messages {...data} />
-        </Suspense>
+        <Messages {...data} />
       );
     }
 
     if (toggle === 5) {
       return (
-        <Suspense fallback={<div>Loading ...</div>}>
-          <DashParams {...data} userType={userType} getData={getData} />
-        </Suspense>
+        <DashParams {...data} userType={userType} getData={getData} />
       );
     }
   };
@@ -168,7 +157,7 @@ function Dashboard() {
           <FiBell />
         </button>
         <button type="button" onClick={() => { setToggle(0); setDashPage(0) }}>
-          <img src={`${import.meta.env.VITE_PATH}${data.photoProfil}`} />
+          <img src={data.photoProfil} />
           {data.nom || data.prenom}
         </button>
       </nav>
@@ -181,7 +170,7 @@ function Dashboard() {
               <div className="dashboardProfile">
                 <img
                   className="dashboardProfilePic"
-                  src={`${import.meta.env.VITE_PATH}${data.photoProfil}`}
+                  src={data.photoProfil}
                   alt=""
                   width={70}
                   height={70}
@@ -195,7 +184,7 @@ function Dashboard() {
                     ({data.nbNotes})
                   </span>
                 </h2>
-                {userType ? (
+                {userType === 'creche' ? (
                   <h1>
                     {data.nom}
                   </h1>
@@ -208,13 +197,13 @@ function Dashboard() {
               <p className="dashboardProfilePres">{data.description}</p>
               <ul className="dashboardProfilePicList">
                 <li>
-                  <img src={`${import.meta.env.VITE_PATH}${data?.photoStructure1}`} alt="" loading="lazy" />
+                  <img src={data?.photoStructure1} alt="" loading="lazy" />
                 </li>
                 <li>
-                  <img src={`${import.meta.env.VITE_PATH}${data?.photoStructure2}`} alt="" loading="lazy" />
+                  <img src={data?.photoStructure2} alt="" loading="lazy" />
                 </li>
                 <li>
-                  <img src={`${import.meta.env.VITE_PATH}${data?.photoStructure3}`} alt="" loading="lazy" />
+                  <img src={data?.photoStructure3} alt="" loading="lazy" />
                 </li>
               </ul>
               <div className="dashboardProfileContact">

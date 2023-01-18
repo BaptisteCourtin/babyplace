@@ -235,16 +235,6 @@
             }
         }
 
-        & .dashParamsFormats {
-            font-size: $small;
-            margin-bottom: 15px;
-
-            & span {
-                font-weight: 500;
-                color: $third;
-            }
-        }
-
         & ul {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -413,6 +403,17 @@
                 }
             }
         }
+    }
+}
+
+.dashParamsFormats {
+    font-size: $small;
+    margin-bottom: 15px;
+    line-height: 1.2;
+
+    & span {
+        font-weight: 500;
+        color: $third;
     }
 }
 
