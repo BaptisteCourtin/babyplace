@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import axios from "axios";
 import OneFormInscr from "./OneFormInscr";
+import FamilleContext from "@components/context/FamilleContext";
 
 function Inscription() {
-  const familleId = 1;
+  const { familleId } = useContext(FamilleContext);
 
   // sert pour le updateFields et le get
   const [initialData, setInitialData] = useState({
@@ -46,11 +47,14 @@ function Inscription() {
   const getDonneesForm = () => {
     axios
       // !!! prend 2 fois les doc de famille car 2 parents et les données sont dans un tableau
-      .get(`http://localhost:5000/famille/formInscription/${familleId}`, {
-        headers: {
-          "x-token": Token,
-        },
-      })
+      .get(
+        `${import.meta.env.VITE_PATH}/famille/formInscription/${familleId}`,
+        {
+          headers: {
+            "x-token": Token,
+          },
+        }
+      )
       .then((res) => {
         setDonneesForm(res.data);
         setDonneesOK(true);
@@ -344,6 +348,11 @@ function Inscription() {
     finalOK === true && (
       <main className="inscription">
         <h3>Dossier Inscription</h3>
+        <br />
+        <p>N'oubliez pas d'enregistrer vos informations.</p>
+        <p>❗Même quand vous supprimez un fichier.</p>
+        <br />
+        <p>Vous verez les modifications quand vous reviendrez sur cette page</p>
         <h4>Parent 1</h4>
         <form>
           <OneFormInscr

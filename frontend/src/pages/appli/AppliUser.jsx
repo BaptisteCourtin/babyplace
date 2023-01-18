@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import NavbarApp from "@components/appli/navbar/NavbarApp";
 import avatar from "@assets/avatar1.svg";
 import Completion from "@components/appli/user/Completion";
+import FamilleContext from "@components/context/FamilleContext";
 
 function AppliUser() {
   const [pourcentFormParent, setPourcentFormParent] = useState(0);
@@ -11,12 +12,12 @@ function AppliUser() {
   const [pourcentFormInscription, setPourcentFormInscription] = useState(0);
   const [truePourcentInscription, setTruePourcentInscription] = useState(0);
 
-  const familleId = 1;
+  const { familleId } = useContext(FamilleContext);
   const Token =
     "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getPourcentForm = () => {
     axios
-      .get(`http://localhost:5000/famille/pourcent/${familleId}`, {
+      .get(`${import.meta.env.VITE_PATH}/famille/pourcent/${familleId}`, {
         headers: {
           "x-token": Token,
         },

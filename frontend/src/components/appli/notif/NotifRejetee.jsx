@@ -6,6 +6,7 @@ import logoBlanc from "@assets/logo-blanc.svg";
 import avatar1 from "@assets/avatar1.svg";
 
 function NotifRejetee({ setCompo }) {
+  // prendre l'image famille et l'image creche
   return (
     <div className="notif-container-grad">
       <div className="notif-rejet">

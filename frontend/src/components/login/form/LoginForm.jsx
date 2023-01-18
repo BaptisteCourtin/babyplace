@@ -22,11 +22,10 @@ function LoginForm() {
   const handleClick = (e) => {
     e.preventDefault();
     if (email && password) {
-      axios
-        .post("http://localhost:5000/auth", {
-          email,
-          password,
-        })
+      axios.post(`${import.meta.env.VITE_PATH}/auth`, {
+        email,
+        password,
+      })
         .then((res) => {
           if (email !== adminEmail && password !== adminPassword) {
             const { token } = res.data;

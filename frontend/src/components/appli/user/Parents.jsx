@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import FamilleContext from "@components/context/FamilleContext";
 
 function Parents() {
+  const { familleId } = useContext(FamilleContext);
+
   // meme nom que bdd
   const [initialData, setInitialData] = useState({
     nom1: "",
@@ -35,12 +38,11 @@ function Parents() {
   const [donneesOK, setDonneesOK] = useState(false); // les donnees sont prises => mis dans initial data
   const [finalOK, setFinalOK] = useState(false); // donnees mises dans initial => go visuel
 
-  const familleId = 1;
   const Token =
     "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getDonneesForm = () => {
     axios
-      .get(`http://localhost:5000/famille/formParent/${familleId}`, {
+      .get(`${import.meta.env.VITE_PATH}/famille/formParent/${familleId}`, {
         headers: {
           "x-token": Token,
         },
@@ -127,6 +129,8 @@ function Parents() {
     finalOK === true && (
       <main className="parent">
         <h3>Dossier Parents</h3>
+        <br />
+        <p>N'oubliez pas d'enregistrer vos informations.</p>
 
         <form>
           <h4>Parent 1</h4>

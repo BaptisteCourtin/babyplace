@@ -9,8 +9,32 @@
 
   & p {
     color: #787885;
-    width: 30vw;
     text-align: center;
+    width: 30vw;
+    font-size: $h4;
+  }
+
+  & button {
+    color: #787885;
+    background: none;
+    text-align: center;
+    width: 250px;
+    max-width: 30vw;
+    height: 40px;
+    font-size: $h4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    margin: 4px;
+    padding: 8px;
+    transition: .5s ease-in-out;
+  }
+
+  & button:hover {
+    color: $white;
+    background: $third;
+    border: 1px solid $grey;
   }
 
   & .leftPart {
@@ -211,7 +235,7 @@
   }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1000px) {
   .formStructureContainer {
     position: relative;
     width: 90vw;

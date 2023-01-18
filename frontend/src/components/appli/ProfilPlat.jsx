@@ -9,6 +9,7 @@ const user = {
 };
 
 function ProfilPlat() {
+  // prendre user image
   return (
     <div className="profil-plat">
       <div className="container-image">

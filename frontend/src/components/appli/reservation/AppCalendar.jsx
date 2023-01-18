@@ -39,7 +39,7 @@ function AppCalendar({
   const afficheDate = () => {
     let jour = clickedDay.toString();
     jour = jour.split(" ");
-    let jourLong = `${jour[2]} ${jour[1]}  ${jour[3]}`;
+    let jourLong = `${jour[2]} ${jour[1]} ${jour[3]}`;
     setJour(jourLong);
 
     if (jour[0] === "Mon") {
@@ -85,8 +85,9 @@ function AppCalendar({
 
     if (dataCalendarId[0]) {
       let result = false;
+
       for (let i = 0; i < dataCalendarId.length; i++) {
-        if (compareAsc(date, parseISO(dataCalendarId[i].date)) === 0) {
+        if (Date.parse(date) === Date.parse(dataCalendarId[i].date)) {
           result = true;
         }
       }
@@ -96,7 +97,7 @@ function AppCalendar({
 
   // --- classname et couleur des cases ---
 
-  const CaseClassName = ({ date, view }) => {
+  const CaseClassName = ({ date }) => {
     if (
       (date.getDay() === 1 && dataHorairesId[0].ouvert === 0) ||
       (date.getDay() === 2 && dataHorairesId[1].ouvert === 0) ||
@@ -112,7 +113,7 @@ function AppCalendar({
     if (dataCalendarId[0]) {
       let result = "";
       for (let i = 0; i < dataCalendarId.length; i++) {
-        if (compareAsc(date, parseISO(dataCalendarId[i].date)) === 0) {
+        if (Date.parse(date) === Date.parse(dataCalendarId[i].date)) {
           result = "disable-day";
         }
       }
