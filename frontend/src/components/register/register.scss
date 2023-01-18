@@ -5,4 +5,10 @@
   height: 100vh;
   display: grid;
   grid-template-columns: 2fr 3fr;
+
+  @media screen and (max-width: 650px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }

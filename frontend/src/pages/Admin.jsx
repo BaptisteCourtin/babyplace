@@ -16,25 +16,30 @@ function Admin() {
     }
   };
 
-  const setVerified = async (structureId) => {
-    await axios
-      .put(`http://localhost:5000/admin/verified/${structureId}`, {
-        id: structureId,
-      })
-      .then(toast.success("L'utilisateur a bien été approuvé"), getStructure());
-  };
-
-  const setRefused = async (structureId) => {
-    await axios
-      .delete(
-        `http://localhost:5000/admin/refused/${structureId}?type=${userType}`,
-        {
-          id: structureId,
-          type: userType,
+    const setVerified = async (structureId) => {
+        try {
+            await axios.put(`http://localhost:5000/admin/verified/${structureId}`, {
+                id: structureId
+            })
+            toast.success("L'utilisateur a bien été approuvé"),
+                getStructure()
+        } catch (err) {
+            console.error(err.message)
         }
-      )
-      .then(toast.error("L'utilisateur a bien été supprimé"), getStructure());
-  };
+    }
+
+    const setRefused = async (structureId) => {
+        try {
+            await axios.delete(`http://localhost:5000/admin/refused/${structureId}?type=${userType}`, {
+                id: structureId,
+                type: userType
+            })
+            toast.error("L'utilisateur a bien été supprimé"),
+                getStructure()
+        } catch (err) {
+            console.error(err.message)
+        }
+    }
 
   useEffect(() => {
     getStructure();
