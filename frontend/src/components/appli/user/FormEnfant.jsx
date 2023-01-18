@@ -33,15 +33,9 @@ function FormEnfant() {
   const [nomsEnfants, setNomsEnfants] = useState(); // les prenoms des enfants
   const [enfantId, setEnfantId] = useState(0); // mettre l'id du premier enfant dans le usestate
 
-  const Token =
-    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getNomsEnfants = () => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/famille/nomsEnfants/${familleId}`, {
-        headers: {
-          "x-token": Token,
-        },
-      })
+      .get(`${import.meta.env.VITE_PATH}/famille/nomsEnfants/${familleId}`)
       .then((res) => {
         setNomsEnfants(res.data);
         setEnfantId(res.data[0].enfantId);
@@ -60,11 +54,7 @@ function FormEnfant() {
 
   const getDonneesForm = () => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/famille/formEnfant/${enfantId}`, {
-        headers: {
-          "x-token": Token,
-        },
-      })
+      .get(`${import.meta.env.VITE_PATH}/famille/formEnfant/${enfantId}`)
       .then((res) => {
         setDonneesForm(res.data);
         setDonneesOK(true);

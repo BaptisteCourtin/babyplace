@@ -20,12 +20,13 @@
       input {
         width: 0px;
       }
-      img {
+      .photoProfil {
         background: $gradient;
         width: 175px;
         height: 175px;
         object-fit: contain;
         border-radius: 50%;
+        cursor: pointer;
       }
     }
 

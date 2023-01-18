@@ -7,15 +7,9 @@ function PersonnesConfiance({ setCompo }) {
   const [persoConf, setPersoConf] = useState([]);
   const { familleId } = useContext(FamilleContext);
 
-  const Token =
-    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getPersoConf = () => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/famille/conf/${familleId}`, {
-        headers: {
-          "x-token": Token,
-        },
-      })
+      .get(`${import.meta.env.VITE_PATH}/famille/conf/${familleId}`)
       .then((res) => {
         setPersoConf(res.data);
       })

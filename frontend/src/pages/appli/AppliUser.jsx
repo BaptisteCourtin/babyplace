@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import axios from "axios";
 import NavbarApp from "@components/appli/navbar/NavbarApp";
-import avatar from "@assets/avatar1.svg";
 import Completion from "@components/appli/user/Completion";
 import FamilleContext from "@components/context/FamilleContext";
+import { AiOutlineUser } from "react-icons/ai";
 
 function AppliUser() {
   const [pourcentFormParent, setPourcentFormParent] = useState(0);
@@ -17,15 +17,9 @@ function AppliUser() {
   const [donneesOK, setDonneesOK] = useState(false);
 
   const { familleId } = useContext(FamilleContext);
-  const Token =
-    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getPourcentForm = () => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/famille/pourcent/${familleId}`, {
-        headers: {
-          "x-token": Token,
-        },
-      })
+      .get(`${import.meta.env.VITE_PATH}/famille/pourcent/${familleId}`)
       .then((res) => {
         console.log(res.data);
         setPourcentFormParent(res.data[0][0].pourcentFormParent);
@@ -84,12 +78,15 @@ function AppliUser() {
     formData.append("photoFamille", docImgProfil.current.files[0]);
 
     axios
-      .post("http://localhost:5000/famille/photoProfil", formData)
+      .post(`${import.meta.env.VITE_PATH}/famille/photoProfil`, formData)
       .then((result) => {
         axios
-          .put(`http://localhost:5000/famille/photoProfil/${familleId}`, {
-            photoFamille: result.data.photoFamille[0].filename,
-          })
+          .put(
+            `${import.meta.env.VITE_PATH}/famille/photoProfil/${familleId}`,
+            {
+              photoFamille: result.data.photoFamille[0].filename,
+            }
+          )
           .then(() => {
             setImageProfil(result.data.photoFamille[0].filename);
           })
@@ -135,16 +132,17 @@ function AppliUser() {
               ref={docImgProfil}
               onChange={() => SubmitPhotoFamille()}
             />
-            <img
-              src={
-                imageProfil
-                  ? `${
-                      import.meta.env.VITE_PATH
-                    }/uploads/photoFamille/${imageProfil}`
-                  : avatar
-              }
-              alt="avatar"
-            />
+            {imageProfil ? (
+              <img
+                className="photoProfil"
+                src={`${
+                  import.meta.env.VITE_PATH
+                }/uploads/photoFamille/${imageProfil}`}
+                alt="avatar"
+              />
+            ) : (
+              <AiOutlineUser className="photoProfil" />
+            )}
           </label>
           <h3>
             {nomPrenom[0].prenom || nomPrenom[0].nom
