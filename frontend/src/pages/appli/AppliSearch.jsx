@@ -19,7 +19,7 @@ function AppliSearch() {
     "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getStructure = () => {
     axios
-      .get("http://localhost:5000/structure/allapp", {
+      .get(`${import.meta.env.VITE_PATH}/structure/allapp`, {
         headers: {
           "x-token": Token,
         },
@@ -39,6 +39,12 @@ function AppliSearch() {
   const [dataBasique, setDataBasique] = useState({
     isCreche: 2,
     dispo: false,
+  });
+
+  const [dataDateHeure, setDataDateHeure] = useState({
+    heureMin: "00:00",
+    heureMax: "23:59",
+    jour: "",
   });
 
   const [dataServices, setDataServices] = useState({
@@ -68,6 +74,7 @@ function AppliSearch() {
           setCompo={setCompo}
           Allstructure={structure}
           dataBasique={dataBasique}
+          dataDateHeure={dataDateHeure}
           dataServices={dataServices}
           dataAggrements={dataAggrements}
         />
@@ -86,7 +93,13 @@ function AppliSearch() {
       );
     }
     if (compo === 5) {
-      return <DateHeure setCompo={setCompo} />;
+      return (
+        <DateHeure
+          setCompo={setCompo}
+          dataDateHeure={dataDateHeure}
+          setDataDateHeure={setDataDateHeure}
+        />
+      );
     }
     if (compo === 6) {
       return (
@@ -111,6 +124,7 @@ function AppliSearch() {
         setCompo={setCompo}
         Allstructure={structure}
         dataBasique={dataBasique}
+        dataDateHeure={dataDateHeure}
         dataServices={dataServices}
         dataAggrements={dataAggrements}
       />

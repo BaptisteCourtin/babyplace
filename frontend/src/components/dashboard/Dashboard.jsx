@@ -130,7 +130,7 @@ function Dashboard() {
         data.avisProprete +
         data.avisSecurite) /
         5) *
-      10
+        10
     ) / 10;
 
   const notifContent = (type) => {
@@ -156,7 +156,13 @@ function Dashboard() {
         <button type="button" onClick={() => setToggleNotif(!toggleNotif)}>
           <FiBell />
         </button>
-        <button type="button" onClick={() => { setToggle(0); setDashPage(0) }}>
+        <button
+          type="button"
+          onClick={() => {
+            setToggle(0);
+            setDashPage(0);
+          }}
+        >
           <img src={data.photoProfil} />
           {data.nom || data.prenom}
         </button>
@@ -180,8 +186,7 @@ function Dashboard() {
                   {data.nom}
                   <span>
                     {reviews}
-                    <AiFillStar />
-                    ({data.nbNotes})
+                    <AiFillStar />({data.nbNotes})
                   </span>
                 </h2>
                 {userType === 'creche' ? (

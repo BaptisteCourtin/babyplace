@@ -10,6 +10,7 @@ function DashPlaces({
   structureId,
 }) {
 
+function DashPlaces({ userType, title, structureId }) {
   const [toggleDay, setToggleDay] = useState(null);
   const [selected, setSelected] = useState(null);
   const [dayId, setDayId] = useState(1);
@@ -17,9 +18,9 @@ function DashPlaces({
   const [data, setData] = useState([]);
   const [horaires, setHoraires] = useState([]);
 
-  const [hour1, setHour1] = useState(null)
-  const [hour2, setHour2] = useState(null)
-  const [hour3, setHour3] = useState(null)
+  const [hour1, setHour1] = useState(null);
+  const [hour2, setHour2] = useState(null);
+  const [hour3, setHour3] = useState(null);
 
   const [indemn1, setIndemn1] = useState(null);
   const [switch1, setSwitch1] = useState(() => {
@@ -89,7 +90,7 @@ function DashPlaces({
     try {
       await axios.put(`${import.meta.env.VITE_PATH}/dashboard/tarif/${structureId}`, {
         id: structureId,
-        tarif: tarif,
+        tarif,
         tarifValue: value,
         table: userType === 'assMat' && tarif === 'tarifHeureSup' ? 'assMat' : 'structure'
       })
@@ -99,13 +100,13 @@ function DashPlaces({
     catch (err) {
       console.error(err.message)
     }
-  }
+  };
 
   const updateIndemn = async (indemn, value) => {
     try {
       await axios.put(`${import.meta.env.VITE_PATH}/dashboard/indemn/${structureId}`, {
         id: structureId,
-        indemn: indemn,
+        indemn,
         indemnValue: value,
         table: userType === 'assMat' && indemn !== 'indemnRepas' ? 'assMat' : 'structure'
       })
@@ -115,7 +116,7 @@ function DashPlaces({
     catch (err) {
       console.error(err.message)
     }
-  }
+  };
 
   const updateOptions = async (options, value) => {
     try {
@@ -130,7 +131,7 @@ function DashPlaces({
     catch (err) {
       console.error(err.message)
     }
-  }
+  };
 
   return (
     <div className="dashPlaces">
@@ -150,18 +151,16 @@ function DashPlaces({
           <summary>Vos tarifs</summary>
           <div className="dashPlacesPrices">
             <div className="dashOptionsPrices">
-              <p>
-                Heure
-              </p>
+              <p>Heure</p>
               <input
                 type="number"
                 name="tarifHeureSup"
                 id="tarifHeureSup"
                 value={hour1}
-                step={.5}
+                step={0.5}
                 onChange={(e) => {
                   setHour1(e.target.value);
-                  updateTarif('tarifHeure', e.target.value);
+                  updateTarif("tarifHeure", e.target.value);
                 }}
               />
               €
@@ -175,28 +174,26 @@ function DashPlaces({
                 name="tarifHeureSup"
                 id="tarifHeureSup"
                 value={hour2}
-                step={.5}
+                step={0.5}
                 onChange={(e) => {
                   setHour2(e.target.value);
-                  updateTarif('tarifHoraireSpec', e.target.value);
+                  updateTarif("tarifHoraireSpec", e.target.value);
                 }}
               />
               €
             </div>
-            {userType === 'assMat' && (
+            {userType === "assMat" && (
               <div className="dashOptionsPrices">
-                <p title="Au delà de 45h/semaine">
-                  Heure majorée
-                </p>
+                <p title="Au delà de 45h/semaine">Heure majorée</p>
                 <input
                   type="number"
                   name="tarifHeureSup"
                   id="tarifHeureSup"
                   value={hour3}
-                  step={.5}
+                  step={0.5}
                   onChange={(e) => {
                     setHour3(e.target.value);
-                    updateTarif('tarifHeureSup', e.target.value);
+                    updateTarif("tarifHeureSup", e.target.value);
                   }}
                 />
                 €
@@ -207,7 +204,7 @@ function DashPlaces({
         <details>
           <summary>Vos options</summary>
           <div className="dashPlacesOptions">
-            {userType === 'assMat' && (
+            {userType === "assMat" && (
               <>
                 <div className="dashSwitchContainer">
                   Indemnité d'entretien
@@ -228,10 +225,10 @@ function DashPlaces({
                       type="number"
                       min={1}
                       value={indemn1}
-                      step={.5}
+                      step={0.5}
                       onChange={(e) => {
                         setIndemn1(e.target.value);
-                        updateIndemn('indemnEntretien', e.target.value);
+                        updateIndemn("indemnEntretien", e.target.value);
                       }}
                     />
                     €
@@ -256,10 +253,10 @@ function DashPlaces({
                       type="number"
                       min={1}
                       value={indemn2}
-                      step={.5}
+                      step={0.5}
                       onChange={(e) => {
                         setIndemn2(e.target.value);
-                        updateIndemn('indemnKm', e.target.value);
+                        updateIndemn("indemnKm", e.target.value);
                       }}
                     />
                     €
@@ -286,10 +283,10 @@ function DashPlaces({
                   type="number"
                   min={1}
                   value={indemn3}
-                  step={.5}
+                  step={0.5}
                   onChange={(e) => {
                     setIndemn3(e.target.value);
-                    updateIndemn('indemnRepas', e.target.value);
+                    updateIndemn("indemnRepas", e.target.value);
                   }}
                 />
                 €

@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import DashCalendar from "./calendar/DashCalendar";
 import { toast } from "react-hot-toast";
+import DashCalendar from "./calendar/DashCalendar";
 
 function DashAgenda({ structureId, maxPlaces }) {
   const [hours, setHours] = useState([]);
@@ -42,9 +42,10 @@ function DashAgenda({ structureId, maxPlaces }) {
         .put(`${import.meta.env.VITE_PATH}/calendrier/places/${calendarIndex}`, {
           id: calendarIndex,
           nbPlaces: places,
-        })
-      toast.success("Vos places ont bien été modifiées")
-      getCalendar()
+        }
+      );
+      toast.success("Vos places ont bien été modifiées");
+      getCalendar();
     } catch (err) {
       console.error(err.message)
     }
@@ -55,10 +56,11 @@ function DashAgenda({ structureId, maxPlaces }) {
       await axios
         .put(`${import.meta.env.VITE_PATH}/calendrier/places/close/${calendarIndex}`, {
           id: calendarIndex,
-        })
-      toast.success("Bon repos")
-      getCalendar()
-      setPlaces("")
+        }
+      );
+      toast.success("Bon repos");
+      getCalendar();
+      setPlaces("");
     } catch (err) {
       console.error(err.message)
     }
@@ -70,10 +72,11 @@ function DashAgenda({ structureId, maxPlaces }) {
         .put(`${import.meta.env.VITE_PATH}/calendrier/places/open/${calendarIndex}`, {
           id: calendarIndex,
           maxPlaces,
-        })
-      toast.success("Travaillez bien")
-      getCalendar()
-      setPlaces("")
+        }
+      );
+      toast.success("Travaillez bien");
+      getCalendar();
+      setPlaces("");
     } catch (err) {
       console.error(err.message)
     }
@@ -133,8 +136,9 @@ function DashAgenda({ structureId, maxPlaces }) {
     }-${curDate.getDate()}`;
 
   const [clickedDay, setClickedDay] = useState(new Date());
-  const date = `${clickedDay.getFullYear()}-${clickedDay.getMonth() + 1
-    }-${clickedDay.getDate()}`;
+  const date = `${clickedDay.getFullYear()}-${
+    clickedDay.getMonth() + 1
+  }-${clickedDay.getDate()}`;
 
   const day = clickedDay.toLocaleDateString("fr-FR", { weekday: "long" });
 

@@ -6,11 +6,34 @@ import PropTypes from "prop-types";
 
 import Rating from "react-rating";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
+import { toast } from "react-hot-toast";
 
 function NotifNote({ setCompo }) {
-  // faire passer l'id de la structure
-  const id = 6;
+  // --- get ---
+  const id = 6; // mettre l'id  de la structure suivant le clic de la notif
   const [structureNotes, setStructureNotes] = useState();
+
+  const Token =
+    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+  const getStructureById = () => {
+    axios
+      .get(`${import.meta.env.VITE_PATH}/structure/notes/${id}`, {
+        headers: {
+          "x-token": Token,
+        },
+      })
+      .then((res) => {
+        setStructureNotes(res.data[0]);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  useEffect(() => {
+    getStructureById();
+  }, []);
+
+  // --- update ---
 
   const [noteCom, setNoteCom] = useState(0);
   const [noteEveil, setNoteEveil] = useState(0);
@@ -19,7 +42,7 @@ function NotifNote({ setCompo }) {
   const [noteHoraires, setNoteHoraires] = useState(0);
 
   const updateNotes = (dataNewNotes) => {
-    axios.put(`http://localhost:5000/structure/notes/${id}`, {
+    axios.put(`${import.meta.env.VITE_PATH}/structure/notes/${id}`, {
       nbNotes: dataNewNotes.nbNotes,
       noteCom: dataNewNotes.avisCom,
       noteProprete: dataNewNotes.avisProprete,
@@ -40,39 +63,19 @@ function NotifNote({ setCompo }) {
 
     const dataNewNotes = {
       nbNotes: (nbNotes += 1),
-      avisCom: (avisCom / nbNotes).toFixed(2),
-      avisEveil: (avisEveil / nbNotes).toFixed(2),
-      avisHoraires: (avisHoraires / nbNotes).toFixed(2),
-      avisProprete: (avisProprete / nbNotes).toFixed(2),
-      avisSecurite: (avisSecurite / nbNotes).toFixed(2),
+      avisCom: avisCom / nbNotes,
+      avisEveil: avisEveil / nbNotes,
+      avisHoraires: avisHoraires / nbNotes,
+      avisProprete: avisProprete / nbNotes,
+      avisSecurite: avisSecurite / nbNotes,
     };
 
     updateNotes(dataNewNotes);
 
-    // faire une pop up merci ???
+    toast.success("Merci de votre dévotion à notre cause 😈");
 
     setCompo(0);
   };
-
-  const Token =
-    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
-  const getStructureById = () => {
-    axios
-      .get(`http://localhost:5000/structure/notes/${id}`, {
-        headers: {
-          "x-token": Token,
-        },
-      })
-      .then((res) => {
-        setStructureNotes(res.data[0]);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-  useEffect(() => {
-    getStructureById();
-  }, []);
 
   return (
     <div className="notif-container-grad">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import MultiRangeSlider from "multi-range-slider-react";
 import open from "@assets/dashboard/open-sign.svg";
 import close from "@assets/dashboard/closed-sign.svg";
@@ -7,6 +7,18 @@ import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useEffect } from 'react';
 
+function Agenda({
+  title,
+  updateDay,
+  horaires,
+  toggleDay,
+  setToggleDay,
+  selected,
+  setSelected,
+  dayId,
+}) {
+  const [toggleType, setToggleType] = useState(0);
+  const [clickedDay, setClickedDay] = useState(new Date());
 
 function Agenda({ structureId, getHoraires, horaires, toggleDay, setToggleDay, selected, setSelected, dayId, setDayId }) {
 
@@ -153,4 +165,4 @@ function Agenda({ structureId, getHoraires, horaires, toggleDay, setToggleDay, s
     )
 }
 
-export default Agenda
+export default Agenda;

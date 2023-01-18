@@ -3,7 +3,7 @@ import StructureContext from "@components/context/StructureContext";
 import Proptypes from "prop-types";
 
 function Structure15({
-  numSecu, numAgrement, dateAgrement, docPmi, siret, assHabitNom, assHabitNumero, assHabitAdresse, assAutoNom, assAutoNumero, assAutoAdresse, docIdentite, docVitale, docJustifDom, docDiplome, docRespCivile, docAssAuto, inputRefPmi, inputRefCpam, inputRefCni, inputRefDom, inputRefDiplome, inputRefAuto, inputRefResp, updateFields,
+  numSecu, numAgrement, dateAgrement, siret, assHabitNom, assHabitNumero, assHabitAdresse, assAutoNom, assAutoNumero, assAutoAdresse, inputRefPmi, inputRefCpam, inputRefCni, inputRefDom, inputRefDiplome, inputRefAuto, inputRefResp, updateFields,
 }) {
   const { structure } = useContext(StructureContext);
 
@@ -343,7 +343,6 @@ Structure15.propTypes = {
   numSecu: Proptypes.node,
   numAgrement: Proptypes.node,
   dateAgrement: Proptypes.node,
-  docPmi: Proptypes.node,
   siret: Proptypes.node,
   assHabitNom: Proptypes.node,
   assHabitNumero: Proptypes.node,
@@ -351,12 +350,6 @@ Structure15.propTypes = {
   assAutoNom: Proptypes.node,
   assAutoNumero: Proptypes.node,
   assAutoAdresse: Proptypes.node,
-  docIdentite: Proptypes.node,
-  docVitale: Proptypes.node,
-  docJustifDom: Proptypes.node,
-  docDiplome: Proptypes.node,
-  docRespCivile: Proptypes.node,
-  docAssAuto: Proptypes.node,
   updateFields: Proptypes.func,
 };
 export default Structure15;

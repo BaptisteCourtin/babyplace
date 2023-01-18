@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
+import Proptypes, { bool, number, node, oneOfType } from "prop-types";
 import imgCopie from "@assets/img-copie.svg";
 import imgTime from "@assets/img-time.svg";
 import imgDossier from "@assets/img-dossier.svg";
-import Proptypes from "prop-types";
 import ResaContext from "@components/context/ResaContext";
 
-function Structure7({ resaInst, updateFields }) {
+function Structure7({ updateFields }) {
   const { resa, setResa } = useContext(ResaContext);
   return (
     <div>
@@ -94,7 +94,11 @@ function Structure7({ resaInst, updateFields }) {
   );
 }
 Structure7.propTypes = {
-  resaInst: Proptypes.node,
+  resaInst: oneOfType([
+    bool,
+    number,
+    node
+  ]),
   updateFields: Proptypes.func,
 };
 export default Structure7;

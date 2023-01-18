@@ -26,7 +26,7 @@ function CarteCreche({ data, userPosition }) {
     "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getHorairesId = () => {
     axios
-      .get(`http://localhost:5000/horaires/${structureId}`, {
+      .get(`${import.meta.env.VITE_PATH}/horaires/${structureId}`, {
         headers: {
           "x-token": Token,
         },
@@ -79,7 +79,7 @@ function CarteCreche({ data, userPosition }) {
 
   const distance = (getDistance(userPosition, center) / 1000).toFixed(2);
 
-  // ---
+  // --- avis moyen ---
 
   const [nbStarMoyen, setNbStarMoyen] = useState(0);
 

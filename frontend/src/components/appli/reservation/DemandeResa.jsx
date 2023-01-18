@@ -9,6 +9,7 @@ function DemandeResa({
   heureMin,
   heureMax,
   jour,
+  isOccasionnel,
   nom,
   nomUsage,
   nomNaissance,
@@ -27,9 +28,11 @@ function DemandeResa({
   const [prixTotal, setPrixTotal] = useState(0);
 
   const calculPrixTotal = () => {
+    // heure commencé = payer
     setPrixTotal(
       (
-        tarifHeure * (heureMax - heureMin) +
+        tarifHeure * (heureMax.split(":")[0] - heureMin.split(":")[0]) +
+        (heureMax.split(":")[1] - heureMin.split(":")[1] > 0 ? tarifHeure : 0) +
         (kilometre && indemnKm) +
         (repas && indemnRepas) +
         (entretien && indemnEntretien)
@@ -43,21 +46,17 @@ function DemandeResa({
 
   const enfantId = 1;
   const handleRequest = () => {
-    axios.post(`http://localhost:5000/reservation`, {
+    axios.post(`${import.meta.env.VITE_PATH}/reservation`, {
       enfantId,
       structureId,
       prixTotal,
+
+      isOccasionnel,
       dateArrivee: jour,
       heureArrivee: heureMin,
       dateDepart: jour,
       heureDepart: heureMax,
     });
-    // nom-prenom enfant
-    // age enfant
-    // nom-prenom parent
-    // % profil complet
-
-    // temps total
     setCompo(3);
   };
 
@@ -102,6 +101,7 @@ function DemandeResa({
               p={`Indemnité de repas (${indemnRepas}€)`}
               classique
             />
+            {/* indemnKm à mettre par rapport au km */}
             {indemnKm ? (
               <Toggle
                 setter={setKilometre}
@@ -126,11 +126,20 @@ function DemandeResa({
         <div className="prix-resa">
           <div className="prix">
             <p>
-              {/* indemnKm par rapport au km */}
               <span>{prixTotal}€ *</span>
             </p>
             <p>
-              <span>{heureMax - heureMin}h de garde</span>
+              <span>
+                {`${
+                  heureMax.split(":")[1] - heureMin.split(":")[1] >= 0
+                    ? heureMax.split(":")[0] - heureMin.split(":")[0]
+                    : heureMax.split(":")[0] - heureMin.split(":")[0] - 1
+                }:${
+                  heureMax.split(":")[1] - heureMin.split(":")[1] >= 0
+                    ? heureMax.split(":")[1] - heureMin.split(":")[1]
+                    : 60 - heureMax.split(":")[1] - heureMin.split(":")[1]
+                } h de garde`}
+              </span>
             </p>
           </div>
           <button type="button" onClick={() => handleRequest()}>
@@ -150,8 +159,8 @@ function DemandeResa({
 DemandeResa.propTypes = {
   setCompo: PropTypes.func.isRequired,
 
-  heureMin: PropTypes.number.isRequired,
-  heureMax: PropTypes.number.isRequired,
+  heureMin: PropTypes.string.isRequired,
+  heureMax: PropTypes.string.isRequired,
   jour: PropTypes.string.isRequired,
   nom: PropTypes.string,
   nomUsage: PropTypes.string,
