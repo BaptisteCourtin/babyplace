@@ -36,7 +36,11 @@
     & details {
       & summary {
         font-size: $h3;
-        font-weight: 700;
+        font-weight: 500;
+
+        &::marker {
+          color: $third;
+        }
       }
 
       & a {
@@ -61,9 +65,17 @@
   & .loginParamsBtn {
     padding: 15px 20px;
     background-color: $third;
+    border: 1px solid transparent;
     border-radius: 50px;
     font-size: $h4;
     font-weight: 700;
     color: $white;
+    transition: 0.3s ease-in-out;
+
+    &:hover {
+      color: $third;
+      background-color: $white;
+      border: 1px solid $third;
+    }
   }
 }

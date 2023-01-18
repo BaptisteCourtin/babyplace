@@ -4,18 +4,21 @@ const sha256 = require("js-sha256");
 const datasource = require("../database");
 const fs = require("fs");
 const multer = require("multer");
+const upload = multer({ dest: "public/uploads/" });
 const { v4: uuidv4 } = require("uuid");
+const uploadDoc = require('./helpers/helper')
 
 const structure = require("./controllers/structure.controllers");
 const horaires = require("./controllers/horaires.controllers");
 const calendrier = require("./controllers/calendrier.controllers");
 const dashboard = require("./controllers/dashboard.controllers");
-const messageAdmin = require("./controllers/messageAdmin.controllers");
-
+const reservation = require("./controllers/reservation.controller");
 const assMat = require("./controllers/assMat.controllers");
 const creche = require("./controllers/creche.controllers");
 const famille = require("./controllers/famille.controllers");
 const messagerie = require("./controllers/messagerie.controllers");
+const notification = require("./controllers/notification.controllers");
+const messageAdmin = require("./controllers/messageAdmin.controllers");
 
 // --- pour app ---
 
@@ -327,23 +330,49 @@ router.get("/structure", structure.getStructure);
 router.get("/structures", structure.getStructures);
 router.get("/structure/type/:id", structure.getStructureType);
 router.get("/structure/details", structure.getStructureDetails);
+router.get("/reservation", reservation.getReser);
 router.get("/admin", structure.getNotVerified);
-router.get("/horaires", horaires.getHoraires);
 router.get("/horaires/:id", horaires.getHorairesById);
 router.get("/calendrier/:id", calendrier.getCalendrier);
+router.get("/notifications/:id", notification.getNotifications);
 router.get("/admin/assmat", assMat.getAssMat);
 router.get("/admin/creche", creche.getCreche);
 router.get("/admin/famille", famille.getFamille);
 
 router.put("/admin/verified/:id", structure.updateVerified);
+router.put("/reservation/status", reservation.updateStatus);
 router.put("/horaires/day/:id", horaires.updateDay);
 router.put("/dashboard/hours/:id", dashboard.updateHours);
 router.put("/dashboard/indemn/:id", dashboard.updateIndemn);
 router.put("/dashboard/tarif/:id", dashboard.updateTarif);
 router.put("/dashboard/options/:id", dashboard.updateOptions);
+router.put("/dashboard/docs", structure.updateImages);
+router.put("/structure/infos/:id", structure.updateInfos);
+router.put("/structure/password/:id", structure.updatePwd);
 router.put("/calendrier/places/:id", calendrier.updatePlaces);
 router.put("/calendrier/places/close/:id", calendrier.updateStatusClose);
 router.put("/calendrier/places/open/:id", calendrier.updateStatusOpen);
+router.put("/logout/:id", structure.logout);
+
+router.post("/calendrier/add", calendrier.postDate);
+router.post("/dashboard/docs", upload.single(`file`), structure.uploadProfil);
+router.post('/uploads', async (req, res, next) => {
+  try {
+    const file = req.file
+    const result = await uploadDoc(file)
+    res
+      .status(200)
+      .json(result)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.delete("/calendrier", calendrier.deleteDates);
+router.delete("/calendrier/:id", calendrier.fullDate)
+router.delete("/admin/refused/:id", structure.deleteRefused);
+router.delete("/notifications/:id", notification.deleteNotification);
+//Routes for dashboard + admin page end
 
 router.post("/inscription", (req, res) => {
   const { email, password } = req.body;

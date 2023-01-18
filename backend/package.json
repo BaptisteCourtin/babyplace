@@ -14,9 +14,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/storage": "^6.9.0",
+    "body-parser": "^1.20.1",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
+    "multer": "^1.4.5-lts.1",
     "mysql2": "^2.3.3",
     "socket-io": "^1.0.0",
     "template-fullstack": "file:.."
