@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import avatar from "@assets/avatar1.svg";
 import FamilleContext from "@components/context/FamilleContext";
+import { AiOutlineUser } from "react-icons/ai";
 
 function ProfilPlat() {
   const { familleId } = useContext(FamilleContext);
@@ -14,15 +14,9 @@ function ProfilPlat() {
 
   const [donneesOK, setDonneesOK] = useState(false);
 
-  const Token =
-    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getFamilleInfo = () => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/famille/info/${familleId}`, {
-        headers: {
-          "x-token": Token,
-        },
-      })
+      .get(`${import.meta.env.VITE_PATH}/famille/info/${familleId}`)
       .then((res) => {
         setPrenom1(res.data[0][0].prenom);
         setNom1(res.data[0][0].nom);
@@ -48,16 +42,16 @@ function ProfilPlat() {
     donneesOK && (
       <div className="profil-plat">
         <div className="container-image">
-          <img
-            src={
-              photoFamille
-                ? `${
-                    import.meta.env.VITE_PATH
-                  }/uploads/photoFamille/${photoFamille}`
-                : avatar
-            }
-            alt="img"
-          />
+          {photoFamille ? (
+            <img
+              src={`${
+                import.meta.env.VITE_PATH
+              }/uploads/photoFamille/${photoFamille}`}
+              alt="avatar"
+            />
+          ) : (
+            <AiOutlineUser />
+          )}
         </div>
         <div className="user-info">
           <h3>

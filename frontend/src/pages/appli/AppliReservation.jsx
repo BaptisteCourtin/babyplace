@@ -28,18 +28,10 @@ function AppliReservation() {
 
   // --- get calendar par structureId ---
   const [dataCalendarId, setDataCalendarId] = useState([]);
-  const Token =
-    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+
   const getCalendar = () => {
     axios
-      .get(
-        `${import.meta.env.VITE_PATH}/calendrier/whereMoins/${structureId}`,
-        {
-          headers: {
-            "x-token": Token,
-          },
-        }
-      )
+      .get(`${import.meta.env.VITE_PATH}/calendrier/whereMoins/${structureId}`)
       .then((res) => {
         setDataCalendarId(res.data);
       })

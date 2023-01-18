@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import Calendar from "react-calendar";
-import parseISO from "date-fns/parseISO";
-import compareAsc from "date-fns/compareAsc";
 
 import open from "@assets/dashboard/open-sign.svg";
 import close from "@assets/dashboard/closed-sign.svg";
@@ -64,7 +62,6 @@ function AppCalendar({
       setThisMinHeure(dataHorairesId[6].heureMin);
       setThisMaxHeure(dataHorairesId[6].heureMax);
     }
-
     return jourLong;
   };
 

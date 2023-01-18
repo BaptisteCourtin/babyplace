@@ -38,15 +38,9 @@ function Parents() {
   const [donneesOK, setDonneesOK] = useState(false); // les donnees sont prises => mis dans initial data
   const [finalOK, setFinalOK] = useState(false); // donnees mises dans initial => go visuel
 
-  const Token =
-    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getDonneesForm = () => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/famille/formParent/${familleId}`, {
-        headers: {
-          "x-token": Token,
-        },
-      })
+      .get(`${import.meta.env.VITE_PATH}/famille/formParent/${familleId}`)
       .then((res) => {
         setDonneesForm(res.data);
         setDonneesOK(true);
@@ -110,7 +104,7 @@ function Parents() {
     // modifier le parentId
     const { parentId } = donneesForm[place - 1];
     const pourcent = calculPourcent();
-    axios.put(`http://localhost:5000/formParent/${parentId}`, {
+    axios.put(`${import.meta.env.VITE_PATH}/formParent/${parentId}`, {
       nom: initialData[`nom${place}`],
       prenom: initialData[`prenom${place}`],
       profession: initialData[`profession${place}`],
