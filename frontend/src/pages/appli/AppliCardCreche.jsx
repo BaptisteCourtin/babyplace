@@ -49,7 +49,7 @@ function AppliCardCreche() {
   } = data;
 
   const handleSignaler = () => {
-    axios.put(`http://localhost:5000/structure/signal/${structureId}`);
+    axios.put(`${import.meta.env.VITE_PATH}/structure/signal/${structureId}`);
   };
 
   return (

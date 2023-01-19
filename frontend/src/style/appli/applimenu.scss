@@ -71,14 +71,55 @@
       flex-direction: column;
       gap: 1rem;
 
+      .create-conf {
+        background-color: $blue;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 1rem;
+      }
+
+      .form-ajout-confiance {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 90%;
+        text-align: center;
+        border: 1px $second solid;
+        padding: 1rem;
+        box-shadow: 0px 0px 5px $second;
+        border-radius: 10px;
+
+        .ferm {
+          color: red;
+          border: 1px red solid;
+          border-radius: 10px;
+          padding: 0.5rem;
+        }
+
+        h3 {
+          margin: 0.5rem 0;
+        }
+      }
+
       .card-confiance {
         width: 90%;
         display: flex;
-        flex-direction: column;
-        gap: 0.25rem;
-        margin-left: 1rem;
-        padding-left: 0.5rem;
-        border-left: 1px $second solid;
+        justify-content: space-between;
+        align-items: center;
+
+        .info {
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+          margin-left: 1rem;
+          padding-left: 0.5rem;
+          border-left: 1px $second solid;
+        }
+
+        .delete-conf {
+          color: red;
+        }
       }
     }
 

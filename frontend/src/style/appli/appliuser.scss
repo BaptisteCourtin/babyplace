@@ -13,8 +13,21 @@
     color: $white;
     padding: 0 1rem 3.5rem;
 
-    img {
+    label {
       margin-top: 2rem;
+      border-radius: 50%;
+
+      input {
+        width: 0px;
+      }
+      .photoProfil {
+        background: $gradient;
+        width: 175px;
+        height: 175px;
+        object-fit: contain;
+        border-radius: 50%;
+        cursor: pointer;
+      }
     }
 
     h3 {

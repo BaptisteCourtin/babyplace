@@ -33,7 +33,7 @@ function AppliUserCompletion() {
       <div className="container-header">
         <header>
           <button type="button" className="button-head">
-            <Link to="/appli/user">{`< Ed Cannan`}</Link>
+            <Link to="/appli/user">{`< Retour`}</Link>
           </button>
           <div className="container-butt">
             <button type="button" onClick={() => setCompo(0)}>

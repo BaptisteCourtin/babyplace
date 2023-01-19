@@ -2,25 +2,28 @@ import React, { useState, useEffect } from 'react';
 import Nav from './Nav.admin';
 import axios from 'axios';
 import { AiFillCloseCircle } from "react-icons/ai";
+import { toast } from 'react-hot-toast';
+import ModalMessageAdmin from './ModalMessageAdmin';
 
 const MessageAdmin = () => {
 
     const [messageAdminData, setMessageAdminData] = useState([]);
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedId, setSelectedId] = useState();
 
-    const getAllMessage = () => {
-        axios.get("http://localhost:5000/contact/message/all")
-            .then((ret) => {
-                console.log(ret.data);
-                setMessageAdminData(ret.data);
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-    };
-
+    const getAllMessage = async () => {
+        try {
+            const ret = await axios.get("http://localhost:5000/contact/message/all");
+            setMessageAdminData(ret.data);
+        } catch (err) {
+            toast.error(err.message);
+        };
+    }
     const deleteMessage = (id) => {
-        axios.delete(`http://localhost:5000/contact/message/all/${id}`);
-    };
+        setSelectedId(id);
+        setIsOpen(!isOpen);
+    }
+
 
     useEffect(() => {
         getAllMessage();
@@ -51,6 +54,7 @@ const MessageAdmin = () => {
                         </li>
                     ))}
             </div>
+            <ModalMessageAdmin open={isOpen} close={setIsOpen} selectedId={selectedId} />
         </div>
     );
 };

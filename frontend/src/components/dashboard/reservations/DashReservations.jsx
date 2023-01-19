@@ -1,99 +1,45 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { MdOutlineCancel, MdCheckCircleOutline } from "react-icons/md";
 import { GoFile } from "react-icons/go";
-import logo from "@assets/logo5white.svg";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
-function DashReservations() {
-  const children = [
-    {
-      name: "baby1",
-      age: "14 mois",
-      parent: "father",
-      profile: "80%",
-      day: "6 déc",
-      comingHour: 7,
-      leavingHour: 18,
-      status: "approved",
-    },
-    {
-      name: "baby2",
-      age: "20 mois",
-      parent: "mother",
-      profile: "100%",
-      day: "8 déc",
-      comingHour: 8,
-      leavingHour: 18,
-      status: "waiting",
-    },
-    {
-      name: "baby3",
-      age: "18 mois",
-      parent: "mother",
-      profile: "40%",
-      day: "6 déc",
-      comingHour: 10,
-      leavingHour: 14,
-      status: "refused",
-    },
-    {
-      name: "baby4",
-      age: "10 mois",
-      parent: "father",
-      profile: "100%",
-      day: "7 déc",
-      comingHour: 7,
-      leavingHour: 16,
-      status: "canceled",
-    },
-    {
-      name: "baby5",
-      age: "22 mois",
-      parent: "mother",
-      profile: "90%",
-      day: "9 déc",
-      comingHour: 8,
-      leavingHour: 20,
-      status: "approved",
-    },
-    {
-      name: "baby6",
-      age: "10 mois",
-      parent: "father",
-      profile: "100%",
-      day: "12 déc",
-      comingHour: 9,
-      leavingHour: 17,
-      status: "waiting",
-    },
-  ];
+function DashReservations({ tarifHeure }) {
 
   const [statusToggle, setStatusToggle] = useState(0);
-  const [filteredChildren, setFilteredChildren] = useState([]);
+  const [filteredReser, setFilteredReser] = useState([]);
 
-  const [approvedModal, setApprovedModal] = useState(false);
-  const [refusedModal, setRefusedModal] = useState(false);
-  const handleApprovedClick = () => {
-    setApprovedModal(true);
-    setRefusedModal(false);
+  const [reser, setReser] = useState([])
+  const getReser = async () => {
+    try {
+      const res = await axios
+        .get(`${import.meta.env.VITE_PATH}/reservation`)
+      setReser(res.data)
+    } catch (err) {
+      toast.error(err.message)
+    }
   };
 
-  const handleRefusedClick = () => {
-    setApprovedModal(false);
-    setRefusedModal(true);
-  };
-
-  const hourlyPrice = 5;
+  const updateStatus = async (status, reserId) => {
+    try {
+      await axios
+        .put(`${import.meta.env.VITE_PATH}/reservation/status`, {
+          status: status,
+          id: reserId
+        })
+      if (status === 'approved') {
+        toast.success("Vous avez accepté cette demande")
+      } else if (status === 'refused') {
+        toast.success("Vous avez refusé cette demande")
+      }
+      getReser()
+    } catch (err) {
+      console.log(err.message)
+    }
+  }
 
   useEffect(() => {
-    setFilteredChildren(
-      children.filter((c) => {
-        if (statusToggle === 0) return c;
-        if (statusToggle === 1) return c.status.includes("approved");
-        if (statusToggle === 2) return c.status.includes("waiting");
-        if (statusToggle === 3) return c.status.includes("refused");
-        if (statusToggle === 4) return c.status.includes("canceled");
-      })
-    );
+    getReser();
   }, [statusToggle]);
 
   return (
@@ -139,142 +85,108 @@ function DashReservations() {
         </div>
       </div>
       <ul className="reserList">
-        {filteredChildren.map((c) => (
-          <li
-            style={{
-              border: (() => {
-                if (c.status === "approved") {
-                  return "1px solid #2dcd7a";
-                }
-                if (c.status === "waiting") {
-                  return "1px solid #FFA84C";
-                }
-                if (c.status === "refused") {
-                  return "1px solid #EF3672";
-                }
-                if (c.status === "canceled") {
-                  return "1px solid #4b5d68";
-                }
-              })(),
-              opacity: (() => {
-                if (c.status === "canceled" || c.status === "refused") {
-                  return "0.4";
-                }
-                return "1";
-              })(),
-            }}
-          >
-            <p
-              className="reserStatusColor"
+        {reser
+          .filter((r) => {
+            if (statusToggle === 0) return r;
+            else if (statusToggle === 1) return r.status.includes("approved");
+            else if (statusToggle === 2) return r.status.includes("waiting");
+            else if (statusToggle === 3) return r.status.includes("refused");
+            else if (statusToggle === 4) return r.status.includes("canceled");
+          })
+          .map((r) => (
+            <li
               style={{
-                backgroundColor: (() => {
-                  if (c.status === "approved") {
-                    return "#2dcd7a";
+                border: (() => {
+                  if (r.status === "approved") {
+                    return "1px solid #2dcd7a";
                   }
-                  if (c.status === "waiting") {
-                    return "#FFA84C";
+                  if (r.status === "waiting") {
+                    return "1px solid #FFA84C";
                   }
-                  if (c.status === "refused") {
-                    return "#EF3672";
+                  if (r.status === "refused") {
+                    return "1px solid #EF3672";
                   }
-                  if (c.status === "canceled") {
-                    return "#4b5d68";
+                  if (r.status === "canceled") {
+                    return "1px solid #4b5d68";
                   }
                 })(),
+                opacity: (() => {
+                  if (r.status === "canceled" || r.status === "refused") {
+                    return "0.4";
+                  }
+                  return "1";
+                })(),
               }}
-            />
-            <div className="reserInfo1">
-              <p>{c.name}</p>
-              <p>{c.age}</p>
-            </div>
-            <div className="reserInfo2">
-              <p>{c.parent}</p>
-              <p>Profil {c.profile}</p>
-            </div>
-            <div className="reserInfo3">
-              <p>
-                <span>Date d'arrivée</span>
-                <br />
-                {c.day} / {c.comingHour}:00
-              </p>
-              <p>
-                <span>Date de départ</span>
-                <br />
-                {c.day} / {c.leavingHour}:00
-              </p>
-            </div>
-            <div className="reserInfo4">
-              <p>{c.leavingHour - c.comingHour}H</p>
-              <p>{(c.leavingHour - c.comingHour) * hourlyPrice}€</p>
-            </div>
-            {c.status === "waiting" ? (
-              <div className="reserChoice">
-                <button type="button" onClick={handleApprovedClick}>
-                  <MdCheckCircleOutline />
-                  Accepter
-                </button>
-                <button type="button" onClick={handleRefusedClick}>
-                  <MdOutlineCancel /> Refuser
-                </button>
+            >
+              <p
+                className="reserStatusColor"
+                style={{
+                  backgroundColor: (() => {
+                    if (r.status === "approved") {
+                      return "#2dcd7a";
+                    }
+                    if (r.status === "waiting") {
+                      return "#FFA84C";
+                    }
+                    if (r.status === "refused") {
+                      return "#EF3672";
+                    }
+                    if (r.status === "canceled") {
+                      return "#4b5d68";
+                    }
+                  })(),
+                }}
+              />
+              <div className="reserInfo1">
+                <p>{r.prenomEnfant} <br /> {r.nomEnfant}</p>
+                <p>{r.ageEnfant} mois</p>
               </div>
-            ) : (
-              <div className="reserModif">
-                <button type="button">
-                  <GoFile />
-                  Modifier
-                </button>
+              <div className="reserInfo2">
+                <p>{r.prenomParent} <br /> {r.nomParent}</p>
+                <p>Profil {r.pourcentProfil} %</p>
               </div>
-            )}
-          </li>
-        ))}
+              <div className="reserInfo3">
+                <p>
+                  <span>Dates</span>
+                  <br />
+                  {r.dateArrivee} / {r.dateDepart}
+                </p>
+                <p>
+                  <span>Horaires</span>
+                  <br />
+                  {r.heureArrivee} / {r.heureDepart}
+                </p>
+              </div>
+              <div className="reserInfo4">
+                <p>
+                  {r.heureDepart.replace(':00', '') - r.heureArrivee.replace(':00', '')}H
+                </p>
+                <p>
+                  {(r.heureDepart.replace(':00', '') - r.heureArrivee.replace(':00', '')) * tarifHeure}€
+                </p>
+              </div>
+              {r.status === "waiting" ? (
+                <div className="reserChoice">
+                  <button type="button" onClick={() => updateStatus('approved', r.id)}>
+                    <MdCheckCircleOutline />
+                    Accepter
+                  </button>
+                  <button type="button" onClick={() => updateStatus('refused', r.id)}>
+                    <MdOutlineCancel /> Refuser
+                  </button>
+                </div>
+              ) : (
+                <div className="reserModif">
+                  <button type="button" onClick={() => updateStatus('waiting', r.id)}>
+                    <GoFile />
+                    Modifier
+                  </button>
+                </div>
+              )}
+            </li>
+          ))
+        }
       </ul>
-      {approvedModal && (
-        <div className="approvedModal">
-          <div className="approvedModalInner">
-            <div className="approvedModalImg">
-              <img
-                src="https://randomuser.me/api/portraits/med/men/64.jpg"
-                alt=""
-              />
-              <img src={logo} alt="" />
-              <img
-                src="https://randomuser.me/api/portraits/med/women/64.jpg"
-                alt=""
-              />
-            </div>
-            <h2>Fantastique !</h2>
-            <p>Vous avez approuvé la demande de garde pour </p>
-            <div className="approvedModalBtn">
-              <button type="button">Envoyer un message</button>
-              <button type="button" onClick={() => setApprovedModal(false)}>
-                Fermer
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-      {refusedModal && (
-        <div className="refusedModal">
-          <div className="refusedModalInner">
-            <div className="refusedModalImg">
-              <img
-                src="https://randomuser.me/api/portraits/med/men/64.jpg"
-                alt=""
-              />
-              <img src={logo} alt="" />
-              <img
-                src="https://randomuser.me/api/portraits/med/women/64.jpg"
-                alt=""
-              />
-            </div>
-            <h2>Dommage !</h2>
-            <p>Vous avez refusé la demande de garde pour </p>
-            <button type="button" onClick={() => setRefusedModal(false)}>
-              Fermer
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
+import FamilleContext from "@components/context/FamilleContext";
 import { Link } from "react-router-dom";
 import logoBlanc from "@assets/logo-blanc.svg";
 import PropTypes from "prop-types";
+import { AiOutlineUser } from "react-icons/ai";
 
 function ConfirmeResa({
   heureMin,
@@ -13,12 +16,39 @@ function ConfirmeResa({
   nomNaissance,
   prenom,
 }) {
+  const { familleId } = useContext(FamilleContext);
+  const [photoFamille, setPhotoFamille] = useState();
+
+  const getFamilleInfo = () => {
+    axios
+      .get(`${import.meta.env.VITE_PATH}/famille/info/${familleId}`)
+      .then((res) => {
+        setPhotoFamille(res.data[1][0].photoProfilFamille);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  useEffect(() => {
+    getFamilleInfo();
+  }, [familleId]);
+
   return (
     <>
       <main className="confirme-resa">
         <img src={logoBlanc} className="mini-logo" alt="logo-blanc" />
         <div className="avatars">
-          <img className="avatar" src={photoProfil} alt="avatar1" />
+          {photoFamille ? (
+            <img
+              className="photoProfil"
+              src={`${
+                import.meta.env.VITE_PATH
+              }/uploads/photoFamille/${photoFamille}`}
+              alt="avatar"
+            />
+          ) : (
+            <AiOutlineUser className="photoProfil" />
+          )}
           <img className="avatar" src={photoProfil} alt="avatar2" />
         </div>
         <h3 className="title">Réservation</h3>

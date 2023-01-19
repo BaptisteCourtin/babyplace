@@ -5,22 +5,17 @@ import avatar1 from "@assets/avatar1.svg";
 import PropTypes from "prop-types";
 
 import Rating from "react-rating";
-import { AiOutlineStar, AiFillStar } from "react-icons/ai";
+import { AiOutlineStar, AiFillStar, AiOutlineUser } from "react-icons/ai";
+import { toast } from "react-hot-toast";
 
-function NotifNote({ setCompo }) {
+function NotifNote({ setCompo, photoFamille }) {
   // --- get ---
-  const id = 6;
+  const id = 6; // mettre l'id  de la structure suivant le clic de la notif
   const [structureNotes, setStructureNotes] = useState();
 
-  const Token =
-    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getStructureById = () => {
     axios
-      .get(`http://localhost:5000/structure/notes/${id}`, {
-        headers: {
-          "x-token": Token,
-        },
-      })
+      .get(`${import.meta.env.VITE_PATH}/structure/notes/${id}`)
       .then((res) => {
         setStructureNotes(res.data[0]);
       })
@@ -41,7 +36,7 @@ function NotifNote({ setCompo }) {
   const [noteHoraires, setNoteHoraires] = useState(0);
 
   const updateNotes = (dataNewNotes) => {
-    axios.put(`http://localhost:5000/structure/notes/${id}`, {
+    axios.put(`${import.meta.env.VITE_PATH}/structure/notes/${id}`, {
       nbNotes: dataNewNotes.nbNotes,
       noteCom: dataNewNotes.avisCom,
       noteProprete: dataNewNotes.avisProprete,
@@ -71,7 +66,7 @@ function NotifNote({ setCompo }) {
 
     updateNotes(dataNewNotes);
 
-    // faire une pop up merci
+    toast.success("Merci de votre dévotion à notre cause 😈");
 
     setCompo(0);
   };
@@ -87,7 +82,16 @@ function NotifNote({ setCompo }) {
       <div className="notif-note">
         <img src={logoBlanc} alt="logo-blanc" className="logo" />
         <div className="avatars">
-          <img src={avatar1} alt="img profil" className="avatar" />
+          {photoFamille ? (
+            <img
+              src={`${
+                import.meta.env.VITE_PATH
+              }/uploads/photoFamille/${photoFamille}`}
+              alt="avatar"
+            />
+          ) : (
+            <AiOutlineUser />
+          )}
           <img src={avatar1} alt="img creche" className="avatar" />
         </div>
         <h3>Donnez nous votre avis !</h3>
