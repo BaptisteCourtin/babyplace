@@ -28,13 +28,13 @@
     border-radius: 50px;
     margin: 4px;
     padding: 8px;
-    transition: .5s ease-in-out;
   }
 
   & button:hover {
-    color: $white;
-    background: $third;
-    border: 1px solid $grey;
+    color: $third;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+
   }
 
   & .leftPart {
@@ -219,12 +219,24 @@
       margin: 4px;
       padding: 8px;
       border: 1px solid $grey;
+      transition: .2s ease-in-out;
+    }
+
+    & button:hover {
+      box-shadow: 2px 2px 4px $grey;
     }
 
     & .backButton {
       border: none;
       color: $third;
       background-color: #eeeeee00;
+    }
+
+    & .backButton:hover {
+      box-shadow: none;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+
     }
   }
 
