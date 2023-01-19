@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Carousel } from "react-responsive-carousel";
 import Toggle from "../filtres/Toggle";
+import FamilleContext from "@components/context/FamilleContext";
 
 function FormEnfant() {
+  const { familleId } = useContext(FamilleContext);
+  // console.log("fID : " + familleId);
+
   // meme nom que bdd
   const [initialData, setInitialData] = useState({
     nom: "",
@@ -26,20 +30,15 @@ function FormEnfant() {
 
   // --- prise des donnees qui sont dans la bdd ---
 
-  const [nomsEnfants, setNomsEnfants] = useState();
+  const [nomsEnfants, setNomsEnfants] = useState(); // les prenoms des enfants
+  const [enfantId, setEnfantId] = useState(0); // mettre l'id du premier enfant dans le usestate
 
-  const familleId = 1;
-  const Token =
-    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getNomsEnfants = () => {
     axios
-      .get(`http://localhost:5000/famille/nomsEnfants/${familleId}`, {
-        headers: {
-          "x-token": Token,
-        },
-      })
+      .get(`${import.meta.env.VITE_PATH}/famille/nomsEnfants/${familleId}`)
       .then((res) => {
         setNomsEnfants(res.data);
+        setEnfantId(res.data[0].enfantId);
       })
       .catch((err) => {
         console.error(err);
@@ -49,20 +48,13 @@ function FormEnfant() {
     getNomsEnfants();
   }, []);
 
-  const [donneesForm, setDonneesForm] = useState();
+  const [donneesForm, setDonneesForm] = useState(); // les donnees des form
   const [donneesOK, setDonneesOK] = useState(false); // les donnees sont prises => mis dans initial data
   const [finalOK, setFinalOK] = useState(false); // donnees mises dans initial => go visuel
-  const [enfantId, setEnfantId] = useState(1);
 
-  // const Token =
-  //   "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getDonneesForm = () => {
     axios
-      .get(`http://localhost:5000/famille/formEnfant/${enfantId}`, {
-        headers: {
-          "x-token": Token,
-        },
-      })
+      .get(`${import.meta.env.VITE_PATH}/famille/formEnfant/${enfantId}`)
       .then((res) => {
         setDonneesForm(res.data);
         setDonneesOK(true);
@@ -73,7 +65,7 @@ function FormEnfant() {
   };
   useEffect(() => {
     getDonneesForm();
-  }, [enfantId]);
+  }, [enfantId, nomsEnfants]); // met le bon form
 
   // --- func pour changer initial value ---
 
@@ -124,7 +116,7 @@ function FormEnfant() {
 
   const updateFormEnfant = () => {
     const pourcent = calculPourcent();
-    axios.put(`http://localhost:5000/formEnfant/${enfantId}`, {
+    axios.put(`${import.meta.env.VITE_PATH}/formEnfant/${enfantId}`, {
       initialData,
       pourcent,
     });
@@ -133,18 +125,24 @@ function FormEnfant() {
   // --- ajout enfant ---
 
   const ajoutEnfant = () => {
-    console.log("click new enfant");
-    axios.post(`http://localhost:5000/famille/newEnfant`, {
-      familleId,
-      prenom: "nouveau enfant",
-    });
+    axios
+      .post(`${import.meta.env.VITE_PATH}/famille/newEnfant`, {
+        familleId,
+      })
+      .then(() => {
+        getNomsEnfants();
+      });
   };
   // asynchronisme de l'affichage
 
   // --- supprimer enfant ---
 
   const deleteEnfant = () => {
-    axios.delete(`http://localhost:5000/famille/deleteEnfant/${enfantId}`);
+    axios
+      .delete(`${import.meta.env.VITE_PATH}/famille/deleteEnfant/${enfantId}`)
+      .then(() => {
+        getNomsEnfants();
+      });
   };
   // asynchronisme de l'affichage
 
@@ -153,6 +151,8 @@ function FormEnfant() {
     nomsEnfants !== undefined && (
       <main className="enfant">
         <h3>Dossier Enfants</h3>
+        <br />
+        <p>N'oubliez pas d'enregistrer vos informations.</p>
 
         <div className="kid">
           <div className="action-kid">
@@ -186,7 +186,7 @@ function FormEnfant() {
                     type="button"
                     onClick={() => setEnfantId(each.enfantId)}
                   >
-                    {each.prenom}
+                    {each.prenom ? each.prenom : "Prenom Enfant"}
                   </button>
                 </div>
               ))}

@@ -190,8 +190,7 @@ export default function Home() {
                       Olympe
                     </p>
                     <p>
-                      Site pratique et simple d'utilisation qui permet de
-                      réserver rapidement et facilement une place en crèche
+                      Maintenant je ne vois plus mes enfants. J'ai repris goût à la vie
                     </p>
                     <span>⭐⭐⭐⭐⭐</span>
                   </li>
@@ -203,7 +202,7 @@ export default function Home() {
                       />
                       Marie-Françoise
                     </p>
-                    <p>Permet une meilleure gestion de son agenda</p>
+                    <p>A soigné mon cancer</p>
                     <span>⭐⭐⭐⭐⭐</span>
                   </li>
                 </>
@@ -217,7 +216,7 @@ export default function Home() {
                       />
                       Eustache
                     </p>
-                    <p>Très bien</p>
+                    <p>Maintenant je peux marcher</p>
                     <span>⭐⭐⭐⭐⭐</span>
                   </li>
                   <li>
@@ -229,8 +228,7 @@ export default function Home() {
                       Cécille-Myrtille
                     </p>
                     <p>
-                      M'a permis de trouver rapidement une place en crèche pour
-                      mon enfant
+                      Avant j'étais suicidaire mais, un jour, j'ai découvert Babyplace et depuis je suis moins suicidaire
                     </p>
                     <span>⭐⭐⭐⭐⭐</span>
                   </li>

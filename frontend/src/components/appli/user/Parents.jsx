@@ -1,22 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import FamilleContext from "@components/context/FamilleContext";
 
 function Parents() {
+  const { familleId } = useContext(FamilleContext);
+
   // meme nom que bdd
   const [initialData, setInitialData] = useState({
-    nom1: "",
-    prenom1: "",
-    profession1: "",
-    telephone1: "",
-    email1: "",
-    adresse1: "",
+    nom1: null,
+    prenom1: null,
+    profession1: null,
+    telephone1: null,
+    email1: null,
+    adresse1: null,
 
-    nom2: "",
-    prenom2: "",
-    profession2: "",
-    telephone2: "",
-    email2: "",
-    adresse2: "",
+    nom2: null,
+    prenom2: null,
+    profession2: null,
+    telephone2: null,
+    email2: null,
+    adresse2: null,
   });
 
   // --- changer une donnée avec le form ---
@@ -35,16 +38,9 @@ function Parents() {
   const [donneesOK, setDonneesOK] = useState(false); // les donnees sont prises => mis dans initial data
   const [finalOK, setFinalOK] = useState(false); // donnees mises dans initial => go visuel
 
-  const familleId = 1;
-  const Token =
-    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getDonneesForm = () => {
     axios
-      .get(`http://localhost:5000/famille/formParent/${familleId}`, {
-        headers: {
-          "x-token": Token,
-        },
-      })
+      .get(`${import.meta.env.VITE_PATH}/famille/formParent/${familleId}`)
       .then((res) => {
         setDonneesForm(res.data);
         setDonneesOK(true);
@@ -96,7 +92,7 @@ function Parents() {
   const calculPourcent = () => {
     let pourcent = 0;
     for (const prop in initialData) {
-      if (initialData[prop] !== "") {
+      if (initialData[prop] !== null) {
         pourcent += 1;
       }
     }
@@ -108,7 +104,7 @@ function Parents() {
     // modifier le parentId
     const { parentId } = donneesForm[place - 1];
     const pourcent = calculPourcent();
-    axios.put(`http://localhost:5000/formParent/${parentId}`, {
+    axios.put(`${import.meta.env.VITE_PATH}/formParent/${parentId}`, {
       nom: initialData[`nom${place}`],
       prenom: initialData[`prenom${place}`],
       profession: initialData[`profession${place}`],
@@ -120,13 +116,12 @@ function Parents() {
     });
   };
 
-  // ajouter le poucentage de completion dans la bdd à partir d'ici pour la page user
-  // => obliger de prendre les infos à partir des pages de form
-
   return (
     finalOK === true && (
       <main className="parent">
         <h3>Dossier Parents</h3>
+        <br />
+        <p>N'oubliez pas d'enregistrer vos informations.</p>
 
         <form>
           <h4>Parent 1</h4>

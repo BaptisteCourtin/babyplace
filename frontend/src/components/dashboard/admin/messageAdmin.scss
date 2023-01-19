@@ -47,8 +47,13 @@
                     height: auto;
                 }
 
-                #messageAdminCloseBtn {
-                    color: red;
+                button {
+                    background: none;
+
+                    #messageAdminCloseBtn {
+                        color: red;
+                        transform: scale(1.5);
+                    }
                 }
             }
         }

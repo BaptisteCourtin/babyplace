@@ -4,8 +4,10 @@ import PropTypes from "prop-types";
 
 import logoBlanc from "@assets/logo-blanc.svg";
 import avatar1 from "@assets/avatar1.svg";
+import { AiOutlineUser } from "react-icons/ai";
 
-function NotifRejetee({ setCompo }) {
+function NotifRejetee({ setCompo, photoFamille }) {
+  // prendre l'image famille et l'image creche
   return (
     <div className="notif-container-grad">
       <div className="notif-rejet">
@@ -20,7 +22,16 @@ function NotifRejetee({ setCompo }) {
         </div>
         <img src={logoBlanc} alt="logo-blanc" className="logo" />
         <div className="avatars">
-          <img src={avatar1} alt="img profil" className="avatar" />
+          {photoFamille ? (
+            <img
+              src={`${
+                import.meta.env.VITE_PATH
+              }/uploads/photoFamille/${photoFamille}`}
+              alt="avatar"
+            />
+          ) : (
+            <AiOutlineUser />
+          )}
           <img src={avatar1} alt="img creche" className="avatar" />
         </div>
         <div className="text">

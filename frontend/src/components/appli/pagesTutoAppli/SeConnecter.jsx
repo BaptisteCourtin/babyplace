@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import FamilleContext from "@components/context/FamilleContext";
 
 function SeConnecter({ setCompo }) {
   const navigate = useNavigate();
+  const { setFamilleId } = useContext(FamilleContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,12 +17,15 @@ function SeConnecter({ setCompo }) {
     e.preventDefault();
     if (email && password) {
       axios
-        .post("http://localhost:5000/authFamille", {
+        .post(`${import.meta.env.VITE_PATH}/authFamille`, {
           email,
           password,
         })
         .then((ret) => {
-          const { token } = ret.data;
+          const { token, familleId } = ret.data;
+
+          setFamilleId(familleId);
+          sessionStorage.setItem("BabyPlacefamilleId", familleId);
 
           navigate("/appli/search", {
             state: {

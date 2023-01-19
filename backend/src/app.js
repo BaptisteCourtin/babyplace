@@ -3,6 +3,8 @@ const fs = require("fs");
 const path = require("path");
 const cors = require("cors");
 const router = require("./router");
+const multer = require("multer");
+const bodyParser = require("body-parser");
 const ws = require("./services/messagerie.service");
 
 const app = express();
@@ -22,6 +24,17 @@ app.use(express.static(path.join(__dirname, "../public")));
 
 // Serve REACT APP
 app.use(express.static(path.join(__dirname, "..", "..", "frontend", "dist")));
+
+const multerMid = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 5 * 1024 * 1024,
+  },
+})
+app.disable('x-powered-by')
+app.use(multerMid.single('file'))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 
 // API routes
 app.use(router);

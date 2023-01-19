@@ -1,4 +1,6 @@
 const structureModels = require("../models/structure.models.js");
+const { v4: uuidv4 } = require("uuid");
+const fs = require("fs");
 
 const getAllStructures = async (req, res) => {
   const result = await structureModels.getAllStructures(req);
@@ -44,7 +46,50 @@ const updateVerified = async (req, res) => {
   if (result.affectedRows === 0) {
     return res.status(404).send("Not found")
   } else {
-    return res.status(204)
+    return res.sendStatus(204)
+  }
+}
+
+const updateImages = async (req, res) => {
+  const { id, value, file, table } = req.body
+  const result = await structureModels.updateImages(id, value, file, table)
+  if (result.affectedRows === 0) {
+    return res.status(404).send("Not found")
+  } else {
+    return res.sendStatus(204)
+  }
+}
+
+const uploadProfil = async (req, res) => {
+  const { originalname, filename, destination } = req.file;
+  let oldName = `${destination}${filename}`
+  let newName = `${destination}${uuidv4()}-${originalname}`
+
+  fs
+    .rename(oldName, newName, (err) => {
+      if (err) throw err;
+      newName = newName.replace("public", '')
+      res.send(newName);
+    });
+}
+
+const updateInfos = async (req, res) => {
+  const { id, table, nom, nomNaissance, nomUsage, prenom, adresse, email, telephone, description } = req.body
+  const result = await structureModels.updateInfos(id, table, nom, nomNaissance, nomUsage, prenom, adresse, email, telephone, description)
+  if (result.affectedRows === 0) {
+    return res.status(404).send("Not found")
+  } else {
+    return res.sendStatus(200)
+  }
+}
+
+const updatePwd = async (req, res) => {
+  const { id, pwd } = req.body
+  const result = await structureModels.updatePwd(id, pwd)
+  if (result.affectedRows === 0) {
+    return res.status(404).send("Not found")
+  } else {
+    return res.sendStatus(200)
   }
 }
 
@@ -60,7 +105,7 @@ const deleteRefused = async (req, res) => {
   if (result.affectedRows === 0) {
     res.status(404).send("Not found")
   } else {
-    res.status(204)
+    res.sendStatus(204)
   }
 }
 
@@ -104,11 +149,15 @@ module.exports = {
   getStructureType,
   getNotVerified,
   updateVerified,
+  updateImages,
   deleteRefused,
   getStructureDataMess,
   getAllStructures,
   getStructureById,
+  updateInfos,
+  updatePwd,
   updateNotes,
+  uploadProfil,
   logout,
   updateSignal,
 };

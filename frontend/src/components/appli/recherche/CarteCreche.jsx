@@ -22,15 +22,9 @@ function CarteCreche({ data, userPosition }) {
 
   // les horaires de chaques jour suivant l'id de la structure
   const [dataHorairesId, setDataHorairesId] = useState([]);
-  const Token =
-    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getHorairesId = () => {
     axios
-      .get(`http://localhost:5000/horaires/${structureId}`, {
-        headers: {
-          "x-token": Token,
-        },
-      })
+      .get(`${import.meta.env.VITE_PATH}/horaires/${structureId}`)
       .then((res) => {
         setDataHorairesId(res.data);
       })
