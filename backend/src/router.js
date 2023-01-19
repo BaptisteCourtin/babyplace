@@ -6,7 +6,7 @@ const fs = require("fs");
 const multer = require("multer");
 const upload = multer({ dest: "public/uploads/" });
 const { v4: uuidv4 } = require("uuid");
-const uploadDoc = require('./helpers/helper')
+const uploadDoc = require("./helpers/helper");
 
 const structure = require("./controllers/structure.controllers");
 const horaires = require("./controllers/horaires.controllers");
@@ -270,34 +270,15 @@ router.put("/formInscription/docFamilleChangeName/:id", (req, res) => {
 
 // PHOTO DE PROFIL FAMILLE
 // mettre dans uploads et change nom
-router.post(
-  "/famille/photoProfil",
-  multer({
-    storage: multer.diskStorage({
-      destination: (req, file, cb) => {
-        cb(null, "./public/uploads/photoFamille");
-      },
-      filename: (req, file, cb) => {
-        const date = new Date();
-        cb(
-          null,
-          Math.round(Math.random() * 1000) +
-            `${date.getMinutes()}${date.getSeconds()}` +
-            Math.round(Math.random() * 1000) +
-            "-qws-" +
-            file.originalname
-          // nom avec des chiffres + nom d'origine du fichier
-        );
-      },
-    }),
-  }).fields([
-    // nom envoyer par formData
-    { name: "photoFamille", maxCount: 1 },
-  ]),
-  (req, res) => {
-    res.send(req.files);
+router.post("/famille/photoProfil", async (req, res, next) => {
+  try {
+    const file = req.file;
+    const result = await uploadDoc(file);
+    res.status(200).json(result);
+  } catch (error) {
+    next(error);
   }
-);
+});
 
 // mise dans bdd
 router.put("/famille/photoProfil/:id", (req, res) => {
@@ -356,20 +337,18 @@ router.put("/logout/:id", structure.logout);
 
 router.post("/calendrier/add", calendrier.postDate);
 router.post("/dashboard/docs", upload.single(`file`), structure.uploadProfil);
-router.post('/uploads', async (req, res, next) => {
+router.post("/uploads", async (req, res, next) => {
   try {
-    const file = req.file
-    const result = await uploadDoc(file)
-    res
-      .status(200)
-      .json(result)
+    const file = req.file;
+    const result = await uploadDoc(file);
+    res.status(200).json(result);
   } catch (error) {
-    next(error)
+    next(error);
   }
-})
+});
 
 router.delete("/calendrier", calendrier.deleteDates);
-router.delete("/calendrier/:id", calendrier.fullDate)
+router.delete("/calendrier/:id", calendrier.fullDate);
 router.delete("/admin/refused/:id", structure.deleteRefused);
 router.delete("/notifications/:id", notification.deleteNotification);
 //Routes for dashboard + admin page end

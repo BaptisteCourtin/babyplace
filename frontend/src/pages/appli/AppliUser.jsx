@@ -75,7 +75,7 @@ function AppliUser() {
 
   const SubmitPhotoFamille = () => {
     const formData = new FormData();
-    formData.append("photoFamille", docImgProfil.current.files[0]);
+    formData.append("file", docImgProfil.current.files[0]);
 
     axios
       .post(`${import.meta.env.VITE_PATH}/famille/photoProfil`, formData)
@@ -84,11 +84,11 @@ function AppliUser() {
           .put(
             `${import.meta.env.VITE_PATH}/famille/photoProfil/${familleId}`,
             {
-              photoFamille: result.data.photoFamille[0].filename,
+              photoFamille: result.data,
             }
           )
           .then(() => {
-            setImageProfil(result.data.photoFamille[0].filename);
+            setImageProfil(result.data);
           })
           .catch((err) => {
             console.error(err);
@@ -133,13 +133,7 @@ function AppliUser() {
               onChange={() => SubmitPhotoFamille()}
             />
             {imageProfil ? (
-              <img
-                className="photoProfil"
-                src={`${
-                  import.meta.env.VITE_PATH
-                }/uploads/photoFamille/${imageProfil}`}
-                alt="avatar"
-              />
+              <img className="photoProfil" src={imageProfil} alt="avatar" />
             ) : (
               <AiOutlineUser className="photoProfil" />
             )}
