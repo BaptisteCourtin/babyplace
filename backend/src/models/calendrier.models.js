@@ -49,21 +49,27 @@ const postDate = async (date, nbPlaces, structureId) => {
 };
 
 const deleteDates = async () => {
-    const [result] = await datasource.query("DELETE FROM calendrier WHERE date < CURDATE()")
-    return result
-}
+  const [result] = await datasource.query(
+    "DELETE FROM calendrier WHERE date < CURDATE()"
+  );
+  return result;
+};
 
 const fullDate = async (id) => {
-    const [result] = await datasource.query("DELETE FROM calendrier WHERE calendrierId = ?", [id])
-    return result
-}
+  const [result] = await datasource.query(
+    "DELETE FROM calendrier WHERE calendrierId = ?",
+    [id]
+  );
+  return result;
+};
 
 module.exports = {
-    getCalendrier,
-    updateStatusClose,
-    updateStatusOpen,
-    updatePlaces,
-    postDate,
-    deleteDates,
-    fullDate
+  getCalendrier,
+  updateStatusClose,
+  updateStatusOpen,
+  updatePlaces,
+  postDate,
+  deleteDates,
+  fullDate,
+  getCalendrierMoins,
 };
