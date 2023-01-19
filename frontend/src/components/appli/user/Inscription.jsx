@@ -42,21 +42,15 @@ function Inscription() {
   const [donneesOK, setDonneesOK] = useState(false); // les donnees sont prises => mis dans initial data
   const [finalOK, setFinalOK] = useState(false); // donnees mises dans initial => go visuel
 
-  const Token =
-    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getDonneesForm = () => {
+    console.log("getForm");
     axios
       // !!! prend 2 fois les doc de famille car 2 parents et les données sont dans un tableau
-      .get(
-        `${import.meta.env.VITE_PATH}/famille/formInscription/${familleId}`,
-        {
-          headers: {
-            "x-token": Token,
-          },
-        }
-      )
+      .get(`${import.meta.env.VITE_PATH}/famille/formInscription/${familleId}`)
       .then((res) => {
         setDonneesForm(res.data);
+      })
+      .then(() => {
         setDonneesOK(true);
       })
       .catch((err) => {
@@ -105,6 +99,7 @@ function Inscription() {
     if (donneesOK === true) {
       remplirInitial();
     }
+    setDonneesOK(false);
   }, [donneesOK]);
 
   // --- changer une donnée avec le form ---
@@ -198,7 +193,7 @@ function Inscription() {
 
     axios
       // mise dans uploads // formData contient les noms des fichiers des Src
-      .post("http://localhost:5000/formInscription/docParent", formData)
+      .post(`${import.meta.env.VITE_PATH}/formInscription/docParent`, formData)
 
       // mise dans bdd
       // mettre seulement ce qui n'est pas déjà dans la bdd
@@ -262,7 +257,9 @@ function Inscription() {
 
         axios
           .put(
-            `http://localhost:5000/formInscription/docParentChangeName/${parentId}`,
+            `${
+              import.meta.env.VITE_PATH
+            }/formInscription/docParentChangeName/${parentId}`,
             {
               // nom des let
               docJustifRevenus,
@@ -302,7 +299,7 @@ function Inscription() {
 
     // mise dans uploads
     axios
-      .post("http://localhost:5000/formInscription/docFamille", formData)
+      .post(`${import.meta.env.VITE_PATH}/formInscription/docFamille`, formData)
 
       // mise dans bdd
       // mettre seulement ce qui n'est pas déjà dans la bdd
@@ -326,7 +323,9 @@ function Inscription() {
 
         axios
           .put(
-            `http://localhost:5000/formInscription/docFamilleChangeName/${familleId}`,
+            `${
+              import.meta.env.VITE_PATH
+            }/formInscription/docFamilleChangeName/${familleId}`,
             {
               // nom des let
               docAssurParent,

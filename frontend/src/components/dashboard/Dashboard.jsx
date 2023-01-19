@@ -1,60 +1,125 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import { FiBell } from "react-icons/fi";
 import { AiFillStar, AiOutlinePhone, AiOutlineMail } from "react-icons/ai";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
-import useLocalStorage from "@utils/useLocalStorage";
-import DashNavbar from "./nav/DashNavbar";
+import { toast } from "react-hot-toast";
+import ReactModal from "react-modal";
 
+import DashNavbar from "./nav/DashNavbar";
 import DashReservations from "./reservations/DashReservations";
 import DashAgenda from "./agenda/DashAgenda.jsx";
 import DashPlaces from "./places/DashPlaces";
 import Messages from "../messages/Messages";
+import DashParams from "./parameters/DashParams";
 
 function Dashboard() {
   const { state } = useLocation();
-  const { data, userType } = state;
+  const { token } = state;
+  const [donnees, setDonnees] = useState({});
+  const [details, setDetails] = useState([]);
+  const [userType, setUserType] = useState(null);
 
-  const [dashPage, setDashPage] = useLocalStorage(0, "dashPage");
+  const getData = async () => {
+    try {
+      const res = await axios.get(`${import.meta.env.VITE_PATH}/structure`, {
+        headers: {
+          "x-token": token,
+        },
+      })
+      setDonnees(res.data[0]);
+      if (res.data[0].isCreche === 0) {
+        axios.get(`${import.meta.env.VITE_PATH}/structure/details?type=assMat&id=${res.data[0].structureId}`, {
+          id: res.data[0].structureId,
+        })
+          .then(res => {
+            setDetails(res.data[0])
+            setUserType('assMat')
+          })
+      } else {
+        axios.get(`${import.meta.env.VITE_PATH}/structure/details?type=creche&id=${res.data[0].structureId}`, {
+          id: res.data[0].structureId,
+        })
+          .then(res => {
+            setDetails(res.data[0])
+            setUserType('creche')
+          })
+      }
+    }
+    catch (err) {
+      toast.error(err.message)
+    }
+  };
 
-  const navigate = useNavigate();
+  const data = Object.assign(donnees, details)
 
-  const [toggle, setToggle] = useState(dashPage);
+  const [toggleNotif, setToggleNotif] = useState(false)
+
+  const [toggle, setToggle] = useState(0);
   const pageShown = () => {
     if (toggle === 1) {
-      return <DashReservations />;
+      return (
+        <DashReservations {...data} />
+      );
     }
     if (toggle === 2) {
-      return <DashAgenda {...data} />;
+      return (
+        <DashAgenda structureId={data.structureId} maxPlaces={data.maxPlaces} />
+      );
     }
     if (toggle === 3) {
       return (
-        <DashPlaces
-          userType={userType}
-          structureId={data.structureId}
-          title="Horaires"
-        />
+        <DashPlaces userType={userType} structureId={data.structureId} />
       );
     }
     if (toggle === 4) {
-      return <Messages {...data} />;
+      return (
+        <Messages {...data} />
+      );
     }
 
     if (toggle === 5) {
-      return navigate("/structure/inscription-form");
+      return (
+        <DashParams {...data} userType={userType} getData={getData} />
+      );
     }
   };
 
-  const deleteDates = async (curDate) => {
-    await axios.delete(`http://localhost:5000/calendrier?date=${curDate}`);
-  };
+  const [notif, setNotif] = useState([])
+
+  const getNotifications = async () => {
+    try {
+      const res = await axios
+        .get(`${import.meta.env.VITE_PATH}/notifications/${data.structureId}`, {
+          id: data.structureId
+        })
+      setNotif(res.data)
+    } catch (err) {
+      toast.error(err.message)
+    }
+  }
+
+  const deleteNotification = async (id) => {
+    try {
+      await axios
+        .delete(`${import.meta.env.VITE_PATH}/notifications/${id}`, {
+          id
+        })
+      getNotifications()
+    } catch (err) {
+      toast.error("Could not delete the notification")
+    }
+  }
+
+  const deleteDates = async () => {
+    await axios
+      .delete(`${import.meta.env.VITE_PATH}/calendrier`)
+  }
 
   useEffect(() => {
-    let curDate = new Date();
-    curDate = `${curDate.getFullYear()}-${
-      curDate.getMonth() + 1
-    }-${curDate.getDate()}`;
-    deleteDates(curDate);
+    getData();
+    deleteDates();
+    getNotifications();
   }, []);
 
   const reviews =
@@ -68,10 +133,27 @@ function Dashboard() {
         10
     ) / 10;
 
+  const notifContent = (type) => {
+    if (type === "waiting") {
+      return "Vous avez une demande en attente"
+    }
+  }
+
+  const openModal = () => {
+    setToggleNotif(true)
+  }
+
+  const closeModal = () => {
+    setToggleNotif(false)
+  }
+
+  const telephone = (data.telephone)
+  // .toString().match(/.{1,2}/g).join(" ")
+
   return (
     <div className="dashboard">
       <nav>
-        <button type="button">
+        <button type="button" onClick={() => setToggleNotif(!toggleNotif)}>
           <FiBell />
         </button>
         <button
@@ -86,7 +168,7 @@ function Dashboard() {
         </button>
       </nav>
       <main>
-        <DashNavbar {...data} setToggle={setToggle} setDashPage={setDashPage} />
+        <DashNavbar {...data} toggle={toggle} setToggle={setToggle} />
         <section className="dashboardSection">
           {pageShown()}
           {toggle === 0 && (
@@ -107,8 +189,10 @@ function Dashboard() {
                     <AiFillStar />({data.nbNotes})
                   </span>
                 </h2>
-                {userType ? (
-                  <h1>{data.nom}</h1>
+                {userType === 'creche' ? (
+                  <h1>
+                    {data.nom}
+                  </h1>
                 ) : (
                   <h1>
                     {data.prenom} {data.nomUsage ?? data.nomNaissance}
@@ -130,10 +214,7 @@ function Dashboard() {
               <div className="dashboardProfileContact">
                 <p>
                   <AiOutlinePhone />
-                  {data.telephone
-                    .toString()
-                    .match(/.{1,2}/g)
-                    .join(" ")}
+                  {telephone}
                 </p>
                 <p>
                   <AiOutlineMail />
@@ -151,7 +232,46 @@ function Dashboard() {
           Crée avec <span>♥</span> Wild Code School x Babyplace
         </p>
       </footer>
-    </div>
+      {toggleNotif && (
+        <ReactModal
+          isOpen={openModal}
+          onRequestClose={closeModal}
+          className="notifContainer"
+        >
+          <>
+            <div className="notifInner">
+              <h2>Notifications</h2>
+              <button onClick={() => setToggleNotif(false)}>X</button>
+            </div>
+            <hr />
+            <ul>
+              {notif.length ? (
+                notif.map(n => (
+                  <li
+                    onClick={() => {
+                      if (n.type === "waiting") {
+                        setToggle(1)
+                      }
+                    }}
+                  >
+                    <p>{notifContent(n.type)}</p>
+                    <button onClick={() => deleteNotification(n.notifId)}>X</button>
+                  </li>
+                ))
+              ) : (
+                <li
+                  style={{
+                    opacity: '0.7'
+                  }}
+                >
+                  Pas de notifications
+                </li>
+              )}
+            </ul>
+          </>
+        </ReactModal>
+      )}
+    </div >
   );
 }
 

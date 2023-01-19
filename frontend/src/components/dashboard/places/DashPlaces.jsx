@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
-import { toast } from "react-hot-toast";
-import DashCalendar from "../agenda/calendar/DashCalendar";
 import Agenda from "./Components/DashPlaces.Agenda";
+import { toast } from "react-hot-toast";
+import { activitiesArray } from "@utils/activitiesArray";
 
-function DashPlaces({ userType, title, structureId }) {
+function DashPlaces({ userType, structureId }) {
   const [toggleDay, setToggleDay] = useState(null);
   const [selected, setSelected] = useState(null);
-  const [dayId, setDayId] = useState(null);
+  const [dayId, setDayId] = useState(1);
 
   const [data, setData] = useState([]);
   const [horaires, setHoraires] = useState([]);
@@ -44,7 +44,9 @@ function DashPlaces({ userType, title, structureId }) {
   const getData = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/structure/type/${structureId}?type=${userType}`,
+        `${
+          import.meta.env.VITE_PATH
+        }/structure/type/${structureId}?type=${userType}`,
         {
           id: structureId,
           type: userType,
@@ -58,14 +60,14 @@ function DashPlaces({ userType, title, structureId }) {
       setIndemn2(res.data[0].indemnKm);
       setIndemn3(res.data[0].indemnRepas);
     } catch (err) {
-      toast.error(err.message);
+      console.error(err.message);
     }
   };
 
   const getHoraires = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/horaires/${structureId}`,
+        `${import.meta.env.VITE_PATH}/horaires/${structureId}`,
         {
           id: structureId,
         }
@@ -73,9 +75,8 @@ function DashPlaces({ userType, title, structureId }) {
       setHoraires(res.data);
       setToggleDay(res.data[0].ouvert);
       setSelected(res.data[0].jourSemaine);
-      setDayId(res.data[0].jourId);
     } catch (err) {
-      toast.error(err.message);
+      console.error(err.message);
     }
   };
 
@@ -84,93 +85,77 @@ function DashPlaces({ userType, title, structureId }) {
     getHoraires();
   }, []);
 
-  const updateDay = async () => {
-    const dataSubmit = {
-      id: dayId,
-      toggleDay: !toggleDay,
-    };
-    dataSubmit[selected] = !toggleDay;
-    await axios.put(`http://localhost:5000/horaires/day/${dayId}`, dataSubmit);
-  };
-
-  const updateHours = async () => {
-    await axios.put(`http://localhost:5000/dashboard/hours/${structureId}`, {
-      heureMin,
-      heureMax,
-      structureId,
-      jourId: dayId,
-    });
-  };
-
   const updateTarif = async (tarif, value) => {
     try {
-      await axios.put(`http://localhost:5000/dashboard/tarif/${structureId}`, {
-        id: structureId,
-        tarif,
-        tarifValue: value,
-        table:
-          userType === "assMat" && tarif === "tarifHeureSup"
-            ? "assMat"
-            : "structure",
-      });
+      await axios.put(
+        `${import.meta.env.VITE_PATH}/dashboard/tarif/${structureId}`,
+        {
+          id: structureId,
+          tarif,
+          tarifValue: value,
+          table:
+            userType === "assMat" && tarif === "tarifHeureSup"
+              ? "assMat"
+              : "structure",
+        }
+      );
       toast.success("Vos tarifs ont bien été modifiés");
       getData();
     } catch (err) {
-      toast.error(err.message);
+      console.error(err.message);
     }
   };
 
   const updateIndemn = async (indemn, value) => {
     try {
-      await axios.put(`http://localhost:5000/dashboard/indemn/${structureId}`, {
-        id: structureId,
-        indemn,
-        indemnValue: value,
-        table:
-          userType === "assMat" && indemn !== "indemnRepas"
-            ? "assMat"
-            : "structure",
-      });
+      await axios.put(
+        `${import.meta.env.VITE_PATH}/dashboard/indemn/${structureId}`,
+        {
+          id: structureId,
+          indemn,
+          indemnValue: value,
+          table:
+            userType === "assMat" && indemn !== "indemnRepas"
+              ? "assMat"
+              : "structure",
+        }
+      );
       toast.success("Vos indemnités ont bien été modifiées");
       getData();
     } catch (err) {
-      toast.error(err.message);
+      console.error(err.message);
     }
   };
 
   const updateOptions = async (options, value) => {
     try {
       await axios.put(
-        `http://localhost:5000/dashboard/options/${structureId}`,
+        `${import.meta.env.VITE_PATH}/dashboard/options/${structureId}`,
         {
           id: structureId,
           optionsValue: value,
-          options,
+          options: options,
         }
       );
       toast.success("Vos options ont bien été modifiées");
       getData();
     } catch (err) {
-      toast.error(err.message);
+      console.error(err.message);
     }
   };
-
-  // const handleInput = (e) => {
-  //   setHoursOpen(e.minValue);
-  //   setHoursClose(e.maxValue);
-  // };
 
   return (
     <div className="dashPlaces">
       <Agenda
-        title={title}
-        updateDay={updateDay}
+        structureId={structureId}
         horaires={horaires}
+        getHoraires={getHoraires}
         toggleDay={toggleDay}
         setToggleDay={setToggleDay}
         selected={selected}
         setSelected={setSelected}
         dayId={dayId}
+        setDayId={setDayId}
       />
       <section className="dashPlacesParams">
         <details>
@@ -323,44 +308,19 @@ function DashPlaces({ userType, title, structureId }) {
         <details>
           <summary>Vos activités</summary>
           <ul className="dashPlacesCheckboxes">
-            <li>
-              <input
-                type="checkbox"
-                id="check1"
-                defaultChecked={data.handi}
-                onChange={() => {
-                  updateOptions("handi", data.handi);
-                }}
-              />
-              <label htmlFor="check1">
-                J'accueille des enfants en situation de handicap
-              </label>
-            </li>
-            <li>
-              <input
-                type="checkbox"
-                id="check2"
-                defaultChecked={data.sorties}
-                onChange={() => {
-                  updateOptions("sorties", data.sorties);
-                }}
-              />
-              <label htmlFor="check2">Je propose des sorties</label>
-            </li>
-            <li>
-              <input
-                type="checkbox"
-                id="check3"
-                defaultChecked={data.bilingue}
-              />
-              <label htmlFor="check3">Je propose des activités bilingues</label>
-            </li>
-            <li>
-              <input type="checkbox" id="check4" defaultChecked={data.eveil} />
-              <label htmlFor="check4">
-                Je propose des activités musicales ou artistiques
-              </label>
-            </li>
+            {activitiesArray.map((a) => (
+              <li>
+                <input
+                  type="checkbox"
+                  id={a.id}
+                  defaultChecked={data[a.name]}
+                  onChange={() => {
+                    updateOptions(a.name, data[a.name]);
+                  }}
+                />
+                <label htmlFor={a.id}>{a.content}</label>
+              </li>
+            ))}
           </ul>
         </details>
       </section>

@@ -31,6 +31,11 @@ const getPourcent = async (req, res) => {
   return res.json(result);
 };
 
+const getFamilleInfo = async (req, res) => {
+  const result = await familleModels.getFamilleInfo(req);
+  return res.json(result);
+};
+
 const getNomsEtIdEnfants = async (req, res) => {
   const result = await familleModels.getNomsEtIdEnfants(req);
   return res.json(result);
@@ -64,8 +69,18 @@ const postNewEnfant = async (req, res) => {
   return res.json(result);
 };
 
+const postNewConfiance = async (req, res) => {
+  const result = await familleModels.postNewConfiance(req);
+  return res.json(result);
+};
+
 const deleteEnfant = async (req, res) => {
   const result = await familleModels.deleteEnfant(req);
+  return res.json(result);
+};
+
+const deleteConfiance = async (req, res) => {
+  const result = await familleModels.deleteConfiance(req);
   return res.json(result);
 };
 
@@ -88,4 +103,7 @@ module.exports = {
   deleteEnfant,
   getDonneesFormInscription,
   getFamilleDataMess,
+  postNewConfiance,
+  deleteConfiance,
+  getFamilleInfo,
 };
