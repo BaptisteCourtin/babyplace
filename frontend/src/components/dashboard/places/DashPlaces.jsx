@@ -5,12 +5,7 @@ import Agenda from "./Components/DashPlaces.Agenda";
 import { toast } from "react-hot-toast";
 import { activitiesArray } from "@utils/activitiesArray";
 
-function DashPlaces({
-  userType,
-  structureId,
-}) {
-
-function DashPlaces({ userType, title, structureId }) {
+function DashPlaces({ userType, structureId }) {
   const [toggleDay, setToggleDay] = useState(null);
   const [selected, setSelected] = useState(null);
   const [dayId, setDayId] = useState(1);
@@ -48,38 +43,42 @@ function DashPlaces({ userType, title, structureId }) {
 
   const getData = async () => {
     try {
-      const res = await axios
-        .get(`${import.meta.env.VITE_PATH}/structure/type/${structureId}?type=${userType}`, {
+      const res = await axios.get(
+        `${
+          import.meta.env.VITE_PATH
+        }/structure/type/${structureId}?type=${userType}`,
+        {
           id: structureId,
-          type: userType
-        })
-      setData(res.data[0])
-      setHour1(res.data[0].tarifHeure)
-      setHour2(res.data[0].tarifHoraireSpec)
-      setHour3(res.data[0].tarifHeureSup)
-      setIndemn1(res.data[0].indemnEntretien)
-      setIndemn2(res.data[0].indemnKm)
-      setIndemn3(res.data[0].indemnRepas)
-    }
-    catch (err) {
-      console.error(err.message)
+          type: userType,
+        }
+      );
+      setData(res.data[0]);
+      setHour1(res.data[0].tarifHeure);
+      setHour2(res.data[0].tarifHoraireSpec);
+      setHour3(res.data[0].tarifHeureSup);
+      setIndemn1(res.data[0].indemnEntretien);
+      setIndemn2(res.data[0].indemnKm);
+      setIndemn3(res.data[0].indemnRepas);
+    } catch (err) {
+      console.error(err.message);
     }
   };
 
   const getHoraires = async () => {
     try {
-      const res = await axios
-        .get(`${import.meta.env.VITE_PATH}/horaires/${structureId}`, {
-          id: structureId
-        })
+      const res = await axios.get(
+        `${import.meta.env.VITE_PATH}/horaires/${structureId}`,
+        {
+          id: structureId,
+        }
+      );
       setHoraires(res.data);
       setToggleDay(res.data[0].ouvert);
       setSelected(res.data[0].jourSemaine);
+    } catch (err) {
+      console.error(err.message);
     }
-    catch (err) {
-      console.error(err.message)
-    }
-  }
+  };
 
   useEffect(() => {
     getData();
@@ -88,48 +87,60 @@ function DashPlaces({ userType, title, structureId }) {
 
   const updateTarif = async (tarif, value) => {
     try {
-      await axios.put(`${import.meta.env.VITE_PATH}/dashboard/tarif/${structureId}`, {
-        id: structureId,
-        tarif,
-        tarifValue: value,
-        table: userType === 'assMat' && tarif === 'tarifHeureSup' ? 'assMat' : 'structure'
-      })
-      toast.success("Vos tarifs ont bien été modifiés")
-      getData()
-    }
-    catch (err) {
-      console.error(err.message)
+      await axios.put(
+        `${import.meta.env.VITE_PATH}/dashboard/tarif/${structureId}`,
+        {
+          id: structureId,
+          tarif,
+          tarifValue: value,
+          table:
+            userType === "assMat" && tarif === "tarifHeureSup"
+              ? "assMat"
+              : "structure",
+        }
+      );
+      toast.success("Vos tarifs ont bien été modifiés");
+      getData();
+    } catch (err) {
+      console.error(err.message);
     }
   };
 
   const updateIndemn = async (indemn, value) => {
     try {
-      await axios.put(`${import.meta.env.VITE_PATH}/dashboard/indemn/${structureId}`, {
-        id: structureId,
-        indemn,
-        indemnValue: value,
-        table: userType === 'assMat' && indemn !== 'indemnRepas' ? 'assMat' : 'structure'
-      })
-      toast.success("Vos indemnités ont bien été modifiées")
-      getData()
-    }
-    catch (err) {
-      console.error(err.message)
+      await axios.put(
+        `${import.meta.env.VITE_PATH}/dashboard/indemn/${structureId}`,
+        {
+          id: structureId,
+          indemn,
+          indemnValue: value,
+          table:
+            userType === "assMat" && indemn !== "indemnRepas"
+              ? "assMat"
+              : "structure",
+        }
+      );
+      toast.success("Vos indemnités ont bien été modifiées");
+      getData();
+    } catch (err) {
+      console.error(err.message);
     }
   };
 
   const updateOptions = async (options, value) => {
     try {
-      await axios.put(`${import.meta.env.VITE_PATH}/dashboard/options/${structureId}`, {
-        id: structureId,
-        optionsValue: value,
-        options: options
-      })
-      toast.success("Vos options ont bien été modifiées")
-      getData()
-    }
-    catch (err) {
-      console.error(err.message)
+      await axios.put(
+        `${import.meta.env.VITE_PATH}/dashboard/options/${structureId}`,
+        {
+          id: structureId,
+          optionsValue: value,
+          options: options,
+        }
+      );
+      toast.success("Vos options ont bien été modifiées");
+      getData();
+    } catch (err) {
+      console.error(err.message);
     }
   };
 
@@ -297,19 +308,17 @@ function DashPlaces({ userType, title, structureId }) {
         <details>
           <summary>Vos activités</summary>
           <ul className="dashPlacesCheckboxes">
-            {activitiesArray.map(a => (
+            {activitiesArray.map((a) => (
               <li>
                 <input
                   type="checkbox"
                   id={a.id}
                   defaultChecked={data[a.name]}
                   onChange={() => {
-                    updateOptions(a.name, data[a.name])
+                    updateOptions(a.name, data[a.name]);
                   }}
                 />
-                <label htmlFor={a.id}>
-                  {a.content}
-                </label>
+                <label htmlFor={a.id}>{a.content}</label>
               </li>
             ))}
           </ul>
