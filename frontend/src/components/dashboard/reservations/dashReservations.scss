@@ -208,9 +208,11 @@
     left: -15vw;
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(148.74deg,
-        rgba(71, 79, 255, 0.6) 2.49%,
-        rgba(227, 122, 204, 0.6) 99.05%);
+    background: linear-gradient(
+      148.74deg,
+      rgba(71, 79, 255, 0.6) 2.49%,
+      rgba(227, 122, 204, 0.6) 99.05%
+    );
     z-index: 2;
 
     & .approvedModalInner {
@@ -288,9 +290,11 @@
     left: -15vw;
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(148.74deg,
-        rgba(71, 79, 255, 0.6) 2.49%,
-        rgba(227, 122, 204, 0.6) 99.05%);
+    background: linear-gradient(
+      148.74deg,
+      rgba(71, 79, 255, 0.6) 2.49%,
+      rgba(227, 122, 204, 0.6) 99.05%
+    );
     z-index: 2;
 
     & .refusedModalInner {

@@ -172,6 +172,7 @@ function NotifNote({ setCompo, photoFamille }) {
 
 NotifNote.propTypes = {
   setCompo: PropTypes.func.isRequired,
+  photoFamille: PropTypes.string.isRequired,
 };
 
 export default NotifNote;

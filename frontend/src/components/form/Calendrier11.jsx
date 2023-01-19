@@ -14,31 +14,36 @@ function Structure11({
   closedDays,
   setClosedDays,
   structureId,
-  setData
+  setData,
 }) {
   const getCalendrier = () => {
-    Axios.get(`${import.meta.env.VITE_PATH}/calendrierExist?id=${structureId}`, { structureId })
+    Axios.get(
+      `${import.meta.env.VITE_PATH}/calendrierExist?id=${structureId}`,
+      { structureId }
+    )
       .then((result) => {
-        let indispo = [];
+        const indispo = [];
         if (result.data.length > 0) {
           for (let i = 0; i < result.data.length; i++) {
-            indispo.push(result.data[i].date)
+            indispo.push(result.data[i].date);
           }
         }
         setClosedDays(indispo);
         setData((prev) => {
           return {
-            ...prev, indispo: indispo
-          }
+            ...prev,
+            indispo,
+          };
         });
       })
       .catch((err) => {
         console.error(err);
-      })
-  }
+      });
+  };
   const isOpenDay = (e) => {
-    const clickedDayFormated = `${e.getFullYear()}-${e.getMonth() + 1
-      }-${e.getDate()}`;
+    const clickedDayFormated = `${e.getFullYear()}-${
+      e.getMonth() + 1
+    }-${e.getDate()}`;
     if (closedDays.length > 0) {
       const indexOfDay = closedDays.indexOf(clickedDayFormated);
       if (indexOfDay !== -1) {
@@ -66,8 +71,9 @@ function Structure11({
       return "select";
     }
     if (closedDays.length > 0 && view === "month") {
-      const formatedDate = `${date.getFullYear()}-${date.getMonth() + 1
-        }-${date.getDate()}`;
+      const formatedDate = `${date.getFullYear()}-${
+        date.getMonth() + 1
+      }-${date.getDate()}`;
       if (closedDays.includes(formatedDate)) {
         return "select";
       }
@@ -75,8 +81,8 @@ function Structure11({
     }
   };
   useEffect(() => {
-    getCalendrier()
-  }, [])
+    getCalendrier();
+  }, []);
   return (
     <div className="structure11 page-left">
       <h4>Calendrier de vos indisponibilités</h4>
@@ -97,33 +103,12 @@ function Structure11({
   );
 }
 Structure11.propTypes = {
-  lundiOuvert: oneOfType([
-    bool,
-    number
-  ]),
-  mardiOuvert: oneOfType([
-    bool,
-    number
-  ]),
-  mercrediOuvert: oneOfType([
-    bool,
-    number
-  ]),
-  jeudiOuvert: oneOfType([
-    bool,
-    number
-  ]),
-  vendrediOuvert: oneOfType([
-    bool,
-    number
-  ]),
-  samediOuvert: oneOfType([
-    bool,
-    number
-  ]),
-  dimancheOuvert: oneOfType([
-    bool,
-    number
-  ]),
+  lundiOuvert: oneOfType([bool, number]),
+  mardiOuvert: oneOfType([bool, number]),
+  mercrediOuvert: oneOfType([bool, number]),
+  jeudiOuvert: oneOfType([bool, number]),
+  vendrediOuvert: oneOfType([bool, number]),
+  samediOuvert: oneOfType([bool, number]),
+  dimancheOuvert: oneOfType([bool, number]),
 };
 export default Structure11;

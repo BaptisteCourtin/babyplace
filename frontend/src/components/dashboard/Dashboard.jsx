@@ -26,41 +26,50 @@ function Dashboard() {
         headers: {
           "x-token": token,
         },
-      })
+      });
       setDonnees(res.data[0]);
       if (res.data[0].isCreche === 0) {
-        axios.get(`${import.meta.env.VITE_PATH}/structure/details?type=assMat&id=${res.data[0].structureId}`, {
-          id: res.data[0].structureId,
-        })
-          .then(res => {
-            setDetails(res.data[0])
-            setUserType('assMat')
-          })
+        axios
+          .get(
+            `${import.meta.env.VITE_PATH}/structure/details?type=assMat&id=${
+              res.data[0].structureId
+            }`,
+            {
+              id: res.data[0].structureId,
+            }
+          )
+          .then((res) => {
+            setDetails(res.data[0]);
+            setUserType("assMat");
+          });
       } else {
-        axios.get(`${import.meta.env.VITE_PATH}/structure/details?type=creche&id=${res.data[0].structureId}`, {
-          id: res.data[0].structureId,
-        })
-          .then(res => {
-            setDetails(res.data[0])
-            setUserType('creche')
-          })
+        axios
+          .get(
+            `${import.meta.env.VITE_PATH}/structure/details?type=creche&id=${
+              res.data[0].structureId
+            }`,
+            {
+              id: res.data[0].structureId,
+            }
+          )
+          .then((res) => {
+            setDetails(res.data[0]);
+            setUserType("creche");
+          });
       }
-    }
-    catch (err) {
-      toast.error(err.message)
+    } catch (err) {
+      toast.error(err.message);
     }
   };
 
-  const data = Object.assign(donnees, details)
+  const data = Object.assign(donnees, details);
 
-  const [toggleNotif, setToggleNotif] = useState(false)
+  const [toggleNotif, setToggleNotif] = useState(false);
 
   const [toggle, setToggle] = useState(0);
   const pageShown = () => {
     if (toggle === 1) {
-      return (
-        <DashReservations {...data} />
-      );
+      return <DashReservations {...data} />;
     }
     if (toggle === 2) {
       return (
@@ -68,53 +77,47 @@ function Dashboard() {
       );
     }
     if (toggle === 3) {
-      return (
-        <DashPlaces userType={userType} structureId={data.structureId} />
-      );
+      return <DashPlaces userType={userType} structureId={data.structureId} />;
     }
     if (toggle === 4) {
-      return (
-        <Messages {...data} />
-      );
+      return <Messages {...data} />;
     }
 
     if (toggle === 5) {
-      return (
-        <DashParams {...data} userType={userType} getData={getData} />
-      );
+      return <DashParams {...data} userType={userType} getData={getData} />;
     }
   };
 
-  const [notif, setNotif] = useState([])
+  const [notif, setNotif] = useState([]);
 
   const getNotifications = async () => {
     try {
-      const res = await axios
-        .get(`${import.meta.env.VITE_PATH}/notifications/${data.structureId}`, {
-          id: data.structureId
-        })
-      setNotif(res.data)
+      const res = await axios.get(
+        `${import.meta.env.VITE_PATH}/notifications/${data.structureId}`,
+        {
+          id: data.structureId,
+        }
+      );
+      setNotif(res.data);
     } catch (err) {
-      toast.error(err.message)
+      toast.error(err.message);
     }
-  }
+  };
 
   const deleteNotification = async (id) => {
     try {
-      await axios
-        .delete(`${import.meta.env.VITE_PATH}/notifications/${id}`, {
-          id
-        })
-      getNotifications()
+      await axios.delete(`${import.meta.env.VITE_PATH}/notifications/${id}`, {
+        id,
+      });
+      getNotifications();
     } catch (err) {
-      toast.error("Could not delete the notification")
+      toast.error("Could not delete the notification");
     }
-  }
+  };
 
   const deleteDates = async () => {
-    await axios
-      .delete(`${import.meta.env.VITE_PATH}/calendrier`)
-  }
+    await axios.delete(`${import.meta.env.VITE_PATH}/calendrier`);
+  };
 
   useEffect(() => {
     getData();
@@ -135,19 +138,19 @@ function Dashboard() {
 
   const notifContent = (type) => {
     if (type === "waiting") {
-      return "Vous avez une demande en attente"
+      return "Vous avez une demande en attente";
     }
-  }
+  };
 
   const openModal = () => {
-    setToggleNotif(true)
-  }
+    setToggleNotif(true);
+  };
 
   const closeModal = () => {
-    setToggleNotif(false)
-  }
+    setToggleNotif(false);
+  };
 
-  const telephone = (data.telephone)
+  const { telephone } = data;
   // .toString().match(/.{1,2}/g).join(" ")
 
   return (
@@ -189,10 +192,8 @@ function Dashboard() {
                     <AiFillStar />({data.nbNotes})
                   </span>
                 </h2>
-                {userType === 'creche' ? (
-                  <h1>
-                    {data.nom}
-                  </h1>
+                {userType === "creche" ? (
+                  <h1>{data.nom}</h1>
                 ) : (
                   <h1>
                     {data.prenom} {data.nomUsage ?? data.nomNaissance}
@@ -246,22 +247,24 @@ function Dashboard() {
             <hr />
             <ul>
               {notif.length ? (
-                notif.map(n => (
+                notif.map((n) => (
                   <li
                     onClick={() => {
                       if (n.type === "waiting") {
-                        setToggle(1)
+                        setToggle(1);
                       }
                     }}
                   >
                     <p>{notifContent(n.type)}</p>
-                    <button onClick={() => deleteNotification(n.notifId)}>X</button>
+                    <button onClick={() => deleteNotification(n.notifId)}>
+                      X
+                    </button>
                   </li>
                 ))
               ) : (
                 <li
                   style={{
-                    opacity: '0.7'
+                    opacity: "0.7",
                   }}
                 >
                   Pas de notifications
@@ -271,7 +274,7 @@ function Dashboard() {
           </>
         </ReactModal>
       )}
-    </div >
+    </div>
   );
 }
 

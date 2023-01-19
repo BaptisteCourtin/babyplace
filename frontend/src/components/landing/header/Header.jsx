@@ -46,7 +46,8 @@ function Header({ userType }) {
           <br />
         </p>
         <button type="button">
-          <HashLink to="/contact#contact">En savoir plus</HashLink></button>
+          <HashLink to="/contact#contact">En savoir plus</HashLink>
+        </button>
       </div>
       <img src={headerImg} alt="" />
     </header>

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
-import Agenda from "./Components/DashPlaces.Agenda";
 import { toast } from "react-hot-toast";
 import { activitiesArray } from "@utils/activitiesArray";
+import Agenda from "./Components/DashPlaces.Agenda";
 
 function DashPlaces({ userType, structureId }) {
   const [toggleDay, setToggleDay] = useState(null);
@@ -134,7 +134,7 @@ function DashPlaces({ userType, structureId }) {
         {
           id: structureId,
           optionsValue: value,
-          options: options,
+          options,
         }
       );
       toast.success("Vos options ont bien été modifiées");

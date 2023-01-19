@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Calendar from "react-calendar";
 
 import PropTypes from "prop-types";
@@ -131,7 +131,7 @@ function AppliPlaces({ dataDateHeure, setDataDateHeure }) {
                   onChange={(e) => {
                     ChangeDateHeure(e, "heureMin");
                   }}
-                ></input>
+                />
                 <p>à</p>
                 <input
                   type="time"
@@ -139,7 +139,7 @@ function AppliPlaces({ dataDateHeure, setDataDateHeure }) {
                   onChange={(e) => {
                     ChangeDateHeure(e, "heureMax");
                   }}
-                ></input>
+                />
               </div>
             </div>
           </div>
@@ -175,7 +175,7 @@ function AppliPlaces({ dataDateHeure, setDataDateHeure }) {
                   onChange={(e) => {
                     ChangeDateHeure(e, "heureMin");
                   }}
-                ></input>
+                />
                 <p>à</p>
                 <input
                   type="time"
@@ -183,7 +183,7 @@ function AppliPlaces({ dataDateHeure, setDataDateHeure }) {
                   onChange={(e) => {
                     ChangeDateHeure(e, "heureMax");
                   }}
-                ></input>
+                />
               </div>
             </div>
           </div>

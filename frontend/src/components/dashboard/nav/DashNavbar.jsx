@@ -25,7 +25,7 @@ function DashNavbar({ toggle, setToggle, structureId }) {
       });
       navigate("/");
     } catch (err) {
-      console.error(err.message)
+      console.error(err.message);
     }
   };
 
@@ -38,7 +38,7 @@ function DashNavbar({ toggle, setToggle, structureId }) {
         </h2>
       </div>
       <ul className="dashNavList">
-        <li className={toggle === 1 && 'selected'}>
+        <li className={toggle === 1 && "selected"}>
           <MdOutlineFormatListBulleted />
           <button
             type="button"
@@ -49,7 +49,7 @@ function DashNavbar({ toggle, setToggle, structureId }) {
             Demandes
           </button>
         </li>
-        <li className={toggle === 2 && 'selected'}>
+        <li className={toggle === 2 && "selected"}>
           <MdOutlineCalendarToday />
           <button
             type="button"
@@ -60,7 +60,7 @@ function DashNavbar({ toggle, setToggle, structureId }) {
             Agenda
           </button>
         </li>
-        <li className={toggle === 3 && 'selected'}>
+        <li className={toggle === 3 && "selected"}>
           <MdAccessTime />
           <button
             type="button"
@@ -71,7 +71,7 @@ function DashNavbar({ toggle, setToggle, structureId }) {
             Horaires
           </button>
         </li>
-        <li className={toggle === 4 && 'selected'}>
+        <li className={toggle === 4 && "selected"}>
           <MdOutlineMarkAsUnread />
           <button
             type="button"

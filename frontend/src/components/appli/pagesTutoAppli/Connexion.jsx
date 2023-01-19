@@ -19,7 +19,6 @@ function Connexion({ setCompo }) {
   const handleInscription = (e) => {
     e.preventDefault();
     if (email && password === password2) {
-      console.log(email, password);
       axios
         .post(`${import.meta.env.VITE_PATH}/inscriptionAppFamille`, {
           email,

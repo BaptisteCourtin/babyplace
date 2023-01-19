@@ -12,34 +12,37 @@ function DashAgenda({ structureId, maxPlaces }) {
 
   const getHours = async () => {
     try {
-      const res = await axios
-        .get(`${import.meta.env.VITE_PATH}/horaires/${structureId}`, {
-          id: structureId
-        })
-      setHours(res.data)
-    }
-    catch (err) {
-      console.error(err.message)
+      const res = await axios.get(
+        `${import.meta.env.VITE_PATH}/horaires/${structureId}`,
+        {
+          id: structureId,
+        }
+      );
+      setHours(res.data);
+    } catch (err) {
+      console.error(err.message);
     }
   };
 
   const getCalendar = async () => {
     try {
-      const res = await axios
-        .get(`${import.meta.env.VITE_PATH}/calendrier/${structureId}`, {
-          id: structureId
-        })
+      const res = await axios.get(
+        `${import.meta.env.VITE_PATH}/calendrier/${structureId}`,
+        {
+          id: structureId,
+        }
+      );
       setCalendar(res.data);
-    }
-    catch (err) {
-      console.error(err.message)
+    } catch (err) {
+      console.error(err.message);
     }
   };
 
   const updatePlaces = async () => {
     try {
-      await axios
-        .put(`${import.meta.env.VITE_PATH}/calendrier/places/${calendarIndex}`, {
+      await axios.put(
+        `${import.meta.env.VITE_PATH}/calendrier/places/${calendarIndex}`,
+        {
           id: calendarIndex,
           nbPlaces: places,
         }
@@ -47,14 +50,15 @@ function DashAgenda({ structureId, maxPlaces }) {
       toast.success("Vos places ont bien été modifiées");
       getCalendar();
     } catch (err) {
-      console.error(err.message)
+      console.error(err.message);
     }
   };
 
   const updateStatusClose = async (calendarIndex) => {
     try {
-      await axios
-        .put(`${import.meta.env.VITE_PATH}/calendrier/places/close/${calendarIndex}`, {
+      await axios.put(
+        `${import.meta.env.VITE_PATH}/calendrier/places/close/${calendarIndex}`,
+        {
           id: calendarIndex,
         }
       );
@@ -62,14 +66,15 @@ function DashAgenda({ structureId, maxPlaces }) {
       getCalendar();
       setPlaces("");
     } catch (err) {
-      console.error(err.message)
+      console.error(err.message);
     }
   };
 
   const updateStatusOpen = async (calendarIndex) => {
     try {
-      await axios
-        .put(`${import.meta.env.VITE_PATH}/calendrier/places/open/${calendarIndex}`, {
+      await axios.put(
+        `${import.meta.env.VITE_PATH}/calendrier/places/open/${calendarIndex}`,
+        {
           id: calendarIndex,
           maxPlaces,
         }
@@ -78,53 +83,53 @@ function DashAgenda({ structureId, maxPlaces }) {
       getCalendar();
       setPlaces("");
     } catch (err) {
-      console.error(err.message)
+      console.error(err.message);
     }
   };
 
   const addSleepDate = async () => {
     try {
-      await axios
-        .post(`${import.meta.env.VITE_PATH}/calendrier/add`, {
-          date,
-          nbPlaces: -1,
-          structureId,
-        })
-      toast.success("Bon repos")
-      getCalendar()
+      await axios.post(`${import.meta.env.VITE_PATH}/calendrier/add`, {
+        date,
+        nbPlaces: -1,
+        structureId,
+      });
+      toast.success("Bon repos");
+      getCalendar();
     } catch (err) {
-      console.error(err.message)
+      console.error(err.message);
     }
   };
 
   const addWorkDate = async () => {
     try {
-      setPlaces(1)
-      await axios
-        .post(`${import.meta.env.VITE_PATH}/calendrier/add`, {
-          date,
-          nbPlaces: 1,
-          structureId,
-        })
-      toast.success("Travaillez bien")
-      getCalendar()
+      setPlaces(1);
+      await axios.post(`${import.meta.env.VITE_PATH}/calendrier/add`, {
+        date,
+        nbPlaces: 1,
+        structureId,
+      });
+      toast.success("Travaillez bien");
+      getCalendar();
     } catch (err) {
-      console.error(err.message)
+      console.error(err.message);
     }
   };
 
   const fullDate = async (calendarIndex) => {
     try {
-      await axios
-        .delete(`${import.meta.env.VITE_PATH}/calendrier/${calendarIndex}`, {
-          id: calendarIndex
-        })
-      toast.success("C'est noté")
-      getCalendar()
+      await axios.delete(
+        `${import.meta.env.VITE_PATH}/calendrier/${calendarIndex}`,
+        {
+          id: calendarIndex,
+        }
+      );
+      toast.success("C'est noté");
+      getCalendar();
     } catch (err) {
-      console.error(err.message)
+      console.error(err.message);
     }
-  }
+  };
 
   useEffect(() => {
     getHours();
@@ -132,8 +137,9 @@ function DashAgenda({ structureId, maxPlaces }) {
   }, []);
 
   let curDate = new Date();
-  curDate = `${curDate.getFullYear()}-${curDate.getMonth() + 1
-    }-${curDate.getDate()}`;
+  curDate = `${curDate.getFullYear()}-${
+    curDate.getMonth() + 1
+  }-${curDate.getDate()}`;
 
   const [clickedDay, setClickedDay] = useState(new Date());
   const date = `${clickedDay.getFullYear()}-${
@@ -160,15 +166,23 @@ function DashAgenda({ structureId, maxPlaces }) {
           {calendar.every(
             (c) => c.structureId === structureId && c.date !== date
           ) && (
-              <>
-                <button type="button" className="agendaPlacesWork" onClick={() => addSleepDate()}>
-                  Repos
-                </button>
-                <button type="button" className="agendaPlacesWork" onClick={() => addWorkDate()}>
-                  Places restantes
-                </button>
-              </>
-            )}
+            <>
+              <button
+                type="button"
+                className="agendaPlacesWork"
+                onClick={() => addSleepDate()}
+              >
+                Repos
+              </button>
+              <button
+                type="button"
+                className="agendaPlacesWork"
+                onClick={() => addWorkDate()}
+              >
+                Places restantes
+              </button>
+            </>
+          )}
           {calendar
             .filter((c) => c.structureId === structureId && c.date === date)
             .map((fc) =>
@@ -230,7 +244,7 @@ function DashAgenda({ structureId, maxPlaces }) {
                   <button
                     className="agendaPlacesWork"
                     onClick={() => {
-                      fullDate(fc.calendrierId)
+                      fullDate(fc.calendrierId);
                     }}
                   >
                     Complet

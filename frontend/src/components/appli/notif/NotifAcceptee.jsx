@@ -49,6 +49,7 @@ function NotifAcceptee({ setCompo, photoFamille }) {
 
 NotifAcceptee.propTypes = {
   setCompo: PropTypes.func.isRequired,
+  photoFamille: PropTypes.string.isRequired,
 };
 
 export default NotifAcceptee;

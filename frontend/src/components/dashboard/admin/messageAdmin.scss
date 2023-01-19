@@ -1,61 +1,61 @@
 .messageAdmin {
-    width: 100%;
+  width: 100%;
 
-    .messageAdminList {
-        display: flex;
-        flex-direction: column;
-        padding: 20px;
-        width: 95%;
+  .messageAdminList {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 95%;
 
-        h1 {
-            font-size: 2em;
-            font-weight: 600;
-        }
-
-        li {
-            list-style: none;
-            border-bottom: solid 1px $grey;
-
-            .messageListAdminContainer {
-                display: flex;
-                width: 100%;
-                justify-content: space-between;
-                align-items: center;
-
-                .messageListAdminHeader {
-                    padding: 15px;
-                    gap: 20px;
-                    width: 25%;
-
-                    h4 {
-                        font-size: 1.15em;
-                        font-weight: 500;
-                        color: $third;
-                    }
-
-                    .messageListEmail {
-                        color: $fourth;
-                    }
-                }
-
-                .optionSelected {
-                    width: 25%;
-                }
-
-                .messageListAdminBody {
-                    width: 50%;
-                    height: auto;
-                }
-
-                button {
-                    background: none;
-
-                    #messageAdminCloseBtn {
-                        color: red;
-                        transform: scale(1.5);
-                    }
-                }
-            }
-        }
+    h1 {
+      font-size: 2em;
+      font-weight: 600;
     }
+
+    li {
+      list-style: none;
+      border-bottom: solid 1px $grey;
+
+      .messageListAdminContainer {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+
+        .messageListAdminHeader {
+          padding: 15px;
+          gap: 20px;
+          width: 25%;
+
+          h4 {
+            font-size: 1.15em;
+            font-weight: 500;
+            color: $third;
+          }
+
+          .messageListEmail {
+            color: $fourth;
+          }
+        }
+
+        .optionSelected {
+          width: 25%;
+        }
+
+        .messageListAdminBody {
+          width: 50%;
+          height: auto;
+        }
+
+        button {
+          background: none;
+
+          #messageAdminCloseBtn {
+            color: red;
+            transform: scale(1.5);
+          }
+        }
+      }
+    }
+  }
 }

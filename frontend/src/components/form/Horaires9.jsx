@@ -31,10 +31,15 @@ function Structure9({
 }) {
   const [memeHoraire, setMemeHoraire] = useState(true);
   const getHoraires = () => {
-    Axios.get(`${import.meta.env.VITE_PATH}/horairesExist?id=${structureId}`, { structureId })
+    Axios.get(`${import.meta.env.VITE_PATH}/horairesExist?id=${structureId}`, {
+      structureId,
+    })
       .then((result) => {
-        if (result.data.length > 0) { setHorairesExist(true) }
-        else { setHorairesExist(false) }
+        if (result.data.length > 0) {
+          setHorairesExist(true);
+        } else {
+          setHorairesExist(false);
+        }
         for (let i = 0; i < result.data.length; i++) {
           if (result.data[i].jourId === 1) {
             setData((prev) => {
@@ -43,7 +48,7 @@ function Structure9({
                 lundiOuvert: result.data[i].ouvert,
                 lundiMin: result.data[i].heureMin,
                 lundiMax: result.data[i].heureMax,
-              }
+              };
             });
           } else if (result.data[i].jourId === 2) {
             setData((prev) => {
@@ -52,8 +57,8 @@ function Structure9({
                 mardiOuvert: result.data[i].ouvert,
                 mardiMin: result.data[i].heureMin,
                 mardiMax: result.data[i].heureMax,
-              }
-            })
+              };
+            });
           } else if (result.data[i].jourId === 3) {
             setData((prev) => {
               return {
@@ -61,8 +66,8 @@ function Structure9({
                 mercrediOuvert: result.data[i].ouvert,
                 mercrediMin: result.data[i].heureMin,
                 mercrediMax: result.data[i].heureMax,
-              }
-            })
+              };
+            });
           } else if (result.data[i].jourId === 4) {
             setData((prev) => {
               return {
@@ -70,8 +75,8 @@ function Structure9({
                 jeudiOuvert: result.data[i].ouvert,
                 jeudiMin: result.data[i].heureMin,
                 jeudiMax: result.data[i].heureMax,
-              }
-            })
+              };
+            });
           } else if (result.data[i].jourId === 5) {
             setData((prev) => {
               return {
@@ -79,8 +84,8 @@ function Structure9({
                 vendrediOuvert: result.data[i].ouvert,
                 vendrediMin: result.data[i].heureMin,
                 vendrediMax: result.data[i].heureMax,
-              }
-            })
+              };
+            });
           } else if (result.data[i].jourId === 6) {
             setData((prev) => {
               return {
@@ -88,8 +93,8 @@ function Structure9({
                 samediOuvert: result.data[i].ouvert,
                 samediMin: result.data[i].heureMin,
                 samediMax: result.data[i].heureMax,
-              }
-            })
+              };
+            });
           } else if (result.data[i].jourId === 7) {
             setData((prev) => {
               return {
@@ -97,18 +102,18 @@ function Structure9({
                 dimancheOuvert: result.data[i].ouvert,
                 dimancheMin: result.data[i].heureMin,
                 dimancheMax: result.data[i].heureMax,
-              }
-            })
+              };
+            });
           }
         }
       })
       .catch((err) => {
         console.error(err);
-      })
-  }
+      });
+  };
   useEffect(() => {
-    getHoraires()
-  }, [])
+    getHoraires();
+  }, []);
 
   return (
     <div className="structure9 page-left">
@@ -131,15 +136,27 @@ function Structure9({
                 type="time"
                 name="horaireMin"
                 step="300"
-                value={lundiMin || mardiMin || mercrediMin || jeudiMin || vendrediMin || samediMin || dimancheMin || undefined}
+                value={
+                  lundiMin ||
+                  mardiMin ||
+                  mercrediMin ||
+                  jeudiMin ||
+                  vendrediMin ||
+                  samediMin ||
+                  dimancheMin ||
+                  undefined
+                }
                 onChange={(e) => {
                   lundiOuvert && updateFields({ lundiMin: e.target.value });
                   mardiOuvert && updateFields({ mardiMin: e.target.value });
-                  mercrediOuvert && updateFields({ mercrediMin: e.target.value });
+                  mercrediOuvert &&
+                    updateFields({ mercrediMin: e.target.value });
                   jeudiOuvert && updateFields({ jeudiMin: e.target.value });
-                  vendrediOuvert && updateFields({ vendrediMin: e.target.value });
+                  vendrediOuvert &&
+                    updateFields({ vendrediMin: e.target.value });
                   samediOuvert && updateFields({ samediMin: e.target.value });
-                  dimancheOuvert && updateFields({ dimancheMin: e.target.value });
+                  dimancheOuvert &&
+                    updateFields({ dimancheMin: e.target.value });
                 }}
               />
               <p>à</p>
@@ -147,15 +164,27 @@ function Structure9({
                 type="time"
                 name="horaireMax"
                 step="300"
-                value={lundiMax || mardiMax || mercrediMax || jeudiMax || vendrediMax || samediMax || dimancheMax || undefined}
+                value={
+                  lundiMax ||
+                  mardiMax ||
+                  mercrediMax ||
+                  jeudiMax ||
+                  vendrediMax ||
+                  samediMax ||
+                  dimancheMax ||
+                  undefined
+                }
                 onChange={(e) => {
                   lundiOuvert && updateFields({ lundiMax: e.target.value });
                   mardiOuvert && updateFields({ mardiMax: e.target.value });
-                  mercrediOuvert && updateFields({ mercrediMax: e.target.value });
+                  mercrediOuvert &&
+                    updateFields({ mercrediMax: e.target.value });
                   jeudiOuvert && updateFields({ jeudiMax: e.target.value });
-                  vendrediOuvert && updateFields({ vendrediMax: e.target.value });
+                  vendrediOuvert &&
+                    updateFields({ vendrediMax: e.target.value });
                   samediOuvert && updateFields({ samediMax: e.target.value });
-                  dimancheOuvert && updateFields({ dimancheMax: e.target.value });
+                  dimancheOuvert &&
+                    updateFields({ dimancheMax: e.target.value });
                 }}
               />
             </div>
@@ -180,8 +209,8 @@ function Structure9({
               </div>
             </div>
             {!lundiOuvert && <p>Fermé</p>}
-            {(lundiOuvert && memeHoraire) && <p>Ouvert</p>}
-            {(!memeHoraire && lundiOuvert) && (
+            {lundiOuvert && memeHoraire && <p>Ouvert</p>}
+            {!memeHoraire && lundiOuvert && (
               <div className="horaireOuvert">
                 <p>Ouvert de </p>
                 <input
@@ -220,8 +249,8 @@ function Structure9({
               </div>
             </div>
             {!mardiOuvert && <p>Fermé</p>}
-            {(mardiOuvert && memeHoraire) && <p>Ouvert</p>}
-            {(!memeHoraire && mardiOuvert) && (
+            {mardiOuvert && memeHoraire && <p>Ouvert</p>}
+            {!memeHoraire && mardiOuvert && (
               <div className="horaireOuvert">
                 <p>Ouvert de </p>
                 <input
@@ -262,7 +291,7 @@ function Structure9({
               </div>
             </div>
             {!mercrediOuvert && <p>Fermé</p>}
-            {(mercrediOuvert && memeHoraire) && <p>Ouvert</p>}
+            {mercrediOuvert && memeHoraire && <p>Ouvert</p>}
             {!memeHoraire && mercrediOuvert && (
               <div className="horaireOuvert">
                 <p>Ouvert de </p>
@@ -271,7 +300,9 @@ function Structure9({
                   name="mercrediMin"
                   step="300"
                   value={mercrediMin}
-                  onChange={(e) => updateFields({ mercrediMin: e.target.value })}
+                  onChange={(e) =>
+                    updateFields({ mercrediMin: e.target.value })
+                  }
                 />
                 <p>à</p>
                 <input
@@ -279,7 +310,9 @@ function Structure9({
                   name="mercrediMax"
                   step="300"
                   value={mercrediMax}
-                  onChange={(e) => updateFields({ mercrediMax: e.target.value })}
+                  onChange={(e) =>
+                    updateFields({ mercrediMax: e.target.value })
+                  }
                 />
               </div>
             )}
@@ -302,8 +335,8 @@ function Structure9({
               </div>
             </div>
             {!jeudiOuvert && <p>Fermé</p>}
-            {(jeudiOuvert && memeHoraire) && <p>Ouvert</p>}
-            {(!memeHoraire && jeudiOuvert) && (
+            {jeudiOuvert && memeHoraire && <p>Ouvert</p>}
+            {!memeHoraire && jeudiOuvert && (
               <div className="horaireOuvert">
                 <p>Ouvert de </p>
                 <input
@@ -344,8 +377,8 @@ function Structure9({
               </div>
             </div>
             {!vendrediOuvert && <p>Fermé</p>}
-            {(vendrediOuvert && memeHoraire) && <p>Ouvert</p>}
-            {(!memeHoraire && vendrediOuvert) && (
+            {vendrediOuvert && memeHoraire && <p>Ouvert</p>}
+            {!memeHoraire && vendrediOuvert && (
               <div className="horaireOuvert">
                 <p>Ouvert de </p>
                 <input
@@ -353,7 +386,9 @@ function Structure9({
                   name="vendrediMin"
                   step="300"
                   value={vendrediMin}
-                  onChange={(e) => updateFields({ vendrediMin: e.target.value })}
+                  onChange={(e) =>
+                    updateFields({ vendrediMin: e.target.value })
+                  }
                 />
                 <p>à</p>
                 <input
@@ -361,7 +396,9 @@ function Structure9({
                   name="vendrediMax"
                   step="300"
                   value={vendrediMax}
-                  onChange={(e) => updateFields({ vendrediMax: e.target.value })}
+                  onChange={(e) =>
+                    updateFields({ vendrediMax: e.target.value })
+                  }
                 />
               </div>
             )}
@@ -384,8 +421,8 @@ function Structure9({
               </div>
             </div>
             {!samediOuvert && <p>Fermé</p>}
-            {(samediOuvert && memeHoraire) ? <p>Ouvert</p> : ""}
-            {(!memeHoraire && samediOuvert) &&
+            {samediOuvert && memeHoraire ? <p>Ouvert</p> : ""}
+            {!memeHoraire && samediOuvert && (
               <div className="horaireOuvert">
                 <p>Ouvert de </p>
                 <input
@@ -404,8 +441,7 @@ function Structure9({
                   onChange={(e) => updateFields({ samediMax: e.target.value })}
                 />
               </div>
-            }
-
+            )}
           </div>
           <div className="inputContainer with-toggle">
             <div className="innerToggle">
@@ -427,8 +463,8 @@ function Structure9({
               </div>
             </div>
             {!dimancheOuvert && <p>Fermé</p>}
-            {(Boolean(dimancheOuvert) && memeHoraire) && <p>Ouvert</p>}
-            {(!memeHoraire && dimancheOuvert) && (
+            {Boolean(dimancheOuvert) && memeHoraire && <p>Ouvert</p>}
+            {!memeHoraire && dimancheOuvert && (
               <div className="horaireOuvert">
                 <p>Ouvert de </p>
                 <input
@@ -436,7 +472,9 @@ function Structure9({
                   name="dimancheMin"
                   step="300"
                   value={dimancheMin}
-                  onChange={(e) => updateFields({ dimancheMin: e.target.value })}
+                  onChange={(e) =>
+                    updateFields({ dimancheMin: e.target.value })
+                  }
                 />
                 <p>à</p>
                 <input
@@ -444,7 +482,9 @@ function Structure9({
                   name="dimancheMax"
                   step="300"
                   value={dimancheMax}
-                  onChange={(e) => updateFields({ dimancheMax: e.target.value })}
+                  onChange={(e) =>
+                    updateFields({ dimancheMax: e.target.value })
+                  }
                 />
               </div>
             )}
@@ -455,34 +495,13 @@ function Structure9({
   );
 }
 Structure9.propTypes = {
-  lundiOuvert: oneOfType([
-    bool,
-    number
-  ]),
-  mardiOuvert: oneOfType([
-    bool,
-    number
-  ]),
-  mercrediOuvert: oneOfType([
-    bool,
-    number
-  ]),
-  jeudiOuvert: oneOfType([
-    bool,
-    number
-  ]),
-  vendrediOuvert: oneOfType([
-    bool,
-    number
-  ]),
-  samediOuvert: oneOfType([
-    bool,
-    number
-  ]),
-  dimancheOuvert: oneOfType([
-    bool,
-    number
-  ]),
+  lundiOuvert: oneOfType([bool, number]),
+  mardiOuvert: oneOfType([bool, number]),
+  mercrediOuvert: oneOfType([bool, number]),
+  jeudiOuvert: oneOfType([bool, number]),
+  vendrediOuvert: oneOfType([bool, number]),
+  samediOuvert: oneOfType([bool, number]),
+  dimancheOuvert: oneOfType([bool, number]),
   updateFields: Proptypes.func,
 };
 export default Structure9;

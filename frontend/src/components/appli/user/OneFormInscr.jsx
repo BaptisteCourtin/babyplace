@@ -1,6 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-const OneFormInscr = ({ init, src, nomDoc, handleSupp, p, who }) => {
+function OneFormInscr({ init, src, nomDoc, handleSupp, p, who }) {
   return (
     <div className="champ">
       <p>{p}</p>
@@ -31,6 +32,15 @@ const OneFormInscr = ({ init, src, nomDoc, handleSupp, p, who }) => {
       )}
     </div>
   );
+}
+
+OneFormInscr.propTypes = {
+  init: PropTypes.string.isRequired,
+  src: PropTypes.func.isRequired,
+  nomDoc: PropTypes.string.isRequired,
+  handleSupp: PropTypes.func.isRequired,
+  p: PropTypes.string.isRequired,
+  who: PropTypes.number.isRequired,
 };
 
 export default OneFormInscr;

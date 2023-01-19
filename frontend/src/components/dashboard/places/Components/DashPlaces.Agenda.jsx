@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import open from "@assets/dashboard/open-sign.svg";
 import close from "@assets/dashboard/closed-sign.svg";
-import DashCalendar from "../../agenda/calendar/DashCalendar";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import { useEffect } from "react";
+import DashCalendar from "../../agenda/calendar/DashCalendar";
 
 function Agenda({
   structureId,
@@ -29,8 +28,8 @@ function Agenda({
         `${import.meta.env.VITE_PATH}/dashboard/hours/${structureId}`,
         {
           id: structureId,
-          value: value,
-          state: state,
+          value,
+          state,
           jourId: dayId,
         }
       );
@@ -48,8 +47,8 @@ function Agenda({
     try {
       await axios.put(`${import.meta.env.VITE_PATH}/horaires/day/${dayId}`, {
         id: dayId,
-        structureId: structureId,
-        value: value,
+        structureId,
+        value,
       });
       toast.success("Vos préférences ont bien été modifiées");
       getHoraires();

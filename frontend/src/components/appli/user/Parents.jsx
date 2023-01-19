@@ -96,7 +96,7 @@ function Parents() {
         pourcent += 1;
       }
     }
-    return parseInt((pourcent * 100) / 12);
+    return parseInt((pourcent * 100) / 12, 10);
     // !!! pour 2 parents !!!
   };
 

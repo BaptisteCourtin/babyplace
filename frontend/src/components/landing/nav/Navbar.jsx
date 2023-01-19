@@ -2,8 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import logo from "@assets/logo4.svg";
 import logotxt from "@assets/babyplaceTxt.svg";
-import { Link } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 
 function Navbar({ userType, setUserType }) {
@@ -21,9 +20,11 @@ function Navbar({ userType, setUserType }) {
         Vous êtes professionnel de la petite enfance ?
       </button>
       <div className="navRight">
-        <HashLink to="/contact#aide"><button type="button" className="textBtn">
-          Besoin d'aide ?
-        </button></HashLink>
+        <HashLink to="/contact#aide">
+          <button type="button" className="textBtn">
+            Besoin d'aide ?
+          </button>
+        </HashLink>
         <NavLink to="/appli">
           <button type="button" className="connect">
             <div>
@@ -32,7 +33,8 @@ function Navbar({ userType, setUserType }) {
               <span>Gérer mes rdv</span>
             </div>
             <span className="arrow">➜</span>
-          </button></NavLink>
+          </button>
+        </NavLink>
       </div>
     </nav>
   ) : (

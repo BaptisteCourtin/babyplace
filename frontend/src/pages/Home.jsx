@@ -190,7 +190,8 @@ export default function Home() {
                       Olympe
                     </p>
                     <p>
-                      Maintenant je ne vois plus mes enfants. J'ai repris goût à la vie
+                      Maintenant je ne vois plus mes enfants. J'ai repris goût à
+                      la vie
                     </p>
                     <span>⭐⭐⭐⭐⭐</span>
                   </li>
@@ -228,7 +229,8 @@ export default function Home() {
                       Cécille-Myrtille
                     </p>
                     <p>
-                      Avant j'étais suicidaire mais, un jour, j'ai découvert Babyplace et depuis je suis moins suicidaire
+                      Avant j'étais suicidaire mais, un jour, j'ai découvert
+                      Babyplace et depuis je suis moins suicidaire
                     </p>
                     <span>⭐⭐⭐⭐⭐</span>
                   </li>

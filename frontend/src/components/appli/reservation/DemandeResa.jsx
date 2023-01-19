@@ -162,6 +162,7 @@ DemandeResa.propTypes = {
   heureMin: PropTypes.string.isRequired,
   heureMax: PropTypes.string.isRequired,
   jour: PropTypes.string.isRequired,
+  isOccasionnel: PropTypes.number.isRequired,
   nom: PropTypes.string,
   nomUsage: PropTypes.string,
   nomNaissance: PropTypes.string,

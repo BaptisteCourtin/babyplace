@@ -5,38 +5,35 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 
 function DashReservations({ tarifHeure }) {
-
   const [statusToggle, setStatusToggle] = useState(0);
   const [filteredReser, setFilteredReser] = useState([]);
 
-  const [reser, setReser] = useState([])
+  const [reser, setReser] = useState([]);
   const getReser = async () => {
     try {
-      const res = await axios
-        .get(`${import.meta.env.VITE_PATH}/reservation`)
-      setReser(res.data)
+      const res = await axios.get(`${import.meta.env.VITE_PATH}/reservation`);
+      setReser(res.data);
     } catch (err) {
-      toast.error(err.message)
+      toast.error(err.message);
     }
   };
 
   const updateStatus = async (status, reserId) => {
     try {
-      await axios
-        .put(`${import.meta.env.VITE_PATH}/reservation/status`, {
-          status: status,
-          id: reserId
-        })
-      if (status === 'approved') {
-        toast.success("Vous avez accepté cette demande")
-      } else if (status === 'refused') {
-        toast.success("Vous avez refusé cette demande")
+      await axios.put(`${import.meta.env.VITE_PATH}/reservation/status`, {
+        status,
+        id: reserId,
+      });
+      if (status === "approved") {
+        toast.success("Vous avez accepté cette demande");
+      } else if (status === "refused") {
+        toast.success("Vous avez refusé cette demande");
       }
-      getReser()
+      getReser();
     } catch (err) {
-      console.log(err.message)
+      console.log(err.message);
     }
-  }
+  };
 
   useEffect(() => {
     getReser();
@@ -88,10 +85,10 @@ function DashReservations({ tarifHeure }) {
         {reser
           .filter((r) => {
             if (statusToggle === 0) return r;
-            else if (statusToggle === 1) return r.status.includes("approved");
-            else if (statusToggle === 2) return r.status.includes("waiting");
-            else if (statusToggle === 3) return r.status.includes("refused");
-            else if (statusToggle === 4) return r.status.includes("canceled");
+            if (statusToggle === 1) return r.status.includes("approved");
+            if (statusToggle === 2) return r.status.includes("waiting");
+            if (statusToggle === 3) return r.status.includes("refused");
+            if (statusToggle === 4) return r.status.includes("canceled");
           })
           .map((r) => (
             <li
@@ -138,11 +135,15 @@ function DashReservations({ tarifHeure }) {
                 }}
               />
               <div className="reserInfo1">
-                <p>{r.prenomEnfant} <br /> {r.nomEnfant}</p>
+                <p>
+                  {r.prenomEnfant} <br /> {r.nomEnfant}
+                </p>
                 <p>{r.ageEnfant} mois</p>
               </div>
               <div className="reserInfo2">
-                <p>{r.prenomParent} <br /> {r.nomParent}</p>
+                <p>
+                  {r.prenomParent} <br /> {r.nomParent}
+                </p>
                 <p>Profil {r.pourcentProfil} %</p>
               </div>
               <div className="reserInfo3">
@@ -159,33 +160,46 @@ function DashReservations({ tarifHeure }) {
               </div>
               <div className="reserInfo4">
                 <p>
-                  {r.heureDepart.replace(':00', '') - r.heureArrivee.replace(':00', '')}H
+                  {r.heureDepart.replace(":00", "") -
+                    r.heureArrivee.replace(":00", "")}
+                  H
                 </p>
                 <p>
-                  {(r.heureDepart.replace(':00', '') - r.heureArrivee.replace(':00', '')) * tarifHeure}€
+                  {(r.heureDepart.replace(":00", "") -
+                    r.heureArrivee.replace(":00", "")) *
+                    tarifHeure}
+                  €
                 </p>
               </div>
               {r.status === "waiting" ? (
                 <div className="reserChoice">
-                  <button type="button" onClick={() => updateStatus('approved', r.id)}>
+                  <button
+                    type="button"
+                    onClick={() => updateStatus("approved", r.id)}
+                  >
                     <MdCheckCircleOutline />
                     Accepter
                   </button>
-                  <button type="button" onClick={() => updateStatus('refused', r.id)}>
+                  <button
+                    type="button"
+                    onClick={() => updateStatus("refused", r.id)}
+                  >
                     <MdOutlineCancel /> Refuser
                   </button>
                 </div>
               ) : (
                 <div className="reserModif">
-                  <button type="button" onClick={() => updateStatus('waiting', r.id)}>
+                  <button
+                    type="button"
+                    onClick={() => updateStatus("waiting", r.id)}
+                  >
                     <GoFile />
                     Modifier
                   </button>
                 </div>
               )}
             </li>
-          ))
-        }
+          ))}
       </ul>
     </div>
   );
