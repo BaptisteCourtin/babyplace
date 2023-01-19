@@ -28,12 +28,25 @@ function Inscription() {
     docDivorce1: null,
   });
 
-  const handleSupp = (e) => {
-    const { name } = e.target;
-    setInitialData((prevState) => ({
-      ...prevState,
-      [name]: null,
-    }));
+  const handleSupp = (e, who) => {
+    if (who === 1 || who === 2) {
+      const { parentId } = donneesForm[who - 1];
+      axios.put(
+        `${import.meta.env.VITE_PATH}/parent/nullOneDocForm/${parentId}`,
+        {
+          nomFichier: e.target.name,
+        }
+      );
+    } else if (who === 3) {
+      axios.put(
+        `${import.meta.env.VITE_PATH}/famille/nullOneDocForm/${familleId}`,
+        {
+          nomFichier: e.target.name,
+        }
+      );
+    }
+
+    // getDonneesForm(); // asynchrone (1 coup)
   };
 
   // --- prise info bdd ---
@@ -43,7 +56,6 @@ function Inscription() {
   const [finalOK, setFinalOK] = useState(false); // donnees mises dans initial => go visuel
 
   const getDonneesForm = () => {
-    console.log("getForm");
     axios
       // !!! prend 2 fois les doc de famille car 2 parents et les données sont dans un tableau
       .get(`${import.meta.env.VITE_PATH}/famille/formInscription/${familleId}`)
@@ -91,6 +103,7 @@ function Inscription() {
     handleChangeInitial("docAutoImage", 0);
     handleChangeInitial("docDivorce", 0);
 
+    setDonneesOK(false);
     setFinalOK(true);
   };
 
@@ -99,7 +112,6 @@ function Inscription() {
     if (donneesOK === true) {
       remplirInitial();
     }
-    setDonneesOK(false);
   }, [donneesOK]);
 
   // --- changer une donnée avec le form ---
@@ -123,224 +135,442 @@ function Inscription() {
   const docAutoImageSrc = useRef(null);
   const docDivorceSrc = useRef(null);
 
+  // --- form parent 1 ou 2 ---
+
   const SubmitFormParent = (e, num) => {
     e.preventDefault();
     // desctructure pour avoir parentId
     const { parentId } = donneesForm[num - 1];
-    const formData = new FormData();
-
-    // que des if car pas obliger de tous mettre tout de suite
 
     if (num === 1) {
       if (docJustifRevenus1Src.current !== null) {
-        formData.append(
-          // nom envoyer dans router
-          "docJustifRevenus",
-          // nom du useref
-          docJustifRevenus1Src.current.files[0]
-        );
-      }
-      if (docDeclaRevenus1Src.current !== null) {
-        formData.append(
-          "docDeclaRevenus",
-          docDeclaRevenus1Src.current.files[0]
-        );
-      }
-      if (docSituationPro1Src.current !== null) {
-        formData.append(
-          "docSituationPro",
-          docSituationPro1Src.current.files[0]
-        );
-      }
-      if (docJustifDom1Src.current !== null) {
-        formData.append("docJustifDom", docJustifDom1Src.current.files[0]);
-      }
-      if (numCaf1Src.current !== null) {
-        formData.append("numCaf", numCaf1Src.current.files[0]);
-      }
-      if (numSecu1Src.current !== null) {
-        formData.append("numSecu", numSecu1Src.current.files[0]);
-      }
-    } else if (num === 2) {
-      if (docJustifRevenus2Src.current !== null) {
-        formData.append(
-          "docJustifRevenus",
-          docJustifRevenus2Src.current.files[0]
-        );
-      }
-      if (docDeclaRevenus2Src.current !== null) {
-        formData.append(
-          "docDeclaRevenus",
-          docDeclaRevenus2Src.current.files[0]
-        );
-      }
-      if (docSituationPro2Src.current !== null) {
-        formData.append(
-          "docSituationPro",
-          docSituationPro2Src.current.files[0]
-        );
-      }
-      if (docJustifDom2Src.current !== null) {
-        formData.append("docJustifDom", docJustifDom2Src.current.files[0]);
-      }
-      if (numCaf2Src.current !== null) {
-        formData.append("numCaf", numCaf2Src.current.files[0]);
-      }
-      if (numSecu2Src.current !== null) {
-        formData.append("numSecu", numSecu2Src.current.files[0]);
-      }
-    }
-
-    axios
-      // mise dans uploads // formData contient les noms des fichiers des Src
-      .post(`${import.meta.env.VITE_PATH}/formInscription/docParent`, formData)
-
-      // mise dans bdd
-      // mettre seulement ce qui n'est pas déjà dans la bdd
-      .then((result) => {
-        let docJustifRevenus = null;
-        let docDeclaRevenus = null;
-        let docSituationPro = null;
-        let docJustifDom = null;
-        let numCaf = null;
-        let numSecu = null;
-
-        if (num === 1) {
-          docJustifRevenus = result.data.docJustifRevenus
-            ? result.data.docJustifRevenus[0].filename
-            : initialData.docJustifRevenus1;
-
-          docDeclaRevenus = result.data.docDeclaRevenus
-            ? result.data.docDeclaRevenus[0].filename
-            : initialData.docDeclaRevenus1;
-
-          docSituationPro = result.data.docSituationPro
-            ? result.data.docSituationPro[0].filename
-            : initialData.docSituationPro1;
-
-          docJustifDom = result.data.docJustifDom
-            ? result.data.docJustifDom[0].filename
-            : initialData.docJustifDom1;
-
-          numCaf = result.data.numCaf
-            ? result.data.numCaf[0].filename
-            : initialData.numCaf1;
-
-          numSecu = result.data.numSecu
-            ? result.data.numSecu[0].filename
-            : initialData.numSecu1;
-        } else if (num === 2) {
-          docJustifRevenus = result.data.docJustifRevenus
-            ? result.data.docJustifRevenus[0].filename
-            : initialData.docJustifRevenus2;
-
-          docDeclaRevenus = result.data.docDeclaRevenus
-            ? result.data.docDeclaRevenus[0].filename
-            : initialData.docDeclaRevenus2;
-
-          docSituationPro = result.data.docSituationPro
-            ? result.data.docSituationPro[0].filename
-            : initialData.docSituationPro2;
-
-          docJustifDom = result.data.docJustifDom
-            ? result.data.docJustifDom[0].filename
-            : initialData.docJustifDom2;
-
-          numCaf = result.data.numCaf
-            ? result.data.numCaf[0].filename
-            : initialData.numCaf2;
-
-          numSecu = result.data.numSecu
-            ? result.data.numSecu[0].filename
-            : initialData.numSecu2;
-        }
-
+        let formData = new FormData();
+        formData.append("file", docJustifRevenus1Src.current.files[0]);
         axios
-          .put(
-            `${
-              import.meta.env.VITE_PATH
-            }/formInscription/docParentChangeName/${parentId}`,
-            {
-              // nom des let
-              docJustifRevenus,
-              docDeclaRevenus,
-              docSituationPro,
-              docJustifDom,
-              numCaf,
-              numSecu,
-            }
+          .post(
+            `${import.meta.env.VITE_PATH}/formInscription/docParent`,
+            formData
           )
+          .then((result) => {
+            axios
+              .put(
+                `${
+                  import.meta.env.VITE_PATH
+                }/formInscription/docParentChangeName/${parentId}`,
+                {
+                  docJustifRevenus: result.data,
+                }
+              )
+              .catch((err) => {
+                console.error(err);
+              });
+          })
           .catch((err) => {
             console.error(err);
           });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+      }
+      if (docDeclaRevenus1Src.current !== null) {
+        let formData = new FormData();
+        formData.append("file", docDeclaRevenus1Src.current.files[0]);
+        axios
+          .post(
+            `${import.meta.env.VITE_PATH}/formInscription/docParent`,
+            formData
+          )
+          .then((result) => {
+            axios
+              .put(
+                `${
+                  import.meta.env.VITE_PATH
+                }/formInscription/docParentChangeName/${parentId}`,
+                {
+                  docDeclaRevenus: result.data,
+                }
+              )
+              .catch((err) => {
+                console.error(err);
+              });
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+      if (docSituationPro1Src.current !== null) {
+        let formData = new FormData();
+        formData.append("file", docSituationPro1Src.current.files[0]);
+        axios
+          .post(
+            `${import.meta.env.VITE_PATH}/formInscription/docParent`,
+            formData
+          )
+          .then((result) => {
+            axios
+              .put(
+                `${
+                  import.meta.env.VITE_PATH
+                }/formInscription/docParentChangeName/${parentId}`,
+                {
+                  docSituationPro: result.data,
+                }
+              )
+              .catch((err) => {
+                console.error(err);
+              });
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+      if (docJustifDom1Src.current !== null) {
+        let formData = new FormData();
+        formData.append("file", docJustifDom1Src.current.files[0]);
+        axios
+          .post(
+            `${import.meta.env.VITE_PATH}/formInscription/docParent`,
+            formData
+          )
+          .then((result) => {
+            axios
+              .put(
+                `${
+                  import.meta.env.VITE_PATH
+                }/formInscription/docParentChangeName/${parentId}`,
+                {
+                  docJustifDom: result.data,
+                }
+              )
+              .catch((err) => {
+                console.error(err);
+              });
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+      if (numCaf1Src.current !== null) {
+        let formData = new FormData();
+        formData.append("file", numCaf1Src.current.files[0]);
+        axios
+          .post(
+            `${import.meta.env.VITE_PATH}/formInscription/docParent`,
+            formData
+          )
+          .then((result) => {
+            axios
+              .put(
+                `${
+                  import.meta.env.VITE_PATH
+                }/formInscription/docParentChangeName/${parentId}`,
+                {
+                  numCaf: result.data,
+                }
+              )
+              .catch((err) => {
+                console.error(err);
+              });
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+      if (numSecu1Src.current !== null) {
+        let formData = new FormData();
+        formData.append("file", numSecu1Src.current.files[0]);
+        axios
+          .post(
+            `${import.meta.env.VITE_PATH}/formInscription/docParent`,
+            formData
+          )
+          .then((result) => {
+            axios
+              .put(
+                `${
+                  import.meta.env.VITE_PATH
+                }/formInscription/docParentChangeName/${parentId}`,
+                {
+                  numSecu: result.data,
+                }
+              )
+              .catch((err) => {
+                console.error(err);
+              });
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    }
+    // ---
+    else if (num === 2) {
+      if (docJustifRevenus2Src.current !== null) {
+        let formData = new FormData();
+        formData.append("file", docJustifRevenus2Src.current.files[0]);
+        axios
+          .post(
+            `${import.meta.env.VITE_PATH}/formInscription/docParent`,
+            formData
+          )
+          .then((result) => {
+            axios
+              .put(
+                `${
+                  import.meta.env.VITE_PATH
+                }/formInscription/docParentChangeName/${parentId}`,
+                {
+                  docJustifRevenus: result.data,
+                }
+              )
+              .catch((err) => {
+                console.error(err);
+              });
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+      if (docDeclaRevenus2Src.current !== null) {
+        let formData = new FormData();
+        formData.append("file", docDeclaRevenus2Src.current.files[0]);
+        axios
+          .post(
+            `${import.meta.env.VITE_PATH}/formInscription/docParent`,
+            formData
+          )
+          .then((result) => {
+            axios
+              .put(
+                `${
+                  import.meta.env.VITE_PATH
+                }/formInscription/docParentChangeName/${parentId}`,
+                {
+                  docDeclaRevenus: result.data,
+                }
+              )
+              .catch((err) => {
+                console.error(err);
+              });
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+      if (docSituationPro2Src.current !== null) {
+        let formData = new FormData();
+        formData.append("file", docSituationPro2Src.current.files[0]);
+        axios
+          .post(
+            `${import.meta.env.VITE_PATH}/formInscription/docParent`,
+            formData
+          )
+          .then((result) => {
+            axios
+              .put(
+                `${
+                  import.meta.env.VITE_PATH
+                }/formInscription/docParentChangeName/${parentId}`,
+                {
+                  docSituationPro: result.data,
+                }
+              )
+              .catch((err) => {
+                console.error(err);
+              });
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+      if (docJustifDom2Src.current !== null) {
+        let formData = new FormData();
+        formData.append("file", docJustifDom2Src.current.files[0]);
+        axios
+          .post(
+            `${import.meta.env.VITE_PATH}/formInscription/docParent`,
+            formData
+          )
+          .then((result) => {
+            axios
+              .put(
+                `${
+                  import.meta.env.VITE_PATH
+                }/formInscription/docParentChangeName/${parentId}`,
+                {
+                  docJustifDom: result.data,
+                }
+              )
+              .catch((err) => {
+                console.error(err);
+              });
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+      if (numCaf2Src.current !== null) {
+        let formData = new FormData();
+        formData.append("file", numCaf2Src.current.files[0]);
+        axios
+          .post(
+            `${import.meta.env.VITE_PATH}/formInscription/docParent`,
+            formData
+          )
+          .then((result) => {
+            axios
+              .put(
+                `${
+                  import.meta.env.VITE_PATH
+                }/formInscription/docParentChangeName/${parentId}`,
+                {
+                  numCaf: result.data,
+                }
+              )
+              .catch((err) => {
+                console.error(err);
+              });
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+      if (numSecu2Src.current !== null) {
+        let formData = new FormData();
+        formData.append("file", numSecu2Src.current.files[0]);
+        axios
+          .post(
+            `${import.meta.env.VITE_PATH}/formInscription/docParent`,
+            formData
+          )
+          .then((result) => {
+            axios
+              .put(
+                `${
+                  import.meta.env.VITE_PATH
+                }/formInscription/docParentChangeName/${parentId}`,
+                {
+                  numSecu: result.data,
+                }
+              )
+              .catch((err) => {
+                console.error(err);
+              });
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    }
   };
+
+  // --- form famille -> en commun ---
 
   const SubmitFormFamille = (e) => {
     e.preventDefault();
-    const formData = new FormData();
-
-    // que des if car pas obliger de tous mettre tout de suite
+    // que des if car pas obliger de tous mettre d'un coup
     if (docAssurParentSrc.current !== null) {
-      formData.append("docAssurParent", docAssurParentSrc.current.files[0]);
+      let formData = new FormData();
+      console.log(docAssurParentSrc.current.files[0]);
+      formData.append("file", docAssurParentSrc.current.files[0]);
+      axios
+        .post(
+          `${import.meta.env.VITE_PATH}/formInscription/docFamille`,
+          formData
+        )
+        .then((result) => {
+          axios
+            .put(
+              `${
+                import.meta.env.VITE_PATH
+              }/formInscription/docFamilleChangeName/${familleId}`,
+              {
+                docAssurParent: result.data,
+              }
+            )
+            .catch((err) => {
+              console.error(err);
+            });
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     }
     if (docRibSrc.current !== null) {
-      formData.append("docRib", docRibSrc.current.files[0]);
+      let formData = new FormData();
+      formData.append("file", docRibSrc.current.files[0]);
+      axios
+        .post(
+          `${import.meta.env.VITE_PATH}/formInscription/docFamille`,
+          formData
+        )
+        .then((result) => {
+          axios
+            .put(
+              `${
+                import.meta.env.VITE_PATH
+              }/formInscription/docFamilleChangeName/${familleId}`,
+              {
+                docRib: result.data,
+              }
+            )
+            .catch((err) => {
+              console.error(err);
+            });
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     }
     if (docAutoImageSrc.current !== null) {
-      formData.append("docAutoImage", docAutoImageSrc.current.files[0]);
+      let formData = new FormData();
+      formData.append("file", docAutoImageSrc.current.files[0]);
+      axios
+        .post(
+          `${import.meta.env.VITE_PATH}/formInscription/docFamille`,
+          formData
+        )
+        .then((result) => {
+          axios
+            .put(
+              `${
+                import.meta.env.VITE_PATH
+              }/formInscription/docFamilleChangeName/${familleId}`,
+              {
+                docAutoImage: result.data,
+              }
+            )
+            .catch((err) => {
+              console.error(err);
+            });
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     }
     if (docDivorceSrc.current !== null) {
-      formData.append("docDivorce", docDivorceSrc.current.files[0]);
+      let formData = new FormData();
+      formData.append("file", docDivorceSrc.current.files[0]);
+      axios
+        .post(
+          `${import.meta.env.VITE_PATH}/formInscription/docFamille`,
+          formData
+        )
+        .then((result) => {
+          axios
+            .put(
+              `${
+                import.meta.env.VITE_PATH
+              }/formInscription/docFamilleChangeName/${familleId}`,
+              {
+                docDivorce: result.data,
+              }
+            )
+            .catch((err) => {
+              console.error(err);
+            });
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     }
-
-    // mise dans uploads
-    axios
-      .post(`${import.meta.env.VITE_PATH}/formInscription/docFamille`, formData)
-
-      // mise dans bdd
-      // mettre seulement ce qui n'est pas déjà dans la bdd
-
-      .then((result) => {
-        const docAssurParent = result.data.docAssurParent
-          ? result.data.docAssurParent[0].filename
-          : initialData.docAssurParent1;
-
-        const docRib = result.data.docRib
-          ? result.data.docRib[0].filename
-          : initialData.docRib1;
-
-        const docAutoImage = result.data.docAutoImage
-          ? result.data.docAutoImage[0].filename
-          : initialData.docAutoImage1;
-
-        const docDivorce = result.data.docDivorce
-          ? result.data.docDivorce[0].filename
-          : initialData.docDivorce1;
-
-        axios
-          .put(
-            `${
-              import.meta.env.VITE_PATH
-            }/formInscription/docFamilleChangeName/${familleId}`,
-            {
-              // nom des let
-              docAssurParent,
-              docRib,
-              docAutoImage,
-              docDivorce,
-            }
-          )
-          .catch((err) => {
-            console.error(err);
-          });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
   };
 
   return (
@@ -349,7 +579,6 @@ function Inscription() {
         <h3>Dossier Inscription</h3>
         <br />
         <p>N'oubliez pas d'enregistrer vos informations.</p>
-        <p>❗Même quand vous supprimez un fichier.</p>
         <br />
         <p>Vous verez les modifications quand vous reviendrez sur cette page</p>
         <h4>Parent 1</h4>
@@ -357,50 +586,50 @@ function Inscription() {
           <OneFormInscr
             init={initialData.docJustifRevenus1}
             src={docJustifRevenus1Src}
-            nomDoc={"docJustifRevenus1"}
+            nomDoc={"docJustifRevenus"}
             handleSupp={handleSupp}
             p="Justificatif de revenu (moins de 3 mois)"
-            what={1}
+            who={1}
           />
           <OneFormInscr
             init={initialData.docDeclaRevenus1}
             src={docDeclaRevenus1Src}
-            nomDoc={"docDeclaRevenus1"}
+            nomDoc={"docDeclaRevenus"}
             handleSupp={handleSupp}
             p="Déclaration de revenu (année en cours)"
-            what={1}
+            who={1}
           />
           <OneFormInscr
             init={initialData.docSituationPro1}
             src={docSituationPro1Src}
-            nomDoc={"docSituationPro1"}
+            nomDoc={"docSituationPro"}
             handleSupp={handleSupp}
             p="Justificatif de situation professionnel"
-            what={1}
+            who={1}
           />
           <OneFormInscr
             init={initialData.docJustifDom1}
             src={docJustifDom1Src}
-            nomDoc={"docJustifDom1"}
+            nomDoc={"docJustifDom"}
             handleSupp={handleSupp}
             p="Justificatif de domicile"
-            what={1}
+            who={1}
           />
           <OneFormInscr
             init={initialData.numCaf1}
             src={numCaf1Src}
-            nomDoc={"numCaf1"}
+            nomDoc={"numCaf"}
             handleSupp={handleSupp}
             p="Numéro Allocataire CAF"
-            what={1}
+            who={1}
           />
           <OneFormInscr
             init={initialData.numSecu1}
             src={numSecu1Src}
-            nomDoc={"numSecu1"}
+            nomDoc={"numSecu"}
             handleSupp={handleSupp}
             p="Numéro de sécurité sociale"
-            what={1}
+            who={1}
           />
         </form>
 
@@ -419,50 +648,50 @@ function Inscription() {
           <OneFormInscr
             init={initialData.docJustifRevenus2}
             src={docJustifRevenus2Src}
-            nomDoc={"docJustifRevenus2"}
+            nomDoc={"docJustifRevenus"}
             handleSupp={handleSupp}
             p="Justificatif de revenu (moins de 3 mois)"
-            what={1}
+            who={2}
           />
           <OneFormInscr
             init={initialData.docDeclaRevenus2}
             src={docDeclaRevenus2Src}
-            nomDoc={"docDeclaRevenus2"}
+            nomDoc={"docDeclaRevenus"}
             handleSupp={handleSupp}
             p="Déclaration de revenu (année en cours)"
-            what={1}
+            who={2}
           />
           <OneFormInscr
             init={initialData.docSituationPro2}
             src={docSituationPro2Src}
-            nomDoc={"docSituationPro2"}
+            nomDoc={"docSituationPro"}
             handleSupp={handleSupp}
             p="Justificatif de situation professionnel"
-            what={1}
+            who={2}
           />
           <OneFormInscr
             init={initialData.docJustifDom2}
             src={docJustifDom2Src}
-            nomDoc={"docJustifDom2"}
+            nomDoc={"docJustifDom"}
             handleSupp={handleSupp}
             p="Justificatif de domicile"
-            what={1}
+            who={2}
           />
           <OneFormInscr
             init={initialData.numCaf2}
             src={numCaf2Src}
-            nomDoc={"numCaf2"}
+            nomDoc={"numCaf"}
             handleSupp={handleSupp}
             p="Numéro Allocataire CAF"
-            what={1}
+            who={2}
           />
           <OneFormInscr
             init={initialData.numSecu2}
             src={numSecu2Src}
-            nomDoc={"numSecu2"}
+            nomDoc={"numSecu"}
             handleSupp={handleSupp}
             p="Numéro de sécurité sociale"
-            what={1}
+            who={2}
           />
         </form>
 
@@ -481,34 +710,34 @@ function Inscription() {
           <OneFormInscr
             init={initialData.docAssurParent1}
             src={docAssurParentSrc}
-            nomDoc={"docAssurParent1"}
+            nomDoc={"docAssurParent"}
             handleSupp={handleSupp}
             p="Numéro de sécurité sociale"
-            what={2}
+            who={3}
           />
           <OneFormInscr
             init={initialData.docRib1}
             src={docRibSrc}
-            nomDoc={"docRib1"}
+            nomDoc={"docRib"}
             handleSupp={handleSupp}
             p="RIB"
-            what={2}
+            who={3}
           />
           <OneFormInscr
             init={initialData.docAutoImage1}
             src={docAutoImageSrc}
-            nomDoc={"docAutoImage1"}
+            nomDoc={"docAutoImage"}
             handleSupp={handleSupp}
             p="Autoristaion photo et video"
-            what={2}
+            who={3}
           />
           <OneFormInscr
             init={initialData.docDivorce1}
             src={docDivorceSrc}
-            nomDoc={"docDivorce1"}
+            nomDoc={"docDivorce"}
             handleSupp={handleSupp}
             p="Copie du jugement de divorce"
-            what={2}
+            who={3}
           />
         </form>
         <div className="button-bas">

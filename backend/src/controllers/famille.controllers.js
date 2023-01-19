@@ -84,6 +84,16 @@ const deleteConfiance = async (req, res) => {
   return res.json(result);
 };
 
+const nullOneDocFormParent = async (req, res) => {
+  const result = await familleModels.nullOneDocFormParent(req);
+  return res.json(result);
+};
+
+const nullOneDocFormCommun = async (req, res) => {
+  const result = await familleModels.nullOneDocFormCommun(req);
+  return res.json(result);
+};
+
 const getFamilleDataMess = async (req, res) => {
   const result = await familleModels.getFamilleDataMess(req);
   return res.json(result);
@@ -106,4 +116,6 @@ module.exports = {
   postNewConfiance,
   deleteConfiance,
   getFamilleInfo,
+  nullOneDocFormParent,
+  nullOneDocFormCommun,
 };

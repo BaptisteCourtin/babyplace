@@ -8,6 +8,13 @@ const upload = multer({ dest: "public/uploads/" });
 const { v4: uuidv4 } = require("uuid");
 const uploadDoc = require("./helpers/helper");
 
+const multerMid = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 5 * 1024 * 1024,
+  },
+});
+
 const structure = require("./controllers/structure.controllers");
 const horaires = require("./controllers/horaires.controllers");
 const calendrier = require("./controllers/calendrier.controllers");
@@ -130,6 +137,8 @@ router.put("/structure/notes/:id", structure.updateNotes); //notes
 router.put("/structure/signal/:id", structure.updateSignal); // signalement
 router.put("/formParent/:id", famille.updateFormParent); // formulaire parent
 router.put("/formEnfant/:id", famille.updateFormEnfant); // formulaire enfant
+router.put("/parent/nullOneDocForm/:id", famille.nullOneDocFormParent); // delete un doc du form inscription parent
+router.put("/famille/nullOneDocForm/:id", famille.nullOneDocFormCommun); // delete un doc du form inscription commun
 
 router.post("/reservation", famille.postReservation); // reservation
 router.post("/famille/newEnfant", famille.postNewEnfant); // nouveau enfant
@@ -145,35 +154,15 @@ router.delete("/contact/message/all/:id", messageAdmin.deleteMessagebyId); // de
 // mettre dans uploads et change nom
 router.post(
   "/formInscription/docParent",
-  multer({
-    storage: multer.diskStorage({
-      destination: (req, file, cb) => {
-        cb(null, "./public/uploads/formInscriptionParents");
-      },
-      filename: (req, file, cb) => {
-        const date = new Date();
-        cb(
-          null,
-          Math.round(Math.random() * 1000) +
-            `${date.getMinutes()}${date.getSeconds()}` +
-            Math.round(Math.random() * 1000) +
-            "-qws-" +
-            file.originalname
-          // nom avec des chiffres + nom d'origine du fichier
-        );
-      },
-    }),
-  }).fields([
-    // nom envoyer par formData
-    { name: "docJustifRevenus", maxCount: 1 },
-    { name: "docDeclaRevenus", maxCount: 1 },
-    { name: "docSituationPro", maxCount: 1 },
-    { name: "docJustifDom", maxCount: 1 },
-    { name: "numCaf", maxCount: 1 },
-    { name: "numSecu", maxCount: 1 },
-  ]),
-  (req, res) => {
-    res.send(req.files);
+  multerMid.single("file"),
+  async (req, res, next) => {
+    try {
+      const file = req.file;
+      const result = await uploadDoc(file);
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
   }
 );
 
@@ -187,19 +176,24 @@ router.put("/formInscription/docParentChangeName/:id", (req, res) => {
     numCaf,
     numSecu,
   } = req.body;
+
+  let toSave = "";
+  [
+    { docJustifRevenus },
+    { docDeclaRevenus },
+    { docSituationPro },
+    { docJustifDom },
+    { numCaf },
+    { numSecu },
+  ].forEach((el) => {
+    if (Object.values(el)[0] !== undefined) {
+      let key = Object.keys(el)[0];
+      toSave += key + "= '" + el[key] + "'";
+    }
+  });
+
   datasource
-    .query(
-      "UPDATE parent SET docJustifRevenus=?, docDeclaRevenus=?, docSituationPro=?, docJustifDom=?, numCaf=?, numSecu=? WHERE parentId=?",
-      [
-        docJustifRevenus,
-        docDeclaRevenus,
-        docSituationPro,
-        docJustifDom,
-        numCaf,
-        numSecu,
-        req.params.id,
-      ]
-    )
+    .query(`UPDATE parent SET ${toSave} WHERE parentId=?`, [req.params.id])
     .then(([parent]) => {
       if (parent.affectedRows === 0) {
         res.status(404).send("Not Found");
@@ -217,44 +211,35 @@ router.put("/formInscription/docParentChangeName/:id", (req, res) => {
 // mettre dans uploads et change nom
 router.post(
   "/formInscription/docFamille",
-  multer({
-    storage: multer.diskStorage({
-      destination: (req, file, cb) => {
-        cb(null, "./public/uploads/formInscriptionFamille");
-      },
-      filename: (req, file, cb) => {
-        const date = new Date();
-        cb(
-          null,
-          Math.round(Math.random() * 1000) +
-            `${date.getMinutes()}${date.getSeconds()}` +
-            Math.round(Math.random() * 1000) +
-            "-qws-" +
-            file.originalname
-          // nom avec des chiffres + nom d'origine du fichier
-        );
-      },
-    }),
-  }).fields([
-    // nom envoyer par formData
-    { name: "docAssurParent", maxCount: 1 },
-    { name: "docRib", maxCount: 1 },
-    { name: "docAutoImage", maxCount: 1 },
-    { name: "docDivorce", maxCount: 1 },
-  ]),
-  (req, res) => {
-    res.send(req.files);
+  multerMid.single("file"),
+  async (req, res, next) => {
+    try {
+      console.log("req.file", req.file);
+      const file = req.file;
+      const result = await uploadDoc(file);
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
   }
 );
 
 // mise dans bdd
 router.put("/formInscription/docFamilleChangeName/:id", (req, res) => {
   const { docAssurParent, docRib, docAutoImage, docDivorce } = req.body;
+
+  let toSave = "";
+  [{ docAssurParent }, { docRib }, { docAutoImage }, { docDivorce }].forEach(
+    (el) => {
+      if (Object.values(el)[0] !== undefined) {
+        let key = Object.keys(el)[0];
+        toSave += key + "= '" + el[key] + "'";
+      }
+    }
+  );
+
   datasource
-    .query(
-      "UPDATE famille SET docAssurParent=?, docRib=?, docAutoImage=?, docDivorce=? WHERE familleId=?",
-      [docAssurParent, docRib, docAutoImage, docDivorce, req.params.id]
-    )
+    .query(`UPDATE famille SET ${toSave} WHERE familleId=?`, [req.params.id])
     .then(([parent]) => {
       if (parent.affectedRows === 0) {
         res.status(404).send("Not Found");
@@ -270,15 +255,20 @@ router.put("/formInscription/docFamilleChangeName/:id", (req, res) => {
 
 // PHOTO DE PROFIL FAMILLE
 // mettre dans uploads et change nom
-router.post("/famille/photoProfil", async (req, res, next) => {
-  try {
-    const file = req.file;
-    const result = await uploadDoc(file);
-    res.status(200).json(result);
-  } catch (error) {
-    next(error);
+
+router.post(
+  "/famille/photoProfil",
+  multerMid.single("file"),
+  async (req, res, next) => {
+    try {
+      const file = req.file;
+      const result = await uploadDoc(file);
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 // mise dans bdd
 router.put("/famille/photoProfil/:id", (req, res) => {
