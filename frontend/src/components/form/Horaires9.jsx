@@ -31,8 +31,9 @@ function Structure9({
 }) {
   const [memeHoraire, setMemeHoraire] = useState(true);
   const getHoraires = () => {
-    Axios.get(`${import.meta.env.VITE_PATH}/horairesExist?id=${structureId}`, { structureId })
+    Axios.get(`${import.meta.env.VITE_PATH}/horairesExist?id=${structureId}`, [structureId])
       .then((result) => {
+        console.log(result)
         if (result.data.length > 0) { setHorairesExist(true) }
         else { setHorairesExist(false) }
         for (let i = 0; i < result.data.length; i++) {
@@ -108,7 +109,7 @@ function Structure9({
   }
   useEffect(() => {
     getHoraires()
-  }, [])
+  }, [structureId])
 
   return (
     <div className="structure9 page-left">

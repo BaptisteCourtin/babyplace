@@ -1,15 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Proptypes from "prop-types";
+import Axios from "axios";
 
 function Structure3({
-  photo1Src,
-  photo2Src,
-  photo3Src,
   inputRef1,
   inputRef2,
   inputRef3,
+  structureId,
   updateFields,
 }) {
+  const [image1Src, setImage1Src] = useState("https://via.placeholder.com/240x160.png?text=photo+1");
+  const [image2Src, setImage2Src] = useState("https://via.placeholder.com/240x160.png?text=photo+2");
+  const [image3Src, setImage3Src] = useState("https://via.placeholder.com/240x160.png?text=photo+3");
+  const getPicture = () => {
+    Axios.get(`${import.meta.env.VITE_PATH}/photosStructure?id=${structureId}`, [structureId])
+      .then((result) => {
+        console.log(result.data[0])
+        if (result.data[0].photoStructure1 !== null) {
+          setImage1Src(`${import.meta.env.VITE_PATH}${result.data[0].photoStructure1}`);
+          updateFields({ photo1Src: result.data[0].photoStructure1 })
+        };
+        if (result.data[0].photoStructure2 !== null) {
+          setImage2Src(`${import.meta.env.VITE_PATH}${result.data[0].photoStructure2}`);
+          updateFields({ photo2Src: result.data[0].photoStructure2 })
+
+        };
+        if (result.data[0].photoStructure3 !== null) {
+          setImage3Src(`${import.meta.env.VITE_PATH}${result.data[0].photoStructure3}`);
+          updateFields({ photo3Src: result.data[0].photoStructure3 })
+
+        };
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+  }
+
   const updateImg1 = (e) => {
     // e.files contient un objet FileList
     const [picture] = e.target.files;
@@ -20,9 +46,7 @@ function Structure3({
       // L'événement déclenché lorsque la lecture est complète
       reader.onload = (el) => {
         // On change l'URL de l'image (base64)
-        // console.log(e.result);
-        photo1Src = el.target.result;
-        updateFields({ photo1Src: el.target.result });
+        setImage1Src(el.target.result);
       };
       // On lit le fichier "picture" uploadé
       reader.readAsDataURL(picture);
@@ -33,8 +57,8 @@ function Structure3({
     if (picture) {
       const reader = new FileReader();
       reader.onload = (el) => {
-        photo2Src = el.target.result;
-        updateFields({ photo2Src: el.target.result });
+        setImage2Src(el.target.result);
+
       };
       reader.readAsDataURL(picture);
     }
@@ -44,12 +68,16 @@ function Structure3({
     if (picture) {
       const reader = new FileReader();
       reader.onload = (el) => {
-        photo3Src = el.target.result;
-        updateFields({ photo3Src: el.target.result });
+        setImage3Src(el.target.result);
+
       };
       reader.readAsDataURL(picture);
     }
   };
+
+  useEffect(() => {
+    getPicture()
+  }, [])
   return (
     <div className="structure3">
       <h4>Égayez votre annonce avec des photos</h4>
@@ -62,7 +90,7 @@ function Structure3({
       <div className="pageContent">
         <div className="photoAndDescContainer">
           <div className="imgContainer">
-            <img src={photo1Src} alt="prévisualisation" />
+            <img src={image1Src} alt="prévisualisation" />
           </div>
           <div className="inputContainer">
             <br />
@@ -78,7 +106,7 @@ function Structure3({
         </div>
         <div className="photoAndDescContainer">
           <div className="imgContainer">
-            <img src={photo2Src} alt="prévisualisation" />
+            <img src={image2Src} alt="prévisualisation" />
           </div>
           <div className="inputContainer">
             <br />
@@ -94,7 +122,7 @@ function Structure3({
         </div>
         <div className="photoAndDescContainer">
           <div className="imgContainer">
-            <img src={photo3Src} alt="prévisualisation" />
+            <img src={image3Src} alt="prévisualisation" />
           </div>
           <div className="inputContainer">
             <br />

@@ -36,11 +36,11 @@
     }
 
     & input:valid {
-      border: 2px solid $fifth;
+      border: 2px solid $green;
     }
 
     & input:valid+label {
-      color: $fifth;
+      color: $green;
     }
 
     .checkSymbol {
@@ -51,7 +51,7 @@
       position: absolute;
       transform: translateX(170px) translateY(6px);
       font-size: 2rem;
-      color: $fifth;
+      color: $green;
       display: initial;
     }
 
@@ -100,7 +100,7 @@
       right: 0;
       top: 8px;
       font-size: 2rem;
-      color: $fifth;
+      color: $green;
       display: initial;
     }
 

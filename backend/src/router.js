@@ -461,6 +461,18 @@ router.post("/photoProfil", uploadAvatar.single("avatar"), (req, res) => {
   res.send(req.file);
 });
 
+router.get("/photoProfil", (req, res) => {
+  datasource.query(
+    "SELECT photoProfil FROM structure WHERE structureId= ?",
+    [req.query.id]
+  ).then(([result]) => {
+    res.send(result).status(200)
+  }).catch((err) => {
+    console.error(err);
+    res.status(500).send("Accès impossible");
+  });
+})
+
 router.put("/photoProfil", (req, res) => {
   const { photoProfil, email } = req.body;
   datasource
@@ -507,6 +519,18 @@ router.post(
     res.send(req.files);
   }
 );
+
+router.get("/photosStructure", (req, res) => {
+  datasource.query(
+    "SELECT photoStructure1, photoStructure2, photoStructure3 FROM structure WHERE structureId= ?",
+    [req.query.id]
+  ).then(([result]) => {
+    res.send(result).status(200)
+  }).catch((err) => {
+    console.error(err);
+    res.status(500).send("Accès impossible");
+  });
+})
 
 router.put("/photosStructure", (req, res) => {
   const { photoStructure1, photoStructure2, photoStructure3, email } = req.body;

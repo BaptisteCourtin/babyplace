@@ -3,7 +3,6 @@ import io from "socket.io-client";
 import axios from "axios";
 import Chat from "./Chat";
 
-
 const socket = io.connect("http://localhost:3001");
 
 function Messages({ nom, prenom, email, photoProfil, structureId }) {
@@ -25,13 +24,21 @@ function Messages({ nom, prenom, email, photoProfil, structureId }) {
   };
 
   const joinRoom = async () => {
-    console.log(room);
     await socket.emit("join_room", room);
+    // socket.on("is_logged", (id) => {
+    //   if (id != 0) {
+    //     console.log(`user ${id} is logged`);
+    //     setLogged(0);
+    //   }
+    // })
   };
+
 
   useEffect(() => {
     getStructureForMess();
+    socket.emit("auth", structureId);
   }, []);
+
 
   return (
     <div className="messages">

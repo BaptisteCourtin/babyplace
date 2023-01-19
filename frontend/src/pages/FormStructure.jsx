@@ -38,10 +38,10 @@ const INITIAL_DATA = {
   nomUsage: "",
   prenom: "",
   adresseStructure: "",
-  imageProfilSrc: "https://via.placeholder.com/150.png?text=photo",
-  photo1Src: "https://via.placeholder.com/240x160.png?text=photo+1",
-  photo2Src: "https://via.placeholder.com/240x160.png?text=photo+2",
-  photo3Src: "https://via.placeholder.com/240x160.png?text=photo+3",
+  imageProfilSrc: null,
+  photo1Src: null,
+  photo2Src: null,
+  photo3Src: null,
   description: "",
   PCSC1: false,
   nesting: false,
@@ -144,9 +144,11 @@ function FormStructure() {
   const [structureId, setStructureId] = useState(null);
   const [horairesExist, setHorairesExist] = useState(null);
   const [closePage, setClosePage] = useState(false);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth)
 
   const updateSize = () => {
-    if (window.innerWidth < 1200) {
+    setScreenWidth(window.innerWidth);
+    if (window.innerWidth < 1000) {
       setShowExplications(false);
     } else setShowExplications(true);
   };
@@ -285,14 +287,8 @@ function FormStructure() {
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
     useMultistepForm([
       <Structure1 {...data} updateFields={updateFields} />,
-      <Structure2 {...data} inputRef={inputRef} updateFields={updateFields} />,
-      <Structure3
-        {...data}
-        inputRef1={inputRef1}
-        inputRef2={inputRef2}
-        inputRef3={inputRef3}
-        updateFields={updateFields}
-      />,
+      <Structure2 {...data} inputRef={inputRef} structureId={structureId} updateFields={updateFields} />,
+      <Structure3 {...data} inputRef1={inputRef1} inputRef2={inputRef2} inputRef3={inputRef3} structureId={structureId} updateFields={updateFields} />,
       <Structure4 {...data} updateFields={updateFields} />,
       <Structure5 {...data} updateFields={updateFields} />,
       <Structure6 />,
@@ -464,6 +460,10 @@ function FormStructure() {
       nomUsage,
       prenom,
       adresseStructure,
+      imageProfilSrc,
+      photo1Src,
+      photo2Src,
+      photo3Src,
       description,
       PCSC1,
       nesting,
@@ -591,47 +591,47 @@ function FormStructure() {
       }
       else if (currentStepIndex === 1) {
         const formData = new FormData();
-        if (inputRef !== null) {
+        if (inputRef.current.files[0] !== undefined) {
           formData.append("avatar", inputRef.current.files[0]);
-        }
-        Axios.post(`${import.meta.env.VITE_PATH}/photoProfil`, formData)
-          .then((result) => {
-            let photoProfil = null;
-            if (result.data !== undefined) {
-              photoProfil = `${import.meta.env.VITE_PATH}/uploads/avatar/${result.data.filename}`;
-            }
-            Axios.put(`${import.meta.env.VITE_PATH}/photoProfil`, {
-              photoProfil, email
+          Axios.post(`${import.meta.env.VITE_PATH}/photoProfil`, formData)
+            .then((result) => {
+              let photoProfil = imageProfilSrc;
+              if (result.data !== undefined) {
+                photoProfil = `/uploads/avatar/${result.data.filename}`;
+              }
+              Axios.put(`${import.meta.env.VITE_PATH}/photoProfil`, {
+                photoProfil, email
+              })
+                .then(closePage ? navigate("/", {}) : next())
+                .catch((err) => {
+                  console.error(err);
+                });
             })
-              .then(closePage ? navigate("/", {}) : next())
-              .catch((err) => {
-                console.error(err);
-              });
-          })
-          .catch((err) => {
-            console.error(err);
-          });
+            .catch((err) => {
+              console.error(err);
+            });
+        } else { next() }
       } else if (currentStepIndex === 2) {
         const formData = new FormData();
-        if (inputRef1 !== null) { formData.append("photo1", inputRef1.current.files[0]) };
-        if (inputRef2 !== null) { formData.append("photo2", inputRef2.current.files[0]) };
-        if (inputRef3 !== null) { formData.append("photo3", inputRef3.current.files[0]) };
+        if (inputRef1.current.files[0] !== undefined) { formData.append("photo1", inputRef1.current.files[0]) };
+        if (inputRef2.current.files[0] !== undefined) { formData.append("photo2", inputRef2.current.files[0]) };
+        if (inputRef3.current.files[0] !== undefined) { formData.append("photo3", inputRef3.current.files[0]) };
         Axios.post(`${import.meta.env.VITE_PATH}/photosStructure`, formData)
           .then((result) => {
-            let photoStructure1 = null;
-            let photoStructure2 = null;
-            let photoStructure3 = null;
+            let photoStructure1 = photo1Src;
+            let photoStructure2 = photo2Src;
+            let photoStructure3 = photo3Src;
             if (result.data.photo1 !== undefined) {
               let photo1 = result.data.photo1[0].filename;
-              photoStructure1 = `${import.meta.env.VITE_PATH}/uploads/photosStructure/${photo1}`;
+              photoStructure1 = `/uploads/photosStructure/${photo1}`;
             }
             if (result.data.photo2 !== undefined) {
               let photo2 = result.data.photo2[0].filename;
-              photoStructure2 = `${import.meta.env.VITE_PATH}/uploads/photosStructure/${photo2}`;
+              photoStructure2 = `/uploads/photosStructure/${photo2}`;
             }
             if (result.data.photo3 !== undefined) {
               photo3 = result.data.photo3[0].filename;
-              photoStructure3 = `${import.meta.env.VITE_PATH}/uploads/photosStructure/${photo3}`;
+              photoStructure3 = `/uploads/photosStructure/${photo3}`;
             }
             Axios.put(`${import.meta.env.VITE_PATH}/photosStructure`, {
               photoStructure1, photoStructure2, photoStructure3, email
@@ -887,7 +887,7 @@ function FormStructure() {
               currentStepIndex !== 7 &&
               currentStepIndex !== 15 ? (
               <div className="explicationsContainer">
-                {window.innerWidth < 1000 && (
+                {screenWidth < 1000 && (
                   <button
                     type="button"
                     className="backButton"
