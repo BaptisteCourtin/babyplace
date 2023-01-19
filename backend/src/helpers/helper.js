@@ -25,7 +25,6 @@ const uploadDoc = (file) =>
     blobStream
       .on("finish", () => {
         const publicUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
-        console.log(publicUrl);
         resolve(publicUrl);
       })
       .on("error", () => {

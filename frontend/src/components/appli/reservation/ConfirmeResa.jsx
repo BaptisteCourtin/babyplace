@@ -39,15 +39,9 @@ function ConfirmeResa({
         <img src={logoBlanc} className="mini-logo" alt="logo-blanc" />
         <div className="avatars">
           {photoFamille ? (
-            <img
-              className="photoProfil"
-              src={`${
-                import.meta.env.VITE_PATH
-              }/uploads/photoFamille/${photoFamille}`}
-              alt="avatar"
-            />
+            <img className="avatar" src={photoFamille} alt="avatar" />
           ) : (
-            <AiOutlineUser className="photoProfil" />
+            <AiOutlineUser className="avatar" />
           )}
           <img className="avatar" src={photoProfil} alt="avatar2" />
         </div>
