@@ -1,5 +1,14 @@
+<<<<<<< HEAD
+import React, { useState } from "react";
+import MultiRangeSlider from "multi-range-slider-react";
+import open from "@assets/dashboard/open-sign.svg";
+import close from "@assets/dashboard/closed-sign.svg";
+import DashCalendar from "@components/dashboard/agenda/Components/Calendar.DashAgenda";
+import PropTypes from "prop-types";
+=======
 import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
+>>>>>>> 493a1dc6f76d572162ad38176b611e00087a35be
 
 import PropTypes from "prop-types";
 

@@ -15,9 +15,7 @@ const uploadDoc = (file) =>
   new Promise((resolve, reject) => {
     let { originalname, buffer } = file;
     const date = new Date();
-    originalname = `${Math.round(
-      Math.random() * 10000
-    )}${date.getHours()}${date.getMinutes()}${date.getSeconds()}${date.getMilliseconds()}-qws-${originalname}`;
+    originalname = `${Math.round(Math.random() * 10000)}${date.getHours()}${date.getMinutes()}${date.getSeconds()}${date.getMilliseconds()}-qws-${originalname}`;
     const blob = bucket.file(originalname.replace(/ /g, "_"));
     const blobStream = blob.createWriteStream({
       resumable: false,
@@ -25,7 +23,6 @@ const uploadDoc = (file) =>
     blobStream
       .on("finish", () => {
         const publicUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
-        console.log(publicUrl);
         resolve(publicUrl);
       })
       .on("error", () => {
