@@ -9,6 +9,7 @@ import ActivitiesDashHours from "./Components/Activities.DashHours";
 
 function DashHours({ userType, structureId }) {
   const [dayId, setDayId] = useState(1);
+  const [horairesId, setHorairesId] = useState(null)
 
   const {
     toggleDay,
@@ -39,11 +40,7 @@ function DashHours({ userType, structureId }) {
     getHoraires,
   } = useGetHours(structureId, userType);
 
-  const { updateIndemn, updateOptions, updateTarif } = usePutHours(
-    structureId,
-    userType,
-    getData
-  );
+  const { updateIndemn, updateOptions, updateTarif, updateDay, updateHours } = usePutHours(structureId, userType, getData, getHoraires, horairesId, toggleDay, setToggleDay)
 
   return (
     <div className="dashPlaces">
@@ -51,12 +48,15 @@ function DashHours({ userType, structureId }) {
         structureId={structureId}
         horaires={horaires}
         getHoraires={getHoraires}
+        updateDay={updateDay}
+        updateHours={updateHours}
         toggleDay={toggleDay}
         setToggleDay={setToggleDay}
         selected={selected}
         setSelected={setSelected}
         dayId={dayId}
         setDayId={setDayId}
+        setHorairesId={setHorairesId}
       />
       <section className="dashPlacesParams">
         <PricesDashHours

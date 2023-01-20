@@ -63,7 +63,6 @@ function DashParams({
   const [deleteMail, setDeleteMail] = useState(null);
   const [newPwd, setNewPwd] = useState(null);
   const [cNewPwd, setCNewPwd] = useState(null);
-  const navigate = useNavigate();
 
   const { handleSubmitInfo, updatePassword } = usePutParams(
     structureId,

@@ -8,10 +8,10 @@ const getHorairesById = async (id) => {
   return result;
 };
 
-const updateDay = async (id, structureId, value) => {
+const updateDay = async (id, value) => {
   const [result] = await datasource.query(
-    `UPDATE horaires SET ouvert = ? WHERE jourId = ? AND structureId = ?`,
-    [value, id, structureId]
+    `UPDATE horaires SET ouvert = ? WHERE horairesId = ?`,
+    [value, id]
   );
   return result;
 };
