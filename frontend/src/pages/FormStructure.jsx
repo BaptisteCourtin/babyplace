@@ -1042,17 +1042,17 @@ function FormStructure() {
                 docAutoSrc,
                 email,
               })
-                .then(closePage ? navigate("/", {}) : next())
                 .catch((err) => {
                   console.error(err);
-                });
+                })
+                .then(closePage ? navigate("/", {}) : next())
             }
           })
           .catch((err) => {
             console.error(err);
           });
       }
-    }
+    } else navigate('/', {})
   };
   return (
     <StructureContext.Provider value={{ structure, setStructure }}>
