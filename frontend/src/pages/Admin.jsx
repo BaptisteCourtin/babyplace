@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-import { toast } from 'react-hot-toast';
-import Nav from '@components/dashboard/admin/Nav.Admin';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import Nav from "@components/dashboard/admin/Nav.Admin";
 
 function Admin() {
   const [data, setData] = useState([]);
@@ -19,27 +19,28 @@ function Admin() {
   const setVerified = async (structureId) => {
     try {
       await axios.put(`http://localhost:5000/admin/verified/${structureId}`, {
-        id: structureId
-      })
-      toast.success("L'utilisateur a bien été approuvé"),
-        getStructure()
+        id: structureId,
+      });
+      toast.success("L'utilisateur a bien été approuvé"), getStructure();
     } catch (err) {
-      console.error(err.message)
+      console.error(err.message);
     }
-  }
+  };
 
   const setRefused = async (structureId) => {
     try {
-      await axios.delete(`http://localhost:5000/admin/refused/${structureId}?type=${userType}`, {
-        id: structureId,
-        type: userType
-      })
-      toast.error("L'utilisateur a bien été supprimé"),
-        getStructure()
+      await axios.delete(
+        `http://localhost:5000/admin/refused/${structureId}?type=${userType}`,
+        {
+          id: structureId,
+          type: userType,
+        }
+      );
+      toast.error("L'utilisateur a bien été supprimé"), getStructure();
     } catch (err) {
-      console.error(err.message)
+      console.error(err.message);
     }
-  }
+  };
 
   useEffect(() => {
     getStructure();

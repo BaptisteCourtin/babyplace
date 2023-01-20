@@ -24,7 +24,9 @@ function Footer({ userType }) {
             </div>
           )}
           <div className="footerBtn">
-            <button type="button"><HashLink to="/contact#contact">En savoir plus</HashLink></button>
+            <button type="button">
+              <HashLink to="/contact#contact">En savoir plus</HashLink>
+            </button>
             <button type="button">
               <HashLink to="/contact#contact">
                 Demander une démo <span>➜</span>

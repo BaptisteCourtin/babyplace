@@ -11,15 +11,24 @@ import AvailableDashAgenda from "./Components/Available.DashAgenda";
 import StatusDashAgenda from "./Components/Status.DashAgenda";
 
 function DashAgenda({ structureId, maxPlaces }) {
-
   const [places, setPlaces] = useState(null);
   const [calendarIndex, setCalendarIndex] = useState(null);
 
-  const { curDate, clickedDay, setClickedDay, date, day } = useFormatDay()
-  const { calendar, getCalendar } = useGetAgenda(structureId)
-  const { updatePlaces, updateStatusClose, updateStatusOpen } = usePutData(calendarIndex, getCalendar, maxPlaces, setPlaces)
-  const { addSleepDate, addWorkDate } = usePostData(setPlaces, date, structureId, getCalendar)
-  const { fullDate } = useDeleteData(calendarIndex, getCalendar)
+  const { curDate, clickedDay, setClickedDay, date, day } = useFormatDay();
+  const { calendar, getCalendar } = useGetAgenda(structureId);
+  const { updatePlaces, updateStatusClose, updateStatusOpen } = usePutData(
+    calendarIndex,
+    getCalendar,
+    maxPlaces,
+    setPlaces
+  );
+  const { addSleepDate, addWorkDate } = usePostData(
+    setPlaces,
+    date,
+    structureId,
+    getCalendar
+  );
+  const { fullDate } = useDeleteData(calendarIndex, getCalendar);
 
   return (
     <div className="dashAgenda">

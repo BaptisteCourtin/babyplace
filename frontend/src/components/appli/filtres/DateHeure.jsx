@@ -25,6 +25,8 @@ function DateHeure({ setCompo, dataDateHeure, setDataDateHeure }) {
 
 DateHeure.propTypes = {
   setCompo: PropTypes.func.isRequired,
+  dataDateHeure: PropTypes.object.isRequired,
+  setDataDateHeure: PropTypes.func.isRequired,
 };
 
 export default DateHeure;

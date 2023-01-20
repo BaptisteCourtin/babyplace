@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Carousel } from "react-responsive-carousel";
-import Toggle from "../filtres/Toggle";
 import FamilleContext from "@components/context/FamilleContext";
+import Toggle from "../filtres/Toggle";
 
 function FormEnfant() {
   const { familleId } = useContext(FamilleContext);
@@ -164,7 +164,11 @@ function FormEnfant() {
               Ajouter un enfant
             </button>
 
-            <button className="delete-kid" onClick={() => deleteEnfant()}>
+            <button
+              type="button"
+              className="delete-kid"
+              onClick={() => deleteEnfant()}
+            >
               Supprimer enfant
             </button>
           </div>

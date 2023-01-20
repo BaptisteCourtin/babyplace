@@ -17,9 +17,14 @@ function Dashboard() {
   const [openNav, setOpenNav] = useState(true);
   const [toggleNotif, setToggleNotif] = useState(false);
 
-  const { getData, data, userType, notif, getNotifications } = useGetAllData(token)
-  const { pageShown, toggle, setToggle } = usePageToggle(data, userType, getData)
-  const { deleteNotification, deleteDates } = useDeleteData(getNotifications)
+  const { getData, data, userType, notif, getNotifications } =
+    useGetAllData(token);
+  const { pageShown, toggle, setToggle } = usePageToggle(
+    data,
+    userType,
+    getData
+  );
+  const { deleteNotification, deleteDates } = useDeleteData(getNotifications);
 
   useEffect(() => {
     getData();
@@ -51,7 +56,7 @@ function Dashboard() {
         setToggleNotif={setToggleNotif}
         deleteNotification={deleteNotification}
       />
-    </div >
+    </div>
   );
 }
 

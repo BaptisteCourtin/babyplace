@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { HashLink } from "react-router-hash-link";
+import { useForm } from "react-hook-form";
+import axios from "axios";
 import FooterLite from "./FooterLite";
 import NavbarLite from "./NavbarLite";
 import Modal from "./Modal";
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import axios from "axios";
 
 function Contact() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,15 +14,21 @@ function Contact() {
 
   const onSubmit = (d) => {
     const { prenom, nom, email, optionSelected, texte } = d;
-    axios.post(
-      `http://localhost:5000/contact/message`, { prenom, nom, email, optionSelected, texte })
-      .then((res) => {
-        console.log(res.data)
-      }).catch((err) => {
-        console.error(err)
+    axios
+      .post(`http://localhost:5000/contact/message`, {
+        prenom,
+        nom,
+        email,
+        optionSelected,
+        texte,
       })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
-
 
   const openCloseModal = (e) => {
     setIsOpen(!isOpen);
@@ -49,16 +54,16 @@ function Contact() {
     {
       id: 5,
       text: "tout autres questoins",
-    }
+    },
   ];
 
   const handleChange = (e) => {
-    setSelected(e.target.value)
+    setSelected(e.target.value);
   };
 
   useEffect(() => {
     console.log(selected);
-  }, [handleChange])
+  }, [handleChange]);
 
   return (
     <div className="contact-form" id="aide">
@@ -75,60 +80,89 @@ function Contact() {
 
       <section id="contact">
         <h3>Contactez-Nous</h3>
-        <p id="question">Une question ? N'hesitez pas à utiliser ce formulaire de contact, ci-dessous, nous vous repondrons dans les plus bref délais.</p>
+        <p id="question">
+          Une question ? N'hesitez pas à utiliser ce formulaire de contact,
+          ci-dessous, nous vous repondrons dans les plus bref délais.
+        </p>
         <form className="formContact" onSubmit={handleSubmit(onSubmit)}>
           <div className="formContainer">
             <div className="divName">
-              <label className="labelForm" htmlFor="prenom" >
+              <label className="labelForm" htmlFor="prenom">
                 Prénom <span id="obligatoire">*</span>
               </label>
 
-              <input id="userName" type="text" {...register('prenom', { required: true })} />
+              <input
+                id="userName"
+                type="text"
+                {...register("prenom", { required: true })}
+              />
             </div>
             <div className="divFirstName">
               <label className="labelForm" htmlFor="nom">
                 Nom <span id="obligatoire">*</span>
               </label>
-              <input id="userFirstName" type="text" {...register('nom', { required: true })} />
+              <input
+                id="userFirstName"
+                type="text"
+                {...register("nom", { required: true })}
+              />
             </div>
             <div className="divEmail">
               <label className="labelForm" htmlFor="email">
                 E-mail <span id="obligatoire">*</span>
               </label>
-              <input id="userMail" type="email" {...register('email', { required: true })} />
+              <input
+                id="userMail"
+                type="email"
+                {...register("email", { required: true })}
+              />
             </div>
-
 
             <div className="divObject">
               <label className="labelForm" htmlFor="object">
                 Object <span id="obligatoire">*</span>
               </label>
 
-              <select className="object-select" {...register('optionSelected', { required: true })}>
+              <select
+                className="object-select"
+                {...register("optionSelected", { required: true })}
+              >
                 <option value=""> </option>
                 {optionValue.map((opt) => {
-                  return <option value={opt.text} id="optionClass">{opt.text}</option>;
+                  return (
+                    <option value={opt.text} id="optionClass">
+                      {opt.text}
+                    </option>
+                  );
                 })}
               </select>
-
             </div>
             <div className="divMessage">
               <label className="labelForm" htmlFor="textearea">
                 Message <span id="obligatoire">*</span>
               </label>
 
-              <textarea name="formulaire-message" id="formulaireMessage" {...register('texte', { required: true })} />
+              <textarea
+                name="formulaire-message"
+                id="formulaireMessage"
+                {...register("texte", { required: true })}
+              />
               <span id="obligatoireText">* les chants sont obligatoires</span>
             </div>
 
             <div className="policyTextDiv">
               <p id="policyText">
-                <input type="checkbox" id="checkboxPolicy" name="checkboxPolicy" onChange={() => setChecked(!checked)}
+                <input
+                  type="checkbox"
+                  id="checkboxPolicy"
+                  name="checkboxPolicy"
+                  onChange={() => setChecked(!checked)}
                   required
-                /> En cliquant sur “Envoyer” vous
-                acceptez d'être contactés par l'administrateur de Babyplace ou l'agence web Dave Warehouse. Pour
-                en savoir plus sur l'utilisation de vos données personnelles,
-                merci de consulter la page concernant{" "}
+                />{" "}
+                En cliquant sur “Envoyer” vous acceptez d'être contactés par
+                l'administrateur de Babyplace ou l'agence web Dave Warehouse.
+                Pour en savoir plus sur l'utilisation de vos données
+                personnelles, merci de consulter la page concernant{" "}
                 <HashLink to="/features#politique">
                   <span>notre politique de confidentialité</span>
                 </HashLink>
@@ -137,19 +171,22 @@ function Contact() {
             </div>
           </div>
 
-          <button className="navBtnLite" type="submit"
+          <button
+            className="navBtnLite"
+            type="submit"
             style={{
               opacity: !checked ? "0.2" : "1",
             }}
-            disabled={!!(!checked)}
-            onClick={openCloseModal}>
+            disabled={!!!checked}
+            onClick={openCloseModal}
+          >
             Envoyer
           </button>
         </form>
       </section>
       <Modal open={isOpen} closeModal={openCloseModal} />
       <FooterLite />
-    </div >
+    </div>
   );
 }
 

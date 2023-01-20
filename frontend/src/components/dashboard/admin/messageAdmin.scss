@@ -1,108 +1,152 @@
 .messageAdmin {
-    width: 100%;
+  width: 100%;
 
-    .messageAdminList {
+  .messageAdminList {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    gap: 20px;
+
+    h1 {
+      font-size: 2em;
+      font-weight: 600;
+    }
+
+    .messageAdminListBis {
+      width: 90%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    li {
+      width: 100%;
+      list-style: none;
+      padding: 10px;
+      border: 2px solid $third;
+      border-radius: 5px;
+
+      .messageListAdminContainer {
         display: flex;
-        flex-direction: column;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+
+        .messageListAdminHeader {
+          padding: 15px;
+          gap: 20px;
+          width: 25%;
+
+          h4 {
+            font-size: 1.15em;
+            font-weight: 500;
+            color: $third;
+          }
+
+          .messageListEmail {
+            color: $fourth;
+          }
+        }
+
+        .optionSelected {
+          width: 25%;
+        }
+
+        .messageListAdminBody {
+          width: 50%;
+          height: auto;
+        }
+
+        .adminMessageBtn {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 5px;
+          width: 15%;
+
+          & #btnRepondre {
+            padding: 5px 0;
+            width: 100%;
+            background-color: $fifth;
+            color: $white;
+            font-weight: 500;
+            border: 1px solid transparent;
+            border-radius: 5px;
+            transition: 0.3s ease-in-out;
+
+            &:hover {
+              border: 1px solid $fifth;
+              background-color: transparent;
+              color: $fifth;
+            }
+          }
+
+          #btnDelete {
+            padding: 5px 0;
+            width: 100%;
+            background-color: $seventh;
+            color: $white;
+            font-weight: 500;
+            border: 1px solid transparent;
+            border-radius: 5px;
+            transition: 0.3s ease-in-out;
+
+            &:hover {
+              border: 1px solid $seventh;
+              background-color: transparent;
+              color: $seventh;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  li {
+    list-style: none;
+    border-bottom: solid 1px $grey;
+
+    .messageListAdminContainer {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+
+      .messageListAdminHeader {
         padding: 15px;
         gap: 20px;
+        width: 25%;
 
-        h1 {
-            font-size: 2em;
-            font-weight: 600;
-
+        h4 {
+          font-size: 1.15em;
+          font-weight: 500;
+          color: $third;
         }
 
-        .messageAdminListBis {
-            width: 90%;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+        .messageListEmail {
+          color: $fourth;
         }
+      }
 
-        li {
-            width: 100%;
-            list-style: none;
-            padding: 10px;
-            border: 2px solid $third;
-            border-radius: 5px;
+      .optionSelected {
+        width: 25%;
+      }
 
-            .messageListAdminContainer {
-                display: flex;
-                width: 100%;
-                justify-content: space-between;
-                align-items: center;
+      .messageListAdminBody {
+        width: 50%;
+        height: auto;
+      }
 
-                .messageListAdminHeader {
-                    padding: 15px;
-                    gap: 20px;
-                    width: 25%;
+      button {
+        background: none;
 
-                    h4 {
-                        font-size: 1.15em;
-                        font-weight: 500;
-                        color: $third;
-                    }
-
-                    .messageListEmail {
-                        color: $fourth;
-                    }
-                }
-
-                .optionSelected {
-                    width: 25%;
-                }
-
-                .messageListAdminBody {
-                    width: 50%;
-                    height: auto;
-                }
-
-                .adminMessageBtn {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                    gap: 5px;
-                    width: 15%;
-
-                    & #btnRepondre {
-                        padding: 5px 0;
-                        width: 100%;
-                        background-color: $fifth;
-                        color: $white;
-                        font-weight: 500;
-                        border: 1px solid transparent;
-                        border-radius: 5px;
-                        transition: 0.3s ease-in-out;
-
-                        &:hover {
-                            border: 1px solid $fifth;
-                            background-color: transparent;
-                            color: $fifth;
-                        }
-                    }
-
-
-                    #btnDelete {
-                        padding: 5px 0;
-                        width: 100%;
-                        background-color: $seventh;
-                        color: $white;
-                        font-weight: 500;
-                        border: 1px solid transparent;
-                        border-radius: 5px;
-                        transition: 0.3s ease-in-out;
-
-                        &:hover {
-                            border: 1px solid $seventh;
-                            background-color: transparent;
-                            color: $seventh;
-                        }
-                    }
-                }
-            }
+        #messageAdminCloseBtn {
+          color: red;
+          transform: scale(1.5);
         }
+      }
     }
+  }
 }

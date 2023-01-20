@@ -94,11 +94,7 @@ function Structure7({ updateFields }) {
   );
 }
 Structure7.propTypes = {
-  resaInst: oneOfType([
-    bool,
-    number,
-    node
-  ]),
+  resaInst: oneOfType([bool, number, node]),
   updateFields: Proptypes.func,
 };
 export default Structure7;

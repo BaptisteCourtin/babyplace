@@ -169,6 +169,7 @@ function PersonnesConfiance({ setCompo }) {
                 <p>{each.tel}</p>
               </div>
               <button
+                type="button"
                 className="delete-conf"
                 onClick={() => deleteConfiance(each.confianceId)}
               >

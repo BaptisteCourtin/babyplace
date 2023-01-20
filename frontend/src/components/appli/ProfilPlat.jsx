@@ -22,10 +22,7 @@ function ProfilPlat() {
         setNom1(res.data[0][0].nom);
         setPrenom2(res.data[0][1].prenom);
         setNom2(res.data[0][1].nom);
-
         setPhotoFamille(res.data[1][0].photoProfilFamille);
-
-        console.log(res.data[0]);
       })
       .then(() => {
         setDonneesOK(true);
@@ -52,17 +49,17 @@ function ProfilPlat() {
           <h3>
             {prenom1 || nom1
               ? `
-            ${prenom1 ? prenom1 : ""} 
-            ${nom1 ? nom1 : ""}`
+            ${prenom1 || ""} 
+            ${nom1 || ""}`
               : ""}
             {prenom2 || nom2
               ? prenom1 || nom1
                 ? ` & 
-                ${prenom2 ? prenom2 : ""} 
-                ${nom2 ? nom2 : ""}`
+                ${prenom2 || ""} 
+                ${nom2 || ""}`
                 : `
-            ${prenom2 ? prenom2 : ""} 
-            ${nom2 ? nom2 : ""}`
+            ${prenom2 || ""} 
+            ${nom2 || ""}`
               : ""}
           </h3>
         </div>

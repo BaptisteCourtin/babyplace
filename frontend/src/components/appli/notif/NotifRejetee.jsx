@@ -51,6 +51,7 @@ function NotifRejetee({ setCompo, photoFamille }) {
 
 NotifRejetee.propTypes = {
   setCompo: PropTypes.func.isRequired,
+  photoFamille: PropTypes.string.isRequired,
 };
 
 export default NotifRejetee;

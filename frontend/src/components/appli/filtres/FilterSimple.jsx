@@ -6,7 +6,7 @@ function FilterSimple({ setCompo, dataBasique, setDataBasique }) {
   const ChangeIsCreche = (e) => {
     setDataBasique((prevState) => ({
       ...prevState,
-      isCreche: parseInt(e.target.value),
+      isCreche: parseInt(e.target.value, 10),
     }));
   };
 
