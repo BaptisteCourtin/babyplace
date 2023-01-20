@@ -124,8 +124,7 @@ function Inscription() {
       .then((result) => {
         axios
           .put(
-            `${
-              import.meta.env.VITE_PATH
+            `${import.meta.env.VITE_PATH
             }/formInscription/docParentChangeName/${parentId}/${nameDoc}`,
             {
               httpDoc: result.data,
@@ -148,8 +147,7 @@ function Inscription() {
       .then((result) => {
         axios
           .put(
-            `${
-              import.meta.env.VITE_PATH
+            `${import.meta.env.VITE_PATH
             }/formInscription/docFamilleChangeName/${familleId}/${nameDoc}`,
             {
               httpDoc: result.data,
@@ -172,162 +170,6 @@ function Inscription() {
 
     if (num === 1) {
       if (docJustifRevenus1Src.current !== null) {
-<<<<<<< HEAD
-        const formData = new FormData();
-        formData.append("file", docJustifRevenus1Src.current.files[0]);
-        axios
-          .post(
-            `${import.meta.env.VITE_PATH}/formInscription/docParent`,
-            formData
-          )
-          .then((result) => {
-            axios
-              .put(
-                `${
-                  import.meta.env.VITE_PATH
-                }/formInscription/docParentChangeName/${parentId}`,
-                {
-                  docJustifRevenus: result.data,
-                }
-              )
-              .catch((err) => {
-                console.error(err);
-              });
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      }
-      if (docDeclaRevenus1Src.current !== null) {
-        const formData = new FormData();
-        formData.append("file", docDeclaRevenus1Src.current.files[0]);
-        axios
-          .post(
-            `${import.meta.env.VITE_PATH}/formInscription/docParent`,
-            formData
-          )
-          .then((result) => {
-            axios
-              .put(
-                `${
-                  import.meta.env.VITE_PATH
-                }/formInscription/docParentChangeName/${parentId}`,
-                {
-                  docDeclaRevenus: result.data,
-                }
-              )
-              .catch((err) => {
-                console.error(err);
-              });
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      }
-      if (docSituationPro1Src.current !== null) {
-        const formData = new FormData();
-        formData.append("file", docSituationPro1Src.current.files[0]);
-        axios
-          .post(
-            `${import.meta.env.VITE_PATH}/formInscription/docParent`,
-            formData
-          )
-          .then((result) => {
-            axios
-              .put(
-                `${
-                  import.meta.env.VITE_PATH
-                }/formInscription/docParentChangeName/${parentId}`,
-                {
-                  docSituationPro: result.data,
-                }
-              )
-              .catch((err) => {
-                console.error(err);
-              });
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      }
-      if (docJustifDom1Src.current !== null) {
-        const formData = new FormData();
-        formData.append("file", docJustifDom1Src.current.files[0]);
-        axios
-          .post(
-            `${import.meta.env.VITE_PATH}/formInscription/docParent`,
-            formData
-          )
-          .then((result) => {
-            axios
-              .put(
-                `${
-                  import.meta.env.VITE_PATH
-                }/formInscription/docParentChangeName/${parentId}`,
-                {
-                  docJustifDom: result.data,
-                }
-              )
-              .catch((err) => {
-                console.error(err);
-              });
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      }
-      if (numCaf1Src.current !== null) {
-        const formData = new FormData();
-        formData.append("file", numCaf1Src.current.files[0]);
-        axios
-          .post(
-            `${import.meta.env.VITE_PATH}/formInscription/docParent`,
-            formData
-          )
-          .then((result) => {
-            axios
-              .put(
-                `${
-                  import.meta.env.VITE_PATH
-                }/formInscription/docParentChangeName/${parentId}`,
-                {
-                  numCaf: result.data,
-                }
-              )
-              .catch((err) => {
-                console.error(err);
-              });
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      }
-      if (numSecu1Src.current !== null) {
-        const formData = new FormData();
-        formData.append("file", numSecu1Src.current.files[0]);
-        axios
-          .post(
-            `${import.meta.env.VITE_PATH}/formInscription/docParent`,
-            formData
-          )
-          .then((result) => {
-            axios
-              .put(
-                `${
-                  import.meta.env.VITE_PATH
-                }/formInscription/docParentChangeName/${parentId}`,
-                {
-                  numSecu: result.data,
-                }
-              )
-              .catch((err) => {
-                console.error(err);
-              });
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-=======
         OneIfFormParent(parentId, docJustifRevenus1Src, "docJustifRevenus");
       }
       if (docDeclaRevenus1Src.current !== null) {
@@ -344,166 +186,9 @@ function Inscription() {
       }
       if (numSecu1Src.current !== null) {
         OneIfFormParent(parentId, numSecu1Src, "numSecu");
->>>>>>> dev
       }
     } else if (num === 2) {
       if (docJustifRevenus2Src.current !== null) {
-<<<<<<< HEAD
-        const formData = new FormData();
-        formData.append("file", docJustifRevenus2Src.current.files[0]);
-        axios
-          .post(
-            `${import.meta.env.VITE_PATH}/formInscription/docParent`,
-            formData
-          )
-          .then((result) => {
-            axios
-              .put(
-                `${
-                  import.meta.env.VITE_PATH
-                }/formInscription/docParentChangeName/${parentId}`,
-                {
-                  docJustifRevenus: result.data,
-                }
-              )
-              .catch((err) => {
-                console.error(err);
-              });
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      }
-      if (docDeclaRevenus2Src.current !== null) {
-        const formData = new FormData();
-        formData.append("file", docDeclaRevenus2Src.current.files[0]);
-        axios
-          .post(
-            `${import.meta.env.VITE_PATH}/formInscription/docParent`,
-            formData
-          )
-          .then((result) => {
-            axios
-              .put(
-                `${
-                  import.meta.env.VITE_PATH
-                }/formInscription/docParentChangeName/${parentId}`,
-                {
-                  docDeclaRevenus: result.data,
-                }
-              )
-              .catch((err) => {
-                console.error(err);
-              });
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      }
-      if (docSituationPro2Src.current !== null) {
-        const formData = new FormData();
-        formData.append("file", docSituationPro2Src.current.files[0]);
-        axios
-          .post(
-            `${import.meta.env.VITE_PATH}/formInscription/docParent`,
-            formData
-          )
-          .then((result) => {
-            axios
-              .put(
-                `${
-                  import.meta.env.VITE_PATH
-                }/formInscription/docParentChangeName/${parentId}`,
-                {
-                  docSituationPro: result.data,
-                }
-              )
-              .catch((err) => {
-                console.error(err);
-              });
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      }
-      if (docJustifDom2Src.current !== null) {
-        const formData = new FormData();
-        formData.append("file", docJustifDom2Src.current.files[0]);
-        axios
-          .post(
-            `${import.meta.env.VITE_PATH}/formInscription/docParent`,
-            formData
-          )
-          .then((result) => {
-            axios
-              .put(
-                `${
-                  import.meta.env.VITE_PATH
-                }/formInscription/docParentChangeName/${parentId}`,
-                {
-                  docJustifDom: result.data,
-                }
-              )
-              .catch((err) => {
-                console.error(err);
-              });
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      }
-      if (numCaf2Src.current !== null) {
-        const formData = new FormData();
-        formData.append("file", numCaf2Src.current.files[0]);
-        axios
-          .post(
-            `${import.meta.env.VITE_PATH}/formInscription/docParent`,
-            formData
-          )
-          .then((result) => {
-            axios
-              .put(
-                `${
-                  import.meta.env.VITE_PATH
-                }/formInscription/docParentChangeName/${parentId}`,
-                {
-                  numCaf: result.data,
-                }
-              )
-              .catch((err) => {
-                console.error(err);
-              });
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      }
-      if (numSecu2Src.current !== null) {
-        const formData = new FormData();
-        formData.append("file", numSecu2Src.current.files[0]);
-        axios
-          .post(
-            `${import.meta.env.VITE_PATH}/formInscription/docParent`,
-            formData
-          )
-          .then((result) => {
-            axios
-              .put(
-                `${
-                  import.meta.env.VITE_PATH
-                }/formInscription/docParentChangeName/${parentId}`,
-                {
-                  numSecu: result.data,
-                }
-              )
-              .catch((err) => {
-                console.error(err);
-              });
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-=======
         OneIfFormParent(parentId, docJustifRevenus2Src, "docJustifRevenus");
       }
       if (docDeclaRevenus2Src.current !== null) {
@@ -520,7 +205,6 @@ function Inscription() {
       }
       if (numSecu2Src.current !== null) {
         OneIfFormParent(parentId, numSecu2Src, "numSecu");
->>>>>>> dev
       }
     }
   };
@@ -530,111 +214,6 @@ function Inscription() {
   const SubmitFormFamille = (e) => {
     e.preventDefault();
     if (docAssurParentSrc.current !== null) {
-<<<<<<< HEAD
-      const formData = new FormData();
-      console.log(docAssurParentSrc.current.files[0]);
-      formData.append("file", docAssurParentSrc.current.files[0]);
-      axios
-        .post(
-          `${import.meta.env.VITE_PATH}/formInscription/docFamille`,
-          formData
-        )
-        .then((result) => {
-          axios
-            .put(
-              `${
-                import.meta.env.VITE_PATH
-              }/formInscription/docFamilleChangeName/${familleId}`,
-              {
-                docAssurParent: result.data,
-              }
-            )
-            .catch((err) => {
-              console.error(err);
-            });
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
-    if (docRibSrc.current !== null) {
-      const formData = new FormData();
-      formData.append("file", docRibSrc.current.files[0]);
-      axios
-        .post(
-          `${import.meta.env.VITE_PATH}/formInscription/docFamille`,
-          formData
-        )
-        .then((result) => {
-          axios
-            .put(
-              `${
-                import.meta.env.VITE_PATH
-              }/formInscription/docFamilleChangeName/${familleId}`,
-              {
-                docRib: result.data,
-              }
-            )
-            .catch((err) => {
-              console.error(err);
-            });
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
-    if (docAutoImageSrc.current !== null) {
-      const formData = new FormData();
-      formData.append("file", docAutoImageSrc.current.files[0]);
-      axios
-        .post(
-          `${import.meta.env.VITE_PATH}/formInscription/docFamille`,
-          formData
-        )
-        .then((result) => {
-          axios
-            .put(
-              `${
-                import.meta.env.VITE_PATH
-              }/formInscription/docFamilleChangeName/${familleId}`,
-              {
-                docAutoImage: result.data,
-              }
-            )
-            .catch((err) => {
-              console.error(err);
-            });
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
-    if (docDivorceSrc.current !== null) {
-      const formData = new FormData();
-      formData.append("file", docDivorceSrc.current.files[0]);
-      axios
-        .post(
-          `${import.meta.env.VITE_PATH}/formInscription/docFamille`,
-          formData
-        )
-        .then((result) => {
-          axios
-            .put(
-              `${
-                import.meta.env.VITE_PATH
-              }/formInscription/docFamilleChangeName/${familleId}`,
-              {
-                docDivorce: result.data,
-              }
-            )
-            .catch((err) => {
-              console.error(err);
-            });
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-=======
       OneIfFormFamille(docAssurParentSrc, "docAssurParent");
     }
     if (docRibSrc.current !== null) {
@@ -645,7 +224,6 @@ function Inscription() {
     }
     if (docDivorceSrc.current !== null) {
       OneIfFormFamille(docDivorceSrc, "docDivorce");
->>>>>>> dev
     }
   };
 
