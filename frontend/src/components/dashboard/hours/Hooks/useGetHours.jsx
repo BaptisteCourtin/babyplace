@@ -72,7 +72,7 @@ export const useGetHours = (structureId, userType) => {
   };
 
   const setValues = () => {
-    if (horaires.length) {
+    if (horaires && horaires.length !== 0) {
       setToggleDay(horaires[0].ouvert);
       setSelected(horaires[0].jourSemaine);
     }
@@ -81,6 +81,7 @@ export const useGetHours = (structureId, userType) => {
   useEffect(() => {
     getData();
     getHoraires();
+    console.log(horaires)
     setValues();
   }, []);
 
