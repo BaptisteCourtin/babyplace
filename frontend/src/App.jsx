@@ -27,6 +27,7 @@ import Faq from "@components/features/Faq";
 import Admin from "@pages/Admin";
 import Stats from "@pages/Stats";
 import Home from "@pages/Home";
+import WaitAdmin from "@pages/WaitAdmin";
 import AppliChat from "@pages/appli/AppliChat";
 import Aide from "@components/appli/menu/Aide";
 import MessageAdmin from "@components/dashboard/admin/MessageAdmin";
@@ -47,6 +48,7 @@ function App() {
             <Route path="/" element={<Home />} />
 
             <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/messages" element={<MessageAdmin />} />
             <Route path="/stats" element={<Stats />} />
 
             <Route path="/register" element={<Register />} />
@@ -79,6 +81,8 @@ function App() {
               path="/structure/inscription-form"
               element={<FormStructure />}
             />
+
+            <Route path="/pending" element={<WaitAdmin />} />
           </Routes>
         </FamilleContext.Provider>
       </UserEmailContext.Provider>

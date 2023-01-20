@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import Nav from "@components/dashboard/admin/Nav.admin";
+import Nav from "@components/dashboard/admin/Nav.Admin";
 
 function Admin() {
   const [data, setData] = useState([]);

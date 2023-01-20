@@ -1,7 +1,23 @@
 import React from "react";
 import Proptypes from "prop-types";
+import { useState, useEffect } from "react";
+import Axios from "axios";
 
-function Structure2({ imageProfilSrc, inputRef, updateFields }) {
+function Structure2({ inputRef, structureId, updateFields }) {
+  const [imageSrc, setImageSrc] = useState('https://via.placeholder.com/150.png?text=photo');
+  const getPicture = () => {
+    Axios.get(`${import.meta.env.VITE_PATH}/photoProfil?id=${structureId}`, [structureId])
+      .then((result) => {
+        if (result.data.length > 0) {
+          setImageSrc(`${import.meta.env.VITE_PATH}${result.data[0].photoProfil}`);
+          updateFields({ imageProfilSrc: result.data[0].photoProfil })
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+  }
+
   const updateImg = (e) => {
     // e.files contient un objet FileList
     const [picture] = e.target.files;
@@ -14,21 +30,22 @@ function Structure2({ imageProfilSrc, inputRef, updateFields }) {
       // L'événement déclenché lorsque la lecture est complète
       reader.onload = (el) => {
         // On change l'URL de l'image (base64)
-        // console.log(e.result);
-        imageProfilSrc = el.target.result;
-        updateFields({ imageProfilSrc: el.target.result });
+        setImageSrc(el.target.result);
       };
 
       // On lit le fichier "picture" uploadé
       reader.readAsDataURL(picture);
     }
   };
+  useEffect(() => {
+    getPicture()
+  }, [])
   return (
     <div className="structure2">
       <h4>Choisir une photo de profil :</h4>
       <div className="pageContent">
         <div className="imgContainer">
-          <img src={imageProfilSrc} alt="prévisualisation" />
+          <img src={imageSrc} alt="prévisualisation" />
         </div>
         <div className="inputContainer">
           <label htmlFor="avatar">Formats acceptés : .jpg, .jpeg, .png</label>

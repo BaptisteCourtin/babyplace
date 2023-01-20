@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Calendar from "react-calendar";
-
 import PropTypes from "prop-types";
 
 function AppliPlaces({ dataDateHeure, setDataDateHeure }) {

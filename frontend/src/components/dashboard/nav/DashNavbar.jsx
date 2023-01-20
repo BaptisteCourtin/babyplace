@@ -30,7 +30,7 @@ function DashNavbar({ toggle, setToggle, structureId }) {
   };
 
   return (
-    <section className="dashNav">
+    <aside className="dashNav">
       <div className="dashNavLogo">
         <img src={logoWhite} alt="" />
         <h2>
@@ -98,7 +98,7 @@ function DashNavbar({ toggle, setToggle, structureId }) {
           Déconnexion
         </button>
       </div>
-    </section>
+    </aside>
   );
 }
 

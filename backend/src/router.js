@@ -300,8 +300,8 @@ router.put("/calendrier/places/open/:id", calendrier.updateStatusOpen);
 router.put("/logout/:id", structure.logout);
 
 router.post("/calendrier/add", calendrier.postDate);
-router.post("/dashboard/docs", upload.single(`file`), structure.uploadProfil);
-router.post("/uploads", async (req, res, next) => {
+router.post("/dashboard/docs", structure.uploadProfil);
+router.post('/uploads', multerMid.single('file'), async (req, res, next) => {
   try {
     const file = req.file;
     const result = await uploadDoc(file);
@@ -604,6 +604,18 @@ router.post("/photoProfil", uploadAvatar.single("avatar"), (req, res) => {
   res.send(req.file);
 });
 
+router.get("/photoProfil", (req, res) => {
+  datasource.query(
+    "SELECT photoProfil FROM structure WHERE structureId= ?",
+    [req.query.id]
+  ).then(([result]) => {
+    res.send(result).status(200)
+  }).catch((err) => {
+    console.error(err);
+    res.status(500).send("Accès impossible");
+  });
+})
+
 router.put("/photoProfil", (req, res) => {
   const { photoProfil, email } = req.body;
   datasource
@@ -650,6 +662,18 @@ router.post(
     res.send(req.files);
   }
 );
+
+router.get("/photosStructure", (req, res) => {
+  datasource.query(
+    "SELECT photoStructure1, photoStructure2, photoStructure3 FROM structure WHERE structureId= ?",
+    [req.query.id]
+  ).then(([result]) => {
+    res.send(result).status(200)
+  }).catch((err) => {
+    console.error(err);
+    res.status(500).send("Accès impossible");
+  });
+})
 
 router.put("/photosStructure", (req, res) => {
   const { photoStructure1, photoStructure2, photoStructure3, email } = req.body;
@@ -1220,7 +1244,7 @@ router.delete("/admin/refused/:id", structure.deleteRefused);
 
 router.post("/auth", async (req, res) => {
   await datasource
-    .query("SELECT * FROM structure WHERE email = ?", [req.body.email])
+    .query("SELECT * FROM structure WHERE email = ? AND isVerify = 1", [req.body.email])
     .then(([[user]]) => {
       if (user && req.body.password === user.password) {
         const start = Date.now();

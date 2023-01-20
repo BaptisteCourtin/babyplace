@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { AiFillCloseCircle } from "react-icons/ai";
-import { toast } from "react-hot-toast";
 import Nav from "./Nav.admin";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 import ModalMessageAdmin from "./ModalMessageAdmin";
 
 function MessageAdmin() {
@@ -22,6 +21,7 @@ function MessageAdmin() {
     setSelectedId(id);
     setIsOpen(!isOpen);
   };
+  const repondre = (email) => {};
 
   useEffect(() => {
     getAllMessage();

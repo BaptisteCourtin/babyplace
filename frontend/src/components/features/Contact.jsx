@@ -10,6 +10,7 @@ function Contact() {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState("");
   const { register, handleSubmit } = useForm();
+  const [checked, setChecked] = useState(false);
 
   const onSubmit = (d) => {
     const { prenom, nom, email, optionSelected, texte } = d;
@@ -151,11 +152,17 @@ function Contact() {
 
             <div className="policyTextDiv">
               <p id="policyText">
-                <input type="checkbox" id="checkboxPolicy" /> En cliquant sur
-                “Envoyer” vous acceptez d'être contactés par l'administrateur de
-                Babyplace ou l'agence web Dave Warehouse. Pour en savoir plus
-                sur l'utilisation de vos données personnelles, merci de
-                consulter la page concernant{" "}
+                <input
+                  type="checkbox"
+                  id="checkboxPolicy"
+                  name="checkboxPolicy"
+                  onChange={() => setChecked(!checked)}
+                  required
+                />{" "}
+                En cliquant sur “Envoyer” vous acceptez d'être contactés par
+                l'administrateur de Babyplace ou l'agence web Dave Warehouse.
+                Pour en savoir plus sur l'utilisation de vos données
+                personnelles, merci de consulter la page concernant{" "}
                 <HashLink to="/features#politique">
                   <span>notre politique de confidentialité</span>
                 </HashLink>
@@ -164,7 +171,15 @@ function Contact() {
             </div>
           </div>
 
-          <button className="navBtnLite" type="submit" onClick={openCloseModal}>
+          <button
+            className="navBtnLite"
+            type="submit"
+            style={{
+              opacity: !checked ? "0.2" : "1",
+            }}
+            disabled={!!!checked}
+            onClick={openCloseModal}
+          >
             Envoyer
           </button>
         </form>

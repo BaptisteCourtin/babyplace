@@ -38,10 +38,10 @@ const INITIAL_DATA = {
   nomUsage: "",
   prenom: "",
   adresseStructure: "",
-  imageProfilSrc: "https://via.placeholder.com/150.png?text=photo",
-  photo1Src: "https://via.placeholder.com/240x160.png?text=photo+1",
-  photo2Src: "https://via.placeholder.com/240x160.png?text=photo+2",
-  photo3Src: "https://via.placeholder.com/240x160.png?text=photo+3",
+  imageProfilSrc: null,
+  photo1Src: null,
+  photo2Src: null,
+  photo3Src: null,
   description: "",
   PCSC1: false,
   nesting: false,
@@ -139,15 +139,18 @@ function FormStructure() {
   const [structure, setStructure] = useState("");
   const [resa, setResa] = useState("");
   const { userEmail } = useContext(UserEmailContext);
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const [showExplications, setShowExplications] = useState(true);
+  const [showExplications, setShowExplications] = useState(
+    window.innerWidth > 1000 ? true : false
+  );
   const [closedDays, setClosedDays] = useState([]);
   const [structureId, setStructureId] = useState(null);
   const [horairesExist, setHorairesExist] = useState(null);
   const [closePage, setClosePage] = useState(false);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
   const updateSize = () => {
     setScreenWidth(window.innerWidth);
-    if (window.innerWidth < 1200) {
+    if (window.innerWidth < 1000) {
       setShowExplications(false);
     } else setShowExplications(true);
   };
@@ -291,12 +294,18 @@ function FormStructure() {
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
     useMultistepForm([
       <Structure1 {...data} updateFields={updateFields} />,
-      <Structure2 {...data} inputRef={inputRef} updateFields={updateFields} />,
+      <Structure2
+        {...data}
+        inputRef={inputRef}
+        structureId={structureId}
+        updateFields={updateFields}
+      />,
       <Structure3
         {...data}
         inputRef1={inputRef1}
         inputRef2={inputRef2}
         inputRef3={inputRef3}
+        structureId={structureId}
         updateFields={updateFields}
       />,
       <Structure4 {...data} updateFields={updateFields} />,
@@ -482,6 +491,10 @@ function FormStructure() {
       nomUsage,
       prenom,
       adresseStructure,
+      imageProfilSrc,
+      photo1Src,
+      photo2Src,
+      photo3Src,
       description,
       PCSC1,
       nesting,
@@ -552,6 +565,7 @@ function FormStructure() {
       assAutoNom,
       assAutoNumero,
       assAutoAdresse,
+      indispo,
     } = data;
     const email = userEmail;
     if (!isLastStep) {
@@ -630,63 +644,58 @@ function FormStructure() {
             console.error(err);
           });
       } else if (currentStepIndex === 1) {
-        const formData = new FormData();
-        if (inputRef !== null) {
+        let formData = new FormData();
+        if (inputRef.current.files[0] !== undefined) {
+          console.log(inputRef.current.files[0]);
           formData.append("avatar", inputRef.current.files[0]);
-        }
-        Axios.post(`${import.meta.env.VITE_PATH}/photoProfil`, formData)
-          .then((result) => {
-            let photoProfil = null;
-            if (result.data !== undefined) {
-              photoProfil = `${import.meta.env.VITE_PATH}/uploads/avatar/${
-                result.data.filename
-              }`;
-            }
-            Axios.put(`${import.meta.env.VITE_PATH}/photoProfil`, {
-              photoProfil,
-              email,
+          Axios.post(`${import.meta.env.VITE_PATH}/photoProfil`, formData)
+            .then((result) => {
+              let photoProfil = imageProfilSrc;
+              if (result.data !== undefined) {
+                photoProfil = `/uploads/avatar/${result.data.filename}`;
+              }
+              Axios.put(`${import.meta.env.VITE_PATH}/photoProfil`, {
+                photoProfil,
+                email,
+              })
+                .then(closePage ? navigate("/", {}) : next())
+                .catch((err) => {
+                  console.error(err);
+                });
             })
-              .then(closePage ? navigate("/", {}) : next())
-              .catch((err) => {
-                console.error(err);
-              });
-          })
-          .catch((err) => {
-            console.error(err);
-          });
+            .catch((err) => {
+              console.error(err);
+            });
+        } else {
+          next();
+        }
       } else if (currentStepIndex === 2) {
         const formData = new FormData();
-        if (inputRef1 !== null) {
+        if (inputRef1.current.files[0] !== undefined) {
           formData.append("photo1", inputRef1.current.files[0]);
         }
-        if (inputRef2 !== null) {
+        if (inputRef2.current.files[0] !== undefined) {
           formData.append("photo2", inputRef2.current.files[0]);
         }
-        if (inputRef3 !== null) {
+        if (inputRef3.current.files[0] !== undefined) {
           formData.append("photo3", inputRef3.current.files[0]);
         }
         Axios.post(`${import.meta.env.VITE_PATH}/photosStructure`, formData)
           .then((result) => {
-            let photoStructure1 = null;
-            let photoStructure2 = null;
-            let photoStructure3 = null;
+            let photoStructure1 = photo1Src;
+            let photoStructure2 = photo2Src;
+            let photoStructure3 = photo3Src;
             if (result.data.photo1 !== undefined) {
-              const photo1 = result.data.photo1[0].filename;
-              photoStructure1 = `${
-                import.meta.env.VITE_PATH
-              }/uploads/photosStructure/${photo1}`;
+              let photo1 = result.data.photo1[0].filename;
+              photoStructure1 = `/uploads/photosStructure/${photo1}`;
             }
             if (result.data.photo2 !== undefined) {
-              const photo2 = result.data.photo2[0].filename;
-              photoStructure2 = `${
-                import.meta.env.VITE_PATH
-              }/uploads/photosStructure/${photo2}`;
+              let photo2 = result.data.photo2[0].filename;
+              photoStructure2 = `/uploads/photosStructure/${photo2}`;
             }
             if (result.data.photo3 !== undefined) {
               photo3 = result.data.photo3[0].filename;
-              photoStructure3 = `${
-                import.meta.env.VITE_PATH
-              }/uploads/photosStructure/${photo3}`;
+              photoStructure3 = `/uploads/photosStructure/${photo3}`;
             }
             Axios.put(`${import.meta.env.VITE_PATH}/photosStructure`, {
               photoStructure1,
@@ -852,26 +861,33 @@ function FormStructure() {
             console.error(err);
           });
       } else if (currentStepIndex === 10) {
-        Axios.get(
-          `${import.meta.env.VITE_PATH}/getStructureId?email=${email}`,
-          { email }
-        )
-          .then((id) => {
-            const { structureId } = id.data;
-            closedDays.map((date) => {
-              Axios.post(`${import.meta.env.VITE_PATH}/calendrier/add`, {
-                date,
-                nbPlaces: -1,
-                structureId,
-              }).catch((err) => {
-                console.error(err);
-              });
+        closedDays.map((date) => {
+          if (indispo.indexOf(date) === -1) {
+            Axios.post(`${import.meta.env.VITE_PATH}/calendrier/add`, {
+              date: date,
+              nbPlaces: -1,
+              structureId,
+            }).catch((err) => {
+              console.error(err);
             });
-          })
-          .then(closePage ? navigate("/", {}) : next())
-          .catch((err) => {
-            console.error(err);
-          });
+          }
+        });
+        indispo.map((value) => {
+          console.log(closedDays.indexOf(value));
+          if (closedDays.indexOf(value) === -1) {
+            let date = value;
+            console.log(date);
+            Axios.delete(
+              `${
+                import.meta.env.VITE_PATH
+              }/calendrierIndispo/?structureId=${structureId}&date=${date}`,
+              [structureId, date]
+            ).catch((err) => {
+              console.error(err);
+            });
+          }
+        });
+        closePage ? navigate("/", {}) : next();
       } else if (currentStepIndex === 11 && structure === "creche") {
         Axios.put(`${import.meta.env.VITE_PATH}/agrementsCreche`, {
           nbEmployes,
@@ -1098,7 +1114,7 @@ function FormStructure() {
             currentStepIndex !== 7 &&
             currentStepIndex !== 15 ? (
               <div className="explicationsContainer">
-                {screenWidth < 1200 && (
+                {screenWidth < 1000 && (
                   <button
                     type="button"
                     className="backButton"
