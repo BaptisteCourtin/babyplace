@@ -72,7 +72,7 @@
     }
   }
 
-  & select+label {
+  & select + label {
     color: $grey;
     font-size: 0.9rem;
     position: absolute;

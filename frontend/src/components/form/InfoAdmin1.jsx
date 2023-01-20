@@ -138,7 +138,13 @@ function Structure1({
             />
             <label
               htmlFor="nomStrucure"
-              className={(nomStructure !== "" && nomStructure !== null && nomStructure !== undefined) ? "labelChecked" : ""}
+              className={
+                nomStructure !== "" &&
+                nomStructure !== null &&
+                nomStructure !== undefined
+                  ? "labelChecked"
+                  : ""
+              }
             >
               Nom
             </label>

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Nav from "./Nav.admin";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import Nav from "./Nav.admin";
 import ModalMessageAdmin from "./ModalMessageAdmin";
 
-function MessageAdmin() {
+const MessageAdmin = () => {
+
   const [messageAdminData, setMessageAdminData] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedId, setSelectedId] = useState();
@@ -15,13 +16,16 @@ function MessageAdmin() {
       setMessageAdminData(ret.data);
     } catch (err) {
       toast.error(err.message);
-    }
+    };
   };
+
   const deleteMessage = (id) => {
     setSelectedId(id);
     setIsOpen(!isOpen);
   };
-  const repondre = (email) => {};
+
+  const repondre = (email) => {
+  };
 
   useEffect(() => {
     getAllMessage();
@@ -32,32 +36,39 @@ function MessageAdmin() {
       <Nav />
       <div className="messageAdminList">
         <h1>Messages</h1>
-        {messageAdminData &&
-          messageAdminData.map((element) => (
-            <li key={element.id}>
-              <div className="messageListAdminContainer">
-                <div className="messageListAdminHeader">
-                  <h4>
-                    {element.prenom} {element.nom}
-                  </h4>
-                  <div className="messageListEmail">{element.email}</div>
+        <div className="messageAdminListBis">
+          {messageAdminData &&
+            messageAdminData.map((element) => (
+              <li key={element.id}>
+                <div className="messageListAdminContainer">
+                  <div className='messageListAdminHeader'>
+                    <h4>{element.prenom} {element.nom}</h4>
+                    <div className='messageListEmail'>{element.email}</div>
+                  </div>
+                  <div className='optionSelected'>{element.optionSelected}</div>
+                  <div className='messageListAdminBody'>{element.texte}</div>
+                  <div className="adminMessageBtn">
+                    <button
+                      type="button" id="btnRepondre"
+                      onClick={() => repondre(element.email)}
+                    >
+                      Répondre
+                    </button>
+                    <button
+                      type="button" id="btnDelete"
+                      onClick={() => deleteMessage(element.id)}
+                    >
+                      Supprimer
+                    </button>
+                  </div>
                 </div>
-                <div className="optionSelected">{element.optionSelected}</div>
-                <div className="messageListAdminBody">{element.texte}</div>
-                <button type="button" onClick={() => deleteMessage(element.id)}>
-                  <AiFillCloseCircle id="messageAdminCloseBtn" />
-                </button>
-              </div>
-            </li>
-          ))}
+              </li>
+            ))}
+        </div>
       </div>
-      <ModalMessageAdmin
-        open={isOpen}
-        close={setIsOpen}
-        selectedId={selectedId}
-      />
+      <ModalMessageAdmin open={isOpen} close={setIsOpen} selectedId={selectedId} />
     </div>
   );
-}
+};
 
 export default MessageAdmin;
