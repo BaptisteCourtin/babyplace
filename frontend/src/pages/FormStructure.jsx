@@ -157,6 +157,7 @@ function FormStructure() {
       return { ...prev, ...fields };
     });
   }
+
   useEffect(() => {
     Axios.get(`${import.meta.env.VITE_PATH}/isCreche?email=${userEmail}`, { userEmail })
       .then((result) => {
@@ -169,6 +170,7 @@ function FormStructure() {
         }
       }).catch((err) => { console.error(err) })
   }, []);
+
   useEffect(() => {
     if (structure === "creche") {
       Axios.get(
