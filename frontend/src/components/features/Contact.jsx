@@ -9,8 +9,18 @@ import Modal from "./Modal";
 function Contact() {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState("");
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const [checked, setChecked] = useState(false);
+
+  const onReset = () => {
+    reset({
+      prenom: "",
+      nom: "",
+      email: "",
+      texte: "",
+      optionSelected: ""
+    });
+  };
 
   const onSubmit = (d) => {
     const { prenom, nom, email, optionSelected, texte } = d;
@@ -184,7 +194,7 @@ function Contact() {
           </button>
         </form>
       </section>
-      <Modal open={isOpen} closeModal={openCloseModal} />
+      <Modal open={isOpen} closeModal={openCloseModal} onReset={onReset} />
       <FooterLite />
     </div>
   );
