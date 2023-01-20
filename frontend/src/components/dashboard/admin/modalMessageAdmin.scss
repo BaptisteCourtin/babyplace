@@ -36,56 +36,56 @@
 
       h4 {
         font-size: 1.5em;
+        font-weight: 600;
       }
     }
 
     .modalAdminBody {
       font-size: 1.15em;
       margin-bottom: 10px;
+      margin-bottom: 15px;
+
     }
 
     .modalAdminBtns {
       display: flex;
-      margin: 0px 150px;
       justify-content: space-between;
+      align-items: center;
+      padding: 0px 100px;
+      gap: 30%;
+      width: 100%;
 
-      #modalAdminBtn1 {
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-        gap: $h1;
-        padding: 10px 25px 10px 25px;
-        border: 1px solid transparent;
-        border-radius: 50px;
-        background-color: $third;
+      #btnRepondre {
+        padding: 5px 0;
+        width: 100%;
+        background-color: $fifth;
         color: $white;
         font-weight: 500;
         transition: 0.3s ease-in-out;
+        border: 1px solid transparent;
+        border-radius: 5px;
 
         &:hover {
-          background: none;
-          border: 1px solid $third;
-          color: $second;
+          border: 1px solid $fifth;
+          background-color: transparent;
+          color: $fifth;
         }
       }
 
-      #modalAdminBtn2 {
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-        gap: $h1;
-        padding: 10px 25px 10px 25px;
-        border: 1px solid $third;
-        border-radius: 50px;
-        background: none;
-        color: $third;
+      #btnDelete {
+        padding: 5px 0;
+        width: 100%;
+        background-color: $seventh;
+        color: $white;
         font-weight: 500;
+        border: 1px solid transparent;
+        border-radius: 5px;
         transition: 0.3s ease-in-out;
 
         &:hover {
-          background-color: $third;
-          border: 1px solid $third;
-          color: $white;
+          border: 1px solid $seventh;
+          background-color: transparent;
+          color: $seventh;
         }
       }
     }
