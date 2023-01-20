@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-export const getAllData = (token) => {
+export const useGetAllData = (token) => {
 
     const [userType, setUserType] = useState(null);
     const [donnees, setDonnees] = useState({});

@@ -1246,7 +1246,7 @@ router.delete("/admin/refused/:id", structure.deleteRefused);
 
 router.post("/auth", async (req, res) => {
   await datasource
-    .query("SELECT * FROM structure WHERE email = ?", [req.body.email])
+    .query("SELECT * FROM structure WHERE email = ? AND isVerify = 1", [req.body.email])
     .then(([[user]]) => {
       if (user && req.body.password === user.password) {
         const start = Date.now();

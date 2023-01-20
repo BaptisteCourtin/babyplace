@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from "axios";
 
-export const useGetData = (structureId) => {
+export const useGetAgenda = (structureId) => {
 
     const [calendar, setCalendar] = useState([]);
 
