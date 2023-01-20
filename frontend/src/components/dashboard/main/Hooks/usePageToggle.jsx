@@ -9,7 +9,9 @@ export const usePageToggle = (data) => {
   const [toggle, setToggle] = useState(0);
   const pageShown = () => {
     if (toggle === 1) {
-      return <DashReservations {...data} />;
+      return (
+        <DashReservations {...data} />
+      );
     }
     if (toggle === 2) {
       return (
@@ -17,10 +19,14 @@ export const usePageToggle = (data) => {
       );
     }
     if (toggle === 3) {
-      return <DashHours userType={userType} structureId={data.structureId} />;
+      return (
+        <DashHours userType={userType} structureId={data.structureId} />
+      );
     }
     if (toggle === 4) {
-      return <Messages {...data} />;
+      return (
+        <Messages {...data} />
+      );
     }
 
     if (toggle === 5) {

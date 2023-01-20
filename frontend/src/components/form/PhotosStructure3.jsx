@@ -24,7 +24,7 @@ function Structure3({
       [structureId]
     )
       .then((result) => {
-        console.log(result.data[0])
+        console.log(result.data[0].photoStructure1)
         if (result.data[0].photoStructure1 !== null) {
           setImage1Src(
             `${import.meta.env.VITE_PATH}${result.data[0].photoStructure1}`
