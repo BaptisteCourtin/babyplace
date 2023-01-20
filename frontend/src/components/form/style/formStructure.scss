@@ -9,8 +9,32 @@
 
   & p {
     color: #787885;
-    width: 30vw;
     text-align: center;
+    width: 30vw;
+    font-size: $h4;
+  }
+
+  & button {
+    color: #787885;
+    background: none;
+    text-align: center;
+    width: 250px;
+    max-width: 30vw;
+    height: 40px;
+    font-size: $h4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    margin: 4px;
+    padding: 8px;
+    transition: 0.5s ease-in-out;
+  }
+
+  & button:hover {
+    color: $third;
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
 
   & .leftPart {
@@ -195,12 +219,23 @@
       margin: 4px;
       padding: 8px;
       border: 1px solid $grey;
+      transition: .2s ease-in-out;
+    }
+
+    & button:hover {
+      box-shadow: 2px 2px 4px $grey;
     }
 
     & .backButton {
       border: none;
       color: $third;
       background-color: #eeeeee00;
+    }
+
+    & .backButton:hover {
+      box-shadow: none;
+      text-decoration: underline;
+      text-underline-offset: 4px;
     }
   }
 
@@ -211,7 +246,7 @@
   }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1000px) {
   .formStructureContainer {
     position: relative;
     width: 90vw;

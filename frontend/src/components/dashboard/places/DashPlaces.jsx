@@ -1,26 +1,21 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
-import DashCalendar from "../agenda/calendar/DashCalendar";
-import Agenda from "./Components/DashPlaces.Agenda";
 import { toast } from "react-hot-toast";
+import { activitiesArray } from "@utils/activitiesArray";
+import Agenda from "./Components/DashPlaces.Agenda";
 
-function DashPlaces({
-  userType,
-  title,
-  structureId,
-}) {
-
+function DashPlaces({ userType, structureId }) {
   const [toggleDay, setToggleDay] = useState(null);
   const [selected, setSelected] = useState(null);
-  const [dayId, setDayId] = useState(null);
+  const [dayId, setDayId] = useState(1);
 
   const [data, setData] = useState([]);
   const [horaires, setHoraires] = useState([]);
 
-  const [hour1, setHour1] = useState(null)
-  const [hour2, setHour2] = useState(null)
-  const [hour3, setHour3] = useState(null)
+  const [hour1, setHour1] = useState(null);
+  const [hour2, setHour2] = useState(null);
+  const [hour3, setHour3] = useState(null);
 
   const [indemn1, setIndemn1] = useState(null);
   const [switch1, setSwitch1] = useState(() => {
@@ -48,144 +43,135 @@ function DashPlaces({
 
   const getData = async () => {
     try {
-      const res = await axios
-        .get(`http://localhost:5000/structure/type/${structureId}?type=${userType}`, {
+      const res = await axios.get(
+        `${
+          import.meta.env.VITE_PATH
+        }/structure/type/${structureId}?type=${userType}`,
+        {
           id: structureId,
-          type: userType
-        })
+          type: userType,
+        }
+      );
       setData(res.data[0]);
-      setHour1(res.data[0].tarifHeure)
-      setHour2(res.data[0].tarifHoraireSpec)
-      setHour3(res.data[0].tarifHeureSup)
-      setIndemn1(res.data[0].indemnEntretien)
-      setIndemn2(res.data[0].indemnKm)
-      setIndemn3(res.data[0].indemnRepas)
-    }
-    catch (err) {
-      toast.error(err.message)
+      setHour1(res.data[0].tarifHeure);
+      setHour2(res.data[0].tarifHoraireSpec);
+      setHour3(res.data[0].tarifHeureSup);
+      setIndemn1(res.data[0].indemnEntretien);
+      setIndemn2(res.data[0].indemnKm);
+      setIndemn3(res.data[0].indemnRepas);
+    } catch (err) {
+      console.error(err.message);
     }
   };
 
   const getHoraires = async () => {
     try {
-      const res = await axios
-        .get(`http://localhost:5000/horaires/${structureId}`, {
-          id: structureId
-        })
+      const res = await axios.get(
+        `${import.meta.env.VITE_PATH}/horaires/${structureId}`,
+        {
+          id: structureId,
+        }
+      );
       setHoraires(res.data);
       setToggleDay(res.data[0].ouvert);
       setSelected(res.data[0].jourSemaine);
-      setDayId(res.data[0].jourId);
+    } catch (err) {
+      console.error(err.message);
     }
-    catch (err) {
-      toast.error(err.message)
-    }
-  }
+  };
 
   useEffect(() => {
     getData();
     getHoraires();
   }, []);
 
-  const updateDay = async () => {
-    const dataSubmit = {
-      id: dayId,
-      toggleDay: !toggleDay,
-    };
-    dataSubmit[selected] = !toggleDay;
-    await axios.put(`http://localhost:5000/horaires/day/${dayId}`, dataSubmit);
-  };
-
-  const updateHours = async () => {
-    await axios.put(`http://localhost:5000/dashboard/hours/${structureId}`, {
-      heureMin,
-      heureMax,
-      structureId,
-      jourId: dayId,
-    });
-  };
-
   const updateTarif = async (tarif, value) => {
     try {
-      await axios.put(`http://localhost:5000/dashboard/tarif/${structureId}`, {
-        id: structureId,
-        tarif: tarif,
-        tarifValue: value,
-        table: userType === 'assMat' && tarif === 'tarifHeureSup' ? 'assMat' : 'structure'
-      })
-      toast.success("Vos tarifs ont bien été modifiés")
-      getData()
+      await axios.put(
+        `${import.meta.env.VITE_PATH}/dashboard/tarif/${structureId}`,
+        {
+          id: structureId,
+          tarif,
+          tarifValue: value,
+          table:
+            userType === "assMat" && tarif === "tarifHeureSup"
+              ? "assMat"
+              : "structure",
+        }
+      );
+      toast.success("Vos tarifs ont bien été modifiés");
+      getData();
+    } catch (err) {
+      console.error(err.message);
     }
-    catch (err) {
-      toast.error(err.message)
-    }
-  }
+  };
 
   const updateIndemn = async (indemn, value) => {
     try {
-      await axios.put(`http://localhost:5000/dashboard/indemn/${structureId}`, {
-        id: structureId,
-        indemn: indemn,
-        indemnValue: value,
-        table: userType === 'assMat' && indemn !== 'indemnRepas' ? 'assMat' : 'structure'
-      })
-      toast.success("Vos indemnités ont bien été modifiées")
-      getData()
+      await axios.put(
+        `${import.meta.env.VITE_PATH}/dashboard/indemn/${structureId}`,
+        {
+          id: structureId,
+          indemn,
+          indemnValue: value,
+          table:
+            userType === "assMat" && indemn !== "indemnRepas"
+              ? "assMat"
+              : "structure",
+        }
+      );
+      toast.success("Vos indemnités ont bien été modifiées");
+      getData();
+    } catch (err) {
+      console.error(err.message);
     }
-    catch (err) {
-      toast.error(err.message)
-    }
-  }
+  };
 
   const updateOptions = async (options, value) => {
     try {
-      await axios.put(`http://localhost:5000/dashboard/options/${structureId}`, {
-        id: structureId,
-        optionsValue: value,
-        options: options
-      })
-      toast.success("Vos options ont bien été modifiées")
-      getData()
+      await axios.put(
+        `${import.meta.env.VITE_PATH}/dashboard/options/${structureId}`,
+        {
+          id: structureId,
+          optionsValue: value,
+          options,
+        }
+      );
+      toast.success("Vos options ont bien été modifiées");
+      getData();
+    } catch (err) {
+      console.error(err.message);
     }
-    catch (err) {
-      toast.error(err.message)
-    }
-  }
-
-  // const handleInput = (e) => {
-  //   setHoursOpen(e.minValue);
-  //   setHoursClose(e.maxValue);
-  // };
+  };
 
   return (
     <div className="dashPlaces">
       <Agenda
-        title={title}
-        updateDay={updateDay}
+        structureId={structureId}
         horaires={horaires}
+        getHoraires={getHoraires}
         toggleDay={toggleDay}
         setToggleDay={setToggleDay}
         selected={selected}
         setSelected={setSelected}
         dayId={dayId}
+        setDayId={setDayId}
       />
       <section className="dashPlacesParams">
         <details>
           <summary>Vos tarifs</summary>
           <div className="dashPlacesPrices">
             <div className="dashOptionsPrices">
-              <p>
-                Heure
-              </p>
+              <p>Heure</p>
               <input
                 type="number"
                 name="tarifHeureSup"
                 id="tarifHeureSup"
                 value={hour1}
-                step={.5}
+                step={0.5}
                 onChange={(e) => {
                   setHour1(e.target.value);
-                  updateTarif('tarifHeure', e.target.value);
+                  updateTarif("tarifHeure", e.target.value);
                 }}
               />
               €
@@ -199,28 +185,26 @@ function DashPlaces({
                 name="tarifHeureSup"
                 id="tarifHeureSup"
                 value={hour2}
-                step={.5}
+                step={0.5}
                 onChange={(e) => {
                   setHour2(e.target.value);
-                  updateTarif('tarifHoraireSpec', e.target.value);
+                  updateTarif("tarifHoraireSpec", e.target.value);
                 }}
               />
               €
             </div>
-            {userType === 'assMat' && (
+            {userType === "assMat" && (
               <div className="dashOptionsPrices">
-                <p title="Au delà de 45h/semaine">
-                  Heure majorée
-                </p>
+                <p title="Au delà de 45h/semaine">Heure majorée</p>
                 <input
                   type="number"
                   name="tarifHeureSup"
                   id="tarifHeureSup"
                   value={hour3}
-                  step={.5}
+                  step={0.5}
                   onChange={(e) => {
                     setHour3(e.target.value);
-                    updateTarif('tarifHeureSup', e.target.value);
+                    updateTarif("tarifHeureSup", e.target.value);
                   }}
                 />
                 €
@@ -231,7 +215,7 @@ function DashPlaces({
         <details>
           <summary>Vos options</summary>
           <div className="dashPlacesOptions">
-            {userType === 'assMat' && (
+            {userType === "assMat" && (
               <>
                 <div className="dashSwitchContainer">
                   Indemnité d'entretien
@@ -252,10 +236,10 @@ function DashPlaces({
                       type="number"
                       min={1}
                       value={indemn1}
-                      step={.5}
+                      step={0.5}
                       onChange={(e) => {
                         setIndemn1(e.target.value);
-                        updateIndemn('indemnEntretien', e.target.value);
+                        updateIndemn("indemnEntretien", e.target.value);
                       }}
                     />
                     €
@@ -280,10 +264,10 @@ function DashPlaces({
                       type="number"
                       min={1}
                       value={indemn2}
-                      step={.5}
+                      step={0.5}
                       onChange={(e) => {
                         setIndemn2(e.target.value);
-                        updateIndemn('indemnKm', e.target.value);
+                        updateIndemn("indemnKm", e.target.value);
                       }}
                     />
                     €
@@ -310,10 +294,10 @@ function DashPlaces({
                   type="number"
                   min={1}
                   value={indemn3}
-                  step={.5}
+                  step={0.5}
                   onChange={(e) => {
                     setIndemn3(e.target.value);
-                    updateIndemn('indemnRepas', e.target.value);
+                    updateIndemn("indemnRepas", e.target.value);
                   }}
                 />
                 €
@@ -324,48 +308,19 @@ function DashPlaces({
         <details>
           <summary>Vos activités</summary>
           <ul className="dashPlacesCheckboxes">
-            <li>
-              <input
-                type="checkbox"
-                id="check1"
-                defaultChecked={data.handi}
-                onChange={() => {
-                  updateOptions('handi', data.handi)
-                }}
-              />
-              <label htmlFor="check1">
-                J'accueille des enfants en situation de handicap
-              </label>
-            </li>
-            <li>
-              <input
-                type="checkbox"
-                id="check2"
-                defaultChecked={data.sorties}
-                onChange={() => {
-                  updateOptions('sorties', data.sorties)
-                }}
-              />
-              <label htmlFor="check2">Je propose des sorties</label>
-            </li>
-            <li>
-              <input
-                type="checkbox"
-                id="check3"
-                defaultChecked={data.bilingue}
-              />
-              <label htmlFor="check3">Je propose des activités bilingues</label>
-            </li>
-            <li>
-              <input
-                type="checkbox"
-                id="check4"
-                defaultChecked={data.eveil}
-              />
-              <label htmlFor="check4">
-                Je propose des activités musicales ou artistiques
-              </label>
-            </li>
+            {activitiesArray.map((a) => (
+              <li>
+                <input
+                  type="checkbox"
+                  id={a.id}
+                  defaultChecked={data[a.name]}
+                  onChange={() => {
+                    updateOptions(a.name, data[a.name]);
+                  }}
+                />
+                <label htmlFor={a.id}>{a.content}</label>
+              </li>
+            ))}
           </ul>
         </details>
       </section>

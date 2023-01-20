@@ -25,35 +25,36 @@
       border-radius: 10px;
       padding: 20px 4px 4px;
       margin: 0 4px;
-      border: 1px solid $grey;
       height: 50px;
       position: relative;
-      width: 205px;
+      width: 215px;
     }
 
     & input:focus {
       outline: 1.5px solid $third;
     }
 
-    & input:valid {
-      border: 2px solid $fifth;
+    & .input {
+      border: 1px solid $grey;
+
     }
 
-    & input:valid + label {
-      color: $fifth;
+    & .inputChecked {
+      border: 2px solid $green;
+    }
+
+    & .labelChecked {
+      color: $green;
     }
 
     .checkSymbol {
-      display: none;
-    }
-
-    & input:valid + label + p {
       position: absolute;
-      transform: translateX(170px) translateY(6px);
+      transform: translateX(180px) translateY(6px);
       font-size: 2rem;
-      color: $fifth;
+      color: $green;
       display: initial;
     }
+
 
     & label {
       position: absolute;
@@ -95,17 +96,15 @@
       margin-bottom: 0.5vh;
     }
 
-    & input[type="file"]:valid + label + p {
-      position: absolute;
-      right: 0;
-      top: 8px;
-      font-size: 2rem;
-      color: $fifth;
-      display: initial;
-    }
-
-    & input[type="file"]:valid + label {
-      display: none;
+    & input[type="file"]:valid {
+      & .checkSymbol {
+        position: absolute;
+        right: 0;
+        top: 8px;
+        font-size: 2rem;
+        color: $green;
+        display: initial;
+      }
     }
 
     & h5 {
@@ -120,16 +119,17 @@
   }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1000px) {
   .structure15 {
     & .inputContainer {
+
       & input[type="text"],
       & input[type="date"] {
         width: 80vw;
         max-width: 500px;
       }
 
-      & input:valid + label + p {
+      & input:valid+label+p {
         transform: translateX(69vw) translateY(6px);
       }
     }

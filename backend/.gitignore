@@ -3,3 +3,5 @@ node_modules
 database.js
 src/models/inscStructure.models.js
 public/uploads
+google-cloud-key.json
+uploads

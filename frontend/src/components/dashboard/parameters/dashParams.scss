@@ -1,0 +1,502 @@
+.dashParams {
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+
+  & h2 {
+    font-size: $h2;
+    font-weight: 500;
+    margin-left: 20px;
+
+    &::first-letter {
+      font-weight: 700;
+      color: $third;
+    }
+  }
+
+  & .dashParamsProfilContainer {
+    width: 80%;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+
+    & .dashParamsProfil {
+      display: inline-block;
+      position: relative;
+
+      & img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        pointer-events: none;
+        opacity: 1;
+        object-fit: cover;
+        border: 1px solid $third;
+      }
+
+      & input {
+        width: 100px;
+        height: 100px;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        cursor: pointer;
+      }
+    }
+
+    & .dashParamsName {
+      font-size: 50px;
+      font-weight: 500;
+      color: $third;
+    }
+
+    & .dashParamsType {
+      background-color: $third;
+      color: $white;
+      padding: 5px 10px;
+      border-radius: 50px;
+      font-weight: 700;
+      text-align: center;
+    }
+  }
+
+  & .dashParamsInfo {
+    & summary {
+      width: fit-content;
+      font-size: $h3;
+      font-weight: 500;
+      margin-bottom: 15px;
+      cursor: pointer;
+
+      &::marker {
+        color: $third;
+      }
+    }
+
+    & .dashParamsInfoList {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      justify-items: center;
+
+      & ul {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        & li {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+
+          & input {
+            border-radius: 5px;
+            padding: 25px 5px 5px;
+            margin: 0 5px;
+            border: 1px solid $third;
+            height: 50px;
+            width: 32vw;
+            outline: none;
+          }
+
+          & label {
+            position: absolute;
+            z-index: 2;
+            transform: translateY(6px) translateX(10px);
+            font-weight: 800;
+            color: $third;
+          }
+        }
+      }
+    }
+
+    & .dashParamsInfoText {
+      width: 70%;
+      margin: 15px auto;
+      position: relative;
+
+      & textarea {
+        width: 100%;
+        border-radius: 5px;
+        padding: 25px 5px 5px;
+        margin: 0 5px;
+        border: 1px solid $third;
+        height: 150px;
+        outline: none;
+        resize: none;
+      }
+
+      & label {
+        position: absolute;
+        z-index: 2;
+        transform: translateY(6px) translateX(10px);
+        font-weight: 800;
+        color: $third;
+      }
+    }
+
+    & .dashParamsInfoBtn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      & button {
+        padding: 5px 15px;
+        background-color: $third;
+        color: $white;
+        font-size: $h3;
+        font-weight: 500;
+        border: 1px solid transparent;
+        border-radius: 50px;
+        transition: 0.3s ease-in-out;
+
+        &:hover {
+          background: transparent;
+          color: $third;
+          border: 1px solid $third;
+        }
+      }
+    }
+  }
+
+  & .dashParamsImages {
+    & summary {
+      width: fit-content;
+      font-size: $h3;
+      font-weight: 500;
+      margin-bottom: 15px;
+      cursor: pointer;
+
+      &::marker {
+        color: $third;
+      }
+    }
+
+    & ul {
+      width: 90%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+
+      & li {
+        display: inline-block;
+        position: relative;
+        height: 200px;
+
+        & img {
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          opacity: 1;
+          border-radius: 5px;
+          object-fit: cover;
+          border: 1px solid $third;
+        }
+
+        & input {
+          width: 100%;
+          opacity: 0;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  & .dashParamsDocs {
+    & summary {
+      width: fit-content;
+      font-size: $h3;
+      font-weight: 500;
+      margin-bottom: 15px;
+      cursor: pointer;
+
+      &::marker {
+        color: $third;
+      }
+    }
+
+    & ul {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      justify-items: stretch;
+      align-items: stretch;
+      gap: 20px;
+
+      & li {
+        width: 100%;
+
+        & .dashParamsDocsContainer {
+          position: relative;
+
+          & label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            border: 1px solid $third;
+            border-bottom: none;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            color: $third;
+            font-weight: 500;
+            font-size: $h4;
+            text-align: center;
+            cursor: pointer;
+          }
+
+          & input {
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            cursor: pointer;
+          }
+        }
+
+        & a {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          height: 30px;
+          border: 1px solid $third;
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+          text-align: center;
+          background-color: $third;
+          color: $white;
+          font-weight: 500;
+          transition: 0.3s ease-in-out;
+
+          &:hover {
+            background-color: transparent;
+            color: $third;
+          }
+        }
+      }
+    }
+  }
+
+  & .dashParamsDanger {
+    & summary {
+      width: fit-content;
+      font-size: $h3;
+      font-weight: 500;
+      color: $seventh;
+      margin-bottom: 15px;
+      cursor: pointer;
+
+      &::marker {
+        color: $seventh;
+      }
+    }
+
+    & form {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 10px;
+
+      & ul {
+        display: flex;
+        justify-content: space-evenly;
+        gap: 15px;
+
+        & li {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+
+          & input {
+            border-radius: 5px;
+            padding: 25px 5px 5px;
+            margin: 0 5px;
+            border: 1px solid $third;
+            height: 50px;
+            width: 32vw;
+            outline: none;
+          }
+
+          & label {
+            position: absolute;
+            transform: translateY(6px) translateX(10px);
+            font-weight: 800;
+            color: $third;
+          }
+        }
+      }
+
+      & button {
+        padding: 5px 15px;
+        background-color: $third;
+        color: $white;
+        font-size: $h3;
+        font-weight: 500;
+        border: 1px solid transparent;
+        border-radius: 50px;
+        transition: 0.3s ease-in-out;
+
+        &:hover {
+          background: transparent;
+          color: $third;
+          border: 1px solid $third;
+        }
+      }
+    }
+
+    & hr {
+      width: 80%;
+      margin: 20px auto;
+      height: 3px;
+      border-radius: 50px;
+    }
+
+    & .dashParamsDangerDelete {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      & button {
+        padding: 5px 15px;
+        background-color: $seventh;
+        color: $white;
+        border: 1px solid transparent;
+        border-radius: 50px;
+        font-size: $h4;
+        font-weight: 500;
+        transition: 0.3s ease-in-out;
+
+        &:hover {
+          color: $seventh;
+          background: transparent;
+          border: 1px solid $seventh;
+        }
+      }
+    }
+  }
+}
+
+.dashParamsFormats {
+  font-size: $small;
+  margin-bottom: 15px;
+  line-height: 1.2;
+
+  & span {
+    font-weight: 500;
+    color: $third;
+  }
+}
+
+.deleteContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(50%, 50%);
+  padding: 20px;
+  border: 1px solid $seventh;
+  border-radius: 5px;
+  background-color: $white;
+
+  & .deleteContainerClose {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: $h3;
+    font-weight: 500;
+    background: none;
+    transition: 0.3s ease-in-out;
+
+    &:hover {
+      color: $seventh;
+    }
+  }
+
+  & .deleteContainerHeader {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    & img {
+      width: 50px;
+      height: 50px;
+    }
+
+    & h2 {
+      font-size: $h1;
+      color: $third;
+      font-weight: 700;
+    }
+  }
+
+  & .deleteContainerText {
+    width: 80%;
+    margin: 20px auto;
+    text-align: center;
+    font-size: $h4;
+    line-height: 1.3;
+
+    & span {
+      font-weight: 500;
+      color: $seventh;
+    }
+  }
+
+  & .deleteContainerInput {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
+
+    & input {
+      width: 80%;
+      margin: 0 auto;
+      padding: 3px;
+      border: 1px solid $seventh;
+      border-radius: 5px;
+      outline: none;
+    }
+
+    & .deleteContainerBtn {
+      padding: 5px 15px;
+      background-color: $seventh;
+      color: $white;
+      font-weight: 500;
+      font-size: $h3;
+      border: 1px solid transparent;
+      border-radius: 50px;
+      transition: 0.3s ease-in-out;
+
+      &:hover {
+        border: 1px solid $seventh;
+        color: $seventh;
+        background: transparent;
+      }
+    }
+  }
+}

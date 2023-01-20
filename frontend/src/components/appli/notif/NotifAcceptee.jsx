@@ -1,9 +1,12 @@
 import React from "react";
 import logoBlanc from "@assets/logo-blanc.svg";
 import avatar1 from "@assets/avatar1.svg";
+import { AiOutlineUser } from "react-icons/ai";
 import PropTypes from "prop-types";
 
-function NotifAcceptee({ setCompo }) {
+function NotifAcceptee({ setCompo, photoFamille }) {
+  // prendre l'image creche
+
   return (
     <div className="notif-container-grad">
       <div className="notif-accepte">
@@ -18,7 +21,11 @@ function NotifAcceptee({ setCompo }) {
         </div>
         <img src={logoBlanc} alt="logo-blanc" className="logo" />
         <div className="avatars">
-          <img src={avatar1} alt="img profil" className="avatar" />
+          {photoFamille ? (
+            <img src={photoFamille} alt="avatar" className="avatar" />
+          ) : (
+            <AiOutlineUser className="avatar" />
+          )}
           <img src={avatar1} alt="img creche" className="avatar" />
         </div>
 
@@ -42,6 +49,7 @@ function NotifAcceptee({ setCompo }) {
 
 NotifAcceptee.propTypes = {
   setCompo: PropTypes.func.isRequired,
+  photoFamille: PropTypes.string.isRequired,
 };
 
 export default NotifAcceptee;

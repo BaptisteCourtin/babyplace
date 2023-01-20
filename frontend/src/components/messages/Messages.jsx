@@ -9,12 +9,13 @@ function Messages({ nom, prenom, email, photoProfil, structureId }) {
   const [room, setRoom] = useState("");
   const [title, setTitle] = useState("");
   const [strucData, setStrucData] = useState([]);
-  const [selected, setSelected] = useState(false)
+  const [selected, setSelected] = useState(false);
 
   const getStructureForMess = () => {
     axios
-      .get("http://localhost:5000/structure/all")
+      .get("http://localhost:5000/famille/all")
       .then((ret) => {
+        console.log(ret.data);
         setStrucData(ret.data);
       })
       .catch((err) => {
@@ -23,12 +24,18 @@ function Messages({ nom, prenom, email, photoProfil, structureId }) {
   };
 
   const joinRoom = async () => {
-    console.log(room);
     await socket.emit("join_room", room);
+    // socket.on("is_logged", (id) => {
+    //   if (id != 0) {
+    //     console.log(`user ${id} is logged`);
+    //     setLogged(0);
+    //   }
+    // })
   };
 
   useEffect(() => {
     getStructureForMess();
+    socket.emit("auth", structureId);
   }, []);
 
   return (
@@ -48,20 +55,27 @@ function Messages({ nom, prenom, email, photoProfil, structureId }) {
           <div className="salonsMessages">
             {strucData &&
               strucData
-                .filter((f) => !f.nom.includes(nom))
+                // .filter((f) => !f.email.includes(email))
                 .map((element) => (
-                  <li className={selected && element.nom === title ? "selected contactList" : "contactList"} key={element.crecheId}>
+                  <li
+                    className={
+                      selected && element.email === title
+                        ? "selected contactList"
+                        : "contactList"
+                    }
+                    key={element.familleId}
+                  >
                     <button
                       type="button"
                       onClick={() => {
                         setSelected(true);
-                        setRoom(structureId + element.crecheId);
-                        setTitle(element.nom);
+                        setRoom(structureId + element.familleId);
+                        setTitle(element.email);
                       }}
                       id="btn-affiche-con"
                     >
-                      {element.photoProfil && <img src={element.photoProfil} />}
-                      {element.nom}
+                      {/* {element.photoProfil && <img src={element.photoProfil} />} */}
+                      {element.email}
                     </button>
                   </li>
                 ))}

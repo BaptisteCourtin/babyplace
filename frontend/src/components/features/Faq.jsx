@@ -97,8 +97,8 @@ function Faq(props) {
           <p>
             Nous sommes ouverts à de nombreuses formes de partenariats, à
             condition que l'internaute soit respecté. Le{" "}
-            <HashLink to="/contact#contact">formulaire de contact</HashLink> vous
-            permet de nous décrire le partenariat que vous recherchez.
+            <HashLink to="/contact#contact">formulaire de contact</HashLink>{" "}
+            vous permet de nous décrire le partenariat que vous recherchez.
           </p>
 
           <h4 id="7">

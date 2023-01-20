@@ -1,9 +1,5 @@
 .dashNav {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 15vw;
+  grid-area: navbar;
   background: $gradient;
   padding: 15px;
   color: $white;
@@ -40,10 +36,12 @@
     gap: 25px;
 
     & li {
+      padding: 5px 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 5px;
+      border-radius: 50px;
 
       & button {
         border-bottom: 1px solid transparent;
@@ -55,6 +53,17 @@
         }
       }
     }
+
+    & .selected {
+      background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
+      color: $third;
+
+      & button {
+        &:hover {
+          border-bottom: 1px solid transparent;
+        }
+      }
+    }
   }
 
   & .dashNavParams {
@@ -62,7 +71,7 @@
     align-items: flex-start;
     justify-content: center;
     flex-direction: column;
-    gap: 25px;
+    gap: 15px;
     position: absolute;
     bottom: 20px;
     font-weight: 500;

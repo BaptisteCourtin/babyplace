@@ -3,6 +3,8 @@ const fs = require("fs");
 const path = require("path");
 const cors = require("cors");
 const router = require("./router");
+const bodyParser = require("body-parser");
+const ws = require("./services/messagerie.service");
 
 const app = express();
 
@@ -22,8 +24,15 @@ app.use(express.static(path.join(__dirname, "../public")));
 // Serve REACT APP
 app.use(express.static(path.join(__dirname, "..", "..", "frontend", "dist")));
 
+app.disable("x-powered-by");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 // API routes
 app.use(router);
+
+// Start websocket
+ws.open();
 
 // Redirect all requests to the REACT app
 const reactIndexFile = path.join(

@@ -20,11 +20,14 @@ const tabNotif = [
     texte: "Votre demande de réservation à XXX a été acceptée",
     compo: 3,
   },
-  {
-    texte: "juste un test pour payer",
-    compo: 4,
-  },
+  // {
+  //   texte: "juste un test pour payer",
+  //   compo: 4,
+  // },
 ];
+
+// ---
+// get dans reservation -> refused ET approved
 
 function NotifBase({ setCompo }) {
   return (

@@ -26,13 +26,17 @@
   }
 
   #contact {
+    #question {
+      margin-top: 20px;
+    }
+
     .formContact {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin: 40px 60px;
+      margin: 20px 30px;
       border: solid 1px $third;
-      padding: 60px 80px;
+      padding: 30px 40px;
       border-radius: 25px;
 
       .formContainer {
@@ -103,9 +107,31 @@
           }
         }
 
+        .divObject {
+          grid-column: 1 / 3;
+          grid-row: 3;
+          display: flex;
+          flex-direction: column;
+          height: 80px;
+
+          .labelForm {
+            width: 100%;
+            height: 30px;
+            font-weight: 500;
+          }
+
+          .object-select {
+            background: none;
+            height: 30px;
+            border: solid 1px $grey;
+            border-radius: 10px;
+            padding: 0px 15px;
+          }
+        }
+
         .divMessage {
           grid-column: 1/3;
-          grid-row: 3;
+          grid-row: 4;
           display: flex;
           flex-direction: column;
           height: auto;
@@ -127,13 +153,17 @@
 
         .policyTextDiv {
           grid-column: 1/3;
-          grid-row: 4;
+          grid-row: 5;
           margin: 20px;
           display: inline;
 
           p {
             font-size: 1.25em;
             line-height: 1.5em;
+
+            #checkboxPolicy {
+              transform: translateY(-2px);
+            }
 
             span {
               font-weight: 600;
@@ -160,12 +190,18 @@
         font-weight: 500;
         transition: 0.3s ease-in-out;
 
-        &:hover {
-          background: none;
-          border: 1px solid $third;
-          color: $second;
-        }
+        
       }
     }
+  }
+
+  #obligatoire {
+    color: $fourth;
+  }
+
+  #obligatoireText {
+    color: $fourth;
+    font-size: smaller;
+    margin-top: 10px;
   }
 }

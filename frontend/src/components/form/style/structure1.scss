@@ -20,22 +20,22 @@
     }
 
     & input:valid {
-      border: 2px solid $fifth;
+      border: 2px solid $green;
     }
 
     & input:valid + label {
-      color: $fifth;
+      color: $green;
     }
 
     .checkSymbol {
       display: none;
     }
 
-    & input:valid + label + p {
+    & input:valid + label + .checkSymbol {
       position: absolute;
       transform: translateX(29vw) translateY(6px);
       font-size: 2rem;
-      color: $fifth;
+      color: $green;
       display: initial;
     }
 
@@ -90,7 +90,7 @@
   }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1000px) {
   .structure1 {
     & .inputsContainer {
       & input[type="text"],
@@ -99,8 +99,8 @@
         max-width: 500px;
       }
 
-      & input:valid + label + p {
-        transform: translateX(69vw) translateY(6px);
+      & input:valid + label + .checkSymbol {
+        transform: translateX(clamp(10px, 69vw, 450px)) translateY(6px);
       }
     }
 

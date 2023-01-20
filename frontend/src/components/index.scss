@@ -34,7 +34,7 @@
 @import "../components/appli/menu/cardFavPlat.scss";
 @import "../components/appli/filtres/toggle.scss";
 @import "../components/appli/filtres/check.scss";
-@import "../components/appli/filtres/appliPlaces.scss";
+@import "../components/appli/reservation/appCalendar.scss";
 
 // --- form ---
 @import "../components/form/style/formStructure.scss";
@@ -53,9 +53,13 @@
 @import "../components/form/style/structure14.scss";
 @import "../components/form/style/structure15.scss";
 @import "../components/form/style/structure16.scss";
+@import "../style/waitAdmin.scss";
 
 // --- Messages ---
 @import "../components/messages/messages.scss";
+@import "../components/messages/forApp/messagesForApp.scss";
+@import "../components/dashboard/admin/messageAdmin.scss";
+@import "../components/dashboard/admin/modalMessageAdmin.scss";
 
 // --- Features ---
 @import "../components/features/styles/footerLite.scss";

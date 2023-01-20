@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useLocation } from "react-router-dom";
 import ChoixDates from "@components/appli/reservation/ChoixDates";
 import DemandeResa from "@components/appli/reservation/DemandeResa";
@@ -25,9 +26,29 @@ function AppliReservation() {
     indemnRepas,
   } = data;
 
-  const [heureMin, setHeureMin] = useState(0);
-  const [heureMax, setHeureMax] = useState(24);
+  // --- get calendar par structureId ---
+  const [dataCalendarId, setDataCalendarId] = useState([]);
+
+  const getCalendar = () => {
+    axios
+      .get(`${import.meta.env.VITE_PATH}/calendrier/whereMoins/${structureId}`)
+      .then((res) => {
+        setDataCalendarId(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  useEffect(() => {
+    getCalendar();
+  }, []);
+
+  // --- les infos à passer ---
+
+  const [heureMin, setHeureMin] = useState("24:00");
+  const [heureMax, setHeureMax] = useState("00:00");
   const [jour, setJour] = useState("Lundi");
+  const [isOccasionnel, setIsOccasionnel] = useState(0);
 
   const [compo, setCompo] = useState(0);
   const choixComposant = () => {
@@ -38,6 +59,7 @@ function AppliReservation() {
           heureMin={heureMin}
           heureMax={heureMax}
           jour={jour}
+          isOccasionnel={isOccasionnel}
           nom={nom}
           nomUsage={nomUsage}
           nomNaissance={nomNaissance}
@@ -69,6 +91,11 @@ function AppliReservation() {
     return (
       <ChoixDates
         setCompo={setCompo}
+        heureMax={heureMax}
+        heureMin={heureMin}
+        jour={jour}
+        setIsOccasionnel={setIsOccasionnel}
+        isOccasionnel={isOccasionnel}
         setHeureMin={setHeureMin}
         setHeureMax={setHeureMax}
         setJour={setJour}
@@ -78,6 +105,7 @@ function AppliReservation() {
         prenom={prenom}
         photoProfil={photoProfil}
         dataHorairesId={dataHorairesId}
+        dataCalendarId={dataCalendarId}
       />
     );
   };

@@ -1,21 +1,47 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { AiFillStar } from "react-icons/ai";
+import { AiFillCloseCircle, AiFillStar } from "react-icons/ai";
 
 function CardFavPlat({ each }) {
-  const { nom, note, image, texte } = each;
+  const {
+    nom,
+    photoProfil,
+    avisCom,
+    avisProprete,
+    avisSecurite,
+    avisEveil,
+    avisHoraires,
+  } = each;
+
+  const [nbStarMoyen, setNbStarMoyen] = useState(0.5);
+
+  const staring = () => {
+    setNbStarMoyen(
+      (
+        (avisCom + avisProprete + avisSecurite + avisEveil + avisHoraires) /
+        5
+      ).toFixed(1)
+    );
+  };
+
+  useEffect(() => {
+    staring();
+  }, []);
+
   return (
     <div className="card-fav-plat">
-      <img src={image} alt="img" />
+      <img src={photoProfil} alt="img" />
       <div className="texte">
         <h4>{nom}</h4>
-        <p>{texte}</p>
       </div>
-      {note ? (
+      {avisCom ? (
         <p className="note">
-          {note} <AiFillStar />
+          {nbStarMoyen} <AiFillStar />
         </p>
       ) : null}
+      <button id="card-fav-plat-closeIcon" onClick="">
+        <AiFillCloseCircle style={{ color: "red" }} />
+      </button>
     </div>
   );
 }

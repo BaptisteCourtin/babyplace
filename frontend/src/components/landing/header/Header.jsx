@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import headerImg from "@assets/landing page/image1.svg";
 import { useNavigate } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 
 function Header({ userType }) {
   const navigate = useNavigate();
@@ -44,7 +45,9 @@ function Header({ userType }) {
           Communication directe et simplifiée avec les parents
           <br />
         </p>
-        <button type="button">En savoir plus</button>
+        <button type="button">
+          <HashLink to="/contact#contact">En savoir plus</HashLink>
+        </button>
       </div>
       <img src={headerImg} alt="" />
     </header>

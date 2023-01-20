@@ -1,9 +1,8 @@
 const dashboardModels = require('../models/dashboard.models');
 
 const updateHours = async (req, res) => {
-    const { heureMin, heureMax, structureId, jourId } = req.body
-
-    const result = await dashboardModels.updateHours(heureMin, heureMax, structureId, jourId)
+    const { id, value, state } = req.body
+    const result = await dashboardModels.updateHours(id, value, state)
     if (result.affectedRows === 0) {
         res.status(404).send("Not found")
     } else {
@@ -33,7 +32,6 @@ const updateIndemn = async (req, res) => {
 
 const updateOptions = async (req, res) => {
     const { options, optionsValue, id } = req.body
-    console.log(req.body)
     const result = await dashboardModels.updateOptions(options, optionsValue, id)
     if (result.affectedRows === 0) {
         res.status(404).send("Not found")

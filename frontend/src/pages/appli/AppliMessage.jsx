@@ -1,40 +1,46 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import NavbarApp from "@components/appli/navbar/NavbarApp";
 import ProfilPlat from "@components/appli/ProfilPlat";
 import CardFavPlat from "@components/appli/menu/CardFavPlat";
-import imgCreche from "@assets/img-time.svg";
-
-const tabFav = [
-  {
-    nom: "creche nb 1",
-    note: 4.8,
-    image: imgCreche,
-    texte: "description 1 c'est un peu long afin d'overflow",
-  },
-  {
-    nom: "creche nb 2",
-    note: 2,
-    image: imgCreche,
-    texte: "description 2",
-  },
-  {
-    nom: "creche nb 3",
-    note: 3.5,
-    image: imgCreche,
-    texte: "",
-  },
-];
+import axios from "axios";
+import { NavLink } from "react-router-dom";
 
 function AppliMessage() {
+  const [strucData, setStrucData] = useState([]);
+
+  const getStructureForMess = () => {
+    axios
+      .get(`${import.meta.env.VITE_PATH}/structure/all`)
+      .then((ret) => {
+        console.log(ret.data);
+        setStrucData(ret.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  // const joinRoom = async () => {
+  //   console.log(room);
+  //   await socket.emit("join_room", room);
+  // };
+
+  useEffect(() => {
+    getStructureForMess();
+  }, []);
+
   return (
     <div className="appli-message">
       <ProfilPlat />
 
       <main>
-        {tabFav.map((each) => (
-          <CardFavPlat each={each} />
+        {strucData.map((each) => (
+          <NavLink to="/appli/message/room">
+            <CardFavPlat each={each} />
+          </NavLink>
         ))}
       </main>
+
       <NavbarApp />
     </div>
   );

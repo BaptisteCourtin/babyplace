@@ -1,8 +1,9 @@
 .connexion,
 .enfant,
 .parent,
-.inscription,
-.moyens-paiements {
+.moyens-paiements,
+.new-confiance,
+.perso-confiance {
   form {
     display: flex;
     flex-direction: column;
@@ -12,7 +13,7 @@
     width: 90%;
     flex-grow: 1;
 
-    label:not(.check) {
+    label:not(.check):not(.toggle) {
       position: relative;
       width: 100%;
 
@@ -89,5 +90,11 @@
         top: 17px;
       }
     }
+  }
+}
+
+.moyens-paiements {
+  p {
+    text-align: center;
   }
 }

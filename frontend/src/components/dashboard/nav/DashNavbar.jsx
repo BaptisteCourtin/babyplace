@@ -13,20 +13,24 @@ import {
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function DashNavbar({ setToggle, structureId, setDashPage }) {
+function DashNavbar({ toggle, setToggle, structureId }) {
   const navigate = useNavigate();
 
-  const logout = () => {
-    axios.put(`http://localhost:5000/logout/${structureId}`, {
-      id: structureId,
-      token: null,
-      tokenStart: null,
-    });
-    navigate("/");
+  const logout = async () => {
+    try {
+      await axios.put(`${import.meta.env.VITE_PATH}/logout/${structureId}`, {
+        id: structureId,
+        token: null,
+        tokenStart: null,
+      });
+      navigate("/");
+    } catch (err) {
+      console.error(err.message);
+    }
   };
 
   return (
-    <section className="dashNav">
+    <aside className="dashNav">
       <div className="dashNavLogo">
         <img src={logoWhite} alt="" />
         <h2>
@@ -34,49 +38,45 @@ function DashNavbar({ setToggle, structureId, setDashPage }) {
         </h2>
       </div>
       <ul className="dashNavList">
-        <li>
+        <li className={toggle === 1 && "selected"}>
           <MdOutlineFormatListBulleted />
           <button
             type="button"
             onClick={() => {
               setToggle(1);
-              setDashPage(1);
             }}
           >
             Demandes
           </button>
         </li>
-        <li>
+        <li className={toggle === 2 && "selected"}>
           <MdOutlineCalendarToday />
           <button
             type="button"
             onClick={() => {
               setToggle(2);
-              setDashPage(2);
             }}
           >
             Agenda
           </button>
         </li>
-        <li>
+        <li className={toggle === 3 && "selected"}>
           <MdAccessTime />
           <button
             type="button"
             onClick={() => {
               setToggle(3);
-              setDashPage(3);
             }}
           >
             Horaires
           </button>
         </li>
-        <li>
+        <li className={toggle === 4 && "selected"}>
           <MdOutlineMarkAsUnread />
           <button
             type="button"
             onClick={() => {
               setToggle(4);
-              setDashPage(4);
             }}
           >
             Messagerie
@@ -88,7 +88,6 @@ function DashNavbar({ setToggle, structureId, setDashPage }) {
           type="button"
           onClick={() => {
             setToggle(5);
-            setDashPage(5);
           }}
         >
           <MdOutlineSettings />
@@ -99,7 +98,7 @@ function DashNavbar({ setToggle, structureId, setDashPage }) {
           Déconnexion
         </button>
       </div>
-    </section>
+    </aside>
   );
 }
 

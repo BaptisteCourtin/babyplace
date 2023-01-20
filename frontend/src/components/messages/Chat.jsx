@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Scrolltobottom from "react-scroll-to-bottom";
 import axios from "axios";
 import moment from "moment";
+import { toast } from "react-hot-toast";
 
 function Chat({ socket, username, room, title, joinRoom }) {
   const [currentMessage, setCurrentMessage] = useState("");
@@ -18,6 +19,7 @@ function Chat({ socket, username, room, title, joinRoom }) {
         date,
       })
       .then((res) => {
+        logged;
         console.log(res.data);
       })
       .catch((err) => {
@@ -34,8 +36,9 @@ function Chat({ socket, username, room, title, joinRoom }) {
         time: `${new Date(Date.now()).getHours()}:${new Date(
           Date.now()
         ).getMinutes()}`,
-        date: `${new Date(Date.now()).getFullYear()} -${new Date(Date.now()).getMonth() + 1
-          } -${new Date(Date.now()).getUTCDate()} `,
+        date: `${new Date(Date.now()).getFullYear()} -${
+          new Date(Date.now()).getMonth() + 1
+        } -${new Date(Date.now()).getUTCDate()} `,
       };
       saveMessage(messageData);
       await socket.emit("send_message", messageData);
@@ -50,20 +53,20 @@ function Chat({ socket, username, room, title, joinRoom }) {
     });
   }, [socket]);
 
-  const getMessagesFromRoom = () => {
-    axios
-      .get("http://localhost:5000/messages/recup", {
-        headers: {
-          room,
-        },
-      })
-      .then((ret) => {
-        console.warn(ret.data);
-        setMessageListData(ret.data[0]);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+  const getMessagesFromRoom = async () => {
+    try {
+      const result = await axios.get(
+        `http://localhost:5000/messages/recup/${room}`,
+        {
+          headers: {
+            room,
+          },
+        }
+      );
+      setMessageListData(result.data);
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
 
   useEffect(() => {
