@@ -1,19 +1,19 @@
-import React from 'react'
+import React from "react";
 
 function ClosedDashStatus({ fc, updateStatusOpen }) {
-    return (
-        <>
-            <p>Vous ne travaillez pas 😀</p>
-            <button
-                className="agendaPlacesWork"
-                onClick={() => {
-                    updateStatusOpen(fc.calendrierId);
-                }}
-            >
-                Ouvrir
-            </button>
-        </>
-    )
+  return (
+    <>
+      <p>Vous ne travaillez pas 😀</p>
+      <button
+        className="agendaPlacesWork"
+        onClick={() => {
+          updateStatusOpen(fc.calendrierId);
+        }}
+      >
+        Ouvrir
+      </button>
+    </>
+  );
 }
 
-export default ClosedDashStatus
+export default ClosedDashStatus;

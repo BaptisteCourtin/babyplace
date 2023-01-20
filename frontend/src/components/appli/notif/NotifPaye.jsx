@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import TheCard from "../menu/TheCard";
 import { toast } from "react-hot-toast";
+import TheCard from "../menu/TheCard";
 
 function NotifPaye({ setCompo }) {
   const handlePaiement = () => {

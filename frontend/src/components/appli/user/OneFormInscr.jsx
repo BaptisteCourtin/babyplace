@@ -1,6 +1,6 @@
 import React from "react";
 
-const OneFormInscr = ({ init, src, nomDoc, handleSupp, p, who }) => {
+function OneFormInscr({ init, src, nomDoc, handleSupp, p, who }) {
   return (
     <div className="champ">
       <p>{p}</p>
@@ -31,6 +31,6 @@ const OneFormInscr = ({ init, src, nomDoc, handleSupp, p, who }) => {
       )}
     </div>
   );
-};
+}
 
 export default OneFormInscr;

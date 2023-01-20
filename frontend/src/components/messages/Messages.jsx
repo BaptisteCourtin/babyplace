@@ -33,12 +33,10 @@ function Messages({ nom, prenom, email, photoProfil, structureId }) {
     // })
   };
 
-
   useEffect(() => {
     getStructureForMess();
     socket.emit("auth", structureId);
   }, []);
-
 
   return (
     <div className="messages">
@@ -59,7 +57,14 @@ function Messages({ nom, prenom, email, photoProfil, structureId }) {
               strucData
                 // .filter((f) => !f.email.includes(email))
                 .map((element) => (
-                  <li className={selected && element.email === title ? "selected contactList" : "contactList"} key={element.familleId}>
+                  <li
+                    className={
+                      selected && element.email === title
+                        ? "selected contactList"
+                        : "contactList"
+                    }
+                    key={element.familleId}
+                  >
                     <button
                       type="button"
                       onClick={() => {

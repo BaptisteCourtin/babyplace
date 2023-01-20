@@ -40,14 +40,10 @@ function LoginParams() {
           <Link to="/">Paramètres de réservation</Link>
         </details>
       </div>
-      <Link
-        className="loginParamsBtn"
-        to="/dashboard"
-        state={{ token }}
-      >
+      <Link className="loginParamsBtn" to="/dashboard" state={{ token }}>
         Continuer
       </Link>
-    </section >
+    </section>
   );
 }
 

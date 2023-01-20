@@ -1,22 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Proptypes from "prop-types";
-import { useState, useEffect } from "react";
 import Axios from "axios";
 
 function Structure2({ inputRef, structureId, updateFields }) {
-  const [imageSrc, setImageSrc] = useState('https://via.placeholder.com/150.png?text=photo');
+  const [imageSrc, setImageSrc] = useState(
+    "https://via.placeholder.com/150.png?text=photo"
+  );
   const getPicture = () => {
-    Axios.get(`${import.meta.env.VITE_PATH}/photoProfil?id=${structureId}`, [structureId])
+    Axios.get(`${import.meta.env.VITE_PATH}/photoProfil?id=${structureId}`, [
+      structureId,
+    ])
       .then((result) => {
         if (result.data.length > 0) {
-          setImageSrc(`${import.meta.env.VITE_PATH}${result.data[0].photoProfil}`);
-          updateFields({ imageProfilSrc: result.data[0].photoProfil })
+          setImageSrc(
+            `${import.meta.env.VITE_PATH}${result.data[0].photoProfil}`
+          );
+          updateFields({ imageProfilSrc: result.data[0].photoProfil });
         }
       })
       .catch((err) => {
         console.error(err);
-      })
-  }
+      });
+  };
 
   const updateImg = (e) => {
     // e.files contient un objet FileList
@@ -38,8 +43,8 @@ function Structure2({ inputRef, structureId, updateFields }) {
     }
   };
   useEffect(() => {
-    getPicture()
-  }, [])
+    getPicture();
+  }, []);
   return (
     <div className="structure2">
       <h4>Choisir une photo de profil :</h4>
@@ -64,7 +69,8 @@ function Structure2({ inputRef, structureId, updateFields }) {
   );
 }
 Structure2.propTypes = {
-  imageProfilSrc: Proptypes.string,
+  inputRef: Proptypes.node,
+  structureId: Proptypes.string,
   updateFields: Proptypes.func,
 };
 export default Structure2;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import axios from "axios";
-import OneFormInscr from "./OneFormInscr";
 import FamilleContext from "@components/context/FamilleContext";
+import OneFormInscr from "./OneFormInscr";
 
 function Inscription() {
   const { familleId } = useContext(FamilleContext);
@@ -144,7 +144,7 @@ function Inscription() {
 
     if (num === 1) {
       if (docJustifRevenus1Src.current !== null) {
-        let formData = new FormData();
+        const formData = new FormData();
         formData.append("file", docJustifRevenus1Src.current.files[0]);
         axios
           .post(
@@ -170,7 +170,7 @@ function Inscription() {
           });
       }
       if (docDeclaRevenus1Src.current !== null) {
-        let formData = new FormData();
+        const formData = new FormData();
         formData.append("file", docDeclaRevenus1Src.current.files[0]);
         axios
           .post(
@@ -196,7 +196,7 @@ function Inscription() {
           });
       }
       if (docSituationPro1Src.current !== null) {
-        let formData = new FormData();
+        const formData = new FormData();
         formData.append("file", docSituationPro1Src.current.files[0]);
         axios
           .post(
@@ -222,7 +222,7 @@ function Inscription() {
           });
       }
       if (docJustifDom1Src.current !== null) {
-        let formData = new FormData();
+        const formData = new FormData();
         formData.append("file", docJustifDom1Src.current.files[0]);
         axios
           .post(
@@ -248,7 +248,7 @@ function Inscription() {
           });
       }
       if (numCaf1Src.current !== null) {
-        let formData = new FormData();
+        const formData = new FormData();
         formData.append("file", numCaf1Src.current.files[0]);
         axios
           .post(
@@ -274,7 +274,7 @@ function Inscription() {
           });
       }
       if (numSecu1Src.current !== null) {
-        let formData = new FormData();
+        const formData = new FormData();
         formData.append("file", numSecu1Src.current.files[0]);
         axios
           .post(
@@ -303,7 +303,7 @@ function Inscription() {
     // ---
     else if (num === 2) {
       if (docJustifRevenus2Src.current !== null) {
-        let formData = new FormData();
+        const formData = new FormData();
         formData.append("file", docJustifRevenus2Src.current.files[0]);
         axios
           .post(
@@ -329,7 +329,7 @@ function Inscription() {
           });
       }
       if (docDeclaRevenus2Src.current !== null) {
-        let formData = new FormData();
+        const formData = new FormData();
         formData.append("file", docDeclaRevenus2Src.current.files[0]);
         axios
           .post(
@@ -355,7 +355,7 @@ function Inscription() {
           });
       }
       if (docSituationPro2Src.current !== null) {
-        let formData = new FormData();
+        const formData = new FormData();
         formData.append("file", docSituationPro2Src.current.files[0]);
         axios
           .post(
@@ -381,7 +381,7 @@ function Inscription() {
           });
       }
       if (docJustifDom2Src.current !== null) {
-        let formData = new FormData();
+        const formData = new FormData();
         formData.append("file", docJustifDom2Src.current.files[0]);
         axios
           .post(
@@ -407,7 +407,7 @@ function Inscription() {
           });
       }
       if (numCaf2Src.current !== null) {
-        let formData = new FormData();
+        const formData = new FormData();
         formData.append("file", numCaf2Src.current.files[0]);
         axios
           .post(
@@ -433,7 +433,7 @@ function Inscription() {
           });
       }
       if (numSecu2Src.current !== null) {
-        let formData = new FormData();
+        const formData = new FormData();
         formData.append("file", numSecu2Src.current.files[0]);
         axios
           .post(
@@ -467,7 +467,7 @@ function Inscription() {
     e.preventDefault();
     // que des if car pas obliger de tous mettre d'un coup
     if (docAssurParentSrc.current !== null) {
-      let formData = new FormData();
+      const formData = new FormData();
       console.log(docAssurParentSrc.current.files[0]);
       formData.append("file", docAssurParentSrc.current.files[0]);
       axios
@@ -494,7 +494,7 @@ function Inscription() {
         });
     }
     if (docRibSrc.current !== null) {
-      let formData = new FormData();
+      const formData = new FormData();
       formData.append("file", docRibSrc.current.files[0]);
       axios
         .post(
@@ -520,7 +520,7 @@ function Inscription() {
         });
     }
     if (docAutoImageSrc.current !== null) {
-      let formData = new FormData();
+      const formData = new FormData();
       formData.append("file", docAutoImageSrc.current.files[0]);
       axios
         .post(
@@ -546,7 +546,7 @@ function Inscription() {
         });
     }
     if (docDivorceSrc.current !== null) {
-      let formData = new FormData();
+      const formData = new FormData();
       formData.append("file", docDivorceSrc.current.files[0]);
       axios
         .post(
@@ -586,7 +586,7 @@ function Inscription() {
           <OneFormInscr
             init={initialData.docJustifRevenus1}
             src={docJustifRevenus1Src}
-            nomDoc={"docJustifRevenus"}
+            nomDoc="docJustifRevenus"
             handleSupp={handleSupp}
             p="Justificatif de revenu (moins de 3 mois)"
             who={1}
@@ -594,7 +594,7 @@ function Inscription() {
           <OneFormInscr
             init={initialData.docDeclaRevenus1}
             src={docDeclaRevenus1Src}
-            nomDoc={"docDeclaRevenus"}
+            nomDoc="docDeclaRevenus"
             handleSupp={handleSupp}
             p="Déclaration de revenu (année en cours)"
             who={1}
@@ -602,7 +602,7 @@ function Inscription() {
           <OneFormInscr
             init={initialData.docSituationPro1}
             src={docSituationPro1Src}
-            nomDoc={"docSituationPro"}
+            nomDoc="docSituationPro"
             handleSupp={handleSupp}
             p="Justificatif de situation professionnel"
             who={1}
@@ -610,7 +610,7 @@ function Inscription() {
           <OneFormInscr
             init={initialData.docJustifDom1}
             src={docJustifDom1Src}
-            nomDoc={"docJustifDom"}
+            nomDoc="docJustifDom"
             handleSupp={handleSupp}
             p="Justificatif de domicile"
             who={1}
@@ -618,7 +618,7 @@ function Inscription() {
           <OneFormInscr
             init={initialData.numCaf1}
             src={numCaf1Src}
-            nomDoc={"numCaf"}
+            nomDoc="numCaf"
             handleSupp={handleSupp}
             p="Numéro Allocataire CAF"
             who={1}
@@ -626,7 +626,7 @@ function Inscription() {
           <OneFormInscr
             init={initialData.numSecu1}
             src={numSecu1Src}
-            nomDoc={"numSecu"}
+            nomDoc="numSecu"
             handleSupp={handleSupp}
             p="Numéro de sécurité sociale"
             who={1}
@@ -648,7 +648,7 @@ function Inscription() {
           <OneFormInscr
             init={initialData.docJustifRevenus2}
             src={docJustifRevenus2Src}
-            nomDoc={"docJustifRevenus"}
+            nomDoc="docJustifRevenus"
             handleSupp={handleSupp}
             p="Justificatif de revenu (moins de 3 mois)"
             who={2}
@@ -656,7 +656,7 @@ function Inscription() {
           <OneFormInscr
             init={initialData.docDeclaRevenus2}
             src={docDeclaRevenus2Src}
-            nomDoc={"docDeclaRevenus"}
+            nomDoc="docDeclaRevenus"
             handleSupp={handleSupp}
             p="Déclaration de revenu (année en cours)"
             who={2}
@@ -664,7 +664,7 @@ function Inscription() {
           <OneFormInscr
             init={initialData.docSituationPro2}
             src={docSituationPro2Src}
-            nomDoc={"docSituationPro"}
+            nomDoc="docSituationPro"
             handleSupp={handleSupp}
             p="Justificatif de situation professionnel"
             who={2}
@@ -672,7 +672,7 @@ function Inscription() {
           <OneFormInscr
             init={initialData.docJustifDom2}
             src={docJustifDom2Src}
-            nomDoc={"docJustifDom"}
+            nomDoc="docJustifDom"
             handleSupp={handleSupp}
             p="Justificatif de domicile"
             who={2}
@@ -680,7 +680,7 @@ function Inscription() {
           <OneFormInscr
             init={initialData.numCaf2}
             src={numCaf2Src}
-            nomDoc={"numCaf"}
+            nomDoc="numCaf"
             handleSupp={handleSupp}
             p="Numéro Allocataire CAF"
             who={2}
@@ -688,7 +688,7 @@ function Inscription() {
           <OneFormInscr
             init={initialData.numSecu2}
             src={numSecu2Src}
-            nomDoc={"numSecu"}
+            nomDoc="numSecu"
             handleSupp={handleSupp}
             p="Numéro de sécurité sociale"
             who={2}
@@ -710,7 +710,7 @@ function Inscription() {
           <OneFormInscr
             init={initialData.docAssurParent1}
             src={docAssurParentSrc}
-            nomDoc={"docAssurParent"}
+            nomDoc="docAssurParent"
             handleSupp={handleSupp}
             p="Numéro de sécurité sociale"
             who={3}
@@ -718,7 +718,7 @@ function Inscription() {
           <OneFormInscr
             init={initialData.docRib1}
             src={docRibSrc}
-            nomDoc={"docRib"}
+            nomDoc="docRib"
             handleSupp={handleSupp}
             p="RIB"
             who={3}
@@ -726,7 +726,7 @@ function Inscription() {
           <OneFormInscr
             init={initialData.docAutoImage1}
             src={docAutoImageSrc}
-            nomDoc={"docAutoImage"}
+            nomDoc="docAutoImage"
             handleSupp={handleSupp}
             p="Autoristaion photo et video"
             who={3}
@@ -734,7 +734,7 @@ function Inscription() {
           <OneFormInscr
             init={initialData.docDivorce1}
             src={docDivorceSrc}
-            nomDoc={"docDivorce"}
+            nomDoc="docDivorce"
             handleSupp={handleSupp}
             p="Copie du jugement de divorce"
             who={3}

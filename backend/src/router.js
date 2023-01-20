@@ -26,6 +26,7 @@ const famille = require("./controllers/famille.controllers");
 const messagerie = require("./controllers/messagerie.controllers");
 const notification = require("./controllers/notification.controllers");
 const messageAdmin = require("./controllers/messageAdmin.controllers");
+// const inscStructure = require("./controllers/inscStructure.controllers");
 
 // --- pour app ---
 
@@ -1043,6 +1044,20 @@ router.get("/getStructureId", (req, res) => {
       res.status(500).send("Accès impossible");
     });
 });
+
+router.delete("/calendrierIndispo", (req, res) => {
+  const { structureId, date } = req.query
+  datasource.query(
+    "DELETE FROM calendrier WHERE structureId= ? AND date = ?",
+    [structureId, date]
+  ).then((result) => {
+    res.sendStatus(200)
+  }).catch((err) => {
+    console.error(err);
+    res.status(500).send("Suppression impossible");
+  });
+})
+
 
 router.put("/agrementsCreche", (req, res) => {
   const { nbEmployes, maxPlaces, maxHandi, max18Mois, maxNuit, email } =

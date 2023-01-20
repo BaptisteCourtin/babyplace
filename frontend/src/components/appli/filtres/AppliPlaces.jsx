@@ -130,7 +130,7 @@ function AppliPlaces({ dataDateHeure, setDataDateHeure }) {
                   onChange={(e) => {
                     ChangeDateHeure(e, "heureMin");
                   }}
-                ></input>
+                />
                 <p>à</p>
                 <input
                   type="time"
@@ -138,7 +138,7 @@ function AppliPlaces({ dataDateHeure, setDataDateHeure }) {
                   onChange={(e) => {
                     ChangeDateHeure(e, "heureMax");
                   }}
-                ></input>
+                />
               </div>
             </div>
           </div>
@@ -174,7 +174,7 @@ function AppliPlaces({ dataDateHeure, setDataDateHeure }) {
                   onChange={(e) => {
                     ChangeDateHeure(e, "heureMin");
                   }}
-                ></input>
+                />
                 <p>à</p>
                 <input
                   type="time"
@@ -182,7 +182,7 @@ function AppliPlaces({ dataDateHeure, setDataDateHeure }) {
                   onChange={(e) => {
                     ChangeDateHeure(e, "heureMax");
                   }}
-                ></input>
+                />
               </div>
             </div>
           </div>

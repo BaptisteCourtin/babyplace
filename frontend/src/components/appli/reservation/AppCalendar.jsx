@@ -37,7 +37,7 @@ function AppCalendar({
   const afficheDate = () => {
     let jour = clickedDay.toString();
     jour = jour.split(" ");
-    let jourLong = `${jour[2]} ${jour[1]} ${jour[3]}`;
+    const jourLong = `${jour[2]} ${jour[1]} ${jour[3]}`;
     setJour(jourLong);
 
     if (jour[0] === "Mon") {
@@ -183,7 +183,7 @@ function AppCalendar({
                   onChange={(e) => {
                     setHeureMin(e.target.value);
                   }}
-                ></input>
+                />
                 <p>à</p>
                 <input
                   type="time"
@@ -192,7 +192,7 @@ function AppCalendar({
                   onChange={(e) => {
                     setHeureMax(e.target.value);
                   }}
-                ></input>
+                />
               </div>
             </div>
           </div>
@@ -239,7 +239,7 @@ function AppCalendar({
                   onChange={(e) => {
                     setHeureMin(e.target.value);
                   }}
-                ></input>
+                />
                 <p>à</p>
                 <input
                   type="time"
@@ -248,7 +248,7 @@ function AppCalendar({
                   onChange={(e) => {
                     setHeureMax(e.target.value);
                   }}
-                ></input>
+                />
               </div>
             </div>
           </div>

@@ -37,8 +37,9 @@ function ChatForApp({ socket, username, room, title, joinRoom }) {
         time: `${new Date(Date.now()).getHours()}:${new Date(
           Date.now()
         ).getMinutes()}`,
-        date: `${new Date(Date.now()).getFullYear()} -${new Date(Date.now()).getMonth() + 1
-          } -${new Date(Date.now()).getUTCDate()} `,
+        date: `${new Date(Date.now()).getFullYear()} -${
+          new Date(Date.now()).getMonth() + 1
+        } -${new Date(Date.now()).getUTCDate()} `,
       };
 
       saveMessage(messageData);
@@ -56,15 +57,18 @@ function ChatForApp({ socket, username, room, title, joinRoom }) {
 
   const getMessagesFromRoom = async () => {
     try {
-      const result = await axios.get(`http://localhost:5000/messages/recup/${room}`, {
-        headers: {
-          room,
-        },
-      });
+      const result = await axios.get(
+        `http://localhost:5000/messages/recup/${room}`,
+        {
+          headers: {
+            room,
+          },
+        }
+      );
       setMessageListData(result.data);
     } catch (err) {
       toast.error(err.message);
-    };
+    }
   };
 
   useEffect(() => {
@@ -77,7 +81,11 @@ function ChatForApp({ socket, username, room, title, joinRoom }) {
     <div className="chat-windowForApp">
       <div className="chat-headerForApp">
         <p>
-          <NavLink to="/appli/message"><AiFillLeftCircle id="returnIcon" /></NavLink> Conversation avec {title}</p>
+          <NavLink to="/appli/message">
+            <AiFillLeftCircle id="returnIcon" />
+          </NavLink>{" "}
+          Conversation avec {title}
+        </p>
       </div>
       <div className="chat-bodyForApp">
         <Scrolltobottom className="message-containerForApp">

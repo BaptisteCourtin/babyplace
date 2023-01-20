@@ -52,17 +52,17 @@ function ProfilPlat() {
           <h3>
             {prenom1 || nom1
               ? `
-            ${prenom1 ? prenom1 : ""} 
-            ${nom1 ? nom1 : ""}`
+            ${prenom1 || ""} 
+            ${nom1 || ""}`
               : ""}
             {prenom2 || nom2
               ? prenom1 || nom1
                 ? ` & 
-                ${prenom2 ? prenom2 : ""} 
-                ${nom2 ? nom2 : ""}`
+                ${prenom2 || ""} 
+                ${nom2 || ""}`
                 : `
-            ${prenom2 ? prenom2 : ""} 
-            ${nom2 ? nom2 : ""}`
+            ${prenom2 || ""} 
+            ${nom2 || ""}`
               : ""}
           </h3>
         </div>

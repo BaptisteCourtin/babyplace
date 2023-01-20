@@ -2,11 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Calendar from "react-calendar";
 
-function CalendarDashAgenda({
-  setClickedDay,
-  clickedDay,
-  setPlaces,
-}) {
+function CalendarDashAgenda({ setClickedDay, clickedDay, setPlaces }) {
   const value = new Date();
 
   return (

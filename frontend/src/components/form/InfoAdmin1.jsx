@@ -42,7 +42,7 @@ function Structure1({
           </button>
         </div>
       </div>
-      {(structure === "creche") && (
+      {structure === "creche" && (
         <div className="creche">
           <div>
             <h4>Maintenant précisons les choses...</h4>
@@ -138,7 +138,13 @@ function Structure1({
             />
             <label
               htmlFor="nomStrucure"
-              className={(nomStructure !== "" && nomStructure !== null && nomStructure !== undefined) ? "labelChecked" : ""}
+              className={
+                nomStructure !== "" &&
+                nomStructure !== null &&
+                nomStructure !== undefined
+                  ? "labelChecked"
+                  : ""
+              }
             >
               Nom
             </label>
@@ -295,10 +301,7 @@ function Structure1({
   );
 }
 Structure1.propTypes = {
-  isCreche: oneOfType([
-    bool,
-    node
-  ]),
+  isCreche: oneOfType([bool, node]),
   typeCreche: Proptypes.string,
   nomStructure: Proptypes.string,
   telephone: Proptypes.string,

@@ -1,87 +1,108 @@
 import axios from "axios";
 import { toast } from "react-hot-toast";
 
-export const usePutHours = (structureId, userType, getData, getHoraires, dayId) => {
-    const updateTarif = async (tarif, value) => {
-        try {
-            await axios.put(`${import.meta.env.VITE_PATH}/dashboard/tarif/${structureId}`, {
-                id: structureId,
-                tarif: tarif,
-                tarifValue: value,
-                table: userType === 'assMat' && tarif === 'tarifHeureSup' ? 'assMat' : 'structure'
-            })
-            toast.success("Vos tarifs ont bien été modifiés")
-            getData()
+export const usePutHours = (
+  structureId,
+  userType,
+  getData,
+  getHoraires,
+  dayId
+) => {
+  const updateTarif = async (tarif, value) => {
+    try {
+      await axios.put(
+        `${import.meta.env.VITE_PATH}/dashboard/tarif/${structureId}`,
+        {
+          id: structureId,
+          tarif,
+          tarifValue: value,
+          table:
+            userType === "assMat" && tarif === "tarifHeureSup"
+              ? "assMat"
+              : "structure",
         }
-        catch (err) {
-            console.error(err.message)
-        }
+      );
+      toast.success("Vos tarifs ont bien été modifiés");
+      getData();
+    } catch (err) {
+      console.error(err.message);
     }
+  };
 
-    const updateIndemn = async (indemn, value) => {
-        try {
-            await axios.put(`${import.meta.env.VITE_PATH}/dashboard/indemn/${structureId}`, {
-                id: structureId,
-                indemn: indemn,
-                indemnValue: value,
-                table: userType === 'assMat' && indemn !== 'indemnRepas' ? 'assMat' : 'structure'
-            })
-            toast.success("Vos indemnités ont bien été modifiées")
-            getData()
+  const updateIndemn = async (indemn, value) => {
+    try {
+      await axios.put(
+        `${import.meta.env.VITE_PATH}/dashboard/indemn/${structureId}`,
+        {
+          id: structureId,
+          indemn,
+          indemnValue: value,
+          table:
+            userType === "assMat" && indemn !== "indemnRepas"
+              ? "assMat"
+              : "structure",
         }
-        catch (err) {
-            console.error(err.message)
-        }
+      );
+      toast.success("Vos indemnités ont bien été modifiées");
+      getData();
+    } catch (err) {
+      console.error(err.message);
     }
+  };
 
-    const updateOptions = async (options, value) => {
-        try {
-            await axios.put(`${import.meta.env.VITE_PATH}/dashboard/options/${structureId}`, {
-                id: structureId,
-                optionsValue: value,
-                options: options
-            })
-            toast.success("Vos options ont bien été modifiées")
-            getData()
+  const updateOptions = async (options, value) => {
+    try {
+      await axios.put(
+        `${import.meta.env.VITE_PATH}/dashboard/options/${structureId}`,
+        {
+          id: structureId,
+          optionsValue: value,
+          options,
         }
-        catch (err) {
-            console.error(err.message)
-        }
+      );
+      toast.success("Vos options ont bien été modifiées");
+      getData();
+    } catch (err) {
+      console.error(err.message);
     }
+  };
 
-    const updateHours = async (value, type, state) => {
-        try {
-            type(value)
-            await axios.put(`${import.meta.env.VITE_PATH}/dashboard/hours/${structureId}`, {
-                id: structureId,
-                value: value,
-                state: state,
-                jourId: dayId,
-            })
-            toast.success("Vos horaires ont bien été modifiés", {
-                id: 'horaires',
-                duration: 2000
-            })
-            getHoraires()
-        } catch (err) {
-            console.error(err.message)
+  const updateHours = async (value, type, state) => {
+    try {
+      type(value);
+      await axios.put(
+        `${import.meta.env.VITE_PATH}/dashboard/hours/${structureId}`,
+        {
+          id: structureId,
+          value,
+          state,
+          jourId: dayId,
         }
+      );
+      toast.success("Vos horaires ont bien été modifiés", {
+        id: "horaires",
+        duration: 2000,
+      });
+      getHoraires();
+    } catch (err) {
+      console.error(err.message);
     }
+  };
 
-    const updateDay = async (value) => {
-        setToggleDay(!toggleDay);
-        try {
-            await axios.put(`${import.meta.env.VITE_PATH}/horaires/day/${dayId}`, {
-                id: dayId,
-                structureId: structureId,
-                value: value,
-            });
-            toast.success("Vos préférences ont bien été modifiées");
-            getHoraires();
-        } catch (err) {
-            console.error(err.message);
-        }
-    };
+  const updateDay = async (value) => {
+    setToggleDay(!toggleDay);
+    try {
+      await axios.put(`${import.meta.env.VITE_PATH}/horaires/day/${dayId}`, {
+        id: dayId,
+        structureId,
+        value,
+      });
+      toast.success("Vos préférences ont bien été modifiées");
+      getHoraires();
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
 
-    return { updateIndemn, updateOptions, updateTarif, updateHours, updateDay }
-}
+  return { updateIndemn, updateOptions, updateTarif, updateHours, updateDay };
+};

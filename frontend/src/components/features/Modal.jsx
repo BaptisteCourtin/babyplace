@@ -6,7 +6,7 @@ function Modal({ open, closeModal }) {
 
   const handleClose = () => {
     closeModal();
-  }
+  };
 
   return (
     <div className="modalDiv">

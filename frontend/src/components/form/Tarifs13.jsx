@@ -318,10 +318,7 @@ function Structure13({
   );
 }
 Structure13.propTypes = {
-  financementPaje: oneOfType([
-    bool,
-    number
-  ]),
+  financementPaje: oneOfType([bool, number]),
   tarifHeure: Proptypes.node,
   tarifHoraireSpec: Proptypes.node,
   indemnRepas: Proptypes.node,

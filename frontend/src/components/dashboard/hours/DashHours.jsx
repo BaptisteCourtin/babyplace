@@ -7,16 +7,44 @@ import PricesDashHours from "./Components/Prices.DashHours";
 import OptionsDashHours from "./Components/Options.DashHours";
 import ActivitiesDashHours from "./Components/Activities.DashHours";
 
-function DashHours({
-  userType,
-  structureId,
-}) {
+function DashHours({ userType, structureId }) {
   const [dayId, setDayId] = useState(1);
-  console.log(userType)
+  console.log(userType);
 
-  const { toggleDay, setToggleDay, selected, setSelected, data, horaires, hour1, setHour1, hour2, setHour2, hour3, setHour3, indemn1, setIndemn1, indemn2, setIndemn2, indemn3, setIndemn3, switch1, setSwitch1, switch2, setSwitch2, switch3, setSwitch3, getData, getHoraires } = useGetHours(structureId, userType)
+  const {
+    toggleDay,
+    setToggleDay,
+    selected,
+    setSelected,
+    data,
+    horaires,
+    hour1,
+    setHour1,
+    hour2,
+    setHour2,
+    hour3,
+    setHour3,
+    indemn1,
+    setIndemn1,
+    indemn2,
+    setIndemn2,
+    indemn3,
+    setIndemn3,
+    switch1,
+    setSwitch1,
+    switch2,
+    setSwitch2,
+    switch3,
+    setSwitch3,
+    getData,
+    getHoraires,
+  } = useGetHours(structureId, userType);
 
-  const { updateIndemn, updateOptions, updateTarif } = usePutHours(structureId, userType, getData)
+  const { updateIndemn, updateOptions, updateTarif } = usePutHours(
+    structureId,
+    userType,
+    getData
+  );
 
   return (
     <div className="dashPlaces">
@@ -58,10 +86,7 @@ function DashHours({
           switch3={switch3}
           setSwitch3={setSwitch3}
         />
-        <ActivitiesDashHours
-          data={data}
-          updateOptions={updateOptions}
-        />
+        <ActivitiesDashHours data={data} updateOptions={updateOptions} />
       </section>
     </div>
   );

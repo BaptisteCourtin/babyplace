@@ -1,8 +1,12 @@
-import React from 'react'
+import React from "react";
 
 function FormDashDanger({ updatePassword, setNewPwd, setCNewPwd }) {
   return (
-    <form onSubmit={(e) => { updatePassword(e) }}>
+    <form
+      onSubmit={(e) => {
+        updatePassword(e);
+      }}
+    >
       <ul>
         <li>
           <label htmlFor="password">Mot de passe</label>
@@ -12,8 +16,10 @@ function FormDashDanger({ updatePassword, setNewPwd, setCNewPwd }) {
             name="password"
             id="password"
             pattern=".{8,}"
-            placeholder='Nouveau mot de passe'
-            onChange={(e) => { setNewPwd(e.target.value) }}
+            placeholder="Nouveau mot de passe"
+            onChange={(e) => {
+              setNewPwd(e.target.value);
+            }}
           />
         </li>
         <li>
@@ -24,14 +30,16 @@ function FormDashDanger({ updatePassword, setNewPwd, setCNewPwd }) {
             name="cpassword"
             id="cpassword"
             pattern=".{8,}"
-            placeholder='Confirmer le mot de passe'
-            onChange={(e) => { setCNewPwd(e.target.value) }}
+            placeholder="Confirmer le mot de passe"
+            onChange={(e) => {
+              setCNewPwd(e.target.value);
+            }}
           />
         </li>
       </ul>
       <button type="submit">Enregistrer</button>
     </form>
-  )
+  );
 }
 
-export default FormDashDanger
+export default FormDashDanger;

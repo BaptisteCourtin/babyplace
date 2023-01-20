@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import AppCalendar from "./AppCalendar";
 import PropTypes from "prop-types";
+import AppCalendar from "./AppCalendar";
 
 function ChoixDates({
   setCompo,
