@@ -7,8 +7,8 @@ import DashFooter from "./main/DashFooter";
 import DashNotif from "./main/DashNotif";
 import DashTopbar from "./main/DashTopbar";
 import { usePageToggle } from "./main/Hooks/usePageToggle";
-import { useGetData } from "./agenda/Hooks/useGetAgenda";
 import { useDeleteData } from "./main/Hooks/useDeleteData";
+import { useGetAllData } from "./main/Hooks/useGetData";
 
 function Dashboard() {
   const { state } = useLocation();
@@ -17,7 +17,7 @@ function Dashboard() {
   const [openNav, setOpenNav] = useState(true);
   const [toggleNotif, setToggleNotif] = useState(false);
 
-  const { getData, data, userType, notif, getNotifications } = useGetData(token)
+  const { getData, data, userType, notif, getNotifications } = useGetAllData(token)
   const { pageShown, toggle, setToggle } = usePageToggle(data, userType, getData)
   const { deleteNotification, deleteDates } = useDeleteData(getNotifications)
 

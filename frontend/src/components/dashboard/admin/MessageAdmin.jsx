@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Nav from './Nav.admin';
 import axios from 'axios';
-import { AiFillCloseCircle } from "react-icons/ai";
 import { toast } from 'react-hot-toast';
 import ModalMessageAdmin from './ModalMessageAdmin';
 
@@ -23,6 +22,9 @@ const MessageAdmin = () => {
         setSelectedId(id);
         setIsOpen(!isOpen);
     }
+    const repondre = (email) => {
+
+    }
 
 
     useEffect(() => {
@@ -34,25 +36,35 @@ const MessageAdmin = () => {
             <Nav />
             <div className="messageAdminList">
                 <h1>Messages</h1>
-                {messageAdminData &&
-                    messageAdminData.map((element) => (
-                        <li key={element.id}>
-                            <div className="messageListAdminContainer">
-                                <div className='messageListAdminHeader'>
-                                    <h4>{element.prenom} {element.nom}</h4>
-                                    <div className='messageListEmail'>{element.email}</div>
+                <div className="messageAdminListBis">
+                    {messageAdminData &&
+                        messageAdminData.map((element) => (
+                            <li key={element.id}>
+                                <div className="messageListAdminContainer">
+                                    <div className='messageListAdminHeader'>
+                                        <h4>{element.prenom} {element.nom}</h4>
+                                        <div className='messageListEmail'>{element.email}</div>
+                                    </div>
+                                    <div className='optionSelected'>{element.optionSelected}</div>
+                                    <div className='messageListAdminBody'>{element.texte}</div>
+                                    <div className="adminMessageBtn">
+                                        <button
+                                            type="button" id="btnRepondre"
+                                            onClick={() => repondre(element.email)}
+                                        >
+                                            Répondre
+                                        </button>
+                                        <button
+                                            type="button" id="btnDelete"
+                                            onClick={() => deleteMessage(element.id)}
+                                        >
+                                            Supprimer
+                                        </button>
+                                    </div>
                                 </div>
-                                <div className='optionSelected'>{element.optionSelected}</div>
-                                <div className='messageListAdminBody'>{element.texte}</div>
-                                <button
-                                    type="button"
-                                    onClick={() => deleteMessage(element.id)}
-                                >
-                                    <AiFillCloseCircle id="messageAdminCloseBtn" />
-                                </button>
-                            </div>
-                        </li>
-                    ))}
+                            </li>
+                        ))}
+                </div>
             </div>
             <ModalMessageAdmin open={isOpen} close={setIsOpen} selectedId={selectedId} />
         </div>
