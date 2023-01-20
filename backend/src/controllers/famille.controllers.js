@@ -41,6 +41,11 @@ const getNomsEtIdEnfants = async (req, res) => {
   return res.json(result);
 };
 
+const getNomsEtIdEnfants100 = async (req, res) => {
+  const result = await familleModels.getNomsEtIdEnfants100(req);
+  return res.json(result);
+};
+
 const updateFormParent = async (req, res) => {
   const result = await familleModels.updateFormParent(req);
   if (result.affectedRows === 0) {
@@ -109,6 +114,7 @@ module.exports = {
   getDonneesFormEnfant,
   getPourcent,
   getNomsEtIdEnfants,
+  getNomsEtIdEnfants100,
   postNewEnfant,
   deleteEnfant,
   getDonneesFormInscription,

@@ -126,6 +126,7 @@ router.get("/famille/conf/:id", famille.getPersoConfiance); //perso confiance
 router.get("/famille/formParent/:id", famille.getDonneesFormParent); //donnees du formulaire parent
 router.get("/famille/formEnfant/:id", famille.getDonneesFormEnfant); //donnees du formulaire enfant
 router.get("/famille/nomsEnfants/:id", famille.getNomsEtIdEnfants); // noms et id des enfants
+router.get("/famille/nomsEnfants100/:id", famille.getNomsEtIdEnfants100); // noms et id des enfants
 router.get("/famille/formInscription/:id", famille.getDonneesFormInscription); //donnees du formulaire inscription
 router.get("/famille/pourcent/:id", famille.getPourcent); // pourcent des formulaire
 router.get("/famille/info/:id", famille.getFamilleInfo); // info famille (noms + photo)
@@ -167,33 +168,15 @@ router.post(
 );
 
 // mise dans bdd
-router.put("/formInscription/docParentChangeName/:id", (req, res) => {
-  const {
-    docJustifRevenus,
-    docDeclaRevenus,
-    docSituationPro,
-    docJustifDom,
-    numCaf,
-    numSecu,
-  } = req.body;
-
-  let toSave = "";
-  [
-    { docJustifRevenus },
-    { docDeclaRevenus },
-    { docSituationPro },
-    { docJustifDom },
-    { numCaf },
-    { numSecu },
-  ].forEach((el) => {
-    if (Object.values(el)[0] !== undefined) {
-      let key = Object.keys(el)[0];
-      toSave += key + "= '" + el[key] + "'";
-    }
-  });
-
+router.put("/formInscription/docParentChangeName/:id/:nomDoc", (req, res) => {
+  // console.log(req.params);
+  // console.log(req.body);
+  const { httpDoc } = req.body;
   datasource
-    .query(`UPDATE parent SET ${toSave} WHERE parentId=?`, [req.params.id])
+    .query(`UPDATE parent SET ${req.params.nomDoc}=? WHERE parentId=?`, [
+      httpDoc,
+      req.params.id,
+    ])
     .then(([parent]) => {
       if (parent.affectedRows === 0) {
         res.status(404).send("Not Found");
@@ -214,7 +197,6 @@ router.post(
   multerMid.single("file"),
   async (req, res, next) => {
     try {
-      console.log("req.file", req.file);
       const file = req.file;
       const result = await uploadDoc(file);
       res.status(200).json(result);
@@ -225,21 +207,13 @@ router.post(
 );
 
 // mise dans bdd
-router.put("/formInscription/docFamilleChangeName/:id", (req, res) => {
-  const { docAssurParent, docRib, docAutoImage, docDivorce } = req.body;
-
-  let toSave = "";
-  [{ docAssurParent }, { docRib }, { docAutoImage }, { docDivorce }].forEach(
-    (el) => {
-      if (Object.values(el)[0] !== undefined) {
-        let key = Object.keys(el)[0];
-        toSave += key + "= '" + el[key] + "'";
-      }
-    }
-  );
-
+router.put("/formInscription/docFamilleChangeName/:id/:nomDoc", (req, res) => {
+  const { httpDoc } = req.body;
   datasource
-    .query(`UPDATE famille SET ${toSave} WHERE familleId=?`, [req.params.id])
+    .query(`UPDATE famille SET ${req.params.nomDoc}=? WHERE familleId=?`, [
+      httpDoc,
+      req.params.id,
+    ])
     .then(([parent]) => {
       if (parent.affectedRows === 0) {
         res.status(404).send("Not Found");

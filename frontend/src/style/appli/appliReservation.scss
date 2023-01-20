@@ -60,21 +60,49 @@
       .principale {
         display: flex;
         flex-direction: column;
+        max-width: 100%;
+
         gap: 1rem;
-        padding: 1rem 1rem;
+        padding: 1rem;
         flex-grow: 1;
 
         h3 {
           font-size: $h3;
           font-weight: 600;
         }
-      }
 
-      .tog {
-        margin: 2rem 0;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
+        .tog {
+          margin: 2rem 0;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        // ---
+
+        .all-kid {
+          margin-bottom: 1rem;
+          background-color: $grey;
+          padding: 0.5rem;
+          border-radius: 10px;
+
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 0.75rem;
+
+          button {
+            background-color: $blue;
+            border-radius: 10px;
+            padding: 7px;
+            height: 60px;
+            word-wrap: break-word;
+          }
+        }
+
+        span {
+          font-size: $h4;
+          font-weight: 600;
+        }
       }
 
       .prix-resa {
