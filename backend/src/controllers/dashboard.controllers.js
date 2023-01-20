@@ -1,8 +1,8 @@
 const dashboardModels = require('../models/dashboard.models');
 
 const updateHours = async (req, res) => {
-    const { id, jourId, value, state } = req.body
-    const result = await dashboardModels.updateHours(id, jourId, value, state)
+    const { id, value, state } = req.body
+    const result = await dashboardModels.updateHours(id, value, state)
     if (result.affectedRows === 0) {
         res.status(404).send("Not found")
     } else {

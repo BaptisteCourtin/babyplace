@@ -8,7 +8,7 @@ function HoursDashAgenda({ horaires, dayId, setHoursOpen, setHoursClose, updateH
             <div className="dashRangeInput">
                 <input
                     type="time"
-                    value={horaires[dayId].heureMin}
+                    defaultValue={horaires[dayId].heureMin}
                     step="300"
                     onChange={(e) =>
                         updateHours(e.target.value, setHoursOpen, "heureMin")
@@ -17,7 +17,7 @@ function HoursDashAgenda({ horaires, dayId, setHoursOpen, setHoursClose, updateH
                 <span> - </span>
                 <input
                     type="time"
-                    value={horaires[dayId].heureMax}
+                    defaultValue={horaires[dayId].heureMax}
                     step="300"
                     onChange={(e) =>
                         updateHours(e.target.value, setHoursClose, "heureMax")

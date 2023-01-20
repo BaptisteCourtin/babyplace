@@ -64,17 +64,23 @@ export const useGetHours = (structureId, userType) => {
                     id: structureId
                 })
             setHoraires(res.data);
-            setToggleDay(res.data[0].ouvert);
-            setSelected(res.data[0].jourSemaine);
         }
         catch (err) {
             console.error(err.message)
         }
     }
 
+    const setValues = () => {
+        if (horaires.length) {
+            setToggleDay(horaires[0].ouvert);
+            setSelected(horaires[0].jourSemaine);
+        }
+    }
+
     useEffect(() => {
         getData();
         getHoraires();
+        setValues();
     }, []);
 
     return { toggleDay, setToggleDay, selected, setSelected, data, horaires, hour1, setHour1, hour2, setHour2, hour3, setHour3, indemn1, setIndemn1, indemn2, setIndemn2, indemn3, setIndemn3, switch1, setSwitch1, switch2, setSwitch2, switch3, setSwitch3, getData, getHoraires }

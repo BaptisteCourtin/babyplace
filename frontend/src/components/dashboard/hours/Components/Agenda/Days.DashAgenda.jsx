@@ -1,11 +1,12 @@
 import React from 'react'
 
-function DaysDashAgenda({ horaires, selected, setSelected, setToggleDay, setDayId }) {
+function DaysDashAgenda({ horaires, selected, setSelected, setToggleDay, setDayId, setHorairesId }) {
 
-    const onDayChange = (jour, status, id) => {
+    const onDayChange = (jour, status, id, heureId) => {
         setSelected(jour);
         setToggleDay(status);
         setDayId(id - 1);
+        setHorairesId(heureId)
     };
 
     return (
@@ -18,7 +19,7 @@ function DaysDashAgenda({ horaires, selected, setSelected, setToggleDay, setDayI
                         id={h.jourSemaine}
                         value={h.jourSemaine}
                         onChange={() => {
-                            onDayChange(h.jourSemaine, h.ouvert, h.jourId);
+                            onDayChange(h.jourSemaine, h.ouvert, h.jourId, h.horairesId);
                         }}
                     />
                     <label

@@ -12,10 +12,11 @@ function DashHours({
   structureId,
 }) {
   const [dayId, setDayId] = useState(1);
+  const [horairesId, setHorairesId] = useState(null)
 
   const { toggleDay, setToggleDay, selected, setSelected, data, horaires, hour1, setHour1, hour2, setHour2, hour3, setHour3, indemn1, setIndemn1, indemn2, setIndemn2, indemn3, setIndemn3, switch1, setSwitch1, switch2, setSwitch2, switch3, setSwitch3, getData, getHoraires } = useGetHours(structureId, userType)
 
-  const { updateIndemn, updateOptions, updateTarif } = usePutHours(structureId, userType, getData)
+  const { updateIndemn, updateOptions, updateTarif, updateDay, updateHours } = usePutHours(structureId, userType, getData, getHoraires, horairesId, toggleDay, setToggleDay)
 
   return (
     <div className="dashPlaces">
@@ -23,12 +24,15 @@ function DashHours({
         structureId={structureId}
         horaires={horaires}
         getHoraires={getHoraires}
+        updateDay={updateDay}
+        updateHours={updateHours}
         toggleDay={toggleDay}
         setToggleDay={setToggleDay}
         selected={selected}
         setSelected={setSelected}
         dayId={dayId}
         setDayId={setDayId}
+        setHorairesId={setHorairesId}
       />
       <section className="dashPlacesParams">
         <PricesDashHours

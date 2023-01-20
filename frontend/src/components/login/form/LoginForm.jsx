@@ -45,7 +45,11 @@ function LoginForm() {
           }
         })
         .catch((err) => {
-          toast.error(err?.response?.data || err.message);
+          if (err?.response.status === 404) {
+            navigate('/pending')
+          } else {
+            toast.error(err?.response?.data || err.message);
+          }
         });
     }
   };

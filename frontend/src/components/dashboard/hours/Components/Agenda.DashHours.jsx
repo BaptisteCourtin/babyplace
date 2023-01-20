@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
 import DashCalendar from "../../agenda/Components/Calendar.DashAgenda";
 import { useEffect } from 'react';
-import { usePutHours } from '../Hooks/usePutHours';
 import DaysDashAgenda from './Agenda/Days.DashAgenda';
 import HoursDashAgenda from './Agenda/Hours.DashAgenda';
 import ChoiceDashAgenda from './Agenda/Choice.DashAgenda';
 import DayOffDashAgenda from './Agenda/DayOff.DashAgenda';
 
-function Agenda({ structureId, getHoraires, horaires, toggleDay, setToggleDay, selected, setSelected, dayId, setDayId }) {
+function Agenda({ getHoraires, updateHours, updateDay, horaires, toggleDay, setToggleDay, selected, setSelected, dayId, setDayId, setHorairesId }) {
 
     const [toggleType, setToggleType] = useState(0);
     const [clickedDay, setClickedDay] = useState(new Date());
     const [hoursOpen, setHoursOpen] = useState(null);
     const [hoursClose, setHoursClose] = useState(null);
-
-    const { updateHours, updateDay } = usePutHours(structureId, getHoraires, dayId)
 
     useEffect(() => {
         getHoraires();
@@ -35,6 +32,7 @@ function Agenda({ structureId, getHoraires, horaires, toggleDay, setToggleDay, s
                         setSelected={setSelected}
                         setToggleDay={setToggleDay}
                         setDayId={setDayId}
+                        setHorairesId={setHorairesId}
                     />
                     {toggleDay ? (
                         <HoursDashAgenda
