@@ -9,7 +9,6 @@ import ActivitiesDashHours from "./Components/Activities.DashHours";
 
 function DashHours({ userType, structureId }) {
   const [dayId, setDayId] = useState(1);
-  console.log(userType);
 
   const {
     toggleDay,

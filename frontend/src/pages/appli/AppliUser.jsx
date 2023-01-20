@@ -48,7 +48,7 @@ function AppliUser() {
       pourcent += pourcentFormEnfant[i].pourcentFormEnfant;
       nbTime += 1;
     }
-    setTruePourcentEnfant(parseInt(pourcent / nbTime));
+    setTruePourcentEnfant(parseInt(pourcent / nbTime, 10));
   };
 
   useEffect(() => {

@@ -83,13 +83,15 @@ function AppCalendar({
     if (dataCalendarId[0]) {
       let result = false;
 
-      for (let i = 0; i < dataCalendarId.length; i++) {
+      for (let i = 0; i < dataCalendarId.length; i += 1) {
         if (Date.parse(date) === Date.parse(dataCalendarId[i].date)) {
           result = true;
         }
       }
       return result;
     }
+
+    return false;
   };
 
   // --- classname et couleur des cases ---
@@ -109,13 +111,15 @@ function AppCalendar({
 
     if (dataCalendarId[0]) {
       let result = "";
-      for (let i = 0; i < dataCalendarId.length; i++) {
+      for (let i = 0; i < dataCalendarId.length; i += 1) {
         if (Date.parse(date) === Date.parse(dataCalendarId[i].date)) {
           result = "disable-day";
         }
       }
       return result;
     }
+
+    return "";
   };
 
   return (
@@ -263,6 +267,13 @@ AppCalendar.propTypes = {
   setHeureMax: PropTypes.func.isRequired,
   setJour: PropTypes.func.isRequired,
   dataHorairesId: PropTypes.array.isRequired,
+  setIsOccasionnel: PropTypes.func.isRequired,
+  isOccasionnel: PropTypes.number.isRequired,
+  setThisMinHeure: PropTypes.func.isRequired,
+  setThisMaxHeure: PropTypes.func.isRequired,
+  thisMinHeure: PropTypes.string,
+  thisMaxHeure: PropTypes.string,
+  dataCalendarId: PropTypes.array.isRequired,
 };
 
 export default AppCalendar;

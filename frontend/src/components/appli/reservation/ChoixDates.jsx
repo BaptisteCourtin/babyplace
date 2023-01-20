@@ -10,7 +10,7 @@ function ChoixDates({
   setHeureMin,
   setHeureMax,
   setJour,
-  jour,
+  // jour,
   setIsOccasionnel,
   isOccasionnel,
   photoProfil,
@@ -100,6 +100,8 @@ function ChoixDates({
 
 ChoixDates.propTypes = {
   setCompo: PropTypes.func.isRequired,
+  heureMax: PropTypes.string.isRequired,
+  heureMin: PropTypes.string.isRequired,
   setHeureMin: PropTypes.func.isRequired,
   setHeureMax: PropTypes.func.isRequired,
   setJour: PropTypes.func.isRequired,
@@ -108,6 +110,9 @@ ChoixDates.propTypes = {
   nomUsage: PropTypes.string,
   nomNaissance: PropTypes.string,
   prenom: PropTypes.string,
+  setIsOccasionnel: PropTypes.func.isRequired,
+  isOccasionnel: PropTypes.number.isRequired,
+  dataCalendarId: PropTypes.array.isRequired,
   dataHorairesId: PropTypes.array.isRequired,
 };
 

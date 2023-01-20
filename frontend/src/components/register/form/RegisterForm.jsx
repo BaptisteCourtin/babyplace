@@ -6,23 +6,23 @@ import {
   AiOutlineEyeInvisible,
   AiOutlineCheck,
 } from "react-icons/ai";
+import ReactModal from 'react-modal';
 import UserEmailContext from "@components/context/UserEmailContext";
 import ReactModal from 'react-modal';
 import toast from "react-hot-toast";
 import Axios from "axios";
 
+
 function RegisterForm() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
   const { userEmail, setUserEmail } = useContext(UserEmailContext);
   const [password, setPassword] = useState("");
   const [checked, setChecked] = useState(false);
   const [typePwd, setTypePwd] = useState(true);
 
   const [pwdLength, setPwdLength] = useState(null);
-
   const handlePwdClick = (e) => {
     e.preventDefault();
     setTypePwd(!typePwd);

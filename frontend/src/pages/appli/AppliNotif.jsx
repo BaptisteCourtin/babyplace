@@ -10,6 +10,9 @@ import NotifPaye from "@components/appli/notif/NotifPaye";
 
 function AppliNotif() {
   const { familleId } = useContext(FamilleContext);
+
+  // --- photo famille ---
+
   const [photoFamille, setPhotoFamille] = useState();
 
   const getFamilleInfo = () => {

@@ -82,8 +82,8 @@ function ConfirmeResa({
 }
 
 ConfirmeResa.propTypes = {
-  heureMin: PropTypes.number.isRequired,
-  heureMax: PropTypes.number.isRequired,
+  heureMin: PropTypes.string.isRequired,
+  heureMax: PropTypes.string.isRequired,
   jour: PropTypes.string.isRequired,
   photoProfil: PropTypes.string.isRequired,
   nom: PropTypes.string,

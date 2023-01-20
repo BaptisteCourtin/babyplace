@@ -47,7 +47,7 @@ function DashParams({
   const docRespCivileRef = useRef(null);
   const docAssAutoRef = useRef(null);
 
-  const fileName = "";
+  let fileName = "";
 
   const [infos, setInfos] = useState({
     nom,
@@ -63,6 +63,7 @@ function DashParams({
   const [deleteMail, setDeleteMail] = useState(null);
   const [newPwd, setNewPwd] = useState(null);
   const [cNewPwd, setCNewPwd] = useState(null);
+  const navigate = useNavigate();
 
   const { handleSubmitInfo, updatePassword } = usePutParams(
     structureId,

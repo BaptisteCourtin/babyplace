@@ -66,6 +66,14 @@ const getNomsEtIdEnfants = async (req) => {
   return result;
 };
 
+const getNomsEtIdEnfants100 = async (req) => {
+  const [result] = await datasource.query(
+    "SELECT prenom, enfantId FROM enfant WHERE familleId = ? AND pourcentFormEnfant = 100",
+    [req.params.id]
+  );
+  return result;
+};
+
 const updateFormParent = async (req) => {
   const { nom, prenom, profession, telephone, email, adresse } = req.body;
 
@@ -119,7 +127,7 @@ const postReservation = async (req) => {
   } = req.body;
 
   const [result] = await datasource.query(
-    "INSERT INTO reservation (structureId, enfantId, prixTotal, isOccasionnel, dateArrivee, heureArrivee, dateDepart, heureDepart) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+    "INSERT INTO reservation (structureId, enfantId, prixTotal, isOccasionnel, dateArrivee, heureArrivee, dateDepart, heureDepart) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ; INSERT INTO notifications (structureId , enfantId ) VALUES (?, ?)",
     [
       structureId,
       enfantId,
@@ -129,6 +137,9 @@ const postReservation = async (req) => {
       heureArrivee,
       dateDepart,
       heureDepart,
+
+      structureId,
+      enfantId,
     ]
   );
   return result;
@@ -193,6 +204,7 @@ module.exports = {
   getDonneesFormEnfant,
   getPourcent,
   getNomsEtIdEnfants,
+  getNomsEtIdEnfants100,
   postNewEnfant,
   deleteEnfant,
   getDonneesFormInscription,

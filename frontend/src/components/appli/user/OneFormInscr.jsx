@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function OneFormInscr({ init, src, nomDoc, handleSupp, p, who }) {
   return (
@@ -32,5 +33,17 @@ function OneFormInscr({ init, src, nomDoc, handleSupp, p, who }) {
     </div>
   );
 }
+<<<<<<< HEAD
+=======
+
+OneFormInscr.propTypes = {
+  init: PropTypes.string.isRequired,
+  src: PropTypes.func.isRequired,
+  nomDoc: PropTypes.string.isRequired,
+  handleSupp: PropTypes.func.isRequired,
+  p: PropTypes.string.isRequired,
+  who: PropTypes.number.isRequired,
+};
+>>>>>>> dev
 
 export default OneFormInscr;

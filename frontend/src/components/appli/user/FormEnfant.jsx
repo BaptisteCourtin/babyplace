@@ -164,7 +164,11 @@ function FormEnfant() {
               Ajouter un enfant
             </button>
 
-            <button className="delete-kid" onClick={() => deleteEnfant()}>
+            <button
+              type="button"
+              className="delete-kid"
+              onClick={() => deleteEnfant()}
+            >
               Supprimer enfant
             </button>
           </div>

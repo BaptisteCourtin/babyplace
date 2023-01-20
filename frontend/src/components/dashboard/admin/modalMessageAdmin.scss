@@ -42,7 +42,9 @@
 
     .modalAdminBody {
       font-size: 1.15em;
+      margin-bottom: 10px;
       margin-bottom: 15px;
+
     }
 
     .modalAdminBtns {
@@ -59,9 +61,10 @@
         background-color: $fifth;
         color: $white;
         font-weight: 500;
-        border: 1px solid transparent;
         border-radius: 5px;
         transition: 0.3s ease-in-out;
+        border: 1px solid transparent;
+        border-radius: 5px;
 
         &:hover {
           border: 1px solid $fifth;
@@ -88,4 +91,5 @@
       }
     }
   }
+
 }

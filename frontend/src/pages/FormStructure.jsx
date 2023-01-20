@@ -39,9 +39,9 @@ const INITIAL_DATA = {
   prenom: "",
   adresseStructure: "",
   imageProfilSrc: null,
-  photo1Src: "",
-  photo2Src: "",
-  photo3Src: "",
+  photo1Src: null,
+  photo2Src: null,
+  photo3Src: null,
   description: "",
   PCSC1: false,
   nesting: false,
@@ -574,7 +574,7 @@ function FormStructure() {
       assAutoNom,
       assAutoNumero,
       assAutoAdresse,
-      indispo
+      indispo,
     } = data;
     const email = userEmail;
     if (!isLastStep) {
@@ -655,6 +655,7 @@ function FormStructure() {
       } else if (currentStepIndex === 1) {
         const formData = new FormData();
         if (inputRef.current.files[0] !== undefined) {
+          console.log(inputRef.current.files[0]);
           formData.append("avatar", inputRef.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/photoProfil`, formData)
             .then((result) => {

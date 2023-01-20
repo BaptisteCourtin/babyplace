@@ -90,7 +90,7 @@ function Structure15({
               type="date"
               name="dateAgrement"
               value={dateAgrement}
-              onChange={(e) => updateFields({ dateAgrement: e.target.value })}
+              onChange={(e) => { updateFields({ dateAgrement: e.target.value }) }}
             />
             <label
               htmlFor="dateAgrement"

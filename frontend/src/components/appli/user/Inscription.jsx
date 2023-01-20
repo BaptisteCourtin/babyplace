@@ -28,27 +28,6 @@ function Inscription() {
     docDivorce1: null,
   });
 
-  const handleSupp = (e, who) => {
-    if (who === 1 || who === 2) {
-      const { parentId } = donneesForm[who - 1];
-      axios.put(
-        `${import.meta.env.VITE_PATH}/parent/nullOneDocForm/${parentId}`,
-        {
-          nomFichier: e.target.name,
-        }
-      );
-    } else if (who === 3) {
-      axios.put(
-        `${import.meta.env.VITE_PATH}/famille/nullOneDocForm/${familleId}`,
-        {
-          nomFichier: e.target.name,
-        }
-      );
-    }
-
-    // getDonneesForm(); // asynchrone (1 coup)
-  };
-
   // --- prise info bdd ---
 
   const [donneesForm, setDonneesForm] = useState(); // pris dans bdd
@@ -137,13 +116,63 @@ function Inscription() {
 
   // --- form parent 1 ou 2 ---
 
+  const OneIfFormParent = (parentId, src, nameDoc) => {
+    const formData = new FormData();
+    formData.append("file", src.current.files[0]);
+    axios
+      .post(`${import.meta.env.VITE_PATH}/formInscription/docParent`, formData)
+      .then((result) => {
+        axios
+          .put(
+            `${
+              import.meta.env.VITE_PATH
+            }/formInscription/docParentChangeName/${parentId}/${nameDoc}`,
+            {
+              httpDoc: result.data,
+            }
+          )
+          .catch((err) => {
+            console.error(err);
+          });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const OneIfFormFamille = (src, nameDoc) => {
+    const formData = new FormData();
+    formData.append("file", src.current.files[0]);
+    axios
+      .post(`${import.meta.env.VITE_PATH}/formInscription/docFamille`, formData)
+      .then((result) => {
+        axios
+          .put(
+            `${
+              import.meta.env.VITE_PATH
+            }/formInscription/docFamilleChangeName/${familleId}/${nameDoc}`,
+            {
+              httpDoc: result.data,
+            }
+          )
+          .catch((err) => {
+            console.error(err);
+          });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   const SubmitFormParent = (e, num) => {
     e.preventDefault();
+    // que des if car pas obligé de tout mettre d'un coup
     // desctructure pour avoir parentId
     const { parentId } = donneesForm[num - 1];
 
     if (num === 1) {
       if (docJustifRevenus1Src.current !== null) {
+<<<<<<< HEAD
         const formData = new FormData();
         formData.append("file", docJustifRevenus1Src.current.files[0]);
         axios
@@ -298,11 +327,28 @@ function Inscription() {
           .catch((err) => {
             console.error(err);
           });
+=======
+        OneIfFormParent(parentId, docJustifRevenus1Src, "docJustifRevenus");
       }
-    }
-    // ---
-    else if (num === 2) {
+      if (docDeclaRevenus1Src.current !== null) {
+        OneIfFormParent(parentId, docDeclaRevenus1Src, "docDeclaRevenus");
+      }
+      if (docSituationPro1Src.current !== null) {
+        OneIfFormParent(parentId, docSituationPro1Src, "docSituationPro");
+      }
+      if (docJustifDom1Src.current !== null) {
+        OneIfFormParent(parentId, docJustifDom1Src, "docJustifDom");
+      }
+      if (numCaf1Src.current !== null) {
+        OneIfFormParent(parentId, numCaf1Src, "numCaf");
+      }
+      if (numSecu1Src.current !== null) {
+        OneIfFormParent(parentId, numSecu1Src, "numSecu");
+>>>>>>> dev
+      }
+    } else if (num === 2) {
       if (docJustifRevenus2Src.current !== null) {
+<<<<<<< HEAD
         const formData = new FormData();
         formData.append("file", docJustifRevenus2Src.current.files[0]);
         axios
@@ -457,6 +503,24 @@ function Inscription() {
           .catch((err) => {
             console.error(err);
           });
+=======
+        OneIfFormParent(parentId, docJustifRevenus2Src, "docJustifRevenus");
+      }
+      if (docDeclaRevenus2Src.current !== null) {
+        OneIfFormParent(parentId, docDeclaRevenus2Src, "docDeclaRevenus");
+      }
+      if (docSituationPro2Src.current !== null) {
+        OneIfFormParent(parentId, docSituationPro2Src, "docSituationPro");
+      }
+      if (docJustifDom2Src.current !== null) {
+        OneIfFormParent(parentId, docJustifDom2Src, "docJustifDom");
+      }
+      if (numCaf2Src.current !== null) {
+        OneIfFormParent(parentId, numCaf2Src, "numCaf");
+      }
+      if (numSecu2Src.current !== null) {
+        OneIfFormParent(parentId, numSecu2Src, "numSecu");
+>>>>>>> dev
       }
     }
   };
@@ -465,8 +529,8 @@ function Inscription() {
 
   const SubmitFormFamille = (e) => {
     e.preventDefault();
-    // que des if car pas obliger de tous mettre d'un coup
     if (docAssurParentSrc.current !== null) {
+<<<<<<< HEAD
       const formData = new FormData();
       console.log(docAssurParentSrc.current.files[0]);
       formData.append("file", docAssurParentSrc.current.files[0]);
@@ -570,7 +634,41 @@ function Inscription() {
         .catch((err) => {
           console.error(err);
         });
+=======
+      OneIfFormFamille(docAssurParentSrc, "docAssurParent");
     }
+    if (docRibSrc.current !== null) {
+      OneIfFormFamille(docRibSrc, "docRib");
+    }
+    if (docAutoImageSrc.current !== null) {
+      OneIfFormFamille(docAutoImageSrc, "docAutoImage");
+    }
+    if (docDivorceSrc.current !== null) {
+      OneIfFormFamille(docDivorceSrc, "docDivorce");
+>>>>>>> dev
+    }
+  };
+
+  // --- supprimer un fichier ---
+
+  const handleSupp = (e, who) => {
+    if (who === 1 || who === 2) {
+      const { parentId } = donneesForm[who - 1];
+      axios.put(
+        `${import.meta.env.VITE_PATH}/parent/nullOneDocForm/${parentId}`,
+        {
+          nomFichier: e.target.name,
+        }
+      );
+    } else if (who === 3) {
+      axios.put(
+        `${import.meta.env.VITE_PATH}/famille/nullOneDocForm/${familleId}`,
+        {
+          nomFichier: e.target.name,
+        }
+      );
+    }
+    // getDonneesForm(); // asynchrone (1 coup)
   };
 
   return (
