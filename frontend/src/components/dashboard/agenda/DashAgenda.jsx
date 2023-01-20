@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import DashAgendaCalendar from "./Components/Calendar.DashAgenda";
-import { useGetData } from "./Hooks/useGetAgenda";
+import { useGetAgenda } from "./Hooks/useGetAgenda";
 import { usePutData } from "./Hooks/usePutAgenda";
 import { usePostData } from "./Hooks/usePostAgenda";
 import { useDeleteData } from "./Hooks/useDeleteAgenda";
@@ -16,7 +16,7 @@ function DashAgenda({ structureId, maxPlaces }) {
   const [calendarIndex, setCalendarIndex] = useState(null);
 
   const { curDate, clickedDay, setClickedDay, date, day } = useFormatDay()
-  const { calendar, getCalendar } = useGetData(structureId)
+  const { calendar, getCalendar } = useGetAgenda(structureId)
   const { updatePlaces, updateStatusClose, updateStatusOpen } = usePutData(calendarIndex, getCalendar, maxPlaces, setPlaces)
   const { addSleepDate, addWorkDate } = usePostData(setPlaces, date, structureId, getCalendar)
   const { fullDate } = useDeleteData(calendarIndex, getCalendar)
