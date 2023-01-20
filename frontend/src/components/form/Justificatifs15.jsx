@@ -42,7 +42,7 @@ function Structure15({
                 value={numSecu}
                 className={
                   (numSecu !== null &&
-                    numSecu !== undefined && numSecu.length > 15)
+                    numSecu !== undefined && numSecu.length >= 15)
                     ? "inputChecked"
                     : "input"
                 }
@@ -52,7 +52,7 @@ function Structure15({
                 htmlFor="numSecu"
                 className={
                   (numSecu !== null &&
-                    numSecu !== undefined && numSecu.length > 15)
+                    numSecu !== undefined && numSecu.length >= 15)
                     ? "labelChecked"
                     : "input"
                 }
@@ -61,18 +61,18 @@ function Structure15({
               </label>
               {(
                 numSecu !== null &&
-                numSecu !== undefined && numSecu.length > 15) && <p className="checkSymbol">&#x2713;</p>}
+                numSecu !== undefined && numSecu.length >= 15) && <p className="checkSymbol">&#x2713;</p>}
             </div>
           ) : (
             <div className="inputContainer">
               <input
                 type="text"
                 name="siret"
-                pattern="[0-9]{10}"
+                pattern="[0-9]{10,}"
                 value={siret}
                 className={
                   (siret !== null &&
-                    siret !== undefined && siret.length > 10)
+                    siret !== undefined && siret.length >= 10)
                     ? "inputChecked"
                     : "input"
                 }
@@ -82,7 +82,7 @@ function Structure15({
                 htmlFor="siret"
                 className={
                   (siret !== null &&
-                    siret !== undefined && siret.length > 10)
+                    siret !== undefined && siret.length >= 10)
                     ? "labelChecked"
                     : ""
                 }
@@ -91,7 +91,7 @@ function Structure15({
               </label>
               {
                 (siret !== null &&
-                  siret !== undefined && siret.length > 10)
+                  siret !== undefined && siret.length >= 10)
                 &&
                 <p className="checkSymbol">&#x2713;</p>
               }
@@ -102,11 +102,11 @@ function Structure15({
             <input
               type="text"
               name="numAgrement"
-              pattern="[0-9]{10}"
+              pattern="[0-9]{10,}"
               value={numAgrement}
               className={
                 (numAgrement !== null &&
-                  numAgrement !== undefined && numAgrement.length > 10)
+                  numAgrement !== undefined && numAgrement.length >= 10)
                   ? "inputChecked"
                   : "input"
               }
@@ -116,7 +116,7 @@ function Structure15({
               htmlFor="numAgrement"
               className={
                 (numAgrement !== null &&
-                  numAgrement !== undefined && numAgrement.length > 10)
+                  numAgrement !== undefined && numAgrement.length >= 10)
                   ? "labelChecked"
                   : ""
               }
@@ -125,7 +125,7 @@ function Structure15({
             </label>
             {
               (numAgrement !== null &&
-                numAgrement !== undefined && numAgrement.length > 10)
+                numAgrement !== undefined && numAgrement.length >= 10)
               &&
               <p className="checkSymbol">&#x2713;</p>
             }
@@ -160,7 +160,7 @@ function Structure15({
                   value={assHabitNom}
                   className={
                     (assHabitNom !== null &&
-                      assHabitNom !== undefined && assHabitNom.length > 4)
+                      assHabitNom !== undefined && assHabitNom.length >= 4)
                       ? "inputChecked"
                       : "input"
                   }
@@ -171,7 +171,7 @@ function Structure15({
                 <label
                   htmlFor="assHabitNom"
                   className={(assHabitNom !== null &&
-                    assHabitNom !== undefined && assHabitNom.length > 4)
+                    assHabitNom !== undefined && assHabitNom.length >= 4)
                     ? "labelChecked"
                     : ""}
                 >
@@ -179,7 +179,7 @@ function Structure15({
                 </label>
                 {
                   (assHabitNom !== null &&
-                    assHabitNom !== undefined && assHabitNom.length > 4)
+                    assHabitNom !== undefined && assHabitNom.length >= 4)
                   &&
                   <p className="checkSymbol">&#x2713;</p>
                 }
@@ -193,7 +193,7 @@ function Structure15({
                   value={assHabitNumero}
                   className={
                     (assHabitNumero !== null &&
-                      assHabitNumero !== undefined && assHabitNumero.length > 5)
+                      assHabitNumero !== undefined && assHabitNumero.length >= 5)
                       ? "inputChecked"
                       : "input"
                   }
@@ -204,7 +204,7 @@ function Structure15({
                 <label
                   htmlFor="assHabitNumero"
                   className={(assHabitNumero !== null &&
-                    assHabitNumero !== undefined && assHabitNumero.length > 5)
+                    assHabitNumero !== undefined && assHabitNumero.length >= 5)
                     ? "labelChecked"
                     : ""}
                 >
@@ -212,7 +212,7 @@ function Structure15({
                 </label>
                 {
                   (assHabitNumero !== null &&
-                    assHabitNumero !== undefined && assHabitNumero.length > 5)
+                    assHabitNumero !== undefined && assHabitNumero.length >= 5)
                   &&
                   <p className="checkSymbol">&#x2713;</p>
                 }
@@ -260,7 +260,7 @@ function Structure15({
                   value={assAutoNom}
                   className={
                     (assAutoNom !== null &&
-                      assAutoNom !== undefined && assAutoNom.length > 4)
+                      assAutoNom !== undefined && assAutoNom.length >= 4)
                       ? "inputChecked"
                       : "input"
                   }
@@ -269,7 +269,7 @@ function Structure15({
                 <label
                   htmlFor="assAutoNom"
                   className={(assAutoNom !== null &&
-                    assAutoNom !== undefined && assAutoNom.length > 4)
+                    assAutoNom !== undefined && assAutoNom.length >= 4)
                     ? "labelChecked"
                     : ""}
                 >
@@ -277,7 +277,7 @@ function Structure15({
                 </label>
                 {
                   (assAutoNom !== null &&
-                    assAutoNom !== undefined && assAutoNom.length > 4)
+                    assAutoNom !== undefined && assAutoNom.length >= 4)
                   &&
                   <p className="checkSymbol">&#x2713;</p>
                 }
@@ -290,7 +290,7 @@ function Structure15({
                   value={assAutoNumero}
                   className={
                     (assAutoNumero !== null &&
-                      assAutoNumero !== undefined && assAutoNumero.length > 5)
+                      assAutoNumero !== undefined && assAutoNumero.length >= 5)
                       ? "inputChecked"
                       : "input"
                   }
@@ -301,7 +301,7 @@ function Structure15({
                 <label
                   htmlFor="assAutoNumero"
                   className={(assAutoNumero !== null &&
-                    assAutoNumero !== undefined && assAutoNumero.length > 5)
+                    assAutoNumero !== undefined && assAutoNumero.length >= 5)
                     ? "labelChecked"
                     : ""}
                 >
@@ -309,7 +309,7 @@ function Structure15({
                 </label>
                 {
                   (assAutoNumero !== null &&
-                    assAutoNumero !== undefined && assAutoNumero.length > 5)
+                    assAutoNumero !== undefined && assAutoNumero.length >= 5)
                   &&
                   <p className="checkSymbol">&#x2713;</p>
                 }
