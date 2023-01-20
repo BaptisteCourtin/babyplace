@@ -210,7 +210,12 @@ function Structure15({
                 />
                 <label
                   htmlFor="assAutoAdresse"
-                  className={assAutoAdresse !== "" ? "labelChecked" : ""}
+                  className={assAutoAdresse !== "" &&
+                    assAutoAdresse !== null &&
+                    assAutoAdresse !== undefined
+                    ? "labelChecked"
+                    : ""
+                  }
                 >
                   Adresse
                 </label>
@@ -241,7 +246,6 @@ function Structure15({
               })
             }
           />
-          <label htmlFor="docPmi" />
           <p className="checkSymbol">&#x2713;</p>
         </div>
         {structure === "assmat" && (
@@ -265,7 +269,6 @@ function Structure15({
                   });
                 }}
               />
-              <label htmlFor="docIdentite" />
               <p className="checkSymbol">&#x2713;</p>
             </div>
             <div className="docInputContainer">
@@ -288,7 +291,6 @@ function Structure15({
                   })
                 }
               />
-              <label htmlFor="docVitale" />
               <p className="checkSymbol">&#x2713;</p>
             </div>
             <div className="docInputContainer">
@@ -307,7 +309,6 @@ function Structure15({
                   })
                 }
               />
-              <label htmlFor="docJustifDom" />
               <p className="checkSymbol">&#x2713;</p>
             </div>
             <div className="docInputContainer">
@@ -329,7 +330,6 @@ function Structure15({
                   })
                 }
               />
-              <label htmlFor="docDiplome" />
               <p className="checkSymbol">&#x2713;</p>
             </div>
             <div className="docInputContainer">
@@ -351,7 +351,6 @@ function Structure15({
                   })
                 }
               />
-              <label htmlFor="docRespCivile" />
               <p className="checkSymbol">&#x2713;</p>
             </div>
             <div className="docInputContainer">
@@ -370,7 +369,6 @@ function Structure15({
                   })
                 }
               />
-              <label htmlFor="docAssAuto" />
               <p className="checkSymbol">&#x2713;</p>
             </div>
           </>
@@ -390,6 +388,13 @@ Structure15.propTypes = {
   assAutoNom: Proptypes.node,
   assAutoNumero: Proptypes.node,
   assAutoAdresse: Proptypes.node,
+  inputRefPmi: Proptypes.node,
+  inputRefCpam: Proptypes.node,
+  inputRefCni: Proptypes.node,
+  inputRefDom: Proptypes.node,
+  inputRefDiplome: Proptypes.node,
+  inputRefAuto: Proptypes.node,
+  inputRefResp: Proptypes.node,
   updateFields: Proptypes.func,
 };
 export default Structure15;

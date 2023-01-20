@@ -35,11 +35,11 @@
       outline: 1.5px solid $third;
     }
 
-    & input:valid {
-      border: 2px solid $green;
-    }
+    // & input:valid {
+    //   border: 2px solid $green;
+    // }
 
-    & input:valid+label {
+    & .labelChecked {
       color: $green;
     }
 
@@ -47,12 +47,14 @@
       display: none;
     }
 
-    & input:valid+label+p {
-      position: absolute;
-      transform: translateX(170px) translateY(6px);
-      font-size: 2rem;
-      color: $green;
-      display: initial;
+    & input:valid {
+      & .checkSymbol {
+        position: absolute;
+        transform: translateX(170px) translateY(6px);
+        font-size: 2rem;
+        color: $green;
+        display: initial;
+      }
     }
 
     & label {
@@ -95,17 +97,15 @@
       margin-bottom: 0.5vh;
     }
 
-    & input[type="file"]:valid+label+p {
-      position: absolute;
-      right: 0;
-      top: 8px;
-      font-size: 2rem;
-      color: $green;
-      display: initial;
-    }
-
-    & input[type="file"]:valid+label {
-      display: none;
+    & input[type="file"]:valid {
+      & .checkSymbol {
+        position: absolute;
+        right: 0;
+        top: 8px;
+        font-size: 2rem;
+        color: $green;
+        display: initial;
+      }
     }
 
     & h5 {

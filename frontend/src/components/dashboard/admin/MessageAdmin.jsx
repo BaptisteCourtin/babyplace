@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import Nav from './Nav.admin';
-import axios from 'axios';
-import { toast } from 'react-hot-toast';
-import ModalMessageAdmin from './ModalMessageAdmin';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import Nav from "./Nav.admin";
+import ModalMessageAdmin from "./ModalMessageAdmin";
 
 const MessageAdmin = () => {
 

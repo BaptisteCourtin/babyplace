@@ -177,7 +177,7 @@ function Contact() {
             style={{
               opacity: !checked ? "0.2" : "1",
             }}
-            disabled={!!!checked}
+            disabled={!checked}
             onClick={openCloseModal}
           >
             Envoyer

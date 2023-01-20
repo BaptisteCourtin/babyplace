@@ -9,32 +9,45 @@ function Structure3({
   structureId,
   updateFields,
 }) {
-  const [image1Src, setImage1Src] = useState("https://via.placeholder.com/240x160.png?text=photo+1");
-  const [image2Src, setImage2Src] = useState("https://via.placeholder.com/240x160.png?text=photo+2");
-  const [image3Src, setImage3Src] = useState("https://via.placeholder.com/240x160.png?text=photo+3");
+  const [image1Src, setImage1Src] = useState(
+    "https://via.placeholder.com/240x160.png?text=photo+1"
+  );
+  const [image2Src, setImage2Src] = useState(
+    "https://via.placeholder.com/240x160.png?text=photo+2"
+  );
+  const [image3Src, setImage3Src] = useState(
+    "https://via.placeholder.com/240x160.png?text=photo+3"
+  );
   const getPicture = () => {
-    Axios.get(`${import.meta.env.VITE_PATH}/photosStructure?id=${structureId}`, [structureId])
+    Axios.get(
+      `${import.meta.env.VITE_PATH}/photosStructure?id=${structureId}`,
+      [structureId]
+    )
       .then((result) => {
         console.log(result.data[0])
         if (result.data[0].photoStructure1 !== null) {
-          setImage1Src(`${import.meta.env.VITE_PATH}${result.data[0].photoStructure1}`);
-          updateFields({ photo1Src: result.data[0].photoStructure1 })
-        };
+          setImage1Src(
+            `${import.meta.env.VITE_PATH}${result.data[0].photoStructure1}`
+          );
+          updateFields({ photo1Src: result.data[0].photoStructure1 });
+        }
         if (result.data[0].photoStructure2 !== null) {
-          setImage2Src(`${import.meta.env.VITE_PATH}${result.data[0].photoStructure2}`);
-          updateFields({ photo2Src: result.data[0].photoStructure2 })
-
-        };
+          setImage2Src(
+            `${import.meta.env.VITE_PATH}${result.data[0].photoStructure2}`
+          );
+          updateFields({ photo2Src: result.data[0].photoStructure2 });
+        }
         if (result.data[0].photoStructure3 !== null) {
-          setImage3Src(`${import.meta.env.VITE_PATH}${result.data[0].photoStructure3}`);
-          updateFields({ photo3Src: result.data[0].photoStructure3 })
-
-        };
+          setImage3Src(
+            `${import.meta.env.VITE_PATH}${result.data[0].photoStructure3}`
+          );
+          updateFields({ photo3Src: result.data[0].photoStructure3 });
+        }
       })
       .catch((err) => {
         console.error(err);
-      })
-  }
+      });
+  };
 
   const updateImg1 = (e) => {
     // e.files contient un objet FileList
@@ -58,7 +71,6 @@ function Structure3({
       const reader = new FileReader();
       reader.onload = (el) => {
         setImage2Src(el.target.result);
-
       };
       reader.readAsDataURL(picture);
     }
@@ -69,15 +81,14 @@ function Structure3({
       const reader = new FileReader();
       reader.onload = (el) => {
         setImage3Src(el.target.result);
-
       };
       reader.readAsDataURL(picture);
     }
   };
 
   useEffect(() => {
-    getPicture()
-  }, [])
+    getPicture();
+  }, []);
   return (
     <div className="structure3">
       <h4>Égayez votre annonce avec des photos</h4>
@@ -141,9 +152,10 @@ function Structure3({
   );
 }
 Structure3.propTypes = {
-  photo1Src: Proptypes.string,
-  photo2Src: Proptypes.string,
-  photo3Src: Proptypes.string,
+  inputRef1: Proptypes.node,
+  inputRef2: Proptypes.node,
+  inputRef3: Proptypes.node,
+  structureId: Proptypes.string,
   updateFields: Proptypes.func,
 };
 export default Structure3;

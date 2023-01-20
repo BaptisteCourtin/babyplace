@@ -23,7 +23,7 @@
       border: 2px solid $green;
     }
 
-    & input:valid+label {
+    & input:valid + label {
       color: $green;
     }
 
@@ -31,7 +31,7 @@
       display: none;
     }
 
-    & input:valid+label+.checkSymbol {
+    & input:valid + label + .checkSymbol {
       position: absolute;
       transform: translateX(29vw) translateY(6px);
       font-size: 2rem;
@@ -93,14 +93,13 @@
 @media screen and (max-width: 1000px) {
   .structure1 {
     & .inputsContainer {
-
       & input[type="text"],
       & input[type="tel"] {
         width: 80vw;
         max-width: 500px;
       }
 
-      & input:valid+label+.checkSymbol {
+      & input:valid + label + .checkSymbol {
         transform: translateX(clamp(10px, 69vw, 450px)) translateY(6px);
       }
     }

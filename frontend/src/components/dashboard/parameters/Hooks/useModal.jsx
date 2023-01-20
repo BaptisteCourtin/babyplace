@@ -1,11 +1,11 @@
 export const useModal = (setDeleteModal) => {
-    const openDeleteModal = () => {
-        setDeleteModal(true)
-    }
+  const openDeleteModal = () => {
+    setDeleteModal(true);
+  };
 
-    const closeDeleteModal = () => {
-        setDeleteModal(false)
-    }
+  const closeDeleteModal = () => {
+    setDeleteModal(false);
+  };
 
-    return { openDeleteModal, closeDeleteModal }
-}
+  return { openDeleteModal, closeDeleteModal };
+};
