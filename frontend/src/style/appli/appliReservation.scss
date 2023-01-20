@@ -31,11 +31,13 @@
       }
     }
 
+    // choix dates
     &.choix-dates {
       background-color: $white;
       padding: 1rem;
     }
 
+    // demande resa
     &.demande-resa {
       overflow: hidden;
       background-color: $white;
@@ -93,6 +95,7 @@
           }
         }
         button {
+          padding: 0 0.5rem;
           background: $gradient;
           font-size: $h3;
           font-weight: 500;
@@ -106,6 +109,7 @@
       }
     }
 
+    // confirme resa
     &.confirme-resa {
       color: $white;
 

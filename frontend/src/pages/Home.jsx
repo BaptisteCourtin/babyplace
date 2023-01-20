@@ -9,6 +9,7 @@ import key from "@assets/img-key.svg";
 import copie from "@assets/img-copie.svg";
 import imgInfo from "@assets/landing page/image2.svg";
 import useLocalStorage from "@utils/useLocalStorage";
+import { HashLink } from "react-router-hash-link";
 
 export default function Home() {
   const [carouselFirst, setCarouselFirst] = useState(true);
@@ -119,7 +120,9 @@ export default function Home() {
                     ordinateur.
                   </p>
                   <button type="button">
-                    En savoir plus <span>➜</span>
+                    <HashLink to="/contact#contact">
+                      En savoir plus <span>➜</span>
+                    </HashLink>
                   </button>
                 </div>
               </li>
@@ -132,7 +135,9 @@ export default function Home() {
                     plus vite des annulations et des demandes de réservations.
                   </p>
                   <button type="button">
-                    En savoir plus <span>➜</span>
+                    <HashLink to="/contact#contact">
+                      En savoir plus <span>➜</span>
+                    </HashLink>
                   </button>
                 </div>
               </li>
@@ -146,7 +151,9 @@ export default function Home() {
                     votre quartier.
                   </p>
                   <button type="button">
-                    En savoir plus <span>➜</span>
+                    <HashLink to="/contact#contact">
+                      En savoir plus <span>➜</span>
+                    </HashLink>
                   </button>
                 </div>
               </li>
@@ -161,7 +168,9 @@ export default function Home() {
                     légales de Babyplace.
                   </p>
                   <button type="button">
-                    En savoir plus <span>➜</span>
+                    <HashLink to="/contact#contact">
+                      En savoir plus <span>➜</span>
+                    </HashLink>
                   </button>
                 </div>
               </li>

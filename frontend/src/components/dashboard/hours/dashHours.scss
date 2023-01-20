@@ -247,7 +247,6 @@
     gap: 20px;
 
     & details {
-
       & summary {
         margin-bottom: 10px;
         font-size: $h3;
@@ -261,7 +260,6 @@
         &::marker {
           color: $third;
         }
-
       }
 
       & .dashPlacesPrices {
@@ -319,11 +317,11 @@
               height: 0;
             }
 
-            & input:checked+.dashSwitchSlider {
+            & input:checked + .dashSwitchSlider {
               background-color: $third;
             }
 
-            & input:checked+.dashSwitchSlider:before {
+            & input:checked + .dashSwitchSlider:before {
               -webkit-transform: translateX(52px);
               -ms-transform: translateX(52px);
               transform: translateX(52px);

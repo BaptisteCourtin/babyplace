@@ -44,7 +44,7 @@ function Favoris({ setCompo }) {
             state={occasions}
             nom="occasions"
             p="Je souhaite obtenir des notifications en cas de disponibilités des structures favorites"
-            classique={true}
+            classique
           />
         </div>
         {tabFav.map((each, index) => (

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Proptypes from "prop-types";
+import Proptypes, { bool, node, oneOfType } from "prop-types";
 import StructureContext from "@components/context/StructureContext";
 
 function Structure1({
@@ -14,6 +14,7 @@ function Structure1({
   updateFields,
 }) {
   const { structure, setStructure } = useContext(StructureContext);
+
   return (
     <div className="page-left structure1">
       <div className="typeContainer">
@@ -41,7 +42,7 @@ function Structure1({
           </button>
         </div>
       </div>
-      {isCreche === true && (
+      {(structure === "creche") && (
         <div className="creche">
           <div>
             <h4>Maintenant précisons les choses...</h4>
@@ -132,7 +133,7 @@ function Structure1({
               name="nomStructure"
               placeholder="Nom de votre établissement"
               pattern=".{4,}"
-              value={nomStructure}
+              value={nomStructure || undefined}
               onChange={(e) => updateFields({ nomStructure: e.target.value })}
             />
             <label
@@ -151,14 +152,14 @@ function Structure1({
               name="adresseStructure"
               placeholder="N°, rue, CP, ville"
               pattern=".{10,} [0-9]{5} .{3,}"
-              value={adresseStructure}
+              value={adresseStructure || undefined}
               onChange={(e) =>
                 updateFields({ adresseStructure: e.target.value })
               }
             />
             <label
               htmlFor="adresseStrucure"
-              className={adresseStructure !== "" ? "labelChecked" : ""}
+              className={adresseStructure !== " " ? "labelChecked" : ""}
             >
               Adresse
             </label>
@@ -174,7 +175,7 @@ function Structure1({
               type="tel"
               placeholder="0123456789"
               pattern="[0-9]{10}"
-              value={telephone}
+              value={telephone || undefined}
               onChange={(e) => updateFields({ telephone: e.target.value })}
             />
             <label
@@ -187,7 +188,7 @@ function Structure1({
           </div>
         </div>
       )}
-      {isCreche === false && (
+      {structure === "assmat" && (
         <div className="assmat">
           <h4>Complétez et vérifiez vos informations</h4>
           <div className="inputsContainer">
@@ -197,7 +198,7 @@ function Structure1({
               name="nomNaissance"
               placeholder="Nom de naissance"
               pattern=".{2,}"
-              value={nomNaissance}
+              value={nomNaissance || undefined}
               onChange={(e) => updateFields({ nomNaissance: e.target.value })}
             />
             <label
@@ -214,7 +215,7 @@ function Structure1({
               type="text"
               name="nomUsage"
               placeholder="Nom d'usage"
-              value={nomUsage}
+              value={nomUsage || undefined}
               onChange={(e) => updateFields({ nomUsage: e.target.value })}
             />
             <label
@@ -232,7 +233,7 @@ function Structure1({
               name="prenom"
               placeholder="Prénom"
               pattern=".{3,}"
-              value={prenom}
+              value={prenom || undefined}
               onChange={(e) => updateFields({ prenom: e.target.value })}
             />
             <label
@@ -250,7 +251,7 @@ function Structure1({
               name="adresseStructure"
               pattern=".{10,} [0-9]{5} .{3,}"
               placeholder="N°, rue, CP, ville"
-              value={adresseStructure}
+              value={adresseStructure || undefined}
               onChange={(e) =>
                 updateFields({ adresseStructure: e.target.value })
               }
@@ -272,7 +273,7 @@ function Structure1({
               required
               type="tel"
               placeholder="0123456789"
-              value={telephone}
+              value={telephone || undefined}
               pattern="[0-9]{10}"
               onChange={(e) => updateFields({ telephone: e.target.value })}
             />
@@ -294,7 +295,10 @@ function Structure1({
   );
 }
 Structure1.propTypes = {
-  isCreche: Proptypes.node,
+  isCreche: oneOfType([
+    bool,
+    node
+  ]),
   typeCreche: Proptypes.string,
   nomStructure: Proptypes.string,
   telephone: Proptypes.string,

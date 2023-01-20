@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import axios from "axios";
-import { toast } from "react-hot-toast";
 
 import DashNavbar from "./nav/DashNavbar";
-import DashReservations from "./reservations/DashReservations";
-import DashAgenda from "./agenda/DashAgenda.jsx";
-import DashHours from "./hours/DashHours";
-import Messages from "../messages/Messages";
-import DashParams from "./parameters/DashParams";
 import DashMain from "./main/DashMain";
 import DashFooter from "./main/DashFooter";
 import DashNotif from "./main/DashNotif";

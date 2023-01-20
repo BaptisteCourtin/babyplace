@@ -20,6 +20,11 @@ function TheCard() {
 
   return (
     <main className="moyens-paiements">
+      <p>
+        Ne rentrez pas vos vrai informations de paiments, ça ne sert à rien, de
+        toute façon le bouton en bas vous emmène juste sur une autre page 😘
+      </p>
+      <br />
       <img src={CreditCard} alt="card" />
       <form>
         <label htmlFor="cardNumber">
@@ -74,7 +79,7 @@ function TheCard() {
           setter={setSauvegarde}
           state={sauvegarde}
           nom="sauvegarde"
-          p="Garder cette carte en mémoire"
+          p="Garder cette carte en mémoire (c'est faux, ça ne fait rien)"
         />
       </form>
     </main>

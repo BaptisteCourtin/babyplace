@@ -6,7 +6,6 @@ import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useEffect } from 'react';
 
-
 function Agenda({ structureId, getHoraires, horaires, toggleDay, setToggleDay, selected, setSelected, dayId, setDayId }) {
 
     const [toggleType, setToggleType] = useState(0);
@@ -27,6 +26,7 @@ function Agenda({ structureId, getHoraires, horaires, toggleDay, setToggleDay, s
                 id: 'horaires',
                 duration: 2000
             })
+            getHoraires()
         } catch (err) {
             console.error(err.message)
         }
@@ -152,4 +152,4 @@ function Agenda({ structureId, getHoraires, horaires, toggleDay, setToggleDay, s
     )
 }
 
-export default Agenda
+export default Agenda;

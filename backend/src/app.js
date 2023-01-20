@@ -4,6 +4,8 @@ const path = require("path");
 const cors = require("cors");
 const router = require("./router");
 const bodyParser = require("body-parser");
+const ws = require("./services/messagerie.service");
+
 const app = express();
 
 // use some application-level middlewares
@@ -29,6 +31,9 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 // API routes
 app.use(router);
+
+// Start websocket
+ws.open();
 
 // Redirect all requests to the REACT app
 const reactIndexFile = path.join(

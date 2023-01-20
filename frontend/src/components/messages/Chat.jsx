@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import Scrolltobottom from "react-scroll-to-bottom";
 import axios from "axios";
 import moment from "moment";
+import { toast } from "react-hot-toast";
 
 function Chat({ socket, username, room, title, joinRoom }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
   const [messageListData, setMessageListData] = useState([]);
+
 
   const saveMessage = (messageData) => {
     const { room, author, message, date } = messageData;
@@ -18,6 +20,7 @@ function Chat({ socket, username, room, title, joinRoom }) {
         date,
       })
       .then((res) => {
+        logged
         console.log(res.data);
       })
       .catch((err) => {
@@ -50,20 +53,17 @@ function Chat({ socket, username, room, title, joinRoom }) {
     });
   }, [socket]);
 
-  const getMessagesFromRoom = () => {
-    axios
-      .get("http://localhost:5000/messages/recup", {
+  const getMessagesFromRoom = async () => {
+    try {
+      const result = await axios.get(`http://localhost:5000/messages/recup/${room}`, {
         headers: {
           room,
         },
-      })
-      .then((ret) => {
-        console.warn(ret.data);
-        setMessageListData(ret.data[0]);
-      })
-      .catch((err) => {
-        console.error(err);
       });
+      setMessageListData(result.data);
+    } catch (err) {
+      toast.error(err.message);
+    };
   };
 
   useEffect(() => {

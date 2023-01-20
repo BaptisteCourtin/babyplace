@@ -7,6 +7,7 @@ import facebook from "@assets/facebook.svg";
 import twitter from "@assets/twitter.svg";
 import insta from "@assets/insta.svg";
 import { HashLink } from "react-router-hash-link";
+import { NavLink } from "react-router-dom";
 
 function Footer({ userType }) {
   return (
@@ -23,9 +24,11 @@ function Footer({ userType }) {
             </div>
           )}
           <div className="footerBtn">
-            <button type="button">En savoir plus</button>
+            <button type="button"><HashLink to="/contact#contact">En savoir plus</HashLink></button>
             <button type="button">
-              Demander une démo <span>➜</span>
+              <HashLink to="/contact#contact">
+                Demander une démo <span>➜</span>
+              </HashLink>
             </button>
           </div>
         </div>

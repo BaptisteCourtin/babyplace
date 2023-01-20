@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import logo from "@assets/logo4.svg";
 import logotxt from "@assets/babyplaceTxt.svg";
 import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 
 function Navbar({ userType, setUserType }) {
   return userType === "parent" ? (
@@ -19,17 +21,18 @@ function Navbar({ userType, setUserType }) {
         Vous êtes professionnel de la petite enfance ?
       </button>
       <div className="navRight">
-        <button type="button" className="textBtn">
+        <HashLink to="/contact#aide"><button type="button" className="textBtn">
           Besoin d'aide ?
-        </button>
-        <button type="button" className="connect">
-          <div>
-            <span>Se connecter</span>
-            <br />
-            <span>Gérer mes rdv</span>
-          </div>
-          <span className="arrow">➜</span>
-        </button>
+        </button></HashLink>
+        <NavLink to="/appli">
+          <button type="button" className="connect">
+            <div>
+              <span>Se connecter</span>
+              <br />
+              <span>Gérer mes rdv</span>
+            </div>
+            <span className="arrow">➜</span>
+          </button></NavLink>
       </div>
     </nav>
   ) : (

@@ -4,6 +4,8 @@ import avatar1 from "@assets/avatar1.svg";
 import PropTypes from "prop-types";
 
 function NotifAcceptee({ setCompo }) {
+  // prendre l'image famille et l'image creche
+
   return (
     <div className="notif-container-grad">
       <div className="notif-accepte">

@@ -1,433 +1,210 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import MultiRangeSlider from "multi-range-slider-react";
 import open from "@assets/dashboard/open-sign.svg";
 import close from "@assets/dashboard/closed-sign.svg";
 import DashCalendar from "@components/dashboard/agenda/Components/Calendar.DashAgenda";
 import PropTypes from "prop-types";
+=======
+import React, { useState, useEffect } from "react";
+import Calendar from "react-calendar";
+>>>>>>> 493a1dc6f76d572162ad38176b611e00087a35be
 
-function DashPlaces({ setHeureMin, setHeureMax, setJour, dataHorairesId }) {
-  // const { jourSemaine, ouvert, heureMin, heureMax, jourId } = dataHorairesId;
+import PropTypes from "prop-types";
 
-  const [toggleType, setToggleType] = useState(0);
-  const [toggleDay, setToggleDay] = useState("lundi");
+function AppliPlaces({ dataDateHeure, setDataDateHeure }) {
+  const value = new Date(); // date de base occas
+  const [isOccasionnel, setIsOccasionnel] = useState(0);
 
-  const [minValue, setMinValue] = useState(0);
-  const [maxValue, setMaxValue] = useState(0);
-  const handleSlider = (e) => {
-    setMinValue(e.minValue);
-    setMaxValue(e.maxValue);
-    // remonte les valeurs
-    setHeureMin(e.minValue);
-    setHeureMax(e.maxValue);
-    setJour(toggleDay);
+  const ChangeDateHeure = (e, what) => {
+    setDataDateHeure((prevState) => ({
+      ...prevState,
+      [what]: e,
+    }));
   };
+
+  // --- version occas
 
   const [clickedDay, setClickedDay] = useState(new Date());
-
-  const afficheDate = () => {
-    let jour = clickedDay.toString();
-    jour = jour.split(" ");
-    jour = `${jour[2]} ${jour[1]}  ${jour[3]}`;
-    return jour;
+  const chooseOneDay = (e) => {
+    setClickedDay(e);
+    let jour = e.toString().split(" ");
+    jour = `${jour[2]} ${jour[1]} ${jour[3]}`;
+    ChangeDateHeure(jour, "jour");
   };
 
-  const days = [
-    {
-      min: dataHorairesId ? dataHorairesId[0].heureMin : 8,
-      max: dataHorairesId ? dataHorairesId[0].heureMax : 18,
-      day: "lundi",
-    },
-    {
-      min: dataHorairesId ? dataHorairesId[1].heureMin : 8,
-      max: dataHorairesId ? dataHorairesId[1].heureMax : 18,
-      day: "mardi",
-    },
-    {
-      min: dataHorairesId ? dataHorairesId[2].heureMin : 8,
-      max: dataHorairesId ? dataHorairesId[2].heureMax : 18,
-      day: "mercredi",
-    },
-    {
-      min: dataHorairesId ? dataHorairesId[3].heureMin : 8,
-      max: dataHorairesId ? dataHorairesId[3].heureMax : 18,
-      day: "jeudi",
-    },
-    {
-      min: dataHorairesId ? dataHorairesId[4].heureMin : 8,
-      max: dataHorairesId ? dataHorairesId[4].heureMax : 18,
-      day: "vendredi",
-    },
-    {
-      min: dataHorairesId ? dataHorairesId[5].heureMin : 8,
-      max: dataHorairesId ? dataHorairesId[5].heureMax : 18,
-      day: "samedi",
-    },
-    {
-      min: dataHorairesId ? dataHorairesId[6].heureMin : 8,
-      max: dataHorairesId ? dataHorairesId[6].heureMax : 18,
-      day: "dimanche",
-    },
-  ];
-
   return (
-    <div className="appli-dashPlaces">
-      <div className="dashPlacesType">
+    <div className="app-calendar">
+      <div className="recu-occas">
         <button
           type="button"
-          onClick={() => setToggleType(0)}
-          className={toggleType === 0 ? "selected" : ""}
+          onClick={() => setIsOccasionnel(0)}
+          className={isOccasionnel === 0 ? "selected" : ""}
         >
           Récurrent
         </button>
         <button
           type="button"
-          onClick={() => setToggleType(1)}
-          className={toggleType === 1 ? "selected" : ""}
+          onClick={() => setIsOccasionnel(1)}
+          className={isOccasionnel === 1 ? "selected" : ""}
         >
           Occasionnel
         </button>
       </div>
-      {toggleType === 0 ? (
-        <div className="dashPlacesRange">
-          {days.map(
-            (each) =>
-              each.day === toggleDay && (
-                <>
-                  {/* ternaire suivant si structure ou filtres */}
-                  {dataHorairesId ? (
-                    <ul className="dashPlacesDays">
-                      {dataHorairesId[0].ouvert ? (
-                        <li>
-                          <input
-                            type="radio"
-                            name="days"
-                            id="lundi"
-                            value="lundi"
-                            onChange={(e) => setToggleDay(e.target.value)}
-                          />
-                          <label
-                            htmlFor="lundi"
-                            className={toggleDay === "lundi" ? "selected" : ""}
-                          >
-                            L
-                          </label>
-                        </li>
-                      ) : (
-                        <li>
-                          <label>
-                            <p className="nope-cross">X</p>
-                          </label>
-                        </li>
-                      )}
-                      {dataHorairesId[1].ouvert ? (
-                        <li>
-                          <input
-                            type="radio"
-                            name="days"
-                            id="mardi"
-                            value="mardi"
-                            onChange={(e) => setToggleDay(e.target.value)}
-                          />
-                          <label
-                            htmlFor="mardi"
-                            className={toggleDay === "mardi" ? "selected" : ""}
-                          >
-                            M
-                          </label>
-                        </li>
-                      ) : (
-                        <li>
-                          <label>
-                            <p className="nope-cross">X</p>
-                          </label>
-                        </li>
-                      )}
+      {/* ternaire suivant récurrent ou occasionnel */}
+      {isOccasionnel === 0 ? (
+        <div className="calendar-recur">
+          <div className="container-days">
+            <li>
+              <input
+                type="radio"
+                name="jour"
+                id="Lundi"
+                value="Lundi"
+                onChange={(e) => ChangeDateHeure(e.target.value, "jour")}
+              />
+              <label htmlFor="Lundi">L</label>
+            </li>
+            <li>
+              <input
+                type="radio"
+                name="jour"
+                id="Mardi"
+                value="Mardi"
+                onChange={(e) => ChangeDateHeure(e.target.value, "jour")}
+              />
+              <label htmlFor="Mardi">M</label>
+            </li>
+            <li>
+              <input
+                type="radio"
+                name="jour"
+                id="Mercredi"
+                value="Mercredi"
+                onChange={(e) => ChangeDateHeure(e.target.value, "jour")}
+              />
+              <label htmlFor="Mercredi">M</label>
+            </li>
+            <li>
+              <input
+                type="radio"
+                name="jour"
+                id="Jeudi"
+                value="Jeudi"
+                onChange={(e) => ChangeDateHeure(e.target.value, "jour")}
+              />
+              <label htmlFor="Jeudi">J</label>
+            </li>
+            <li>
+              <input
+                type="radio"
+                name="jour"
+                id="Vendredi"
+                value="Vendredi"
+                onChange={(e) => ChangeDateHeure(e.target.value, "jour")}
+              />
+              <label htmlFor="Vendredi">V</label>
+            </li>
+            <li>
+              <input
+                type="radio"
+                name="jour"
+                id="Samedi"
+                value="Samedi"
+                onChange={(e) => ChangeDateHeure(e.target.value, "jour")}
+              />
+              <label htmlFor="Samedi">S</label>
+            </li>
+            <li>
+              <input
+                type="radio"
+                name="jour"
+                id="Dimanche"
+                value="Dimanche"
+                onChange={(e) => ChangeDateHeure(e.target.value, "jour")}
+              />
+              <label htmlFor="Dimanche">D</label>
+            </li>
+          </div>
 
-                      {dataHorairesId[2].ouvert ? (
-                        <li>
-                          <input
-                            type="radio"
-                            name="days"
-                            id="mercredi"
-                            value="mercredi"
-                            onChange={(e) => setToggleDay(e.target.value)}
-                          />
-                          <label
-                            htmlFor="mercredi"
-                            className={
-                              toggleDay === "mercredi" ? "selected" : ""
-                            }
-                          >
-                            M
-                          </label>
-                        </li>
-                      ) : (
-                        <li>
-                          <label>
-                            <p className="nope-cross">X</p>
-                          </label>
-                        </li>
-                      )}
-
-                      {dataHorairesId[3].ouvert ? (
-                        <li>
-                          <input
-                            type="radio"
-                            name="days"
-                            id="jeudi"
-                            value="jeudi"
-                            onChange={(e) => setToggleDay(e.target.value)}
-                          />
-                          <label
-                            htmlFor="jeudi"
-                            className={toggleDay === "jeudi" ? "selected" : ""}
-                          >
-                            J
-                          </label>
-                        </li>
-                      ) : (
-                        <li>
-                          <label>
-                            <p className="nope-cross">X</p>
-                          </label>
-                        </li>
-                      )}
-
-                      {dataHorairesId[4].ouvert ? (
-                        <li>
-                          <input
-                            type="radio"
-                            name="days"
-                            id="vendredi"
-                            value="vendredi"
-                            onChange={(e) => setToggleDay(e.target.value)}
-                          />
-                          <label
-                            htmlFor="vendredi"
-                            className={
-                              toggleDay === "vendredi" ? "selected" : ""
-                            }
-                          >
-                            V
-                          </label>
-                        </li>
-                      ) : (
-                        <li>
-                          <label>
-                            <p className="nope-cross">X</p>
-                          </label>
-                        </li>
-                      )}
-
-                      {dataHorairesId[5].ouvert ? (
-                        <li>
-                          <input
-                            type="radio"
-                            name="days"
-                            id="samedi"
-                            value="samedi"
-                            onChange={(e) => setToggleDay(e.target.value)}
-                          />
-                          <label
-                            htmlFor="samedi"
-                            className={toggleDay === "samedi" ? "selected" : ""}
-                          >
-                            S
-                          </label>
-                        </li>
-                      ) : (
-                        <li>
-                          <label>
-                            <p className="nope-cross">X</p>
-                          </label>
-                        </li>
-                      )}
-                      {dataHorairesId[6].ouvert ? (
-                        <li>
-                          <input
-                            type="radio"
-                            name="days"
-                            id="dimanche"
-                            value="dimanche"
-                            onChange={(e) => setToggleDay(e.target.value)}
-                          />
-                          <label
-                            htmlFor="dimanche"
-                            className={
-                              toggleDay === "dimanche" ? "selected" : ""
-                            }
-                          >
-                            D
-                          </label>
-                        </li>
-                      ) : (
-                        <li>
-                          <label>
-                            <p className="nope-cross">X</p>
-                          </label>
-                        </li>
-                      )}
-                    </ul>
-                  ) : (
-                    <ul className="dashPlacesDays">
-                      <li>
-                        <input
-                          type="radio"
-                          name="days"
-                          id="lundi"
-                          value="lundi"
-                          onChange={(e) => setToggleDay(e.target.value)}
-                        />
-                        <label
-                          htmlFor="lundi"
-                          className={toggleDay === "lundi" ? "selected" : ""}
-                        >
-                          L
-                        </label>
-                      </li>
-
-                      <li>
-                        <input
-                          type="radio"
-                          name="days"
-                          id="mardi"
-                          value="mardi"
-                          onChange={(e) => setToggleDay(e.target.value)}
-                        />
-                        <label
-                          htmlFor="mardi"
-                          className={toggleDay === "mardi" ? "selected" : ""}
-                        >
-                          M
-                        </label>
-                      </li>
-
-                      <li>
-                        <input
-                          type="radio"
-                          name="days"
-                          id="mercredi"
-                          value="mercredi"
-                          onChange={(e) => setToggleDay(e.target.value)}
-                        />
-                        <label
-                          htmlFor="mercredi"
-                          className={toggleDay === "mercredi" ? "selected" : ""}
-                        >
-                          M
-                        </label>
-                      </li>
-
-                      <li>
-                        <input
-                          type="radio"
-                          name="days"
-                          id="jeudi"
-                          value="jeudi"
-                          onChange={(e) => setToggleDay(e.target.value)}
-                        />
-                        <label
-                          htmlFor="jeudi"
-                          className={toggleDay === "jeudi" ? "selected" : ""}
-                        >
-                          J
-                        </label>
-                      </li>
-
-                      <li>
-                        <input
-                          type="radio"
-                          name="days"
-                          id="vendredi"
-                          value="vendredi"
-                          onChange={(e) => setToggleDay(e.target.value)}
-                        />
-                        <label
-                          htmlFor="vendredi"
-                          className={toggleDay === "vendredi" ? "selected" : ""}
-                        >
-                          V
-                        </label>
-                      </li>
-
-                      <li>
-                        <input
-                          type="radio"
-                          name="days"
-                          id="samedi"
-                          value="samedi"
-                          onChange={(e) => setToggleDay(e.target.value)}
-                        />
-                        <label
-                          htmlFor="samedi"
-                          className={toggleDay === "samedi" ? "selected" : ""}
-                        >
-                          S
-                        </label>
-                      </li>
-
-                      <li>
-                        <input
-                          type="radio"
-                          name="days"
-                          id="dimanche"
-                          value="dimanche"
-                          onChange={(e) => setToggleDay(e.target.value)}
-                        />
-                        <label
-                          htmlFor="dimanche"
-                          className={toggleDay === "dimanche" ? "selected" : ""}
-                        >
-                          D
-                        </label>
-                      </li>
-                    </ul>
-                  )}
-
-                  {/* voir pour les demi / quart d'heure */}
-                  <MultiRangeSlider
-                    min={dataHorairesId ? each.min.split(":")[0] : 0}
-                    max={dataHorairesId ? each.max.split(":")[0] : 24}
-                    minValue={
-                      dataHorairesId ? each.min.split(":")[0] : each.min
-                    }
-                    maxValue={
-                      dataHorairesId ? each.max.split(":")[0] : each.max
-                    }
-                    step={1}
-                    onInput={(e) => {
-                      handleSlider(e);
-                    }}
-                  />
-                  <div className="dashRangeValues">
-                    <p>
-                      <img src={open} alt="open" /> Ouvre à : {minValue}H
-                    </p>
-                    <p>
-                      <img src={close} alt="close" /> Ferme à: {maxValue}H
-                    </p>
-                  </div>
-                </>
-              )
-          )}
+          <div className="choose-hour">
+            <p className="zzz">
+              {`Vous avez choisi ->`} <span>{dataDateHeure.jour}</span>
+            </p>
+            <div className="my-hour">
+              <p>Ouvert de </p>
+              <div className="horaireOuvert">
+                <input
+                  type="time"
+                  value={dataDateHeure.heureMin}
+                  onChange={(e) => {
+                    ChangeDateHeure(e, "heureMin");
+                  }}
+                ></input>
+                <p>à</p>
+                <input
+                  type="time"
+                  value={dataDateHeure.heureMin}
+                  onChange={(e) => {
+                    ChangeDateHeure(e, "heureMax");
+                  }}
+                ></input>
+              </div>
+            </div>
+          </div>
         </div>
       ) : (
-        <div className="appli-calendar">
-          <DashCalendar setClickedDay={setClickedDay} clickedDay={clickedDay} />
+        // ---------------------------
+        // si toggle = 1 = occas
+        // ---------------------------
+        <div className="calendar-occas">
+          <Calendar
+            locale="fr"
+            showNeighboringMonth={false}
+            value={clickedDay}
+            minDetail="month"
+            maxDetail="month"
+            minDate={value}
+            onClickDay={(e) => {
+              chooseOneDay(e);
+            }}
+          />
+
           <p>
-            {`Vous avez choisi ->`} <span>{afficheDate()}</span>
+            {`Vous avez choisi ->`} <span>{dataDateHeure.jour}</span>
           </p>
+
+          <div className="choose-hour">
+            <div className="my-hour">
+              <p>Ouvert de </p>
+              <div className="horaireOuvert">
+                <input
+                  type="time"
+                  value={dataDateHeure.heureMin}
+                  onChange={(e) => {
+                    ChangeDateHeure(e, "heureMin");
+                  }}
+                ></input>
+                <p>à</p>
+                <input
+                  type="time"
+                  value={dataDateHeure.heureMin}
+                  onChange={(e) => {
+                    ChangeDateHeure(e, "heureMax");
+                  }}
+                ></input>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>
   );
 }
 
-DashPlaces.propTypes = {
-  setHeureMin: PropTypes.func.isRequired,
-  setHeureMax: PropTypes.func.isRequired,
-  setJour: PropTypes.func.isRequired,
-  dataHorairesId: PropTypes.array.isRequired,
+AppliPlaces.propTypes = {
+  dataDateHeure: PropTypes.object.isRequired,
+  setDataDateHeure: PropTypes.func.isRequired,
 };
 
-export default DashPlaces;
+export default AppliPlaces;
