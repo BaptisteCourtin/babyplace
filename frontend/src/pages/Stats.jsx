@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { toast } from 'react-hot-toast'
 import { useEffect } from 'react'
-import Nav from '@components/dashboard/admin/Nav.admin';
+import Nav from '@components/dashboard/admin/Nav.Admin';
 
 function Stats() {
 

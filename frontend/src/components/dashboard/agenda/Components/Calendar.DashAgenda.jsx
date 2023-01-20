@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Calendar from "react-calendar";
 
-function DashCalendar({
+function CalendarDashAgenda({
   setClickedDay,
   clickedDay,
   setPlaces,
@@ -25,9 +25,9 @@ function DashCalendar({
   );
 }
 
-export default DashCalendar;
+export default CalendarDashAgenda;
 
-DashCalendar.propTypes = {
+CalendarDashAgenda.propTypes = {
   clickedDay: PropTypes.string.isRequired,
   setClickedDay: PropTypes.func.isRequired,
 };

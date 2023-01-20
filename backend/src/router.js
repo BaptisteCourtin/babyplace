@@ -62,8 +62,16 @@ router.put("/calendrier/places/open/:id", calendrier.updateStatusOpen);
 router.put("/logout/:id", structure.logout);
 
 router.post("/calendrier/add", calendrier.postDate);
-router.post("/dashboard/docs", upload.single(`file`), structure.uploadProfil);
-router.post('/uploads', async (req, res, next) => {
+router.post("/dashboard/docs", structure.uploadProfil);
+
+const multerMid = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 5 * 1024 * 1024,
+  },
+})
+
+router.post('/uploads', multerMid.single('file'), async (req, res, next) => {
   try {
     const file = req.file
     const result = await uploadDoc(file)

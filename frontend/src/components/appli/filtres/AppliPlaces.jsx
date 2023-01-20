@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import MultiRangeSlider from "multi-range-slider-react";
 import open from "@assets/dashboard/open-sign.svg";
 import close from "@assets/dashboard/closed-sign.svg";
-import DashCalendar from "@components/dashboard/agenda/calendar/DashCalendar";
+import DashCalendar from "@components/dashboard/agenda/Components/Calendar.DashAgenda";
 import PropTypes from "prop-types";
 
 function DashPlaces({ setHeureMin, setHeureMax, setJour, dataHorairesId }) {

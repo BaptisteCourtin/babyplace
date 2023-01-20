@@ -15,7 +15,6 @@ const uploadDoc = (file) => new Promise((resolve, reject) => {
     let { originalname, buffer } = file
     const date = new Date();
     originalname = `${Math.round(Math.random() * 10000)}${date.getHours()}${date.getMinutes()}${date.getSeconds()}${date.getMilliseconds()}${originalname}`;
-    console.log(originalname)
     const blob = bucket.file(originalname.replace(/ /g, "_"))
     const blobStream = blob.createWriteStream({
         resumable: false

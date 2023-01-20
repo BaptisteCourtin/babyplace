@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import MultiRangeSlider from "multi-range-slider-react";
 import open from "@assets/dashboard/open-sign.svg";
 import close from "@assets/dashboard/closed-sign.svg";
-import DashCalendar from "../../agenda/calendar/DashCalendar";
+import DashCalendar from "../../agenda/Components/Calendar.DashAgenda";
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useEffect } from 'react';
