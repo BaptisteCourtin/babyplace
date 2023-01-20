@@ -5,7 +5,7 @@ import DashParams from "@components/dashboard/parameters/DashParams";
 import DashReservations from "@components/dashboard/reservations/DashReservations";
 import Messages from "@components/messages/Messages";
 
-export const usePageToggle = (data, userType, getData) => {
+export const usePageToggle = (data) => {
   const [toggle, setToggle] = useState(0);
   const pageShown = () => {
     if (toggle === 1) {

@@ -1,7 +1,7 @@
 const datasource = require("../../database")
 
-const updateHours = async (value, id, jourId, state) => {
-    const [result] = await datasource.query(`UPDATE horaires SET ${state} = ? WHERE structureId = ? AND jourId = ?`, [value, id, jourId])
+const updateHours = async (id, value, state) => {
+    const [result] = await datasource.query(`UPDATE horaires SET ${state} = ? WHERE horairesId = ?`, [value, id])
     return result
 }
 
