@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 import {
   AiOutlineEye,
   AiOutlineEyeInvisible,
@@ -8,7 +7,6 @@ import {
 } from "react-icons/ai";
 import ReactModal from 'react-modal';
 import UserEmailContext from "@components/context/UserEmailContext";
-import ReactModal from 'react-modal';
 import toast from "react-hot-toast";
 import Axios from "axios";
 

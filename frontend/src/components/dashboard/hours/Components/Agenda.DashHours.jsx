@@ -7,12 +7,6 @@ import DayOffDashAgenda from './Agenda/DayOff.DashAgenda';
 
 function Agenda({ getHoraires, updateHours, updateDay, horaires, toggleDay, setToggleDay, selected, setSelected, dayId, setDayId, setHorairesId }) {
 
-  const { updateHours, updateDay } = usePutHours(
-    structureId,
-    getHoraires,
-    dayId
-  );
-
   useEffect(() => {
     getHoraires();
   }, [hoursOpen, hoursClose]);
