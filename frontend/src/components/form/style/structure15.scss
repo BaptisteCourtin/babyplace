@@ -25,37 +25,36 @@
       border-radius: 10px;
       padding: 20px 4px 4px;
       margin: 0 4px;
-      border: 1px solid $grey;
       height: 50px;
       position: relative;
-      width: 205px;
+      width: 215px;
     }
 
     & input:focus {
       outline: 1.5px solid $third;
     }
 
-    // & input:valid {
-    //   border: 2px solid $green;
-    // }
+    & .input {
+      border: 1px solid $grey;
+
+    }
+
+    & .inputChecked {
+      border: 2px solid $green;
+    }
 
     & .labelChecked {
       color: $green;
     }
 
     .checkSymbol {
-      display: none;
+      position: absolute;
+      transform: translateX(180px) translateY(6px);
+      font-size: 2rem;
+      color: $green;
+      display: initial;
     }
 
-    & input:valid {
-      & .checkSymbol {
-        position: absolute;
-        transform: translateX(170px) translateY(6px);
-        font-size: 2rem;
-        color: $green;
-        display: initial;
-      }
-    }
 
     & label {
       position: absolute;
