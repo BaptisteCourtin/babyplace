@@ -1,8 +1,8 @@
 const datasource = require("../../database");
 
-const getReser = async () => {
+const getReser = async (id) => {
     const [result] = await datasource.query(
-        "SELECT * FROM reservation",
+        "SELECT * FROM reservation WHERE structureId = ?", [id],
     );
     return result;
 };

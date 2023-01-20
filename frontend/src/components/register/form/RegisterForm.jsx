@@ -142,6 +142,7 @@ function RegisterForm() {
         shouldCloseOnEsc={true}
         onRequestClose={() => setModalIsOpen(false)}
         ariaHideApp={false}
+        className="waitingModal"
         style={{
           overlay: {
             backgroundColor: "#000000",

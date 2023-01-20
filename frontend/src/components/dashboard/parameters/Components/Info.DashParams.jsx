@@ -3,6 +3,7 @@ import React from "react";
 function InfoDashParams({
   userType,
   updateFields,
+  nom,
   nomUsage,
   nomNaissance,
   prenom,
