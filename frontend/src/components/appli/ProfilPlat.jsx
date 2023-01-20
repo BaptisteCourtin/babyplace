@@ -43,12 +43,7 @@ function ProfilPlat() {
       <div className="profil-plat">
         <div className="container-image">
           {photoFamille ? (
-            <img
-              src={`${
-                import.meta.env.VITE_PATH
-              }/uploads/photoFamille/${photoFamille}`}
-              alt="avatar"
-            />
+            <img src={photoFamille} alt="avatar" />
           ) : (
             <AiOutlineUser />
           )}

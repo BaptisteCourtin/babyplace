@@ -23,14 +23,9 @@ function NotifRejetee({ setCompo, photoFamille }) {
         <img src={logoBlanc} alt="logo-blanc" className="logo" />
         <div className="avatars">
           {photoFamille ? (
-            <img
-              src={`${
-                import.meta.env.VITE_PATH
-              }/uploads/photoFamille/${photoFamille}`}
-              alt="avatar"
-            />
+            <img src={photoFamille} alt="avatar" className="avatar" />
           ) : (
-            <AiOutlineUser />
+            <AiOutlineUser className="avatar" />
           )}
           <img src={avatar1} alt="img creche" className="avatar" />
         </div>
