@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-hot-toast";
 
-export const usePutHours = (structureId, userType, getData) => {
+export const usePutHours = (structureId, userType, getData, getHoraires, dayId) => {
     const updateTarif = async (tarif, value) => {
         try {
             await axios.put(`${import.meta.env.VITE_PATH}/dashboard/tarif/${structureId}`, {
@@ -49,5 +49,39 @@ export const usePutHours = (structureId, userType, getData) => {
         }
     }
 
-    return { updateIndemn, updateOptions, updateTarif }
+    const updateHours = async (value, type, state) => {
+        try {
+            type(value)
+            await axios.put(`${import.meta.env.VITE_PATH}/dashboard/hours/${structureId}`, {
+                id: structureId,
+                value: value,
+                state: state,
+                jourId: dayId,
+            })
+            toast.success("Vos horaires ont bien été modifiés", {
+                id: 'horaires',
+                duration: 2000
+            })
+            getHoraires()
+        } catch (err) {
+            console.error(err.message)
+        }
+    }
+
+    const updateDay = async (value) => {
+        setToggleDay(!toggleDay);
+        try {
+            await axios.put(`${import.meta.env.VITE_PATH}/horaires/day/${dayId}`, {
+                id: dayId,
+                structureId: structureId,
+                value: value,
+            });
+            toast.success("Vos préférences ont bien été modifiées");
+            getHoraires();
+        } catch (err) {
+            console.error(err.message);
+        }
+    };
+
+    return { updateIndemn, updateOptions, updateTarif, updateHours, updateDay }
 }
