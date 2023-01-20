@@ -103,6 +103,7 @@ function DashParams({
         handleSubmitInfo={handleSubmitInfo}
         userType={userType}
         updateFields={updateFields}
+        nom={nom}
         nomUsage={nomUsage}
         nomNaissance={nomNaissance}
         prenom={prenom}
