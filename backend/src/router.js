@@ -1266,8 +1266,10 @@ router.post("/auth", async (req, res) => {
             console.error(err);
             res.status(500).send("Erreur de connexion");
           });
-      } else {
+      } else if (user && req.body.password !== user.password) {
         res.status(401).send("Email ou mot de passe incorrect");
+      } else {
+        res.status(404).send("Votre compte n'est pas encore vérifié")
       }
     })
     .catch((err) => {
