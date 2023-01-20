@@ -167,6 +167,22 @@ const deleteConfiance = async (req) => {
   return result;
 };
 
+const nullOneDocFormParent = async (req) => {
+  const [result] = await datasource.query(
+    `UPDATE parent SET ${req.body.nomFichier} = NULL WHERE parentId = ?`,
+    [req.params.id]
+  );
+  return result;
+};
+
+const nullOneDocFormCommun = async (req) => {
+  const [result] = await datasource.query(
+    `UPDATE famille SET ${req.body.nomFichier} = NULL WHERE familleId = ?`,
+    [req.params.id]
+  );
+  return result;
+};
+
 module.exports = {
   getPersoConfiance,
   postReservation,
@@ -184,4 +200,6 @@ module.exports = {
   deleteConfiance,
   postNewConfiance,
   getFamilleInfo,
+  nullOneDocFormParent,
+  nullOneDocFormCommun,
 };

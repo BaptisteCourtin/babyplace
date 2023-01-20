@@ -6,7 +6,14 @@ const fs = require("fs");
 const multer = require("multer");
 const upload = multer({ dest: "public/uploads/" });
 const { v4: uuidv4 } = require("uuid");
-const uploadDoc = require('./helpers/helper')
+const uploadDoc = require("./helpers/helper");
+
+const multerMid = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 5 * 1024 * 1024,
+  },
+});
 
 const structure = require("./controllers/structure.controllers");
 const horaires = require("./controllers/horaires.controllers");
@@ -130,6 +137,8 @@ router.put("/structure/notes/:id", structure.updateNotes); //notes
 router.put("/structure/signal/:id", structure.updateSignal); // signalement
 router.put("/formParent/:id", famille.updateFormParent); // formulaire parent
 router.put("/formEnfant/:id", famille.updateFormEnfant); // formulaire enfant
+router.put("/parent/nullOneDocForm/:id", famille.nullOneDocFormParent); // delete un doc du form inscription parent
+router.put("/famille/nullOneDocForm/:id", famille.nullOneDocFormCommun); // delete un doc du form inscription commun
 
 router.post("/reservation", famille.postReservation); // reservation
 router.post("/famille/newEnfant", famille.postNewEnfant); // nouveau enfant
@@ -145,35 +154,15 @@ router.delete("/contact/message/all/:id", messageAdmin.deleteMessagebyId); // de
 // mettre dans uploads et change nom
 router.post(
   "/formInscription/docParent",
-  multer({
-    storage: multer.diskStorage({
-      destination: (req, file, cb) => {
-        cb(null, "./public/uploads/formInscriptionParents");
-      },
-      filename: (req, file, cb) => {
-        const date = new Date();
-        cb(
-          null,
-          Math.round(Math.random() * 1000) +
-          `${date.getMinutes()}${date.getSeconds()}` +
-          Math.round(Math.random() * 1000) +
-          "-qws-" +
-          file.originalname
-          // nom avec des chiffres + nom d'origine du fichier
-        );
-      },
-    }),
-  }).fields([
-    // nom envoyer par formData
-    { name: "docJustifRevenus", maxCount: 1 },
-    { name: "docDeclaRevenus", maxCount: 1 },
-    { name: "docSituationPro", maxCount: 1 },
-    { name: "docJustifDom", maxCount: 1 },
-    { name: "numCaf", maxCount: 1 },
-    { name: "numSecu", maxCount: 1 },
-  ]),
-  (req, res) => {
-    res.send(req.files);
+  multerMid.single("file"),
+  async (req, res, next) => {
+    try {
+      const file = req.file;
+      const result = await uploadDoc(file);
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
   }
 );
 
@@ -187,19 +176,24 @@ router.put("/formInscription/docParentChangeName/:id", (req, res) => {
     numCaf,
     numSecu,
   } = req.body;
+
+  let toSave = "";
+  [
+    { docJustifRevenus },
+    { docDeclaRevenus },
+    { docSituationPro },
+    { docJustifDom },
+    { numCaf },
+    { numSecu },
+  ].forEach((el) => {
+    if (Object.values(el)[0] !== undefined) {
+      let key = Object.keys(el)[0];
+      toSave += key + "= '" + el[key] + "'";
+    }
+  });
+
   datasource
-    .query(
-      "UPDATE parent SET docJustifRevenus=?, docDeclaRevenus=?, docSituationPro=?, docJustifDom=?, numCaf=?, numSecu=? WHERE parentId=?",
-      [
-        docJustifRevenus,
-        docDeclaRevenus,
-        docSituationPro,
-        docJustifDom,
-        numCaf,
-        numSecu,
-        req.params.id,
-      ]
-    )
+    .query(`UPDATE parent SET ${toSave} WHERE parentId=?`, [req.params.id])
     .then(([parent]) => {
       if (parent.affectedRows === 0) {
         res.status(404).send("Not Found");
@@ -217,46 +211,75 @@ router.put("/formInscription/docParentChangeName/:id", (req, res) => {
 // mettre dans uploads et change nom
 router.post(
   "/formInscription/docFamille",
-  multer({
-    storage: multer.diskStorage({
-      destination: (req, file, cb) => {
-        cb(null, "./public/uploads/formInscriptionFamille");
-      },
-      filename: (req, file, cb) => {
-        const date = new Date();
-        cb(
-          null,
-          Math.round(Math.random() * 1000) +
-          `${date.getMinutes()}${date.getSeconds()}` +
-          Math.round(Math.random() * 1000) +
-          "-qws-" +
-          file.originalname
-          // nom avec des chiffres + nom d'origine du fichier
-        );
-      },
-    }),
-  }).fields([
-    // nom envoyer par formData
-    { name: "docAssurParent", maxCount: 1 },
-    { name: "docRib", maxCount: 1 },
-    { name: "docAutoImage", maxCount: 1 },
-    { name: "docDivorce", maxCount: 1 },
-  ]),
-  (req, res) => {
-    res.send(req.files);
+  multerMid.single("file"),
+  async (req, res, next) => {
+    try {
+      console.log("req.file", req.file);
+      const file = req.file;
+      const result = await uploadDoc(file);
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
   }
 );
 
 // mise dans bdd
 router.put("/formInscription/docFamilleChangeName/:id", (req, res) => {
   const { docAssurParent, docRib, docAutoImage, docDivorce } = req.body;
+
+  let toSave = "";
+  [{ docAssurParent }, { docRib }, { docAutoImage }, { docDivorce }].forEach(
+    (el) => {
+      if (Object.values(el)[0] !== undefined) {
+        let key = Object.keys(el)[0];
+        toSave += key + "= '" + el[key] + "'";
+      }
+    }
+  );
+
   datasource
-    .query(
-      "UPDATE famille SET docAssurParent=?, docRib=?, docAutoImage=?, docDivorce=? WHERE familleId=?",
-      [docAssurParent, docRib, docAutoImage, docDivorce, req.params.id]
-    )
+    .query(`UPDATE famille SET ${toSave} WHERE familleId=?`, [req.params.id])
     .then(([parent]) => {
       if (parent.affectedRows === 0) {
+        res.status(404).send("Not Found");
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Modification impossible");
+    });
+});
+
+// PHOTO DE PROFIL FAMILLE
+// mettre dans uploads et change nom
+
+router.post(
+  "/famille/photoProfil",
+  multerMid.single("file"),
+  async (req, res, next) => {
+    try {
+      const file = req.file;
+      const result = await uploadDoc(file);
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+// mise dans bdd
+router.put("/famille/photoProfil/:id", (req, res) => {
+  const { photoFamille } = req.body;
+  datasource
+    .query("UPDATE famille SET photoProfilFamille=? WHERE familleId=?", [
+      photoFamille,
+      req.params.id,
+    ])
+    .then(([famille]) => {
+      if (famille.affectedRows === 0) {
         res.status(404).send("Not Found");
       } else {
         res.sendStatus(204);
@@ -303,21 +326,19 @@ router.put("/calendrier/places/open/:id", calendrier.updateStatusOpen);
 router.put("/logout/:id", structure.logout);
 
 router.post("/calendrier/add", calendrier.postDate);
-router.post("/dashboard/docs", upload.single(`file`), structure.uploadProfil);
-router.post('/uploads', async (req, res, next) => {
+router.post("/dashboard/docs", structure.uploadProfil);
+router.post('/uploads', multerMid.single('file'), async (req, res, next) => {
   try {
-    const file = req.file
-    const result = await uploadDoc(file)
-    res
-      .status(200)
-      .json(result)
+    const file = req.file;
+    const result = await uploadDoc(file);
+    res.status(200).json(result);
   } catch (error) {
-    next(error)
+    next(error);
   }
-})
+});
 
 router.delete("/calendrier", calendrier.deleteDates);
-router.delete("/calendrier/:id", calendrier.fullDate)
+router.delete("/calendrier/:id", calendrier.fullDate);
 router.delete("/admin/refused/:id", structure.deleteRefused);
 router.delete("/notifications/:id", notification.deleteNotification);
 //Routes for dashboard + admin page end
@@ -565,41 +586,30 @@ router.post("/inscriptionAssmat1", (req, res) => {
 });
 
 router.get("/calendrierExist", (req, res) => {
-  datasource.query(
-    "SELECT calendrier.date FROM calendrier WHERE structureId= ? AND nbPlaces=-1",
-    [req.query.id]
-  ).then(([result]) => {
-    res.send(result).status(200)
-  }).catch((err) => {
-    console.error(err);
-    res.status(500).send("Accès impossible");
-  });
-})
-
-router.delete("/calendrierIndispo", (req, res) => {
-  const { structureId, date } = req.query
-  datasource.query(
-    "DELETE FROM calendrier WHERE structureId= ? AND date = ?",
-    [structureId, date]
-  ).then((result) => {
-    res.sendStatus(200)
-  }).catch((err) => {
-    console.error(err);
-    res.status(500).send("Suppression impossible");
-  });
-})
-
+  datasource
+    .query(
+      "SELECT calendrier.date FROM calendrier WHERE structureId= ? AND nbPlaces=-1",
+      [req.query.id]
+    )
+    .then(([result]) => {
+      res.send(result).status(200);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Accès impossible");
+    });
+});
 router.get("/horairesExist", (req, res) => {
-  datasource.query(
-    "SELECT * FROM horaires WHERE structureId= ?",
-    [req.query.id]
-  ).then(([result]) => {
-    res.send(result).status(200)
-  }).catch((err) => {
-    console.error(err);
-    res.status(500).send("Accès impossible");
-  });
-})
+  datasource
+    .query("SELECT * FROM horaires WHERE structureId= ?", [req.query.id])
+    .then(([result]) => {
+      res.send(result).status(200);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Accès impossible");
+    });
+});
 
 const storageAvatar = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -617,7 +627,6 @@ const storageAvatar = multer.diskStorage({
 const uploadAvatar = multer({ storage: storageAvatar });
 
 router.post("/photoProfil", uploadAvatar.single("avatar"), (req, res) => {
-  console.log(req.file)
   res.send(req.file);
 });
 

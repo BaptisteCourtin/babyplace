@@ -1,30 +1,20 @@
 import React from "react";
 
-const OneFormInscr = ({ init, src, nomDoc, handleSupp, p, what }) => {
-  let That = "";
-  if (what === 1) {
-    That = "Parents";
-  }
-  if (what === 2) {
-    That = "Famille";
-  }
-
+const OneFormInscr = ({ init, src, nomDoc, handleSupp, p, who }) => {
   return (
     <div className="champ">
       <p>{p}</p>
       {init !== null && init !== "" ? (
         <div className="with-init">
-          <button type="button" name={nomDoc} onClick={(e) => handleSupp(e)}>
+          <button
+            type="button"
+            name={nomDoc}
+            onClick={(e) => handleSupp(e, who)}
+          >
             Supp
           </button>
 
-          <a
-            href={`${
-              import.meta.env.VITE_PATH
-            }/uploads/formInscription${That}/${init}`}
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href={init} target="_blank" rel="noreferrer">
             {init.split("-qws-")[1]}
           </a>
         </div>

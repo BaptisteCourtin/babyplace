@@ -3,7 +3,6 @@ const fs = require("fs");
 const path = require("path");
 const cors = require("cors");
 const router = require("./router");
-const multer = require("multer");
 const bodyParser = require("body-parser");
 const ws = require("./services/messagerie.service");
 
