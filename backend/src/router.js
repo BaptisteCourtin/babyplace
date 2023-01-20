@@ -6,7 +6,7 @@ const fs = require("fs");
 const multer = require("multer");
 const upload = multer({ dest: "public/uploads/" });
 const { v4: uuidv4 } = require("uuid");
-const uploadDoc = require("./helpers/helper");
+const uploadDoc = require('./helpers/helper')
 
 const structure = require("./controllers/structure.controllers");
 const horaires = require("./controllers/horaires.controllers");
@@ -268,39 +268,6 @@ router.put("/formInscription/docFamilleChangeName/:id", (req, res) => {
     });
 });
 
-// PHOTO DE PROFIL FAMILLE
-// mettre dans uploads et change nom
-router.post("/famille/photoProfil", async (req, res, next) => {
-  try {
-    const file = req.file;
-    const result = await uploadDoc(file);
-    res.status(200).json(result);
-  } catch (error) {
-    next(error);
-  }
-});
-
-// mise dans bdd
-router.put("/famille/photoProfil/:id", (req, res) => {
-  const { photoFamille } = req.body;
-  datasource
-    .query("UPDATE famille SET photoProfilFamille=? WHERE familleId=?", [
-      photoFamille,
-      req.params.id,
-    ])
-    .then(([famille]) => {
-      if (famille.affectedRows === 0) {
-        res.status(404).send("Not Found");
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Modification impossible");
-    });
-});
-
 // --- pour messagerie ---
 
 router.get("/structure/all", structure.getStructureDataMess);
@@ -337,19 +304,20 @@ router.put("/logout/:id", structure.logout);
 
 router.post("/calendrier/add", calendrier.postDate);
 router.post("/dashboard/docs", upload.single(`file`), structure.uploadProfil);
-router.post("/uploads", async (req, res, next) => {
+router.post('/uploads', async (req, res, next) => {
   try {
-    const file = req.file;
-    console.log(req.file)
-    const result = await uploadDoc(file);
-    res.status(200).json(result);
+    const file = req.file
+    const result = await uploadDoc(file)
+    res
+      .status(200)
+      .json(result)
   } catch (error) {
-    next(error);
+    next(error)
   }
-});
+})
 
 router.delete("/calendrier", calendrier.deleteDates);
-router.delete("/calendrier/:id", calendrier.fullDate);
+router.delete("/calendrier/:id", calendrier.fullDate)
 router.delete("/admin/refused/:id", structure.deleteRefused);
 router.delete("/notifications/:id", notification.deleteNotification);
 //Routes for dashboard + admin page end
@@ -382,26 +350,8 @@ router.post("/inscription", (req, res) => {
         });
     })
     .catch((err) => {
-      console.error(err.errno);
-      if (err.errno === 1062) {
-        res.status(400).send(err)
-      } else { res.status(500).send("Création de compte impossible"); }
-
-    });
-});
-
-router.get("/isCreche", (req, res) => {
-  datasource
-    .query(
-      "SELECT isCreche FROM structure WHERE email = ?",
-      [req.query.email]
-    )
-    .then(([[result]]) => {
-      res.send(result).status(200);
-    })
-    .catch((err) => {
       console.error(err);
-      res.status(500).send("Accès impossible");
+      res.status(500).send("Création de compte impossible");
     });
 });
 
@@ -651,33 +601,25 @@ router.get("/horairesExist", (req, res) => {
   });
 })
 
-// const storageAvatar = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, "./public/uploads/avatar");
-//   },
-//   filename: (req, file, cb) => {
-//     const date = new Date();
-//     cb(
-//       null,
-//       "avatar" + date.getMinutes() + Math.round(Math.random() * 1000) + ".jpeg"
-//     );
-//   },
-// });
+const storageAvatar = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./public/uploads/avatar");
+  },
+  filename: (req, file, cb) => {
+    const date = new Date();
+    cb(
+      null,
+      "avatar" + date.getMinutes() + Math.round(Math.random() * 1000) + ".jpeg"
+    );
+  },
+});
 
-// const uploadAvatar = multer({ storage: storageAvatar });
+const uploadAvatar = multer({ storage: storageAvatar });
 
-// router.post("/photoProfil", async (req, res, next) => {
-//   try {
-//     const file = req.file
-//     const result = await uploadDoc(file)
-//     res
-//       .status(200)
-//       .json(result)
-//     console.log(result)
-//   } catch (error) {
-//     next(error)
-//   }
-// });
+router.post("/photoProfil", uploadAvatar.single("avatar"), (req, res) => {
+  console.log(req.file)
+  res.send(req.file);
+});
 
 router.get("/photoProfil", (req, res) => {
   datasource.query(

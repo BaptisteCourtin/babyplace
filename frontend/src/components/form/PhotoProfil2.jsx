@@ -9,7 +9,7 @@ function Structure2({ inputRef, structureId, updateFields }) {
     Axios.get(`${import.meta.env.VITE_PATH}/photoProfil?id=${structureId}`, [structureId])
       .then((result) => {
         if (result.data.length > 0) {
-          setImageSrc(result.data[0].photoProfil);
+          setImageSrc(`${import.meta.env.VITE_PATH}${result.data[0].photoProfil}`);
           updateFields({ imageProfilSrc: result.data[0].photoProfil })
         }
       })
