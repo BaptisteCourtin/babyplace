@@ -40,32 +40,61 @@ function Structure15({
                 name="numSecu"
                 pattern="[0-9]{15}"
                 value={numSecu}
+                className={
+                  (numSecu !== null &&
+                    numSecu !== undefined && numSecu.length > 15)
+                    ? "inputChecked"
+                    : "input"
+                }
                 onChange={(e) => updateFields({ numSecu: e.target.value })}
               />
               <label
                 htmlFor="numSecu"
-                className={numSecu !== "" ? "labelChecked" : ""}
+                className={
+                  (numSecu !== null &&
+                    numSecu !== undefined && numSecu.length > 15)
+                    ? "labelChecked"
+                    : "input"
+                }
               >
                 N° sécurité sociale
               </label>
-              <p className="checkSymbol">&#x2713;</p>
+              {(
+                numSecu !== null &&
+                numSecu !== undefined && numSecu.length > 15) && <p className="checkSymbol">&#x2713;</p>}
             </div>
           ) : (
             <div className="inputContainer">
               <input
                 type="text"
                 name="siret"
-                pattern="[0-9]{15}"
+                pattern="[0-9]{10}"
                 value={siret}
+                className={
+                  (siret !== null &&
+                    siret !== undefined && siret.length > 10)
+                    ? "inputChecked"
+                    : "input"
+                }
                 onChange={(e) => updateFields({ siret: e.target.value })}
               />
               <label
                 htmlFor="siret"
-                className={siret !== "" ? "labelChecked" : ""}
+                className={
+                  (siret !== null &&
+                    siret !== undefined && siret.length > 10)
+                    ? "labelChecked"
+                    : ""
+                }
               >
                 SIRET
               </label>
-              <p className="checkSymbol">&#x2713;</p>
+              {
+                (siret !== null &&
+                  siret !== undefined && siret.length > 10)
+                &&
+                <p className="checkSymbol">&#x2713;</p>
+              }
             </div>
           )}
 
@@ -73,32 +102,49 @@ function Structure15({
             <input
               type="text"
               name="numAgrement"
-              pattern="[0-9]{15}"
+              pattern="[0-9]{10}"
               value={numAgrement}
+              className={
+                (numAgrement !== null &&
+                  numAgrement !== undefined && numAgrement.length > 10)
+                  ? "inputChecked"
+                  : "input"
+              }
               onChange={(e) => updateFields({ numAgrement: e.target.value })}
             />
             <label
               htmlFor="numAgrement"
-              className={numAgrement !== "" ? "labelChecked" : ""}
+              className={
+                (numAgrement !== null &&
+                  numAgrement !== undefined && numAgrement.length > 10)
+                  ? "labelChecked"
+                  : ""
+              }
             >
               N° agrément
             </label>
-            <p className="checkSymbol">&#x2713;</p>
+            {
+              (numAgrement !== null &&
+                numAgrement !== undefined && numAgrement.length > 10)
+              &&
+              <p className="checkSymbol">&#x2713;</p>
+            }
           </div>
           <div className="inputContainer">
             <input
               type="date"
               name="dateAgrement"
               value={dateAgrement}
+              className={dateAgrement !== "" && dateAgrement !== null ? "inputChecked" : ""}
               onChange={(e) => { updateFields({ dateAgrement: e.target.value }) }}
             />
             <label
               htmlFor="dateAgrement"
-              className={dateAgrement !== "" ? "labelChecked" : ""}
+              className={dateAgrement !== "" && dateAgrement !== null ? "labelChecked" : ""}
             >
               Date agrément
             </label>
-            <p className="checkSymbol">&#x2713;</p>
+            {dateAgrement !== "" && dateAgrement !== null && <p className="checkSymbol">&#x2713;</p>}
           </div>
         </div>
         {structure === "assmat" && (
@@ -112,17 +158,31 @@ function Structure15({
                   name="assHabitNom"
                   pattern=".{4,}"
                   value={assHabitNom}
+                  className={
+                    (assHabitNom !== null &&
+                      assHabitNom !== undefined && assHabitNom.length > 4)
+                      ? "inputChecked"
+                      : "input"
+                  }
                   onChange={(e) =>
                     updateFields({ assHabitNom: e.target.value })
                   }
                 />
                 <label
                   htmlFor="assHabitNom"
-                  className={assHabitNom !== "" ? "labelChecked" : ""}
+                  className={(assHabitNom !== null &&
+                    assHabitNom !== undefined && assHabitNom.length > 4)
+                    ? "labelChecked"
+                    : ""}
                 >
                   Nom
                 </label>
-                <p className="checkSymbol">&#x2713;</p>
+                {
+                  (assHabitNom !== null &&
+                    assHabitNom !== undefined && assHabitNom.length > 4)
+                  &&
+                  <p className="checkSymbol">&#x2713;</p>
+                }
               </div>
 
               <div className="inputContainer">
@@ -131,17 +191,31 @@ function Structure15({
                   name="assHabitNumero"
                   pattern=".{5,}"
                   value={assHabitNumero}
+                  className={
+                    (assHabitNumero !== null &&
+                      assHabitNumero !== undefined && assHabitNumero.length > 5)
+                      ? "inputChecked"
+                      : "input"
+                  }
                   onChange={(e) =>
                     updateFields({ assHabitNumero: e.target.value })
                   }
                 />
                 <label
                   htmlFor="assHabitNumero"
-                  className={assHabitNumero !== "" ? "labelChecked" : ""}
+                  className={(assHabitNumero !== null &&
+                    assHabitNumero !== undefined && assHabitNumero.length > 5)
+                    ? "labelChecked"
+                    : ""}
                 >
                   Numéro de police
                 </label>
-                <p className="checkSymbol">&#x2713;</p>
+                {
+                  (assHabitNumero !== null &&
+                    assHabitNumero !== undefined && assHabitNumero.length > 5)
+                  &&
+                  <p className="checkSymbol">&#x2713;</p>
+                }
               </div>
               <div className="inputContainer">
                 <input
@@ -149,17 +223,31 @@ function Structure15({
                   name="assHabitAdresse"
                   pattern=".{10,} [0-9]{5} .{3,}"
                   value={assHabitAdresse}
+                  className={
+                    (assHabitAdresse !== null &&
+                      assHabitAdresse !== undefined && assHabitAdresse.length > 10)
+                      ? "inputChecked"
+                      : "input"
+                  }
                   onChange={(e) =>
                     updateFields({ assHabitAdresse: e.target.value })
                   }
                 />
                 <label
                   htmlFor="assHabitAdresse"
-                  className={assHabitAdresse !== "" ? "labelChecked" : ""}
+                  className={(assHabitAdresse !== null &&
+                    assHabitAdresse !== undefined && assHabitAdresse.length > 10)
+                    ? "labelChecked"
+                    : ""}
                 >
                   Adresse
                 </label>
-                <p className="checkSymbol">&#x2713;</p>
+                {
+                  (assHabitAdresse !== null &&
+                    assHabitAdresse !== undefined && assHabitAdresse.length > 10)
+                  &&
+                  <p className="checkSymbol">&#x2713;</p>
+                }
               </div>
             </div>
             <h5>Assurance auto</h5>
@@ -170,15 +258,29 @@ function Structure15({
                   name="assAutoNom"
                   pattern=".{4,}"
                   value={assAutoNom}
+                  className={
+                    (assAutoNom !== null &&
+                      assAutoNom !== undefined && assAutoNom.length > 4)
+                      ? "inputChecked"
+                      : "input"
+                  }
                   onChange={(e) => updateFields({ assAutoNom: e.target.value })}
                 />
                 <label
                   htmlFor="assAutoNom"
-                  className={assAutoNom !== "" ? "labelChecked" : ""}
+                  className={(assAutoNom !== null &&
+                    assAutoNom !== undefined && assAutoNom.length > 4)
+                    ? "labelChecked"
+                    : ""}
                 >
                   Nom
                 </label>
-                <p className="checkSymbol">&#x2713;</p>
+                {
+                  (assAutoNom !== null &&
+                    assAutoNom !== undefined && assAutoNom.length > 4)
+                  &&
+                  <p className="checkSymbol">&#x2713;</p>
+                }
               </div>
               <div className="inputContainer">
                 <input
@@ -186,17 +288,31 @@ function Structure15({
                   name="assAutoNumero"
                   pattern=".{5,}"
                   value={assAutoNumero}
+                  className={
+                    (assAutoNumero !== null &&
+                      assAutoNumero !== undefined && assAutoNumero.length > 5)
+                      ? "inputChecked"
+                      : "input"
+                  }
                   onChange={(e) =>
                     updateFields({ assAutoNumero: e.target.value })
                   }
                 />
                 <label
                   htmlFor="assAutoNumero"
-                  className={assAutoNumero !== "" ? "labelChecked" : ""}
+                  className={(assAutoNumero !== null &&
+                    assAutoNumero !== undefined && assAutoNumero.length > 5)
+                    ? "labelChecked"
+                    : ""}
                 >
                   Numéro de police
                 </label>
-                <p className="checkSymbol">&#x2713;</p>
+                {
+                  (assAutoNumero !== null &&
+                    assAutoNumero !== undefined && assAutoNumero.length > 5)
+                  &&
+                  <p className="checkSymbol">&#x2713;</p>
+                }
               </div>
               <div className="inputContainer">
                 <input
@@ -204,6 +320,12 @@ function Structure15({
                   name="assAutoAdresse"
                   pattern=".{10,} [0-9]{5} .{3,}"
                   value={assAutoAdresse}
+                  className={
+                    (assAutoAdresse !== null &&
+                      assAutoAdresse !== undefined && assAutoAdresse.length > 10)
+                      ? "inputChecked"
+                      : "input"
+                  }
                   onChange={(e) =>
                     updateFields({ assAutoAdresse: e.target.value })
                   }
@@ -219,7 +341,12 @@ function Structure15({
                 >
                   Adresse
                 </label>
-                <p className="checkSymbol">&#x2713;</p>
+                {
+                  (assAutoAdresse !== null &&
+                    assAutoAdresse !== undefined && assAutoAdresse.length > 10)
+                  &&
+                  <p className="checkSymbol">&#x2713;</p>
+                }
               </div>
             </div>{" "}
           </>
