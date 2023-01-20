@@ -5,12 +5,13 @@ import DashParams from "@components/dashboard/parameters/DashParams";
 import DashReservations from "@components/dashboard/reservations/DashReservations";
 import Messages from "@components/messages/Messages";
 
-<<<<<<< HEAD
-export const usePageToggle = (data) => {
+export const usePageToggle = (data, userType, getData) => {
   const [toggle, setToggle] = useState(0);
   const pageShown = () => {
     if (toggle === 1) {
-      return <DashReservations {...data} />;
+      return (
+        <DashReservations {...data} />
+      );
     }
     if (toggle === 2) {
       return (
@@ -18,36 +19,15 @@ export const usePageToggle = (data) => {
       );
     }
     if (toggle === 3) {
-      return <DashHours userType={userType} structureId={data.structureId} />;
+      return (
+        <DashHours userType={userType} structureId={data.structureId} />
+      );
     }
     if (toggle === 4) {
-      return <Messages {...data} />;
+      return (
+        <Messages {...data} />
+      );
     }
-=======
-export const usePageToggle = (data, userType, getData) => {
-    const [toggle, setToggle] = useState(0);
-    const pageShown = () => {
-        if (toggle === 1) {
-            return (
-                <DashReservations {...data} />
-            );
-        }
-        if (toggle === 2) {
-            return (
-                <DashAgenda structureId={data.structureId} maxPlaces={data.maxPlaces} />
-            );
-        }
-        if (toggle === 3) {
-            return (
-                <DashHours userType={userType} structureId={data.structureId} />
-            );
-        }
-        if (toggle === 4) {
-            return (
-                <Messages {...data} />
-            );
-        }
->>>>>>> dev
 
     if (toggle === 5) {
       return <DashParams {...data} userType={userType} getData={getData} />;

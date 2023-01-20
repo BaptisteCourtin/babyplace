@@ -680,6 +680,7 @@ function FormStructure() {
         }
       } else if (currentStepIndex === 2) {
         const formData = new FormData();
+        console.log(inputRef1.current.files[0])
         if (inputRef1.current.files[0] !== undefined) {
           formData.append("photo1", inputRef1.current.files[0]);
         }

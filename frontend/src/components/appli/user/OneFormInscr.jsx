@@ -33,8 +33,6 @@ function OneFormInscr({ init, src, nomDoc, handleSupp, p, who }) {
     </div>
   );
 }
-<<<<<<< HEAD
-=======
 
 OneFormInscr.propTypes = {
   init: PropTypes.string.isRequired,
@@ -44,6 +42,5 @@ OneFormInscr.propTypes = {
   p: PropTypes.string.isRequired,
   who: PropTypes.number.isRequired,
 };
->>>>>>> dev
 
 export default OneFormInscr;
