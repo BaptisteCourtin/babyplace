@@ -19,7 +19,6 @@ function Structure15({
           {structure === "assmat" ? (
             <div className="inputContainer">
               <input
-                required
                 type="text"
                 name="numSecu"
                 pattern="[0-9]{15}"
@@ -37,7 +36,6 @@ function Structure15({
           ) : (
             <div className="inputContainer">
               <input
-                required
                 type="text"
                 name="siret"
                 pattern="[0-9]{15}"
@@ -56,7 +54,6 @@ function Structure15({
 
           <div className="inputContainer">
             <input
-              required
               type="text"
               name="numAgrement"
               pattern="[0-9]{15}"
@@ -73,11 +70,10 @@ function Structure15({
           </div>
           <div className="inputContainer">
             <input
-              required
               type="date"
               name="dateAgrement"
               value={dateAgrement}
-              onChange={(e) => updateFields({ dateAgrement: e.target.value })}
+              onChange={(e) => { updateFields({ dateAgrement: e.target.value }) }}
             />
             <label
               htmlFor="dateAgrement"
@@ -217,7 +213,6 @@ function Structure15({
             <span> (Obligatoire) </span>
           </h5>
           <input
-            required
             type="file"
             id="docpmi"
             name="docpmi"
@@ -255,7 +250,6 @@ function Structure15({
                 <span> (Obligatoire) </span>
               </h5>
               <input
-                required
                 type="file"
                 id="docVitale"
                 name="docVitale"
@@ -305,7 +299,6 @@ function Structure15({
                 Assurance responsabilité civile <span> (Obligatoire) </span>
               </h5>
               <input
-                required
                 type="file"
                 id="docRespCivile"
                 name="docRespCivile"
