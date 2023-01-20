@@ -30,32 +30,32 @@ function Agenda({ structureId, getHoraires, horaires, toggleDay, setToggleDay, s
         } catch (err) {
             console.error(err.message)
         }
-    };
+    }
 
     const updateDay = async (value) => {
-        setToggleDay(!toggleDay)
+        setToggleDay(!toggleDay);
         try {
             await axios.put(`${import.meta.env.VITE_PATH}/horaires/day/${dayId}`, {
                 id: dayId,
                 structureId: structureId,
-                value: value
+                value: value,
             });
-            toast.success("Vos préférences ont bien été modifiées")
-            getHoraires()
+            toast.success("Vos préférences ont bien été modifiées");
+            getHoraires();
         } catch (err) {
-            console.error(err.message)
+            console.error(err.message);
         }
     };
 
     useEffect(() => {
-        getHoraires()
-    }, [hoursOpen, hoursClose])
+        getHoraires();
+    }, [hoursOpen, hoursClose]);
 
     const onDayChange = (jour, status, id) => {
-        setSelected(jour)
-        setToggleDay(status)
-        setDayId(id - 1)
-    }
+        setSelected(jour);
+        setToggleDay(status);
+        setDayId(id - 1);
+    };
 
     return (
         <section className="agendaSection">
@@ -87,7 +87,7 @@ function Agenda({ structureId, getHoraires, horaires, toggleDay, setToggleDay, s
                                     id={h.jourSemaine}
                                     value={h.jourSemaine}
                                     onChange={() => {
-                                        onDayChange(h.jourSemaine, h.ouvert, h.jourId)
+                                        onDayChange(h.jourSemaine, h.ouvert, h.jourId);
                                     }}
                                 />
                                 <label
@@ -101,26 +101,33 @@ function Agenda({ structureId, getHoraires, horaires, toggleDay, setToggleDay, s
                     </ul>
                     {toggleDay ? (
                         <>
-                            <div className='dashRangeInput'>
+                            <div className="dashRangeInput">
                                 <input
                                     type="time"
                                     value={horaires[dayId].heureMin}
                                     step="300"
-                                    onChange={(e) => updateHours(e.target.value, setHoursOpen, 'heureMin')} />
+                                    onChange={(e) =>
+                                        updateHours(e.target.value, setHoursOpen, "heureMin")
+                                    }
+                                />
                                 <span> - </span>
                                 <input
                                     type="time"
                                     value={horaires[dayId].heureMax}
                                     step="300"
-                                    onChange={(e) => updateHours(e.target.value, setHoursClose, 'heureMax')} />
+                                    onChange={(e) =>
+                                        updateHours(e.target.value, setHoursClose, "heureMax")
+                                    }
+                                />
                             </div>
                             <div className="dashRangeValues">
                                 <p>
-                                    <img src={open} alt="" /> Ouverture : {horaires[dayId].heureMin}
-                                    H
+                                    <img src={open} alt="" /> Ouverture :{" "}
+                                    {horaires[dayId].heureMin}H
                                 </p>
                                 <p>
-                                    <img src={close} alt="" /> Fermeture : {horaires[dayId].heureMax}H
+                                    <img src={close} alt="" /> Fermeture :{" "}
+                                    {horaires[dayId].heureMax}H
                                 </p>
                             </div>
                             <button
@@ -149,7 +156,7 @@ function Agenda({ structureId, getHoraires, horaires, toggleDay, setToggleDay, s
                 <DashCalendar clickedDay={clickedDay} setClickedDay={setClickedDay} />
             )}
         </section>
-    )
+    );
 }
 
 export default Agenda;

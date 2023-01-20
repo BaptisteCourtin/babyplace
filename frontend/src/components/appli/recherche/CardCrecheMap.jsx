@@ -18,15 +18,9 @@ function CardCrecheMap({ data }) {
   const [likeCard, setLikeCard] = useState(true);
 
   const [dataHorairesId, setDataHorairesId] = useState([]);
-  const Token =
-    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const getHorairesId = () => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/horaires/${structureId}`, {
-        headers: {
-          "x-token": Token,
-        },
-      })
+      .get(`${import.meta.env.VITE_PATH}/horaires/${structureId}`)
       .then((res) => {
         setDataHorairesId(res.data);
       })

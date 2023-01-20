@@ -15,15 +15,10 @@ function AppliSearch() {
 
   // --- les structures ---
   const [structure, setStructure] = useState([]);
-  const Token =
-    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+
   const getStructure = () => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/structure/allapp`, {
-        headers: {
-          "x-token": Token,
-        },
-      })
+      .get(`${import.meta.env.VITE_PATH}/structure/allapp`)
       .then((res) => {
         setStructure(res.data);
       })
