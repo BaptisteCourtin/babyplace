@@ -1,7 +1,8 @@
 const reservationModels = require("../models/reservation.models.js");
 
 const getReser = async (req, res) => {
-    const result = await reservationModels.getReser();
+    const { id } = req.params;
+    const result = await reservationModels.getReser(id);
     return res.json(result);
 };
 

@@ -276,7 +276,7 @@ router.get("/structure", structure.getStructure);
 router.get("/structures", structure.getStructures);
 router.get("/structure/type/:id", structure.getStructureType);
 router.get("/structure/details", structure.getStructureDetails);
-router.get("/reservation", reservation.getReser);
+router.get("/reservation/:id", reservation.getReser);
 router.get("/admin", structure.getNotVerified);
 router.get("/horaires/:id", horaires.getHorairesById);
 router.get("/calendrier/:id", calendrier.getCalendrier);

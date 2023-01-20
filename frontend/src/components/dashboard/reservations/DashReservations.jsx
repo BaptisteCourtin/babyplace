@@ -4,10 +4,10 @@ import { usePutReservations } from "./Hooks/usePutReservations";
 import NavDashReservations from "./Components/Nav.DashReservations";
 import ListDashReservations from "./Components/List.DashReservations";
 
-function DashReservations({ tarifHeure }) {
+function DashReservations({ tarifHeure, structureId }) {
   const [statusToggle, setStatusToggle] = useState(0);
 
-  const { reser, getReser } = useGetReservations(statusToggle);
+  const { reser, getReser } = useGetReservations(statusToggle, structureId);
   const { updateStatus } = usePutReservations(getReser);
 
   return (
