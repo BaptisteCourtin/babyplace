@@ -10,7 +10,6 @@ function AppliUser() {
   const [pourcentFormEnfant, setPourcentFormEnfant] = useState(0);
   const [truePourcentEnfant, setTruePourcentEnfant] = useState(0);
   const [pourcentFormInscription, setPourcentFormInscription] = useState(0);
-  const [truePourcentInscription, setTruePourcentInscription] = useState(0);
 
   const [imageProfil, setImageProfil] = useState(null);
   const [nomPrenom, setNomPrenom] = useState(false);
@@ -24,9 +23,9 @@ function AppliUser() {
         console.log(res.data);
         setPourcentFormParent(res.data[0][0].pourcentFormParent);
         setPourcentFormEnfant(res.data[1]);
-        // setPourcentFormInscription(res.data[2]);
         setImageProfil(res.data[2][0].photoProfilFamille);
         setNomPrenom(res.data[0]);
+        setPourcentFormInscription(res.data[3][0].pourcentFormInscription);
       })
       .then(() => {
         setDonneesOK(true);
@@ -54,20 +53,6 @@ function AppliUser() {
   useEffect(() => {
     getTruePourcentEnfant();
   }, [pourcentFormEnfant]);
-
-  // const getTruePourcentInscription = () => {
-  //   let pourcent = 0;
-  //   let nbTime = 0;
-  //   for (const i in pourcentFormInscription) {
-  //     pourcent += pourcentFormInscription[i].pourcentFormInscription;
-  //     nbTime += 1;
-  //   }
-  //   setTruePourcentInscription(parseInt(pourcent / nbTime));
-  // };
-
-  // useEffect(() => {
-  //   getTruePourcentInscription();
-  // }, [pourcentFormInscription]);
 
   // --- upload image profil---
 

@@ -139,6 +139,7 @@ router.put("/structure/notes/:id", structure.updateNotes); //notes
 router.put("/structure/signal/:id", structure.updateSignal); // signalement
 router.put("/formParent/:id", famille.updateFormParent); // formulaire parent
 router.put("/formEnfant/:id", famille.updateFormEnfant); // formulaire enfant
+router.put("/pourcentFormInscr/:id", famille.updatePourcentFormInscr); // pourcent formulaire inscr
 router.put("/parent/nullOneDocForm/:id", famille.nullOneDocFormParent); // delete un doc du form inscription parent
 router.put("/famille/nullOneDocForm/:id", famille.nullOneDocFormCommun); // delete un doc du form inscription commun
 
@@ -302,7 +303,7 @@ router.put("/logout/:id", structure.logout);
 
 router.post("/calendrier/add", calendrier.postDate);
 router.post("/dashboard/docs", structure.uploadProfil);
-router.post('/uploads', multerMid.single('file'), async (req, res, next) => {
+router.post("/uploads", multerMid.single("file"), async (req, res, next) => {
   try {
     const file = req.file;
     const result = await uploadDoc(file);
@@ -606,16 +607,18 @@ router.post("/photoProfil", uploadAvatar.single("avatar"), (req, res) => {
 });
 
 router.get("/photoProfil", (req, res) => {
-  datasource.query(
-    "SELECT photoProfil FROM structure WHERE structureId= ?",
-    [req.query.id]
-  ).then(([result]) => {
-    res.send(result).status(200)
-  }).catch((err) => {
-    console.error(err);
-    res.status(500).send("Accès impossible");
-  });
-})
+  datasource
+    .query("SELECT photoProfil FROM structure WHERE structureId= ?", [
+      req.query.id,
+    ])
+    .then(([result]) => {
+      res.send(result).status(200);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Accès impossible");
+    });
+});
 
 router.put("/photoProfil", (req, res) => {
   const { photoProfil, email } = req.body;
@@ -665,16 +668,19 @@ router.post(
 );
 
 router.get("/photosStructure", (req, res) => {
-  datasource.query(
-    "SELECT photoStructure1, photoStructure2, photoStructure3 FROM structure WHERE structureId= ?",
-    [req.query.id]
-  ).then(([result]) => {
-    res.send(result).status(200)
-  }).catch((err) => {
-    console.error(err);
-    res.status(500).send("Accès impossible");
-  });
-})
+  datasource
+    .query(
+      "SELECT photoStructure1, photoStructure2, photoStructure3 FROM structure WHERE structureId= ?",
+      [req.query.id]
+    )
+    .then(([result]) => {
+      res.send(result).status(200);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Accès impossible");
+    });
+});
 
 router.put("/photosStructure", (req, res) => {
   const { photoStructure1, photoStructure2, photoStructure3, email } = req.body;
@@ -1020,18 +1026,20 @@ router.get("/getStructureId", (req, res) => {
 });
 
 router.delete("/calendrierIndispo", (req, res) => {
-  const { structureId, date } = req.query
-  datasource.query(
-    "DELETE FROM calendrier WHERE structureId= ? AND date = ?",
-    [structureId, date]
-  ).then((result) => {
-    res.sendStatus(200)
-  }).catch((err) => {
-    console.error(err);
-    res.status(500).send("Suppression impossible");
-  });
-})
-
+  const { structureId, date } = req.query;
+  datasource
+    .query("DELETE FROM calendrier WHERE structureId= ? AND date = ?", [
+      structureId,
+      date,
+    ])
+    .then((result) => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Suppression impossible");
+    });
+});
 
 router.put("/agrementsCreche", (req, res) => {
   const { nbEmployes, maxPlaces, maxHandi, max18Mois, maxNuit, email } =
@@ -1259,7 +1267,9 @@ router.delete("/admin/refused/:id", structure.deleteRefused);
 
 router.post("/auth", async (req, res) => {
   await datasource
-    .query("SELECT * FROM structure WHERE email = ? AND isVerify = 1", [req.body.email])
+    .query("SELECT * FROM structure WHERE email = ? AND isVerify = 1", [
+      req.body.email,
+    ])
     .then(([[user]]) => {
       if (user && req.body.password === user.password) {
         const start = Date.now();
@@ -1284,7 +1294,7 @@ router.post("/auth", async (req, res) => {
       } else if (user && req.body.password !== user.password) {
         res.status(401).send("Email ou mot de passe incorrect");
       } else {
-        res.sendStatus(404)
+        res.sendStatus(404);
       }
     })
     .catch((err) => {

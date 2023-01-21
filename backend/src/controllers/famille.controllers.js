@@ -27,7 +27,6 @@ const getDonneesFormInscription = async (req, res) => {
 
 const getPourcent = async (req, res) => {
   const result = await familleModels.getPourcent(req);
-  // console.log(result);
   return res.json(result);
 };
 
@@ -57,6 +56,15 @@ const updateFormParent = async (req, res) => {
 
 const updateFormEnfant = async (req, res) => {
   const result = await familleModels.updateFormEnfant(req);
+  if (result.affectedRows === 0) {
+    res.status(404).send("Not found");
+  } else {
+    res.sendStatus(204);
+  }
+};
+
+const updatePourcentFormInscr = async (req, res) => {
+  const result = await familleModels.updatePourcentFormInscr(req);
   if (result.affectedRows === 0) {
     res.status(404).send("Not found");
   } else {
@@ -124,4 +132,5 @@ module.exports = {
   getFamilleInfo,
   nullOneDocFormParent,
   nullOneDocFormCommun,
+  updatePourcentFormInscr,
 };
