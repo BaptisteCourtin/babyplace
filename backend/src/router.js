@@ -346,8 +346,27 @@ router.post("/inscription", (req, res) => {
         });
     })
     .catch((err) => {
+      console.error(err.errno);
+      if (err.errno === 1062) {
+        res.status(400).send(err)
+      } else { res.status(500).send("Création de compte impossible"); }
+
+    });
+});
+
+router.get("/isCreche", (req, res) => {
+  datasource
+    .query(
+      "SELECT isCreche FROM structure WHERE email = ?",
+      [req.query.email]
+    )
+    .then(([[result]]) => {
+      console.log(result)
+      res.send(result).status(200);
+    })
+    .catch((err) => {
       console.error(err);
-      res.status(500).send("Création de compte impossible");
+      res.status(500).send("Accès impossible");
     });
 });
 
