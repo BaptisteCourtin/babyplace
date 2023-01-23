@@ -83,6 +83,7 @@ function DemandeResa({
   const handleRequest = () => {
     axios.post(`${import.meta.env.VITE_PATH}/reservation`, {
       enfantId,
+      familleId,
       structureId,
 
       prixTotal,

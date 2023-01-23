@@ -88,6 +88,19 @@
           height: 49px;
 
           padding-right: 1rem;
+
+          span {
+            &.accepted {
+              color: green;
+              font-size: $h4;
+              font-weight: 500;
+            }
+            &.rejected {
+              color: red;
+              font-size: $h4;
+              font-weight: 500;
+            }
+          }
         }
       }
     }

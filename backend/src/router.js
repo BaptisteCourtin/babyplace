@@ -23,6 +23,8 @@ const reservation = require("./controllers/reservation.controller");
 const assMat = require("./controllers/assMat.controllers");
 const creche = require("./controllers/creche.controllers");
 const famille = require("./controllers/famille.controllers");
+const parent = require("./controllers/parent.controllers");
+const enfant = require("./controllers/enfant.controllers");
 const messagerie = require("./controllers/messagerie.controllers");
 const notification = require("./controllers/notification.controllers");
 const messageAdmin = require("./controllers/messageAdmin.controllers");
@@ -121,36 +123,37 @@ router.post("/authFamille", (req, res) => {
 });
 
 router.get("/structure/allapp", structure.getAllStructures); //search
-router.get("/horaires/:id", horaires.getHorairesById); //search
 router.get("/structure/notes/:id", structure.getStructureById); //notes
+router.get("/horaires/:id", horaires.getHorairesById); //search
+router.get("/calendrier/whereMoins/:id", calendrier.getCalendrierMoins); // calendrier par id where nbPlaces = -1
 router.get("/famille/conf/:id", famille.getPersoConfiance); //perso confiance
-router.get("/famille/formParent/:id", famille.getDonneesFormParent); //donnees du formulaire parent
-router.get("/famille/formEnfant/:id", famille.getDonneesFormEnfant); //donnees du formulaire enfant
-router.get("/famille/nomsEnfants/:id", famille.getNomsEtIdEnfants); // noms et id des enfants
-router.get("/famille/nomsEnfants100/:id", famille.getNomsEtIdEnfants100); // noms et id des enfants
+router.get("/famille/info/:id", famille.getFamilleInfo); // info famille (noms + photo)
 router.get("/famille/formInscription/:id", famille.getDonneesFormInscription); //donnees du formulaire inscription
 router.get("/famille/pourcent/:id", famille.getPourcent); // pourcent des formulaire
-router.get("/famille/info/:id", famille.getFamilleInfo); // info famille (noms + photo)
+router.get("/famille/formParent/:id", parent.getDonneesFormParent); //donnees du formulaire parent
+router.get("/famille/formEnfant/:id", enfant.getDonneesFormEnfant); //donnees du formulaire enfant
+router.get("/famille/nomsEnfants/:id", enfant.getNomsEtIdEnfants); // noms et id des enfants
+router.get("/famille/nomsEnfants100/:id", enfant.getNomsEtIdEnfants100); // noms et id des enfants à 100 %
+router.get("/reservationAR/:id", reservation.getReservationAR); //search
 router.get("/contact/message/all", messageAdmin.getAllMessageToAdmin); // recupérer tous les message pour le dashboard admin
-router.get("/calendrier/whereMoins/:id", calendrier.getCalendrierMoins); // calendrier par id where nbPlaces = -1
 router.get("/messages/recup/:room", messagerie.getAllMessageFromDb); // recupération des message pour le chat
 
 router.put("/structure/notes/:id", structure.updateNotes); //notes
 router.put("/structure/signal/:id", structure.updateSignal); // signalement
-router.put("/formParent/:id", famille.updateFormParent); // formulaire parent
-router.put("/formEnfant/:id", famille.updateFormEnfant); // formulaire enfant
 router.put("/pourcentFormInscr/:id", famille.updatePourcentFormInscr); // pourcent formulaire inscr
-router.put("/parent/nullOneDocForm/:id", famille.nullOneDocFormParent); // delete un doc du form inscription parent
-router.put("/famille/nullOneDocForm/:id", famille.nullOneDocFormCommun); // delete un doc du form inscription commun
+router.put("/famille/nullOneDocForm/:id", famille.nullOneDocFormCommun); // delete un doc du form inscription (commun)
+router.put("/formParent/:id", parent.updateFormParent); // formulaire parent
+router.put("/parent/nullOneDocForm/:id", parent.nullOneDocFormParent); // delete un doc du form inscription (parent)
+router.put("/formEnfant/:id", enfant.updateFormEnfant); // formulaire enfant
 
-router.post("/reservation", famille.postReservation); // reservation
-router.post("/famille/newEnfant", famille.postNewEnfant); // nouveau enfant
+router.post("/reservation", reservation.postReservation); // reservation
+router.post("/famille/newEnfant", enfant.postNewEnfant); // nouveau enfant
 router.post("/contact/message", messageAdmin.postMessageToAdmin); // nouveau message pour l'admin
 router.post("/messages/sauvegarde", messagerie.saveMessageInDb); // sauvegarde des messages du chat dans la db
 router.post("/famille/newConfiance", famille.postNewConfiance); // nouveau perso confiance
 
-router.delete("/famille/deleteEnfant/:id", famille.deleteEnfant); // delete enfant
 router.delete("/famille/deleteConfiance/:id", famille.deleteConfiance); // delete perso confiance
+router.delete("/famille/deleteEnfant/:id", enfant.deleteEnfant); // delete enfant
 router.delete("/contact/message/all/:id", messageAdmin.deleteMessagebyId); // delete message from admin dashboard
 
 // FORM INSCRIPTION CHAQUE PARENT (juste le where qui change)
@@ -171,8 +174,6 @@ router.post(
 
 // mise dans bdd
 router.put("/formInscription/docParentChangeName/:id/:nomDoc", (req, res) => {
-  // console.log(req.params);
-  // console.log(req.body);
   const { httpDoc } = req.body;
   datasource
     .query(`UPDATE parent SET ${req.params.nomDoc}=? WHERE parentId=?`, [

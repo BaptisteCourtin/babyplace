@@ -20,7 +20,6 @@ function AppliUser() {
     axios
       .get(`${import.meta.env.VITE_PATH}/famille/pourcent/${familleId}`)
       .then((res) => {
-        console.log(res.data);
         setPourcentFormParent(res.data[0][0].pourcentFormParent);
         setPourcentFormEnfant(res.data[1]);
         setImageProfil(res.data[2][0].photoProfilFamille);

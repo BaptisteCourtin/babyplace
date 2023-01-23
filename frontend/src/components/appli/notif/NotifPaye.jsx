@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { toast } from "react-hot-toast";
 import TheCard from "../menu/TheCard";
 
-function NotifPaye({ setCompo }) {
+function NotifPaye({ setCompo, oneReservation }) {
   const handlePaiement = () => {
     toast.success("merci 😘");
     setCompo(0);
@@ -16,7 +16,7 @@ function NotifPaye({ setCompo }) {
           {`< Retour`}
         </button>
       </div>
-      <h3>XXX € à payer</h3>
+      <h3>{oneReservation.prixTotal} € à payer</h3>
       <TheCard />
       <div className="button-bas">
         <button

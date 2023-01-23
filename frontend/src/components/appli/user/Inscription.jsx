@@ -28,7 +28,6 @@ function Inscription() {
       }
       // -2 car parent id
       pourcent = parseInt(((pourcent - 2) * 100) / 16, 10);
-      console.log(pourcent);
       axios.put(`${import.meta.env.VITE_PATH}/pourcentFormInscr/${familleId}`, {
         pourcent,
       });
@@ -45,7 +44,6 @@ function Inscription() {
       .get(`${import.meta.env.VITE_PATH}/famille/formInscription/${familleId}`)
       .then((res) => {
         setDonneesForm(res.data);
-        console.log(res.data);
       })
       .then(() => {
         setDonneesOK(true);
@@ -263,7 +261,6 @@ function Inscription() {
         }
       );
     }
-    console.log("supp ok");
     getDonneesForm();
   };
 
@@ -423,7 +420,7 @@ function Inscription() {
             src={docAutoImageSrc}
             nomDoc="docAutoImage"
             handleSupp={handleSupp}
-            p="Autoristaion photo et video"
+            p="Autorisation photo et video"
             who={3}
           />
           <OneFormInscr
