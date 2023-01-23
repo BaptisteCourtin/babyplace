@@ -26,9 +26,15 @@ const postReservation = async (req, res) => {
   return res.json(result);
 };
 
+const deleteResa = async (req, res) => {
+  const result = await reservationModels.deleteResa(req);
+  return res.json(result);
+};
+
 module.exports = {
   getReser,
   getReservationAR,
   updateStatus,
   postReservation,
+  deleteResa,
 };

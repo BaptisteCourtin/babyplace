@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 function CardNotif({ each, setCompo, setOneReservation }) {
   const handleClicked = () => {
     setOneReservation(each);
-    setCompo(each.status === "approved" ? 3 : 2);
+    setCompo(each.status === "toNote" ? 1 : each.status === "approved" ? 3 : 2);
   };
 
   return (
@@ -13,12 +13,32 @@ function CardNotif({ each, setCompo, setOneReservation }) {
       className="card-notif"
       onClick={() => handleClicked()}
     >
-      <p>
-        Votre demande de réservation à XXX a été
-        <span className={each.status === "approved" ? "accepted" : "rejected"}>
-          {each.status === "approved" ? " acceptée" : " rejetée"}
-        </span>
-      </p>
+      {each.status === "toNote" ? (
+        <p>
+          Donnez-nous votre avis sur{" "}
+          {each.crecheNom
+            ? each.crecheNom
+            : each.assMatNomUsage
+            ? `${each.assMatPrenom} ${each.assMatNomUsage}`
+            : ` ${each.assMatPrenom} ${each.assMatNomNaissance}`}
+        </p>
+      ) : (
+        <p>
+          Votre demande de réservation à{" "}
+          {each.crecheNom
+            ? each.crecheNom
+            : each.assMatNomUsage
+            ? `${each.assMatPrenom} ${each.assMatNomUsage}`
+            : ` ${each.assMatPrenom} ${each.assMatNomNaissance}`}{" "}
+          a été
+          <span
+            className={each.status === "approved" ? "accepted" : "rejected"}
+          >
+            {each.status === "approved" ? " acceptée" : " rejetée"}
+          </span>
+        </p>
+      )}
+
       <span>{`>`}</span>
     </button>
   );

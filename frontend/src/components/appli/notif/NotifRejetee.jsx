@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -6,7 +7,12 @@ import logoBlanc from "@assets/logo-blanc.svg";
 import { AiOutlineUser } from "react-icons/ai";
 
 function NotifRejetee({ setCompo, photoFamille, oneReservation }) {
-  // prendre l'image creche
+  const removeResa = () => {
+    axios.delete(
+      `${import.meta.env.VITE_PATH}/reservation/deleteResa/${oneReservation.id}`
+    );
+  };
+
   return (
     <div className="notif-container-grad">
       <div className="notif-rejet">
@@ -56,11 +62,11 @@ function NotifRejetee({ setCompo, photoFamille, oneReservation }) {
           </p>
         </div>
         <div className="button-bas">
-          <Link to="/appli/search">
-            <button type="button" className="butt">
+          <button type="button" className="butt" onClick={() => removeResa()}>
+            <Link to="/appli/search">
               Voir d’autres professionnel.les disponibles
-            </button>
-          </Link>
+            </Link>
+          </button>
         </div>
       </div>
     </div>

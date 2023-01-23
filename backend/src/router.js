@@ -154,6 +154,7 @@ router.post("/famille/newConfiance", famille.postNewConfiance); // nouveau perso
 
 router.delete("/famille/deleteConfiance/:id", famille.deleteConfiance); // delete perso confiance
 router.delete("/famille/deleteEnfant/:id", enfant.deleteEnfant); // delete enfant
+router.delete("/reservation/deleteResa/:id", reservation.deleteResa); // delete perso confiance
 router.delete("/contact/message/all/:id", messageAdmin.deleteMessagebyId); // delete message from admin dashboard
 
 // FORM INSCRIPTION CHAQUE PARENT (juste le where qui change)

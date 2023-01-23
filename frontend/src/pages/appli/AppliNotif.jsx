@@ -55,7 +55,13 @@ function AppliNotif() {
 
   const choixComposant = () => {
     if (compo === 1) {
-      return <NotifNote setCompo={setCompo} photoFamille={photoFamille} />;
+      return (
+        <NotifNote
+          setCompo={setCompo}
+          photoFamille={photoFamille}
+          oneReservation={oneReservation}
+        />
+      );
     }
     if (compo === 2) {
       return (

@@ -7,14 +7,6 @@ import NavbarApp from "@components/appli/navbar/NavbarApp";
 import CardNotif from "@components/appli/notif/CardNotif";
 
 function NotifBase({ setCompo, allReservation, setOneReservation }) {
-  // const tabNotif = [
-  //   {
-  //     texte:
-  //       "Donnez-nous votre avis sur XXX / une notif un peu longue genre voila c'est juste pour tester mais c'est quand meme long c'est quand meme long c'est quand meme long c'est quand meme long c'est quand meme long c'est quand meme long c'est quand meme long c'est quand meme long c'est quand meme long",
-  //     compo: 1,
-  //   },
-  // ];
-
   return (
     <div className="notif-base">
       <h3>Notifications</h3>

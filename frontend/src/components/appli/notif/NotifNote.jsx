@@ -1,23 +1,27 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import logoBlanc from "@assets/logo-blanc.svg";
-import avatar1 from "@assets/avatar1.svg";
 import PropTypes from "prop-types";
 
 import Rating from "react-rating";
 import { AiOutlineStar, AiFillStar, AiOutlineUser } from "react-icons/ai";
 import { toast } from "react-hot-toast";
 
-function NotifNote({ setCompo, photoFamille }) {
+function NotifNote({ setCompo, photoFamille, oneReservation }) {
   // --- get ---
-  const id = 6; // mettre l'id  de la structure suivant le clic de la notif
   const [structureNotes, setStructureNotes] = useState();
 
   const getStructureById = () => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/structure/notes/${id}`)
+      .get(
+        `${import.meta.env.VITE_PATH}/structure/notes/${
+          oneReservation.structureId
+        }`
+      )
       .then((res) => {
         setStructureNotes(res.data[0]);
+        console.log(res.data[0]);
       })
       .catch((err) => {
         console.error(err);
@@ -36,14 +40,19 @@ function NotifNote({ setCompo, photoFamille }) {
   const [noteHoraires, setNoteHoraires] = useState(0);
 
   const updateNotes = (dataNewNotes) => {
-    axios.put(`${import.meta.env.VITE_PATH}/structure/notes/${id}`, {
-      nbNotes: dataNewNotes.nbNotes,
-      noteCom: dataNewNotes.avisCom,
-      noteProprete: dataNewNotes.avisProprete,
-      noteSecurite: dataNewNotes.avisSecurite,
-      noteEveil: dataNewNotes.avisEveil,
-      noteHoraires: dataNewNotes.avisHoraires,
-    });
+    axios.put(
+      `${import.meta.env.VITE_PATH}/structure/notes/${
+        oneReservation.structureId
+      }`,
+      {
+        nbNotes: dataNewNotes.nbNotes,
+        noteCom: dataNewNotes.avisCom,
+        noteProprete: dataNewNotes.avisProprete,
+        noteSecurite: dataNewNotes.avisSecurite,
+        noteEveil: dataNewNotes.avisEveil,
+        noteHoraires: dataNewNotes.avisHoraires,
+      }
+    );
   };
 
   const submitNote = () => {
@@ -68,7 +77,9 @@ function NotifNote({ setCompo, photoFamille }) {
 
     toast.success("Merci de votre dévotion à notre cause 😈");
 
-    setCompo(0);
+    axios.delete(
+      `${import.meta.env.VITE_PATH}/reservation/deleteResa/${oneReservation.id}`
+    );
   };
 
   return (
@@ -87,9 +98,24 @@ function NotifNote({ setCompo, photoFamille }) {
           ) : (
             <AiOutlineUser className="avatar" />
           )}
-          <img src={avatar1} alt="img creche" className="avatar" />
+          {oneReservation.photoProfil ? (
+            <img
+              src={oneReservation.photoProfil}
+              alt="avatar"
+              className="avatar"
+            />
+          ) : (
+            <AiOutlineUser className="avatar" />
+          )}{" "}
         </div>
-        <h3>Donnez nous votre avis !</h3>
+        <h3>
+          Donnez nous votre avis sur{" "}
+          {oneReservation.crecheNom
+            ? oneReservation.crecheNom
+            : oneReservation.assMatNomUsage
+            ? `${oneReservation.assMatPrenom} ${oneReservation.assMatNomUsage}`
+            : ` ${oneReservation.assMatPrenom} ${oneReservation.assMatNomNaissance}`}
+        </h3>
 
         <form>
           <div>
@@ -162,7 +188,7 @@ function NotifNote({ setCompo, photoFamille }) {
 
         <div className="button-bas">
           <button type="submit" className="butt" onClick={() => submitNote()}>
-            Envoyer
+            <Link to="/appli/search">Envoyer</Link>
           </button>
         </div>
       </div>
