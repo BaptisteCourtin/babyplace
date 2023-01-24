@@ -105,9 +105,8 @@ function DemandeResa({
 
       prixTotal,
       isOccasionnel,
-      dateArrivee: jour,
+      jour,
       heureArrivee: heureMin,
-      dateDepart: jour,
       heureDepart: heureMax,
       heureTotal,
     });

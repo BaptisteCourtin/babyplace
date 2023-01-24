@@ -38,7 +38,6 @@ function AppliNotif() {
       .get(`${import.meta.env.VITE_PATH}/reservationAR/${familleId}`)
       .then((res) => {
         setAllReservation(res.data);
-        console.log("data", res.data);
       })
       .catch((err) => {
         console.error(err);
