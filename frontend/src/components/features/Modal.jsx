@@ -1,11 +1,12 @@
 import React from "react";
 import mdameCoucou from "@assets/landing page/image2.svg";
 
-function Modal({ open, closeModal }) {
+function Modal({ open, closeModal, onReset }) {
   if (!open) return null;
 
   const handleClose = () => {
     closeModal();
+    onReset();
   };
 
   return (

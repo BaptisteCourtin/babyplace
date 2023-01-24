@@ -29,27 +29,71 @@ function AppliNotif() {
     getFamilleInfo();
   }, [familleId]);
 
+  // --- get reservation refused ET approved ---
+
+  const [allReservation, setAllReservation] = useState([]);
+
+  const getAllReservation = () => {
+    axios
+      .get(`${import.meta.env.VITE_PATH}/reservationAR/${familleId}`)
+      .then((res) => {
+        setAllReservation(res.data);
+        console.log("data", res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  useEffect(() => {
+    getAllReservation();
+  }, [familleId]);
+
   // ---
 
   const [compo, setCompo] = useState(0);
+  const [oneReservation, setOneReservation] = useState(0);
 
   const choixComposant = () => {
     if (compo === 1) {
-      return <NotifNote setCompo={setCompo} photoFamille={photoFamille} />;
+      return (
+        <NotifNote
+          setCompo={setCompo}
+          photoFamille={photoFamille}
+          oneReservation={oneReservation}
+        />
+      );
     }
     if (compo === 2) {
-      return <NotifRejetee setCompo={setCompo} photoFamille={photoFamille} />;
+      return (
+        <NotifRejetee
+          setCompo={setCompo}
+          photoFamille={photoFamille}
+          oneReservation={oneReservation}
+        />
+      );
     }
     if (compo === 3) {
-      return <NotifAcceptee setCompo={setCompo} photoFamille={photoFamille} />;
+      return (
+        <NotifAcceptee
+          setCompo={setCompo}
+          photoFamille={photoFamille}
+          oneReservation={oneReservation}
+        />
+      );
     }
     if (compo === 4) {
-      return <NotifPaye setCompo={setCompo} />;
+      return <NotifPaye setCompo={setCompo} oneReservation={oneReservation} />;
     }
-    return <NotifBase setCompo={setCompo} />;
+    return (
+      <NotifBase
+        setCompo={setCompo}
+        allReservation={allReservation}
+        setOneReservation={setOneReservation}
+      />
+    );
   };
 
-  return <div className="appli-notif">{choixComposant()}</div>;
+  return familleId && <div className="appli-notif">{choixComposant()}</div>;
 }
 
 export default AppliNotif;

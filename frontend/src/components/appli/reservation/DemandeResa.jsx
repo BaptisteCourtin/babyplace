@@ -46,6 +46,23 @@ function DemandeResa({
     calculPrixTotal();
   }, [kilometre, entretien, repas]);
 
+  // --- heure total avec minutes ---
+  const [heureTotal, setHeureTotal] = useState(0);
+
+  const handleHeureTotal = () => {
+    setHeureTotal(
+      `${
+        heureMax.split(":")[1] - heureMin.split(":")[1] >= 0
+          ? heureMax.split(":")[0] - heureMin.split(":")[0]
+          : heureMax.split(":")[0] - heureMin.split(":")[0] - 1
+      }:${
+        heureMax.split(":")[1] - heureMin.split(":")[1] >= 0
+          ? heureMax.split(":")[1] - heureMin.split(":")[1]
+          : 60 + (heureMax.split(":")[1] - heureMin.split(":")[1])
+      }`
+    );
+  };
+
   // --- get enfant id suivant la famille id ---
 
   const [nomsEnfants, setNomsEnfants] = useState(); // les prenoms des enfants
@@ -55,7 +72,6 @@ function DemandeResa({
     axios
       .get(`${import.meta.env.VITE_PATH}/famille/nomsEnfants100/${familleId}`)
       .then((res) => {
-        console.log(res.data);
         setNomsEnfants(res.data);
         setEnfantId(res.data[0].enfantId);
       })
@@ -65,6 +81,7 @@ function DemandeResa({
   };
   useEffect(() => {
     getNomsEnfants();
+    handleHeureTotal();
   }, []);
 
   // --- nom enfant quand clique ---
@@ -83,6 +100,7 @@ function DemandeResa({
   const handleRequest = () => {
     axios.post(`${import.meta.env.VITE_PATH}/reservation`, {
       enfantId,
+      familleId,
       structureId,
 
       prixTotal,
@@ -91,6 +109,7 @@ function DemandeResa({
       heureArrivee: heureMin,
       dateDepart: jour,
       heureDepart: heureMax,
+      heureTotal,
     });
     setCompo(3);
   };
@@ -179,17 +198,7 @@ function DemandeResa({
                 <span>{prixTotal}€ *</span>
               </p>
               <p>
-                <span>
-                  {`${
-                    heureMax.split(":")[1] - heureMin.split(":")[1] >= 0
-                      ? heureMax.split(":")[0] - heureMin.split(":")[0]
-                      : heureMax.split(":")[0] - heureMin.split(":")[0] - 1
-                  }:${
-                    heureMax.split(":")[1] - heureMin.split(":")[1] >= 0
-                      ? heureMax.split(":")[1] - heureMin.split(":")[1]
-                      : 60 - heureMax.split(":")[1] - heureMin.split(":")[1]
-                  } h de garde`}
-                </span>
+                <span>{heureTotal} h de garde</span>
               </p>
             </div>
             <button type="button" onClick={() => handleRequest()}>
