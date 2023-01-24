@@ -35,7 +35,7 @@ function NotifAcceptee({ setCompo, photoFamille, oneReservation }) {
             />
           ) : (
             <AiOutlineUser className="avatar" />
-          )}{" "}
+          )}
         </div>
 
         <div className="text">

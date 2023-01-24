@@ -16,6 +16,14 @@ const getReservationAR = async (req) => {
   return result;
 };
 
+const getReservationPayed = async (req) => {
+  const [result] = await datasource.query(
+    "SELECT r.heureArrivee, r.heureDepart, r.dateArrivee, r.dateDepart, r.jour, e.nom, e.prenom, c.nom AS crecheNom, a.nomUsage AS assMatNomUsage, a.nomNaissance AS assMatNomNaissance, a.prenom AS assMatPrenom, s.photoProfil FROM reservation AS r INNER JOIN enfant AS e ON e.enfantId = r.enfantId LEFT JOIN creche AS c ON c.structureId = r.structureId LEFT JOIN assMat AS a ON a.structureId = r.structureId LEFT JOIN structure AS s ON s.structureId=r.structureId WHERE r.familleId = ? AND (status = 'payed') ORDER BY dateArrivee",
+    [req.params.id]
+  );
+  return result;
+};
+
 const updateStatus = async (status, id) => {
   const [result] = await datasource.query(
     "UPDATE reservation SET status = ? WHERE id = ?",
@@ -31,23 +39,21 @@ const postReservation = async (req) => {
     enfantId,
     prixTotal,
     isOccasionnel,
-    dateArrivee,
+    jour,
     heureArrivee,
-    dateDepart,
     heureDepart,
     heureTotal,
   } = req.body;
 
   const [result] = await datasource.query(
-    "INSERT INTO reservation (structureId, enfantId, prixTotal, isOccasionnel, dateArrivee, heureArrivee, dateDepart, heureDepart, familleId, heureTotal) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ; INSERT INTO notifications (structureId , enfantId ) VALUES (?, ?)",
+    "INSERT INTO reservation (structureId, enfantId, prixTotal, isOccasionnel, jour, heureArrivee, heureDepart, familleId, heureTotal) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ; INSERT INTO notifications (structureId , enfantId ) VALUES (?, ?)",
     [
       structureId,
       enfantId,
       prixTotal,
       isOccasionnel,
-      dateArrivee,
+      jour,
       heureArrivee,
-      dateDepart,
       heureDepart,
       familleId,
       heureTotal,
@@ -70,6 +76,7 @@ const deleteResa = async (req) => {
 module.exports = {
   getReser,
   getReservationAR,
+  getReservationPayed,
   updateStatus,
   postReservation,
   deleteResa,

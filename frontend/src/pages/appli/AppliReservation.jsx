@@ -45,9 +45,9 @@ function AppliReservation() {
 
   // --- les infos à passer ---
 
-  const [heureMin, setHeureMin] = useState("24:00");
-  const [heureMax, setHeureMax] = useState("00:00");
-  const [jour, setJour] = useState("Lundi");
+  const [heureMin, setHeureMin] = useState("");
+  const [heureMax, setHeureMax] = useState("");
+  const [jour, setJour] = useState("");
   const [isOccasionnel, setIsOccasionnel] = useState(0);
 
   const [compo, setCompo] = useState(0);

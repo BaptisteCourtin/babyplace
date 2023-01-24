@@ -134,7 +134,8 @@ router.get("/famille/formParent/:id", parent.getDonneesFormParent); //donnees du
 router.get("/famille/formEnfant/:id", enfant.getDonneesFormEnfant); //donnees du formulaire enfant
 router.get("/famille/nomsEnfants/:id", enfant.getNomsEtIdEnfants); // noms et id des enfants
 router.get("/famille/nomsEnfants100/:id", enfant.getNomsEtIdEnfants100); // noms et id des enfants à 100 %
-router.get("/reservationAR/:id", reservation.getReservationAR); //search
+router.get("/reservationAR/:id", reservation.getReservationAR); // prend les résa pour la page notif
+router.get("/getReservationPayed/:id", reservation.getReservationPayed); // prend les résa pour la page menu (payed)
 router.get("/contact/message/all", messageAdmin.getAllMessageToAdmin); // recupérer tous les message pour le dashboard admin
 router.get("/messages/recup/:room", messagerie.getAllMessageFromDb); // recupération des message pour le chat
 
@@ -289,7 +290,7 @@ router.get("/admin/creche", creche.getCreche);
 router.get("/admin/famille", famille.getFamille);
 
 router.put("/admin/verified/:id", structure.updateVerified);
-router.put("/reservation/status", reservation.updateStatus);
+router.put("/reservation/status", reservation.updateStatus); // change status resa
 router.put("/horaires/day/:id", horaires.updateDay);
 router.put("/dashboard/hours/:id", dashboard.updateHours);
 router.put("/dashboard/indemn/:id", dashboard.updateIndemn);

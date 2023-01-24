@@ -1,11 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
-import FamilleContext from "@components/context/FamilleContext";
 
-function PersonnesConfiance({ setCompo }) {
+function PersonnesConfiance({ setCompo, familleId }) {
   const [persoConf, setPersoConf] = useState([]);
-  const { familleId } = useContext(FamilleContext);
 
   const getPersoConf = () => {
     axios
