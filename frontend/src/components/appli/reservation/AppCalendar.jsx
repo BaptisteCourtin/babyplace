@@ -156,7 +156,7 @@ function AppCalendar({
                       onChange={(e) => chooseTheDay(e, each)}
                     />
                     <label htmlFor={each.jourSemaine}>
-                      {each.jourSemaine.split("")[0]}
+                      {each.jourSemaine.split("")[0].toUpperCase()}
                     </label>
                   </>
                 ) : (

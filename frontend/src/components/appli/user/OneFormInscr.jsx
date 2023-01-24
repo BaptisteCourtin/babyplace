@@ -35,8 +35,8 @@ function OneFormInscr({ init, src, nomDoc, handleSupp, p, who }) {
 }
 
 OneFormInscr.propTypes = {
-  init: PropTypes.string.isRequired,
-  src: PropTypes.func.isRequired,
+  init: PropTypes.string,
+  src: PropTypes.object.isRequired,
   nomDoc: PropTypes.string.isRequired,
   handleSupp: PropTypes.func.isRequired,
   p: PropTypes.string.isRequired,

@@ -23,6 +23,8 @@ const reservation = require("./controllers/reservation.controller");
 const assMat = require("./controllers/assMat.controllers");
 const creche = require("./controllers/creche.controllers");
 const famille = require("./controllers/famille.controllers");
+const parent = require("./controllers/parent.controllers");
+const enfant = require("./controllers/enfant.controllers");
 const messagerie = require("./controllers/messagerie.controllers");
 const notification = require("./controllers/notification.controllers");
 const messageAdmin = require("./controllers/messageAdmin.controllers");
@@ -121,35 +123,38 @@ router.post("/authFamille", (req, res) => {
 });
 
 router.get("/structure/allapp", structure.getAllStructures); //search
-router.get("/horaires/:id", horaires.getHorairesById); //search
 router.get("/structure/notes/:id", structure.getStructureById); //notes
+router.get("/horaires/:id", horaires.getHorairesById); //search
+router.get("/calendrier/whereMoins/:id", calendrier.getCalendrierMoins); // calendrier par id where nbPlaces = -1
 router.get("/famille/conf/:id", famille.getPersoConfiance); //perso confiance
-router.get("/famille/formParent/:id", famille.getDonneesFormParent); //donnees du formulaire parent
-router.get("/famille/formEnfant/:id", famille.getDonneesFormEnfant); //donnees du formulaire enfant
-router.get("/famille/nomsEnfants/:id", famille.getNomsEtIdEnfants); // noms et id des enfants
-router.get("/famille/nomsEnfants100/:id", famille.getNomsEtIdEnfants100); // noms et id des enfants
+router.get("/famille/info/:id", famille.getFamilleInfo); // info famille (noms + photo)
 router.get("/famille/formInscription/:id", famille.getDonneesFormInscription); //donnees du formulaire inscription
 router.get("/famille/pourcent/:id", famille.getPourcent); // pourcent des formulaire
-router.get("/famille/info/:id", famille.getFamilleInfo); // info famille (noms + photo)
+router.get("/famille/formParent/:id", parent.getDonneesFormParent); //donnees du formulaire parent
+router.get("/famille/formEnfant/:id", enfant.getDonneesFormEnfant); //donnees du formulaire enfant
+router.get("/famille/nomsEnfants/:id", enfant.getNomsEtIdEnfants); // noms et id des enfants
+router.get("/famille/nomsEnfants100/:id", enfant.getNomsEtIdEnfants100); // noms et id des enfants à 100 %
+router.get("/reservationAR/:id", reservation.getReservationAR); //search
 router.get("/contact/message/all", messageAdmin.getAllMessageToAdmin); // recupérer tous les message pour le dashboard admin
-router.get("/calendrier/whereMoins/:id", calendrier.getCalendrierMoins); // calendrier par id where nbPlaces = -1
 router.get("/messages/recup/:room", messagerie.getAllMessageFromDb); // recupération des message pour le chat
 
 router.put("/structure/notes/:id", structure.updateNotes); //notes
 router.put("/structure/signal/:id", structure.updateSignal); // signalement
-router.put("/formParent/:id", famille.updateFormParent); // formulaire parent
-router.put("/formEnfant/:id", famille.updateFormEnfant); // formulaire enfant
-router.put("/parent/nullOneDocForm/:id", famille.nullOneDocFormParent); // delete un doc du form inscription parent
-router.put("/famille/nullOneDocForm/:id", famille.nullOneDocFormCommun); // delete un doc du form inscription commun
+router.put("/pourcentFormInscr/:id", famille.updatePourcentFormInscr); // pourcent formulaire inscr
+router.put("/famille/nullOneDocForm/:id", famille.nullOneDocFormCommun); // delete un doc du form inscription (commun)
+router.put("/formParent/:id", parent.updateFormParent); // formulaire parent
+router.put("/parent/nullOneDocForm/:id", parent.nullOneDocFormParent); // delete un doc du form inscription (parent)
+router.put("/formEnfant/:id", enfant.updateFormEnfant); // formulaire enfant
 
-router.post("/reservation", famille.postReservation); // reservation
-router.post("/famille/newEnfant", famille.postNewEnfant); // nouveau enfant
+router.post("/reservation", reservation.postReservation); // reservation
+router.post("/famille/newEnfant", enfant.postNewEnfant); // nouveau enfant
 router.post("/contact/message", messageAdmin.postMessageToAdmin); // nouveau message pour l'admin
 router.post("/messages/sauvegarde", messagerie.saveMessageInDb); // sauvegarde des messages du chat dans la db
 router.post("/famille/newConfiance", famille.postNewConfiance); // nouveau perso confiance
 
-router.delete("/famille/deleteEnfant/:id", famille.deleteEnfant); // delete enfant
 router.delete("/famille/deleteConfiance/:id", famille.deleteConfiance); // delete perso confiance
+router.delete("/famille/deleteEnfant/:id", enfant.deleteEnfant); // delete enfant
+router.delete("/reservation/deleteResa/:id", reservation.deleteResa); // delete perso confiance
 router.delete("/contact/message/all/:id", messageAdmin.deleteMessagebyId); // delete message from admin dashboard
 
 // FORM INSCRIPTION CHAQUE PARENT (juste le where qui change)
@@ -170,8 +175,6 @@ router.post(
 
 // mise dans bdd
 router.put("/formInscription/docParentChangeName/:id/:nomDoc", (req, res) => {
-  // console.log(req.params);
-  // console.log(req.body);
   const { httpDoc } = req.body;
   datasource
     .query(`UPDATE parent SET ${req.params.nomDoc}=? WHERE parentId=?`, [
@@ -302,7 +305,7 @@ router.put("/logout/:id", structure.logout);
 
 router.post("/calendrier/add", calendrier.postDate);
 router.post("/dashboard/docs", structure.uploadProfil);
-router.post('/uploads', multerMid.single('file'), async (req, res, next) => {
+router.post("/uploads", multerMid.single("file"), async (req, res, next) => {
   try {
     const file = req.file;
     const result = await uploadDoc(file);
@@ -625,16 +628,18 @@ router.post("/photoProfil", uploadAvatar.single("avatar"), (req, res) => {
 });
 
 router.get("/photoProfil", (req, res) => {
-  datasource.query(
-    "SELECT photoProfil FROM structure WHERE structureId= ?",
-    [req.query.id]
-  ).then(([result]) => {
-    res.send(result).status(200)
-  }).catch((err) => {
-    console.error(err);
-    res.status(500).send("Accès impossible");
-  });
-})
+  datasource
+    .query("SELECT photoProfil FROM structure WHERE structureId= ?", [
+      req.query.id,
+    ])
+    .then(([result]) => {
+      res.send(result).status(200);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Accès impossible");
+    });
+});
 
 router.put("/photoProfil", (req, res) => {
   const { photoProfil, email } = req.body;
@@ -684,16 +689,19 @@ router.post(
 );
 
 router.get("/photosStructure", (req, res) => {
-  datasource.query(
-    "SELECT photoStructure1, photoStructure2, photoStructure3 FROM structure WHERE structureId= ?",
-    [req.query.id]
-  ).then(([result]) => {
-    res.send(result).status(200)
-  }).catch((err) => {
-    console.error(err);
-    res.status(500).send("Accès impossible");
-  });
-})
+  datasource
+    .query(
+      "SELECT photoStructure1, photoStructure2, photoStructure3 FROM structure WHERE structureId= ?",
+      [req.query.id]
+    )
+    .then(([result]) => {
+      res.send(result).status(200);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Accès impossible");
+    });
+});
 
 router.put("/photosStructure", (req, res) => {
   const { photoStructure1, photoStructure2, photoStructure3, email } = req.body;
@@ -1039,18 +1047,20 @@ router.get("/getStructureId", (req, res) => {
 });
 
 router.delete("/calendrierIndispo", (req, res) => {
-  const { structureId, date } = req.query
-  datasource.query(
-    "DELETE FROM calendrier WHERE structureId= ? AND date = ?",
-    [structureId, date]
-  ).then((result) => {
-    res.sendStatus(200)
-  }).catch((err) => {
-    console.error(err);
-    res.status(500).send("Suppression impossible");
-  });
-})
-
+  const { structureId, date } = req.query;
+  datasource
+    .query("DELETE FROM calendrier WHERE structureId= ? AND date = ?", [
+      structureId,
+      date,
+    ])
+    .then((result) => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Suppression impossible");
+    });
+});
 
 router.put("/agrementsCreche", (req, res) => {
   const { nbEmployes, maxPlaces, maxHandi, max18Mois, maxNuit, email } =
@@ -1278,7 +1288,9 @@ router.delete("/admin/refused/:id", structure.deleteRefused);
 
 router.post("/auth", async (req, res) => {
   await datasource
-    .query("SELECT * FROM structure WHERE email = ? AND isVerify = 1", [req.body.email])
+    .query("SELECT * FROM structure WHERE email = ? AND isVerify = 1", [
+      req.body.email,
+    ])
     .then(([[user]]) => {
       if (user && req.body.password === user.password) {
         const start = Date.now();
@@ -1303,7 +1315,7 @@ router.post("/auth", async (req, res) => {
       } else if (user && req.body.password !== user.password) {
         res.status(401).send("Email ou mot de passe incorrect");
       } else {
-        res.sendStatus(404)
+        res.sendStatus(404);
       }
     })
     .catch((err) => {

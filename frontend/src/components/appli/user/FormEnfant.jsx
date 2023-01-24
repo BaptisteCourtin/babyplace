@@ -3,6 +3,7 @@ import axios from "axios";
 import { Carousel } from "react-responsive-carousel";
 import FamilleContext from "@components/context/FamilleContext";
 import Toggle from "../filtres/Toggle";
+import { toast } from "react-hot-toast";
 
 function FormEnfant() {
   const { familleId } = useContext(FamilleContext);
@@ -116,10 +117,14 @@ function FormEnfant() {
 
   const updateFormEnfant = () => {
     const pourcent = calculPourcent();
-    axios.put(`${import.meta.env.VITE_PATH}/formEnfant/${enfantId}`, {
-      initialData,
-      pourcent,
-    });
+    axios
+      .put(`${import.meta.env.VITE_PATH}/formEnfant/${enfantId}`, {
+        initialData,
+        pourcent,
+      })
+      .then(() => {
+        toast.success("C'est bon, c'est mis à jour 👌");
+      });
   };
 
   // --- ajout enfant ---
@@ -133,7 +138,6 @@ function FormEnfant() {
         getNomsEnfants();
       });
   };
-  // asynchronisme de l'affichage
 
   // --- supprimer enfant ---
 
@@ -144,7 +148,6 @@ function FormEnfant() {
         getNomsEnfants();
       });
   };
-  // asynchronisme de l'affichage
 
   return (
     finalOK === true &&

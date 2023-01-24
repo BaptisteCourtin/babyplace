@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import FamilleContext from "@components/context/FamilleContext";
+import { toast } from "react-hot-toast";
 
 function Parents() {
   const { familleId } = useContext(FamilleContext);
@@ -101,19 +102,22 @@ function Parents() {
   };
 
   const updateFormParent = (place) => {
-    // modifier le parentId
     const { parentId } = donneesForm[place - 1];
     const pourcent = calculPourcent();
-    axios.put(`${import.meta.env.VITE_PATH}/formParent/${parentId}`, {
-      nom: initialData[`nom${place}`],
-      prenom: initialData[`prenom${place}`],
-      profession: initialData[`profession${place}`],
-      telephone: initialData[`telephone${place}`],
-      email: initialData[`email${place}`],
-      adresse: initialData[`adresse${place}`],
+    axios
+      .put(`${import.meta.env.VITE_PATH}/formParent/${parentId}`, {
+        nom: initialData[`nom${place}`],
+        prenom: initialData[`prenom${place}`],
+        profession: initialData[`profession${place}`],
+        telephone: initialData[`telephone${place}`],
+        email: initialData[`email${place}`],
+        adresse: initialData[`adresse${place}`],
 
-      pourcent,
-    });
+        pourcent,
+      })
+      .then(() => {
+        toast.success("C'est bon, c'est mis à jour 👌");
+      });
   };
 
   return (

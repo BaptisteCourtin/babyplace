@@ -46,7 +46,7 @@ function PersonnesConfiance({ setCompo }) {
     }
   };
 
-  // --- supprimer enfant ---
+  // --- supprimer confiance ---
 
   const deleteConfiance = (confianceId) => {
     axios
