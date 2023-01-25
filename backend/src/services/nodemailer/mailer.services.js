@@ -1,6 +1,6 @@
 const transporter = require('./transporteur.services');
 
-const sendResponseByMail = async (objet, message, selectedMail, selectedNom, selectedPrenom) => {
+const sendResponseByMail = async (objet, message, selectedMail, selectedNom, selectedPrenom, selectedOption, selectedMessage) => {
   transporter.sendMail(
     {
       from: `projet3babyplace@gmail.com`,
@@ -25,7 +25,7 @@ const sendResponseByMail = async (objet, message, selectedMail, selectedNom, sel
                   width: 80%;
                   margin: 0 auto;
                   background-color: #fff;
-                  padding: 20px 0px;
+                  padding: 0px 0px 20px 0px;
                   font-family: Arial, Helvetica, sans-serif;
               }
       
@@ -36,7 +36,7 @@ const sendResponseByMail = async (objet, message, selectedMail, selectedNom, sel
                   color: #fff;
                   display: flex;
                   align-items: center;
-                  padding: 20px 40px;
+                  padding: 40px 40px;
               }
       
               .email-body {
@@ -44,11 +44,14 @@ const sendResponseByMail = async (objet, message, selectedMail, selectedNom, sel
                 align-items: center;
                 padding: 30px;
                 font-size: 1.15em;
+                width: 90%;
+                  margin: 0 auto;
                      
               }
 
               .email-body-conatiner {
                 margin-left: 40px;
+                font-size: 1.15em;
               } 
                     
               .email-body-header {
@@ -58,8 +61,8 @@ const sendResponseByMail = async (objet, message, selectedMail, selectedNom, sel
       
               .email-body-header span {
                   color: #7e72f2;
-                  font-size: 1.25em;
-                  font-weight: 500;
+                  font-size: 1.15em;
+                  font-weight: 600;
               }
       
               .email-body-main {
@@ -72,6 +75,13 @@ const sendResponseByMail = async (objet, message, selectedMail, selectedNom, sel
                   color: #000;
                   text-align: center;
                   padding: 10px 0px;
+              }
+
+              .italic {
+                font-style: italic;
+                padding-left: 10px;
+                font-style: 0.95em;
+                color: #7e72f2;
               }
       
               .email-footer {
@@ -96,6 +106,11 @@ const sendResponseByMail = async (objet, message, selectedMail, selectedNom, sel
                 padding-top:10%;
                 margin-right: 20px;
               }
+              
+              .reponse {
+              padding-top: 10px;
+              }
+
           </style>
       </head>
       
@@ -113,7 +128,9 @@ const sendResponseByMail = async (objet, message, selectedMail, selectedNom, sel
                               <p>Madame, Monsieur <span>${selectedPrenom} ${selectedNom}</span>,</p>
                           </div>
                           <div class="email-body-main">
-                              <p>${message}</p>
+                          <p>En réponse à votre demande concernant l'option :<span class="italic"> "${selectedOption}"</span></p>
+                          <p>Message : <span class="italic">"${selectedMessage}"</span></p>
+                              <p class="reponse">${message}</p>
                           </div>
                       </div>
                   </div>
