@@ -3,12 +3,15 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import Nav from "./Nav.admin";
 import ModalMessageAdmin from "./ModalMessageAdmin";
+import ResponseModalAdmin from "./ResponseModalAdmin";
 
 const MessageAdmin = () => {
 
   const [messageAdminData, setMessageAdminData] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedId, setSelectedId] = useState();
+  const [openRes, setOpenRes] = useState(false);
+  const [selectedMail, setSelectedMail] = useState("");
 
   const getAllMessage = async () => {
     try {
@@ -25,11 +28,18 @@ const MessageAdmin = () => {
   };
 
   const repondre = (email) => {
+    setSelectedMail(email);
+    setOpenRes(!openRes);
   };
+
+  const closeRes = () => {
+    getAllMessage();
+    setIsOpen(!isOpen);
+  }
 
   useEffect(() => {
     getAllMessage();
-  }, [deleteMessage]);
+  }, []);
 
   return (
     <div className="messageAdmin">
@@ -49,13 +59,13 @@ const MessageAdmin = () => {
                   <div className='messageListAdminBody'>{element.texte}</div>
                   <div className="adminMessageBtn">
                     <button
-                      type="button" id="btnRepondre"
+                      type="submit" id="btnRepondre"
                       onClick={() => repondre(element.email)}
                     >
                       Répondre
                     </button>
                     <button
-                      type="button" id="btnDelete"
+                      type="submit" id="btnDelete"
                       onClick={() => deleteMessage(element.id)}
                     >
                       Supprimer
@@ -66,7 +76,8 @@ const MessageAdmin = () => {
             ))}
         </div>
       </div>
-      <ModalMessageAdmin open={isOpen} close={setIsOpen} selectedId={selectedId} />
+      <ModalMessageAdmin open={isOpen} close={closeRes} selectedId={selectedId} />
+      <ResponseModalAdmin openRes={openRes} closeRes={setOpenRes} selectedMail={selectedMail} />
     </div>
   );
 };

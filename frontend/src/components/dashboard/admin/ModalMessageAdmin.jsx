@@ -7,10 +7,7 @@ function ModalMessageAdmin({ open, close, selectedId }) {
   const deleteMessage = () => {
     const id = selectedId;
     axios.delete(`http://localhost:5000/contact/message/all/${id}`);
-    closeModal();
-  };
-  const closeModal = () => {
-    close(!open);
+    close();
   };
 
   return (
@@ -24,7 +21,7 @@ function ModalMessageAdmin({ open, close, selectedId }) {
         </div>
         <div className="modalAdminBtns">
           <button id="btnRepondre" onClick={deleteMessage}>OUI</button>
-          <button id="btnDelete" onClick={closeModal}>NON</button>
+          <button id="btnDelete" onClick={close}>NON</button>
         </div>
       </div>
     </div>
