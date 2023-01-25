@@ -28,9 +28,10 @@ const enfant = require("./controllers/enfant.controllers");
 const messagerie = require("./controllers/messagerie.controllers");
 const notification = require("./controllers/notification.controllers");
 const messageAdmin = require("./controllers/messageAdmin.controllers");
+const inscStructure = require("./controllers/inscStructure.controllers");
+const inscCreche = require("./controllers/inscCreche.controllers");
+const inscAssmat = require("./controllers/inscAssmat.controllers");
 const mailer = require("./services/nodemailer/mailer.response.services");
-
-// const inscStructure = require("./controllers/inscStructure.controllers");
 
 // --- pour app ---
 
@@ -323,7 +324,10 @@ router.delete("/calendrier", calendrier.deleteDates);
 router.delete("/calendrier/:id", calendrier.fullDate);
 router.delete("/admin/refused/:id", structure.deleteRefused);
 router.delete("/notifications/:id", notification.deleteNotification);
+
 //Routes for dashboard + admin page end
+
+//Routes inscription structure - start
 
 router.post("/inscription", (req, res) => {
   const { email, password } = req.body;
@@ -355,262 +359,47 @@ router.post("/inscription", (req, res) => {
     .catch((err) => {
       console.error(err.errno);
       if (err.errno === 1062) {
-        res.status(400).send(err)
-      } else { res.status(500).send("Création de compte impossible"); }
-
-    });
-});
-
-router.get("/isCreche", (req, res) => {
-  datasource
-    .query(
-      "SELECT isCreche FROM structure WHERE email = ?",
-      [req.query.email]
-    )
-    .then(([[result]]) => {
-      console.log(result)
-      res.send(result).status(200);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Accès impossible");
-    });
-});
-
-router.get("/getCrecheInfo", (req, res) => {
-  datasource
-    .query(
-      "SELECT * FROM structure INNER JOIN creche ON creche.structureId=structure.structureId WHERE email = ?",
-      [req.query.email]
-    )
-    .then(([[result]]) => {
-      res.send(result).status(200);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Accès impossible");
-    });
-});
-
-router.get("/getAssmatInfo", (req, res) => {
-  datasource
-    .query(
-      "SELECT * FROM structure INNER JOIN assMat ON assMat.structureId=structure.structureId WHERE email = ?",
-      [req.query.email]
-    )
-    .then(([[result]]) => {
-      res.send(result).status(200);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Accès impossible");
-    });
-});
-
-router.get("/crecheExist", (req, res) => {
-  datasource
-    .query(
-      "SELECT creche.structureId FROM structure INNER JOIN creche ON creche.structureId=structure.structureId WHERE email = ?",
-      [req.query.email]
-    )
-    .then(([[result]]) => {
-      res.send(result).status(200);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Accès impossible");
-    });
-});
-
-router.put("/inscriptionCreche1", (req, res) => {
-  const {
-    isCreche,
-    typeCreche,
-    nomStructure,
-    adresseStructure,
-    telephone,
-    email,
-  } = req.body;
-  datasource
-    .query(
-      "UPDATE structure SET isCreche = ?, adresse = ?, telephone= ? WHERE email= ?",
-      [isCreche, adresseStructure, telephone, email]
-    )
-    .then(([structure]) => {
-      if (structure.affectedRows === 0) {
-        res.status(404).send("Not Found");
+        res.status(400).send(err);
       } else {
-        datasource
-          .query("SELECT structureId from structure where email=?", [email])
-          .then(([[id]]) => {
-            const structureId = id.structureId;
-            datasource
-              .query(
-                "INSERT INTO creche(type, nom, structureId) VALUES(?,?,?)",
-                [typeCreche, nomStructure, structureId]
-              )
-              .then(() => {
-                res.sendStatus(204);
-              })
-              .catch((err) => {
-                console.error(err);
-                res.status(500).send("Modification impossible");
-              });
-          });
+        res.status(500).send("Création de compte impossible");
       }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Modification impossible");
-    });
-});
-router.post("/inscriptionCreche1", (req, res) => {
-  const {
-    isCreche,
-    typeCreche,
-    nomStructure,
-    adresseStructure,
-    telephone,
-    email,
-  } = req.body;
-  datasource
-    .query(
-      "UPDATE structure INNER JOIN creche ON creche.structureId=structure.structureId SET isCreche = ?, adresse = ?, telephone= ?, type=?, nom=? WHERE email= ?",
-      [isCreche, adresseStructure, telephone, typeCreche, nomStructure, email]
-    )
-    .then(([structure]) => {
-      if (structure.affectedRows === 0) {
-        res.status(404).send("Not Found");
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Modification impossible");
     });
 });
 
-router.get("/assmatExist", (req, res) => {
-  datasource
-    .query(
-      "SELECT assMat.structureId FROM structure INNER JOIN assMat ON assMat.structureId=structure.structureId WHERE email = ?",
-      [req.query.email]
-    )
-    .then(([[result]]) => {
-      res.send(result).status(200);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Accès impossible");
-    });
-});
+router.get("/isCreche", inscStructure.getIsCreche); // creche ou assmat ?
+router.get("/getStructureId", inscStructure.getStructureId); // get id structure with email
 
-router.put("/inscriptionAssmat1", (req, res) => {
-  const {
-    isCreche,
-    nomNaissance,
-    nomUsage,
-    prenom,
-    adresseStructure,
-    telephone,
-    email,
-  } = req.body;
-  datasource
-    .query(
-      "UPDATE structure SET isCreche = ?, adresse = ?, telephone= ? WHERE email= ?",
-      [isCreche, adresseStructure, telephone, email]
-    )
-    .then(([structure]) => {
-      if (structure.affectedRows === 0) {
-        res.status(404).send("Not Found");
-      } else {
-        datasource
-          .query("SELECT structureId from structure where email=?", [email])
-          .then(([[id]]) => {
-            const structureId = id.structureId;
-            datasource
-              .query(
-                "INSERT INTO assMat(nomNaissance, nomUsage, prenom, structureId) VALUES(?,?,?,?)",
-                [nomNaissance, nomUsage, prenom, structureId]
-              )
-              .then(() => {
-                res.sendStatus(204);
-              })
-              .catch((err) => {
-                console.error(err);
-                res.status(500).send("Modification impossible");
-              });
-          });
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Modification impossible");
-    });
-});
+router.get("/crecheExist", inscCreche.crecheExist); // creche existe?
+router.get("/getCrecheInfo", inscCreche.getCrecheInfo); // get infos creche
+router.put("/inscriptionCreche1", inscCreche.inscriptionCreche1); //modif infos adimin creche
+router.post("/inscriptionCreche1", inscCreche.updateCreche1); // création creche
 
-router.post("/inscriptionAssmat1", (req, res) => {
-  const {
-    isCreche,
-    nomNaissance,
-    nomUsage,
-    prenom,
-    adresseStructure,
-    telephone,
-    email,
-  } = req.body;
-  datasource
-    .query(
-      "UPDATE structure INNER JOIN assMat ON assMat.structureId=structure.structureId SET isCreche = ?, adresse = ?, telephone= ?, nomNaissance=?, nomUsage=?, prenom=? WHERE email= ?",
-      [
-        isCreche,
-        adresseStructure,
-        telephone,
-        nomNaissance,
-        nomUsage,
-        prenom,
-        email,
-      ]
-    )
-    .then(([structure]) => {
-      if (structure.affectedRows === 0) {
-        res.status(404).send("Not Found");
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Modification impossible");
-    });
-});
+router.get("/assmatExist", inscAssmat.assmatExist); // assmat existe ?
+router.get("/getAssmatInfo", inscAssmat.getAssmatInfo); // get infos assmat
+router.put("/inscriptionAssmat1", inscAssmat.inscriptionAssmat1); // modif info admin assmat
+router.post("/inscriptionAssmat1", inscAssmat.updateAssmat1); // création assmat
 
-router.get("/calendrierExist", (req, res) => {
-  datasource
-    .query(
-      "SELECT calendrier.date FROM calendrier WHERE structureId= ? AND nbPlaces=-1",
-      [req.query.id]
-    )
-    .then(([result]) => {
-      res.send(result).status(200);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Accès impossible");
-    });
-});
-router.get("/horairesExist", (req, res) => {
-  datasource
-    .query("SELECT * FROM horaires WHERE structureId= ?", [req.query.id])
-    .then(([result]) => {
-      res.send(result).status(200);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Accès impossible");
-    });
-});
+router.put("/description", inscStructure.updateDescription); //modif description
+
+router.get("/horairesExist", inscStructure.horairesExist); // get horaires si existent
+router.put("/horaires", inscStructure.updateHoraires); // modif horaires
+router.post("/horaires", inscStructure.createHoraires); // création horaires
+
+router.get("/calendrierExist", inscStructure.calendrierExist); // get dates calendrier si existe
+router.delete("/calendrierIndispo", inscStructure.deleteDate); // supprime une date donnée du calendrier
+
+router.put("/optionsAccueilCreche", inscCreche.optionsAccueilCreche); // modif options accueil crèche (bool)
+router.put("/optionsAccueilAssmat", inscAssmat.optionsAccueilAssmat); // modif options accueil assmat
+
+router.put("/resaInst", inscStructure.resaInst); // modif resa instantanée (bool)
+
+router.put("/dureeAccueil", inscStructure.dureeAccueil); // modif durée accueil
+
+router.put("/agrementsCreche", inscCreche.agrementsCreche); // modif agréments crèche
+router.put("/agrementsAssmat", inscAssmat.agrementsAssmat); // modif agréments assmat
+
+router.put("/tarifsCreche", inscCreche.tarifsCreche); // modif tarifs crèche
+router.put("/tarifsAssmat", inscAssmat.tarifsAssmat); // modif tarifs assmat
 
 const storageAvatar = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -713,456 +502,6 @@ router.put("/photosStructure", (req, res) => {
     .query(
       "UPDATE structure SET photoStructure1= ?, photoStructure2= ?, photoStructure3= ? WHERE email= ?",
       [photoStructure1, photoStructure2, photoStructure3, email]
-    )
-    .then(([structure]) => {
-      if (structure.affectedRows === 0) {
-        res.status(404).send("Not Found");
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Modification impossible");
-    });
-});
-
-router.put("/description", (req, res) => {
-  const { description, email } = req.body;
-  datasource
-    .query("UPDATE structure SET description = ? WHERE email= ?", [
-      description,
-      email,
-    ])
-    .then(([structure]) => {
-      if (structure.affectedRows === 0) {
-        res.status(404).send("Not Found");
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Modification impossible");
-    });
-});
-
-router.put("/optionsAccueilCreche", (req, res) => {
-  const {
-    PCSC1,
-    nesting,
-    montessori,
-    handi,
-    jardin,
-    sorties,
-    promenades,
-    eveil,
-    musique,
-    art,
-    bilingue,
-    bibli,
-    transport,
-    albumPhoto,
-    photoConnecte,
-    email,
-  } = req.body;
-  datasource
-    .query(
-      "UPDATE structure INNER JOIN creche ON creche.structureId = structure.structureId SET PCSC1=?, nesting=?, montessori=?, handi=?, jardin=?, sorties=?, promenades=?, eveil=?, musique=?, art=?, bilingue=?, bibli=?, transport=?, albumPhoto=?, photoConnecte=? WHERE email= ?",
-      [
-        PCSC1,
-        nesting,
-        montessori,
-        handi,
-        jardin,
-        sorties,
-        promenades,
-        eveil,
-        musique,
-        art,
-        bilingue,
-        bibli,
-        transport,
-        albumPhoto,
-        photoConnecte,
-        email,
-      ]
-    )
-    .then(([structure]) => {
-      if (structure.affectedRows === 0) {
-        res.status(404).send("Not Found");
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Modification impossible");
-    });
-});
-
-router.put("/optionsAccueilAssmat", (req, res) => {
-  const {
-    PCSC1,
-    nesting,
-    montessori,
-    handi,
-    jardin,
-    sorties,
-    promenades,
-    eveil,
-    musique,
-    art,
-    bilingue,
-    bibli,
-    transport,
-    enfants,
-    experience,
-    animaux,
-    nonFumeur,
-    zeroPollution,
-    repas,
-    hygiene,
-    albumPhoto,
-    photoConnecte,
-    email,
-  } = req.body;
-  datasource
-    .query(
-      "UPDATE structure INNER JOIN assMat ON assMat.structureId = structure.structureId SET PCSC1=?, nesting=?, montessori=?, handi=?, jardin=?, sorties=?, promenades=?, eveil=?, musique=?, art=?, bilingue=?, bibli=?, transport=?, enfants=?, experience=?, animaux=?, nonFumeur=?, zeroPollution=?, repas=?, hygiene=?, albumPhoto=?, photoConnecte=? WHERE email= ?",
-      [
-        PCSC1,
-        nesting,
-        montessori,
-        handi,
-        jardin,
-        sorties,
-        promenades,
-        eveil,
-        musique,
-        art,
-        bilingue,
-        bibli,
-        transport,
-        enfants,
-        experience,
-        animaux,
-        nonFumeur,
-        zeroPollution,
-        repas,
-        hygiene,
-        albumPhoto,
-        photoConnecte,
-        email,
-      ]
-    )
-    .then(([structure]) => {
-      if (structure.affectedRows === 0) {
-        res.status(404).send("Not Found");
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Modification impossible");
-    });
-});
-
-router.put("/resaInst", (req, res) => {
-  const { resaInst, email } = req.body;
-  datasource
-    .query("UPDATE structure SET resaInst = ? WHERE email= ?", [
-      resaInst,
-      email,
-    ])
-    .then(([structure]) => {
-      if (structure.affectedRows === 0) {
-        res.status(404).send("Not Found");
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Modification impossible");
-    });
-});
-
-router.post("/horaires", (req, res) => {
-  const {
-    lundiOuvert,
-    mardiOuvert,
-    mercrediOuvert,
-    jeudiOuvert,
-    vendrediOuvert,
-    samediOuvert,
-    dimancheOuvert,
-    lundiMin,
-    lundiMax,
-    mardiMin,
-    mardiMax,
-    mercrediMin,
-    mercrediMax,
-    jeudiMin,
-    jeudiMax,
-    vendrediMin,
-    vendrediMax,
-    samediMin,
-    samediMax,
-    dimancheMin,
-    dimancheMax,
-    email,
-  } = req.body;
-  datasource
-    .query("SELECT structureId from structure where email=?", [email])
-    .then(([[id]]) => {
-      const structureId = id.structureId;
-      datasource.query(
-        "INSERT INTO horaires(jourSemaine, ouvert, heureMin, heureMax, jourId, structureId) VALUES('lundi', ?, ?, ?, 1, ?)",
-        [lundiOuvert, lundiMin, lundiMax, structureId]
-      );
-      datasource.query(
-        "INSERT INTO horaires(jourSemaine, ouvert, heureMin, heureMax, jourId, structureId) VALUES('mardi', ?, ?, ?, 2, ?)",
-        [mardiOuvert, mardiMin, mardiMax, structureId]
-      );
-      datasource.query(
-        "INSERT INTO horaires(jourSemaine, ouvert, heureMin, heureMax, jourId, structureId) VALUES('mercredi', ?, ?, ?, 3, ?)",
-        [mercrediOuvert, mercrediMin, mercrediMax, structureId]
-      );
-      datasource.query(
-        "INSERT INTO horaires(jourSemaine, ouvert, heureMin, heureMax, jourId, structureId) VALUES('jeudi', ?, ?, ?, 4, ?)",
-        [jeudiOuvert, jeudiMin, jeudiMax, structureId]
-      );
-      datasource.query(
-        "INSERT INTO horaires(jourSemaine, ouvert, heureMin, heureMax, jourId, structureId) VALUES('vendredi', ?, ?, ?, 5, ?)",
-        [vendrediOuvert, vendrediMin, vendrediMax, structureId]
-      );
-      datasource.query(
-        "INSERT INTO horaires(jourSemaine, ouvert, heureMin, heureMax, jourId, structureId) VALUES('samedi', ?, ?, ?, 6, ?)",
-        [samediOuvert, samediMin, samediMax, structureId]
-      );
-      datasource.query(
-        "INSERT INTO horaires(jourSemaine, ouvert, heureMin, heureMax, jourId, structureId) VALUES('dimanche', ?, ?, ?, 7, ?)",
-        [dimancheOuvert, dimancheMin, dimancheMax, structureId]
-      );
-    })
-    .then(() => {
-      res.sendStatus(200);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Modification impossible");
-    });
-});
-
-router.put("/horaires", async (req, res) => {
-  const {
-    lundiOuvert,
-    mardiOuvert,
-    mercrediOuvert,
-    jeudiOuvert,
-    vendrediOuvert,
-    samediOuvert,
-    dimancheOuvert,
-    lundiMin,
-    lundiMax,
-    mardiMin,
-    mardiMax,
-    mercrediMin,
-    mercrediMax,
-    jeudiMin,
-    jeudiMax,
-    vendrediMin,
-    vendrediMax,
-    samediMin,
-    samediMax,
-    dimancheMin,
-    dimancheMax,
-    structureId,
-  } = req.body;
-  try {
-    await datasource.query(
-      "UPDATE horaires SET ouvert=?, heureMin=?, heureMax=? WHERE jourId=1 AND structureId=?",
-      [lundiOuvert, lundiMin, lundiMax, structureId]
-    );
-    await datasource.query(
-      "UPDATE horaires SET ouvert=?, heureMin=?, heureMax=? WHERE jourId=2 AND structureId=?",
-      [mardiOuvert, mardiMin, mardiMax, structureId]
-    );
-    await datasource.query(
-      "UPDATE horaires SET ouvert=?, heureMin=?, heureMax=? WHERE jourId=3 AND structureId=?",
-      [mercrediOuvert, mercrediMin, mercrediMax, structureId]
-    );
-    await datasource.query(
-      "UPDATE horaires SET ouvert=?, heureMin=?, heureMax=? WHERE jourId=4 AND structureId=?",
-      [jeudiOuvert, jeudiMin, jeudiMax, structureId]
-    );
-    await datasource.query(
-      "UPDATE horaires SET ouvert=?, heureMin=?, heureMax=? WHERE jourId=5 AND structureId=?",
-      [vendrediOuvert, vendrediMin, vendrediMax, structureId]
-    );
-    await datasource.query(
-      "UPDATE horaires SET ouvert=?, heureMin=?, heureMax=? WHERE jourId=6 AND structureId=?",
-      [samediOuvert, samediMin, samediMax, structureId]
-    );
-    await datasource.query(
-      "UPDATE horaires SET ouvert=?, heureMin=?, heureMax=? WHERE jourId=7 AND structureId=?",
-      [dimancheOuvert, dimancheMin, dimancheMax, structureId]
-    );
-  } catch (err) {
-    console.error(err);
-  }
-});
-
-router.put("/dureeAccueil", (req, res) => {
-  const { dureeMin, dureeMax, email } = req.body;
-  datasource
-    .query("UPDATE structure SET dureeMin = ?, dureeMax = ? WHERE email= ?", [
-      dureeMin,
-      dureeMax,
-      email,
-    ])
-    .then(([structure]) => {
-      if (structure.affectedRows === 0) {
-        res.status(404).send("Not Found");
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Modification impossible");
-    });
-});
-
-router.get("/getStructureId", (req, res) => {
-  datasource
-    .query("SELECT structureId FROM structure WHERE email = ?", [
-      req.query.email,
-    ])
-    .then(([[result]]) => {
-      res.send(result).status(200);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Accès impossible");
-    });
-});
-
-router.delete("/calendrierIndispo", (req, res) => {
-  const { structureId, date } = req.query;
-  datasource
-    .query("DELETE FROM calendrier WHERE structureId= ? AND date = ?", [
-      structureId,
-      date,
-    ])
-    .then((result) => {
-      res.sendStatus(200);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Suppression impossible");
-    });
-});
-
-router.put("/agrementsCreche", (req, res) => {
-  const { nbEmployes, maxPlaces, maxHandi, max18Mois, maxNuit, email } =
-    req.body;
-  datasource
-    .query(
-      "UPDATE structure INNER JOIN creche ON creche.structureId=structure.structureId SET nbEmployes= ?, maxPlaces= ?, maxHandi= ?, max18Mois= ?, maxNuit= ? WHERE email= ?",
-      [nbEmployes, maxPlaces, maxHandi, max18Mois, maxNuit, email]
-    )
-    .then(([structure]) => {
-      if (structure.affectedRows === 0) {
-        res.status(404).send("Not Found");
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Modification impossible");
-    });
-});
-
-router.put("/agrementsAssmat", (req, res) => {
-  const { maxPlaces, maxHandi, max18Mois, maxNuit, email } = req.body;
-  datasource
-    .query(
-      "UPDATE structure INNER JOIN assMat ON assMat.structureId=structure.structureId SET maxPlaces= ?, maxHandi= ?, max18Mois= ?, maxNuit= ? WHERE email= ?",
-      [maxPlaces, maxHandi, max18Mois, maxNuit, email]
-    )
-    .then(([structure]) => {
-      if (structure.affectedRows === 0) {
-        res.status(404).send("Not Found");
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Modification impossible");
-    });
-});
-
-router.put("/tarifsCreche", (req, res) => {
-  const {
-    financementPaje,
-    tarifHeure,
-    tarifHoraireSpec,
-    indemnRepas,
-    tarifAtelier,
-    email,
-  } = req.body;
-  datasource
-    .query(
-      "UPDATE structure INNER JOIN creche ON creche.structureId=structure.structureId SET financementPaje = ?, tarifHeure= ?, tarifHoraireSpec= ?, indemnRepas= ?, tarifAtelier= ?  WHERE email= ?",
-      [
-        financementPaje,
-        tarifHeure,
-        tarifHoraireSpec,
-        indemnRepas,
-        tarifAtelier,
-        email,
-      ]
-    )
-    .then(([structure]) => {
-      if (structure.affectedRows === 0) {
-        res.status(404).send("Not Found");
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Modification impossible");
-    });
-});
-
-router.put("/tarifsAssmat", (req, res) => {
-  const {
-    tarifHeure,
-    tarifHoraireSpec,
-    indemnRepas,
-    indemnKm,
-    indemnEntretien,
-    tarifHeureSup,
-    email,
-  } = req.body;
-  datasource
-    .query(
-      "UPDATE structure INNER JOIN assMat ON assMat.structureId=structure.structureId SET tarifHeure= ?, tarifHoraireSpec= ?, indemnRepas= ?, indemnKm= ?, indemnEntretien= ?, tarifHeureSup= ? WHERE email= ?",
-      [
-        tarifHeure,
-        tarifHoraireSpec,
-        indemnRepas,
-        indemnKm,
-        indemnEntretien,
-        tarifHeureSup,
-        email,
-      ]
     )
     .then(([structure]) => {
       if (structure.affectedRows === 0) {
@@ -1283,12 +622,9 @@ router.put("/verifsAssmat", (req, res) => {
     });
 });
 
-router.put("/logout/:id", structure.logout);
-router.post("/calendrier/add", calendrier.postDate);
+//Routes inscription structure - end
 
-router.delete("/calendrier", calendrier.deleteDates);
-router.delete("/admin/refused/:id", structure.deleteRefused);
-//Routes for dashboard + admin page end
+// Route auth structure
 
 router.post("/auth", async (req, res) => {
   await datasource

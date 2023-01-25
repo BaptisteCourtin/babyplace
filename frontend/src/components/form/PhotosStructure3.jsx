@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Proptypes from "prop-types";
+import Proptypes, { string, number, node, object, oneOfType } from "prop-types";
 import Axios from "axios";
 
 function Structure3({
@@ -24,7 +24,7 @@ function Structure3({
       [structureId]
     )
       .then((result) => {
-        console.log(result.data[0].photoStructure1)
+        console.log(result.data[0].photoStructure1);
         if (result.data[0].photoStructure1 !== null) {
           setImage1Src(
             `${import.meta.env.VITE_PATH}${result.data[0].photoStructure1}`
@@ -152,10 +152,10 @@ function Structure3({
   );
 }
 Structure3.propTypes = {
-  inputRef1: Proptypes.node,
-  inputRef2: Proptypes.node,
-  inputRef3: Proptypes.node,
-  structureId: Proptypes.string,
+  inputRef1: oneOfType([node, object]),
+  inputRef2: oneOfType([node, object]),
+  inputRef3: oneOfType([node, object]),
+  structureId: oneOfType([string, number]),
   updateFields: Proptypes.func,
 };
 export default Structure3;

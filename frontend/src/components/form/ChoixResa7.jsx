@@ -6,7 +6,7 @@ import imgDossier from "@assets/img-dossier.svg";
 import ResaContext from "@components/context/ResaContext";
 
 function Structure7({ updateFields }) {
-  const { resa, setResa } = useContext(ResaContext);
+  const { resaInst, setResaInst } = useContext(ResaContext);
   return (
     <div>
       <h4>Choisissez comment les parents pourront réserver chez vous</h4>
@@ -25,9 +25,9 @@ function Structure7({ updateFields }) {
         <div className="choixResaContainer">
           <button
             type="button"
-            className={resa === "inst" ? "choixResa chosen" : "choixResa"}
+            className={resaInst === true ? "choixResa chosen" : "choixResa"}
             onClick={() => {
-              setResa("inst");
+              setResaInst(true);
               updateFields({ resaInst: true });
             }}
           >
@@ -61,10 +61,10 @@ function Structure7({ updateFields }) {
           <button
             type="button"
             onClick={() => {
-              setResa("nonInst");
+              setResaInst(false);
               updateFields({ resaInst: false });
             }}
-            className={resa === "nonInst" ? "choixResa chosen" : "choixResa"}
+            className={resaInst === false ? "choixResa chosen" : "choixResa"}
           >
             <div className=" etapes">
               <div className="etape2">

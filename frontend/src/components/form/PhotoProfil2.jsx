@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Proptypes from "prop-types";
+import Proptypes, { string, number, node, object, oneOfType } from "prop-types";
 import Axios from "axios";
 
 function Structure2({ inputRef, structureId, updateFields }) {
@@ -45,6 +45,7 @@ function Structure2({ inputRef, structureId, updateFields }) {
   useEffect(() => {
     getPicture();
   }, []);
+  console.log(typeof inputRef);
   return (
     <div className="structure2">
       <h4>Choisir une photo de profil :</h4>
@@ -69,8 +70,8 @@ function Structure2({ inputRef, structureId, updateFields }) {
   );
 }
 Structure2.propTypes = {
-  inputRef: Proptypes.node,
-  structureId: Proptypes.string,
+  inputRef: oneOfType([node, object]),
+  structureId: oneOfType([string, number]),
   updateFields: Proptypes.func,
 };
 export default Structure2;
