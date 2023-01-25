@@ -25,8 +25,9 @@ function NotifBase({ setCompo, allReservation, setOneReservation }) {
           </div>
         </Link>
 
-        {allReservation.map((each) => (
+        {allReservation.map((each, index) => (
           <CardNotif
+            key={index}
             each={each}
             setCompo={setCompo}
             setOneReservation={setOneReservation}
@@ -40,7 +41,7 @@ function NotifBase({ setCompo, allReservation, setOneReservation }) {
 
 NotifBase.propTypes = {
   setCompo: PropTypes.func.isRequired,
-  oneReservation: PropTypes.object.isRequired,
+  oneReservation: PropTypes.object,
   setOneReservation: PropTypes.func.isRequired,
 };
 

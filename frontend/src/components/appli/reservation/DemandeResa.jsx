@@ -177,8 +177,9 @@ function DemandeResa({
             </div>
 
             <div className="all-kid">
-              {nomsEnfants.map((each) => (
+              {nomsEnfants.map((each, index) => (
                 <button
+                  key={index}
                   type="button"
                   onClick={() => setEnfantId(each.enfantId)}
                 >

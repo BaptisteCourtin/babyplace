@@ -134,8 +134,7 @@ function CardCrecheMap({
 
 CardCrecheMap.propTypes = {
   data: PropTypes.object.isRequired,
-  userPosition: PropTypes.func.isRequired,
-  familleLiked: PropTypes.object.isRequired,
+  familleLiked: PropTypes.array.isRequired,
   familleId: PropTypes.string.isRequired,
   setChangeLike: PropTypes.func.isRequired,
   changeLike: PropTypes.bool.isRequired,

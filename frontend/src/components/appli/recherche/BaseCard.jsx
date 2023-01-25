@@ -21,8 +21,6 @@ function BaseCard({
 }) {
   const [tri, setTri] = useState("Recent");
 
-  // console.log("data2", familleLiked);
-
   // --- position user ---
   const [ville, setVille] = useState();
   const [userPosition, setUserPosition] = useState([47.2135655, -1.5496263]);
@@ -216,7 +214,13 @@ function BaseCard({
 BaseCard.propTypes = {
   setCompo: PropTypes.func.isRequired,
   Allstructure: PropTypes.array.isRequired,
+  familleLiked: PropTypes.array.isRequired,
+  familleId: PropTypes.string.isRequired,
+  setChangeLike: PropTypes.func.isRequired,
+  changeLike: PropTypes.bool.isRequired,
+
   dataBasique: PropTypes.object.isRequired,
+  dataDateHeure: PropTypes.object.isRequired,
   dataServices: PropTypes.object.isRequired,
   dataAggrements: PropTypes.object.isRequired,
 };
