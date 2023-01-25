@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { HashLink } from "react-router-hash-link";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -8,7 +8,6 @@ import Modal from "./Modal";
 
 function Contact() {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState("");
   const { register, handleSubmit, reset } = useForm();
   const [checked, setChecked] = useState(false);
 
@@ -18,7 +17,7 @@ function Contact() {
       nom: "",
       email: "",
       texte: "",
-      optionSelected: ""
+      optionSelected: "",
     });
   };
 
@@ -33,7 +32,7 @@ function Contact() {
         texte,
       })
       .then((res) => {
-        console.log(res.data);
+        console.warn(res.data);
       })
       .catch((err) => {
         console.error(err);
@@ -41,6 +40,7 @@ function Contact() {
   };
 
   const openCloseModal = (e) => {
+    e.preventDefault();
     setIsOpen(!isOpen);
   };
 
@@ -67,14 +67,6 @@ function Contact() {
     },
   ];
 
-  const handleChange = (e) => {
-    setSelected(e.target.value);
-  };
-
-  useEffect(() => {
-    console.log(selected);
-  }, [handleChange]);
-
   return (
     <div className="contact-form" id="aide">
       <NavbarLite />
@@ -91,8 +83,9 @@ function Contact() {
       <section id="contact">
         <h3>Contactez-Nous</h3>
         <p id="question">
-          Une question ? Vous souhaitez en savoir plus ? N'hesitez pas à utiliser ce formulaire,
-          ci-dessous, nous vous repondrons dans les plus bref délais.
+          Une question ? Vous souhaitez en savoir plus ? N'hesitez pas à
+          utiliser ce formulaire, ci-dessous, nous vous repondrons dans les plus
+          bref délais.
         </p>
         <form className="formContact" onSubmit={handleSubmit(onSubmit)}>
           <div className="formContainer">

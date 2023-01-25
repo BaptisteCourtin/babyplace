@@ -5,7 +5,9 @@ export const useGetReservations = (statusToggle, structureId) => {
   const [reser, setReser] = useState([]);
   const getReser = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_PATH}/reservation/${structureId}`);
+      const res = await axios.get(
+        `${import.meta.env.VITE_PATH}/reservation/${structureId}`
+      );
       setReser(res.data);
     } catch (err) {
       console.error(err.message);

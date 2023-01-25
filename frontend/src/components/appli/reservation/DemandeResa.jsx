@@ -2,8 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import Toggle from "../filtres/Toggle";
 import FamilleContext from "@components/context/FamilleContext";
+import Toggle from "../filtres/Toggle";
 
 function DemandeResa({
   setCompo,

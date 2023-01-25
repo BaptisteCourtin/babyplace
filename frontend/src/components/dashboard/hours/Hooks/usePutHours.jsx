@@ -1,21 +1,33 @@
 import axios from "axios";
 import { toast } from "react-hot-toast";
 
-export const usePutHours = (structureId, userType, getData, getHoraires, horairesId, toggleDay, setToggleDay) => {
-
+export const usePutHours = (
+  structureId,
+  userType,
+  getData,
+  getHoraires,
+  horairesId,
+  toggleDay,
+  setToggleDay
+) => {
   const updateTarif = async (tarif, value) => {
     try {
-      await axios.put(`${import.meta.env.VITE_PATH}/dashboard/tarif/${structureId}`, {
-        id: structureId,
-        tarif: tarif,
-        tarifValue: value,
-        table: userType === 'assMat' && tarif === 'tarifHeureSup' ? 'assMat' : 'structure'
-      })
-      toast.success("Vos tarifs ont bien été modifiés")
-      getData()
-    }
-    catch (err) {
-      console.error(err.message)
+      await axios.put(
+        `${import.meta.env.VITE_PATH}/dashboard/tarif/${structureId}`,
+        {
+          id: structureId,
+          tarif,
+          tarifValue: value,
+          table:
+            userType === "assMat" && tarif === "tarifHeureSup"
+              ? "assMat"
+              : "structure",
+        }
+      );
+      toast.success("Vos tarifs ont bien été modifiés");
+      getData();
+    } catch (err) {
+      console.error(err.message);
     }
   };
 
@@ -59,29 +71,35 @@ export const usePutHours = (structureId, userType, getData, getHoraires, horaire
 
   const updateHours = async (value, type, state) => {
     try {
-      type(value)
-      await axios.put(`${import.meta.env.VITE_PATH}/dashboard/hours/${horairesId}`, {
-        id: horairesId,
-        value: value,
-        state: state,
-      })
+      type(value);
+      await axios.put(
+        `${import.meta.env.VITE_PATH}/dashboard/hours/${horairesId}`,
+        {
+          id: horairesId,
+          value,
+          state,
+        }
+      );
       toast.success("Vos horaires ont bien été modifiés", {
-        id: 'horaires',
-        duration: 2000
-      })
-      getHoraires()
+        id: "horaires",
+        duration: 2000,
+      });
+      getHoraires();
     } catch (err) {
-      console.error(err.message)
+      console.error(err.message);
     }
-  }
+  };
 
   const updateDay = async (value) => {
     setToggleDay(!toggleDay);
     try {
-      await axios.put(`${import.meta.env.VITE_PATH}/horaires/day/${horairesId}`, {
-        id: horairesId,
-        value: value,
-      });
+      await axios.put(
+        `${import.meta.env.VITE_PATH}/horaires/day/${horairesId}`,
+        {
+          id: horairesId,
+          value,
+        }
+      );
       toast.success("Vos préférences ont bien été modifiées");
       getHoraires();
     } catch (err) {

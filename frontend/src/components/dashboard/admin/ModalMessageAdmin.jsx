@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import PropTypes from "prop-types";
 
 function ModalMessageAdmin({ open, close, selectedId }) {
   if (!open) return null;
@@ -8,12 +9,15 @@ function ModalMessageAdmin({ open, close, selectedId }) {
   const deleteMessage = async () => {
     const id = selectedId;
     try {
-      const res = await axios.delete(`http://localhost:5000/contact/message/all/${id}`);
+      const res = await axios.delete(
+        `http://localhost:5000/contact/message/all/${id}`
+      );
       close();
-      toast.success("Le message à bien été supprimé")
+      console.warn(res.data);
+      toast.success("Le message à bien été supprimé");
     } catch (err) {
       toast.error(err.message);
-    };
+    }
   };
 
   return (
@@ -26,12 +30,22 @@ function ModalMessageAdmin({ open, close, selectedId }) {
           <p>Etes-vous sûr de vouloir supprimer ce message ?</p>
         </div>
         <div className="modalAdminBtns">
-          <button id="btnRepondre" onClick={deleteMessage}>OUI</button>
-          <button id="btnDelete" onClick={close}>NON</button>
+          <button type="submit" id="btnRepondre" onClick={deleteMessage}>
+            OUI
+          </button>
+          <button type="submit" id="btnDelete" onClick={close}>
+            NON
+          </button>
         </div>
       </div>
     </div>
   );
 }
+
+ModalMessageAdmin.propTypes = {
+  open: PropTypes.bool,
+  close: PropTypes.func,
+  selectedId: PropTypes.string,
+};
 
 export default ModalMessageAdmin;

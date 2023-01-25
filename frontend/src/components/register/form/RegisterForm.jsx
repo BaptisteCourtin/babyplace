@@ -5,11 +5,10 @@ import {
   AiOutlineEyeInvisible,
   AiOutlineCheck,
 } from "react-icons/ai";
-import ReactModal from 'react-modal';
+import ReactModal from "react-modal";
 import UserEmailContext from "@components/context/UserEmailContext";
 import toast from "react-hot-toast";
 import Axios from "axios";
-
 
 function RegisterForm() {
   const navigate = useNavigate();
@@ -44,11 +43,11 @@ function RegisterForm() {
         })
         .catch((err) => {
           if (err.response.data.errno === 1062) {
-            setModalIsOpen(true)
+            setModalIsOpen(true);
           } else {
             console.error(err);
           }
-        })
+        });
     }
   };
   const handleChange = (event) => {
@@ -138,8 +137,8 @@ function RegisterForm() {
       </form>
       <ReactModal
         isOpen={modalIsOpen}
-        shouldCloseOnOverlayClick={true}
-        shouldCloseOnEsc={true}
+        shouldCloseOnOverlayClick
+        shouldCloseOnEsc
         onRequestClose={() => setModalIsOpen(false)}
         ariaHideApp={false}
         className="waitingModal"
@@ -148,13 +147,22 @@ function RegisterForm() {
             backgroundColor: "#000000",
             height: "100vh",
             width: "100vw",
-          }
+          },
         }}
       >
         <h2>Cet email existe déjà</h2>
-        <h4>Pour accéder à la page de connexion, <Link to="/login">cliquez ici</Link></h4>
-        <button type="button" onClick={() => { setModalIsOpen(false) }}>Fermer</button>
-
+        <h4>
+          Pour accéder à la page de connexion,{" "}
+          <Link to="/login">cliquez ici</Link>
+        </h4>
+        <button
+          type="button"
+          onClick={() => {
+            setModalIsOpen(false);
+          }}
+        >
+          Fermer
+        </button>
       </ReactModal>
     </section>
   );

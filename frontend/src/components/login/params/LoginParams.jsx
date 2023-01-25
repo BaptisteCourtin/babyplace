@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
+
 import { Link, useLocation } from "react-router-dom";
-import { toast } from "react-hot-toast";
 
 function LoginParams() {
   const { state } = useLocation();

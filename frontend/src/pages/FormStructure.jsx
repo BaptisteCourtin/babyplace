@@ -141,7 +141,7 @@ function FormStructure() {
   const { userEmail } = useContext(UserEmailContext);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [showExplications, setShowExplications] = useState(
-    window.innerWidth > 1000 ? true : false
+    window.innerWidth > 1000
   );
   const [closedDays, setClosedDays] = useState([]);
   const [structureId, setStructureId] = useState(null);
@@ -891,7 +891,7 @@ function FormStructure() {
         closedDays.map((date) => {
           if (indispo.indexOf(date) === -1) {
             Axios.post(`${import.meta.env.VITE_PATH}/calendrier/add`, {
-              date: date,
+              date,
               nbPlaces: -1,
               structureId,
             }).catch((err) => {
@@ -901,7 +901,7 @@ function FormStructure() {
         });
         indispo.map((value) => {
           if (closedDays.indexOf(value) === -1) {
-            let date = value;
+            const date = value;
             Axios.delete(
               `${
                 import.meta.env.VITE_PATH

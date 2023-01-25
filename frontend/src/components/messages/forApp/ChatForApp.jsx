@@ -5,6 +5,7 @@ import moment from "moment";
 import { AiFillLeftCircle } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import PropTypes from "prop-types";
 
 function ChatForApp({ socket, username, room, title, joinRoom }) {
   const [currentMessage, setCurrentMessage] = useState("");
@@ -21,7 +22,7 @@ function ChatForApp({ socket, username, room, title, joinRoom }) {
         date,
       })
       .then((res) => {
-        console.log(res.data);
+        console.warn(res.data);
       })
       .catch((err) => {
         console.error(err);
@@ -141,10 +142,20 @@ function ChatForApp({ socket, username, room, title, joinRoom }) {
           }}
           value={currentMessage}
         />
-        <button onClick={sendMessage}>&#9658;</button>
+        <button type="submit" onClick={sendMessage}>
+          &#9658;
+        </button>
       </div>
     </div>
   );
 }
+
+ChatForApp.propTypes = {
+  socket: PropTypes.any,
+  username: PropTypes.string,
+  room: PropTypes.number,
+  title: PropTypes.string,
+  joinRoom: PropTypes.func,
+};
 
 export default ChatForApp;

@@ -9,7 +9,7 @@ import ActivitiesDashHours from "./Components/Activities.DashHours";
 
 function DashHours({ userType, structureId }) {
   const [dayId, setDayId] = useState(1);
-  const [horairesId, setHorairesId] = useState(null)
+  const [horairesId, setHorairesId] = useState(null);
 
   const {
     toggleDay,
@@ -40,7 +40,16 @@ function DashHours({ userType, structureId }) {
     getHoraires,
   } = useGetHours(structureId, userType);
 
-  const { updateIndemn, updateOptions, updateTarif, updateDay, updateHours } = usePutHours(structureId, userType, getData, getHoraires, horairesId, toggleDay, setToggleDay)
+  const { updateIndemn, updateOptions, updateTarif, updateDay, updateHours } =
+    usePutHours(
+      structureId,
+      userType,
+      getData,
+      getHoraires,
+      horairesId,
+      toggleDay,
+      setToggleDay
+    );
 
   return (
     <div className="dashPlaces">
