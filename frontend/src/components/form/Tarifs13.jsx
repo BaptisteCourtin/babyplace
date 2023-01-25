@@ -1,9 +1,8 @@
 import React, { useContext, useState } from "react";
 import StructureContext from "@components/context/StructureContext";
-import Proptypes, { bool, number, oneOfType } from "prop-types";
+import Proptypes from "prop-types";
 
 function Structure13({
-  financementPaje,
   tarifHeure,
   tarifHoraireSpec,
   indemnRepas,
@@ -318,7 +317,6 @@ function Structure13({
   );
 }
 Structure13.propTypes = {
-  financementPaje: oneOfType([bool, number]),
   tarifHeure: Proptypes.node,
   tarifHoraireSpec: Proptypes.node,
   indemnRepas: Proptypes.node,

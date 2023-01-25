@@ -24,7 +24,6 @@ function Structure3({
       [structureId]
     )
       .then((result) => {
-        console.log(result.data[0].photoStructure1);
         if (result.data[0].photoStructure1 !== null) {
           setImage1Src(result.data[0].photoStructure1);
           updateFields({ photo1Src: result.data[0].photoStructure1 });

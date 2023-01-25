@@ -20,8 +20,12 @@ function ModalMessageAdmin({ open, close, selectedId }) {
           <p>Etes-vous sûr de vouloir supprimer ce message ?</p>
         </div>
         <div className="modalAdminBtns">
-          <button id="btnRepondre" onClick={deleteMessage}>OUI</button>
-          <button id="btnDelete" onClick={close}>NON</button>
+          <button id="btnRepondre" onClick={deleteMessage}>
+            OUI
+          </button>
+          <button id="btnDelete" onClick={close}>
+            NON
+          </button>
         </div>
       </div>
     </div>

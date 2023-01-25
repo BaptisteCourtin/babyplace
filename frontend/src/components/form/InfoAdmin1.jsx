@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
-import Proptypes, { bool, node, oneOfType } from "prop-types";
+import Proptypes from "prop-types";
 import StructureContext from "@components/context/StructureContext";
 
 function Structure1({
-  isCreche,
   typeCreche,
   nomStructure,
   telephone,
@@ -140,7 +139,8 @@ function Structure1({
               htmlFor="nomStrucure"
               className={
                 nomStructure !== null &&
-                  nomStructure !== undefined && nomStructure.length > 3
+                nomStructure !== undefined &&
+                nomStructure.length > 3
                   ? "labelChecked"
                   : ""
               }
@@ -164,7 +164,13 @@ function Structure1({
             />
             <label
               htmlFor="adresseStrucure"
-              className={adresseStructure !== null && adresseStructure !== undefined && adresseStructure.length > 10 ? "labelChecked" : ""}
+              className={
+                adresseStructure !== null &&
+                adresseStructure !== undefined &&
+                adresseStructure.length > 10
+                  ? "labelChecked"
+                  : ""
+              }
             >
               Adresse
             </label>
@@ -192,118 +198,114 @@ function Structure1({
             <p className="checkSymbol">&#x2713;</p>
           </div>
         </div>
-      )
-      }
-      {
-        structure === "assmat" && (
-          <div className="assmat">
-            <h4>Complétez et vérifiez vos informations</h4>
-            <div className="inputsContainer">
-              <input
-                required
-                type="text"
-                name="nomNaissance"
-                placeholder="Nom de naissance"
-                pattern=".{2,}"
-                value={nomNaissance || undefined}
-                onChange={(e) => updateFields({ nomNaissance: e.target.value })}
-              />
-              <label
-                htmlFor="nomNaissance"
-                className={nomNaissance !== "" ? "labelChecked" : ""}
-              >
-                Nom de naissance
-              </label>
-              <p className="checkSymbol">&#x2713;</p>
-            </div>
-            <div className="inputsContainer">
-              <input
-                required
-                type="text"
-                name="nomUsage"
-                placeholder="Nom d'usage"
-                value={nomUsage || undefined}
-                onChange={(e) => updateFields({ nomUsage: e.target.value })}
-              />
-              <label
-                htmlFor="nomUsage"
-                className={nomUsage !== "" ? "labelChecked" : ""}
-              >
-                Nom d'usage
-              </label>
-              <p className="checkSymbol">&#x2713;</p>
-            </div>
-            <div className="inputsContainer">
-              <input
-                required
-                type="text"
-                name="prenom"
-                placeholder="Prénom"
-                pattern=".{3,}"
-                value={prenom || undefined}
-                onChange={(e) => updateFields({ prenom: e.target.value })}
-              />
-              <label
-                htmlFor="prenom"
-                className={prenom !== "" ? "labelChecked" : ""}
-              >
-                Prénom
-              </label>
-              <p className="checkSymbol">&#x2713;</p>
-            </div>
-            <div className="inputsContainer">
-              <input
-                required
-                type="text"
-                name="adresseStructure"
-                pattern=".{10,} [0-9]{5} .{3,}"
-                placeholder="N°, rue, CP, ville"
-                value={adresseStructure || undefined}
-                onChange={(e) =>
-                  updateFields({ adresseStructure: e.target.value })
-                }
-              />
-              <label
-                htmlFor="adresseStrucure"
-                className={adresseStructure !== "" ? "labelChecked" : ""}
-              >
-                Adresse
-              </label>
-              <p className="checkSymbol">&#x2713;</p>
-              <p>
-                Les parents n'obtiendront l'adresse exacte qu'après avoir effectué
-                la réservation
-              </p>
-            </div>
-            <div className="inputsContainer">
-              <input
-                required
-                type="tel"
-                placeholder="0123456789"
-                value={telephone || undefined}
-                pattern="[0-9]{10}"
-                onChange={(e) => updateFields({ telephone: e.target.value })}
-              />
-              <label
-                htmlFor="phone"
-                className={telephone !== "" ? "labelChecked" : ""}
-              >
-                Numéro de téléphone
-              </label>
-              <p className="checkSymbol">&#x2713;</p>
-              <p>
-                Les parents n'obtiendront ce numéro qu'après avoir effectué la
-                réservation
-              </p>
-            </div>
+      )}
+      {structure === "assmat" && (
+        <div className="assmat">
+          <h4>Complétez et vérifiez vos informations</h4>
+          <div className="inputsContainer">
+            <input
+              required
+              type="text"
+              name="nomNaissance"
+              placeholder="Nom de naissance"
+              pattern=".{2,}"
+              value={nomNaissance || undefined}
+              onChange={(e) => updateFields({ nomNaissance: e.target.value })}
+            />
+            <label
+              htmlFor="nomNaissance"
+              className={nomNaissance !== "" ? "labelChecked" : ""}
+            >
+              Nom de naissance
+            </label>
+            <p className="checkSymbol">&#x2713;</p>
           </div>
-        )
-      }
-    </div >
+          <div className="inputsContainer">
+            <input
+              required
+              type="text"
+              name="nomUsage"
+              placeholder="Nom d'usage"
+              value={nomUsage || undefined}
+              onChange={(e) => updateFields({ nomUsage: e.target.value })}
+            />
+            <label
+              htmlFor="nomUsage"
+              className={nomUsage !== "" ? "labelChecked" : ""}
+            >
+              Nom d'usage
+            </label>
+            <p className="checkSymbol">&#x2713;</p>
+          </div>
+          <div className="inputsContainer">
+            <input
+              required
+              type="text"
+              name="prenom"
+              placeholder="Prénom"
+              pattern=".{3,}"
+              value={prenom || undefined}
+              onChange={(e) => updateFields({ prenom: e.target.value })}
+            />
+            <label
+              htmlFor="prenom"
+              className={prenom !== "" ? "labelChecked" : ""}
+            >
+              Prénom
+            </label>
+            <p className="checkSymbol">&#x2713;</p>
+          </div>
+          <div className="inputsContainer">
+            <input
+              required
+              type="text"
+              name="adresseStructure"
+              pattern=".{10,} [0-9]{5} .{3,}"
+              placeholder="N°, rue, CP, ville"
+              value={adresseStructure || undefined}
+              onChange={(e) =>
+                updateFields({ adresseStructure: e.target.value })
+              }
+            />
+            <label
+              htmlFor="adresseStrucure"
+              className={adresseStructure !== "" ? "labelChecked" : ""}
+            >
+              Adresse
+            </label>
+            <p className="checkSymbol">&#x2713;</p>
+            <p>
+              Les parents n'obtiendront l'adresse exacte qu'après avoir effectué
+              la réservation
+            </p>
+          </div>
+          <div className="inputsContainer">
+            <input
+              required
+              type="tel"
+              placeholder="0123456789"
+              value={telephone || undefined}
+              pattern="[0-9]{10}"
+              onChange={(e) => updateFields({ telephone: e.target.value })}
+            />
+            <label
+              htmlFor="phone"
+              className={telephone !== "" ? "labelChecked" : ""}
+            >
+              Numéro de téléphone
+            </label>
+            <p className="checkSymbol">&#x2713;</p>
+            <p>
+              Les parents n'obtiendront ce numéro qu'après avoir effectué la
+              réservation
+            </p>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 Structure1.propTypes = {
-  isCreche: oneOfType([bool, node]),
   typeCreche: Proptypes.string,
   nomStructure: Proptypes.string,
   telephone: Proptypes.string,

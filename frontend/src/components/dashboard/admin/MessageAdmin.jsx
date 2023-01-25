@@ -5,8 +5,7 @@ import Nav from "./Nav.admin";
 import ModalMessageAdmin from "./ModalMessageAdmin";
 import ResponseModalAdmin from "./ResponseModalAdmin";
 
-const MessageAdmin = () => {
-
+function MessageAdmin() {
   const [messageAdminData, setMessageAdminData] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedId, setSelectedId] = useState();
@@ -19,7 +18,7 @@ const MessageAdmin = () => {
       setMessageAdminData(ret.data);
     } catch (err) {
       toast.error(err.message);
-    };
+    }
   };
 
   const deleteMessage = (id) => {
@@ -35,7 +34,7 @@ const MessageAdmin = () => {
   const closeRes = () => {
     getAllMessage();
     setIsOpen(!isOpen);
-  }
+  };
 
   useEffect(() => {
     getAllMessage();
@@ -51,21 +50,25 @@ const MessageAdmin = () => {
             messageAdminData.map((element) => (
               <li key={element.id}>
                 <div className="messageListAdminContainer">
-                  <div className='messageListAdminHeader'>
-                    <h4>{element.prenom} {element.nom}</h4>
-                    <div className='messageListEmail'>{element.email}</div>
+                  <div className="messageListAdminHeader">
+                    <h4>
+                      {element.prenom} {element.nom}
+                    </h4>
+                    <div className="messageListEmail">{element.email}</div>
                   </div>
-                  <div className='optionSelected'>{element.optionSelected}</div>
-                  <div className='messageListAdminBody'>{element.texte}</div>
+                  <div className="optionSelected">{element.optionSelected}</div>
+                  <div className="messageListAdminBody">{element.texte}</div>
                   <div className="adminMessageBtn">
                     <button
-                      type="submit" id="btnRepondre"
+                      type="submit"
+                      id="btnRepondre"
                       onClick={() => repondre(element.email)}
                     >
                       Répondre
                     </button>
                     <button
-                      type="submit" id="btnDelete"
+                      type="submit"
+                      id="btnDelete"
                       onClick={() => deleteMessage(element.id)}
                     >
                       Supprimer
@@ -76,10 +79,18 @@ const MessageAdmin = () => {
             ))}
         </div>
       </div>
-      <ModalMessageAdmin open={isOpen} close={closeRes} selectedId={selectedId} />
-      <ResponseModalAdmin openRes={openRes} closeRes={setOpenRes} selectedMail={selectedMail} />
+      <ModalMessageAdmin
+        open={isOpen}
+        close={closeRes}
+        selectedId={selectedId}
+      />
+      <ResponseModalAdmin
+        openRes={openRes}
+        closeRes={setOpenRes}
+        selectedMail={selectedMail}
+      />
     </div>
   );
-};
+}
 
 export default MessageAdmin;

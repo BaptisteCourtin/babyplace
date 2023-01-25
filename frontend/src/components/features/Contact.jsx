@@ -18,7 +18,7 @@ function Contact() {
       nom: "",
       email: "",
       texte: "",
-      optionSelected: ""
+      optionSelected: "",
     });
   };
 
@@ -91,8 +91,9 @@ function Contact() {
       <section id="contact">
         <h3>Contactez-Nous</h3>
         <p id="question">
-          Une question ? Vous souhaitez en savoir plus ? N'hesitez pas à utiliser ce formulaire,
-          ci-dessous, nous vous repondrons dans les plus bref délais.
+          Une question ? Vous souhaitez en savoir plus ? N'hesitez pas à
+          utiliser ce formulaire, ci-dessous, nous vous repondrons dans les plus
+          bref délais.
         </p>
         <form className="formContact" onSubmit={handleSubmit(onSubmit)}>
           <div className="formContainer">

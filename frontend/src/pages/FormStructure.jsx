@@ -141,7 +141,7 @@ function FormStructure() {
   const { userEmail } = useContext(UserEmailContext);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [showExplications, setShowExplications] = useState(
-    window.innerWidth > 1000 ? true : false
+    window.innerWidth > 1000
   );
   const [closedDays, setClosedDays] = useState([]);
   const [structureId, setStructureId] = useState(null);
@@ -706,7 +706,7 @@ function FormStructure() {
                 const photo1 = result.data;
                 photoStructure = photo1;
               }
-              let column = "photoStructure1";
+              const column = "photoStructure1";
               Axios.put(`${import.meta.env.VITE_PATH}/photosStructure`, {
                 column,
                 photoStructure,
@@ -729,7 +729,7 @@ function FormStructure() {
                 const photo2 = result.data;
                 photoStructure = photo2;
               }
-              let column = "photoStructure2";
+              const column = "photoStructure2";
               Axios.put(`${import.meta.env.VITE_PATH}/photosStructure`, {
                 column,
                 photoStructure,
@@ -752,7 +752,7 @@ function FormStructure() {
                 const photo3 = result.data;
                 photoStructure = photo3;
               }
-              let column = "photoStructure3";
+              const column = "photoStructure3";
               Axios.put(`${import.meta.env.VITE_PATH}/photosStructure`, {
                 column,
                 photoStructure,
@@ -917,7 +917,7 @@ function FormStructure() {
         closedDays.map((date) => {
           if (indispo.indexOf(date) === -1) {
             Axios.post(`${import.meta.env.VITE_PATH}/calendrier/add`, {
-              date: date,
+              date,
               nbPlaces: -1,
               structureId,
             }).catch((err) => {
@@ -927,7 +927,7 @@ function FormStructure() {
         });
         indispo.map((value) => {
           if (closedDays.indexOf(value) === -1) {
-            let date = value;
+            const date = value;
             Axios.delete(
               `${
                 import.meta.env.VITE_PATH
