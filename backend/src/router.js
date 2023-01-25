@@ -425,7 +425,7 @@ router.post(
 );
 
 router.get("/photosStructure", inscStructure.getPhotosStructure); // get structure pictures
-router.put("/photosStructure", inscStructure.updatePhotosStructure); // update structure pictures
+router.put("/photosStructure", inscStructure.updatePhotosStructure); // update structure pictures + docPmi
 
 //put structure pictures in cloud
 router.post(
@@ -442,42 +442,29 @@ router.post(
   }
 );
 
-const storageJustif = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "./public/uploads/justificatifs");
-  },
-  filename: (req, file, cb) => {
-    const date = new Date();
-    cb(
-      null,
-      date.getMinutes() + Math.round(Math.random() * 1000) + file.originalname
-    );
-  },
-});
-const uploadJustif = multer({ storage: storageJustif });
-
+//put justificatifs in cloud
 router.post(
   "/justificatifs",
-  uploadJustif.fields([
-    { name: "docpmi", maxCount: 1 },
-    { name: "docIdentite", maxCount: 1 },
-    { name: "docVitale", maxCount: 1 },
-    { name: "docJustifDom", maxCount: 1 },
-    { name: "docDiplome", maxCount: 1 },
-    { name: "docRespCivile", maxCount: 1 },
-    { name: "docAssAuto", maxCount: 1 },
-  ]),
-  (req, res) => {
-    res.send(req.files);
+  multerMid.single("file"),
+  async (req, res, next) => {
+    try {
+      const file = req.file;
+      const result = await uploadDoc(file);
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
   }
 );
 
+router.put("/justificatifs", inscAssmat.justificatifsAssmat); // update assmat doc
+
 router.put("/verifsCreche", (req, res) => {
-  const { numAgrement, dateAgrement, docPmiSrc, siret, email } = req.body;
+  const { numAgrement, dateAgrement, siret, email } = req.body;
   datasource
     .query(
-      "UPDATE structure INNER JOIN creche ON creche.structureId=structure.structureId SET numAgrement= ?, dateAgrement= ?, docPmi= ?, siret= ?  WHERE email= ?",
-      [numAgrement, dateAgrement, docPmiSrc, siret, email]
+      "UPDATE structure INNER JOIN creche ON creche.structureId=structure.structureId SET numAgrement= ?, dateAgrement= ?, siret= ?  WHERE email= ?",
+      [numAgrement, dateAgrement, siret, email]
     )
     .then(([structure]) => {
       if (structure.affectedRows === 0) {

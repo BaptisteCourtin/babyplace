@@ -165,7 +165,6 @@ function FormStructure() {
       userEmail,
     })
       .then((result) => {
-        console.log(result.data.isCreche);
         if (result.data.isCreche === 0) {
           setStructure("assmat");
         }
@@ -592,6 +591,12 @@ function FormStructure() {
       assAutoNumero,
       assAutoAdresse,
       indispo,
+      docIdentite,
+      docVitale,
+      docJustifDom,
+      docDiplome,
+      docRespCivile,
+      docAssAuto,
     } = data;
     const email = userEmail;
     if (!isLastStep) {
@@ -675,7 +680,6 @@ function FormStructure() {
           formData.append("file", inputRef.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/photoProfil`, formData)
             .then((result) => {
-              console.log(result.data);
               let photoProfil = imageProfilSrc;
               if (result.data !== undefined) {
                 photoProfil = result.data;
@@ -992,20 +996,80 @@ function FormStructure() {
             console.error(err);
           });
       } else if (currentStepIndex === 14) {
-        let docPmiSrc = null;
-        let docCniSrc = null;
-        let docCpamSrc = null;
-        let docDomSrc = null;
-        let docDiplomeSrc = null;
-        let docRespSrc = null;
-        let docAutoSrc = null;
-        const formData = new FormData();
-        formData.append("docpmi", inputRefPmi.current.files[0]);
+        let docCniSrc = docIdentite;
+        let docCpamSrc = docVitale;
+        let docDomSrc = docJustifDom;
+        let docDiplomeSrc = docDiplome;
+        let docRespSrc = docRespCivile;
+        let docAutoSrc = docAssAuto;
+        if (inputRefPmi.current !== null) {
+          const formData = new FormData();
+          formData.append("file", inputRefPmi.current.files[0]);
+          Axios.post(`${import.meta.env.VITE_PATH}/photosStructure`, formData)
+            .then((result) => {
+              let photoStructure = docPmi;
+              if (result.data !== undefined) {
+                const doc = result.data;
+                photoStructure = doc;
+              }
+              const column = "docPmi";
+              Axios.put(`${import.meta.env.VITE_PATH}/photosStructure`, {
+                column,
+                photoStructure,
+                email,
+              }).catch((err) => {
+                console.error(err);
+              });
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        }
         if (inputRefCni.current !== null) {
-          formData.append("docIdentite", inputRefCni.current.files[0]);
+          const formData = new FormData();
+          formData.append("file", inputRefCni.current.files[0]);
+          Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
+            .then((result) => {
+              let doc = docIdentite;
+              if (result.data !== undefined) {
+                const docTemp = result.data;
+                doc = docTemp;
+              }
+              const column = "docIdentite";
+              Axios.put(`${import.meta.env.VITE_PATH}/justificatifs`, {
+                column,
+                doc,
+                email,
+              }).catch((err) => {
+                console.error(err);
+              });
+            })
+            .catch((err) => {
+              console.error(err);
+            });
         }
         if (inputRefCpam.current !== null) {
-          formData.append("docVitale", inputRefCpam.current.files[0]);
+          const formData = new FormData();
+          formData.append("file", inputRefCpam.current.files[0]);
+          Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
+            .then((result) => {
+              let doc = docVitale;
+              if (result.data !== undefined) {
+                const docTemp = result.data;
+                doc = docTemp;
+              }
+              const column = "docVitale";
+              Axios.put(`${import.meta.env.VITE_PATH}/justificatifs`, {
+                column,
+                doc,
+                email,
+              }).catch((err) => {
+                console.error(err);
+              });
+            })
+            .catch((err) => {
+              console.error(err);
+            });
         }
         if (inputRefDom.current !== null) {
           formData.append("docJustifDom", inputRefDom.current.files[0]);

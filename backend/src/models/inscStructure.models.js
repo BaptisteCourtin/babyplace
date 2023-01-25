@@ -117,6 +117,13 @@ const updatePhotosStructure = (column, photoStructure, email) => {
   ]);
 };
 
+const updateJustificatif = (column, doc, email) => {
+  return datasource.query(
+    `UPDATE structure INNER JOIN assMat ON assMat.structureId = structure.structureId SET ${column}= ?  WHERE email= ?`,
+    [doc, email]
+  );
+};
+
 const updateDescription = (description, email) => {
   return datasource.query(
     "UPDATE structure SET description = ? WHERE email= ?",
@@ -345,6 +352,7 @@ module.exports = {
   updatePhotoProfil,
   getPhotosStructure,
   updatePhotosStructure,
+  updateJustificatif,
   updateDescription,
   calendrierExist,
   horairesExist,

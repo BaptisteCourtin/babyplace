@@ -101,7 +101,7 @@ function Structure3({
             <input
               type="file"
               id="photo1"
-              name="photo1"
+              name="file"
               ref={inputRef1}
               accept="image/png, image/jpg, image/jpeg"
               onChange={(e) => updateImg1(e)}
@@ -117,7 +117,7 @@ function Structure3({
             <input
               type="file"
               id="photo2"
-              name="photo2"
+              name="file"
               ref={inputRef2}
               accept="image/png, image/jpg, image/jpeg"
               onChange={(e) => updateImg2(e)}
@@ -133,7 +133,7 @@ function Structure3({
             <input
               type="file"
               id="photo3"
-              name="photo3"
+              name="file"
               ref={inputRef3}
               accept="image/png, image/jpg, image/jpeg"
               onChange={(e) => updateImg3(e)}

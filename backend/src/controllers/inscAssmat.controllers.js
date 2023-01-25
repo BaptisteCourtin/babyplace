@@ -212,6 +212,23 @@ const tarifsAssmat = (req, res) => {
     });
 };
 
+const justificatifsAssmat = (req, res) => {
+  const { column, doc, email } = req.body;
+  inscStructureModels
+    .updateJustificatif(column, doc, email)
+    .then(([structure]) => {
+      if (structure.affectedRows === 0) {
+        res.status(404).send("Not Found");
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Modification impossible");
+    });
+};
+
 module.exports = {
   getAssmatInfo,
   assmatExist,
@@ -220,4 +237,5 @@ module.exports = {
   optionsAccueilAssmat,
   agrementsAssmat,
   tarifsAssmat,
+  justificatifsAssmat,
 };
