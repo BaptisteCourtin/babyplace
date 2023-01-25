@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Proptypes, { bool, number, oneOfType } from "prop-types";
+import Proptypes, { bool, number, string, oneOfType } from "prop-types";
 import StructureContext from "@components/context/StructureContext";
 
 function Structure5({
@@ -307,6 +307,7 @@ Structure5.propTypes = {
   montessori: oneOfType([bool, number]),
   handi: oneOfType([bool, number]),
   enfants: oneOfType([bool, number]),
+  experience: oneOfType([string, number]),
   jardin: oneOfType([bool, number]),
   sorties: oneOfType([bool, number]),
   animaux: oneOfType([bool, number]),

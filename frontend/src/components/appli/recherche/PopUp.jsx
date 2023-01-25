@@ -17,8 +17,8 @@ function PopUp({ data, dataHorairesId }) {
     axios
       .get(`${import.meta.env.VITE_PATH}/famille/nomsEnfants100/${familleId}`)
       .then((res) => {
-        // faire aussi suivant les doc
-        console.log(res.data);
+        // faire aussi suivant les doc ???
+        // console.log(res.data);
         if (res.data[0] !== undefined) {
           setProfilComplet(true);
         }

@@ -4,7 +4,8 @@ import madamcoucou from "@assets/img-woman.svg";
 import { toast } from "react-hot-toast";
 import PropTypes from "prop-types";
 
-function ResponseModalAdmin({
+const ResponseModalAdmin = ({
+
   openRes,
   closeRes,
   selectedMail,
@@ -12,7 +13,9 @@ function ResponseModalAdmin({
   selectedPrenom,
   selectedOption,
   selectedMessage,
-}) {
+
+}) => {
+
   if (!openRes) return null;
 
   const [objet, setObjet] = useState("");
@@ -21,6 +24,7 @@ function ResponseModalAdmin({
   const closeMod = () => {
     closeRes(!openRes);
   };
+
 
   const sendRespons = async (e) => {
     e.preventDefault();
@@ -41,10 +45,12 @@ function ResponseModalAdmin({
       setMessage("");
       setObjet("");
       closeMod();
+
       console.warn(res.data);
       toast.success("Votre mail a bien été envoyé !");
     } catch (err) {
       console.error(err.response);
+
       toast.error(err.message);
     }
   };
@@ -94,6 +100,7 @@ function ResponseModalAdmin({
                     onChange={(e) => setMessage(e.target.value)}
                     required
                   />
+
                 </div>
                 <span id="obligatoireText">* les chants sont obligatoires</span>
                 <div className="modalAdminBtns">
@@ -111,7 +118,7 @@ function ResponseModalAdmin({
       </div>
     </div>
   );
-}
+};
 
 ResponseModalAdmin.propTypes = {
   openRes: PropTypes.bool,

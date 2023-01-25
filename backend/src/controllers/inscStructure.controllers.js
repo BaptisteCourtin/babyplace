@@ -26,6 +26,66 @@ const getStructureId = (req, res) => {
     });
 };
 
+const getPhotoProfil = (req, res) => {
+  const id = req.query.id;
+  inscStructureModels
+    .getPhotoProfil(id)
+    .then(([result]) => {
+      res.send(result).status(200);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Accès impossible");
+    });
+};
+
+const updatePhotoProfil = (req, res) => {
+  const { photoProfil, email } = req.body;
+  inscStructureModels
+    .updatePhotoProfil(photoProfil, email)
+    .then(([structure]) => {
+      if (structure.affectedRows === 0) {
+        res.status(404).send("Not Found");
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Modification impossible");
+    });
+};
+
+const getPhotosStructure = (req, res) => {
+  const id = req.query.id;
+  inscStructureModels
+    .getPhotosStructure(id)
+    .then(([result]) => {
+      res.send(result).status(200);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Accès impossible");
+    });
+};
+
+const updatePhotosStructure = (req, res) => {
+  const { column, photoStructure, email } = req.body;
+  inscStructureModels
+    .updatePhotosStructure(column, photoStructure, email)
+    .then(([structure]) => {
+      if (structure.affectedRows === 0) {
+        res.status(404).send("Not Found");
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Modification impossible");
+    });
+};
+
 const updateDescription = (req, res) => {
   const { description, email } = req.body;
   inscStructureModels
@@ -295,6 +355,10 @@ const deleteDate = (req, res) => {
 module.exports = {
   getIsCreche,
   getStructureId,
+  getPhotoProfil,
+  getPhotosStructure,
+  updatePhotoProfil,
+  updatePhotosStructure,
   updateDescription,
   calendrierExist,
   horairesExist,

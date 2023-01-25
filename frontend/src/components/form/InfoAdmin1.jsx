@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
-import Proptypes, { bool, node, oneOfType } from "prop-types";
+import Proptypes from "prop-types";
 import StructureContext from "@components/context/StructureContext";
 
 function Structure1({
-  isCreche,
   typeCreche,
   nomStructure,
   telephone,
@@ -307,7 +306,6 @@ function Structure1({
   );
 }
 Structure1.propTypes = {
-  isCreche: oneOfType([bool, node]),
   typeCreche: Proptypes.string,
   nomStructure: Proptypes.string,
   telephone: Proptypes.string,

@@ -13,6 +13,15 @@ function SeConnecter({ setCompo }) {
   const [password, setPassword] = useState("");
   const [typePwd, setTypePwd] = useState(true);
 
+  const updateToNote = async (familleId) => {
+    await axios.put(`${import.meta.env.VITE_PATH}/resaToNote/${familleId}`);
+  };
+  const deleteAncienResa = async (familleId) => {
+    await axios.delete(
+      `${import.meta.env.VITE_PATH}/deleteAncienResa/${familleId}`
+    );
+  };
+
   const handleConnection = (e) => {
     e.preventDefault();
     if (email && password) {
@@ -22,10 +31,13 @@ function SeConnecter({ setCompo }) {
           password,
         })
         .then((ret) => {
-          const { token, familleId } = ret.data;
+          const { familleId, token } = ret.data;
 
           setFamilleId(familleId);
           sessionStorage.setItem("BabyPlacefamilleId", familleId);
+
+          updateToNote(ret.data.familleId);
+          deleteAncienResa(ret.data.familleId);
 
           navigate("/appli/search", {
             state: {
