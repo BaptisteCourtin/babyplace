@@ -11,6 +11,10 @@ function MessageAdmin() {
   const [selectedId, setSelectedId] = useState();
   const [openRes, setOpenRes] = useState(false);
   const [selectedMail, setSelectedMail] = useState("");
+  const [selectedNom, setSelectedNom] = useState("");
+  const [selectedPrenom, setSelectedPrenom] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedMessage, setSelectedMessage] = useState("");
 
   const getAllMessage = async () => {
     try {
@@ -26,8 +30,12 @@ function MessageAdmin() {
     setIsOpen(!isOpen);
   };
 
-  const repondre = (email) => {
+  const repondre = (email, nom, prenom, option, msg) => {
     setSelectedMail(email);
+    setSelectedNom(nom);
+    setSelectedPrenom(prenom);
+    setSelectedOption(option);
+    setSelectedMessage(msg);
     setOpenRes(!openRes);
   };
 
@@ -62,7 +70,15 @@ function MessageAdmin() {
                     <button
                       type="submit"
                       id="btnRepondre"
-                      onClick={() => repondre(element.email)}
+                      onClick={() =>
+                        repondre(
+                          element.email,
+                          element.nom,
+                          element.prenom,
+                          element.optionSelected,
+                          element.texte
+                        )
+                      }
                     >
                       Répondre
                     </button>
@@ -88,6 +104,10 @@ function MessageAdmin() {
         openRes={openRes}
         closeRes={setOpenRes}
         selectedMail={selectedMail}
+        selectedNom={selectedNom}
+        selectedPrenom={selectedPrenom}
+        selectedOption={selectedOption}
+        selectedMessage={selectedMessage}
       />
     </div>
   );

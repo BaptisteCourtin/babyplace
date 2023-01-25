@@ -1,13 +1,19 @@
 import React from "react";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 function ModalMessageAdmin({ open, close, selectedId }) {
   if (!open) return null;
 
-  const deleteMessage = () => {
+  const deleteMessage = async () => {
     const id = selectedId;
-    axios.delete(`http://localhost:5000/contact/message/all/${id}`);
-    close();
+    try {
+      const res = await axios.delete(`http://localhost:5000/contact/message/all/${id}`);
+      close();
+      toast.success("Le message à bien été supprimé")
+    } catch (err) {
+      toast.error(err.message);
+    };
   };
 
   return (

@@ -5,7 +5,14 @@ import BlocJour from "@components/appli/recherche/BlocJour";
 import PropTypes from "prop-types";
 import { AiOutlineHeart, AiFillHeart, AiFillStar } from "react-icons/ai";
 
-function CarteCreche({ data, userPosition }) {
+function CarteCreche({
+  data,
+  userPosition,
+  familleLiked,
+  familleId,
+  setChangeLike,
+  changeLike,
+}) {
   const {
     isCreche,
     photoStructure1,
@@ -18,9 +25,55 @@ function CarteCreche({ data, userPosition }) {
     adresse,
   } = data;
 
-  const [likeCard, setLikeCard] = useState(true);
+  // --- like or not ---
+  const [thisLikedIndex, setThisLikedIndex] = useState();
+  const [thisLiked, setThisLiked] = useState(false);
 
-  // les horaires de chaques jour suivant l'id de la structure
+  const likeOrNot = () => {
+    for (let i = 0; i < familleLiked.length; i++) {
+      if (familleLiked[i].structureIdLiked === structureId) {
+        setThisLikedIndex(i);
+        setThisLiked(true);
+        break;
+      }
+    }
+  };
+  useEffect(() => {
+    likeOrNot();
+  }, [familleLiked]);
+
+  const handleLikeCard = () => {
+    if (
+      familleLiked[thisLikedIndex] &&
+      familleLiked[thisLikedIndex].structureIdLiked === structureId
+    ) {
+      console.log(structureId, familleId);
+      axios
+        .delete(
+          `${
+            import.meta.env.VITE_PATH
+          }/famille/deleteLike/?familleId=${familleId}&structureId=${structureId}`,
+          [familleId, structureId]
+        )
+        .catch((err) => {
+          console.error(err);
+        });
+      setThisLiked(false);
+    } else {
+      axios
+        .post(`${import.meta.env.VITE_PATH}/famille/oneMoreLike`, {
+          structureId,
+          familleId,
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+      setThisLiked(true);
+    }
+    setChangeLike(!changeLike);
+  };
+
+  // --- les horaires de chaques jour suivant l'id de la structure
   const [dataHorairesId, setDataHorairesId] = useState([]);
   const getHorairesId = () => {
     axios
@@ -109,10 +162,10 @@ function CarteCreche({ data, userPosition }) {
   return (
     dataHorairesId.length !== 0 && (
       <div className="carte-creche" style={isCreche ? blueBg : pinkBg}>
-        {likeCard ? (
-          <AiFillHeart className="like" onClick={() => setLikeCard(false)} />
+        {thisLiked ? (
+          <AiFillHeart className="like" onClick={() => handleLikeCard()} />
         ) : (
-          <AiOutlineHeart className="like" onClick={() => setLikeCard(true)} />
+          <AiOutlineHeart className="like" onClick={() => handleLikeCard()} />
         )}
 
         <Link to="/appli/search/card" state={{ data, dataHorairesId }}>

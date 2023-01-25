@@ -4,7 +4,13 @@ import axios from "axios";
 import { AiOutlineHeart, AiFillHeart, AiFillStar } from "react-icons/ai";
 import PropTypes from "prop-types";
 
-function CardCrecheMap({ data }) {
+function CardCrecheMap({
+  data,
+  familleLiked,
+  familleId,
+  setChangeLike,
+  changeLike,
+}) {
   const {
     photoStructure1,
     structureId,
@@ -15,8 +21,55 @@ function CardCrecheMap({ data }) {
     tarifHeure,
   } = data;
 
-  const [likeCard, setLikeCard] = useState(true);
+  // --- like or not ---
+  const [thisLikedIndex, setThisLikedIndex] = useState();
+  const [thisLiked, setThisLiked] = useState(false);
 
+  const likeOrNot = () => {
+    for (let i = 0; i < familleLiked.length; i++) {
+      if (familleLiked[i].structureIdLiked === structureId) {
+        setThisLikedIndex(i);
+        setThisLiked(true);
+        break;
+      }
+    }
+  };
+  useEffect(() => {
+    likeOrNot();
+  }, [familleLiked]);
+
+  const handleLikeCard = () => {
+    if (
+      familleLiked[thisLikedIndex] &&
+      familleLiked[thisLikedIndex].structureIdLiked === structureId
+    ) {
+      console.log(structureId, familleId);
+      axios
+        .delete(
+          `${
+            import.meta.env.VITE_PATH
+          }/famille/deleteLike/?familleId=${familleId}&structureId=${structureId}`,
+          [familleId, structureId]
+        )
+        .catch((err) => {
+          console.error(err);
+        });
+      setThisLiked(false);
+    } else {
+      axios
+        .post(`${import.meta.env.VITE_PATH}/famille/oneMoreLike`, {
+          structureId,
+          familleId,
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+      setThisLiked(true);
+    }
+    setChangeLike(!changeLike);
+  };
+
+  // ---
   const [dataHorairesId, setDataHorairesId] = useState([]);
   const getHorairesId = () => {
     axios
@@ -53,10 +106,10 @@ function CardCrecheMap({ data }) {
 
   return (
     <div className="card-creche-map">
-      {likeCard ? (
-        <AiFillHeart className="like" onClick={() => setLikeCard(false)} />
+      {thisLiked ? (
+        <AiFillHeart className="like" onClick={() => handleLikeCard()} />
       ) : (
-        <AiOutlineHeart className="like" onClick={() => setLikeCard(true)} />
+        <AiOutlineHeart className="like" onClick={() => handleLikeCard()} />
       )}
 
       <Link to="/appli/search/card" state={{ data, dataHorairesId }}>
