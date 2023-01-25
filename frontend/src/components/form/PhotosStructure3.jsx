@@ -24,23 +24,16 @@ function Structure3({
       [structureId]
     )
       .then((result) => {
-        console.log(result.data[0].photoStructure1);
         if (result.data[0].photoStructure1 !== null) {
-          setImage1Src(
-            `${import.meta.env.VITE_PATH}${result.data[0].photoStructure1}`
-          );
+          setImage1Src(result.data[0].photoStructure1);
           updateFields({ photo1Src: result.data[0].photoStructure1 });
         }
         if (result.data[0].photoStructure2 !== null) {
-          setImage2Src(
-            `${import.meta.env.VITE_PATH}${result.data[0].photoStructure2}`
-          );
+          setImage2Src(result.data[0].photoStructure2);
           updateFields({ photo2Src: result.data[0].photoStructure2 });
         }
         if (result.data[0].photoStructure3 !== null) {
-          setImage3Src(
-            `${import.meta.env.VITE_PATH}${result.data[0].photoStructure3}`
-          );
+          setImage3Src(result.data[0].photoStructure3);
           updateFields({ photo3Src: result.data[0].photoStructure3 });
         }
       })

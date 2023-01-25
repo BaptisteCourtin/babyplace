@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Proptypes, { bool, number, node, oneOfType } from "prop-types";
+import Proptypes from "prop-types";
 import imgCopie from "@assets/img-copie.svg";
 import imgTime from "@assets/img-time.svg";
 import imgDossier from "@assets/img-dossier.svg";
@@ -94,7 +94,6 @@ function Structure7({ updateFields }) {
   );
 }
 Structure7.propTypes = {
-  resaInst: oneOfType([bool, number, node]),
   updateFields: Proptypes.func,
 };
 export default Structure7;
