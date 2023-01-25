@@ -34,6 +34,14 @@ const getPourcent = async (req) => {
   return result;
 };
 
+const getLikes = async (req) => {
+  const [result] = await datasource.query(
+    "SELECT structureIdLiked FROM favoris WHERE familleId = ?",
+    [req.params.id]
+  );
+  return result;
+};
+
 const getFamilleInfo = async (req) => {
   const [result] = await datasource.query(
     "SELECT nom, prenom FROM parent WHERE familleId = ? ; SELECT photoProfilFamille FROM famille WHERE familleId = ? ",
@@ -59,10 +67,26 @@ const postNewConfiance = async (req) => {
   return result;
 };
 
+const postNewLike = async (req) => {
+  const [result] = await datasource.query(
+    "INSERT INTO favoris (familleId, structureIdLiked) VALUES (?, ?)",
+    [parseInt(req.body.familleId), req.body.structureId]
+  );
+  return result;
+};
+
 const deleteConfiance = async (req) => {
   const [result] = await datasource.query(
     "DELETE FROM personne_confiance WHERE confianceId = ?",
     [req.params.id]
+  );
+  return result;
+};
+
+const deleteLike = async (req) => {
+  const [result] = await datasource.query(
+    "DELETE FROM favoris WHERE familleId = ? AND structureIdLiked = ?",
+    [req.query.familleId, req.query.structureId]
   );
   return result;
 };
@@ -79,6 +103,7 @@ module.exports = {
   getPersoConfiance,
   getFamille,
   getPourcent,
+  getLikes,
   getDonneesFormInscription,
   getFamilleDataMess,
   deleteConfiance,
@@ -86,4 +111,6 @@ module.exports = {
   getFamilleInfo,
   nullOneDocFormCommun,
   updatePourcentFormInscr,
+  deleteLike,
+  postNewLike,
 };

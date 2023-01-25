@@ -9,6 +9,10 @@ import PropTypes from "prop-types";
 function BaseCard({
   setCompo,
   Allstructure,
+  familleLiked,
+  familleId,
+  setChangeLike,
+  changeLike,
   // filtres
   dataBasique,
   dataDateHeure,
@@ -16,6 +20,8 @@ function BaseCard({
   dataAggrements,
 }) {
   const [tri, setTri] = useState("Recent");
+
+  console.log("data2", familleLiked);
 
   // --- position user ---
   const [ville, setVille] = useState();
@@ -111,6 +117,7 @@ function BaseCard({
       {/* filtrer selon heure - date */}
       <main>
         {Allstructure !== undefined &&
+          familleLiked !== undefined &&
           Allstructure
             // each = les données d'une creche
             // dataXXX = les données des filtres
@@ -186,13 +193,20 @@ function BaseCard({
               return 0;
               // sort par distance ???
             })
-            .map((each, index) => (
-              <CarteCreche
-                data={each}
-                key={index}
-                userPosition={userPosition}
-              />
-            ))}
+            .map(
+              (each, index) =>
+                familleLiked !== undefined && (
+                  <CarteCreche
+                    data={each}
+                    key={index}
+                    userPosition={userPosition}
+                    familleLiked={familleLiked}
+                    familleId={familleId}
+                    setChangeLike={setChangeLike}
+                    changeLike={changeLike}
+                  />
+                )
+            )}
       </main>
       <NavbarApp />
     </>
