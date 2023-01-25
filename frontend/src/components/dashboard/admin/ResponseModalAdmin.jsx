@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import madamcoucou from '@assets/img-woman.svg';
 
-const ResponseModalAdmin = ({ openRes, closeRes, selectedMail }) => {
+const ResponseModalAdmin = ({ openRes, closeRes, selectedMail, selectedNom, selectedPrenom }) => {
     if (!openRes) return null;
 
     const [objet, setObjet] = useState("");
@@ -11,8 +11,7 @@ const ResponseModalAdmin = ({ openRes, closeRes, selectedMail }) => {
 
     const sendRespons = async (e) => {
         e.preventDefault();
-        const datas = { objet, message, selectedMail };
-        console.log(selectedMail, objet, message);
+        const datas = { objet, message, selectedMail, selectedNom, selectedPrenom };
         const response = await axios.post(`${import.meta.env.VITE_PATH}/contact/messages/repondre`, datas);
         console.log(response.data);
         setMessage("");
