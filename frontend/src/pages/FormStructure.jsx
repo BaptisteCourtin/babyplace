@@ -672,13 +672,13 @@ function FormStructure() {
       } else if (currentStepIndex === 1) {
         const formData = new FormData();
         if (inputRef.current.files[0] !== undefined) {
-          console.log(inputRef.current.files[0]);
-          formData.append("avatar", inputRef.current.files[0]);
+          formData.append("file", inputRef.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/photoProfil`, formData)
             .then((result) => {
+              console.log(result.data);
               let photoProfil = imageProfilSrc;
               if (result.data !== undefined) {
-                photoProfil = `/uploads/avatar/${result.data.filename}`;
+                photoProfil = result.data;
               }
               Axios.put(`${import.meta.env.VITE_PATH}/photoProfil`, {
                 photoProfil,
