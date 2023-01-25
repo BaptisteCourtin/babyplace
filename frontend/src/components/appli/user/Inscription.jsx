@@ -14,7 +14,7 @@ function Inscription() {
   const calculPourcent = () => {
     if (donneesForm !== undefined) {
       let pourcent = 0;
-      for (let i = 0; i < donneesForm[0].length; i++) {
+      for (let i = 0; i < donneesForm[0].length; i += 1) {
         for (const prop in donneesForm[0][i]) {
           if (donneesForm[0][i][prop] !== null) {
             pourcent += 1;

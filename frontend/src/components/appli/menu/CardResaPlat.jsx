@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { AiOutlineUser } from "react-icons/ai";
 
 function CardResaPlat({ each }) {
   const {
@@ -27,11 +28,10 @@ function CardResaPlat({ each }) {
 
       <p>
         Vous avez un rendez-vous avec{" "}
-        {crecheNom
-          ? crecheNom
-          : assMatNomUsage
-          ? `${assMatPrenom} ${assMatNomUsage}`
-          : ` ${assMatPrenom} ${assMatNomNaissance}`}{" "}
+        {crecheNom ||
+          (assMatNomUsage
+            ? `${assMatPrenom} ${assMatNomUsage}`
+            : ` ${assMatPrenom} ${assMatNomNaissance}`)}{" "}
         le{" "}
         <span>
           {jour} {dateArrivee && `du ${dateArrivee} au ${dateDepart}`}

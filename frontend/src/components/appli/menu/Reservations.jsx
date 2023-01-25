@@ -38,6 +38,7 @@ function Reservations({ setCompo, familleId }) {
 
 Reservations.propTypes = {
   setCompo: PropTypes.func.isRequired,
+  familleId: PropTypes.string.isRequired,
 };
 
 export default Reservations;

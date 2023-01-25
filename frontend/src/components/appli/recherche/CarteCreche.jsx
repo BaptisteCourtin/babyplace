@@ -30,7 +30,7 @@ function CarteCreche({
   const [thisLiked, setThisLiked] = useState(false);
 
   const likeOrNot = () => {
-    for (let i = 0; i < familleLiked.length; i++) {
+    for (let i = 0; i < familleLiked.length; i += 1) {
       if (familleLiked[i].structureIdLiked === structureId) {
         setThisLikedIndex(i);
         setThisLiked(true);
@@ -47,7 +47,6 @@ function CarteCreche({
       familleLiked[thisLikedIndex] &&
       familleLiked[thisLikedIndex].structureIdLiked === structureId
     ) {
-      console.log(structureId, familleId);
       axios
         .delete(
           `${
@@ -201,6 +200,11 @@ function CarteCreche({
 
 CarteCreche.propTypes = {
   data: PropTypes.object.isRequired,
+  userPosition: PropTypes.array.isRequired,
+  familleLiked: PropTypes.array.isRequired,
+  familleId: PropTypes.string.isRequired,
+  setChangeLike: PropTypes.func.isRequired,
+  changeLike: PropTypes.bool.isRequired,
 };
 
 export default CarteCreche;

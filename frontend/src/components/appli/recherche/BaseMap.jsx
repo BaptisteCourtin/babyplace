@@ -241,8 +241,9 @@ function BaseMap({
                   (dataAggrements.mois === false || each.max18Mois > 0) &&
                   (dataAggrements.nuit === false || each.maxNuit > 0)
               )
-              .map((each) => (
+              .map((each, index) => (
                 <CardCrecheMap
+                  key={index}
                   data={each}
                   familleLiked={familleLiked}
                   familleId={familleId}
@@ -264,6 +265,11 @@ BaseMap.propTypes = {
   dataBasique: PropTypes.object.isRequired,
   dataServices: PropTypes.object.isRequired,
   dataAggrements: PropTypes.object.isRequired,
+
+  familleLiked: PropTypes.array.isRequired,
+  familleId: PropTypes.string.isRequired,
+  setChangeLike: PropTypes.func.isRequired,
+  changeLike: PropTypes.bool.isRequired,
 };
 
 export default BaseMap;

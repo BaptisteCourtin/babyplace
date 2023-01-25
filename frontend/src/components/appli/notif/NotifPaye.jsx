@@ -38,6 +38,7 @@ function NotifPaye({ setCompo, oneReservation }) {
 
 NotifPaye.propTypes = {
   setCompo: PropTypes.func.isRequired,
+  oneReservation: PropTypes.object.isRequired,
 };
 
 export default NotifPaye;

@@ -54,11 +54,10 @@ function NotifAcceptee({ setCompo, photoFamille, oneReservation }) {
           <h3 className="green">Fantastique !</h3>
 
           <h4>
-            {crecheNom
-              ? crecheNom
-              : assMatNomUsage
-              ? `${assMatPrenom} ${assMatNomUsage}`
-              : `${assMatPrenom} ${assMatNomNaissance}`}{" "}
+            {crecheNom ||
+              (assMatNomUsage
+                ? `${assMatPrenom} ${assMatNomUsage}`
+                : `${assMatPrenom} ${assMatNomNaissance}`)}{" "}
             confirme accueillir {prenom} {nom} le {jour}{" "}
             {dateArrivee &&
               `du ${dateArrivee} au
@@ -79,6 +78,7 @@ function NotifAcceptee({ setCompo, photoFamille, oneReservation }) {
 NotifAcceptee.propTypes = {
   setCompo: PropTypes.func.isRequired,
   photoFamille: PropTypes.string.isRequired,
+  oneReservation: PropTypes.object.isRequired,
 };
 
 export default NotifAcceptee;

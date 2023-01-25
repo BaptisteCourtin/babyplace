@@ -187,8 +187,8 @@ function FormEnfant() {
               centerMode
               centerSlidePercentage={40}
             >
-              {nomsEnfants.map((each) => (
-                <div className="prenom-container">
+              {nomsEnfants.map((each, index) => (
+                <div className="prenom-container" key={index}>
                   <button
                     type="button"
                     onClick={() => setEnfantId(each.enfantId)}

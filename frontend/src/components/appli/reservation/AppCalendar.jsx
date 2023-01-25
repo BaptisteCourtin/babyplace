@@ -143,8 +143,8 @@ function AppCalendar({
       {isOccasionnel === 0 ? (
         <div className="calendar-recur">
           <div className="container-days">
-            {dataHorairesId.map((each) => (
-              <li>
+            {dataHorairesId.map((each, index) => (
+              <li key={index}>
                 {each.ouvert ? (
                   <>
                     <input

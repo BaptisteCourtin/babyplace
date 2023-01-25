@@ -58,11 +58,10 @@ function NotifRejetee({ setCompo, photoFamille, oneReservation }) {
           <h3 className="red">Dommage !</h3>
           <h4>
             Votre réservation à{" "}
-            {crecheNom
-              ? crecheNom
-              : assMatNomUsage
-              ? `${assMatPrenom} ${assMatNomUsage}`
-              : ` ${assMatPrenom} ${assMatNomNaissance}`}{" "}
+            {crecheNom ||
+              (assMatNomUsage
+                ? `${assMatPrenom} ${assMatNomUsage}`
+                : ` ${assMatPrenom} ${assMatNomNaissance}`)}{" "}
             pour {prenom} {nom} le {jour} de {heureArrivee} à {heureDepart} est
             refusée
           </h4>
@@ -87,6 +86,7 @@ function NotifRejetee({ setCompo, photoFamille, oneReservation }) {
 NotifRejetee.propTypes = {
   setCompo: PropTypes.func.isRequired,
   photoFamille: PropTypes.string.isRequired,
+  oneReservation: PropTypes.object.isRequired,
 };
 
 export default NotifRejetee;

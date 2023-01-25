@@ -87,7 +87,7 @@ function DemandeResa({
   // --- nom enfant quand clique ---
 
   const whichKid = () => {
-    for (let i = 0; i < nomsEnfants.length; i++) {
+    for (let i = 0; i < nomsEnfants.length; i += 1) {
       if (nomsEnfants[i].enfantId === enfantId) {
         return `${nomsEnfants[i].prenom}`;
       }
@@ -177,8 +177,9 @@ function DemandeResa({
             </div>
 
             <div className="all-kid">
-              {nomsEnfants.map((each) => (
+              {nomsEnfants.map((each, index) => (
                 <button
+                  key={index}
                   type="button"
                   onClick={() => setEnfantId(each.enfantId)}
                 >

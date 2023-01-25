@@ -26,7 +26,7 @@ function CardCrecheMap({
   const [thisLiked, setThisLiked] = useState(false);
 
   const likeOrNot = () => {
-    for (let i = 0; i < familleLiked.length; i++) {
+    for (let i = 0; i < familleLiked.length; i += 1) {
       if (familleLiked[i].structureIdLiked === structureId) {
         setThisLikedIndex(i);
         setThisLiked(true);
@@ -134,6 +134,10 @@ function CardCrecheMap({
 
 CardCrecheMap.propTypes = {
   data: PropTypes.object.isRequired,
+  familleLiked: PropTypes.array.isRequired,
+  familleId: PropTypes.string.isRequired,
+  setChangeLike: PropTypes.func.isRequired,
+  changeLike: PropTypes.bool.isRequired,
 };
 
 export default CardCrecheMap;
