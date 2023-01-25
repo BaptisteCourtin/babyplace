@@ -4,7 +4,7 @@ const path = require("path");
 const cors = require("cors");
 const router = require("./router");
 const bodyParser = require("body-parser");
-const ws = require("./services/messagerie.service");
+const ws = require("./services/messagerie.services");
 
 const app = express();
 

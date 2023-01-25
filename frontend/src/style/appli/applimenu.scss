@@ -144,13 +144,36 @@
     }
 
     &.reservation {
-      .card-fav-plat {
+      .card-resa-plat {
         height: max-content;
-        .texte p {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+
+        height: 90px;
+
+        margin: 0.5rem 0.5rem 0.5rem 1rem;
+        padding: 1rem;
+        border-left: 1px $second solid;
+
+        .avatar {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+
+        p {
           width: 100%;
           height: max-content;
           white-space: pre-wrap;
           padding-right: 0;
+
+          span {
+            font-size: $h4;
+            font-weight: 500;
+          }
         }
       }
     }

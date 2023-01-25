@@ -31,6 +31,7 @@ const messageAdmin = require("./controllers/messageAdmin.controllers");
 const inscStructure = require("./controllers/inscStructure.controllers");
 const inscCreche = require("./controllers/inscCreche.controllers");
 const inscAssmat = require("./controllers/inscAssmat.controllers");
+const mailer = require("./services/nodemailer/mailer.response.services");
 
 // --- pour app ---
 
@@ -136,7 +137,8 @@ router.get("/famille/formParent/:id", parent.getDonneesFormParent); //donnees du
 router.get("/famille/formEnfant/:id", enfant.getDonneesFormEnfant); //donnees du formulaire enfant
 router.get("/famille/nomsEnfants/:id", enfant.getNomsEtIdEnfants); // noms et id des enfants
 router.get("/famille/nomsEnfants100/:id", enfant.getNomsEtIdEnfants100); // noms et id des enfants à 100 %
-router.get("/reservationAR/:id", reservation.getReservationAR); //search
+router.get("/reservationAR/:id", reservation.getReservationAR); // prend les résa pour la page notif
+router.get("/getReservationPayed/:id", reservation.getReservationPayed); // prend les résa pour la page menu (payed)
 router.get("/contact/message/all", messageAdmin.getAllMessageToAdmin); // recupérer tous les message pour le dashboard admin
 router.get("/messages/recup/:room", messagerie.getAllMessageFromDb); // recupération des message pour le chat
 
@@ -153,6 +155,7 @@ router.post("/famille/newEnfant", enfant.postNewEnfant); // nouveau enfant
 router.post("/contact/message", messageAdmin.postMessageToAdmin); // nouveau message pour l'admin
 router.post("/messages/sauvegarde", messagerie.saveMessageInDb); // sauvegarde des messages du chat dans la db
 router.post("/famille/newConfiance", famille.postNewConfiance); // nouveau perso confiance
+router.post("/contact/messages/repondre", mailer.emailSender); // envoyer des réponses par mail pour l'admin
 
 router.delete("/famille/deleteConfiance/:id", famille.deleteConfiance); // delete perso confiance
 router.delete("/famille/deleteEnfant/:id", enfant.deleteEnfant); // delete enfant
@@ -291,7 +294,7 @@ router.get("/admin/creche", creche.getCreche);
 router.get("/admin/famille", famille.getFamille);
 
 router.put("/admin/verified/:id", structure.updateVerified);
-router.put("/reservation/status", reservation.updateStatus);
+router.put("/reservation/status", reservation.updateStatus); // change status resa
 router.put("/horaires/day/:id", horaires.updateDay);
 router.put("/dashboard/hours/:id", dashboard.updateHours);
 router.put("/dashboard/indemn/:id", dashboard.updateIndemn);

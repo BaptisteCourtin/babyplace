@@ -11,6 +11,11 @@ const getReservationAR = async (req, res) => {
   return res.json(result);
 };
 
+const getReservationPayed = async (req, res) => {
+  const result = await reservationModels.getReservationPayed(req);
+  return res.json(result);
+};
+
 const updateStatus = async (req, res) => {
   const { status, id } = req.body;
   const result = await reservationModels.updateStatus(status, id);
@@ -34,6 +39,7 @@ const deleteResa = async (req, res) => {
 module.exports = {
   getReser,
   getReservationAR,
+  getReservationPayed,
   updateStatus,
   postReservation,
   deleteResa,
