@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { HashLink } from "react-router-hash-link";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -8,7 +8,6 @@ import Modal from "./Modal";
 
 function Contact() {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState("");
   const { register, handleSubmit, reset } = useForm();
   const [checked, setChecked] = useState(false);
 
@@ -33,7 +32,7 @@ function Contact() {
         texte,
       })
       .then((res) => {
-        console.log(res.data);
+        console.warn(res.data);
       })
       .catch((err) => {
         console.error(err);
@@ -41,6 +40,7 @@ function Contact() {
   };
 
   const openCloseModal = (e) => {
+    e.preventDefault();
     setIsOpen(!isOpen);
   };
 
@@ -66,14 +66,6 @@ function Contact() {
       text: "tout autres questoins",
     },
   ];
-
-  const handleChange = (e) => {
-    setSelected(e.target.value);
-  };
-
-  useEffect(() => {
-    console.log(selected);
-  }, [handleChange]);
 
   return (
     <div className="contact-form" id="aide">

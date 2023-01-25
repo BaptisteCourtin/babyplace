@@ -3,6 +3,7 @@ import Scrolltobottom from "react-scroll-to-bottom";
 import axios from "axios";
 import moment from "moment";
 import { toast } from "react-hot-toast";
+import PropTypes from "prop-types";
 
 function Chat({ socket, username, room, title, joinRoom }) {
   const [currentMessage, setCurrentMessage] = useState("");
@@ -19,8 +20,7 @@ function Chat({ socket, username, room, title, joinRoom }) {
         date,
       })
       .then((res) => {
-        logged;
-        console.log(res.data);
+        console.warn(res.data);
       })
       .catch((err) => {
         console.error(err);
@@ -134,10 +134,20 @@ function Chat({ socket, username, room, title, joinRoom }) {
           }}
           value={currentMessage}
         />
-        <button onClick={sendMessage}>&#9658;</button>
+        <button type="submit" onClick={sendMessage}>
+          &#9658;
+        </button>
       </div>
     </div>
   );
 }
+
+Chat.propTypes = {
+  socket: PropTypes.object,
+  username: PropTypes.string,
+  room: PropTypes.number,
+  title: PropTypes.string,
+  joinRoom: PropTypes.func,
+};
 
 export default Chat;

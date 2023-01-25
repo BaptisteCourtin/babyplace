@@ -2,8 +2,10 @@ import axios from "axios";
 import React, { useState } from "react";
 import madamcoucou from "@assets/img-woman.svg";
 import { toast } from "react-hot-toast";
+import PropTypes from "prop-types";
 
 const ResponseModalAdmin = ({
+
   openRes,
   closeRes,
   selectedMail,
@@ -11,11 +13,18 @@ const ResponseModalAdmin = ({
   selectedPrenom,
   selectedOption,
   selectedMessage,
+
 }) => {
+
   if (!openRes) return null;
 
   const [objet, setObjet] = useState("");
   const [message, setMessage] = useState("");
+
+  const closeMod = () => {
+    closeRes(!openRes);
+  };
+
 
   const sendRespons = async (e) => {
     e.preventDefault();
@@ -36,17 +45,16 @@ const ResponseModalAdmin = ({
       setMessage("");
       setObjet("");
       closeMod();
-      console.log(res.data);
+
+      console.warn(res.data);
       toast.success("Votre mail a bien été envoyé !");
     } catch (err) {
-      console.log(err.response);
+      console.error(err.response);
+
       toast.error(err.message);
     }
   };
 
-  const closeMod = () => {
-    closeRes(!openRes);
-  };
   return (
     <div className="responseModalAdmin">
       <div className="responseModalContainer">
@@ -92,10 +100,11 @@ const ResponseModalAdmin = ({
                     onChange={(e) => setMessage(e.target.value)}
                     required
                   />
+
                 </div>
                 <span id="obligatoireText">* les chants sont obligatoires</span>
                 <div className="modalAdminBtns">
-                  <button id="btnDelete" onClick={closeMod}>
+                  <button type="submit" id="btnDelete" onClick={closeMod}>
                     retour
                   </button>
                   <button id="btnRepondre" type="submit">
@@ -109,6 +118,16 @@ const ResponseModalAdmin = ({
       </div>
     </div>
   );
+};
+
+ResponseModalAdmin.propTypes = {
+  openRes: PropTypes.bool,
+  closeRes: PropTypes.func,
+  selectedMail: PropTypes.string,
+  selectedNom: PropTypes.string,
+  selectedPrenom: PropTypes.string,
+  selectedOption: PropTypes.string,
+  selectedMessage: PropTypes.string,
 };
 
 export default ResponseModalAdmin;

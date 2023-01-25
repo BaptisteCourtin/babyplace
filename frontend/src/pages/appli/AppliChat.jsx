@@ -7,13 +7,14 @@ import io from "socket.io-client";
 function AppliChat() {
   const room = 2;
   const socket = io.connect("http://localhost:3001");
-
-  const joinRoom = async () => {
-    console.log(room);
-    await socket.emit("join_room", room);
-  };
   const username = "kevindu75@exemple.com";
   const title = "Crêche";
+
+  const joinRoom = async () => {
+    console.warn(room);
+    await socket.emit("join_room", room);
+  };
+
   return (
     <div className="appli-message">
       <ProfilPlat />

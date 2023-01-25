@@ -6,7 +6,7 @@ function Nav() {
   return (
     <nav className="adminNav">
       <ul>
-        <img src={logo} />
+        <img src={logo} alt="logo" />
         <li>
           <Link to="/">Accueil</Link>
         </li>

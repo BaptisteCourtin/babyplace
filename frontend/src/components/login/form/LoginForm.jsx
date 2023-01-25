@@ -91,7 +91,7 @@ function LoginForm() {
             }}
             required
           />
-          <button onClick={handlePwdClick}>
+          <button type="submit" onClick={handlePwdClick}>
             {!typePwd ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
           </button>
         </div>

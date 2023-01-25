@@ -30,7 +30,7 @@ function Features() {
               à avancer ensemble, que nous mettons au service de nos clients.
             </p>
           </div>
-          <img src={logoDave} />
+          <img src={logoDave} alt="logo des DaveWarehouse" />
         </div>
       </section>
       <section id="profil">
@@ -40,19 +40,19 @@ function Features() {
           <div className="imgAboutUsContainer">
             <ul>
               <li>
-                <img src={Amelie} />
+                <img src={Amelie} alt="Amélie" />
                 <p>Amélie</p>
               </li>
               <li>
-                <img src={Baptiste} />
+                <img src={Baptiste} alt="Baptiste" />
                 <p>Baptiste</p>
               </li>
               <li>
-                <img src={Gui} />
+                <img src={Gui} alt="Guillaume" />
                 <p>Guillaume</p>
               </li>
               <li>
-                <img src={Thibaud} />
+                <img src={Thibaud} alt="Thibaud" />
                 <p>Thibaud</p>
               </li>
             </ul>
