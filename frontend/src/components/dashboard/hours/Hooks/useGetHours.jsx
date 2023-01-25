@@ -39,7 +39,8 @@ export const useGetHours = (structureId, userType) => {
   const getData = async () => {
     try {
       const res = await axios.get(
-        `${import.meta.env.VITE_PATH
+        `${
+          import.meta.env.VITE_PATH
         }/structure/type/${structureId}?type=${userType}`,
         {
           id: structureId,
@@ -60,14 +61,15 @@ export const useGetHours = (structureId, userType) => {
 
   const getHoraires = async () => {
     try {
-      const res = await axios
-        .get(`${import.meta.env.VITE_PATH}/horaires/${structureId}`, {
-          id: structureId
-        })
+      const res = await axios.get(
+        `${import.meta.env.VITE_PATH}/horaires/${structureId}`,
+        {
+          id: structureId,
+        }
+      );
       setHoraires(res.data);
-    }
-    catch (err) {
-      console.error(err.message)
+    } catch (err) {
+      console.error(err.message);
     }
   };
 
@@ -76,12 +78,12 @@ export const useGetHours = (structureId, userType) => {
       setToggleDay(horaires[0].ouvert);
       setSelected(horaires[0].jourSemaine);
     }
-  }
+  };
 
   useEffect(() => {
     getData();
     getHoraires();
-    console.log(horaires)
+    console.log(horaires);
     setValues();
   }, []);
 

@@ -43,7 +43,6 @@ function Structure2({ inputRef, structureId, updateFields }) {
   useEffect(() => {
     getPicture();
   }, []);
-  console.log(typeof inputRef);
   return (
     <div className="structure2">
       <h4>Choisir une photo de profil :</h4>
