@@ -22,6 +22,10 @@ function BaseMap({
   dataBasique,
   dataServices,
   dataAggrements,
+  familleLiked,
+  familleId,
+  setChangeLike,
+  changeLike,
 }) {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
@@ -237,8 +241,14 @@ function BaseMap({
                   (dataAggrements.mois === false || each.max18Mois > 0) &&
                   (dataAggrements.nuit === false || each.maxNuit > 0)
               )
-              .map((each, index) => (
-                <CardCrecheMap data={each} key={index} />
+              .map((each) => (
+                <CardCrecheMap
+                  data={each}
+                  familleLiked={familleLiked}
+                  familleId={familleId}
+                  setChangeLike={setChangeLike}
+                  changeLike={changeLike}
+                />
               ))}
           </Carousel>
         </div>

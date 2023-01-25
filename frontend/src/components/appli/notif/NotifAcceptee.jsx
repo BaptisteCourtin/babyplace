@@ -4,7 +4,19 @@ import { AiOutlineUser } from "react-icons/ai";
 import PropTypes from "prop-types";
 
 function NotifAcceptee({ setCompo, photoFamille, oneReservation }) {
-  // prendre l'image creche
+  const {
+    crecheNom,
+    assMatNomUsage,
+    assMatPrenom,
+    assMatNomNaissance,
+    jour,
+    dateArrivee,
+    dateDepart,
+    heureArrivee,
+    heureDepart,
+    prenom,
+    nom,
+  } = oneReservation;
 
   console.log(oneReservation);
 
@@ -41,16 +53,18 @@ function NotifAcceptee({ setCompo, photoFamille, oneReservation }) {
         <div className="text">
           <h3 className="green">Fantastique !</h3>
 
-          <p>
-            {oneReservation.crecheNom
-              ? oneReservation.crecheNom
-              : oneReservation.assMatNomUsage
-              ? `${oneReservation.assMatPrenom} ${oneReservation.assMatNomUsage}`
-              : `${oneReservation.assMatPrenom} ${oneReservation.assMatNomNaissance}`}{" "}
-            confirme accueillir {oneReservation.prenom} {oneReservation.nom} le{" "}
-            {oneReservation.dateArrivee} de {oneReservation.heureArrivee} à{" "}
-            {oneReservation.heureDepart}
-          </p>
+          <h4>
+            {crecheNom
+              ? crecheNom
+              : assMatNomUsage
+              ? `${assMatPrenom} ${assMatNomUsage}`
+              : `${assMatPrenom} ${assMatNomNaissance}`}{" "}
+            confirme accueillir {prenom} {nom} le {jour}{" "}
+            {dateArrivee &&
+              `du ${dateArrivee} au
+            ${dateDepart}`}{" "}
+            de {heureArrivee} à {heureDepart}
+          </h4>
         </div>
         <div className="button-bas">
           <button type="button" className="butt" onClick={() => setCompo(4)}>

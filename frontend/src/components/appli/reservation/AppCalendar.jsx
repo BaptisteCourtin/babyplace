@@ -20,9 +20,6 @@ function AppCalendar({
   dataHorairesId,
   dataCalendarId,
 }) {
-  // const { jourSemaine, ouvert, heureMin, heureMax} = dataHorairesId;
-  // {date} = dataCalendarId;
-
   const value = new Date(); // date de base occas
 
   const chooseTheDay = (e, each) => {
@@ -37,7 +34,9 @@ function AppCalendar({
   const afficheDate = () => {
     let jour = clickedDay.toString();
     jour = jour.split(" ");
-    const jourLong = `${jour[2]} ${jour[1]} ${jour[3]}`;
+    const jourLong = `${clickedDay.getFullYear()}-${
+      clickedDay.getMonth() + 1
+    }-${clickedDay.getDate()}`;
     setJour(jourLong);
 
     if (jour[0] === "Mon") {

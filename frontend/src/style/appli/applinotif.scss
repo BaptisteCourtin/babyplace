@@ -89,15 +89,17 @@
           padding-right: 1rem;
 
           span {
+            font-size: $h4;
+            font-weight: 500;
+
             &.accepted {
               color: green;
-              font-size: $h4;
-              font-weight: 500;
             }
             &.rejected {
               color: red;
-              font-size: $h4;
-              font-weight: 500;
+            }
+            &.avis {
+              color: gold;
             }
           }
         }

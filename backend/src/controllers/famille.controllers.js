@@ -20,6 +20,11 @@ const getPourcent = async (req, res) => {
   return res.json(result);
 };
 
+const getLikes = async (req, res) => {
+  const result = await familleModels.getLikes(req);
+  return res.json(result);
+};
+
 const getFamilleInfo = async (req, res) => {
   const result = await familleModels.getFamilleInfo(req);
   return res.json(result);
@@ -39,8 +44,18 @@ const postNewConfiance = async (req, res) => {
   return res.json(result);
 };
 
+const postNewLike = async (req, res) => {
+  const result = await familleModels.postNewLike(req);
+  return res.json(result);
+};
+
 const deleteConfiance = async (req, res) => {
   const result = await familleModels.deleteConfiance(req);
+  return res.json(result);
+};
+
+const deleteLike = async (req, res) => {
+  const result = await familleModels.deleteLike(req);
   return res.json(result);
 };
 
@@ -58,6 +73,7 @@ module.exports = {
   getPersoConfiance,
   getFamille,
   getPourcent,
+  getLikes,
   getDonneesFormInscription,
   getFamilleDataMess,
   postNewConfiance,
@@ -65,4 +81,6 @@ module.exports = {
   getFamilleInfo,
   nullOneDocFormCommun,
   updatePourcentFormInscr,
+  deleteLike,
+  postNewLike,
 };

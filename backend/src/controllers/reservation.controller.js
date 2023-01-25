@@ -26,6 +26,15 @@ const updateStatus = async (req, res) => {
   }
 };
 
+const updateResaToNote = async (req, res) => {
+  const result = await reservationModels.updateResaToNote(req);
+  if (result.affectedRows === 0) {
+    res.status(404).send("Not found");
+  } else {
+    res.sendStatus(204);
+  }
+};
+
 const postReservation = async (req, res) => {
   const result = await reservationModels.postReservation(req);
   return res.json(result);
@@ -36,6 +45,11 @@ const deleteResa = async (req, res) => {
   return res.json(result);
 };
 
+const deleteResaByDate = async (req, res) => {
+  const result = await reservationModels.deleteResaByDate(req);
+  return res.json(result);
+};
+
 module.exports = {
   getReser,
   getReservationAR,
@@ -43,4 +57,6 @@ module.exports = {
   updateStatus,
   postReservation,
   deleteResa,
+  deleteResaByDate,
+  updateResaToNote,
 };

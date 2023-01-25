@@ -2,23 +2,41 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function CardResaPlat({ each }) {
+  const {
+    crecheNom,
+    assMatNomUsage,
+    assMatPrenom,
+    assMatNomNaissance,
+    jour,
+    dateArrivee,
+    dateDepart,
+    heureArrivee,
+    heureDepart,
+    prenom,
+    nom,
+    photoProfil,
+  } = each;
+
   return (
     <div className="card-resa-plat">
-      {each.photoProfil ? (
-        <img src={each.photoProfil} alt="avatar" className="avatar" />
+      {photoProfil ? (
+        <img src={photoProfil} alt="avatar" className="avatar" />
       ) : (
         <AiOutlineUser className="avatar" />
       )}
 
       <p>
         Vous avez un rendez-vous avec{" "}
-        {each.crecheNom
-          ? each.crecheNom
-          : each.assMatNomUsage
-          ? `${each.assMatPrenom} ${each.assMatNomUsage}`
-          : ` ${each.assMatPrenom} ${each.assMatNomNaissance}`}{" "}
-        le <span>{each.dateArrivee}</span> de {each.heureArrivee} à{" "}
-        {each.heureDepart} pour {each.prenom} {each.nom}
+        {crecheNom
+          ? crecheNom
+          : assMatNomUsage
+          ? `${assMatPrenom} ${assMatNomUsage}`
+          : ` ${assMatPrenom} ${assMatNomNaissance}`}{" "}
+        le{" "}
+        <span>
+          {jour} {dateArrivee && `du ${dateArrivee} au ${dateDepart}`}
+        </span>
+        de {heureArrivee} à {heureDepart} pour {prenom} {nom}
       </p>
     </div>
   );

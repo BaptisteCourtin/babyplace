@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import BaseCard from "@components/appli/recherche/BaseCard";
 import BaseMap from "@components/appli/recherche/BaseMap";
+import FamilleContext from "@components/context/FamilleContext";
 
 // ---
 import Base from "@components/appli/filtres/Base";
@@ -11,7 +12,7 @@ import Services from "@components/appli/filtres/Services";
 import Aggrements from "@components/appli/filtres/Aggrements";
 
 function AppliSearch() {
-  const [compo, setCompo] = useState(0);
+  const { familleId } = useContext(FamilleContext);
 
   // --- les structures ---
   const [structure, setStructure] = useState([]);
@@ -29,6 +30,24 @@ function AppliSearch() {
   useEffect(() => {
     getStructure();
   }, []);
+
+  // --- likes des familles ---
+  const [familleLiked, setFamilleLiked] = useState();
+  const [changeLike, setChangeLike] = useState(true);
+
+  const getFamilleLiked = () => {
+    axios
+      .get(`${import.meta.env.VITE_PATH}/famille/likes/${familleId}`)
+      .then((res) => {
+        setFamilleLiked(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  useEffect(() => {
+    getFamilleLiked();
+  }, [familleId, changeLike]);
 
   // --- les filtres ---
   const [dataBasique, setDataBasique] = useState({
@@ -61,6 +80,7 @@ function AppliSearch() {
   });
 
   // ---
+  const [compo, setCompo] = useState(0);
 
   const choixComposant = () => {
     if (compo === 2) {
@@ -72,6 +92,10 @@ function AppliSearch() {
           dataDateHeure={dataDateHeure}
           dataServices={dataServices}
           dataAggrements={dataAggrements}
+          familleLiked={familleLiked}
+          familleId={familleId}
+          setChangeLike={setChangeLike}
+          changeLike={changeLike}
         />
       );
     }
@@ -122,11 +146,19 @@ function AppliSearch() {
         dataDateHeure={dataDateHeure}
         dataServices={dataServices}
         dataAggrements={dataAggrements}
+        familleLiked={familleLiked}
+        familleId={familleId}
+        setChangeLike={setChangeLike}
+        changeLike={changeLike}
       />
     );
   };
 
-  return <div className="applisearch">{choixComposant()}</div>;
+  return (
+    familleLiked !== undefined && (
+      <div className="applisearch">{choixComposant()}</div>
+    )
+  );
 }
 
 export default AppliSearch;

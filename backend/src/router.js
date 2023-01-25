@@ -133,6 +133,7 @@ router.get("/famille/conf/:id", famille.getPersoConfiance); //perso confiance
 router.get("/famille/info/:id", famille.getFamilleInfo); // info famille (noms + photo)
 router.get("/famille/formInscription/:id", famille.getDonneesFormInscription); //donnees du formulaire inscription
 router.get("/famille/pourcent/:id", famille.getPourcent); // pourcent des formulaire
+router.get("/famille/likes/:id", famille.getLikes); // get likes
 router.get("/famille/formParent/:id", parent.getDonneesFormParent); //donnees du formulaire parent
 router.get("/famille/formEnfant/:id", enfant.getDonneesFormEnfant); //donnees du formulaire enfant
 router.get("/famille/nomsEnfants/:id", enfant.getNomsEtIdEnfants); // noms et id des enfants
@@ -149,9 +150,11 @@ router.put("/famille/nullOneDocForm/:id", famille.nullOneDocFormCommun); // dele
 router.put("/formParent/:id", parent.updateFormParent); // formulaire parent
 router.put("/parent/nullOneDocForm/:id", parent.nullOneDocFormParent); // delete un doc du form inscription (parent)
 router.put("/formEnfant/:id", enfant.updateFormEnfant); // formulaire enfant
+router.put("/resaToNote/:id", reservation.updateResaToNote); // passe le status √† toNote
 
 router.post("/reservation", reservation.postReservation); // reservation
 router.post("/famille/newEnfant", enfant.postNewEnfant); // nouveau enfant
+router.post("/famille/oneMoreLike", famille.postNewLike); // nouveau like
 router.post("/contact/message", messageAdmin.postMessageToAdmin); // nouveau message pour l'admin
 router.post("/messages/sauvegarde", messagerie.saveMessageInDb); // sauvegarde des messages du chat dans la db
 router.post("/famille/newConfiance", famille.postNewConfiance); // nouveau perso confiance
@@ -159,7 +162,9 @@ router.post("/contact/messages/repondre", mailer.emailSender); // envoyer des r√
 
 router.delete("/famille/deleteConfiance/:id", famille.deleteConfiance); // delete perso confiance
 router.delete("/famille/deleteEnfant/:id", enfant.deleteEnfant); // delete enfant
-router.delete("/reservation/deleteResa/:id", reservation.deleteResa); // delete perso confiance
+router.delete("/reservation/deleteResa/:id", reservation.deleteResa); // delete resa
+router.delete("/deleteAncienResa/:id", reservation.deleteResaByDate); // delete resa by date
+router.delete("/famille/deleteLike", famille.deleteLike); // delete like
 router.delete("/contact/message/all/:id", messageAdmin.deleteMessagebyId); // delete message from admin dashboard
 
 // FORM INSCRIPTION CHAQUE PARENT (juste le where qui change)
