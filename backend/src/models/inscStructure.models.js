@@ -103,6 +103,20 @@ const updatePhotoProfil = (photoProfil, email) => {
   );
 };
 
+const getPhotosStructure = (id) => {
+  return datasource.query(
+    "SELECT photoStructure1, photoStructure2, photoStructure3 FROM structure WHERE structureId= ?",
+    [id]
+  );
+};
+
+const updatePhotosStructure = (column, photoStructure, email) => {
+  return datasource.query(`UPDATE structure SET ${column}= ?  WHERE email= ?`, [
+    photoStructure,
+    email,
+  ]);
+};
+
 const updateDescription = (description, email) => {
   return datasource.query(
     "UPDATE structure SET description = ? WHERE email= ?",
@@ -329,6 +343,8 @@ module.exports = {
   updateAssmat1,
   getPhotoProfil,
   updatePhotoProfil,
+  getPhotosStructure,
+  updatePhotosStructure,
   updateDescription,
   calendrierExist,
   horairesExist,
