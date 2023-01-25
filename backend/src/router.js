@@ -28,6 +28,8 @@ const enfant = require("./controllers/enfant.controllers");
 const messagerie = require("./controllers/messagerie.controllers");
 const notification = require("./controllers/notification.controllers");
 const messageAdmin = require("./controllers/messageAdmin.controllers");
+const mailer = require("./services/nodemailer/mailer.response.services");
+
 // const inscStructure = require("./controllers/inscStructure.controllers");
 
 // --- pour app ---
@@ -152,6 +154,7 @@ router.post("/famille/newEnfant", enfant.postNewEnfant); // nouveau enfant
 router.post("/contact/message", messageAdmin.postMessageToAdmin); // nouveau message pour l'admin
 router.post("/messages/sauvegarde", messagerie.saveMessageInDb); // sauvegarde des messages du chat dans la db
 router.post("/famille/newConfiance", famille.postNewConfiance); // nouveau perso confiance
+router.post("/contact/messages/repondre", mailer.emailSender); // envoyer des réponses par mail pour l'admin
 
 router.delete("/famille/deleteConfiance/:id", famille.deleteConfiance); // delete perso confiance
 router.delete("/famille/deleteEnfant/:id", enfant.deleteEnfant); // delete enfant
