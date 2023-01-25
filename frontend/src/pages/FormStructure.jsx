@@ -65,7 +65,7 @@ const INITIAL_DATA = {
   transport: false,
   albumPhoto: false,
   photoConnecte: false,
-  resaInst: null,
+  resaInst: true,
   lundiOuvert: true,
   mardiOuvert: true,
   mercrediOuvert: true,
@@ -137,10 +137,12 @@ function FormStructure() {
   const inputRefAuto = useRef(null);
   const [data, setData] = useState(INITIAL_DATA);
   const [structure, setStructure] = useState("");
-  const [resa, setResa] = useState("");
+  const [resaInst, setResaInst] = useState("");
   const { userEmail } = useContext(UserEmailContext);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const [showExplications, setShowExplications] = useState(window.innerWidth > 1000 ? true : false);
+  const [showExplications, setShowExplications] = useState(
+    window.innerWidth > 1000 ? true : false
+  );
   const [closedDays, setClosedDays] = useState([]);
   const [structureId, setStructureId] = useState(null);
   const [horairesExist, setHorairesExist] = useState(null);
@@ -159,16 +161,21 @@ function FormStructure() {
   }
 
   useEffect(() => {
-    Axios.get(`${import.meta.env.VITE_PATH}/isCreche?email=${userEmail}`, { userEmail })
+    Axios.get(`${import.meta.env.VITE_PATH}/isCreche?email=${userEmail}`, {
+      userEmail,
+    })
       .then((result) => {
-        console.log(result.data.isCreche)
+        console.log(result.data.isCreche);
         if (result.data.isCreche === 0) {
-          setStructure("assmat")
+          setStructure("assmat");
         }
         if (result.data.isCreche === 1) {
-          setStructure("creche")
+          setStructure("creche");
         }
-      }).catch((err) => { console.error(err) })
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }, []);
 
   useEffect(() => {
@@ -179,6 +186,7 @@ function FormStructure() {
       )
         .then((result) => {
           setStructureId(result.data.structureId);
+          setResaInst(result.data.resaInst);
           setData((prev) => {
             return {
               ...prev,
@@ -233,6 +241,13 @@ function FormStructure() {
       )
         .then((result) => {
           setStructureId(result.data.structureId);
+          if (result.data.resaInst === 1) {
+            setResaInst(true);
+          }
+          if (result.data.resaInst === 0) {
+            setResaInst(false);
+          }
+
           setData((prev) => {
             return {
               ...prev,
@@ -682,7 +697,7 @@ function FormStructure() {
         }
       } else if (currentStepIndex === 2) {
         const formData = new FormData();
-        console.log(inputRef1.current.files[0])
+        console.log(inputRef1.current.files[0]);
         if (inputRef1.current.files[0] !== undefined) {
           formData.append("photo1", inputRef1.current.files[0]);
         }
@@ -876,23 +891,28 @@ function FormStructure() {
         closedDays.map((date) => {
           if (indispo.indexOf(date) === -1) {
             Axios.post(`${import.meta.env.VITE_PATH}/calendrier/add`, {
-              date: date, nbPlaces: -1, structureId,
-            })
-              .catch((err) => {
-                console.error(err);
-              })
+              date: date,
+              nbPlaces: -1,
+              structureId,
+            }).catch((err) => {
+              console.error(err);
+            });
           }
         });
         indispo.map((value) => {
           if (closedDays.indexOf(value) === -1) {
             let date = value;
-            Axios.delete(`${import.meta.env.VITE_PATH}/calendrierIndispo/?structureId=${structureId}&date=${date}`, [structureId, date])
-              .catch((err) => {
-                console.error(err);
-              });
+            Axios.delete(
+              `${
+                import.meta.env.VITE_PATH
+              }/calendrierIndispo/?structureId=${structureId}&date=${date}`,
+              [structureId, date]
+            ).catch((err) => {
+              console.error(err);
+            });
           }
         });
-        closePage ? navigate("/", {}) : next()
+        closePage ? navigate("/", {}) : next();
       } else if (currentStepIndex === 11 && structure === "creche") {
         Axios.put(`${import.meta.env.VITE_PATH}/agrementsCreche`, {
           nbEmployes,
@@ -977,38 +997,45 @@ function FormStructure() {
           .then((result) => {
             if (result.data.docpmi !== undefined) {
               const doc = result.data.docpmi[0].filename;
-              docPmiSrc = `${import.meta.env.VITE_PATH
-                }/uploads/photosStructure/${doc}`;
+              docPmiSrc = `${
+                import.meta.env.VITE_PATH
+              }/uploads/photosStructure/${doc}`;
             }
             if (result.data.docIdentite !== undefined) {
               const doc = result.data.docIdentite[0].filename;
-              docCniSrc = `${import.meta.env.VITE_PATH
-                }/uploads/photosStructure/${doc}`;
+              docCniSrc = `${
+                import.meta.env.VITE_PATH
+              }/uploads/photosStructure/${doc}`;
             }
             if (result.data.docVitale !== undefined) {
               const doc = result.data.docVitale[0].filename;
-              docCpamSrc = `${import.meta.env.VITE_PATH
-                }/uploads/photosStructure/${doc}`;
+              docCpamSrc = `${
+                import.meta.env.VITE_PATH
+              }/uploads/photosStructure/${doc}`;
             }
             if (result.data.docJustifDom !== undefined) {
               const doc = result.data.docJustifDom[0].filename;
-              docDomSrc = `${import.meta.env.VITE_PATH
-                }/uploads/photosStructure/${doc}`;
+              docDomSrc = `${
+                import.meta.env.VITE_PATH
+              }/uploads/photosStructure/${doc}`;
             }
             if (result.data.docDiplome !== undefined) {
               const doc = result.data.docDiplome[0].filename;
-              docDiplomeSrc = `${import.meta.env.VITE_PATH
-                }/uploads/photosStructure/${doc}`;
+              docDiplomeSrc = `${
+                import.meta.env.VITE_PATH
+              }/uploads/photosStructure/${doc}`;
             }
             if (result.data.docRespCivile !== undefined) {
               const doc = result.data.docRespCivile[0].filename;
-              docRespSrc = `${import.meta.env.VITE_PATH
-                }/uploads/photosStructure/${doc}`;
+              docRespSrc = `${
+                import.meta.env.VITE_PATH
+              }/uploads/photosStructure/${doc}`;
             }
             if (result.data.docAssAuto !== undefined) {
               const doc = result.data.docAssAuto[0].filename;
-              docAutoSrc = `${import.meta.env.VITE_PATH
-                }/uploads/photosStructure/${doc}`;
+              docAutoSrc = `${
+                import.meta.env.VITE_PATH
+              }/uploads/photosStructure/${doc}`;
             }
           })
           .then(() => {
@@ -1047,18 +1074,18 @@ function FormStructure() {
                 .catch((err) => {
                   console.error(err);
                 })
-                .then(closePage ? navigate("/", {}) : next())
+                .then(closePage ? navigate("/", {}) : next());
             }
           })
           .catch((err) => {
             console.error(err);
           });
       }
-    } else navigate('/', {})
+    } else navigate("/", {});
   };
   return (
     <StructureContext.Provider value={{ structure, setStructure }}>
-      <ResaContext.Provider value={{ resa, setResa }}>
+      <ResaContext.Provider value={{ resaInst, setResaInst }}>
         <form
           encType="multipart/form-data"
           className="formContainer"
@@ -1099,7 +1126,7 @@ function FormStructure() {
                 ) : (
                   <div> </div>
                 )}
-                {resa !== "" || currentStepIndex !== 6 ? (
+                {resaInst !== "" || currentStepIndex !== 6 ? (
                   <button type="submit" className="nextButton">
                     {!isLastStep ? "Suivant" : "Fin"}
                   </button>
@@ -1109,8 +1136,8 @@ function FormStructure() {
               </div>
             </div>
             {currentStepIndex !== 6 &&
-              currentStepIndex !== 7 &&
-              currentStepIndex !== 15 ? (
+            currentStepIndex !== 7 &&
+            currentStepIndex !== 15 ? (
               <div className="explicationsContainer">
                 {screenWidth < 1000 && (
                   <button

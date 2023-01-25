@@ -5,12 +5,12 @@ import imgDossier from "@assets/img-dossier.svg";
 import ResaContext from "@components/context/ResaContext";
 
 function Structure8() {
-  const { resa } = useContext(ResaContext);
+  const { resaInst } = useContext(ResaContext);
 
   return (
     <div>
       <h4>Voici comment les parents pourront réserver chez vous</h4>
-      {resa === "inst" && (
+      {resaInst === true && (
         <div className="etapesChoixResa">
           <div className="etapeContainer">
             <div className="etape1">
@@ -46,7 +46,7 @@ function Structure8() {
           </div>
         </div>
       )}
-      {resa === "nonInst" && (
+      {resaInst === false && (
         <div className="etapesChoixResa">
           <div className="etapeContainer">
             <div className="etape1">

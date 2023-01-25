@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Proptypes from "prop-types";
+import Proptypes, { bool, number, oneOfType } from "prop-types";
 import StructureContext from "@components/context/StructureContext";
 
 function Structure5({
@@ -302,27 +302,27 @@ function Structure5({
   );
 }
 Structure5.propTypes = {
-  PCSC1: Proptypes.node,
-  nesting: Proptypes.node,
-  montessori: Proptypes.node,
-  handi: Proptypes.node,
-  enfants: Proptypes.node,
-  jardin: Proptypes.node,
-  sorties: Proptypes.node,
-  animaux: Proptypes.node,
-  nonFumeur: Proptypes.node,
-  zeroPollution: Proptypes.node,
-  repas: Proptypes.node,
-  hygiene: Proptypes.node,
-  promenades: Proptypes.node,
-  eveil: Proptypes.node,
-  musique: Proptypes.node,
-  art: Proptypes.node,
-  bilingue: Proptypes.node,
-  bibli: Proptypes.node,
-  transport: Proptypes.node,
-  albumPhoto: Proptypes.node,
-  photoConnecte: Proptypes.node,
+  PCSC1: oneOfType([bool, number]),
+  nesting: oneOfType([bool, number]),
+  montessori: oneOfType([bool, number]),
+  handi: oneOfType([bool, number]),
+  enfants: oneOfType([bool, number]),
+  jardin: oneOfType([bool, number]),
+  sorties: oneOfType([bool, number]),
+  animaux: oneOfType([bool, number]),
+  nonFumeur: oneOfType([bool, number]),
+  zeroPollution: oneOfType([bool, number]),
+  repas: oneOfType([bool, number]),
+  hygiene: oneOfType([bool, number]),
+  promenades: oneOfType([bool, number]),
+  eveil: oneOfType([bool, number]),
+  musique: oneOfType([bool, number]),
+  art: oneOfType([bool, number]),
+  bilingue: oneOfType([bool, number]),
+  bibli: oneOfType([bool, number]),
+  transport: oneOfType([bool, number]),
+  albumPhoto: oneOfType([bool, number]),
+  photoConnecte: oneOfType([bool, number]),
   updateFields: Proptypes.func,
 };
 export default Structure5;
