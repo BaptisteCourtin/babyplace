@@ -147,6 +147,7 @@ router.put("/famille/nullOneDocForm/:id", famille.nullOneDocFormCommun); // dele
 router.put("/formParent/:id", parent.updateFormParent); // formulaire parent
 router.put("/parent/nullOneDocForm/:id", parent.nullOneDocFormParent); // delete un doc du form inscription (parent)
 router.put("/formEnfant/:id", enfant.updateFormEnfant); // formulaire enfant
+router.put("/resaToNote/:id", reservation.updateResaToNote); // passe le status à toNote
 
 router.post("/reservation", reservation.postReservation); // reservation
 router.post("/famille/newEnfant", enfant.postNewEnfant); // nouveau enfant
@@ -158,6 +159,7 @@ router.post("/famille/newConfiance", famille.postNewConfiance); // nouveau perso
 router.delete("/famille/deleteConfiance/:id", famille.deleteConfiance); // delete perso confiance
 router.delete("/famille/deleteEnfant/:id", enfant.deleteEnfant); // delete enfant
 router.delete("/reservation/deleteResa/:id", reservation.deleteResa); // delete resa
+router.delete("/deleteAncienResa/:id", reservation.deleteResaByDate); // delete resa by date
 router.delete("/famille/deleteLike", famille.deleteLike); // delete like
 router.delete("/contact/message/all/:id", messageAdmin.deleteMessagebyId); // delete message from admin dashboard
 

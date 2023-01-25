@@ -7,6 +7,18 @@ import logoBlanc from "@assets/logo-blanc.svg";
 import { AiOutlineUser } from "react-icons/ai";
 
 function NotifRejetee({ setCompo, photoFamille, oneReservation }) {
+  const {
+    crecheNom,
+    assMatNomUsage,
+    assMatPrenom,
+    assMatNomNaissance,
+    jour,
+    heureArrivee,
+    heureDepart,
+    prenom,
+    nom,
+  } = oneReservation;
+
   const removeResa = () => {
     axios.delete(
       `${import.meta.env.VITE_PATH}/reservation/deleteResa/${oneReservation.id}`
@@ -46,14 +58,13 @@ function NotifRejetee({ setCompo, photoFamille, oneReservation }) {
           <h3 className="red">Dommage !</h3>
           <h4>
             Votre réservation à{" "}
-            {oneReservation.crecheNom
-              ? oneReservation.crecheNom
-              : oneReservation.assMatNomUsage
-              ? `${oneReservation.assMatPrenom} ${oneReservation.assMatNomUsage}`
-              : ` ${oneReservation.assMatPrenom} ${oneReservation.assMatNomNaissance}`}{" "}
-            pour {oneReservation.prenom} {oneReservation.nom} le{" "}
-            {oneReservation.dateArrivee} de {oneReservation.heureArrivee} à{" "}
-            {oneReservation.heureDepart} est refusée
+            {crecheNom
+              ? crecheNom
+              : assMatNomUsage
+              ? `${assMatPrenom} ${assMatNomUsage}`
+              : ` ${assMatPrenom} ${assMatNomNaissance}`}{" "}
+            pour {prenom} {nom} le {jour} de {heureArrivee} à {heureDepart} est
+            refusée
           </h4>
 
           <p>

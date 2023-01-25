@@ -21,7 +21,7 @@ function BaseCard({
 }) {
   const [tri, setTri] = useState("Recent");
 
-  console.log("data2", familleLiked);
+  // console.log("data2", familleLiked);
 
   // --- position user ---
   const [ville, setVille] = useState();

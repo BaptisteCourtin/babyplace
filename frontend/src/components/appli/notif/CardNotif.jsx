@@ -15,7 +15,7 @@ function CardNotif({ each, setCompo, setOneReservation }) {
     >
       {each.status === "toNote" ? (
         <p>
-          Donnez-nous votre avis sur{" "}
+          Donnez-nous <span className="avis">votre avis</span> sur{" "}
           {each.crecheNom
             ? each.crecheNom
             : each.assMatNomUsage
