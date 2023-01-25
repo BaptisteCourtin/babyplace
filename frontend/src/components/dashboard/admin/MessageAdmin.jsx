@@ -14,6 +14,8 @@ const MessageAdmin = () => {
   const [selectedMail, setSelectedMail] = useState("");
   const [selectedNom, setSelectedNom] = useState("");
   const [selectedPrenom, setSelectedPrenom] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedMessage, setSelectedMessage] = useState("");
 
   const getAllMessage = async () => {
     try {
@@ -29,10 +31,12 @@ const MessageAdmin = () => {
     setIsOpen(!isOpen);
   };
 
-  const repondre = (email, nom, prenom) => {
+  const repondre = (email, nom, prenom, option, msg) => {
     setSelectedMail(email);
     setSelectedNom(nom);
     setSelectedPrenom(prenom);
+    setSelectedOption(option);
+    setSelectedMessage(msg);
     setOpenRes(!openRes);
   };
 
@@ -64,7 +68,7 @@ const MessageAdmin = () => {
                   <div className="adminMessageBtn">
                     <button
                       type="submit" id="btnRepondre"
-                      onClick={() => repondre(element.email, element.nom, element.prenom)}
+                      onClick={() => repondre(element.email, element.nom, element.prenom, element.optionSelected, element.texte)}
                     >
                       Répondre
                     </button>
@@ -81,7 +85,14 @@ const MessageAdmin = () => {
         </div>
       </div>
       <ModalMessageAdmin open={isOpen} close={closeRes} selectedId={selectedId} />
-      <ResponseModalAdmin openRes={openRes} closeRes={setOpenRes} selectedMail={selectedMail} selectedNom={selectedNom} selectedPrenom={selectedPrenom} />
+      <ResponseModalAdmin
+        openRes={openRes}
+        closeRes={setOpenRes}
+        selectedMail={selectedMail}
+        selectedNom={selectedNom}
+        selectedPrenom={selectedPrenom}
+        selectedOption={selectedOption}
+        selectedMessage={selectedMessage} />
     </div>
   );
 };
