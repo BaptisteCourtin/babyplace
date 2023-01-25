@@ -12,9 +12,7 @@ function Structure2({ inputRef, structureId, updateFields }) {
     ])
       .then((result) => {
         if (result.data.length > 0) {
-          setImageSrc(
-            `${import.meta.env.VITE_PATH}${result.data[0].photoProfil}`
-          );
+          setImageSrc(result.data[0].photoProfil);
           updateFields({ imageProfilSrc: result.data[0].photoProfil });
         }
       })
@@ -54,12 +52,11 @@ function Structure2({ inputRef, structureId, updateFields }) {
           <img src={imageSrc} alt="prévisualisation" />
         </div>
         <div className="inputContainer">
-          <label htmlFor="avatar">Formats acceptés : .jpg, .jpeg, .png</label>
+          <label htmlFor="file">Formats acceptés : .jpg, .jpeg, .png</label>
           <br />
           <input
             type="file"
-            id="avatar"
-            name="avatar"
+            name="file"
             ref={inputRef}
             accept="image/png, image/jpg, image/jpeg"
             onChange={(e) => updateImg(e)}

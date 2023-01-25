@@ -406,120 +406,41 @@ router.put("/agrementsAssmat", inscAssmat.agrementsAssmat); // modif agréments 
 router.put("/tarifsCreche", inscCreche.tarifsCreche); // modif tarifs crèche
 router.put("/tarifsAssmat", inscAssmat.tarifsAssmat); // modif tarifs assmat
 
-const storageAvatar = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "./public/uploads/avatar");
-  },
-  filename: (req, file, cb) => {
-    const date = new Date();
-    cb(
-      null,
-      "avatar" + date.getMinutes() + Math.round(Math.random() * 1000) + ".jpeg"
-    );
-  },
-});
+router.get("/photoProfil", inscStructure.getPhotoProfil); // get profile picture structure
+router.put("/photoProfil", inscStructure.updatePhotoProfil); // update profile picture structure
 
-const uploadAvatar = multer({ storage: storageAvatar });
-
-router.post("/photoProfil", uploadAvatar.single("avatar"), (req, res) => {
-  res.send(req.file);
-});
-
-router.get("/photoProfil", (req, res) => {
-  datasource
-    .query("SELECT photoProfil FROM structure WHERE structureId= ?", [
-      req.query.id,
-    ])
-    .then(([result]) => {
-      res.send(result).status(200);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Accès impossible");
-    });
-});
-
-router.put("/photoProfil", (req, res) => {
-  const { photoProfil, email } = req.body;
-  datasource
-    .query("UPDATE structure SET photoProfil= ? WHERE email= ?", [
-      photoProfil,
-      email,
-    ])
-    .then(([structure]) => {
-      if (structure.affectedRows === 0) {
-        res.status(404).send("Not Found");
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Modification impossible");
-    });
-});
-
-const storagePhotos = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "./public/uploads/photosStructure");
-  },
-  filename: (req, file, cb) => {
-    const date = new Date();
-    cb(
-      null,
-      "photo" + date.getMinutes() + Math.round(Math.random() * 1000) + ".jpeg"
-    );
-  },
-});
-
-const uploadPhotos = multer({ storage: storagePhotos });
-
+// put profile picture in cloud
 router.post(
-  "/photosStructure",
-  uploadPhotos.fields([
-    { name: "photo1", maxCount: 1 },
-    { name: "photo2", maxCount: 1 },
-    { name: "photo3", maxCount: 1 },
-  ]),
-  (req, res) => {
-    res.send(req.files);
+  "/photoProfil",
+  multerMid.single("file"),
+  async (req, res, next) => {
+    try {
+      const file = req.file;
+      const result = await uploadDoc(file);
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
   }
 );
 
-router.get("/photosStructure", (req, res) => {
-  datasource
-    .query(
-      "SELECT photoStructure1, photoStructure2, photoStructure3 FROM structure WHERE structureId= ?",
-      [req.query.id]
-    )
-    .then(([result]) => {
-      res.send(result).status(200);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Accès impossible");
-    });
-});
+router.get("/photosStructure", inscStructure.getPhotosStructure); // get structure pictures
+router.put("/photosStructure", inscStructure.updatePhotosStructure); // update structure pictures
 
-router.put("/photosStructure", (req, res) => {
-  const { photoStructure1, photoStructure2, photoStructure3, email } = req.body;
-  datasource
-    .query(
-      "UPDATE structure SET photoStructure1= ?, photoStructure2= ?, photoStructure3= ? WHERE email= ?",
-      [photoStructure1, photoStructure2, photoStructure3, email]
-    )
-    .then(([structure]) => {
-      if (structure.affectedRows === 0) {
-        res.status(404).send("Not Found");
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Modification impossible");
-    });
-});
+//put structure pictures in cloud
+router.post(
+  "/photosStructure",
+  multerMid.single("file"),
+  async (req, res, next) => {
+    try {
+      const file = req.file;
+      const result = await uploadDoc(file);
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 const storageJustif = multer.diskStorage({
   destination: (req, file, cb) => {

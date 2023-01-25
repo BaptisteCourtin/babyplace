@@ -672,13 +672,13 @@ function FormStructure() {
       } else if (currentStepIndex === 1) {
         const formData = new FormData();
         if (inputRef.current.files[0] !== undefined) {
-          console.log(inputRef.current.files[0]);
-          formData.append("avatar", inputRef.current.files[0]);
+          formData.append("file", inputRef.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/photoProfil`, formData)
             .then((result) => {
+              console.log(result.data);
               let photoProfil = imageProfilSrc;
               if (result.data !== undefined) {
-                photoProfil = `/uploads/avatar/${result.data.filename}`;
+                photoProfil = result.data;
               }
               Axios.put(`${import.meta.env.VITE_PATH}/photoProfil`, {
                 photoProfil,
@@ -696,50 +696,76 @@ function FormStructure() {
           next();
         }
       } else if (currentStepIndex === 2) {
-        const formData = new FormData();
-        console.log(inputRef1.current.files[0]);
         if (inputRef1.current.files[0] !== undefined) {
-          formData.append("photo1", inputRef1.current.files[0]);
-        }
-        if (inputRef2.current.files[0] !== undefined) {
-          formData.append("photo2", inputRef2.current.files[0]);
-        }
-        if (inputRef3.current.files[0] !== undefined) {
-          formData.append("photo3", inputRef3.current.files[0]);
-        }
-        Axios.post(`${import.meta.env.VITE_PATH}/photosStructure`, formData)
-          .then((result) => {
-            let photoStructure1 = photo1Src;
-            let photoStructure2 = photo2Src;
-            let photoStructure3 = photo3Src;
-            if (result.data.photo1 !== undefined) {
-              const photo1 = result.data.photo1[0].filename;
-              photoStructure1 = `/uploads/photosStructure/${photo1}`;
-            }
-            if (result.data.photo2 !== undefined) {
-              const photo2 = result.data.photo2[0].filename;
-              photoStructure2 = `/uploads/photosStructure/${photo2}`;
-            }
-            if (result.data.photo3 !== undefined) {
-              const photo3 = result.data.photo3[0].filename;
-              photoStructure3 = `/uploads/photosStructure/${photo3}`;
-            }
-            Axios.put(`${import.meta.env.VITE_PATH}/photosStructure`, {
-              photoStructure1,
-              photoStructure2,
-              photoStructure3,
-              email,
-            })
-              .then(() => {
-                closePage ? navigate("/", {}) : next();
-              })
-              .catch((err) => {
+          const formData = new FormData();
+          formData.append("file", inputRef1.current.files[0]);
+          Axios.post(`${import.meta.env.VITE_PATH}/photosStructure`, formData)
+            .then((result) => {
+              let photoStructure = photo1Src;
+              if (result.data !== undefined) {
+                const photo1 = result.data;
+                photoStructure = photo1;
+              }
+              let column = "photoStructure1";
+              Axios.put(`${import.meta.env.VITE_PATH}/photosStructure`, {
+                column,
+                photoStructure,
+                email,
+              }).catch((err) => {
                 console.error(err);
               });
-          })
-          .catch((err) => {
-            console.error(err);
-          });
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        }
+        if (inputRef2.current.files[0] !== undefined) {
+          const formData = new FormData();
+          formData.append("file", inputRef2.current.files[0]);
+          Axios.post(`${import.meta.env.VITE_PATH}/photosStructure`, formData)
+            .then((result) => {
+              let photoStructure = photo2Src;
+              if (result.data !== undefined) {
+                const photo2 = result.data;
+                photoStructure = photo2;
+              }
+              let column = "photoStructure2";
+              Axios.put(`${import.meta.env.VITE_PATH}/photosStructure`, {
+                column,
+                photoStructure,
+                email,
+              }).catch((err) => {
+                console.error(err);
+              });
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        }
+        if (inputRef3.current.files[0] !== undefined) {
+          const formData = new FormData();
+          formData.append("file", inputRef3.current.files[0]);
+          Axios.post(`${import.meta.env.VITE_PATH}/photosStructure`, formData)
+            .then((result) => {
+              let photoStructure = photo3Src;
+              if (result.data !== undefined) {
+                const photo3 = result.data;
+                photoStructure = photo3;
+              }
+              let column = "photoStructure3";
+              Axios.put(`${import.meta.env.VITE_PATH}/photosStructure`, {
+                column,
+                photoStructure,
+                email,
+              }).catch((err) => {
+                console.error(err);
+              });
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        }
+        closePage ? navigate("/", {}) : next();
       } else if (currentStepIndex === 3) {
         Axios.put(`${import.meta.env.VITE_PATH}/description`, {
           description,
