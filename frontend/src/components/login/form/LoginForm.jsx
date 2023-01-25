@@ -46,7 +46,7 @@ function LoginForm() {
         })
         .catch((err) => {
           if (err?.response.status === 404) {
-            navigate('/pending')
+            navigate("/pending");
           } else {
             toast.error(err?.response?.data || err.message);
           }

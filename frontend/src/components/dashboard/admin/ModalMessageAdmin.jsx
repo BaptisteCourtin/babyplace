@@ -8,12 +8,14 @@ function ModalMessageAdmin({ open, close, selectedId }) {
   const deleteMessage = async () => {
     const id = selectedId;
     try {
-      const res = await axios.delete(`http://localhost:5000/contact/message/all/${id}`);
+      const res = await axios.delete(
+        `http://localhost:5000/contact/message/all/${id}`
+      );
       close();
-      toast.success("Le message à bien été supprimé")
+      toast.success("Le message à bien été supprimé");
     } catch (err) {
       toast.error(err.message);
-    };
+    }
   };
 
   return (
@@ -26,8 +28,12 @@ function ModalMessageAdmin({ open, close, selectedId }) {
           <p>Etes-vous sûr de vouloir supprimer ce message ?</p>
         </div>
         <div className="modalAdminBtns">
-          <button id="btnRepondre" onClick={deleteMessage}>OUI</button>
-          <button id="btnDelete" onClick={close}>NON</button>
+          <button id="btnRepondre" onClick={deleteMessage}>
+            OUI
+          </button>
+          <button id="btnDelete" onClick={close}>
+            NON
+          </button>
         </div>
       </div>
     </div>

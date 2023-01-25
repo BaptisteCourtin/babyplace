@@ -21,7 +21,6 @@ function NotifNote({ setCompo, photoFamille, oneReservation }) {
       )
       .then((res) => {
         setStructureNotes(res.data[0]);
-        console.log(res.data[0]);
       })
       .catch((err) => {
         console.error(err);
@@ -199,6 +198,7 @@ function NotifNote({ setCompo, photoFamille, oneReservation }) {
 NotifNote.propTypes = {
   setCompo: PropTypes.func.isRequired,
   photoFamille: PropTypes.string.isRequired,
+  oneReservation: PropTypes.object.isRequired,
 };
 
 export default NotifNote;

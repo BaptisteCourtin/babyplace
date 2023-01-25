@@ -39,7 +39,7 @@ function CardFavPlat({ each }) {
           {nbStarMoyen} <AiFillStar />
         </p>
       ) : null}
-      <button id="card-fav-plat-closeIcon" onClick="">
+      <button id="card-fav-plat-closeIcon" onClick="" type="button">
         <AiFillCloseCircle style={{ color: "red" }} />
       </button>
     </div>

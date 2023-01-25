@@ -264,6 +264,11 @@ BaseMap.propTypes = {
   dataBasique: PropTypes.object.isRequired,
   dataServices: PropTypes.object.isRequired,
   dataAggrements: PropTypes.object.isRequired,
+
+  familleLiked: PropTypes.object.isRequired,
+  familleId: PropTypes.string.isRequired,
+  setChangeLike: PropTypes.func.isRequired,
+  changeLike: PropTypes.bool.isRequired,
 };
 
 export default BaseMap;

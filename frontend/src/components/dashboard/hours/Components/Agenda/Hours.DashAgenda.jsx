@@ -2,7 +2,14 @@ import React from "react";
 import open from "@assets/dashboard/open-sign.svg";
 import close from "@assets/dashboard/closed-sign.svg";
 
-function HoursDashAgenda({ horaires, dayId, setHoursOpen, setHoursClose, updateHours, updateDay }) {
+function HoursDashAgenda({
+  horaires,
+  dayId,
+  setHoursOpen,
+  setHoursClose,
+  updateHours,
+  updateDay,
+}) {
   return (
     <>
       <div className="dashRangeInput">
@@ -26,12 +33,10 @@ function HoursDashAgenda({ horaires, dayId, setHoursOpen, setHoursClose, updateH
       </div>
       <div className="dashRangeValues">
         <p>
-          <img src={open} alt="" /> Ouverture :{" "}
-          {horaires[dayId].heureMin}H
+          <img src={open} alt="" /> Ouverture : {horaires[dayId].heureMin}H
         </p>
         <p>
-          <img src={close} alt="" /> Fermeture :{" "}
-          {horaires[dayId].heureMax}H
+          <img src={close} alt="" /> Fermeture : {horaires[dayId].heureMax}H
         </p>
       </div>
       <button
@@ -44,7 +49,7 @@ function HoursDashAgenda({ horaires, dayId, setHoursOpen, setHoursClose, updateH
         Repos
       </button>
     </>
-  )
+  );
 }
 
 export default HoursDashAgenda;

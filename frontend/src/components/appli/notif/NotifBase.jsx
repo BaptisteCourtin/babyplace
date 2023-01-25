@@ -40,6 +40,8 @@ function NotifBase({ setCompo, allReservation, setOneReservation }) {
 
 NotifBase.propTypes = {
   setCompo: PropTypes.func.isRequired,
+  oneReservation: PropTypes.object.isRequired,
+  setOneReservation: PropTypes.func.isRequired,
 };
 
 export default NotifBase;
