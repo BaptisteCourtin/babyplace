@@ -34,6 +34,8 @@ function RegisterForm() {
         password,
       })
         .then((ret) => {
+          sessionStorage.setItem("structureEmail", email);
+          setUserEmail(email);
           const { token } = ret.data;
           navigate("/structure/inscription-form", {
             state: {
@@ -50,9 +52,7 @@ function RegisterForm() {
         });
     }
   };
-  const handleChange = (event) => {
-    setUserEmail(event.target.value);
-  };
+
   const handlePwdLength = (e) => {
     e.preventDefault();
     if (pwdLength < 8) {
@@ -75,7 +75,6 @@ function RegisterForm() {
           placeholder="Email"
           onChange={(event) => {
             setEmail(event.target.value);
-            handleChange(event);
           }}
           required
         />

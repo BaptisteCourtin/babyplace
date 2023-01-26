@@ -93,7 +93,7 @@ const resaInst = (resaInst, email) => {
 
 const createHoraires = (jour, numero, ouvert, min, max, structureId) => {
   return datasource.query(
-    `INSERT INTO horaires(jourSemaine, ouvert, heureMin, heureMax, jourId, structureId) VALUES(${jour}, ?, ?, ?, ${numero}, ?)`,
+    `INSERT INTO horaires(jourSemaine, ouvert, heureMin, heureMax, jourId, structureId) VALUES('${jour}', ?, ?, ?, ${numero}, ?)`,
     [ouvert, min, max, structureId]
   );
 };

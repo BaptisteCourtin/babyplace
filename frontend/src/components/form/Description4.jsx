@@ -20,7 +20,8 @@ function Structure4({ description, updateFields }) {
           onChange={(e) => updateFields({ description: e.target.value })}
         />
         <legend>
-          Maximum 500 caractères. Reste : {500 - description.length}.
+          Maximum 500 caractères.{" "}
+          {description !== null && `Reste : ${500 - description.length}.`}
         </legend>
       </div>
     </div>
