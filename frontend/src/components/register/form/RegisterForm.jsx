@@ -29,7 +29,7 @@ function RegisterForm() {
     e.preventDefault();
 
     if (email && password && checked && pwdLength >= 8) {
-      Axios.post("http://localhost:5000/inscription", {
+      Axios.post(`${import.meta.env.VITE_PATH}/inscription`, {
         email,
         password,
       })

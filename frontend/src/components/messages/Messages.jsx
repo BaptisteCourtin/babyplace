@@ -4,7 +4,7 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import Chat from "./Chat";
 
-const socket = io.connect("http://localhost:3001");
+const socket = io.connect(`${import.meta.env.VITE_SOCKET}`);
 
 function Messages({ nom, prenom, email, photoProfil, structureId }) {
   const [room, setRoom] = useState("");
@@ -14,7 +14,7 @@ function Messages({ nom, prenom, email, photoProfil, structureId }) {
 
   const getStructureForMess = () => {
     axios
-      .get("http://localhost:5000/famille/all")
+      .get(`${import.meta.env.VITE_PATH}/famille/all`)
       .then((ret) => {
         console.warn(ret.data);
         setStrucData(ret.data);

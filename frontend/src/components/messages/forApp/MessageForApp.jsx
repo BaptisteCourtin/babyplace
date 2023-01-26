@@ -10,7 +10,7 @@ function MessageForApp() {
 
   const getStructureForMess = () => {
     axios
-      .get("http://localhost:5000/structure/all")
+      .get(`${import.meta.env.VITE_PATH}/structure/all`)
       .then((ret) => {
         console.warn(ret.data);
         setStrucData(ret.data);
@@ -22,7 +22,7 @@ function MessageForApp() {
 
   const getFamilleForMess = () => {
     axios
-      .get("http://localhost:5000/famille/all")
+      .get(`${import.meta.env.VITE_PATH}/famille/all`)
       .then((ret) => {
         console.warn(ret.data);
         setFamilleData(ret.data);

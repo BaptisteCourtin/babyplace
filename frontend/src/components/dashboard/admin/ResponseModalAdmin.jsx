@@ -17,11 +17,11 @@ const ResponseModalAdmin = ({
 
   const [objet, setObjet] = useState("");
   const [message, setMessage] = useState("");
-  
+
   const closeMod = () => {
     closeRes(!openRes);
   };
-  
+
   const sendRespons = async (e) => {
     e.preventDefault();
     const datas = {
