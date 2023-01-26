@@ -18,7 +18,7 @@ function MessageAdmin() {
 
   const getAllMessage = async () => {
     try {
-      const ret = await axios.get("http://localhost:5000/contact/message/all");
+      const ret = await axios.get(`${import.meta.env.VITE_PATH}/contact/message/all`);
       setMessageAdminData(ret.data);
     } catch (err) {
       toast.error(err.message);

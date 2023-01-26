@@ -15,7 +15,7 @@ function ChatForApp({ socket, username, room, title, joinRoom }) {
   const saveMessage = (messageData) => {
     const { room, author, message, date } = messageData;
     axios
-      .post("http://localhost:5000/messages/sauvegarde", {
+      .post(`${import.meta.env.VITE_PATH}/messages/sauvegarde`, {
         room,
         author,
         message,
@@ -38,9 +38,8 @@ function ChatForApp({ socket, username, room, title, joinRoom }) {
         time: `${new Date(Date.now()).getHours()}:${new Date(
           Date.now()
         ).getMinutes()}`,
-        date: `${new Date(Date.now()).getFullYear()} -${
-          new Date(Date.now()).getMonth() + 1
-        } -${new Date(Date.now()).getUTCDate()} `,
+        date: `${new Date(Date.now()).getFullYear()} -${new Date(Date.now()).getMonth() + 1
+          } -${new Date(Date.now()).getUTCDate()} `,
       };
 
       saveMessage(messageData);
@@ -59,7 +58,7 @@ function ChatForApp({ socket, username, room, title, joinRoom }) {
   const getMessagesFromRoom = async () => {
     try {
       const result = await axios.get(
-        `http://localhost:5000/messages/recup/${room}`,
+        `${import.meta.env.VITE_PATH}/messages/recup/${room}`,
         {
           headers: {
             room,

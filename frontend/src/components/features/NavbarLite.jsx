@@ -13,7 +13,6 @@ function NavbarLite() {
             <img src={logotxt} alt="Babyplace" id="logotxt" />
           </div>
         </NavLink>
-
         <div className="navBtnLite">
           <NavLink to="/">Retourner à l'accueil</NavLink>
         </div>

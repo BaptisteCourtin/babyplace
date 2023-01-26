@@ -10,7 +10,7 @@ function ModalMessageAdmin({ open, close, selectedId }) {
     const id = selectedId;
     try {
       const res = await axios.delete(
-        `http://localhost:5000/contact/message/all/${id}`
+        `${import.meta.env.VITE_PATH}/contact/message/all/${id}`
       );
       close();
       console.warn(res.data);

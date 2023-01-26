@@ -24,7 +24,7 @@ function Contact() {
   const onSubmit = (d) => {
     const { prenom, nom, email, optionSelected, texte } = d;
     axios
-      .post(`http://localhost:5000/contact/message`, {
+      .post(`${import.meta.env.VITE_PATH}/contact/message`, {
         prenom,
         nom,
         email,
@@ -69,7 +69,6 @@ function Contact() {
   return (
     <div className="contact-form" id="aide">
       <NavbarLite />
-
       <section className="aide">
         <h3>Aide</h3>
         <p>
@@ -78,7 +77,6 @@ function Contact() {
           plus bref délai.
         </p>
       </section>
-
       <section id="contact">
         <h3>Contactez-Nous</h3>
         <p id="question">
@@ -92,7 +90,6 @@ function Contact() {
               <label className="labelForm" htmlFor="prenom">
                 Prénom <span id="obligatoire">*</span>
               </label>
-
               <input
                 id="userName"
                 type="text"
@@ -119,12 +116,10 @@ function Contact() {
                 {...register("email", { required: true })}
               />
             </div>
-
             <div className="divObject">
               <label className="labelForm" htmlFor="object">
                 Object <span id="obligatoire">*</span>
               </label>
-
               <select
                 className="object-select"
                 {...register("optionSelected", { required: true })}
@@ -143,7 +138,6 @@ function Contact() {
               <label className="labelForm" htmlFor="textearea">
                 Message <span id="obligatoire">*</span>
               </label>
-
               <textarea
                 name="formulaire-message"
                 id="formulaireMessage"
@@ -151,7 +145,6 @@ function Contact() {
               />
               <span id="obligatoireText">* les chants sont obligatoires</span>
             </div>
-
             <div className="policyTextDiv">
               <p id="policyText">
                 <input
@@ -172,7 +165,6 @@ function Contact() {
               </p>
             </div>
           </div>
-
           <button
             className="navBtnLite"
             type="submit"
@@ -190,6 +182,6 @@ function Contact() {
       <FooterLite />
     </div>
   );
-}
+};
 
 export default Contact;

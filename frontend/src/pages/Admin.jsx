@@ -9,7 +9,7 @@ function Admin() {
 
   const getStructure = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/admin`);
+      const res = await axios.get(`${import.meta.env.VITE_PATH}/admin`);
       setData(res.data);
     } catch (err) {
       toast.error(err.message);
@@ -18,7 +18,7 @@ function Admin() {
 
   const setVerified = async (structureId) => {
     try {
-      await axios.put(`http://localhost:5000/admin/verified/${structureId}`, {
+      await axios.put(`${import.meta.env.VITE_PATH}/admin/verified/${structureId}`, {
         id: structureId,
       });
       toast.success("L'utilisateur a bien été approuvé"), getStructure();
@@ -30,7 +30,7 @@ function Admin() {
   const setRefused = async (structureId) => {
     try {
       await axios.delete(
-        `http://localhost:5000/admin/refused/${structureId}?type=${userType}`,
+        `${import.meta.env.VITE_PATH}/admin/refused/${structureId}?type=${userType}`,
         {
           id: structureId,
           type: userType,
