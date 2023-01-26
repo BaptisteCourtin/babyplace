@@ -37,7 +37,7 @@ function Features() {
       </section>
       <section id="profil">
         <h3>Nos Profils</h3>
-        <p>Notre équipe de développeur ayant participée à ce projet.</p>
+        <p>Notre équipe de développeurs ayant participé à ce projet.</p>
         <div>
           <div className="imgAboutUsContainer">
             <ul>

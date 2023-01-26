@@ -59,7 +59,7 @@
         ul {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 50px;
+          gap: clamp(10px, 3vw, 50px);
           padding: 2vh 0;
 
           & li {
