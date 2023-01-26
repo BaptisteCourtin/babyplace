@@ -28,6 +28,8 @@ import selfie from "../assets/selfie.svg";
 import profilJM from "../assets/profilJM.png";
 import profilCPP from "../assets/profilCPP.jpg";
 import imgWoman from "../assets/img-woman.svg";
+import logo from "../assets/logo4.svg";
+import logotxt from "@assets/babyplaceTxt.svg";
 
 const INITIAL_DATA = {
   isCreche: null,
@@ -1193,7 +1195,10 @@ function FormStructure() {
         >
           <div className="formTitleBar">
             <div className="leftPart">
-              <h4>Babyplace</h4>
+              <div className="logo">
+                <img src={logo} alt="logo" />
+                <img src={logotxt} alt="Babyplace" />
+              </div>
               <p> {pageTitle()} </p>
             </div>
             <div>
