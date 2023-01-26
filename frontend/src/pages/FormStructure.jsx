@@ -226,7 +226,6 @@ function FormStructure() {
               siret: result.data.siret,
               numAgrement: result.data.numAgrement,
               dateAgrement: result.data.dateAgrement,
-              docPmi: result.data.docPmi,
             };
           });
         })
@@ -295,19 +294,12 @@ function FormStructure() {
               numSecu: result.data.numSecu,
               numAgrement: result.data.numAgrement,
               dateAgrement: result.data.dateAgrement,
-              docPmi: result.data.docPmi,
               assHabitNom: result.data.assHabitNom,
               assHabitNumero: result.data.assHabitNumero,
               assHabitAdresse: result.data.assHabitAdresse,
               assAutoNom: result.data.assAutoNom,
               assAutoNumero: result.data.assAutoNumero,
               assAutoAdresse: result.data.assAutoAdresse,
-              docIdentite: result.data.docIdentite,
-              docVitale: result.data.docVitale,
-              docJustifDom: result.data.docJustifDom,
-              docDiplome: result.data.docDiplome,
-              docRespCivile: result.data.docRespCivile,
-              docAssAuto: result.data.docAssAuto,
             };
           });
         })
@@ -365,6 +357,7 @@ function FormStructure() {
         inputRefDiplome={inputRefDiplome}
         inputRefAuto={inputRefAuto}
         inputRefResp={inputRefResp}
+        structureId={structureId}
         updateFields={updateFields}
       />,
       <Structure16 />,
@@ -997,7 +990,6 @@ function FormStructure() {
             console.error(err);
           });
       } else if (currentStepIndex === 14) {
-        console.log(inputRefPmi.current.files.length);
         if (inputRefPmi.current.files.length > 0) {
           const formData = new FormData();
           formData.append("file", inputRefPmi.current.files[0]);

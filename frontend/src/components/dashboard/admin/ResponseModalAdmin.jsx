@@ -4,7 +4,7 @@ import madamcoucou from "@assets/img-woman.svg";
 import { toast } from "react-hot-toast";
 import PropTypes from "prop-types";
 
-const ResponseModalAdmin = ({
+function ResponseModalAdmin({
   openRes,
   closeRes,
   selectedMail,
@@ -12,16 +12,16 @@ const ResponseModalAdmin = ({
   selectedPrenom,
   selectedOption,
   selectedMessage,
-}) => {
+}) {
   if (!openRes) return null;
 
   const [objet, setObjet] = useState("");
   const [message, setMessage] = useState("");
-  
+
   const closeMod = () => {
     closeRes(!openRes);
   };
-  
+
   const sendRespons = async (e) => {
     e.preventDefault();
     const datas = {
@@ -111,7 +111,7 @@ const ResponseModalAdmin = ({
       </div>
     </div>
   );
-};
+}
 
 ResponseModalAdmin.propTypes = {
   openRes: PropTypes.bool,

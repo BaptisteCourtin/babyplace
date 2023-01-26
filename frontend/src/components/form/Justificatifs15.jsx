@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import StructureContext from "@components/context/StructureContext";
 import Proptypes, { node, object, oneOfType } from "prop-types";
+import Axios from "axios";
 
 function Structure15({
   numSecu,
@@ -21,8 +22,63 @@ function Structure15({
   inputRefAuto,
   inputRefResp,
   updateFields,
+  docPmi,
+  docIdentite,
+  docVitale,
+  docJustifDom,
+  docDiplome,
+  docRespCivile,
+  docAssAuto,
+  structureId,
 }) {
   const { structure } = useContext(StructureContext);
+
+  const getDocs = () => {
+    Axios.get(`${import.meta.env.VITE_PATH}/docPmi?id=${structureId}`, [
+      structureId,
+    ])
+      .then((result) => {
+        if (result.data[0].docPmi !== null) {
+          updateFields({ docPmi: result.data[0].docPmi });
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+    if (structure === "assmat") {
+      Axios.get(
+        `${import.meta.env.VITE_PATH}/justificatifs?id=${structureId}`,
+        [structureId]
+      )
+        .then((result) => {
+          if (result.data[0].docIdentite !== null) {
+            updateFields({ docIdentite: result.data[0].docIdentite });
+          }
+          if (result.data[0].docVitale !== null) {
+            updateFields({ docVitale: result.data[0].docVitale });
+          }
+          if (result.data[0].docJustifDom !== null) {
+            updateFields({ docJustifDom: result.data[0].docJustifDom });
+          }
+          if (result.data[0].docAssAuto !== null) {
+            updateFields({ docAssAuto: result.data[0].docAssAuto });
+          }
+          if (result.data[0].docRespCivile !== null) {
+            updateFields({ docRespCivile: result.data[0].docRespCivile });
+          }
+          if (result.data[0].docDiplome !== null) {
+            updateFields({ docDiplome: result.data[0].docDiplome });
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  };
+
+  useEffect(() => {
+    getDocs();
+  }, []);
 
   return (
     <div className="structure15 page-left">
@@ -385,19 +441,20 @@ function Structure15({
             Copie de l'autorisation administrative d'exercice (PMI)
             <span> (Obligatoire) </span>
           </h5>
+          {docPmi !== null && (
+            <div className="actualFile">
+              <p>Fichier actuellement enregistré : </p>
+              <a href={docPmi} target="_blank" rel="noopener noreferrer">
+                {docPmi.split("-qws-")[1]}
+              </a>
+            </div>
+          )}
           <input
             type="file"
             id="docpmi"
-            name="docpmi"
+            name="file"
             ref={inputRefPmi}
             accept="image/png, image/jpg, image/jpeg, .pdf"
-            onChange={() =>
-              updateFields({
-                docPmi: inputRefPmi.current.files[0].name
-                  .split(".")
-                  .slice(-1)[0],
-              })
-            }
           />
           <p className="checkSymbol">&#x2713;</p>
         </div>
@@ -408,19 +465,24 @@ function Structure15({
                 Carte d'identité ou passeport / carte de résident ou titre de
                 séjour et autorisation de travail.{" "}
               </h5>
+              {docIdentite !== null && (
+                <div className="actualFile">
+                  <p>Fichier actuellement enregistré : </p>
+                  <a
+                    href={docIdentite}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {docIdentite.split("-qws-")[1]}
+                  </a>
+                </div>
+              )}
               <input
                 type="file"
                 id="docIdentite"
-                name="docIdentite"
+                name="file"
                 ref={inputRefCni}
                 accept="image/png, image/jpg, image/jpeg, .pdf"
-                onChange={() => {
-                  updateFields({
-                    docIdentite: inputRefCni.current.files[0].name
-                      .split(".")
-                      .slice(-1)[0],
-                  });
-                }}
               />
               <p className="checkSymbol">&#x2713;</p>
             </div>
@@ -430,37 +492,43 @@ function Structure15({
                 Carte vitale ou attestation de sécurité sociale
                 <span> (Obligatoire) </span>
               </h5>
+              {docVitale !== null && (
+                <div className="actualFile">
+                  <p>Fichier actuellement enregistré : </p>
+                  <a href={docVitale} target="_blank" rel="noopener noreferrer">
+                    {docVitale.split("-qws-")[1]}
+                  </a>
+                </div>
+              )}
               <input
                 type="file"
                 id="docVitale"
-                name="docVitale"
+                name="file"
                 ref={inputRefCpam}
                 accept="image/png, image/jpg, image/jpeg, .pdf"
-                onChange={() =>
-                  updateFields({
-                    docVitale: inputRefCpam.current.files[0].name
-                      .split(".")
-                      .slice(-1)[0],
-                  })
-                }
               />
               <p className="checkSymbol">&#x2713;</p>
             </div>
             <div className="docInputContainer">
               <h5>Justificatif de domicile</h5>
+              {docJustifDom !== null && (
+                <div className="actualFile">
+                  <p>Fichier actuellement enregistré : </p>
+                  <a
+                    href={docJustifDom}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {docJustifDom.split("-qws-")[1]}
+                  </a>
+                </div>
+              )}
               <input
                 type="file"
                 id="docJustifDom"
-                name="docJustifDom"
+                name="file"
                 ref={inputRefDom}
                 accept="image/png, image/jpg, image/jpeg, .pdf"
-                onChange={() =>
-                  updateFields({
-                    docJustifDom: inputRefPmi.current.files[0].name
-                      .split(".")
-                      .slice(-1)[0],
-                  })
-                }
               />
               <p className="checkSymbol">&#x2713;</p>
             </div>
@@ -469,19 +537,24 @@ function Structure15({
                 Justificatifs de formations (Brevet de secourisme, CAP,…) et/ou
                 d'expériences (certificats de travail)
               </h5>
+              {docDiplome !== null && (
+                <div className="actualFile">
+                  <p>Fichier actuellement enregistré : </p>
+                  <a
+                    href={docDiplome}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {docDiplome.split("-qws-")[1]}
+                  </a>
+                </div>
+              )}
               <input
                 type="file"
                 id="docDiplome"
-                name="docDiplome"
+                name="file"
                 ref={inputRefDiplome}
                 accept="image/png, image/jpg, image/jpeg, .pdf"
-                onChange={() =>
-                  updateFields({
-                    docDiplome: inputRefDiplome.current.files[0].name
-                      .split(".")
-                      .slice(-1)[0],
-                  })
-                }
               />
               <p className="checkSymbol">&#x2713;</p>
             </div>
@@ -490,37 +563,47 @@ function Structure15({
                 {" "}
                 Assurance responsabilité civile <span> (Obligatoire) </span>
               </h5>
+              {docRespCivile !== null && (
+                <div className="actualFile">
+                  <p>Fichier actuellement enregistré : </p>
+                  <a
+                    href={docRespCivile}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {docRespCivile.split("-qws-")[1]}
+                  </a>
+                </div>
+              )}
               <input
                 type="file"
                 id="docRespCivile"
-                name="docRespCivile"
+                name="file"
                 ref={inputRefResp}
                 accept="image/png, image/jpg, image/jpeg, .pdf"
-                onChange={() =>
-                  updateFields({
-                    docRespCivile: inputRefResp.current.files[0].name
-                      .split(".")
-                      .slice(-1)[0],
-                  })
-                }
               />
               <p className="checkSymbol">&#x2713;</p>
             </div>
             <div className="docInputContainer">
+              {docAssAuto !== null && (
+                <div className="actualFile">
+                  <p>Fichier actuellement enregistré : </p>
+                  <a
+                    href={docAssAuto}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {docAssAuto.split("-qws-")[1]}
+                  </a>
+                </div>
+              )}
               <h5>Assurance auto</h5>
               <input
                 type="file"
                 id="docAssAuto"
-                name="docAssAuto"
+                name="file"
                 ref={inputRefAuto}
                 accept="image/png, image/jpg, image/jpeg, .pdf"
-                onChange={() =>
-                  updateFields({
-                    docAssAuto: inputRefAuto.current.files[0].name
-                      .split(".")
-                      .slice(-1)[0],
-                  })
-                }
               />
               <p className="checkSymbol">&#x2713;</p>
             </div>
@@ -549,5 +632,13 @@ Structure15.propTypes = {
   inputRefAuto: oneOfType([node, object]),
   inputRefResp: oneOfType([node, object]),
   updateFields: Proptypes.func,
+  docPmi: Proptypes.node,
+  docIdentite: Proptypes.node,
+  docVitale: Proptypes.node,
+  docJustifDom: Proptypes.node,
+  docDiplome: Proptypes.node,
+  docRespCivile: Proptypes.node,
+  docAssAuto: Proptypes.node,
+  structureId: Proptypes.node,
 };
 export default Structure15;

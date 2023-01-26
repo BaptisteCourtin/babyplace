@@ -352,6 +352,19 @@ const deleteDate = (req, res) => {
     });
 };
 
+const getDocPmi = (req, res) => {
+  const id = req.query.id;
+  inscStructureModels
+    .getDocPmi(id)
+    .then(([result]) => {
+      res.send(result).status(200);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Accès impossible");
+    });
+};
+
 module.exports = {
   getIsCreche,
   getStructureId,
@@ -367,4 +380,5 @@ module.exports = {
   updateHoraires,
   dureeAccueil,
   deleteDate,
+  getDocPmi,
 };

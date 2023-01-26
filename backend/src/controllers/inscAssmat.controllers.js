@@ -213,6 +213,19 @@ const tarifsAssmat = (req, res) => {
     });
 };
 
+const getJustificatifs = (req, res) => {
+  const id = req.query.id;
+  inscAssmatModels
+    .getJustificatifs(id)
+    .then(([result]) => {
+      res.send(result).status(200);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Accès impossible");
+    });
+};
+
 const justificatifsAssmat = (req, res) => {
   const { column, doc, email } = req.body;
   inscAssmatModels
@@ -277,6 +290,7 @@ module.exports = {
   optionsAccueilAssmat,
   agrementsAssmat,
   tarifsAssmat,
+  getJustificatifs,
   justificatifsAssmat,
   verifsAssmat,
 };

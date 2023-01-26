@@ -425,7 +425,9 @@ router.post(
 );
 
 router.get("/photosStructure", inscStructure.getPhotosStructure); // get structure pictures
-router.put("/photosStructure", inscStructure.updatePhotosStructure); // update structure pictures + docPmi
+router.put("/photosStructure", inscStructure.updatePhotosStructure); // update structure pictures + doc Pmi
+router.get("/docPmi", inscStructure.getDocPmi); // get doc Pmi from structure
+router.get("/justificatifs", inscAssmat.getJustificatifs); // get docs from assmat
 router.put("/justificatifs", inscAssmat.justificatifsAssmat); // update assmat doc
 
 router.put("/verifsAssmat", inscAssmat.verifsAssmat); // update assmat verifications

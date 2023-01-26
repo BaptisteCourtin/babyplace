@@ -28,7 +28,6 @@ function Structure3({
           updateFields({ photo2Src: result.data[0].photoStructure2 });
         }
         if (result.data[0].photoStructure3 !== null) {
-          console.log(result.data[0].photoStructure3);
           setImage3Src(result.data[0].photoStructure3);
           updateFields({ photo3Src: result.data[0].photoStructure3 });
         }

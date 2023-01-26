@@ -7,7 +7,7 @@ import UserEmailContext from "@components/context/UserEmailContext";
 
 function LoginForm() {
   const navigate = useNavigate();
-  const { userEmail, setUserEmail } = useContext(UserEmailContext);
+  const { setUserEmail } = useContext(UserEmailContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

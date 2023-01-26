@@ -119,6 +119,12 @@ const deleteDate = (structureId, date) => {
   );
 };
 
+const getDocPmi = (id) => {
+  return datasource.query("SELECT docPmi FROM structure WHERE structureId= ?", [
+    id,
+  ]);
+};
+
 module.exports = {
   getIsCreche,
   getStructureInfo,
@@ -137,4 +143,5 @@ module.exports = {
   updateHoraires,
   dureeAccueil,
   deleteDate,
+  getDocPmi,
 };

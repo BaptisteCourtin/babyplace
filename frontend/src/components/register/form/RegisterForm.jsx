@@ -14,7 +14,7 @@ function RegisterForm() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const { userEmail, setUserEmail } = useContext(UserEmailContext);
+  const { setUserEmail } = useContext(UserEmailContext);
   const [password, setPassword] = useState("");
   const [checked, setChecked] = useState(false);
   const [typePwd, setTypePwd] = useState(true);
