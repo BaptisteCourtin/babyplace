@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { toast } from "react-hot-toast";
+import UserEmailContext from "@components/context/UserEmailContext";
 
 function LoginForm() {
   const navigate = useNavigate();
+  const { userEmail, setUserEmail } = useContext(UserEmailContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,6 +32,8 @@ function LoginForm() {
         .then((res) => {
           if (email !== adminEmail && password !== adminPassword) {
             const { token } = res.data;
+            sessionStorage.setItem("structureEmail", email);
+            setUserEmail(email);
             navigate("/login-params", {
               state: {
                 token,

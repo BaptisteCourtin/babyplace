@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Proptypes, { string, number, node, object, oneOfType } from "prop-types";
 import Axios from "axios";
+import placeHolder from "@assets/placeHolder.png";
 
 function Structure3({
   inputRef1,
@@ -9,15 +10,9 @@ function Structure3({
   structureId,
   updateFields,
 }) {
-  const [image1Src, setImage1Src] = useState(
-    "https://via.placeholder.com/240x160.png?text=photo+1"
-  );
-  const [image2Src, setImage2Src] = useState(
-    "https://via.placeholder.com/240x160.png?text=photo+2"
-  );
-  const [image3Src, setImage3Src] = useState(
-    "https://via.placeholder.com/240x160.png?text=photo+3"
-  );
+  const [image1Src, setImage1Src] = useState(placeHolder);
+  const [image2Src, setImage2Src] = useState(placeHolder);
+  const [image3Src, setImage3Src] = useState(placeHolder);
   const getPicture = () => {
     Axios.get(
       `${import.meta.env.VITE_PATH}/photosStructure?id=${structureId}`,
@@ -33,6 +28,7 @@ function Structure3({
           updateFields({ photo2Src: result.data[0].photoStructure2 });
         }
         if (result.data[0].photoStructure3 !== null) {
+          console.log(result.data[0].photoStructure3);
           setImage3Src(result.data[0].photoStructure3);
           updateFields({ photo3Src: result.data[0].photoStructure3 });
         }
