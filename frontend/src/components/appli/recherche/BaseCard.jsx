@@ -11,8 +11,7 @@ function BaseCard({
   Allstructure,
   familleLiked,
   familleId,
-  setChangeLike,
-  changeLike,
+  getFamilleLiked,
   // filtres
   dataBasique,
   dataDateHeure,
@@ -126,14 +125,6 @@ function BaseCard({
                 dataBasique.isCreche === each.isCreche ||
                 dataBasique.isCreche === 2
             )
-
-            //   const [dataDateHeure, setDataDateHeure] = useState({
-            //   heureMin: "00:00",
-            //   heureMax: "23:59",
-            //   jour: "",
-            // });
-            // .filter((each) => dataDateHeure.heureMin === each.heureMin)
-
             // false = tout le monde = pas de filtre
             // true = filtrer pour avoir seulement ceux qui l'ont
             .filter(
@@ -200,8 +191,8 @@ function BaseCard({
                     userPosition={userPosition}
                     familleLiked={familleLiked}
                     familleId={familleId}
-                    setChangeLike={setChangeLike}
-                    changeLike={changeLike}
+                    getFamilleLiked={getFamilleLiked}
+                    dataDateHeure={dataDateHeure}
                   />
                 )
             )}
@@ -216,8 +207,7 @@ BaseCard.propTypes = {
   Allstructure: PropTypes.array.isRequired,
   familleLiked: PropTypes.array.isRequired,
   familleId: PropTypes.string.isRequired,
-  setChangeLike: PropTypes.func.isRequired,
-  changeLike: PropTypes.bool.isRequired,
+  getFamilleLiked: PropTypes.func.isRequired,
 
   dataBasique: PropTypes.object.isRequired,
   dataDateHeure: PropTypes.object.isRequired,

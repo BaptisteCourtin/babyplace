@@ -4,13 +4,7 @@ import axios from "axios";
 import { AiOutlineHeart, AiFillHeart, AiFillStar } from "react-icons/ai";
 import PropTypes from "prop-types";
 
-function CardCrecheMap({
-  data,
-  familleLiked,
-  familleId,
-  setChangeLike,
-  changeLike,
-}) {
+function CardCrecheMap({ data, familleLiked, familleId, getFamilleLiked }) {
   const {
     photoStructure1,
     structureId,
@@ -66,7 +60,7 @@ function CardCrecheMap({
         });
       setThisLiked(true);
     }
-    setChangeLike(!changeLike);
+    getFamilleLiked();
   };
 
   // ---
@@ -136,8 +130,7 @@ CardCrecheMap.propTypes = {
   data: PropTypes.object.isRequired,
   familleLiked: PropTypes.array.isRequired,
   familleId: PropTypes.string.isRequired,
-  setChangeLike: PropTypes.func.isRequired,
-  changeLike: PropTypes.bool.isRequired,
+  getFamilleLiked: PropTypes.func.isRequired,
 };
 
 export default CardCrecheMap;

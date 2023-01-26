@@ -59,9 +59,40 @@
         gap: 0.5rem;
         padding: 1rem;
         margin-bottom: 1rem;
+      }
+
+      .card-favoris {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+
+        height: 90px;
+        width: 90%;
+        margin: 0.5rem;
+
+        padding: 1rem;
+        border-left: 1px $second solid;
+
+        .avatar {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
 
         p {
-          font-weight: 400;
+          width: 100%;
+          height: max-content;
+          white-space: pre-wrap;
+          padding-right: 0;
+        }
+
+        button {
+          color: red;
+          border: 1px red solid;
+          border-radius: 10px;
+          padding: 0.5rem;
         }
       }
     }

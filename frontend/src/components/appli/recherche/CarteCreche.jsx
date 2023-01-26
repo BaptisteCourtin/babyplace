@@ -10,8 +10,8 @@ function CarteCreche({
   userPosition,
   familleLiked,
   familleId,
-  setChangeLike,
-  changeLike,
+  getFamilleLiked,
+  dataDateHeure,
 }) {
   const {
     isCreche,
@@ -42,12 +42,9 @@ function CarteCreche({
     likeOrNot();
   }, [familleLiked]);
 
-  const handleLikeCard = () => {
-    if (
-      familleLiked[thisLikedIndex] &&
-      familleLiked[thisLikedIndex].structureIdLiked === structureId
-    ) {
-      axios
+  const handleLikeCard = async () => {
+    if (thisLiked === true) {
+      await axios
         .delete(
           `${
             import.meta.env.VITE_PATH
@@ -58,8 +55,8 @@ function CarteCreche({
           console.error(err);
         });
       setThisLiked(false);
-    } else {
-      axios
+    } else if (thisLiked === false) {
+      await axios
         .post(`${import.meta.env.VITE_PATH}/famille/oneMoreLike`, {
           structureId,
           familleId,
@@ -69,21 +66,101 @@ function CarteCreche({
         });
       setThisLiked(true);
     }
-    setChangeLike(!changeLike);
+    getFamilleLiked();
   };
 
   // --- les horaires de chaques jour suivant l'id de la structure
-  const [dataHorairesId, setDataHorairesId] = useState([]);
-  const getHorairesId = () => {
+
+  // dataDateHeure
+  //   heureMin: "" OK
+  //   heureMax: "" OK
+  //   jour: "" OK recurrent
+  const [dataCalendarId, setDataCalendarId] = useState();
+
+  const getCalendrierMoins = () => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/horaires/${structureId}`)
+      .get(`${import.meta.env.VITE_PATH}/calendrier/whereMoins/${structureId}`)
       .then((res) => {
-        setDataHorairesId(res.data);
+        setDataCalendarId(res.data);
       })
       .catch((err) => {
         console.error(err);
       });
   };
+
+  const [dataHorairesId, setDataHorairesId] = useState([]);
+  const getHorairesId = () => {
+    axios
+      .get(`${import.meta.env.VITE_PATH}/horaires/${structureId}`)
+      .then((res) => {
+        let numPlaceJour;
+        const isNumber = () => {
+          // true => recurrent
+          // false => occasionnel
+          if (typeof dataDateHeure.jour === "number") {
+            return true;
+          }
+          return false;
+        };
+
+        const isWorking = () => {
+          // pour avoir la bonne place dans tableau pour horaires
+          numPlaceJour = dataDateHeure.jour.split("&")[1];
+          if (numPlaceJour == 0) {
+            numPlaceJour = 6;
+          } else numPlaceJour -= 1;
+
+          let isWork = true;
+          // suivant le jour (en jour) suivant table horaires
+          if (res.data[numPlaceJour].ouvert === 0) {
+            return false;
+          }
+          // suivant le jour (en date) suivant table calendrier
+          for (let i = 0; i < dataCalendarId.length; i++) {
+            if (dataCalendarId[i].date === dataDateHeure.jour.split("&")[0]) {
+              return false;
+            }
+          }
+          return isWork;
+        };
+        if (
+          dataDateHeure.jour === "" ||
+          // dataDateHeure.jour N'EST PAS UN NOMBRE => occas
+          (isNumber() === false &&
+            isWorking() === true &&
+            (dataDateHeure.heureMin === "" ||
+              res.data[numPlaceJour].heureMin <= dataDateHeure.heureMin) &&
+            (dataDateHeure.heureMax === "" ||
+              res.data[numPlaceJour].heureMax >= dataDateHeure.heureMax)) ||
+          // dataDateHeure.jour EST UN NOMBRE => récurrent
+          (isNumber() === true &&
+            res.data[dataDateHeure.jour].ouvert === 1 &&
+            (dataDateHeure.heureMin === "" ||
+              res.data[dataDateHeure.jour].heureMin <=
+                dataDateHeure.heureMin) &&
+            (dataDateHeure.heureMax === "" ||
+              res.data[dataDateHeure.jour].heureMax >= dataDateHeure.heureMax))
+
+          // OK EN RECURRENT
+          // (
+          //   res.data[dataDateHeure.jour].ouvert === 1 &&
+          //     (dataDateHeure.heureMin === "" ||
+          //       res.data[dataDateHeure.jour].heureMin <=
+          //         dataDateHeure.heureMin) &&
+          //     (dataDateHeure.heureMax === "" ||
+          //       res.data[dataDateHeure.jour].heureMax >= dataDateHeure.heureMax)
+          // )
+        ) {
+          setDataHorairesId(res.data);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  useEffect(() => {
+    dataCalendarId !== undefined && getHorairesId();
+  }, [dataCalendarId]);
 
   const [center, setCenter] = useState([0, 0]);
 
@@ -153,7 +230,7 @@ function CarteCreche({
   };
 
   useEffect(() => {
-    getHorairesId();
+    getCalendrierMoins();
     handleDistance();
     staring();
   }, []);
@@ -203,8 +280,7 @@ CarteCreche.propTypes = {
   userPosition: PropTypes.array.isRequired,
   familleLiked: PropTypes.array.isRequired,
   familleId: PropTypes.string.isRequired,
-  setChangeLike: PropTypes.func.isRequired,
-  changeLike: PropTypes.bool.isRequired,
+  getFamilleLiked: PropTypes.func.isRequired,
 };
 
 export default CarteCreche;

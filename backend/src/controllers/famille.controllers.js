@@ -25,6 +25,11 @@ const getLikes = async (req, res) => {
   return res.json(result);
 };
 
+const getLikesAndStructure = async (req, res) => {
+  const result = await familleModels.getLikesAndStructure(req);
+  return res.json(result);
+};
+
 const getFamilleInfo = async (req, res) => {
   const result = await familleModels.getFamilleInfo(req);
   return res.json(result);
@@ -74,6 +79,7 @@ module.exports = {
   getFamille,
   getPourcent,
   getLikes,
+  getLikesAndStructure,
   getDonneesFormInscription,
   getFamilleDataMess,
   postNewConfiance,

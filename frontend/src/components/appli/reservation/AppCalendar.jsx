@@ -33,7 +33,7 @@ function AppCalendar({
   const [clickedDay, setClickedDay] = useState(new Date());
   const afficheDate = () => {
     let jour = clickedDay.toString();
-    jour = jour.split(" ");
+    jour = jour.split(" "); // pour les heure selon le jour
     const jourLong = `${clickedDay.getFullYear()}-${
       clickedDay.getMonth() + 1
     }-${clickedDay.getDate()}`;
