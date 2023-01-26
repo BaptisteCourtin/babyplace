@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { toast } from "react-hot-toast";
+import useLocalStorage from "@utils/useLocalStorage";
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [typePwd, setTypePwd] = useState(true);
+  const [localEmail, setLocalEmail] = useLocalStorage("email", "mail");
 
   const handlePwdClick = (e) => {
     e.preventDefault();
@@ -21,6 +23,7 @@ function LoginForm() {
 
   const handleClick = (e) => {
     e.preventDefault();
+    setLocalEmail(email)
     if (email && password) {
       axios
         .post(`${import.meta.env.VITE_PATH}/auth`, {

@@ -40,6 +40,12 @@ const getNotVerified = async (req, res) => {
   return res.json(result)
 }
 
+const getFavorites = async (req, res) => {
+  const { id } = req.params
+  const result = await structureModels.getFavorites(id)
+  return res.json(result)
+}
+
 const updateVerified = async (req, res) => {
   const { id } = req.params
   const result = await structureModels.updateVerified(id);
@@ -148,6 +154,7 @@ module.exports = {
   getStructureDetails,
   getStructureType,
   getNotVerified,
+  getFavorites,
   updateVerified,
   updateImages,
   deleteRefused,

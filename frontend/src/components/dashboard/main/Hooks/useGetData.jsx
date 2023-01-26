@@ -6,6 +6,7 @@ export const useGetAllData = (token) => {
   const [donnees, setDonnees] = useState({});
   const [details, setDetails] = useState([]);
   const [notif, setNotif] = useState([]);
+  const [fav, setFav] = useState([]);
 
   const getData = async () => {
     try {
@@ -18,8 +19,7 @@ export const useGetAllData = (token) => {
       if (res.data[0].isCreche === 0) {
         axios
           .get(
-            `${import.meta.env.VITE_PATH}/structure/details?type=assMat&id=${
-              res.data[0].structureId
+            `${import.meta.env.VITE_PATH}/structure/details?type=assMat&id=${res.data[0].structureId
             }`,
             {
               id: res.data[0].structureId,
@@ -32,8 +32,7 @@ export const useGetAllData = (token) => {
       } else {
         axios
           .get(
-            `${import.meta.env.VITE_PATH}/structure/details?type=creche&id=${
-              res.data[0].structureId
+            `${import.meta.env.VITE_PATH}/structure/details?type=creche&id=${res.data[0].structureId
             }`,
             {
               id: res.data[0].structureId,
@@ -65,5 +64,19 @@ export const useGetAllData = (token) => {
     }
   };
 
-  return { getData, data, userType, donnees, details, notif, getNotifications };
+  const getFavorites = async () => {
+    try {
+      const res = await axios.get(
+        `${import.meta.env.VITE_PATH}/favorites/${data.structureId}`,
+        {
+          id: data.structureId,
+        }
+      );
+      setFav(res.data);
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
+
+  return { getData, data, userType, donnees, details, notif, getNotifications, fav, getFavorites };
 };

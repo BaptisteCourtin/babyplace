@@ -11,7 +11,7 @@ function DashTopbar({
   data,
 }) {
   return (
-    <nav>
+    <nav className="dashTopbar">
       <button className="dashboardBurger" onClick={() => setOpenNav(!openNav)}>
         <RxHamburgerMenu />
       </button>

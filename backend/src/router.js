@@ -277,7 +277,9 @@ router.get("/structures", structure.getStructures);
 router.get("/structure/type/:id", structure.getStructureType);
 router.get("/structure/details", structure.getStructureDetails);
 router.get("/reservation/:id", reservation.getReser);
+router.get("/reservation/approved/:id", reservation.getApprovedReser);
 router.get("/admin", structure.getNotVerified);
+router.get("/favorites/:id", structure.getFavorites)
 router.get("/horaires/:id", horaires.getHorairesById);
 router.get("/calendrier/:id", calendrier.getCalendrier);
 router.get("/notifications/:id", notification.getNotifications);
@@ -287,6 +289,7 @@ router.get("/admin/famille", famille.getFamille);
 
 router.put("/admin/verified/:id", structure.updateVerified);
 router.put("/reservation/status", reservation.updateStatus);
+router.put("/reservation/dates", reservation.updateDates);
 router.put("/horaires/day/:id", horaires.updateDay);
 router.put("/dashboard/hours/:id", dashboard.updateHours);
 router.put("/dashboard/indemn/:id", dashboard.updateIndemn);

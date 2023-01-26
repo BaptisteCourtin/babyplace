@@ -7,6 +7,7 @@ function ListDashReservations({
   statusToggle,
   tarifHeure,
   updateStatus,
+  getReser
 }) {
   return (
     <ul className="reserList">
@@ -16,7 +17,7 @@ function ListDashReservations({
           if (statusToggle === 1) return r.status.includes("approved");
           if (statusToggle === 2) return r.status.includes("waiting");
           if (statusToggle === 3) return r.status.includes("refused");
-          if (statusToggle === 4) return r.status.includes("canceled");
+          if (statusToggle === 4) return r.status.includes("payed");
         })
         .map((r) => (
           <li
@@ -31,7 +32,7 @@ function ListDashReservations({
                 if (r.status === "refused") {
                   return "1px solid #EF3672";
                 }
-                if (r.status === "canceled") {
+                if (r.status === "payed") {
                   return "1px solid #4b5d68";
                 }
               })(),
@@ -56,14 +57,14 @@ function ListDashReservations({
                   if (r.status === "refused") {
                     return "#EF3672";
                   }
-                  if (r.status === "canceled") {
+                  if (r.status === "payed") {
                     return "#4b5d68";
                   }
                 })(),
               }}
             />
             <InfoDashReservations r={r} tarifHeure={tarifHeure} />
-            <StatusDashReservations r={r} updateStatus={updateStatus} />
+            <StatusDashReservations r={r} updateStatus={updateStatus} getReser={getReser} />
           </li>
         ))}
     </ul>

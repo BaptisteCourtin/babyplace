@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 export const useGetHours = (structureId, userType) => {
@@ -78,13 +78,6 @@ export const useGetHours = (structureId, userType) => {
     }
   }
 
-  useEffect(() => {
-    getData();
-    getHoraires();
-    console.log(horaires)
-    setValues();
-  }, []);
-
   return {
     toggleDay,
     setToggleDay,
@@ -112,5 +105,6 @@ export const useGetHours = (structureId, userType) => {
     setSwitch3,
     getData,
     getHoraires,
+    setValues
   };
 };

@@ -1,25 +1,25 @@
 import React from "react";
 
 function InfoDashReservations({ r, tarifHeure }) {
+
+  function calcAge(dateString) {
+    let birthday = +new Date(dateString);
+    return ~~((Date.now() - birthday) / (31557600000 / 12));
+  }
+
   return (
     <>
       <div className="reserInfo1">
         <p>
-          {r.prenomEnfant} <br /> {r.nomEnfant}
+          {r.prenom} <br /> {r.nom}
         </p>
-        <p>{r.ageEnfant} mois</p>
+        <p>{calcAge(r.dateNaissance)} mois</p>
       </div>
       <div className="reserInfo2">
         <p>
-          {r.prenomParent} <br /> {r.nomParent}
-        </p>
-        <p>Profil {r.pourcentProfil} %</p>
-      </div>
-      <div className="reserInfo3">
-        <p>
-          <span>Dates</span>
+          <span>Jour</span>
           <br />
-          {r.dateArrivee} / {r.dateDepart}
+          {r.jour}
         </p>
         <p>
           <span>Horaires</span>
@@ -27,16 +27,12 @@ function InfoDashReservations({ r, tarifHeure }) {
           {r.heureArrivee} / {r.heureDepart}
         </p>
       </div>
-      <div className="reserInfo4">
+      <div className="reserInfo3">
         <p>
-          {r.heureDepart.replace(":00", "") - r.heureArrivee.replace(":00", "")}
-          H
+          {(~~r.heureTotal.split(':')[0]) + 1}H
         </p>
         <p>
-          {(r.heureDepart.replace(":00", "") -
-            r.heureArrivee.replace(":00", "")) *
-            tarifHeure}
-          €
+          {(~~r.heureTotal.split(':')[0] + 1) * tarifHeure}€
         </p>
       </div>
     </>

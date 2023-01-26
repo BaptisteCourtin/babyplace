@@ -52,6 +52,11 @@ const getNotVerified = async () => {
   return result;
 };
 
+const getFavorites = async (id) => {
+  const [result] = await datasource.query("SELECT * FROM favoris AS v LEFT JOIN famille AS f ON v.familleId=f.familleId LEFT JOIN parent AS p ON f.familleId=p.familleId WHERE structureIdLiked = ?", [id])
+  return result
+}
+
 const updateVerified = async (id) => {
   const [result] = await datasource.query(
     "UPDATE structure SET isVerify = 1, isSignaled = 0 WHERE structureId = ?",
@@ -135,6 +140,7 @@ module.exports = {
   getStructureDetails,
   getStructureType,
   getNotVerified,
+  getFavorites,
   updateVerified,
   deleteRefused,
   getStructureDataMess,

@@ -2,6 +2,7 @@
   grid-area: navbar;
   background: $gradient;
   padding: 15px;
+  padding-right: 0;
   color: $white;
 
   & .dashNavLogo {
@@ -36,10 +37,11 @@
     gap: 25px;
 
     & li {
-      padding: 5px 10px;
+      width: 100%;
+      padding: 10px;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       gap: 5px;
       border-radius: 50px;
 
@@ -55,8 +57,11 @@
     }
 
     & .selected {
-      background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
+      position: relative;
+      background: $white;
       color: $third;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
 
       & button {
         &:hover {

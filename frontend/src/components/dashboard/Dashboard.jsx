@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-
 import DashNavbar from "./nav/DashNavbar";
 import DashMain from "./main/DashMain";
 import DashFooter from "./main/DashFooter";
@@ -9,6 +8,8 @@ import DashTopbar from "./main/DashTopbar";
 import { usePageToggle } from "./main/Hooks/usePageToggle";
 import { useDeleteData } from "./main/Hooks/useDeleteData";
 import { useGetAllData } from "./main/Hooks/useGetData";
+import { useGetHours } from "./hours/Hooks/useGetHours";
+import { useGetReservations } from "./reservations/Hooks/useGetReservations";
 
 function Dashboard() {
   const { state } = useLocation();
@@ -17,8 +18,10 @@ function Dashboard() {
   const [openNav, setOpenNav] = useState(true);
   const [toggleNotif, setToggleNotif] = useState(false);
 
-  const { getData, data, userType, notif, getNotifications } =
+  const { getData, data, userType, notif, getNotifications, fav, getFavorites } =
     useGetAllData(token);
+  const { horaires, getHoraires } = useGetHours(data.structureId, userType);
+  const { approvedReser, getApprovedReser } = useGetReservations(data.structureId)
   const { pageShown, toggle, setToggle } = usePageToggle(
     data,
     userType,
@@ -28,9 +31,12 @@ function Dashboard() {
 
   useEffect(() => {
     getData();
-    deleteDates();
+    getApprovedReser();
+    getHoraires();
+    getFavorites();
     getNotifications();
-  }, []);
+    deleteDates();
+  }, [toggle]);
 
   return (
     <div className={openNav ? "dashboard" : "dashboardClosed"}>
@@ -43,12 +49,15 @@ function Dashboard() {
         setToggle={setToggle}
         data={data}
       />
-      <DashMain
-        pageShown={pageShown}
-        data={data}
-        toggle={toggle}
-        userType={userType}
-      />
+      {pageShown()}
+      {toggle === 0 && (
+        <DashMain
+          data={data}
+          fav={fav}
+          horaires={horaires}
+          approvedReser={approvedReser}
+        />
+      )}
       <DashFooter />
       <DashNotif
         notif={notif}
