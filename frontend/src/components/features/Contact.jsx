@@ -39,8 +39,7 @@ function Contact() {
       });
   };
 
-  const openCloseModal = (e) => {
-    e.preventDefault();
+  const openCloseModal = () => {
     setIsOpen(!isOpen);
   };
 

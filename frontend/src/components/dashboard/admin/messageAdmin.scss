@@ -65,11 +65,11 @@
           justify-content: center;
           align-items: center;
           gap: 10px;
-          width: 15%;
+          width: 200px;
 
           & #btnRepondre {
             padding: 5px 0;
-            width: 200px;
+            width: 150px;
             background-color: $fifth;
             color: $white;
             font-weight: 500;
@@ -86,7 +86,7 @@
 
           #btnDelete {
             padding: 5px 0;
-            width: 200px;
+            width: 150px;
             background-color: $seventh;
             color: $white;
             font-weight: 500;

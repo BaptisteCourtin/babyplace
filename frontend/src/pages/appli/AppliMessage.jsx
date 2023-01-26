@@ -6,6 +6,7 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 
 function AppliMessage() {
+
   const [strucData, setStrucData] = useState([]);
 
   const getStructureForMess = () => {
