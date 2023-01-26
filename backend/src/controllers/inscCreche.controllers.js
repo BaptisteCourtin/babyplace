@@ -1,4 +1,5 @@
 const inscStructureModels = require("../models/inscStructure.models.js");
+const inscCrecheModels = require("../models/inscCreche.models.js");
 
 const getCrecheInfo = (req, res) => {
   const table = "creche";
@@ -45,7 +46,7 @@ const inscriptionCreche1 = (req, res) => {
       } else {
         inscStructureModels.getStructureId(email).then(([[id]]) => {
           const structureId = id.structureId;
-          inscStructureModels
+          inscCrecheModels
             .createCreche(typeCreche, nomStructure, structureId)
             .then(() => {
               res.sendStatus(204);
@@ -72,7 +73,7 @@ const updateCreche1 = (req, res) => {
     telephone,
     email,
   } = req.body;
-  inscStructureModels
+  inscCrecheModels
     .updateCreche1(
       isCreche,
       adresseStructure,
@@ -113,7 +114,7 @@ const optionsAccueilCreche = (req, res) => {
     photoConnecte,
     email,
   } = req.body;
-  inscStructureModels
+  inscCrecheModels
     .optionsAccueilCreche(
       PCSC1,
       nesting,
@@ -148,7 +149,7 @@ const optionsAccueilCreche = (req, res) => {
 const agrementsCreche = (req, res) => {
   const { nbEmployes, maxPlaces, maxHandi, max18Mois, maxNuit, email } =
     req.body;
-  inscStructureModels
+  inscCrecheModels
     .agrementsCreche(nbEmployes, maxPlaces, maxHandi, max18Mois, maxNuit, email)
     .then(([structure]) => {
       if (structure.affectedRows === 0) {
@@ -172,7 +173,7 @@ const tarifsCreche = (req, res) => {
     tarifAtelier,
     email,
   } = req.body;
-  inscStructureModels
+  inscCrecheModels
     .tarifsCreche(
       financementPaje,
       tarifHeure,
@@ -196,11 +197,8 @@ const tarifsCreche = (req, res) => {
 
 const verifsCreche = (req, res) => {
   const { numAgrement, dateAgrement, siret, email } = req.body;
-  datasource
-    .query(
-      "UPDATE structure INNER JOIN creche ON creche.structureId=structure.structureId SET numAgrement= ?, dateAgrement= ?, siret= ?  WHERE email= ?",
-      [numAgrement, dateAgrement, siret, email]
-    )
+  inscCrecheModels
+    .verifsCreche(numAgrement, dateAgrement, siret, email)
     .then(([structure]) => {
       if (structure.affectedRows === 0) {
         res.status(404).send("Not Found");

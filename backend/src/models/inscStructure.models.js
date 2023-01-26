@@ -38,57 +38,6 @@ const inscriptionStructure1 = (
   );
 };
 
-const createCreche = (typeCreche, nomStructure, structureId) => {
-  return datasource.query(
-    "INSERT INTO creche(type, nom, structureId) VALUES(?,?,?)",
-    [typeCreche, nomStructure, structureId]
-  );
-};
-
-const updateCreche1 = (
-  isCreche,
-  adresseStructure,
-  telephone,
-  typeCreche,
-  nomStructure,
-  email
-) => {
-  return datasource.query(
-    "UPDATE structure INNER JOIN creche ON creche.structureId=structure.structureId SET isCreche = ?, adresse = ?, telephone= ?, type=?, nom=? WHERE email= ?",
-    [isCreche, adresseStructure, telephone, typeCreche, nomStructure, email]
-  );
-};
-
-const createAssmat = (nomNaissance, nomUsage, prenom, structureId) => {
-  return datasource.query(
-    "INSERT INTO assMat(nomNaissance, nomUsage, prenom, structureId) VALUES(?,?,?,?)",
-    [nomNaissance, nomUsage, prenom, structureId]
-  );
-};
-
-const updateAssmat1 = (
-  isCreche,
-  adresseStructure,
-  telephone,
-  nomNaissance,
-  nomUsage,
-  prenom,
-  email
-) => {
-  return datasource.query(
-    "UPDATE structure INNER JOIN assMat ON assMat.structureId=structure.structureId SET isCreche = ?, adresse = ?, telephone= ?, nomNaissance=?, nomUsage=?, prenom=? WHERE email= ?",
-    [
-      isCreche,
-      adresseStructure,
-      telephone,
-      nomNaissance,
-      nomUsage,
-      prenom,
-      email,
-    ]
-  );
-};
-
 const getPhotoProfil = (id) => {
   return datasource.query(
     "SELECT photoProfil FROM structure WHERE structureId= ?",
@@ -117,13 +66,6 @@ const updatePhotosStructure = (column, photoStructure, email) => {
   ]);
 };
 
-const updateJustificatif = (column, doc, email) => {
-  return datasource.query(
-    `UPDATE structure INNER JOIN assMat ON assMat.structureId = structure.structureId SET ${column}= ?  WHERE email= ?`,
-    [doc, email]
-  );
-};
-
 const updateDescription = (description, email) => {
   return datasource.query(
     "UPDATE structure SET description = ? WHERE email= ?",
@@ -140,102 +82,6 @@ const calendrierExist = (id) => {
 
 const horairesExist = (id) => {
   return datasource.query("SELECT * FROM horaires WHERE structureId= ?", [id]);
-};
-
-const optionsAccueilCreche = (
-  PCSC1,
-  nesting,
-  montessori,
-  handi,
-  jardin,
-  sorties,
-  promenades,
-  eveil,
-  musique,
-  art,
-  bilingue,
-  bibli,
-  transport,
-  albumPhoto,
-  photoConnecte,
-  email
-) => {
-  return datasource.query(
-    "UPDATE structure INNER JOIN creche ON creche.structureId = structure.structureId SET PCSC1=?, nesting=?, montessori=?, handi=?, jardin=?, sorties=?, promenades=?, eveil=?, musique=?, art=?, bilingue=?, bibli=?, transport=?, albumPhoto=?, photoConnecte=? WHERE email= ?",
-    [
-      PCSC1,
-      nesting,
-      montessori,
-      handi,
-      jardin,
-      sorties,
-      promenades,
-      eveil,
-      musique,
-      art,
-      bilingue,
-      bibli,
-      transport,
-      albumPhoto,
-      photoConnecte,
-      email,
-    ]
-  );
-};
-
-const optionsAccueilAssmat = (
-  PCSC1,
-  nesting,
-  montessori,
-  handi,
-  jardin,
-  sorties,
-  promenades,
-  eveil,
-  musique,
-  art,
-  bilingue,
-  bibli,
-  transport,
-  enfants,
-  experience,
-  animaux,
-  nonFumeur,
-  zeroPollution,
-  repas,
-  hygiene,
-  albumPhoto,
-  photoConnecte,
-  email
-) => {
-  return datasource.query(
-    "UPDATE structure INNER JOIN assMat ON assMat.structureId = structure.structureId SET PCSC1=?, nesting=?, montessori=?, handi=?, jardin=?, sorties=?, promenades=?, eveil=?, musique=?, art=?, bilingue=?, bibli=?, transport=?, enfants=?, experience=?, animaux=?, nonFumeur=?, zeroPollution=?, repas=?, hygiene=?, albumPhoto=?, photoConnecte=? WHERE email= ?",
-    [
-      PCSC1,
-      nesting,
-      montessori,
-      handi,
-      jardin,
-      sorties,
-      promenades,
-      eveil,
-      musique,
-      art,
-      bilingue,
-      bibli,
-      transport,
-      enfants,
-      experience,
-      animaux,
-      nonFumeur,
-      zeroPollution,
-      repas,
-      hygiene,
-      albumPhoto,
-      photoConnecte,
-      email,
-    ]
-  );
 };
 
 const resaInst = (resaInst, email) => {
@@ -273,135 +119,22 @@ const deleteDate = (structureId, date) => {
   );
 };
 
-const agrementsCreche = (
-  nbEmployes,
-  maxPlaces,
-  maxHandi,
-  max18Mois,
-  maxNuit,
-  email
-) => {
-  return datasource.query(
-    "UPDATE structure INNER JOIN creche ON creche.structureId=structure.structureId SET nbEmployes= ?, maxPlaces= ?, maxHandi= ?, max18Mois= ?, maxNuit= ? WHERE email= ?",
-    [nbEmployes, maxPlaces, maxHandi, max18Mois, maxNuit, email]
-  );
-};
-
-const agrementsAssmat = (maxPlaces, maxHandi, max18Mois, maxNuit, email) => {
-  return datasource.query(
-    "UPDATE structure INNER JOIN assMat ON assMat.structureId=structure.structureId SET maxPlaces= ?, maxHandi= ?, max18Mois= ?, maxNuit= ? WHERE email= ?",
-    [maxPlaces, maxHandi, max18Mois, maxNuit, email]
-  );
-};
-
-const tarifsCreche = (
-  financementPaje,
-  tarifHeure,
-  tarifHoraireSpec,
-  indemnRepas,
-  tarifAtelier,
-  email
-) => {
-  return datasource.query(
-    "UPDATE structure INNER JOIN creche ON creche.structureId=structure.structureId SET financementPaje = ?, tarifHeure= ?, tarifHoraireSpec= ?, indemnRepas= ?, tarifAtelier= ?  WHERE email= ?",
-    [
-      financementPaje,
-      tarifHeure,
-      tarifHoraireSpec,
-      indemnRepas,
-      tarifAtelier,
-      email,
-    ]
-  );
-};
-
-const tarifsAssmat = (
-  tarifHeure,
-  tarifHoraireSpec,
-  indemnRepas,
-  indemnKm,
-  indemnEntretien,
-  tarifHeureSup,
-  email
-) => {
-  return datasource.query(
-    "UPDATE structure INNER JOIN assMat ON assMat.structureId=structure.structureId SET tarifHeure= ?, tarifHoraireSpec= ?, indemnRepas= ?, indemnKm= ?, indemnEntretien= ?, tarifHeureSup= ? WHERE email= ?",
-    [
-      tarifHeure,
-      tarifHoraireSpec,
-      indemnRepas,
-      indemnKm,
-      indemnEntretien,
-      tarifHeureSup,
-      email,
-    ]
-  );
-};
-const verifsCreche = (numAgrement, dateAgrement, siret, email) => {
-  return datasource.query(
-    "UPDATE structure INNER JOIN creche ON creche.structureId=structure.structureId SET numAgrement= ?, dateAgrement= ?, siret= ?  WHERE email= ?",
-    [numAgrement, dateAgrement, siret, email]
-  );
-};
-
-const verifsAssmat = (
-  numSecu,
-  numAgrement,
-  dateAgrement,
-  assHabitNom,
-  assHabitNumero,
-  assHabitAdresse,
-  assAutoNom,
-  assAutoNumero,
-  assAutoAdresse,
-  email
-) => {
-  return datasource.query(
-    "UPDATE structure INNER JOIN assMat ON assMat.structureId=structure.structureId SET numSecu= ?, numAgrement= ?, dateAgrement= ?, assHabitNom= ?, assHabitNumero= ?, assHabitAdresse= ?, assAutoNom= ?, assAutoNumero= ?, assAutoAdresse= ? WHERE email= ?",
-    [
-      numSecu,
-      numAgrement,
-      dateAgrement,
-      assHabitNom,
-      assHabitNumero,
-      assHabitAdresse,
-      assAutoNom,
-      assAutoNumero,
-      assAutoAdresse,
-      email,
-    ]
-  );
-};
-
 module.exports = {
   getIsCreche,
   getStructureInfo,
   getStructureId,
   structureExist,
   inscriptionStructure1,
-  createCreche,
-  updateCreche1,
-  createAssmat,
-  updateAssmat1,
   getPhotoProfil,
   updatePhotoProfil,
   getPhotosStructure,
   updatePhotosStructure,
-  updateJustificatif,
   updateDescription,
   calendrierExist,
   horairesExist,
-  optionsAccueilCreche,
-  optionsAccueilAssmat,
   resaInst,
   createHoraires,
   updateHoraires,
   dureeAccueil,
   deleteDate,
-  agrementsCreche,
-  agrementsAssmat,
-  tarifsCreche,
-  tarifsAssmat,
-  verifsCreche,
-  verifsAssmat,
 };

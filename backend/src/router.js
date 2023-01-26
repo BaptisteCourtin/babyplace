@@ -426,8 +426,12 @@ router.post(
 
 router.get("/photosStructure", inscStructure.getPhotosStructure); // get structure pictures
 router.put("/photosStructure", inscStructure.updatePhotosStructure); // update structure pictures + docPmi
+router.put("/justificatifs", inscAssmat.justificatifsAssmat); // update assmat doc
 
-//put structure pictures in cloud
+router.put("/verifsAssmat", inscAssmat.verifsAssmat); // update assmat verifications
+router.put("/verifsCreche", inscCreche.verifsCreche); // update creche verifications
+
+// put structure picture in cloud
 router.post(
   "/photosStructure",
   multerMid.single("file"),
@@ -442,7 +446,7 @@ router.post(
   }
 );
 
-//put justificatifs in cloud
+// put assmat doc in cloud
 router.post(
   "/justificatifs",
   multerMid.single("file"),
@@ -456,30 +460,6 @@ router.post(
     }
   }
 );
-
-router.put("/justificatifs", inscAssmat.justificatifsAssmat); // update assmat doc
-
-router.put("/verifsCreche", (req, res) => {
-  const { numAgrement, dateAgrement, siret, email } = req.body;
-  datasource
-    .query(
-      "UPDATE structure INNER JOIN creche ON creche.structureId=structure.structureId SET numAgrement= ?, dateAgrement= ?, siret= ?  WHERE email= ?",
-      [numAgrement, dateAgrement, siret, email]
-    )
-    .then(([structure]) => {
-      if (structure.affectedRows === 0) {
-        res.status(404).send("Not Found");
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Modification impossible");
-    });
-});
-
-router.put("/verifsAssmat", inscAssmat.verifsAssmat);
 
 //Routes inscription structure - end
 
