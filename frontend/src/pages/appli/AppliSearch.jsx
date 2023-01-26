@@ -97,7 +97,18 @@ function AppliSearch() {
       );
     }
     if (compo === 3) {
-      return <Base setCompo={setCompo} />;
+      return (
+        <Base
+          setCompo={setCompo}
+          setDataBasique={setDataBasique}
+          setDataDateHeure={setDataDateHeure}
+          dataDateHeure={dataDateHeure}
+          setDataServices={setDataServices}
+          dataServices={dataServices}
+          setDataAggrements={setDataAggrements}
+          dataAggrements={dataAggrements}
+        />
+      );
     }
     if (compo === 4) {
       return (
