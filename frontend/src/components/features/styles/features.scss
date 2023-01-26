@@ -54,32 +54,63 @@
         display: flex;
         width: 85%;
         margin-top: 20px;
+        justify-content: center;
 
         ul {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 50px;
-          padding: 50px;
+          padding: 2vh 0;
 
           & li {
             display: grid;
             grid-template-columns: 1fr 1fr;
             align-items: center;
             border-radius: 50px;
-            padding: 20px 0px 20px 0;
-            margin-left: 40px;
-            margin-right: 40px;
+            padding: 20px 0;
+            margin: 0 auto;
+            position: relative;
+            width: clamp(180px, 25vw, 350px);
+            height: clamp(120px, 15vw, 200px);
 
             & img {
-              width: 75%;
-              margin-left: -40px;
+              width: clamp(80px, 10vw, 150px);
+              position: absolute;
+              left: -10%;
             }
+            & .rightPart {
+              margin-left: clamp(60px, 10vw, 150px);
+              gap: 1vw;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
 
-            & p {
-              font-size: 1.35em;
-              font-weight: 600;
-              margin-top: -5px;
-              margin-left: -25px;
+              & p {
+                font-size: clamp(16px, 2vw, 30px);
+                font-weight: 600;
+                margin-top: 0;
+              }
+
+              .links {
+                display: flex;
+                flex-direction: row;
+                gap: 15px;
+
+                & a {
+                  height: clamp(30px, 3vw, 45px);
+                  width: clamp(30px, 3vw, 45px);
+                  font-size: clamp(20px, 2vw, 30px);
+                  padding: clamp(5px, 0.5vw, 7.5px);
+                  border-radius: 50%;
+                  box-shadow: 2px 2px 4px grey;
+                  transition: 0.3s ease-in-out;
+                }
+
+                & a:hover {
+                  scale: 1.05;
+                  box-shadow: 3px 3px 4px grey;
+                }
+              }
             }
 
             &:nth-of-type(1) {
