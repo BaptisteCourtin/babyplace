@@ -33,7 +33,6 @@ function AppliSearch() {
 
   // --- likes des familles ---
   const [familleLiked, setFamilleLiked] = useState();
-  const [changeLike, setChangeLike] = useState(true);
 
   const getFamilleLiked = () => {
     axios
@@ -47,17 +46,16 @@ function AppliSearch() {
   };
   useEffect(() => {
     getFamilleLiked();
-  }, [familleId, changeLike]);
+  }, [familleId]);
 
   // --- les filtres ---
   const [dataBasique, setDataBasique] = useState({
     isCreche: 2,
-    dispo: false,
   });
 
   const [dataDateHeure, setDataDateHeure] = useState({
-    heureMin: "00:00",
-    heureMax: "23:59",
+    heureMin: "",
+    heureMax: "",
     jour: "",
   });
 
@@ -94,8 +92,7 @@ function AppliSearch() {
           dataAggrements={dataAggrements}
           familleLiked={familleLiked}
           familleId={familleId}
-          setChangeLike={setChangeLike}
-          changeLike={changeLike}
+          getFamilleLiked={getFamilleLiked}
         />
       );
     }
@@ -148,17 +145,12 @@ function AppliSearch() {
         dataAggrements={dataAggrements}
         familleLiked={familleLiked}
         familleId={familleId}
-        setChangeLike={setChangeLike}
-        changeLike={changeLike}
+        getFamilleLiked={getFamilleLiked}
       />
     );
   };
 
-  return (
-    familleLiked !== undefined && (
-      <div className="applisearch">{choixComposant()}</div>
-    )
-  );
+  return familleLiked && <div className="applisearch">{choixComposant()}</div>;
 }
 
 export default AppliSearch;

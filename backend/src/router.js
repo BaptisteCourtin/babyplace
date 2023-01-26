@@ -134,6 +134,7 @@ router.get("/famille/info/:id", famille.getFamilleInfo); // info famille (noms +
 router.get("/famille/formInscription/:id", famille.getDonneesFormInscription); //donnees du formulaire inscription
 router.get("/famille/pourcent/:id", famille.getPourcent); // pourcent des formulaire
 router.get("/famille/likes/:id", famille.getLikes); // get likes
+router.get("/famille/likesAndStructure/:id", famille.getLikesAndStructure); // get likes et info structure
 router.get("/famille/formParent/:id", parent.getDonneesFormParent); //donnees du formulaire parent
 router.get("/famille/formEnfant/:id", enfant.getDonneesFormEnfant); //donnees du formulaire enfant
 router.get("/famille/nomsEnfants/:id", enfant.getNomsEtIdEnfants); // noms et id des enfants

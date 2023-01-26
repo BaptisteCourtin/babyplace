@@ -42,6 +42,14 @@ const getLikes = async (req) => {
   return result;
 };
 
+const getLikesAndStructure = async (req) => {
+  const [result] = await datasource.query(
+    "SELECT c.nom, a.nomUsage, a.nomNaissance, a.prenom, s.photoProfil, s.structureId FROM favoris AS f LEFT JOIN creche AS c ON c.structureId = f.structureIdLiked LEFT JOIN assMat AS a ON a.structureId = f.structureIdLiked LEFT JOIN structure AS s ON s.structureId = f.structureIdLiked WHERE familleId = ?",
+    [req.params.id]
+  );
+  return result;
+};
+
 const getFamilleInfo = async (req) => {
   const [result] = await datasource.query(
     "SELECT nom, prenom FROM parent WHERE familleId = ? ; SELECT photoProfilFamille FROM famille WHERE familleId = ? ",
@@ -113,4 +121,5 @@ module.exports = {
   updatePourcentFormInscr,
   deleteLike,
   postNewLike,
+  getLikesAndStructure,
 };

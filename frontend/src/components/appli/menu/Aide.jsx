@@ -1,5 +1,5 @@
 import React from "react";
-import unicorn from "@assets/app parents/unicorn.jpg";
+import unicorn from "@assets/app parents/unicorn.png";
 import PropTypes from "prop-types";
 
 function Aide({ setCompo }) {
