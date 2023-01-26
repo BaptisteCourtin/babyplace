@@ -26,7 +26,7 @@ function Modal({ open, closeModal, onReset }) {
             délais.
           </h4>
           <button
-            type="submit"
+            type="button"
             className="navBtnLite-Modal"
             onClick={handleClose}
           >
