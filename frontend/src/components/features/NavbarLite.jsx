@@ -15,7 +15,7 @@ function NavbarLite() {
         </NavLink>
 
         <div className="navBtnLite">
-          <NavLink to="/">Retourner à l'acceuil</NavLink>
+          <NavLink to="/">Retourner à l'accueil</NavLink>
         </div>
       </nav>
     </div>

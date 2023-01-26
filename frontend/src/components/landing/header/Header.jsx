@@ -32,14 +32,14 @@ function Header({ userType }) {
       <div className="headerProMain">
         <h1>Babyplace</h1>
         <p>
-          Gagnez du temps en optimisant votre agenda au quotdien
+          Gagnez du temps en optimisant votre agenda au quotidien
           <br />
-          Installez le logiciel Babyplace maintenant pour saisir toutes les
+          Inscrivez-vous sur Babyplace maintenant pour saisir toutes les
           opportunités autour de chez vous
           <br />
-          Souscription au logiciel Babyplace sans engagement
+          Inscription gratuite et sans engagement
           <br />
-          Logiciel facile a utiliser pour vous permettre d’optimiser vos
+          Interface facile à utiliser pour vous permettre d’optimiser vos
           rendez-vous
           <br />
           Communication directe et simplifiée avec les parents
