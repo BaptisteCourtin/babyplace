@@ -111,8 +111,8 @@ Structure11.propTypes = {
   samediOuvert: oneOfType([bool, number]),
   dimancheOuvert: oneOfType([bool, number]),
   closedDays: Proptypes.node,
-  setClosedDays: Proptypes.node,
+  setClosedDays: Proptypes.func,
   structureId: oneOfType([string, number]),
-  setData: Proptypes.node,
+  setData: Proptypes.func,
 };
 export default Structure11;

@@ -425,9 +425,13 @@ router.post(
 );
 
 router.get("/photosStructure", inscStructure.getPhotosStructure); // get structure pictures
-router.put("/photosStructure", inscStructure.updatePhotosStructure); // update structure pictures
+router.put("/photosStructure", inscStructure.updatePhotosStructure); // update structure pictures + docPmi
+router.put("/justificatifs", inscAssmat.justificatifsAssmat); // update assmat doc
 
-//put structure pictures in cloud
+router.put("/verifsAssmat", inscAssmat.verifsAssmat); // update assmat verifications
+router.put("/verifsCreche", inscCreche.verifsCreche); // update creche verifications
+
+// put structure picture in cloud
 router.post(
   "/photosStructure",
   multerMid.single("file"),
@@ -442,111 +446,20 @@ router.post(
   }
 );
 
-const storageJustif = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "./public/uploads/justificatifs");
-  },
-  filename: (req, file, cb) => {
-    const date = new Date();
-    cb(
-      null,
-      date.getMinutes() + Math.round(Math.random() * 1000) + file.originalname
-    );
-  },
-});
-const uploadJustif = multer({ storage: storageJustif });
-
+// put assmat doc in cloud
 router.post(
   "/justificatifs",
-  uploadJustif.fields([
-    { name: "docpmi", maxCount: 1 },
-    { name: "docIdentite", maxCount: 1 },
-    { name: "docVitale", maxCount: 1 },
-    { name: "docJustifDom", maxCount: 1 },
-    { name: "docDiplome", maxCount: 1 },
-    { name: "docRespCivile", maxCount: 1 },
-    { name: "docAssAuto", maxCount: 1 },
-  ]),
-  (req, res) => {
-    res.send(req.files);
+  multerMid.single("file"),
+  async (req, res, next) => {
+    try {
+      const file = req.file;
+      const result = await uploadDoc(file);
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
   }
 );
-
-router.put("/verifsCreche", (req, res) => {
-  const { numAgrement, dateAgrement, docPmiSrc, siret, email } = req.body;
-  datasource
-    .query(
-      "UPDATE structure INNER JOIN creche ON creche.structureId=structure.structureId SET numAgrement= ?, dateAgrement= ?, docPmi= ?, siret= ?  WHERE email= ?",
-      [numAgrement, dateAgrement, docPmiSrc, siret, email]
-    )
-    .then(([structure]) => {
-      if (structure.affectedRows === 0) {
-        res.status(404).send("Not Found");
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Modification impossible");
-    });
-});
-
-router.put("/verifsAssmat", (req, res) => {
-  const {
-    numSecu,
-    numAgrement,
-    dateAgrement,
-    docPmiSrc,
-    assHabitNom,
-    assHabitNumero,
-    assHabitAdresse,
-    assAutoNom,
-    assAutoNumero,
-    assAutoAdresse,
-    docCniSrc,
-    docCpamSrc,
-    docDomSrc,
-    docDiplomeSrc,
-    docRespSrc,
-    docAutoSrc,
-    email,
-  } = req.body;
-  datasource
-    .query(
-      "UPDATE structure INNER JOIN assMat ON assMat.structureId=structure.structureId SET numSecu= ?, numAgrement= ?, dateAgrement= ?, docPmi= ?, assHabitNom= ?, assHabitNumero= ?, assHabitAdresse= ?, assAutoNom= ?, assAutoNumero= ?, assAutoAdresse= ?, docIdentite= ?, docVitale= ?, docJustifDom= ?, docDiplome= ?, docRespCivile= ?, docAssAuto= ? WHERE email= ?",
-      [
-        numSecu,
-        numAgrement,
-        dateAgrement,
-        docPmiSrc,
-        assHabitNom,
-        assHabitNumero,
-        assHabitAdresse,
-        assAutoNom,
-        assAutoNumero,
-        assAutoAdresse,
-        docCniSrc,
-        docCpamSrc,
-        docDomSrc,
-        docDiplomeSrc,
-        docRespSrc,
-        docAutoSrc,
-        email,
-      ]
-    )
-    .then(([structure]) => {
-      if (structure.affectedRows === 0) {
-        res.status(404).send("Not Found");
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Modification impossible");
-    });
-});
 
 //Routes inscription structure - end
 

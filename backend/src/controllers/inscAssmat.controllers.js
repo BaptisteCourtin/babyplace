@@ -1,4 +1,5 @@
 const inscStructureModels = require("../models/inscStructure.models.js");
+const inscAssmatModels = require("../models/inscAssmat.models.js");
 
 const getAssmatInfo = (req, res) => {
   const table = "assMat";
@@ -46,7 +47,7 @@ const inscriptionAssmat1 = (req, res) => {
       } else {
         inscStructureModels.getStructureId(email).then(([[id]]) => {
           const structureId = id.structureId;
-          inscStructureModels
+          inscAssmatModels
             .createAssmat(nomNaissance, nomUsage, prenom, structureId)
             .then(() => {
               res.sendStatus(204);
@@ -74,7 +75,7 @@ const updateAssmat1 = (req, res) => {
     telephone,
     email,
   } = req.body;
-  inscStructureModels
+  inscAssmatModels
     .updateAssmat1(
       isCreche,
       adresseStructure,
@@ -123,7 +124,7 @@ const optionsAccueilAssmat = (req, res) => {
     photoConnecte,
     email,
   } = req.body;
-  inscStructureModels
+  inscAssmatModels
     .optionsAccueilAssmat(
       PCSC1,
       nesting,
@@ -164,7 +165,7 @@ const optionsAccueilAssmat = (req, res) => {
 
 const agrementsAssmat = (req, res) => {
   const { maxPlaces, maxHandi, max18Mois, maxNuit, email } = req.body;
-  inscStructureModels
+  inscAssmatModels
     .agrementsAssmat(maxPlaces, maxHandi, max18Mois, maxNuit, email)
     .then(([structure]) => {
       if (structure.affectedRows === 0) {
@@ -189,7 +190,7 @@ const tarifsAssmat = (req, res) => {
     tarifHeureSup,
     email,
   } = req.body;
-  inscStructureModels
+  inscAssmatModels
     .tarifsAssmat(
       tarifHeure,
       tarifHoraireSpec,
@@ -197,6 +198,62 @@ const tarifsAssmat = (req, res) => {
       indemnKm,
       indemnEntretien,
       tarifHeureSup,
+      email
+    )
+    .then(([structure]) => {
+      if (structure.affectedRows === 0) {
+        res.status(404).send("Not Found");
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Modification impossible");
+    });
+};
+
+const justificatifsAssmat = (req, res) => {
+  const { column, doc, email } = req.body;
+  inscAssmatModels
+    .updateJustificatif(column, doc, email)
+    .then(([structure]) => {
+      if (structure.affectedRows === 0) {
+        res.status(404).send("Not Found");
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Modification impossible");
+    });
+};
+
+const verifsAssmat = (req, res) => {
+  const {
+    numSecu,
+    numAgrement,
+    dateAgrement,
+    assHabitNom,
+    assHabitNumero,
+    assHabitAdresse,
+    assAutoNom,
+    assAutoNumero,
+    assAutoAdresse,
+    email,
+  } = req.body;
+  inscAssmatModels
+    .verifsAssmat(
+      numSecu,
+      numAgrement,
+      dateAgrement,
+      assHabitNom,
+      assHabitNumero,
+      assHabitAdresse,
+      assAutoNom,
+      assAutoNumero,
+      assAutoAdresse,
       email
     )
     .then(([structure]) => {
@@ -220,4 +277,6 @@ module.exports = {
   optionsAccueilAssmat,
   agrementsAssmat,
   tarifsAssmat,
+  justificatifsAssmat,
+  verifsAssmat,
 };
