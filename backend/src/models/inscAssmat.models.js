@@ -115,6 +115,13 @@ const tarifsAssmat = (
   );
 };
 
+const getJustificatifs = (id) => {
+  return datasource.query(
+    "SELECT docIdentite, docVitale, docJustifDom, docDiplome, docRespCivile, docAssAuto FROM assMat WHERE structureId= ?",
+    [id]
+  );
+};
+
 const updateJustificatif = (column, doc, email) => {
   return datasource.query(
     `UPDATE structure INNER JOIN assMat ON assMat.structureId = structure.structureId SET ${column}= ?  WHERE email= ?`,
@@ -157,6 +164,7 @@ module.exports = {
   optionsAccueilAssmat,
   agrementsAssmat,
   tarifsAssmat,
+  getJustificatifs,
   updateJustificatif,
   verifsAssmat,
 };
