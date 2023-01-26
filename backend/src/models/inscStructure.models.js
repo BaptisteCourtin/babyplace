@@ -337,6 +337,41 @@ const tarifsAssmat = (
     ]
   );
 };
+const verifsCreche = (numAgrement, dateAgrement, siret, email) => {
+  return datasource.query(
+    "UPDATE structure INNER JOIN creche ON creche.structureId=structure.structureId SET numAgrement= ?, dateAgrement= ?, siret= ?  WHERE email= ?",
+    [numAgrement, dateAgrement, siret, email]
+  );
+};
+
+const verifsAssmat = (
+  numSecu,
+  numAgrement,
+  dateAgrement,
+  assHabitNom,
+  assHabitNumero,
+  assHabitAdresse,
+  assAutoNom,
+  assAutoNumero,
+  assAutoAdresse,
+  email
+) => {
+  return datasource.query(
+    "UPDATE structure INNER JOIN assMat ON assMat.structureId=structure.structureId SET numSecu= ?, numAgrement= ?, dateAgrement= ?, assHabitNom= ?, assHabitNumero= ?, assHabitAdresse= ?, assAutoNom= ?, assAutoNumero= ?, assAutoAdresse= ? WHERE email= ?",
+    [
+      numSecu,
+      numAgrement,
+      dateAgrement,
+      assHabitNom,
+      assHabitNumero,
+      assHabitAdresse,
+      assAutoNom,
+      assAutoNumero,
+      assAutoAdresse,
+      email,
+    ]
+  );
+};
 
 module.exports = {
   getIsCreche,
@@ -367,4 +402,6 @@ module.exports = {
   agrementsAssmat,
   tarifsCreche,
   tarifsAssmat,
+  verifsCreche,
+  verifsAssmat,
 };

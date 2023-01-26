@@ -229,6 +229,45 @@ const justificatifsAssmat = (req, res) => {
     });
 };
 
+const verifsAssmat = (req, res) => {
+  const {
+    numSecu,
+    numAgrement,
+    dateAgrement,
+    assHabitNom,
+    assHabitNumero,
+    assHabitAdresse,
+    assAutoNom,
+    assAutoNumero,
+    assAutoAdresse,
+    email,
+  } = req.body;
+  inscStructureModels
+    .verifsAssmat(
+      numSecu,
+      numAgrement,
+      dateAgrement,
+      assHabitNom,
+      assHabitNumero,
+      assHabitAdresse,
+      assAutoNom,
+      assAutoNumero,
+      assAutoAdresse,
+      email
+    )
+    .then(([structure]) => {
+      if (structure.affectedRows === 0) {
+        res.status(404).send("Not Found");
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Modification impossible");
+    });
+};
+
 module.exports = {
   getAssmatInfo,
   assmatExist,
@@ -238,4 +277,5 @@ module.exports = {
   agrementsAssmat,
   tarifsAssmat,
   justificatifsAssmat,
+  verifsAssmat,
 };

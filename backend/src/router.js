@@ -479,61 +479,7 @@ router.put("/verifsCreche", (req, res) => {
     });
 });
 
-router.put("/verifsAssmat", (req, res) => {
-  const {
-    numSecu,
-    numAgrement,
-    dateAgrement,
-    docPmiSrc,
-    assHabitNom,
-    assHabitNumero,
-    assHabitAdresse,
-    assAutoNom,
-    assAutoNumero,
-    assAutoAdresse,
-    docCniSrc,
-    docCpamSrc,
-    docDomSrc,
-    docDiplomeSrc,
-    docRespSrc,
-    docAutoSrc,
-    email,
-  } = req.body;
-  datasource
-    .query(
-      "UPDATE structure INNER JOIN assMat ON assMat.structureId=structure.structureId SET numSecu= ?, numAgrement= ?, dateAgrement= ?, docPmi= ?, assHabitNom= ?, assHabitNumero= ?, assHabitAdresse= ?, assAutoNom= ?, assAutoNumero= ?, assAutoAdresse= ?, docIdentite= ?, docVitale= ?, docJustifDom= ?, docDiplome= ?, docRespCivile= ?, docAssAuto= ? WHERE email= ?",
-      [
-        numSecu,
-        numAgrement,
-        dateAgrement,
-        docPmiSrc,
-        assHabitNom,
-        assHabitNumero,
-        assHabitAdresse,
-        assAutoNom,
-        assAutoNumero,
-        assAutoAdresse,
-        docCniSrc,
-        docCpamSrc,
-        docDomSrc,
-        docDiplomeSrc,
-        docRespSrc,
-        docAutoSrc,
-        email,
-      ]
-    )
-    .then(([structure]) => {
-      if (structure.affectedRows === 0) {
-        res.status(404).send("Not Found");
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Modification impossible");
-    });
-});
+router.put("/verifsAssmat", inscAssmat.verifsAssmat);
 
 //Routes inscription structure - end
 

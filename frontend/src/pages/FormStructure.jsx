@@ -32,17 +32,17 @@ import imgWoman from "../assets/img-woman.svg";
 const INITIAL_DATA = {
   isCreche: null,
   typeCreche: null,
-  nomStructure: "",
-  telephone: "",
-  nomNaissance: "",
-  nomUsage: "",
-  prenom: "",
-  adresseStructure: "",
+  nomStructure: null,
+  telephone: null,
+  nomNaissance: null,
+  nomUsage: null,
+  prenom: null,
+  adresseStructure: null,
   imageProfilSrc: null,
   photo1Src: null,
   photo2Src: null,
   photo3Src: null,
-  description: "",
+  description: null,
   PCSC1: false,
   nesting: false,
   montessori: false,
@@ -108,12 +108,12 @@ const INITIAL_DATA = {
   dateAgrement: null,
   docPmi: null,
   siret: 0,
-  assHabitNom: "",
-  assHabitNumero: "",
-  assHabitAdresse: "",
-  assAutoNom: "",
-  assAutoNumero: "",
-  assAutoAdresse: "",
+  assHabitNom: null,
+  assHabitNumero: null,
+  assHabitAdresse: null,
+  assAutoNom: null,
+  assAutoNumero: null,
+  assAutoAdresse: null,
   docIdentite: null,
   docVitale: null,
   docJustifDom: null,
@@ -996,12 +996,6 @@ function FormStructure() {
             console.error(err);
           });
       } else if (currentStepIndex === 14) {
-        let docCniSrc = docIdentite;
-        let docCpamSrc = docVitale;
-        let docDomSrc = docJustifDom;
-        let docDiplomeSrc = docDiplome;
-        let docRespSrc = docRespCivile;
-        let docAutoSrc = docAssAuto;
         if (inputRefPmi.current !== null) {
           const formData = new FormData();
           formData.append("file", inputRefPmi.current.files[0]);
@@ -1072,104 +1066,126 @@ function FormStructure() {
             });
         }
         if (inputRefDom.current !== null) {
-          formData.append("docJustifDom", inputRefDom.current.files[0]);
+          const formData = new FormData();
+          formData.append("file", inputRefDom.current.files[0]);
+          Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
+            .then((result) => {
+              let doc = docJustifDom;
+              if (result.data !== undefined) {
+                const docTemp = result.data;
+                doc = docTemp;
+              }
+              const column = "docJustifDOm";
+              Axios.put(`${import.meta.env.VITE_PATH}/justificatifs`, {
+                column,
+                doc,
+                email,
+              }).catch((err) => {
+                console.error(err);
+              });
+            })
+            .catch((err) => {
+              console.error(err);
+            });
         }
         if (inputRefDiplome.current !== null) {
-          formData.append("docDiplome", inputRefDiplome.current.files[0]);
+          const formData = new FormData();
+          formData.append("file", inputRefDiplome.current.files[0]);
+          Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
+            .then((result) => {
+              let doc = docDiplome;
+              if (result.data !== undefined) {
+                const docTemp = result.data;
+                doc = docTemp;
+              }
+              const column = "docDiplome";
+              Axios.put(`${import.meta.env.VITE_PATH}/justificatifs`, {
+                column,
+                doc,
+                email,
+              }).catch((err) => {
+                console.error(err);
+              });
+            })
+            .catch((err) => {
+              console.error(err);
+            });
         }
         if (inputRefResp.current !== null) {
-          formData.append("docRespCivile", inputRefResp.current.files[0]);
+          const formData = new FormData();
+          formData.append("file", inputRefResp.current.files[0]);
+          Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
+            .then((result) => {
+              let doc = docRespCivile;
+              if (result.data !== undefined) {
+                const docTemp = result.data;
+                doc = docTemp;
+              }
+              const column = "docRespCivile";
+              Axios.put(`${import.meta.env.VITE_PATH}/justificatifs`, {
+                column,
+                doc,
+                email,
+              }).catch((err) => {
+                console.error(err);
+              });
+            })
+            .catch((err) => {
+              console.error(err);
+            });
         }
         if (inputRefAuto.current !== null) {
-          formData.append("docAssAuto", inputRefAuto.current.files[0]);
+          const formData = new FormData();
+          formData.append("file", inputRefAuto.current.files[0]);
+          Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
+            .then((result) => {
+              let doc = docAssAuto;
+              if (result.data !== undefined) {
+                const docTemp = result.data;
+                doc = docTemp;
+              }
+              const column = "docAssAuto";
+              Axios.put(`${import.meta.env.VITE_PATH}/justificatifs`, {
+                column,
+                doc,
+                email,
+              }).catch((err) => {
+                console.error(err);
+              });
+            })
+            .catch((err) => {
+              console.error(err);
+            });
         }
-        Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
-          .then((result) => {
-            if (result.data.docpmi !== undefined) {
-              const doc = result.data.docpmi[0].filename;
-              docPmiSrc = `${
-                import.meta.env.VITE_PATH
-              }/uploads/photosStructure/${doc}`;
-            }
-            if (result.data.docIdentite !== undefined) {
-              const doc = result.data.docIdentite[0].filename;
-              docCniSrc = `${
-                import.meta.env.VITE_PATH
-              }/uploads/photosStructure/${doc}`;
-            }
-            if (result.data.docVitale !== undefined) {
-              const doc = result.data.docVitale[0].filename;
-              docCpamSrc = `${
-                import.meta.env.VITE_PATH
-              }/uploads/photosStructure/${doc}`;
-            }
-            if (result.data.docJustifDom !== undefined) {
-              const doc = result.data.docJustifDom[0].filename;
-              docDomSrc = `${
-                import.meta.env.VITE_PATH
-              }/uploads/photosStructure/${doc}`;
-            }
-            if (result.data.docDiplome !== undefined) {
-              const doc = result.data.docDiplome[0].filename;
-              docDiplomeSrc = `${
-                import.meta.env.VITE_PATH
-              }/uploads/photosStructure/${doc}`;
-            }
-            if (result.data.docRespCivile !== undefined) {
-              const doc = result.data.docRespCivile[0].filename;
-              docRespSrc = `${
-                import.meta.env.VITE_PATH
-              }/uploads/photosStructure/${doc}`;
-            }
-            if (result.data.docAssAuto !== undefined) {
-              const doc = result.data.docAssAuto[0].filename;
-              docAutoSrc = `${
-                import.meta.env.VITE_PATH
-              }/uploads/photosStructure/${doc}`;
-            }
+        if (structure === "creche") {
+          Axios.put(`${import.meta.env.VITE_PATH}/verifsCreche`, {
+            numAgrement,
+            dateAgrement,
+            siret,
+            email,
           })
-          .then(() => {
-            if (structure === "creche") {
-              Axios.put(`${import.meta.env.VITE_PATH}/verifsCreche`, {
-                numAgrement,
-                dateAgrement,
-                docPmiSrc,
-                siret,
-                email,
-              })
-                .catch((err) => {
-                  console.error(err);
-                })
-                .then(closePage ? navigate("/", {}) : next());
-            } else if (structure === "assmat") {
-              Axios.put(`${import.meta.env.VITE_PATH}/verifsAssmat`, {
-                numSecu,
-                numAgrement,
-                dateAgrement,
-                docPmiSrc,
-                assHabitNom,
-                assHabitNumero,
-                assHabitAdresse,
-                assAutoNom,
-                assAutoNumero,
-                assAutoAdresse,
-                docCniSrc,
-                docCpamSrc,
-                docDomSrc,
-                docDiplomeSrc,
-                docRespSrc,
-                docAutoSrc,
-                email,
-              })
-                .catch((err) => {
-                  console.error(err);
-                })
-                .then(closePage ? navigate("/", {}) : next());
-            }
+            .catch((err) => {
+              console.error(err);
+            })
+            .then(closePage ? navigate("/", {}) : next());
+        } else if (structure === "assmat") {
+          Axios.put(`${import.meta.env.VITE_PATH}/verifsAssmat`, {
+            numSecu,
+            numAgrement,
+            dateAgrement,
+            assHabitNom,
+            assHabitNumero,
+            assHabitAdresse,
+            assAutoNom,
+            assAutoNumero,
+            assAutoAdresse,
+            email,
           })
-          .catch((err) => {
-            console.error(err);
-          });
+            .catch((err) => {
+              console.error(err);
+            })
+            .then(closePage ? navigate("/", {}) : next());
+        }
       }
     } else navigate("/", {});
   };

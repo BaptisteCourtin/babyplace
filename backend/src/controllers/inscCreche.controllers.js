@@ -194,6 +194,26 @@ const tarifsCreche = (req, res) => {
     });
 };
 
+const verifsCreche = (req, res) => {
+  const { numAgrement, dateAgrement, siret, email } = req.body;
+  datasource
+    .query(
+      "UPDATE structure INNER JOIN creche ON creche.structureId=structure.structureId SET numAgrement= ?, dateAgrement= ?, siret= ?  WHERE email= ?",
+      [numAgrement, dateAgrement, siret, email]
+    )
+    .then(([structure]) => {
+      if (structure.affectedRows === 0) {
+        res.status(404).send("Not Found");
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Modification impossible");
+    });
+};
+
 module.exports = {
   getCrecheInfo,
   crecheExist,
@@ -202,4 +222,5 @@ module.exports = {
   optionsAccueilCreche,
   agrementsCreche,
   tarifsCreche,
+  verifsCreche,
 };
