@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from "react";
-import Proptypes from "prop-types";
+import Proptypes, { string, number, node, object, oneOfType } from "prop-types";
+import profil from "@assets/profil.png";
 import Axios from "axios";
 
 function Structure2({ inputRef, structureId, updateFields }) {
-  const [imageSrc, setImageSrc] = useState(
-    "https://via.placeholder.com/150.png?text=photo"
-  );
+  const [imageSrc, setImageSrc] = useState(profil);
   const getPicture = () => {
     Axios.get(`${import.meta.env.VITE_PATH}/photoProfil?id=${structureId}`, [
       structureId,
     ])
       .then((result) => {
-        if (result.data.length > 0) {
-          setImageSrc(
-            `${import.meta.env.VITE_PATH}${result.data[0].photoProfil}`
-          );
+        if (result.data[0].photoProfil !== null) {
+          setImageSrc(result.data[0].photoProfil);
           updateFields({ imageProfilSrc: result.data[0].photoProfil });
         }
       })
@@ -53,12 +50,11 @@ function Structure2({ inputRef, structureId, updateFields }) {
           <img src={imageSrc} alt="prévisualisation" />
         </div>
         <div className="inputContainer">
-          <label htmlFor="avatar">Formats acceptés : .jpg, .jpeg, .png</label>
+          <label htmlFor="file">Formats acceptés : .jpg, .jpeg, .png</label>
           <br />
           <input
             type="file"
-            id="avatar"
-            name="avatar"
+            name="file"
             ref={inputRef}
             accept="image/png, image/jpg, image/jpeg"
             onChange={(e) => updateImg(e)}
@@ -69,8 +65,8 @@ function Structure2({ inputRef, structureId, updateFields }) {
   );
 }
 Structure2.propTypes = {
-  inputRef: Proptypes.node,
-  structureId: Proptypes.string,
+  inputRef: oneOfType([node, object]),
+  structureId: oneOfType([string, number]),
   updateFields: Proptypes.func,
 };
 export default Structure2;

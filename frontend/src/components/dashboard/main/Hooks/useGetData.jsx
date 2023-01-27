@@ -18,8 +18,7 @@ export const useGetAllData = (token) => {
       if (res.data[0].isCreche === 0) {
         axios
           .get(
-            `${import.meta.env.VITE_PATH}/structure/details?type=assMat&id=${
-              res.data[0].structureId
+            `${import.meta.env.VITE_PATH}/structure/details?type=assMat&id=${res.data[0].structureId
             }`,
             {
               id: res.data[0].structureId,
@@ -32,8 +31,7 @@ export const useGetAllData = (token) => {
       } else {
         axios
           .get(
-            `${import.meta.env.VITE_PATH}/structure/details?type=creche&id=${
-              res.data[0].structureId
+            `${import.meta.env.VITE_PATH}/structure/details?type=creche&id=${res.data[0].structureId
             }`,
             {
               id: res.data[0].structureId,
@@ -64,6 +62,8 @@ export const useGetAllData = (token) => {
       console.error(err.message);
     }
   };
+
+
 
   return { getData, data, userType, donnees, details, notif, getNotifications };
 };

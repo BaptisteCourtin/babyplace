@@ -5,6 +5,7 @@ import moment from "moment";
 import { AiFillLeftCircle } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import PropTypes from "prop-types";
 
 function ChatForApp({ socket, username, room, title, joinRoom }) {
   const [currentMessage, setCurrentMessage] = useState("");
@@ -14,14 +15,14 @@ function ChatForApp({ socket, username, room, title, joinRoom }) {
   const saveMessage = (messageData) => {
     const { room, author, message, date } = messageData;
     axios
-      .post("http://localhost:5000/messages/sauvegarde", {
+      .post(`${import.meta.env.VITE_PATH}/messages/sauvegarde`, {
         room,
         author,
         message,
         date,
       })
       .then((res) => {
-        console.log(res.data);
+        console.warn(res.data);
       })
       .catch((err) => {
         console.error(err);
@@ -37,9 +38,8 @@ function ChatForApp({ socket, username, room, title, joinRoom }) {
         time: `${new Date(Date.now()).getHours()}:${new Date(
           Date.now()
         ).getMinutes()}`,
-        date: `${new Date(Date.now()).getFullYear()} -${
-          new Date(Date.now()).getMonth() + 1
-        } -${new Date(Date.now()).getUTCDate()} `,
+        date: `${new Date(Date.now()).getFullYear()} -${new Date(Date.now()).getMonth() + 1
+          } -${new Date(Date.now()).getUTCDate()} `,
       };
 
       saveMessage(messageData);
@@ -58,7 +58,7 @@ function ChatForApp({ socket, username, room, title, joinRoom }) {
   const getMessagesFromRoom = async () => {
     try {
       const result = await axios.get(
-        `http://localhost:5000/messages/recup/${room}`,
+        `${import.meta.env.VITE_PATH}/messages/recup/${room}`,
         {
           headers: {
             room,
@@ -141,10 +141,20 @@ function ChatForApp({ socket, username, room, title, joinRoom }) {
           }}
           value={currentMessage}
         />
-        <button onClick={sendMessage}>&#9658;</button>
+        <button type="submit" onClick={sendMessage}>
+          &#9658;
+        </button>
       </div>
     </div>
   );
 }
+
+ChatForApp.propTypes = {
+  socket: PropTypes.any,
+  username: PropTypes.string,
+  room: PropTypes.number,
+  title: PropTypes.string,
+  joinRoom: PropTypes.func,
+};
 
 export default ChatForApp;

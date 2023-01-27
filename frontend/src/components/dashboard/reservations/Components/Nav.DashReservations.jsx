@@ -17,7 +17,7 @@ function NavDashReservations({ statusToggle, setStatusToggle }) {
           onClick={() => setStatusToggle(1)}
           className={statusToggle === 1 ? "selected" : ""}
         >
-          Accepté
+          Acceptées
         </button>
         <button
           type="button"
@@ -31,14 +31,14 @@ function NavDashReservations({ statusToggle, setStatusToggle }) {
           onClick={() => setStatusToggle(3)}
           className={statusToggle === 3 ? "selected" : ""}
         >
-          Refusé
+          Refusées
         </button>
         <button
           type="button"
           onClick={() => setStatusToggle(4)}
           className={statusToggle === 4 ? "selected" : ""}
         >
-          Annulé
+          Payées
         </button>
       </div>
     </div>

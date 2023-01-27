@@ -36,7 +36,6 @@
 
     & .input {
       border: 1px solid $grey;
-
     }
 
     & .inputChecked {
@@ -54,7 +53,6 @@
       color: $green;
       display: initial;
     }
-
 
     & label {
       position: absolute;
@@ -117,19 +115,28 @@
       }
     }
   }
+  & .actualFile {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0 0;
+    & a {
+      text-decoration: underline;
+      color: $third;
+    }
+  }
 }
 
 @media screen and (max-width: 1000px) {
   .structure15 {
     & .inputContainer {
-
       & input[type="text"],
       & input[type="date"] {
         width: 80vw;
         max-width: 500px;
       }
 
-      & input:valid+label+p {
+      & input:valid + label + p {
         transform: translateX(69vw) translateY(6px);
       }
     }

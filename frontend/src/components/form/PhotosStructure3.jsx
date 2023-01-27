@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Proptypes from "prop-types";
+import Proptypes, { string, number, node, object, oneOfType } from "prop-types";
 import Axios from "axios";
+import placeHolder from "@assets/placeHolder.png";
 
 function Structure3({
   inputRef1,
@@ -9,38 +10,25 @@ function Structure3({
   structureId,
   updateFields,
 }) {
-  const [image1Src, setImage1Src] = useState(
-    "https://via.placeholder.com/240x160.png?text=photo+1"
-  );
-  const [image2Src, setImage2Src] = useState(
-    "https://via.placeholder.com/240x160.png?text=photo+2"
-  );
-  const [image3Src, setImage3Src] = useState(
-    "https://via.placeholder.com/240x160.png?text=photo+3"
-  );
+  const [image1Src, setImage1Src] = useState(placeHolder);
+  const [image2Src, setImage2Src] = useState(placeHolder);
+  const [image3Src, setImage3Src] = useState(placeHolder);
   const getPicture = () => {
     Axios.get(
       `${import.meta.env.VITE_PATH}/photosStructure?id=${structureId}`,
       [structureId]
     )
       .then((result) => {
-        console.log(result.data[0].photoStructure1)
         if (result.data[0].photoStructure1 !== null) {
-          setImage1Src(
-            `${import.meta.env.VITE_PATH}${result.data[0].photoStructure1}`
-          );
+          setImage1Src(result.data[0].photoStructure1);
           updateFields({ photo1Src: result.data[0].photoStructure1 });
         }
         if (result.data[0].photoStructure2 !== null) {
-          setImage2Src(
-            `${import.meta.env.VITE_PATH}${result.data[0].photoStructure2}`
-          );
+          setImage2Src(result.data[0].photoStructure2);
           updateFields({ photo2Src: result.data[0].photoStructure2 });
         }
         if (result.data[0].photoStructure3 !== null) {
-          setImage3Src(
-            `${import.meta.env.VITE_PATH}${result.data[0].photoStructure3}`
-          );
+          setImage3Src(result.data[0].photoStructure3);
           updateFields({ photo3Src: result.data[0].photoStructure3 });
         }
       })
@@ -108,7 +96,7 @@ function Structure3({
             <input
               type="file"
               id="photo1"
-              name="photo1"
+              name="file"
               ref={inputRef1}
               accept="image/png, image/jpg, image/jpeg"
               onChange={(e) => updateImg1(e)}
@@ -124,7 +112,7 @@ function Structure3({
             <input
               type="file"
               id="photo2"
-              name="photo2"
+              name="file"
               ref={inputRef2}
               accept="image/png, image/jpg, image/jpeg"
               onChange={(e) => updateImg2(e)}
@@ -140,7 +128,7 @@ function Structure3({
             <input
               type="file"
               id="photo3"
-              name="photo3"
+              name="file"
               ref={inputRef3}
               accept="image/png, image/jpg, image/jpeg"
               onChange={(e) => updateImg3(e)}
@@ -152,10 +140,10 @@ function Structure3({
   );
 }
 Structure3.propTypes = {
-  inputRef1: Proptypes.node,
-  inputRef2: Proptypes.node,
-  inputRef3: Proptypes.node,
-  structureId: Proptypes.string,
+  inputRef1: oneOfType([node, object]),
+  inputRef2: oneOfType([node, object]),
+  inputRef3: oneOfType([node, object]),
+  structureId: oneOfType([string, number]),
   updateFields: Proptypes.func,
 };
 export default Structure3;

@@ -1,12 +1,17 @@
 import React from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { toast } from "react-hot-toast";
 import TheCard from "../menu/TheCard";
 
-function NotifPaye({ setCompo }) {
+function NotifPaye({ setCompo, oneReservation }) {
   const handlePaiement = () => {
+    axios.put(`${import.meta.env.VITE_PATH}/reservation/status`, {
+      status: "payed",
+      id: oneReservation.id,
+    });
     toast.success("merci 😘");
-    setCompo(0);
   };
 
   return (
@@ -16,7 +21,7 @@ function NotifPaye({ setCompo }) {
           {`< Retour`}
         </button>
       </div>
-      <h3>XXX € à payer</h3>
+      <h3>{oneReservation.prixTotal} € à payer</h3>
       <TheCard />
       <div className="button-bas">
         <button
@@ -24,7 +29,7 @@ function NotifPaye({ setCompo }) {
           type="button"
           onClick={() => handlePaiement(0)}
         >
-          Confirmer la réservation
+          <Link to="/appli/search">Confirmer la réservation</Link>
         </button>
       </div>
     </div>
@@ -33,6 +38,7 @@ function NotifPaye({ setCompo }) {
 
 NotifPaye.propTypes = {
   setCompo: PropTypes.func.isRequired,
+  oneReservation: PropTypes.object.isRequired,
 };
 
 export default NotifPaye;

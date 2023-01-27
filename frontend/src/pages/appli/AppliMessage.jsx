@@ -6,24 +6,20 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 
 function AppliMessage() {
+
   const [strucData, setStrucData] = useState([]);
 
   const getStructureForMess = () => {
     axios
       .get(`${import.meta.env.VITE_PATH}/structure/all`)
       .then((ret) => {
-        console.log(ret.data);
+        console.warn(ret.data);
         setStrucData(ret.data);
       })
       .catch((err) => {
         console.error(err);
       });
   };
-
-  // const joinRoom = async () => {
-  //   console.log(room);
-  //   await socket.emit("join_room", room);
-  // };
 
   useEffect(() => {
     getStructureForMess();

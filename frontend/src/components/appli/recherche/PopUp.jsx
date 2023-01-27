@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
+import FamilleContext from "@components/context/FamilleContext";
 import PopUpProfilComplet from "./PopUpProfilComplet";
 import PopUpProfilNonComplet from "./PopUpProfilNonComplet";
-import FamilleContext from "@components/context/FamilleContext";
 
 function PopUp({ data, dataHorairesId }) {
   const { familleId } = useContext(FamilleContext);
@@ -17,7 +17,8 @@ function PopUp({ data, dataHorairesId }) {
     axios
       .get(`${import.meta.env.VITE_PATH}/famille/nomsEnfants100/${familleId}`)
       .then((res) => {
-        console.log(res.data);
+        // faire aussi suivant les doc ???
+        // console.log(res.data);
         if (res.data[0] !== undefined) {
           setProfilComplet(true);
         }

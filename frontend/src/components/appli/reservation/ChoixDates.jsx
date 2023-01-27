@@ -10,7 +10,6 @@ function ChoixDates({
   setHeureMin,
   setHeureMax,
   setJour,
-  // jour,
   setIsOccasionnel,
   isOccasionnel,
   photoProfil,
@@ -23,13 +22,6 @@ function ChoixDates({
 }) {
   const [thisMinHeure, setThisMinHeure] = useState();
   const [thisMaxHeure, setThisMaxHeure] = useState();
-
-  // console.log(dataCalendarId);
-  // console.log(jour);
-  // console.log("thismin" + thisMinHeure);
-  // console.log("thismax" + thisMaxHeure);
-  // console.log("mymin" + heureMin);
-  // console.log("mymax" + heureMax);
 
   return (
     <>

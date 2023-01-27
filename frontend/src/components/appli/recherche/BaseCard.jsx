@@ -9,6 +9,9 @@ import PropTypes from "prop-types";
 function BaseCard({
   setCompo,
   Allstructure,
+  familleLiked,
+  familleId,
+  getFamilleLiked,
   // filtres
   dataBasique,
   dataDateHeure,
@@ -111,6 +114,7 @@ function BaseCard({
       {/* filtrer selon heure - date */}
       <main>
         {Allstructure !== undefined &&
+          familleLiked !== undefined &&
           Allstructure
             // each = les données d'une creche
             // dataXXX = les données des filtres
@@ -121,14 +125,6 @@ function BaseCard({
                 dataBasique.isCreche === each.isCreche ||
                 dataBasique.isCreche === 2
             )
-
-            //   const [dataDateHeure, setDataDateHeure] = useState({
-            //   heureMin: "00:00",
-            //   heureMax: "23:59",
-            //   jour: "",
-            // });
-            // .filter((each) => dataDateHeure.heureMin === each.heureMin)
-
             // false = tout le monde = pas de filtre
             // true = filtrer pour avoir seulement ceux qui l'ont
             .filter(
@@ -186,13 +182,20 @@ function BaseCard({
               return 0;
               // sort par distance ???
             })
-            .map((each, index) => (
-              <CarteCreche
-                data={each}
-                key={index}
-                userPosition={userPosition}
-              />
-            ))}
+            .map(
+              (each, index) =>
+                familleLiked !== undefined && (
+                  <CarteCreche
+                    data={each}
+                    key={index}
+                    userPosition={userPosition}
+                    familleLiked={familleLiked}
+                    familleId={familleId}
+                    getFamilleLiked={getFamilleLiked}
+                    dataDateHeure={dataDateHeure}
+                  />
+                )
+            )}
       </main>
       <NavbarApp />
     </>
@@ -202,7 +205,12 @@ function BaseCard({
 BaseCard.propTypes = {
   setCompo: PropTypes.func.isRequired,
   Allstructure: PropTypes.array.isRequired,
+  familleLiked: PropTypes.array.isRequired,
+  familleId: PropTypes.string.isRequired,
+  getFamilleLiked: PropTypes.func.isRequired,
+
   dataBasique: PropTypes.object.isRequired,
+  dataDateHeure: PropTypes.object.isRequired,
   dataServices: PropTypes.object.isRequired,
   dataAggrements: PropTypes.object.isRequired,
 };

@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { HashLink } from "react-router-hash-link";
 import { useForm } from "react-hook-form";
-import axios from "axios";
-import FooterLite from "./FooterLite";
-import NavbarLite from "./NavbarLite";
-import Modal from "./Modal";
+import FooterLite from "./components/FooterLite";
+import NavbarLite from "./components/NavbarLite";
+import Modal from "./components/Modal";
+import { onSubmit } from "./hooks/usePostMessage";
 
 function Contact() {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState("");
   const { register, handleSubmit, reset } = useForm();
   const [checked, setChecked] = useState(false);
 
@@ -18,29 +17,11 @@ function Contact() {
       nom: "",
       email: "",
       texte: "",
-      optionSelected: ""
+      optionSelected: "",
     });
   };
 
-  const onSubmit = (d) => {
-    const { prenom, nom, email, optionSelected, texte } = d;
-    axios
-      .post(`http://localhost:5000/contact/message`, {
-        prenom,
-        nom,
-        email,
-        optionSelected,
-        texte,
-      })
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-
-  const openCloseModal = (e) => {
+  const openCloseModal = () => {
     setIsOpen(!isOpen);
   };
 
@@ -67,18 +48,9 @@ function Contact() {
     },
   ];
 
-  const handleChange = (e) => {
-    setSelected(e.target.value);
-  };
-
-  useEffect(() => {
-    console.log(selected);
-  }, [handleChange]);
-
   return (
     <div className="contact-form" id="aide">
       <NavbarLite />
-
       <section className="aide">
         <h3>Aide</h3>
         <p>
@@ -87,12 +59,12 @@ function Contact() {
           plus bref délai.
         </p>
       </section>
-
       <section id="contact">
         <h3>Contactez-Nous</h3>
         <p id="question">
-          Une question ? Vous souhaitez en savoir plus ? N'hesitez pas à utiliser ce formulaire,
-          ci-dessous, nous vous repondrons dans les plus bref délais.
+          Une question ? Vous souhaitez en savoir plus ? N'hesitez pas à
+          utiliser ce formulaire, ci-dessous, nous vous repondrons dans les plus
+          bref délais.
         </p>
         <form className="formContact" onSubmit={handleSubmit(onSubmit)}>
           <div className="formContainer">
@@ -100,7 +72,6 @@ function Contact() {
               <label className="labelForm" htmlFor="prenom">
                 Prénom <span id="obligatoire">*</span>
               </label>
-
               <input
                 id="userName"
                 type="text"
@@ -127,12 +98,10 @@ function Contact() {
                 {...register("email", { required: true })}
               />
             </div>
-
             <div className="divObject">
               <label className="labelForm" htmlFor="object">
                 Object <span id="obligatoire">*</span>
               </label>
-
               <select
                 className="object-select"
                 {...register("optionSelected", { required: true })}
@@ -151,7 +120,6 @@ function Contact() {
               <label className="labelForm" htmlFor="textearea">
                 Message <span id="obligatoire">*</span>
               </label>
-
               <textarea
                 name="formulaire-message"
                 id="formulaireMessage"
@@ -159,7 +127,6 @@ function Contact() {
               />
               <span id="obligatoireText">* les chants sont obligatoires</span>
             </div>
-
             <div className="policyTextDiv">
               <p id="policyText">
                 <input
@@ -180,7 +147,6 @@ function Contact() {
               </p>
             </div>
           </div>
-
           <button
             className="navBtnLite"
             type="submit"
@@ -198,6 +164,6 @@ function Contact() {
       <FooterLite />
     </div>
   );
-}
+};
 
 export default Contact;

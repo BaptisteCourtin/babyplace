@@ -12,11 +12,14 @@ import {
 } from "react-icons/md";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import useLocalStorage from "@utils/useLocalStorage";
 
 function DashNavbar({ toggle, setToggle, structureId }) {
   const navigate = useNavigate();
+  const [localEmail, setLocalEmail] = useLocalStorage("email", "mail");
 
   const logout = async () => {
+    setLocalEmail("")
     try {
       await axios.put(`${import.meta.env.VITE_PATH}/logout/${structureId}`, {
         id: structureId,

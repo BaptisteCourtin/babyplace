@@ -28,44 +28,46 @@ import selfie from "../assets/selfie.svg";
 import profilJM from "../assets/profilJM.png";
 import profilCPP from "../assets/profilCPP.jpg";
 import imgWoman from "../assets/img-woman.svg";
+import logo from "../assets/logo4.svg";
+import logotxt from "@assets/babyplaceTxt.svg";
 
 const INITIAL_DATA = {
   isCreche: null,
   typeCreche: null,
-  nomStructure: "",
-  telephone: "",
-  nomNaissance: "",
-  nomUsage: "",
-  prenom: "",
-  adresseStructure: "",
+  nomStructure: null,
+  telephone: null,
+  nomNaissance: null,
+  nomUsage: null,
+  prenom: null,
+  adresseStructure: null,
   imageProfilSrc: null,
   photo1Src: null,
   photo2Src: null,
   photo3Src: null,
-  description: "",
-  PCSC1: false,
-  nesting: false,
-  montessori: false,
-  handi: false,
-  jardin: false,
-  sorties: false,
+  description: null,
+  PCSC1: 0,
+  nesting: 0,
+  montessori: 0,
+  handi: 0,
+  jardin: 0,
+  sorties: 0,
   experience: 0,
-  enfants: false,
-  animaux: false,
-  nonFumeur: false,
-  zeroPollution: false,
-  repas: false,
-  hygiene: false,
-  promenades: false,
-  eveil: false,
-  musique: false,
-  art: false,
-  bilingue: false,
-  bibli: false,
-  transport: false,
-  albumPhoto: false,
-  photoConnecte: false,
-  resaInst: null,
+  enfants: 0,
+  animaux: 0,
+  nonFumeur: 0,
+  zeroPollution: 0,
+  repas: 0,
+  hygiene: 0,
+  promenades: 0,
+  eveil: 0,
+  musique: 0,
+  art: 0,
+  bilingue: 0,
+  bibli: 0,
+  transport: 0,
+  albumPhoto: 0,
+  photoConnecte: 0,
+  resaInst: true,
   lundiOuvert: true,
   mardiOuvert: true,
   mercrediOuvert: true,
@@ -108,12 +110,12 @@ const INITIAL_DATA = {
   dateAgrement: null,
   docPmi: null,
   siret: 0,
-  assHabitNom: "",
-  assHabitNumero: "",
-  assHabitAdresse: "",
-  assAutoNom: "",
-  assAutoNumero: "",
-  assAutoAdresse: "",
+  assHabitNom: null,
+  assHabitNumero: null,
+  assHabitAdresse: null,
+  assAutoNom: null,
+  assAutoNumero: null,
+  assAutoAdresse: null,
   docIdentite: null,
   docVitale: null,
   docJustifDom: null,
@@ -137,10 +139,12 @@ function FormStructure() {
   const inputRefAuto = useRef(null);
   const [data, setData] = useState(INITIAL_DATA);
   const [structure, setStructure] = useState("");
-  const [resa, setResa] = useState("");
+  const [resaInst, setResaInst] = useState("");
   const { userEmail } = useContext(UserEmailContext);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const [showExplications, setShowExplications] = useState(window.innerWidth > 1000 ? true : false);
+  const [showExplications, setShowExplications] = useState(
+    window.innerWidth > 1000
+  );
   const [closedDays, setClosedDays] = useState([]);
   const [structureId, setStructureId] = useState(null);
   const [horairesExist, setHorairesExist] = useState(null);
@@ -157,18 +161,24 @@ function FormStructure() {
       return { ...prev, ...fields };
     });
   }
+
   useEffect(() => {
-    Axios.get(`${import.meta.env.VITE_PATH}/isCreche?email=${userEmail}`, { userEmail })
+    Axios.get(`${import.meta.env.VITE_PATH}/isCreche?email=${userEmail}`, {
+      userEmail,
+    })
       .then((result) => {
-        console.log(result.data.isCreche)
         if (result.data.isCreche === 0) {
-          setStructure("assmat")
+          setStructure("assmat");
         }
         if (result.data.isCreche === 1) {
-          setStructure("creche")
+          setStructure("creche");
         }
-      }).catch((err) => { console.error(err) })
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }, []);
+
   useEffect(() => {
     if (structure === "creche") {
       Axios.get(
@@ -177,6 +187,7 @@ function FormStructure() {
       )
         .then((result) => {
           setStructureId(result.data.structureId);
+          setResaInst(result.data.resaInst);
           setData((prev) => {
             return {
               ...prev,
@@ -217,7 +228,6 @@ function FormStructure() {
               siret: result.data.siret,
               numAgrement: result.data.numAgrement,
               dateAgrement: result.data.dateAgrement,
-              docPmi: result.data.docPmi,
             };
           });
         })
@@ -231,6 +241,13 @@ function FormStructure() {
       )
         .then((result) => {
           setStructureId(result.data.structureId);
+          if (result.data.resaInst === 1) {
+            setResaInst(true);
+          }
+          if (result.data.resaInst === 0) {
+            setResaInst(false);
+          }
+
           setData((prev) => {
             return {
               ...prev,
@@ -279,19 +296,12 @@ function FormStructure() {
               numSecu: result.data.numSecu,
               numAgrement: result.data.numAgrement,
               dateAgrement: result.data.dateAgrement,
-              docPmi: result.data.docPmi,
               assHabitNom: result.data.assHabitNom,
               assHabitNumero: result.data.assHabitNumero,
               assHabitAdresse: result.data.assHabitAdresse,
               assAutoNom: result.data.assAutoNom,
               assAutoNumero: result.data.assAutoNumero,
               assAutoAdresse: result.data.assAutoAdresse,
-              docIdentite: result.data.docIdentite,
-              docVitale: result.data.docVitale,
-              docJustifDom: result.data.docJustifDom,
-              docDiplome: result.data.docDiplome,
-              docRespCivile: result.data.docRespCivile,
-              docAssAuto: result.data.docAssAuto,
             };
           });
         })
@@ -349,6 +359,7 @@ function FormStructure() {
         inputRefDiplome={inputRefDiplome}
         inputRefAuto={inputRefAuto}
         inputRefResp={inputRefResp}
+        structureId={structureId}
         updateFields={updateFields}
       />,
       <Structure16 />,
@@ -489,6 +500,21 @@ function FormStructure() {
         return "";
     }
   };
+
+  const logout = async () => {
+    try {
+      await Axios.put(`${import.meta.env.VITE_PATH}/logout/${structureId}`, {
+        id: structureId,
+        token: null,
+        tokenStart: null,
+      });
+      sessionStorage.clear();
+      navigate("/");
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
     const {
@@ -575,6 +601,13 @@ function FormStructure() {
       assAutoNumero,
       assAutoAdresse,
       indispo,
+      docPmi,
+      docIdentite,
+      docVitale,
+      docJustifDom,
+      docDiplome,
+      docRespCivile,
+      docAssAuto,
     } = data;
     const email = userEmail;
     if (!isLastStep) {
@@ -592,7 +625,7 @@ function FormStructure() {
                 telephone,
                 email,
               })
-                .then(closePage ? navigate("/", {}) : next())
+                .then(closePage ? logout() : next())
                 .catch((err) => {
                   console.error(err);
                 });
@@ -605,7 +638,7 @@ function FormStructure() {
                 telephone,
                 email,
               })
-                .then(closePage ? navigate("/", {}) : next())
+                .then(closePage ? logout() : next())
                 .catch((err) => {
                   console.error(err);
                 });
@@ -629,7 +662,7 @@ function FormStructure() {
                 telephone,
                 email,
               })
-                .then(closePage ? navigate("/", {}) : next())
+                .then(closePage ? logout() : next())
                 .catch((err) => {
                   console.error(err);
                 });
@@ -643,7 +676,7 @@ function FormStructure() {
                 telephone,
                 email,
               })
-                .then(closePage ? navigate("/", {}) : next())
+                .then(closePage ? logout() : next())
                 .catch((err) => {
                   console.error(err);
                 });
@@ -654,20 +687,19 @@ function FormStructure() {
           });
       } else if (currentStepIndex === 1) {
         const formData = new FormData();
-        if (inputRef.current.files[0] !== undefined) {
-          console.log(inputRef.current.files[0]);
-          formData.append("avatar", inputRef.current.files[0]);
+        if (inputRef.current.files.length > 0) {
+          formData.append("file", inputRef.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/photoProfil`, formData)
             .then((result) => {
               let photoProfil = imageProfilSrc;
               if (result.data !== undefined) {
-                photoProfil = `/uploads/avatar/${result.data.filename}`;
+                photoProfil = result.data;
               }
               Axios.put(`${import.meta.env.VITE_PATH}/photoProfil`, {
                 photoProfil,
                 email,
               })
-                .then(closePage ? navigate("/", {}) : next())
+                .then(closePage ? logout() : next())
                 .catch((err) => {
                   console.error(err);
                 });
@@ -679,56 +711,82 @@ function FormStructure() {
           next();
         }
       } else if (currentStepIndex === 2) {
-        const formData = new FormData();
-        console.log(inputRef1.current.files[0])
-        if (inputRef1.current.files[0] !== undefined) {
-          formData.append("photo1", inputRef1.current.files[0]);
-        }
-        if (inputRef2.current.files[0] !== undefined) {
-          formData.append("photo2", inputRef2.current.files[0]);
-        }
-        if (inputRef3.current.files[0] !== undefined) {
-          formData.append("photo3", inputRef3.current.files[0]);
-        }
-        Axios.post(`${import.meta.env.VITE_PATH}/photosStructure`, formData)
-          .then((result) => {
-            let photoStructure1 = photo1Src;
-            let photoStructure2 = photo2Src;
-            let photoStructure3 = photo3Src;
-            if (result.data.photo1 !== undefined) {
-              const photo1 = result.data.photo1[0].filename;
-              photoStructure1 = `/uploads/photosStructure/${photo1}`;
-            }
-            if (result.data.photo2 !== undefined) {
-              const photo2 = result.data.photo2[0].filename;
-              photoStructure2 = `/uploads/photosStructure/${photo2}`;
-            }
-            if (result.data.photo3 !== undefined) {
-              const photo3 = result.data.photo3[0].filename;
-              photoStructure3 = `/uploads/photosStructure/${photo3}`;
-            }
-            Axios.put(`${import.meta.env.VITE_PATH}/photosStructure`, {
-              photoStructure1,
-              photoStructure2,
-              photoStructure3,
-              email,
-            })
-              .then(() => {
-                closePage ? navigate("/", {}) : next();
-              })
-              .catch((err) => {
+        if (inputRef1.current.files.length > 0) {
+          const formData = new FormData();
+          formData.append("file", inputRef1.current.files[0]);
+          Axios.post(`${import.meta.env.VITE_PATH}/photosStructure`, formData)
+            .then((result) => {
+              let photoStructure = photo1Src;
+              if (result.data !== undefined) {
+                const photo1 = result.data;
+                photoStructure = photo1;
+              }
+              const column = "photoStructure1";
+              Axios.put(`${import.meta.env.VITE_PATH}/photosStructure`, {
+                column,
+                photoStructure,
+                email,
+              }).catch((err) => {
                 console.error(err);
               });
-          })
-          .catch((err) => {
-            console.error(err);
-          });
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        }
+        if (inputRef2.current.files.length > 0) {
+          const formData = new FormData();
+          formData.append("file", inputRef2.current.files[0]);
+          Axios.post(`${import.meta.env.VITE_PATH}/photosStructure`, formData)
+            .then((result) => {
+              let photoStructure = photo2Src;
+              if (result.data !== undefined) {
+                const photo2 = result.data;
+                photoStructure = photo2;
+              }
+              const column = "photoStructure2";
+              Axios.put(`${import.meta.env.VITE_PATH}/photosStructure`, {
+                column,
+                photoStructure,
+                email,
+              }).catch((err) => {
+                console.error(err);
+              });
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        }
+        if (inputRef3.current.files.length > 0) {
+          const formData = new FormData();
+          formData.append("file", inputRef3.current.files[0]);
+          Axios.post(`${import.meta.env.VITE_PATH}/photosStructure`, formData)
+            .then((result) => {
+              let photoStructure = photo3Src;
+              if (result.data !== undefined) {
+                const photo3 = result.data;
+                photoStructure = photo3;
+              }
+              const column = "photoStructure3";
+              Axios.put(`${import.meta.env.VITE_PATH}/photosStructure`, {
+                column,
+                photoStructure,
+                email,
+              }).catch((err) => {
+                console.error(err);
+              });
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        }
+        closePage ? logout() : next();
       } else if (currentStepIndex === 3) {
         Axios.put(`${import.meta.env.VITE_PATH}/description`, {
           description,
           email,
         })
-          .then(closePage ? navigate("/", {}) : next())
+          .then(closePage ? logout() : next())
           .catch((err) => {
             console.error(err);
           });
@@ -751,7 +809,7 @@ function FormStructure() {
           photoConnecte,
           email,
         })
-          .then(closePage ? navigate("/", {}) : next())
+          .then(closePage ? logout() : next())
           .catch((err) => {
             console.error(err);
           });
@@ -781,7 +839,7 @@ function FormStructure() {
           photoConnecte,
           email,
         })
-          .then(closePage ? navigate("/", {}) : next())
+          .then(closePage ? logout() : next())
           .catch((err) => {
             console.error(err);
           });
@@ -790,13 +848,13 @@ function FormStructure() {
         currentStepIndex === 7 ||
         currentStepIndex === 13
       ) {
-        closePage ? navigate("/", {}) : next();
+        closePage ? logout() : next();
       } else if (currentStepIndex === 6) {
         Axios.put(`${import.meta.env.VITE_PATH}/resaInst`, {
           resaInst,
           email,
         })
-          .then(closePage ? navigate("/", {}) : next())
+          .then(closePage ? logout() : next())
           .catch((err) => {
             console.error(err);
           });
@@ -826,7 +884,7 @@ function FormStructure() {
             dimancheMax,
             email,
           })
-            .then(closePage ? navigate("/", {}) : next())
+            .then(closePage ? logout() : next())
             .catch((err) => {
               console.error(err);
             });
@@ -855,7 +913,7 @@ function FormStructure() {
             dimancheMax,
             structureId,
           })
-            .then(closePage ? navigate("/", {}) : next())
+            .then(closePage ? logout() : next())
             .catch((err) => {
               console.error(err);
             });
@@ -866,7 +924,7 @@ function FormStructure() {
           dureeMax,
           email,
         })
-          .then(closePage ? navigate("/", {}) : next())
+          .then(closePage ? logout() : next())
           .catch((err) => {
             console.error(err);
           });
@@ -874,23 +932,28 @@ function FormStructure() {
         closedDays.map((date) => {
           if (indispo.indexOf(date) === -1) {
             Axios.post(`${import.meta.env.VITE_PATH}/calendrier/add`, {
-              date: date, nbPlaces: -1, structureId,
-            })
-              .catch((err) => {
-                console.error(err);
-              })
+              date,
+              nbPlaces: -1,
+              structureId,
+            }).catch((err) => {
+              console.error(err);
+            });
           }
         });
         indispo.map((value) => {
           if (closedDays.indexOf(value) === -1) {
-            let date = value;
-            Axios.delete(`${import.meta.env.VITE_PATH}/calendrierIndispo/?structureId=${structureId}&date=${date}`, [structureId, date])
-              .catch((err) => {
-                console.error(err);
-              });
+            const date = value;
+            Axios.delete(
+              `${
+                import.meta.env.VITE_PATH
+              }/calendrierIndispo/?structureId=${structureId}&date=${date}`,
+              [structureId, date]
+            ).catch((err) => {
+              console.error(err);
+            });
           }
         });
-        closePage ? navigate("/", {}) : next()
+        closePage ? logout() : next();
       } else if (currentStepIndex === 11 && structure === "creche") {
         Axios.put(`${import.meta.env.VITE_PATH}/agrementsCreche`, {
           nbEmployes,
@@ -900,7 +963,7 @@ function FormStructure() {
           maxNuit,
           email,
         })
-          .then(closePage ? navigate("/", {}) : next())
+          .then(closePage ? logout() : next())
           .catch((err) => {
             console.error(err);
           });
@@ -912,7 +975,7 @@ function FormStructure() {
           maxNuit,
           email,
         })
-          .then(closePage ? navigate("/", {}) : next())
+          .then(closePage ? logout() : next())
           .catch((err) => {
             console.error(err);
           });
@@ -925,7 +988,7 @@ function FormStructure() {
           tarifAtelier,
           email,
         })
-          .then(closePage ? navigate("/", {}) : next())
+          .then(closePage ? logout() : next())
           .catch((err) => {
             console.error(err);
           });
@@ -939,124 +1002,207 @@ function FormStructure() {
           tarifHeureSup,
           email,
         })
-          .then(closePage ? navigate("/", {}) : next())
+          .then(closePage ? logout() : next())
           .catch((err) => {
             console.error(err);
           });
       } else if (currentStepIndex === 14) {
-        let docPmiSrc = null;
-        let docCniSrc = null;
-        let docCpamSrc = null;
-        let docDomSrc = null;
-        let docDiplomeSrc = null;
-        let docRespSrc = null;
-        let docAutoSrc = null;
-        const formData = new FormData();
-        formData.append("docpmi", inputRefPmi.current.files[0]);
-        if (inputRefCni.current !== null) {
-          formData.append("docIdentite", inputRefCni.current.files[0]);
-        }
-        if (inputRefCpam.current !== null) {
-          formData.append("docVitale", inputRefCpam.current.files[0]);
-        }
-        if (inputRefDom.current !== null) {
-          formData.append("docJustifDom", inputRefDom.current.files[0]);
-        }
-        if (inputRefDiplome.current !== null) {
-          formData.append("docDiplome", inputRefDiplome.current.files[0]);
-        }
-        if (inputRefResp.current !== null) {
-          formData.append("docRespCivile", inputRefResp.current.files[0]);
-        }
-        if (inputRefAuto.current !== null) {
-          formData.append("docAssAuto", inputRefAuto.current.files[0]);
-        }
-        Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
-          .then((result) => {
-            if (result.data.docpmi !== undefined) {
-              const doc = result.data.docpmi[0].filename;
-              docPmiSrc = `${import.meta.env.VITE_PATH
-                }/uploads/photosStructure/${doc}`;
-            }
-            if (result.data.docIdentite !== undefined) {
-              const doc = result.data.docIdentite[0].filename;
-              docCniSrc = `${import.meta.env.VITE_PATH
-                }/uploads/photosStructure/${doc}`;
-            }
-            if (result.data.docVitale !== undefined) {
-              const doc = result.data.docVitale[0].filename;
-              docCpamSrc = `${import.meta.env.VITE_PATH
-                }/uploads/photosStructure/${doc}`;
-            }
-            if (result.data.docJustifDom !== undefined) {
-              const doc = result.data.docJustifDom[0].filename;
-              docDomSrc = `${import.meta.env.VITE_PATH
-                }/uploads/photosStructure/${doc}`;
-            }
-            if (result.data.docDiplome !== undefined) {
-              const doc = result.data.docDiplome[0].filename;
-              docDiplomeSrc = `${import.meta.env.VITE_PATH
-                }/uploads/photosStructure/${doc}`;
-            }
-            if (result.data.docRespCivile !== undefined) {
-              const doc = result.data.docRespCivile[0].filename;
-              docRespSrc = `${import.meta.env.VITE_PATH
-                }/uploads/photosStructure/${doc}`;
-            }
-            if (result.data.docAssAuto !== undefined) {
-              const doc = result.data.docAssAuto[0].filename;
-              docAutoSrc = `${import.meta.env.VITE_PATH
-                }/uploads/photosStructure/${doc}`;
-            }
-          })
-          .then(() => {
-            if (structure === "creche") {
-              Axios.put(`${import.meta.env.VITE_PATH}/verifsCreche`, {
-                numAgrement,
-                dateAgrement,
-                docPmiSrc,
-                siret,
+        if (inputRefPmi.current.files.length > 0) {
+          const formData = new FormData();
+          formData.append("file", inputRefPmi.current.files[0]);
+          Axios.post(`${import.meta.env.VITE_PATH}/photosStructure`, formData)
+            .then((result) => {
+              let photoStructure = docPmi;
+              if (result.data !== undefined) {
+                const doc = result.data;
+                photoStructure = doc;
+              }
+              const column = "docPmi";
+              Axios.put(`${import.meta.env.VITE_PATH}/photosStructure`, {
+                column,
+                photoStructure,
                 email,
-              })
-                .catch((err) => {
-                  console.error(err);
-                })
-                .then(closePage ? navigate("/", {}) : next());
-            } else if (structure === "assmat") {
-              Axios.put(`${import.meta.env.VITE_PATH}/verifsAssmat`, {
-                numSecu,
-                numAgrement,
-                dateAgrement,
-                docPmiSrc,
-                assHabitNom,
-                assHabitNumero,
-                assHabitAdresse,
-                assAutoNom,
-                assAutoNumero,
-                assAutoAdresse,
-                docCniSrc,
-                docCpamSrc,
-                docDomSrc,
-                docDiplomeSrc,
-                docRespSrc,
-                docAutoSrc,
+              }).catch((err) => {
+                console.error(err);
+              });
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        }
+        if (inputRefCni.current.files.length > 0) {
+          const formData = new FormData();
+          formData.append("file", inputRefCni.current.files[0]);
+          Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
+            .then((result) => {
+              let doc = docIdentite;
+              if (result.data !== undefined) {
+                const docTemp = result.data;
+                doc = docTemp;
+              }
+              const column = "docIdentite";
+              Axios.put(`${import.meta.env.VITE_PATH}/justificatifs`, {
+                column,
+                doc,
                 email,
-              })
-                .catch((err) => {
-                  console.error(err);
-                })
-                .then(closePage ? navigate("/", {}) : next())
-            }
+              }).catch((err) => {
+                console.error(err);
+              });
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        }
+        if (inputRefCpam.current.files.length > 0) {
+          const formData = new FormData();
+          formData.append("file", inputRefCpam.current.files[0]);
+          Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
+            .then((result) => {
+              let doc = docVitale;
+              if (result.data !== undefined) {
+                const docTemp = result.data;
+                doc = docTemp;
+              }
+              const column = "docVitale";
+              Axios.put(`${import.meta.env.VITE_PATH}/justificatifs`, {
+                column,
+                doc,
+                email,
+              }).catch((err) => {
+                console.error(err);
+              });
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        }
+        if (inputRefDom.current.files.length > 0) {
+          const formData = new FormData();
+          formData.append("file", inputRefDom.current.files[0]);
+          Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
+            .then((result) => {
+              let doc = docJustifDom;
+              if (result.data !== undefined) {
+                const docTemp = result.data;
+                doc = docTemp;
+              }
+              const column = "docJustifDOm";
+              Axios.put(`${import.meta.env.VITE_PATH}/justificatifs`, {
+                column,
+                doc,
+                email,
+              }).catch((err) => {
+                console.error(err);
+              });
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        }
+        if (inputRefDiplome.current.files.length > 0) {
+          const formData = new FormData();
+          formData.append("file", inputRefDiplome.current.files[0]);
+          Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
+            .then((result) => {
+              let doc = docDiplome;
+              if (result.data !== undefined) {
+                const docTemp = result.data;
+                doc = docTemp;
+              }
+              const column = "docDiplome";
+              Axios.put(`${import.meta.env.VITE_PATH}/justificatifs`, {
+                column,
+                doc,
+                email,
+              }).catch((err) => {
+                console.error(err);
+              });
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        }
+        if (inputRefResp.current.files.length > 0) {
+          const formData = new FormData();
+          formData.append("file", inputRefResp.current.files[0]);
+          Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
+            .then((result) => {
+              let doc = docRespCivile;
+              if (result.data !== undefined) {
+                const docTemp = result.data;
+                doc = docTemp;
+              }
+              const column = "docRespCivile";
+              Axios.put(`${import.meta.env.VITE_PATH}/justificatifs`, {
+                column,
+                doc,
+                email,
+              }).catch((err) => {
+                console.error(err);
+              });
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        }
+        if (inputRefAuto.current.files.length > 0) {
+          const formData = new FormData();
+          formData.append("file", inputRefAuto.current.files[0]);
+          Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
+            .then((result) => {
+              let doc = docAssAuto;
+              if (result.data !== undefined) {
+                const docTemp = result.data;
+                doc = docTemp;
+              }
+              const column = "docAssAuto";
+              Axios.put(`${import.meta.env.VITE_PATH}/justificatifs`, {
+                column,
+                doc,
+                email,
+              }).catch((err) => {
+                console.error(err);
+              });
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        }
+        if (structure === "creche") {
+          Axios.put(`${import.meta.env.VITE_PATH}/verifsCreche`, {
+            numAgrement,
+            dateAgrement,
+            siret,
+            email,
           })
-          .catch((err) => {
-            console.error(err);
-          });
+            .catch((err) => {
+              console.error(err);
+            })
+            .then(closePage ? logout() : next());
+        } else if (structure === "assmat") {
+          Axios.put(`${import.meta.env.VITE_PATH}/verifsAssmat`, {
+            numSecu,
+            numAgrement,
+            dateAgrement,
+            assHabitNom,
+            assHabitNumero,
+            assHabitAdresse,
+            assAutoNom,
+            assAutoNumero,
+            assAutoAdresse,
+            email,
+          })
+            .catch((err) => {
+              console.error(err);
+            })
+            .then(closePage ? logout() : next());
+        }
       }
-    } else navigate('/', {})
+    } else logout();
   };
   return (
     <StructureContext.Provider value={{ structure, setStructure }}>
-      <ResaContext.Provider value={{ resa, setResa }}>
+      <ResaContext.Provider value={{ resaInst, setResaInst }}>
         <form
           encType="multipart/form-data"
           className="formContainer"
@@ -1064,7 +1210,10 @@ function FormStructure() {
         >
           <div className="formTitleBar">
             <div className="leftPart">
-              <h4>Babyplace</h4>
+              <div className="logo">
+                <img src={logo} alt="logo" />
+                <img src={logotxt} alt="Babyplace" />
+              </div>
               <p> {pageTitle()} </p>
             </div>
             <div>
@@ -1097,7 +1246,7 @@ function FormStructure() {
                 ) : (
                   <div> </div>
                 )}
-                {resa !== "" || currentStepIndex !== 6 ? (
+                {resaInst !== "" || currentStepIndex !== 6 ? (
                   <button type="submit" className="nextButton">
                     {!isLastStep ? "Suivant" : "Fin"}
                   </button>
@@ -1107,8 +1256,8 @@ function FormStructure() {
               </div>
             </div>
             {currentStepIndex !== 6 &&
-              currentStepIndex !== 7 &&
-              currentStepIndex !== 15 ? (
+            currentStepIndex !== 7 &&
+            currentStepIndex !== 15 ? (
               <div className="explicationsContainer">
                 {screenWidth < 1000 && (
                   <button

@@ -1,14 +1,53 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Base({ setCompo }) {
+function Base({
+  setCompo,
+  setDataBasique,
+  dataDateHeure,
+  setDataDateHeure,
+  dataServices,
+  setDataServices,
+  dataAggrements,
+  setDataAggrements,
+}) {
+  const fullReset = () => {
+    setDataBasique((prevState) => ({
+      ...prevState,
+      isCreche: parseInt(2, 10),
+    }));
+
+    for (const key in dataDateHeure) {
+      setDataDateHeure((prevState) => ({
+        ...prevState,
+        [key]: "",
+      }));
+    }
+
+    for (const key in dataServices) {
+      setDataServices((prevState) => ({
+        ...prevState,
+        [key]: false,
+      }));
+    }
+
+    for (const key in dataAggrements) {
+      setDataAggrements((prevState) => ({
+        ...prevState,
+        [key]: false,
+      }));
+    }
+  };
+
   return (
     <div className="filtres">
       <header>
         <button type="button" className="h2" onClick={() => setCompo(0)}>
           {`< Filtres`}
         </button>
-        <button type="button">RESET</button>
+        <button type="button" className="reset" onClick={() => fullReset()}>
+          RESET FILTRES
+        </button>
       </header>
 
       <main className="base">
@@ -43,6 +82,10 @@ function Base({ setCompo }) {
 
 Base.propTypes = {
   setCompo: PropTypes.func.isRequired,
+  setDataBasique: PropTypes.func.isRequired,
+  setdataDateHeure: PropTypes.func.isRequired,
+  setdataServices: PropTypes.func.isRequired,
+  setdataAggrements: PropTypes.func.isRequired,
 };
 
 export default Base;

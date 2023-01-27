@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import BaseCard from "@components/appli/recherche/BaseCard";
 import BaseMap from "@components/appli/recherche/BaseMap";
+import FamilleContext from "@components/context/FamilleContext";
 
 // ---
 import Base from "@components/appli/filtres/Base";
@@ -11,7 +12,7 @@ import Services from "@components/appli/filtres/Services";
 import Aggrements from "@components/appli/filtres/Aggrements";
 
 function AppliSearch() {
-  const [compo, setCompo] = useState(0);
+  const { familleId } = useContext(FamilleContext);
 
   // --- les structures ---
   const [structure, setStructure] = useState([]);
@@ -30,15 +31,31 @@ function AppliSearch() {
     getStructure();
   }, []);
 
+  // --- likes des familles ---
+  const [familleLiked, setFamilleLiked] = useState();
+
+  const getFamilleLiked = () => {
+    axios
+      .get(`${import.meta.env.VITE_PATH}/famille/likes/${familleId}`)
+      .then((res) => {
+        setFamilleLiked(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  useEffect(() => {
+    getFamilleLiked();
+  }, [familleId]);
+
   // --- les filtres ---
   const [dataBasique, setDataBasique] = useState({
     isCreche: 2,
-    dispo: false,
   });
 
   const [dataDateHeure, setDataDateHeure] = useState({
-    heureMin: "00:00",
-    heureMax: "23:59",
+    heureMin: "",
+    heureMax: "",
     jour: "",
   });
 
@@ -61,6 +78,7 @@ function AppliSearch() {
   });
 
   // ---
+  const [compo, setCompo] = useState(0);
 
   const choixComposant = () => {
     if (compo === 2) {
@@ -72,11 +90,25 @@ function AppliSearch() {
           dataDateHeure={dataDateHeure}
           dataServices={dataServices}
           dataAggrements={dataAggrements}
+          familleLiked={familleLiked}
+          familleId={familleId}
+          getFamilleLiked={getFamilleLiked}
         />
       );
     }
     if (compo === 3) {
-      return <Base setCompo={setCompo} />;
+      return (
+        <Base
+          setCompo={setCompo}
+          setDataBasique={setDataBasique}
+          setDataDateHeure={setDataDateHeure}
+          dataDateHeure={dataDateHeure}
+          setDataServices={setDataServices}
+          dataServices={dataServices}
+          setDataAggrements={setDataAggrements}
+          dataAggrements={dataAggrements}
+        />
+      );
     }
     if (compo === 4) {
       return (
@@ -122,11 +154,14 @@ function AppliSearch() {
         dataDateHeure={dataDateHeure}
         dataServices={dataServices}
         dataAggrements={dataAggrements}
+        familleLiked={familleLiked}
+        familleId={familleId}
+        getFamilleLiked={getFamilleLiked}
       />
     );
   };
 
-  return <div className="applisearch">{choixComposant()}</div>;
+  return familleLiked && <div className="applisearch">{choixComposant()}</div>;
 }
 
 export default AppliSearch;

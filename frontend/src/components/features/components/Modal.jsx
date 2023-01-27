@@ -1,5 +1,6 @@
 import React from "react";
 import mdameCoucou from "@assets/landing page/image2.svg";
+import PropTypes from "prop-types";
 
 function Modal({ open, closeModal, onReset }) {
   if (!open) return null;
@@ -13,14 +14,22 @@ function Modal({ open, closeModal, onReset }) {
     <div className="modalDiv">
       <div className="modalContainer">
         <div className="modalDivFirst">
-          <img src={mdameCoucou} id="mdameCouou" />
+          <img
+            src={mdameCoucou}
+            id="mdameCouou"
+            alt="dessin d'une femme avec son ordinateur"
+          />
         </div>
         <div className="modalDivBis">
           <h4>
             Merci pour votre message, nous vous repondrons dans les plus bref
             délais.
           </h4>
-          <button className="navBtnLite-Modal" onClick={handleClose}>
+          <button
+            type="button"
+            className="navBtnLite-Modal"
+            onClick={handleClose}
+          >
             Fermer
           </button>
         </div>
@@ -28,5 +37,11 @@ function Modal({ open, closeModal, onReset }) {
     </div>
   );
 }
+
+Modal.propTypes = {
+  open: PropTypes.bool,
+  closeModal: PropTypes.func,
+  onReset: PropTypes.func,
+};
 
 export default Modal;

@@ -16,16 +16,25 @@
     align-items: center;
     width: 100%;
 
-    .h2 {
+    button.h2 {
       font-size: $h2;
       font-weight: 600;
       background-color: transparent;
     }
 
-    button {
+    button.reset {
       background-color: $grey;
       padding: 0.5rem;
       border-radius: 10px;
+      border: 2px $blue solid;
+      color: $blue;
+    }
+    button.reset:active {
+      background-color: $blue;
+      padding: 0.5rem;
+      border-radius: 10px;
+      border: 2px $grey solid;
+      color: $grey;
     }
   }
 

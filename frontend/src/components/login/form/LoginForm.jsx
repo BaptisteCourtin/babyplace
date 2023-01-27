@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { toast } from "react-hot-toast";
+import useLocalStorage from "@utils/useLocalStorage";
+import UserEmailContext from "@components/context/UserEmailContext";
 
 function LoginForm() {
   const navigate = useNavigate();
+  const { setUserEmail } = useContext(UserEmailContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [typePwd, setTypePwd] = useState(true);
+  const [localEmail, setLocalEmail] = useLocalStorage("email", "mail");
 
   const handlePwdClick = (e) => {
     e.preventDefault();
@@ -21,6 +25,7 @@ function LoginForm() {
 
   const handleClick = (e) => {
     e.preventDefault();
+    setLocalEmail(email)
     if (email && password) {
       axios
         .post(`${import.meta.env.VITE_PATH}/auth`, {
@@ -29,12 +34,18 @@ function LoginForm() {
         })
         .then((res) => {
           if (email !== adminEmail && password !== adminPassword) {
-            const { token } = res.data;
-            navigate("/login-params", {
-              state: {
-                token,
-              },
-            });
+            const { token, isVerify } = res.data;
+            sessionStorage.setItem("structureEmail", email);
+            setUserEmail(email);
+            if (isVerify === 0) {
+              navigate("/pending");
+            } else if (isVerify === 1) {
+              navigate("/login-params", {
+                state: {
+                  token,
+                },
+              });
+            }
           } else if (email === adminEmail && password === adminPassword) {
             const { token } = res.data;
             navigate("/admin", {
@@ -46,7 +57,6 @@ function LoginForm() {
         })
         .catch((err) => {
           if (err?.response.status === 404) {
-            navigate('/pending')
           } else {
             toast.error(err?.response?.data || err.message);
           }
@@ -91,7 +101,7 @@ function LoginForm() {
             }}
             required
           />
-          <button onClick={handlePwdClick}>
+          <button type="submit" onClick={handlePwdClick}>
             {!typePwd ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
           </button>
         </div>

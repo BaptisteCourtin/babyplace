@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Carousel } from "react-responsive-carousel";
 import FamilleContext from "@components/context/FamilleContext";
+import { toast } from "react-hot-toast";
 import Toggle from "../filtres/Toggle";
 
 function FormEnfant() {
@@ -116,10 +117,14 @@ function FormEnfant() {
 
   const updateFormEnfant = () => {
     const pourcent = calculPourcent();
-    axios.put(`${import.meta.env.VITE_PATH}/formEnfant/${enfantId}`, {
-      initialData,
-      pourcent,
-    });
+    axios
+      .put(`${import.meta.env.VITE_PATH}/formEnfant/${enfantId}`, {
+        initialData,
+        pourcent,
+      })
+      .then(() => {
+        toast.success("C'est bon, c'est mis à jour 👌");
+      });
   };
 
   // --- ajout enfant ---
@@ -133,7 +138,6 @@ function FormEnfant() {
         getNomsEnfants();
       });
   };
-  // asynchronisme de l'affichage
 
   // --- supprimer enfant ---
 
@@ -144,7 +148,6 @@ function FormEnfant() {
         getNomsEnfants();
       });
   };
-  // asynchronisme de l'affichage
 
   return (
     finalOK === true &&
@@ -184,8 +187,8 @@ function FormEnfant() {
               centerMode
               centerSlidePercentage={40}
             >
-              {nomsEnfants.map((each) => (
-                <div className="prenom-container">
+              {nomsEnfants.map((each, index) => (
+                <div className="prenom-container" key={index}>
                   <button
                     type="button"
                     onClick={() => setEnfantId(each.enfantId)}

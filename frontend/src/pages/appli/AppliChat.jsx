@@ -4,16 +4,18 @@ import ProfilPlat from "@components/appli/ProfilPlat";
 import ChatForApp from "@components/messages/forApp/ChatForApp";
 import io from "socket.io-client";
 
+const socket = io.connect(`${import.meta.env.VITE_SOCKET}`);
+
 function AppliChat() {
   const room = 2;
-  const socket = io.connect("http://localhost:3001");
-
-  const joinRoom = async () => {
-    console.log(room);
-    await socket.emit("join_room", room);
-  };
   const username = "kevindu75@exemple.com";
   const title = "Crêche";
+
+  const joinRoom = async () => {
+    console.warn(room);
+    await socket.emit("join_room", room);
+  };
+
   return (
     <div className="appli-message">
       <ProfilPlat />

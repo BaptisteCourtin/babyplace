@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 export const useGetHours = (structureId, userType) => {
@@ -60,14 +60,15 @@ export const useGetHours = (structureId, userType) => {
 
   const getHoraires = async () => {
     try {
-      const res = await axios
-        .get(`${import.meta.env.VITE_PATH}/horaires/${structureId}`, {
-          id: structureId
-        })
+      const res = await axios.get(
+        `${import.meta.env.VITE_PATH}/horaires/${structureId}`,
+        {
+          id: structureId,
+        }
+      );
       setHoraires(res.data);
-    }
-    catch (err) {
-      console.error(err.message)
+    } catch (err) {
+      console.error(err.message);
     }
   };
 
@@ -76,14 +77,7 @@ export const useGetHours = (structureId, userType) => {
       setToggleDay(horaires[0].ouvert);
       setSelected(horaires[0].jourSemaine);
     }
-  }
-
-  useEffect(() => {
-    getData();
-    getHoraires();
-    console.log(horaires)
-    setValues();
-  }, []);
+  };
 
   return {
     toggleDay,
@@ -112,5 +106,6 @@ export const useGetHours = (structureId, userType) => {
     setSwitch3,
     getData,
     getHoraires,
+    setValues
   };
 };
