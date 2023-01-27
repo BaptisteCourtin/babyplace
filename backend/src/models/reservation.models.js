@@ -7,6 +7,22 @@ const getReser = async (id) => {
   return result;
 };
 
+const getReservationAR = async (req) => {
+  const [result] = await datasource.query(
+    "SELECT r.*, e.nom, e.prenom, c.nom AS crecheNom, a.nomUsage AS assMatNomUsage, a.nomNaissance AS assMatNomNaissance, a.prenom AS assMatPrenom, s.photoProfil FROM reservation AS r INNER JOIN enfant AS e ON e.enfantId = r.enfantId LEFT JOIN creche AS c ON c.structureId = r.structureId LEFT JOIN assMat AS a ON a.structureId = r.structureId LEFT JOIN structure AS s ON s.structureId=r.structureId WHERE r.familleId = ? AND (status = 'approved' OR status = 'refused' OR status = 'toNote')",
+    [req.params.id]
+  );
+  return result;
+};
+
+const getReservationPayed = async (req) => {
+  const [result] = await datasource.query(
+    "SELECT r.heureArrivee, r.heureDepart, r.dateArrivee, r.dateDepart, r.jour, e.nom, e.prenom, c.nom AS crecheNom, a.nomUsage AS assMatNomUsage, a.nomNaissance AS assMatNomNaissance, a.prenom AS assMatPrenom, s.photoProfil FROM reservation AS r INNER JOIN enfant AS e ON e.enfantId = r.enfantId LEFT JOIN creche AS c ON c.structureId = r.structureId LEFT JOIN assMat AS a ON a.structureId = r.structureId LEFT JOIN structure AS s ON s.structureId=r.structureId WHERE r.familleId = ? AND (status = 'payed') ORDER BY dateArrivee",
+    [req.params.id]
+  );
+  return result;
+};
+
 const getApprovedReser = async (id) => {
   const [result] = await datasource.query(
     "SELECT reservation.id FROM reservation WHERE structureId = ? AND status = 'approved'", [id]
@@ -89,14 +105,10 @@ const updateDates = async (id, dateStart, dateEnd) => {
 }
 
 module.exports = {
-<<<<<<< HEAD
   getReser,
   getApprovedReser,
   updateStatus,
-  updateDates
-}
-=======
-  getReser,
+  updateDates,
   getReservationAR,
   getReservationPayed,
   updateStatus,
@@ -105,4 +117,3 @@ module.exports = {
   updateResaToNote,
   deleteResaByDate,
 };
->>>>>>> 686052b0c4488ba9730c343f86ba9f852718b9a7
