@@ -11,7 +11,7 @@ const app = express();
 // use some application-level middlewares
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: `${process.env.FRONT_HOST}`,
     optionsSuccessStatus: 200,
   })
 );
