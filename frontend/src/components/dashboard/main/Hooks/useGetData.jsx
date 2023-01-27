@@ -6,7 +6,6 @@ export const useGetAllData = (token) => {
   const [donnees, setDonnees] = useState({});
   const [details, setDetails] = useState([]);
   const [notif, setNotif] = useState([]);
-  const [fav, setFav] = useState([]);
 
   const getData = async () => {
     try {
@@ -64,19 +63,7 @@ export const useGetAllData = (token) => {
     }
   };
 
-  const getFavorites = async () => {
-    try {
-      const res = await axios.get(
-        `${import.meta.env.VITE_PATH}/favorites/${data.structureId}`,
-        {
-          id: data.structureId,
-        }
-      );
-      setFav(res.data);
-    } catch (err) {
-      console.error(err.message);
-    }
-  }
 
-  return { getData, data, userType, donnees, details, notif, getNotifications, fav, getFavorites };
+
+  return { getData, data, userType, donnees, details, notif, getNotifications };
 };

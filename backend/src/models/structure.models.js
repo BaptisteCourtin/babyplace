@@ -29,6 +29,13 @@ const getStructure = async (req) => {
   return result;
 };
 
+const getStructureId = async (token) => {
+  const [result] = await datasource.query(
+    "SELECT structure.structureId from structure WHERE token = ?", [token]
+  )
+  return result
+}
+
 const getStructureType = async (id, type) => {
   const [result] = await datasource.query(
     `SELECT * FROM structure AS s JOIN ${type} AS t ON s.structureId=t.structureId WHERE s.structureId = ?`,
@@ -137,6 +144,7 @@ const updateSignal = async (req) => {
 module.exports = {
   getStructure,
   getStructures,
+  getStructureId,
   getStructureDetails,
   getStructureType,
   getNotVerified,

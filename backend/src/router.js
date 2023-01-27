@@ -274,6 +274,7 @@ router.get("/famille/all", famille.getFamilleDataMess);
 //Routes for dashboard + admin page start
 router.get("/structure", structure.getStructure);
 router.get("/structures", structure.getStructures);
+router.get("/structureId", structure.getStructureId);
 router.get("/structure/type/:id", structure.getStructureType);
 router.get("/structure/details", structure.getStructureDetails);
 router.get("/reservation/:id", reservation.getReser);

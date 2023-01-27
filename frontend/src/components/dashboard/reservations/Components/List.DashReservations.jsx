@@ -37,7 +37,7 @@ function ListDashReservations({
                 }
               })(),
               opacity: (() => {
-                if (r.status === "canceled" || r.status === "refused") {
+                if (r.status === "payed" || r.status === "refused") {
                   return "0.4";
                 }
                 return "1";

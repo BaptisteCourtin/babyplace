@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { useLocation } from "react-router-dom";
 import DashNavbar from "./nav/DashNavbar";
 import DashMain from "./main/DashMain";
@@ -10,18 +10,21 @@ import { useDeleteData } from "./main/Hooks/useDeleteData";
 import { useGetAllData } from "./main/Hooks/useGetData";
 import { useGetHours } from "./hours/Hooks/useGetHours";
 import { useGetReservations } from "./reservations/Hooks/useGetReservations";
+import { useGetFavorites } from "./main/Hooks/useGetFavorites";
 
 function Dashboard() {
   const { state } = useLocation();
   const { token } = state;
+  let id = window.localStorage.getItem("id")
 
   const [openNav, setOpenNav] = useState(true);
   const [toggleNotif, setToggleNotif] = useState(false);
 
-  const { getData, data, userType, notif, getNotifications, fav, getFavorites } =
+  const { getData, data, userType, notif, getNotifications } =
     useGetAllData(token);
-  const { horaires, getHoraires } = useGetHours(data.structureId, userType);
-  const { approvedReser, getApprovedReser } = useGetReservations(data.structureId)
+  const { fav, getFavorites } = useGetFavorites(id)
+  const { horaires, getHoraires } = useGetHours(id, userType);
+  const { reser, getReser, approvedReser, getApprovedReser } = useGetReservations(id)
   const { pageShown, toggle, setToggle } = usePageToggle(
     data,
     userType,
@@ -30,13 +33,14 @@ function Dashboard() {
   const { deleteNotification, deleteDates } = useDeleteData(getNotifications);
 
   useEffect(() => {
-    getData();
-    getApprovedReser();
-    getHoraires();
-    getFavorites();
-    getNotifications();
-    deleteDates();
-  }, [toggle]);
+    getData()
+    getReser()
+    getApprovedReser()
+    getHoraires()
+    getFavorites()
+    getNotifications()
+    deleteDates()
+  }, [toggle])
 
   return (
     <div className={openNav ? "dashboard" : "dashboardClosed"}>
@@ -55,6 +59,7 @@ function Dashboard() {
           data={data}
           fav={fav}
           horaires={horaires}
+          reser={reser}
           approvedReser={approvedReser}
         />
       )}

@@ -223,9 +223,12 @@
       color: $white;
 
       & img {
-        max-width: 80%;
-        margin: 0 10% 10px 10%;
+        width: 110px;
+        height: 110px;
+        padding: 10px;
+        margin: 0 10% 30px 10%;
         border-radius: 50%;
+        background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
       }
 
       & p {
@@ -307,6 +310,9 @@
         gap: 20px;
 
         & p {
+          display: flex;
+          align-items: center;
+          justify-content: center;
           padding: 5px;
           background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
           border-radius: 5px;

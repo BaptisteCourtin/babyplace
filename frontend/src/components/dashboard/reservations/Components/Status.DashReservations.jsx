@@ -43,12 +43,16 @@ function StatusDashReservations({ r, updateStatus, getReser }) {
             <MdOutlineCancel /> Refuser
           </button>
         </div>
-      ) : (
+      ) : (r.status === "approved" || r.status === "refused") ? (
         <div className="reserModif">
           <button type="button" onClick={() => updateStatus("waiting", r.id)}>
             <GoFile />
             Modifier
           </button>
+        </div>
+      ) : (
+        <div className="reserPayed">
+          <p>Réservation déjà passée</p>
         </div>
       )}
       {modal &&

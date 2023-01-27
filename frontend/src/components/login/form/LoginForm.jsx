@@ -33,6 +33,7 @@ function LoginForm() {
         .then((res) => {
           if (email !== adminEmail && password !== adminPassword) {
             const { token } = res.data;
+            console.log(res.data)
             navigate("/login-params", {
               state: {
                 token,

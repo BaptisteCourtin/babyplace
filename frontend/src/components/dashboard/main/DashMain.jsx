@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Chart } from "../reservations/Components/Chart.DashReser";
-import { FaRegCalendarCheck, FaRegClock, FaPercent } from 'react-icons/fa';
-import { useEffect } from "react";
+import { FaRegCalendarCheck, FaRegClock, FaPercent, FaBabyCarriage } from 'react-icons/fa';
+import { useFormatDay } from "../agenda/Hooks/useFormatDay";
+import { useGetAgenda } from "../agenda/Hooks/useGetAgenda";
 
-function DashMain({ data, fav, horaires, approvedReser }) {
+function DashMain({ data, fav, horaires, reser, approvedReser }) {
 
   const [filteredHoraires, setFilteredHoraires] = useState([])
+  const { curDate } = useFormatDay();
+  const { calendar } = useGetAgenda(data.structureId)
 
   const calcHours = () => {
     let tmpHours = 0;
@@ -39,8 +42,6 @@ function DashMain({ data, fav, horaires, approvedReser }) {
     )
   }
 
-  console.log(data)
-
   useEffect(() => {
     openDays()
   }, [])
@@ -49,23 +50,62 @@ function DashMain({ data, fav, horaires, approvedReser }) {
     <main className="dashMain">
       <section className="dashTop">
         <ul>
-          <li>
+          <li
+            style={{
+              border: (() => {
+                if (approvedReser.length >= 50) {
+                  return "1px solid #2dcd7a";
+                }
+                if (approvedReser.length >= 20) {
+                  return "1px solid #FFA84C";
+                }
+                if (approvedReser.length >= 0) {
+                  return "1px solid #EF3672";
+                }
+              })()
+            }}
+          >
             <FaRegCalendarCheck />
             <div className="dashListSubgrid">
               <p>Demandes acceptées</p>
-              <h3>{approvedReser.length}</h3>
+              <h3>{approvedReser.length} / {reser.length}</h3>
             </div>
             <p className="dashListSubText">Semaine {weekNumber}</p>
           </li>
-          <li>
+          <li
+            style={{
+              border: (() => {
+                if (calcHours() >= 30) {
+                  return "1px solid #2dcd7a";
+                }
+                if (calcHours() < 30) {
+                  return "1px solid #7e72f2";
+                }
+              })()
+            }}
+          >
             <FaRegClock />
             <div className="dashListSubgrid">
               <p>Heures hebdomadaires</p>
-              <h3>{calcHours()}</h3>
+              <h3>{calcHours()}H</h3>
             </div>
             <p className="dashListSubText">sur {filteredHoraires.length} jours</p>
           </li>
-          <li>
+          <li
+            style={{
+              border: (() => {
+                if (percentComplete === 100) {
+                  return "1px solid #2dcd7a";
+                }
+                if (percentComplete >= 50) {
+                  return "1px solid #7e72f2";
+                }
+                if (percentComplete >= 0) {
+                  return "1px solid #EF3672";
+                }
+              })()
+            }}
+          >
             <FaPercent />
             <div className="dashListSubgrid">
               <p>Complétion du profil</p>
@@ -79,9 +119,32 @@ function DashMain({ data, fav, horaires, approvedReser }) {
               )}
             </p>
           </li>
-          <li>
-            <p></p>
-            <h3></h3>
+          <li
+            style={{
+              border: (() => {
+                if (data.maxPlaces > 0) {
+                  return "1px solid #7e72f2";
+                }
+                if (data.maxPlaces === 0) {
+                  return "1px solid #EF3672";
+                }
+              })()
+            }}
+          >
+            <FaBabyCarriage />
+            <div className="dashListSubgrid">
+              <p>Nombre de places</p>
+              <h3>{data.maxPlaces}</h3>
+            </div>
+            <p className="dashListSubText">
+              {calendar.map(c => (c.date === curDate && c.nbPlaces != -1) ? (
+                `Il vous reste ${c.nbPlaces} places`
+              ) : (c.date === curDate && c.nbPlaces == -1) ? (
+                "Vous êtes au repos"
+              ) : (c.date !== curDate) && (
+                "Vous êtes complet"
+              ))}
+            </p>
           </li>
         </ul>
       </section>
@@ -114,7 +177,7 @@ function DashMain({ data, fav, horaires, approvedReser }) {
         <div className="dashChart">
           <Chart {...data} />
           <div className="dashChartBottom">
-            <p>Hello</p>
+            <p>Il vous reste </p>
             <p>Hello</p>
           </div>
         </div>
