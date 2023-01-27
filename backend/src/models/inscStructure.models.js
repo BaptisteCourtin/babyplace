@@ -93,7 +93,7 @@ const resaInst = (resaInst, email) => {
 
 const createHoraires = (jour, numero, ouvert, min, max, structureId) => {
   return datasource.query(
-    `INSERT INTO horaires(jourSemaine, ouvert, heureMin, heureMax, jourId, structureId) VALUES(${jour}, ?, ?, ?, ${numero}, ?)`,
+    `INSERT INTO horaires(jourSemaine, ouvert, heureMin, heureMax, jourId, structureId) VALUES('${jour}', ?, ?, ?, ${numero}, ?)`,
     [ouvert, min, max, structureId]
   );
 };
@@ -119,6 +119,12 @@ const deleteDate = (structureId, date) => {
   );
 };
 
+const getDocPmi = (id) => {
+  return datasource.query("SELECT docPmi FROM structure WHERE structureId= ?", [
+    id,
+  ]);
+};
+
 module.exports = {
   getIsCreche,
   getStructureInfo,
@@ -137,4 +143,5 @@ module.exports = {
   updateHoraires,
   dureeAccueil,
   deleteDate,
+  getDocPmi,
 };

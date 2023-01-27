@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Toggle from "./Toggle";
 
 function FilterSimple({ setCompo, dataBasique, setDataBasique }) {
   const ChangeIsCreche = (e) => {
@@ -44,12 +43,6 @@ function FilterSimple({ setCompo, dataBasique, setDataBasique }) {
             </option>
           </select>
         </div>
-        <Toggle
-          setter={setDataBasique}
-          state={dataBasique.dispo}
-          nom="dispo"
-          p="Que les profils dispo"
-        />
       </main>
     </div>
   );

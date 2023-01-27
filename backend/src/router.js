@@ -83,8 +83,12 @@ router.post("/inscriptionAppFamille", (req, res) => {
       }
     })
     .catch((err) => {
-      console.error(err);
-      res.status(500).send("Création de compte impossible");
+      console.error(err.errno);
+      if (err.errno === 1062) {
+        res.status(400).send(err);
+      } else {
+        res.status(500).send("Création de compte impossible");
+      }
     });
 });
 
@@ -134,6 +138,7 @@ router.get("/famille/info/:id", famille.getFamilleInfo); // info famille (noms +
 router.get("/famille/formInscription/:id", famille.getDonneesFormInscription); //donnees du formulaire inscription
 router.get("/famille/pourcent/:id", famille.getPourcent); // pourcent des formulaire
 router.get("/famille/likes/:id", famille.getLikes); // get likes
+router.get("/famille/likesAndStructure/:id", famille.getLikesAndStructure); // get likes et info structure
 router.get("/famille/formParent/:id", parent.getDonneesFormParent); //donnees du formulaire parent
 router.get("/famille/formEnfant/:id", enfant.getDonneesFormEnfant); //donnees du formulaire enfant
 router.get("/famille/nomsEnfants/:id", enfant.getNomsEtIdEnfants); // noms et id des enfants
@@ -151,6 +156,7 @@ router.put("/formParent/:id", parent.updateFormParent); // formulaire parent
 router.put("/parent/nullOneDocForm/:id", parent.nullOneDocFormParent); // delete un doc du form inscription (parent)
 router.put("/formEnfant/:id", enfant.updateFormEnfant); // formulaire enfant
 router.put("/resaToNote/:id", reservation.updateResaToNote); // passe le status à toNote
+router.put("/famille/deconnexion/:id", famille.deco); // deconnexion famille
 
 router.post("/reservation", reservation.postReservation); // reservation
 router.post("/famille/newEnfant", enfant.postNewEnfant); // nouveau enfant
@@ -425,7 +431,9 @@ router.post(
 );
 
 router.get("/photosStructure", inscStructure.getPhotosStructure); // get structure pictures
-router.put("/photosStructure", inscStructure.updatePhotosStructure); // update structure pictures + docPmi
+router.put("/photosStructure", inscStructure.updatePhotosStructure); // update structure pictures + doc Pmi
+router.get("/docPmi", inscStructure.getDocPmi); // get doc Pmi from structure
+router.get("/justificatifs", inscAssmat.getJustificatifs); // get docs from assmat
 router.put("/justificatifs", inscAssmat.justificatifsAssmat); // update assmat doc
 
 router.put("/verifsAssmat", inscAssmat.verifsAssmat); // update assmat verifications

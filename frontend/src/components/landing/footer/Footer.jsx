@@ -57,7 +57,7 @@ function Footer({ userType }) {
                 <HashLink to="/features#about">A propos</HashLink>
               </li>
               <li>
-                <HashLink to="/features#profil">Nos Profil</HashLink>
+                <HashLink to="/features#profil">Nos Profils</HashLink>
               </li>
               <li>
                 <HashLink to="/features#mentions">Mentions Légales</HashLink>

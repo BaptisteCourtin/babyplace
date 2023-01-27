@@ -25,6 +25,11 @@ const getLikes = async (req, res) => {
   return res.json(result);
 };
 
+const getLikesAndStructure = async (req, res) => {
+  const result = await familleModels.getLikesAndStructure(req);
+  return res.json(result);
+};
+
 const getFamilleInfo = async (req, res) => {
   const result = await familleModels.getFamilleInfo(req);
   return res.json(result);
@@ -69,11 +74,21 @@ const getFamilleDataMess = async (req, res) => {
   return res.json(result);
 };
 
+const deco = async (req, res) => {
+  const result = await familleModels.deco(req);
+  if (result.affectedRows === 0) {
+    res.status(404).send("Not found");
+  } else {
+    res.sendStatus(204);
+  }
+};
+
 module.exports = {
   getPersoConfiance,
   getFamille,
   getPourcent,
   getLikes,
+  getLikesAndStructure,
   getDonneesFormInscription,
   getFamilleDataMess,
   postNewConfiance,
@@ -83,4 +98,5 @@ module.exports = {
   updatePourcentFormInscr,
   deleteLike,
   postNewLike,
+  deco,
 };

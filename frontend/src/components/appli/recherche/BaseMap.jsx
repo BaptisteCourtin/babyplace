@@ -24,8 +24,7 @@ function BaseMap({
   dataAggrements,
   familleLiked,
   familleId,
-  setChangeLike,
-  changeLike,
+  getFamilleLiked,
 }) {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
@@ -247,8 +246,7 @@ function BaseMap({
                   data={each}
                   familleLiked={familleLiked}
                   familleId={familleId}
-                  setChangeLike={setChangeLike}
-                  changeLike={changeLike}
+                  getFamilleLiked={getFamilleLiked}
                 />
               ))}
           </Carousel>
@@ -268,8 +266,7 @@ BaseMap.propTypes = {
 
   familleLiked: PropTypes.array.isRequired,
   familleId: PropTypes.string.isRequired,
-  setChangeLike: PropTypes.func.isRequired,
-  changeLike: PropTypes.bool.isRequired,
+  getFamilleLiked: PropTypes.func.isRequired,
 };
 
 export default BaseMap;

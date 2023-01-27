@@ -28,6 +28,8 @@ import selfie from "../assets/selfie.svg";
 import profilJM from "../assets/profilJM.png";
 import profilCPP from "../assets/profilCPP.jpg";
 import imgWoman from "../assets/img-woman.svg";
+import logo from "../assets/logo4.svg";
+import logotxt from "@assets/babyplaceTxt.svg";
 
 const INITIAL_DATA = {
   isCreche: null,
@@ -43,28 +45,28 @@ const INITIAL_DATA = {
   photo2Src: null,
   photo3Src: null,
   description: null,
-  PCSC1: false,
-  nesting: false,
-  montessori: false,
-  handi: false,
-  jardin: false,
-  sorties: false,
+  PCSC1: 0,
+  nesting: 0,
+  montessori: 0,
+  handi: 0,
+  jardin: 0,
+  sorties: 0,
   experience: 0,
-  enfants: false,
-  animaux: false,
-  nonFumeur: false,
-  zeroPollution: false,
-  repas: false,
-  hygiene: false,
-  promenades: false,
-  eveil: false,
-  musique: false,
-  art: false,
-  bilingue: false,
-  bibli: false,
-  transport: false,
-  albumPhoto: false,
-  photoConnecte: false,
+  enfants: 0,
+  animaux: 0,
+  nonFumeur: 0,
+  zeroPollution: 0,
+  repas: 0,
+  hygiene: 0,
+  promenades: 0,
+  eveil: 0,
+  musique: 0,
+  art: 0,
+  bilingue: 0,
+  bibli: 0,
+  transport: 0,
+  albumPhoto: 0,
+  photoConnecte: 0,
   resaInst: true,
   lundiOuvert: true,
   mardiOuvert: true,
@@ -226,7 +228,6 @@ function FormStructure() {
               siret: result.data.siret,
               numAgrement: result.data.numAgrement,
               dateAgrement: result.data.dateAgrement,
-              docPmi: result.data.docPmi,
             };
           });
         })
@@ -295,19 +296,12 @@ function FormStructure() {
               numSecu: result.data.numSecu,
               numAgrement: result.data.numAgrement,
               dateAgrement: result.data.dateAgrement,
-              docPmi: result.data.docPmi,
               assHabitNom: result.data.assHabitNom,
               assHabitNumero: result.data.assHabitNumero,
               assHabitAdresse: result.data.assHabitAdresse,
               assAutoNom: result.data.assAutoNom,
               assAutoNumero: result.data.assAutoNumero,
               assAutoAdresse: result.data.assAutoAdresse,
-              docIdentite: result.data.docIdentite,
-              docVitale: result.data.docVitale,
-              docJustifDom: result.data.docJustifDom,
-              docDiplome: result.data.docDiplome,
-              docRespCivile: result.data.docRespCivile,
-              docAssAuto: result.data.docAssAuto,
             };
           });
         })
@@ -365,6 +359,7 @@ function FormStructure() {
         inputRefDiplome={inputRefDiplome}
         inputRefAuto={inputRefAuto}
         inputRefResp={inputRefResp}
+        structureId={structureId}
         updateFields={updateFields}
       />,
       <Structure16 />,
@@ -505,6 +500,21 @@ function FormStructure() {
         return "";
     }
   };
+
+  const logout = async () => {
+    try {
+      await Axios.put(`${import.meta.env.VITE_PATH}/logout/${structureId}`, {
+        id: structureId,
+        token: null,
+        tokenStart: null,
+      });
+      sessionStorage.clear();
+      navigate("/");
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
     const {
@@ -591,6 +601,7 @@ function FormStructure() {
       assAutoNumero,
       assAutoAdresse,
       indispo,
+      docPmi,
       docIdentite,
       docVitale,
       docJustifDom,
@@ -614,7 +625,7 @@ function FormStructure() {
                 telephone,
                 email,
               })
-                .then(closePage ? navigate("/", {}) : next())
+                .then(closePage ? logout() : next())
                 .catch((err) => {
                   console.error(err);
                 });
@@ -627,7 +638,7 @@ function FormStructure() {
                 telephone,
                 email,
               })
-                .then(closePage ? navigate("/", {}) : next())
+                .then(closePage ? logout() : next())
                 .catch((err) => {
                   console.error(err);
                 });
@@ -651,7 +662,7 @@ function FormStructure() {
                 telephone,
                 email,
               })
-                .then(closePage ? navigate("/", {}) : next())
+                .then(closePage ? logout() : next())
                 .catch((err) => {
                   console.error(err);
                 });
@@ -665,7 +676,7 @@ function FormStructure() {
                 telephone,
                 email,
               })
-                .then(closePage ? navigate("/", {}) : next())
+                .then(closePage ? logout() : next())
                 .catch((err) => {
                   console.error(err);
                 });
@@ -676,7 +687,7 @@ function FormStructure() {
           });
       } else if (currentStepIndex === 1) {
         const formData = new FormData();
-        if (inputRef.current.files[0] !== undefined) {
+        if (inputRef.current.files.length > 0) {
           formData.append("file", inputRef.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/photoProfil`, formData)
             .then((result) => {
@@ -688,7 +699,7 @@ function FormStructure() {
                 photoProfil,
                 email,
               })
-                .then(closePage ? navigate("/", {}) : next())
+                .then(closePage ? logout() : next())
                 .catch((err) => {
                   console.error(err);
                 });
@@ -700,7 +711,7 @@ function FormStructure() {
           next();
         }
       } else if (currentStepIndex === 2) {
-        if (inputRef1.current.files[0] !== undefined) {
+        if (inputRef1.current.files.length > 0) {
           const formData = new FormData();
           formData.append("file", inputRef1.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/photosStructure`, formData)
@@ -723,7 +734,7 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRef2.current.files[0] !== undefined) {
+        if (inputRef2.current.files.length > 0) {
           const formData = new FormData();
           formData.append("file", inputRef2.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/photosStructure`, formData)
@@ -746,7 +757,7 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRef3.current.files[0] !== undefined) {
+        if (inputRef3.current.files.length > 0) {
           const formData = new FormData();
           formData.append("file", inputRef3.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/photosStructure`, formData)
@@ -769,13 +780,13 @@ function FormStructure() {
               console.error(err);
             });
         }
-        closePage ? navigate("/", {}) : next();
+        closePage ? logout() : next();
       } else if (currentStepIndex === 3) {
         Axios.put(`${import.meta.env.VITE_PATH}/description`, {
           description,
           email,
         })
-          .then(closePage ? navigate("/", {}) : next())
+          .then(closePage ? logout() : next())
           .catch((err) => {
             console.error(err);
           });
@@ -798,7 +809,7 @@ function FormStructure() {
           photoConnecte,
           email,
         })
-          .then(closePage ? navigate("/", {}) : next())
+          .then(closePage ? logout() : next())
           .catch((err) => {
             console.error(err);
           });
@@ -828,7 +839,7 @@ function FormStructure() {
           photoConnecte,
           email,
         })
-          .then(closePage ? navigate("/", {}) : next())
+          .then(closePage ? logout() : next())
           .catch((err) => {
             console.error(err);
           });
@@ -837,13 +848,13 @@ function FormStructure() {
         currentStepIndex === 7 ||
         currentStepIndex === 13
       ) {
-        closePage ? navigate("/", {}) : next();
+        closePage ? logout() : next();
       } else if (currentStepIndex === 6) {
         Axios.put(`${import.meta.env.VITE_PATH}/resaInst`, {
           resaInst,
           email,
         })
-          .then(closePage ? navigate("/", {}) : next())
+          .then(closePage ? logout() : next())
           .catch((err) => {
             console.error(err);
           });
@@ -873,7 +884,7 @@ function FormStructure() {
             dimancheMax,
             email,
           })
-            .then(closePage ? navigate("/", {}) : next())
+            .then(closePage ? logout() : next())
             .catch((err) => {
               console.error(err);
             });
@@ -902,7 +913,7 @@ function FormStructure() {
             dimancheMax,
             structureId,
           })
-            .then(closePage ? navigate("/", {}) : next())
+            .then(closePage ? logout() : next())
             .catch((err) => {
               console.error(err);
             });
@@ -913,7 +924,7 @@ function FormStructure() {
           dureeMax,
           email,
         })
-          .then(closePage ? navigate("/", {}) : next())
+          .then(closePage ? logout() : next())
           .catch((err) => {
             console.error(err);
           });
@@ -942,7 +953,7 @@ function FormStructure() {
             });
           }
         });
-        closePage ? navigate("/", {}) : next();
+        closePage ? logout() : next();
       } else if (currentStepIndex === 11 && structure === "creche") {
         Axios.put(`${import.meta.env.VITE_PATH}/agrementsCreche`, {
           nbEmployes,
@@ -952,7 +963,7 @@ function FormStructure() {
           maxNuit,
           email,
         })
-          .then(closePage ? navigate("/", {}) : next())
+          .then(closePage ? logout() : next())
           .catch((err) => {
             console.error(err);
           });
@@ -964,7 +975,7 @@ function FormStructure() {
           maxNuit,
           email,
         })
-          .then(closePage ? navigate("/", {}) : next())
+          .then(closePage ? logout() : next())
           .catch((err) => {
             console.error(err);
           });
@@ -977,7 +988,7 @@ function FormStructure() {
           tarifAtelier,
           email,
         })
-          .then(closePage ? navigate("/", {}) : next())
+          .then(closePage ? logout() : next())
           .catch((err) => {
             console.error(err);
           });
@@ -991,12 +1002,12 @@ function FormStructure() {
           tarifHeureSup,
           email,
         })
-          .then(closePage ? navigate("/", {}) : next())
+          .then(closePage ? logout() : next())
           .catch((err) => {
             console.error(err);
           });
       } else if (currentStepIndex === 14) {
-        if (inputRefPmi.current !== null) {
+        if (inputRefPmi.current.files.length > 0) {
           const formData = new FormData();
           formData.append("file", inputRefPmi.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/photosStructure`, formData)
@@ -1019,7 +1030,7 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRefCni.current !== null) {
+        if (inputRefCni.current.files.length > 0) {
           const formData = new FormData();
           formData.append("file", inputRefCni.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
@@ -1042,7 +1053,7 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRefCpam.current !== null) {
+        if (inputRefCpam.current.files.length > 0) {
           const formData = new FormData();
           formData.append("file", inputRefCpam.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
@@ -1065,7 +1076,7 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRefDom.current !== null) {
+        if (inputRefDom.current.files.length > 0) {
           const formData = new FormData();
           formData.append("file", inputRefDom.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
@@ -1088,7 +1099,7 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRefDiplome.current !== null) {
+        if (inputRefDiplome.current.files.length > 0) {
           const formData = new FormData();
           formData.append("file", inputRefDiplome.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
@@ -1111,7 +1122,7 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRefResp.current !== null) {
+        if (inputRefResp.current.files.length > 0) {
           const formData = new FormData();
           formData.append("file", inputRefResp.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
@@ -1134,7 +1145,7 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRefAuto.current !== null) {
+        if (inputRefAuto.current.files.length > 0) {
           const formData = new FormData();
           formData.append("file", inputRefAuto.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
@@ -1167,7 +1178,7 @@ function FormStructure() {
             .catch((err) => {
               console.error(err);
             })
-            .then(closePage ? navigate("/", {}) : next());
+            .then(closePage ? logout() : next());
         } else if (structure === "assmat") {
           Axios.put(`${import.meta.env.VITE_PATH}/verifsAssmat`, {
             numSecu,
@@ -1184,10 +1195,10 @@ function FormStructure() {
             .catch((err) => {
               console.error(err);
             })
-            .then(closePage ? navigate("/", {}) : next());
+            .then(closePage ? logout() : next());
         }
       }
-    } else navigate("/", {});
+    } else logout();
   };
   return (
     <StructureContext.Provider value={{ structure, setStructure }}>
@@ -1199,7 +1210,10 @@ function FormStructure() {
         >
           <div className="formTitleBar">
             <div className="leftPart">
-              <h4>Babyplace</h4>
+              <div className="logo">
+                <img src={logo} alt="logo" />
+                <img src={logotxt} alt="Babyplace" />
+              </div>
               <p> {pageTitle()} </p>
             </div>
             <div>

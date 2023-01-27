@@ -115,6 +115,16 @@
       }
     }
   }
+  & .actualFile {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0 0;
+    & a {
+      text-decoration: underline;
+      color: $third;
+    }
+  }
 }
 
 @media screen and (max-width: 1000px) {

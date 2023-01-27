@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 import Proptypes, { string, number, node, object, oneOfType } from "prop-types";
+import profil from "@assets/profil.png";
 import Axios from "axios";
 
 function Structure2({ inputRef, structureId, updateFields }) {
-  const [imageSrc, setImageSrc] = useState(
-    "https://via.placeholder.com/150.png?text=photo"
-  );
+  const [imageSrc, setImageSrc] = useState(profil);
   const getPicture = () => {
     Axios.get(`${import.meta.env.VITE_PATH}/photoProfil?id=${structureId}`, [
       structureId,
     ])
       .then((result) => {
-        if (result.data.length > 0) {
+        if (result.data[0].photoProfil !== null) {
           setImageSrc(result.data[0].photoProfil);
           updateFields({ imageProfilSrc: result.data[0].photoProfil });
         }

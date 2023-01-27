@@ -3,7 +3,7 @@ import madamcoucou from "@assets/img-woman.svg";
 import PropTypes from "prop-types";
 import { useSendResponseByMail } from "../hooks/useSendResponseByMail";
 
-const ResponseModalAdmin = ({
+function ResponseModalAdmin({
   openRes,
   closeRes,
   selectedMail,
@@ -11,7 +11,7 @@ const ResponseModalAdmin = ({
   selectedPrenom,
   selectedOption,
   selectedMessage,
-}) => {
+}) {
   if (!openRes) return null;
 
   const datas = {
@@ -92,7 +92,7 @@ const ResponseModalAdmin = ({
       </div>
     </div>
   );
-};
+}
 
 ResponseModalAdmin.propTypes = {
   openRes: PropTypes.bool,
