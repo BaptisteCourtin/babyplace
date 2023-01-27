@@ -1,13 +1,23 @@
-const transporter = require('./transporteur.services');
+require("dotenv").config();
 
-const sendResponseByMail = async (objet, message, selectedMail, selectedNom, selectedPrenom, selectedOption, selectedMessage) => {
-    transporter.sendMail(
-        {
-            from: `${process.env.SMTP_USER}`,
-            to: selectedMail,
-            subject: objet,
-            text: message,
-            html: `<!DOCTYPE html>
+const transporter = require("./transporteur.services");
+
+const sendResponseByMail = async (
+  objet,
+  message,
+  selectedMail,
+  selectedNom,
+  selectedPrenom,
+  selectedOption,
+  selectedMessage
+) => {
+  transporter.sendMail(
+    {
+      from: `${process.env.SMTP_USER}`,
+      to: selectedMail,
+      subject: objet,
+      text: message,
+      html: `<!DOCTYPE html>
       <html>
       
       <head>
@@ -151,13 +161,15 @@ const sendResponseByMail = async (objet, message, selectedMail, selectedNom, sel
       
       </html>
       `,
-        }, (err, info) => {
-            if (err) console.log(err);
-            else {
-                console.log("Email sent successfully");
-                console.log("Message ID : ", info.messageId);
-            };
-        });
+    },
+    (err, info) => {
+      if (err) console.log(err);
+      else {
+        console.log("Email sent successfully");
+        console.log("Message ID : ", info.messageId);
+      }
+    }
+  );
 };
 
 module.exports = sendResponseByMail;
