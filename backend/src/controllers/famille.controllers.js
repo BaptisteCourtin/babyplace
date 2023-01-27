@@ -74,6 +74,15 @@ const getFamilleDataMess = async (req, res) => {
   return res.json(result);
 };
 
+const deco = async (req, res) => {
+  const result = await familleModels.deco(req);
+  if (result.affectedRows === 0) {
+    res.status(404).send("Not found");
+  } else {
+    res.sendStatus(204);
+  }
+};
+
 module.exports = {
   getPersoConfiance,
   getFamille,
@@ -89,4 +98,5 @@ module.exports = {
   updatePourcentFormInscr,
   deleteLike,
   postNewLike,
+  deco,
 };
