@@ -5,7 +5,7 @@ import Nav from "@components/dashboard/admin/Nav.Admin";
 import { useNavigate } from "react-router-dom";
 
 function Admin() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [userType, setUserType] = useState(null);
 
@@ -20,9 +20,12 @@ function Admin() {
 
   const setVerified = async (structureId) => {
     try {
-      await axios.put(`${import.meta.env.VITE_PATH}/admin/verified/${structureId}`, {
-        id: structureId,
-      });
+      await axios.put(
+        `${import.meta.env.VITE_PATH}/admin/verified/${structureId}`,
+        {
+          id: structureId,
+        }
+      );
       toast.success("L'utilisateur a bien été approuvé"), getStructure();
     } catch (err) {
       console.error(err.message);
@@ -32,7 +35,9 @@ function Admin() {
   const setRefused = async (structureId) => {
     try {
       await axios.delete(
-        `${import.meta.env.VITE_PATH}/admin/refused/${structureId}?type=${userType}`,
+        `${
+          import.meta.env.VITE_PATH
+        }/admin/refused/${structureId}?type=${userType}`,
         {
           id: structureId,
           type: userType,
@@ -45,10 +50,12 @@ function Admin() {
   };
 
   useEffect(() => {
-    if (window.localStorage.getItem("mail") !== import.meta.env.VITE_ADMIN_EMAIL) {
-      toast.error("Vous n'avez pas l'autorisation d'accéder à cette page")
-      navigate("/")
-    }
+    // if (
+    //   window.localStorage.getItem("mail") !== import.meta.env.VITE_ADMIN_EMAIL
+    // ) {
+    //   toast.error("Vous n'avez pas l'autorisation d'accéder à cette page");
+    //   navigate("/");
+    // }
     getStructure();
   }, []);
 
