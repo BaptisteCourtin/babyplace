@@ -4,8 +4,8 @@ import Amelie from "@assets/features/Amelie.png";
 import Baptiste from "@assets/features/Baptiste.png";
 import Thibaud from "@assets/features/Thibaud.png";
 import logoDave from "@assets/features/logoDave.png";
-import NavbarLite from "./NavbarLite";
-import FooterLite from "./FooterLite";
+import NavbarLite from "./components/NavbarLite";
+import FooterLite from "./components/FooterLite";
 
 function Features() {
   return (
