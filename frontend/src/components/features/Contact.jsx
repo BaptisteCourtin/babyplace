@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { HashLink } from "react-router-hash-link";
 import { useForm } from "react-hook-form";
-import axios from "axios";
-import FooterLite from "./FooterLite";
-import NavbarLite from "./NavbarLite";
-import Modal from "./Modal";
+import FooterLite from "./components/FooterLite";
+import NavbarLite from "./components/NavbarLite";
+import Modal from "./components/Modal";
+import { onSubmit } from "./hooks/usePostMessage";
 
 function Contact() {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,24 +19,6 @@ function Contact() {
       texte: "",
       optionSelected: "",
     });
-  };
-
-  const onSubmit = (d) => {
-    const { prenom, nom, email, optionSelected, texte } = d;
-    axios
-      .post(`${import.meta.env.VITE_PATH}/contact/message`, {
-        prenom,
-        nom,
-        email,
-        optionSelected,
-        texte,
-      })
-      .then((res) => {
-        console.warn(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
   };
 
   const openCloseModal = () => {
