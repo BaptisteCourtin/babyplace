@@ -90,7 +90,7 @@
     & li {
       position: relative;
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       align-items: center;
       width: 95%;
       margin: 0 auto;
@@ -105,8 +105,8 @@
         height: 100%;
         top: 0;
         left: 0;
-        border-bottom-left-radius: 5px;
-        border-top-left-radius: 5px;
+        border-bottom-left-radius: 4px;
+        border-top-left-radius: 4px;
       }
 
       & .reserInfo1 {
@@ -125,17 +125,6 @@
         flex-direction: column;
         gap: 10px;
 
-        & p:first-of-type {
-          text-transform: capitalize;
-          font-weight: 500;
-        }
-      }
-
-      & .reserInfo3 {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-
         & p {
           & span {
             font-weight: 500;
@@ -143,7 +132,7 @@
         }
       }
 
-      & .reserInfo4 {
+      & .reserInfo3 {
         display: flex;
         flex-direction: column;
         gap: 10px;
@@ -168,7 +157,7 @@
           align-items: center;
           justify-content: center;
           gap: 3px;
-          padding: 5px 10px;
+          padding: 5px 20px;
           border-radius: 5px;
           background: none;
         }
@@ -208,11 +197,9 @@
     left: -15vw;
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(
-      148.74deg,
-      rgba(71, 79, 255, 0.6) 2.49%,
-      rgba(227, 122, 204, 0.6) 99.05%
-    );
+    background: linear-gradient(148.74deg,
+        rgba(71, 79, 255, 0.6) 2.49%,
+        rgba(227, 122, 204, 0.6) 99.05%);
     z-index: 2;
 
     & .approvedModalInner {
@@ -290,11 +277,9 @@
     left: -15vw;
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(
-      148.74deg,
-      rgba(71, 79, 255, 0.6) 2.49%,
-      rgba(227, 122, 204, 0.6) 99.05%
-    );
+    background: linear-gradient(148.74deg,
+        rgba(71, 79, 255, 0.6) 2.49%,
+        rgba(227, 122, 204, 0.6) 99.05%);
     z-index: 2;
 
     & .refusedModalInner {
@@ -341,6 +326,69 @@
         border: 1px solid $seventh;
         color: $seventh;
         border-radius: 50px;
+      }
+    }
+  }
+}
+
+.dateChoiceContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  & .dateChoiceInner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 30px;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    background-color: $white;
+    gap: 10px;
+
+    & h2 {
+      font-size: $h2;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 20px;
+      color: $third;
+    }
+
+    & .dateInputContainer {
+      width: 90%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      & input {
+        padding: 5px;
+        border: 1px solid $third;
+        border-radius: 5px;
+      }
+    }
+
+    & button {
+      padding: 5px 15px;
+      margin-top: 20px;
+      font-size: $h4;
+      font-weight: 500;
+      color: $white;
+      background: $third;
+      border: 1px solid transparent;
+      border-radius: 5px;
+      transition: 0.3s ease-in-out;
+
+      &:hover {
+        color: $third;
+        background: transparent;
+        border: 1px solid $third;
       }
     }
   }

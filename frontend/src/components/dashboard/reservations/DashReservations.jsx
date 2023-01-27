@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useGetReservations } from "./Hooks/useGetReservations";
 import { usePutReservations } from "./Hooks/usePutReservations";
 import NavDashReservations from "./Components/Nav.DashReservations";
@@ -7,8 +7,12 @@ import ListDashReservations from "./Components/List.DashReservations";
 function DashReservations({ tarifHeure, structureId }) {
   const [statusToggle, setStatusToggle] = useState(0);
 
-  const { reser, getReser } = useGetReservations(statusToggle, structureId);
+  const { reser, getReser } = useGetReservations(structureId);
   const { updateStatus } = usePutReservations(getReser);
+
+  useEffect(() => {
+    getReser();
+  }, [statusToggle]);
 
   return (
     <div className="dashReservations">
@@ -21,6 +25,7 @@ function DashReservations({ tarifHeure, structureId }) {
         updateStatus={updateStatus}
         tarifHeure={tarifHeure}
         statusToggle={statusToggle}
+        getReser={getReser}
       />
     </div>
   );

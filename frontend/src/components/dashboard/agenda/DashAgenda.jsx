@@ -32,7 +32,7 @@ function DashAgenda({ structureId, maxPlaces }) {
 
   return (
     <div className="dashAgenda">
-      <section className="agendaSection">
+      <section className="agendaDashSection">
         <h2>Agenda</h2>
         <DashAgendaCalendar
           clickedDay={clickedDay}

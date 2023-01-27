@@ -16,166 +16,76 @@
   width: 100vw;
   height: 100vh;
   background-color: #e6e6e6;
+}
 
-  & nav {
+.dashboardClosed {
+  & .dashNav {
+    display: none;
+  }
+}
+
+.dashTopbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  grid-area: topbar;
+  padding: 0 10px;
+  gap: 20px;
+  background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
+  box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
+
+  & .dashboardBurger {
+    visibility: hidden;
+    background: none;
+    color: $third;
+    font-size: $h3;
+    cursor: pointer;
+
+    @media screen and (max-width: 1000px) {
+      visibility: visible;
+    }
+  }
+
+  & .dashboardTopNav {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    grid-area: topbar;
-    padding: 0 10px;
-    gap: 20px;
-    background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
-    box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
+    justify-content: center;
+    gap: 15px;
 
-    & .dashboardBurger {
-      background: none;
-      color: $third;
-      font-size: $h3;
-      cursor: pointer;
-    }
-
-    & .dashboardTopNav {
+    & button {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 5px;
-
-      & button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 3px;
-        height: 100%;
-        background: none;
-        color: $third;
-        cursor: pointer;
-
-        & img {
-          width: 20px;
-          height: 20px;
-          border-radius: 50%;
-          object-fit: cover;
-        }
-      }
-    }
-  }
-
-  & .dashboardSection {
-    grid-area: main;
-
-    & .dashboardWelcome {
-      display: flex;
-      justify-content: space-between;
-      flex-direction: column;
-      width: 100%;
+      gap: 3px;
       height: 100%;
-      padding: 50px;
-      overflow-y: hidden;
+      background: none;
+      color: $third;
+      cursor: pointer;
 
-      & .dashboardProfile {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 20px;
-
-        & .dashboardProfilePic {
-          border: 1px solid $third;
-          border-radius: 50%;
-          object-fit: cover;
-        }
-
-        & h2 {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          font-size: $h1;
-          font-family: $display;
-          font-weight: 700;
-
-          & span {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            padding: 5px 10px;
-            font-size: $normal;
-            color: $white;
-            background-color: $third;
-            border-radius: 50px;
-
-            & svg {
-              fill: $white;
-            }
-          }
-        }
-
-        & h1 {
-          font-size: 45px;
-          font-weight: 500;
-          color: $third;
-        }
-      }
-
-      & .dashboardProfilePres {
-        margin: 20px;
-        font-size: $h4;
-        line-height: 1.4;
-
-        &::first-letter {
-          text-transform: capitalize;
-        }
-      }
-
-      & .dashboardProfilePicList {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-
-        & li {
-          max-height: 275px;
-
-          & img {
-            width: 100%;
-            height: 100%;
-            border: 1px solid $third;
-            border-radius: 5px;
-            object-fit: cover;
-          }
-        }
-      }
-
-      & .dashboardProfileContact {
-        margin-top: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
-
-        & p {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 5px;
-          font-weight: 500;
-          font-size: $h4;
-        }
+      & img {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        object-fit: cover;
       }
     }
   }
+}
 
-  & footer {
-    grid-area: footer;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 10px;
-    background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
-    box-shadow: 5px -5px 5px rgba(75, 93, 104, 0.1);
+.dashFooter {
+  grid-area: footer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
+  box-shadow: 5px -5px 5px rgba(75, 93, 104, 0.1);
 
-    & p {
-      font-size: $xs;
+  & p {
+    font-size: $xs;
 
-      & span {
-        color: red;
-      }
+    & span {
+      color: red;
     }
   }
 }
@@ -223,6 +133,219 @@
         & button {
           background: transparent;
           font-weight: 500;
+        }
+      }
+    }
+  }
+}
+
+.dashMain {
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+  gap: 20px;
+  padding: 20px;
+
+  & .dashTop {
+
+    & ul {
+      display: flex;
+      justify-content: space-evenly;
+      gap: 50px;
+
+      & li {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-template-rows: 6fr 1fr;
+        grid-template-areas:
+          "logo text"
+          "info info";
+        align-items: center;
+        width: 200px;
+        height: 150px;
+        gap: 5px;
+        padding: 10px 15px;
+        border-radius: 25px;
+        background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
+
+        & svg {
+          font-size: $h1;
+          grid-area: logo;
+
+          & path {
+            fill: $third;
+          }
+        }
+
+        & .dashListSubgrid {
+          display: grid;
+          grid-template-rows: 1fr 1fr;
+          gap: 10px;
+          grid-area: text;
+
+          & p {
+            font-size: $small;
+            font-weight: 500;
+            opacity: 0.7;
+          }
+
+          & h3 {
+            font-size: $h2;
+            font-weight: 700;
+          }
+        }
+
+        & .dashListSubText {
+          grid-area: info;
+          opacity: 0.7;
+          font-size: $xs;
+          text-align: center;
+        }
+      }
+    }
+
+  }
+
+
+  & .dashBottom {
+    display: grid;
+    grid-template-columns: 1.5fr 2fr 3fr;
+    gap: 20px;
+
+    & .dashMainInfo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+      padding: 25px 15px;
+      background: $gradient;
+      border-radius: 25px;
+      color: $white;
+
+      & img {
+        width: 110px;
+        height: 110px;
+        padding: 10px;
+        margin: 0 10% 30px 10%;
+        border-radius: 50%;
+        background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
+      }
+
+      & p {
+        text-align: center;
+        line-height: 1.3;
+      }
+
+      & .dashMainInfoName {
+        font-size: $h4;
+        font-weight: 500;
+      }
+    }
+
+    & .dashFav {
+      height: 335px;
+      overflow-x: auto;
+
+      & h3 {
+        position: sticky;
+        top: 0;
+        left: 0;
+        padding: 5px;
+        margin: 5px;
+        margin-top: 0;
+        font-size: $h4;
+        font-weight: 500;
+        color: $white;
+        background-color: $third;
+        border-radius: 5px;
+      }
+
+      & ul {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 5px;
+
+        & li {
+          padding: 10px;
+          background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
+          border-radius: 5px;
+
+          & p {
+            line-height: 1.7;
+          }
+
+          & .dashFavName {
+            color: $third;
+            font-weight: 500;
+          }
+
+          & .dashFavText {
+            text-transform: capitalize;
+          }
+        }
+      }
+
+      &::-webkit-scrollbar {
+        width: 5px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: $third;
+        border-radius: 10px;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background: rgb(99, 84, 238);
+      }
+    }
+
+    & .dashChart {
+      display: grid;
+      grid-template-rows: 6fr 1fr;
+      gap: 5px;
+      padding: 5px 0;
+      overflow-x: hidden;
+
+      & canvas {
+        padding: 5px 10px;
+        max-width: 500px !important;
+        max-height: 250px !important;
+        justify-self: center;
+        background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
+        border-radius: 5px;
+      }
+
+      & .dashChartBottom {
+        width: 95%;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+
+        & p {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 5px;
+          font-size: $h4;
+          background: $third;
+          color: $white;
+          border: 3px solid $white;
+          outline: 3px solid $third;
+          border-radius: 5px;
+
+          & span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 2px;
+          }
         }
       }
     }

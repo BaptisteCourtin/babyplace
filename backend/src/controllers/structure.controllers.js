@@ -22,6 +22,12 @@ const getStructure = async (req, res) => {
   return res.json(result);
 };
 
+const getStructureId = async (req, res) => {
+  const {token} = req.query
+  const result = await structureModels.getStructureId(token)
+  return res.json(result)
+}
+
 const getStructureDetails = async (req, res) => {
   const { type, id } = req.query;
   const result = await structureModels.getStructureDetails(req, type, id);
@@ -37,6 +43,12 @@ const getStructureType = async (req, res) => {
 
 const getNotVerified = async (req, res) => {
   const result = await structureModels.getNotVerified()
+  return res.json(result)
+}
+
+const getFavorites = async (req, res) => {
+  const { id } = req.params
+  const result = await structureModels.getFavorites(id)
   return res.json(result)
 }
 
@@ -145,9 +157,11 @@ const updateSignal = async (req, res) => {
 module.exports = {
   getStructure,
   getStructures,
+  getStructureId,
   getStructureDetails,
   getStructureType,
   getNotVerified,
+  getFavorites,
   updateVerified,
   updateImages,
   deleteRefused,

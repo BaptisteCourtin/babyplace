@@ -21,8 +21,13 @@
 
     h2 {
       padding: 20px 30px 20px 10px;
-      font-weight: 900;
-      font-size: 2em;
+      font-weight: 700;
+      font-size: $h2;
+
+      &::first-letter {
+        font-weight: 700;
+        color: $third;
+      }
     }
 
     .userPart {

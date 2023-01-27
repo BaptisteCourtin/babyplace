@@ -29,6 +29,13 @@ const getStructure = async (req) => {
   return result;
 };
 
+const getStructureId = async (token) => {
+  const [result] = await datasource.query(
+    "SELECT structure.structureId from structure WHERE token = ?", [token]
+  )
+  return result
+}
+
 const getStructureType = async (id, type) => {
   const [result] = await datasource.query(
     `SELECT * FROM structure AS s JOIN ${type} AS t ON s.structureId=t.structureId WHERE s.structureId = ?`,
@@ -51,6 +58,11 @@ const getNotVerified = async () => {
   );
   return result;
 };
+
+const getFavorites = async (id) => {
+  const [result] = await datasource.query("SELECT * FROM favoris AS v LEFT JOIN famille AS f ON v.familleId=f.familleId LEFT JOIN parent AS p ON f.familleId=p.familleId WHERE structureIdLiked = ?", [id])
+  return result
+}
 
 const updateVerified = async (id) => {
   const [result] = await datasource.query(
@@ -132,9 +144,11 @@ const updateSignal = async (req) => {
 module.exports = {
   getStructure,
   getStructures,
+  getStructureId,
   getStructureDetails,
   getStructureType,
   getNotVerified,
+  getFavorites,
   updateVerified,
   deleteRefused,
   getStructureDataMess,

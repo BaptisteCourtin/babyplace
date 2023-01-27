@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Agenda from "./Components/Agenda.DashHours";
 import { useGetHours } from "./Hooks/useGetHours";
@@ -38,6 +38,7 @@ function DashHours({ userType, structureId }) {
     setSwitch3,
     getData,
     getHoraires,
+    setValues
   } = useGetHours(structureId, userType);
 
   const { updateIndemn, updateOptions, updateTarif, updateDay, updateHours } =
@@ -50,6 +51,12 @@ function DashHours({ userType, structureId }) {
       toggleDay,
       setToggleDay
     );
+
+  useEffect(() => {
+    getData();
+    getHoraires();
+    setValues();
+  }, []);
 
   return (
     <div className="dashPlaces">

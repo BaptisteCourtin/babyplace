@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import Nav from "@components/dashboard/admin/Nav.Admin";
+import { useNavigate } from "react-router-dom";
 
 function Admin() {
+  const navigate = useNavigate()
   const [data, setData] = useState([]);
   const [userType, setUserType] = useState(null);
 
@@ -12,7 +14,7 @@ function Admin() {
       const res = await axios.get(`${import.meta.env.VITE_PATH}/admin`);
       setData(res.data);
     } catch (err) {
-      toast.error(err.message);
+      console.error(err.message);
     }
   };
 
@@ -43,6 +45,10 @@ function Admin() {
   };
 
   useEffect(() => {
+    if (window.localStorage.getItem("mail") !== import.meta.env.VITE_ADMIN_EMAIL) {
+      toast.error("Vous n'avez pas l'autorisation d'accéder à cette page")
+      navigate("/")
+    }
     getStructure();
   }, []);
 

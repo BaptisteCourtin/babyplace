@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 
-export const useGetReservations = (statusToggle, structureId) => {
+export const useGetReservations = (structureId) => {
   const [reser, setReser] = useState([]);
+  const [approvedReser, setApprovedReser] = useState([]);
   const getReser = async () => {
     try {
       const res = await axios.get(
@@ -12,11 +13,16 @@ export const useGetReservations = (statusToggle, structureId) => {
     } catch (err) {
       console.error(err.message);
     }
-  };
+  }
 
-  useEffect(() => {
-    getReser();
-  }, [statusToggle]);
+  const getApprovedReser = async () => {
+    try {
+      const res = await axios.get(`${import.meta.env.VITE_PATH}/reservation/approved/${structureId}`);
+      setApprovedReser(res.data);
+    } catch (err) {
+      console.error(err.message)
+    }
+  }
 
-  return { reser, getReser };
+  return { reser, getReser, approvedReser, getApprovedReser };
 };

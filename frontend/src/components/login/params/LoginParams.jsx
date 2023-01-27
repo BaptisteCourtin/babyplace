@@ -1,10 +1,27 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
+import useLocalStorage from "@utils/useLocalStorage";
 
 function LoginParams() {
   const { state } = useLocation();
   const { token } = state;
+  const [localId, setLocalId] = useLocalStorage("id", "id");
+
+  const getStructureId = async () => {
+    try {
+      const res = await axios
+        .get(`${import.meta.env.VITE_PATH}/structureId/?token=${token}`)
+      setLocalId(res.data[0].structureId)
+
+    } catch (err) {
+      console.error(err.message)
+    }
+  }
+
+  useEffect(() => {
+    getStructureId()
+  }, [])
 
   return (
     <section className="loginParams">

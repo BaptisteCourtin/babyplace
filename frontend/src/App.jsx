@@ -3,7 +3,7 @@ import Synthesis from "@components/login/Synthesis";
 import Register from "@components/register/Register";
 
 import { useState, useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { redirect, Route, Routes } from "react-router-dom";
 
 import UserEmailContext from "@components/context/UserEmailContext";
 import FamilleContext from "@components/context/FamilleContext";
@@ -55,7 +55,12 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/login-params" element={<Synthesis />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+
+            {window.localStorage.getItem("mail") !== "" ? (
+              <Route path="/dashboard" element={<Dashboard />} />
+            ) : (
+              redirect("/")
+            )}
 
             <Route path="/features" element={<Features />} />
             <Route path="/contact" element={<Contact />} />

@@ -19,5 +19,18 @@ export const usePutReservations = (getReser) => {
     }
   };
 
-  return { updateStatus };
+  const updateDates = async (reserId, dateStart, dateEnd) => {
+    try {
+      await axios.put(`${import.meta.env.VITE_PATH}/reservation/dates`, {
+        id: reserId,
+        dateStart: dateStart,
+        dateEnd: dateEnd,
+      })
+      toast.success("Vos disponibilités ont été envoyées");
+    } catch (err) {
+      console.error(err.message)
+    }
+  }
+
+  return { updateStatus, updateDates };
 };
