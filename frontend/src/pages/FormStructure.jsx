@@ -500,6 +500,21 @@ function FormStructure() {
         return "";
     }
   };
+
+  const logout = async () => {
+    try {
+      await Axios.put(`${import.meta.env.VITE_PATH}/logout/${structureId}`, {
+        id: structureId,
+        token: null,
+        tokenStart: null,
+      });
+      sessionStorage.clear();
+      navigate("/");
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
     const {
@@ -610,7 +625,7 @@ function FormStructure() {
                 telephone,
                 email,
               })
-                .then(closePage ? navigate("/", {}) : next())
+                .then(closePage ? logout() : next())
                 .catch((err) => {
                   console.error(err);
                 });
@@ -623,7 +638,7 @@ function FormStructure() {
                 telephone,
                 email,
               })
-                .then(closePage ? navigate("/", {}) : next())
+                .then(closePage ? logout() : next())
                 .catch((err) => {
                   console.error(err);
                 });
@@ -647,7 +662,7 @@ function FormStructure() {
                 telephone,
                 email,
               })
-                .then(closePage ? navigate("/", {}) : next())
+                .then(closePage ? logout() : next())
                 .catch((err) => {
                   console.error(err);
                 });
@@ -661,7 +676,7 @@ function FormStructure() {
                 telephone,
                 email,
               })
-                .then(closePage ? navigate("/", {}) : next())
+                .then(closePage ? logout() : next())
                 .catch((err) => {
                   console.error(err);
                 });
@@ -684,7 +699,7 @@ function FormStructure() {
                 photoProfil,
                 email,
               })
-                .then(closePage ? navigate("/", {}) : next())
+                .then(closePage ? logout() : next())
                 .catch((err) => {
                   console.error(err);
                 });
@@ -765,13 +780,13 @@ function FormStructure() {
               console.error(err);
             });
         }
-        closePage ? navigate("/", {}) : next();
+        closePage ? logout() : next();
       } else if (currentStepIndex === 3) {
         Axios.put(`${import.meta.env.VITE_PATH}/description`, {
           description,
           email,
         })
-          .then(closePage ? navigate("/", {}) : next())
+          .then(closePage ? logout() : next())
           .catch((err) => {
             console.error(err);
           });
@@ -794,7 +809,7 @@ function FormStructure() {
           photoConnecte,
           email,
         })
-          .then(closePage ? navigate("/", {}) : next())
+          .then(closePage ? logout() : next())
           .catch((err) => {
             console.error(err);
           });
@@ -824,7 +839,7 @@ function FormStructure() {
           photoConnecte,
           email,
         })
-          .then(closePage ? navigate("/", {}) : next())
+          .then(closePage ? logout() : next())
           .catch((err) => {
             console.error(err);
           });
@@ -833,13 +848,13 @@ function FormStructure() {
         currentStepIndex === 7 ||
         currentStepIndex === 13
       ) {
-        closePage ? navigate("/", {}) : next();
+        closePage ? logout() : next();
       } else if (currentStepIndex === 6) {
         Axios.put(`${import.meta.env.VITE_PATH}/resaInst`, {
           resaInst,
           email,
         })
-          .then(closePage ? navigate("/", {}) : next())
+          .then(closePage ? logout() : next())
           .catch((err) => {
             console.error(err);
           });
@@ -869,7 +884,7 @@ function FormStructure() {
             dimancheMax,
             email,
           })
-            .then(closePage ? navigate("/", {}) : next())
+            .then(closePage ? logout() : next())
             .catch((err) => {
               console.error(err);
             });
@@ -898,7 +913,7 @@ function FormStructure() {
             dimancheMax,
             structureId,
           })
-            .then(closePage ? navigate("/", {}) : next())
+            .then(closePage ? logout() : next())
             .catch((err) => {
               console.error(err);
             });
@@ -909,7 +924,7 @@ function FormStructure() {
           dureeMax,
           email,
         })
-          .then(closePage ? navigate("/", {}) : next())
+          .then(closePage ? logout() : next())
           .catch((err) => {
             console.error(err);
           });
@@ -938,7 +953,7 @@ function FormStructure() {
             });
           }
         });
-        closePage ? navigate("/", {}) : next();
+        closePage ? logout() : next();
       } else if (currentStepIndex === 11 && structure === "creche") {
         Axios.put(`${import.meta.env.VITE_PATH}/agrementsCreche`, {
           nbEmployes,
@@ -948,7 +963,7 @@ function FormStructure() {
           maxNuit,
           email,
         })
-          .then(closePage ? navigate("/", {}) : next())
+          .then(closePage ? logout() : next())
           .catch((err) => {
             console.error(err);
           });
@@ -960,7 +975,7 @@ function FormStructure() {
           maxNuit,
           email,
         })
-          .then(closePage ? navigate("/", {}) : next())
+          .then(closePage ? logout() : next())
           .catch((err) => {
             console.error(err);
           });
@@ -973,7 +988,7 @@ function FormStructure() {
           tarifAtelier,
           email,
         })
-          .then(closePage ? navigate("/", {}) : next())
+          .then(closePage ? logout() : next())
           .catch((err) => {
             console.error(err);
           });
@@ -987,7 +1002,7 @@ function FormStructure() {
           tarifHeureSup,
           email,
         })
-          .then(closePage ? navigate("/", {}) : next())
+          .then(closePage ? logout() : next())
           .catch((err) => {
             console.error(err);
           });
@@ -1163,7 +1178,7 @@ function FormStructure() {
             .catch((err) => {
               console.error(err);
             })
-            .then(closePage ? navigate("/", {}) : next());
+            .then(closePage ? logout() : next());
         } else if (structure === "assmat") {
           Axios.put(`${import.meta.env.VITE_PATH}/verifsAssmat`, {
             numSecu,
@@ -1180,10 +1195,10 @@ function FormStructure() {
             .catch((err) => {
               console.error(err);
             })
-            .then(closePage ? navigate("/", {}) : next());
+            .then(closePage ? logout() : next());
         }
       }
-    } else navigate("/", {});
+    } else logout();
   };
   return (
     <StructureContext.Provider value={{ structure, setStructure }}>
