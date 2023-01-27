@@ -22,14 +22,14 @@ export default function Home() {
       {userType === "parent" ? (
         <main className="home">
           <h2>
-            Simplifiez vous la vie avec Babyplace grace a notre logiciel de
-            reservation en ligne
+            Simplifiez-vous la vie avec Babyplace grâce à notre logiciel de
+            réservation en ligne
           </h2>
           <ul className="mainGrid">
             <li>
               <img src={dossier} alt="" />
               <p>
-                Accédez aux disponibilités de dizaine de miliers de
+                Accédez aux disponibilités de dizaines de milliers de
                 professionnels de la petite enfance
               </p>
             </li>
@@ -74,8 +74,8 @@ export default function Home() {
             </li>
             <li>Annulez ou modifiez vos rendez-vous en 2 clics</li>
             <li>
-              Notez et partagez vos expériences directement sur BabyPlace ce qui
-              vous donne une plus grande transparence
+              Notez et partagez vos expériences directement sur BabyPlace, ce
+              qui vous donne une plus grande transparence
             </li>
           </ul>
         </main>
@@ -103,8 +103,8 @@ export default function Home() {
           <section className="homeProGrid">
             <div className="homeProGridTitle">
               <h2>
-                Equipez vous du logiciel de gestion de place d’accueil de jeunes
-                enfants le plus complet
+                Equipez-vous du logiciel de gestion de places d’accueil de
+                jeunes enfants le plus complet
               </h2>
               <p>Cliquez sur l’une de nos solutions pour en savoir plus</p>
             </div>
@@ -129,7 +129,7 @@ export default function Home() {
               <li>
                 <img src={time} alt="" />
                 <div>
-                  <h3>Soyez alertée</h3>
+                  <h3>Soyez alerté</h3>
                   <p>
                     Choisissez le mode de notification afin d’être informé au
                     plus vite des annulations et des demandes de réservations.
@@ -162,9 +162,9 @@ export default function Home() {
                 <div>
                   <h3>Communiquez avec les parents</h3>
                   <p>
-                    Les parents doivent avoir préremplis leur liste de documents
+                    Les parents doivent avoir prérempli leur liste de documents
                     pour pouvoir faire des réservations. Les parents peuvent
-                    vous soumettre les contrats déjà validé par les équipes
+                    vous soumettre les contrats déjà validés par les équipes
                     légales de Babyplace.
                   </p>
                   <button type="button">

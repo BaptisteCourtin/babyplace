@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Proptypes, { bool, number, oneOfType } from "prop-types";
+import Proptypes, { bool, string, number, oneOfType } from "prop-types";
 import Axios from "axios";
 
 function Structure9({
@@ -35,7 +35,6 @@ function Structure9({
       structureId,
     ])
       .then((result) => {
-        console.log(result);
         if (result.data.length > 0) {
           setHorairesExist(true);
         } else {
@@ -503,6 +502,23 @@ Structure9.propTypes = {
   vendrediOuvert: oneOfType([bool, number]),
   samediOuvert: oneOfType([bool, number]),
   dimancheOuvert: oneOfType([bool, number]),
+  lundiMin: oneOfType([string, number]),
+  lundiMax: oneOfType([string, number]),
+  mardiMin: oneOfType([string, number]),
+  mardiMax: oneOfType([string, number]),
+  mercrediMin: oneOfType([string, number]),
+  mercrediMax: oneOfType([string, number]),
+  jeudiMin: oneOfType([string, number]),
+  jeudiMax: oneOfType([string, number]),
+  vendrediMin: oneOfType([string, number]),
+  vendrediMax: oneOfType([string, number]),
+  samediMin: oneOfType([string, number]),
+  samediMax: oneOfType([string, number]),
+  dimancheMin: oneOfType([string, number]),
+  dimancheMax: oneOfType([string, number]),
+  structureId: oneOfType([string, number]),
+  setData: Proptypes.func,
+  setHorairesExist: Proptypes.func,
   updateFields: Proptypes.func,
 };
 export default Structure9;

@@ -71,7 +71,7 @@
 
       .card-notif {
         width: 100%;
-        height: 80px;
+        height: 70px;
         padding: 1rem;
         border-left: 1px $second solid;
         text-align: left;
@@ -85,9 +85,23 @@
           -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
           overflow: hidden;
-          height: 49px;
 
           padding-right: 1rem;
+
+          span {
+            font-size: $h4;
+            font-weight: 500;
+
+            &.accepted {
+              color: green;
+            }
+            &.rejected {
+              color: red;
+            }
+            &.avis {
+              color: gold;
+            }
+          }
         }
       }
     }

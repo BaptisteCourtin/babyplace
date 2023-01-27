@@ -7,7 +7,19 @@
   align-items: center;
   max-width: 100vw;
 
+  & .logo {
+    display: flex;
+    height: 100%;
+    gap: 8px;
+    flex: 1;
+
+    & img {
+      max-height: 3vh;
+      max-width: 25vw;
+    }
+  }
   & p {
+    flex: 1;
     color: #787885;
     text-align: center;
     width: 30vw;
@@ -28,7 +40,6 @@
     border-radius: 50px;
     margin: 4px;
     padding: 8px;
-    transition: 0.5s ease-in-out;
   }
 
   & button:hover {
@@ -40,12 +51,6 @@
   & .leftPart {
     display: flex;
     align-items: center;
-  }
-
-  & h4 {
-    font-family: $display;
-    font-size: 1.5rem;
-    font-weight: 600;
   }
 }
 
@@ -90,6 +95,7 @@
     flex-wrap: wrap;
     margin-right: 5vw;
     overflow: hidden;
+    gap: 12px;
   }
 
   & .page-left {
@@ -107,7 +113,7 @@
 
   & .explicationsContainer {
     width: 50%;
-    height: 91vh;
+    min-height: 100%;
     background-color: #f9f9f9;
     display: flex;
     flex-direction: column;
@@ -219,7 +225,7 @@
       margin: 4px;
       padding: 8px;
       border: 1px solid $grey;
-      transition: .2s ease-in-out;
+      transition: 0.2s ease-in-out;
     }
 
     & button:hover {

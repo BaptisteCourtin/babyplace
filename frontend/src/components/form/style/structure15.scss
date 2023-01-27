@@ -25,36 +25,33 @@
       border-radius: 10px;
       padding: 20px 4px 4px;
       margin: 0 4px;
-      border: 1px solid $grey;
       height: 50px;
       position: relative;
-      width: 205px;
+      width: 215px;
     }
 
     & input:focus {
       outline: 1.5px solid $third;
     }
 
-    // & input:valid {
-    //   border: 2px solid $green;
-    // }
+    & .input {
+      border: 1px solid $grey;
+    }
+
+    & .inputChecked {
+      border: 2px solid $green;
+    }
 
     & .labelChecked {
       color: $green;
     }
 
     .checkSymbol {
-      display: none;
-    }
-
-    & input:valid {
-      & .checkSymbol {
-        position: absolute;
-        transform: translateX(170px) translateY(6px);
-        font-size: 2rem;
-        color: $green;
-        display: initial;
-      }
+      position: absolute;
+      transform: translateX(180px) translateY(6px);
+      font-size: 2rem;
+      color: $green;
+      display: initial;
     }
 
     & label {
@@ -118,19 +115,28 @@
       }
     }
   }
+  & .actualFile {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0 0;
+    & a {
+      text-decoration: underline;
+      color: $third;
+    }
+  }
 }
 
 @media screen and (max-width: 1000px) {
   .structure15 {
     & .inputContainer {
-
       & input[type="text"],
       & input[type="date"] {
         width: 80vw;
         max-width: 500px;
       }
 
-      & input:valid+label+p {
+      & input:valid + label + p {
         transform: translateX(69vw) translateY(6px);
       }
     }

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Toggle({ setter, state, nom, p, classique }) {
+function Toggle({ setter, state = false, nom, p, classique }) {
   const handleChange = (e) => {
     if (classique) {
       setter(!state);
@@ -36,7 +36,7 @@ function Toggle({ setter, state, nom, p, classique }) {
 
 Toggle.propTypes = {
   setter: PropTypes.func.isRequired,
-  state: PropTypes.bool.isRequired,
+  state: PropTypes.bool,
   nom: PropTypes.string.isRequired,
   p: PropTypes.string.isRequired,
   classique: PropTypes.bool,

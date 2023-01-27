@@ -5,7 +5,14 @@ import BlocJour from "@components/appli/recherche/BlocJour";
 import PropTypes from "prop-types";
 import { AiOutlineHeart, AiFillHeart, AiFillStar } from "react-icons/ai";
 
-function CarteCreche({ data, userPosition }) {
+function CarteCreche({
+  data,
+  userPosition,
+  familleLiked,
+  familleId,
+  getFamilleLiked,
+  dataDateHeure,
+}) {
   const {
     isCreche,
     photoStructure1,
@@ -18,20 +25,142 @@ function CarteCreche({ data, userPosition }) {
     adresse,
   } = data;
 
-  const [likeCard, setLikeCard] = useState(true);
+  // --- like or not ---
+  const [thisLikedIndex, setThisLikedIndex] = useState();
+  const [thisLiked, setThisLiked] = useState(false);
 
-  // les horaires de chaques jour suivant l'id de la structure
-  const [dataHorairesId, setDataHorairesId] = useState([]);
-  const getHorairesId = () => {
+  const likeOrNot = () => {
+    for (let i = 0; i < familleLiked.length; i += 1) {
+      if (familleLiked[i].structureIdLiked === structureId) {
+        setThisLikedIndex(i);
+        setThisLiked(true);
+        break;
+      }
+    }
+  };
+  useEffect(() => {
+    likeOrNot();
+  }, [familleLiked]);
+
+  const handleLikeCard = async () => {
+    if (thisLiked === true) {
+      await axios
+        .delete(
+          `${
+            import.meta.env.VITE_PATH
+          }/famille/deleteLike/?familleId=${familleId}&structureId=${structureId}`,
+          [familleId, structureId]
+        )
+        .catch((err) => {
+          console.error(err);
+        });
+      setThisLiked(false);
+    } else if (thisLiked === false) {
+      await axios
+        .post(`${import.meta.env.VITE_PATH}/famille/oneMoreLike`, {
+          structureId,
+          familleId,
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+      setThisLiked(true);
+    }
+    getFamilleLiked();
+  };
+
+  // --- les horaires de chaques jour suivant l'id de la structure
+
+  // dataDateHeure
+  //   heureMin: "" OK
+  //   heureMax: "" OK
+  //   jour: "" OK recurrent
+  const [dataCalendarId, setDataCalendarId] = useState();
+
+  const getCalendrierMoins = () => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/horaires/${structureId}`)
+      .get(`${import.meta.env.VITE_PATH}/calendrier/whereMoins/${structureId}`)
       .then((res) => {
-        setDataHorairesId(res.data);
+        setDataCalendarId(res.data);
       })
       .catch((err) => {
         console.error(err);
       });
   };
+
+  const [dataHorairesId, setDataHorairesId] = useState([]);
+  const getHorairesId = () => {
+    axios
+      .get(`${import.meta.env.VITE_PATH}/horaires/${structureId}`)
+      .then((res) => {
+        let numPlaceJour;
+        const isNumber = () => {
+          // true => recurrent
+          // false => occasionnel
+          if (typeof dataDateHeure.jour === "number") {
+            return true;
+          }
+          return false;
+        };
+
+        const isWorking = () => {
+          // pour avoir la bonne place dans tableau pour horaires
+          numPlaceJour = dataDateHeure.jour.split("&")[1];
+          if (numPlaceJour == 0) {
+            numPlaceJour = 6;
+          } else numPlaceJour -= 1;
+
+          let isWork = true;
+          // suivant le jour (en jour) suivant table horaires
+          if (res.data[numPlaceJour].ouvert === 0) {
+            return false;
+          }
+          // suivant le jour (en date) suivant table calendrier
+          for (let i = 0; i < dataCalendarId.length; i++) {
+            if (dataCalendarId[i].date === dataDateHeure.jour.split("&")[0]) {
+              return false;
+            }
+          }
+          return isWork;
+        };
+        if (
+          dataDateHeure.jour === "" ||
+          // dataDateHeure.jour N'EST PAS UN NOMBRE => occas
+          (isNumber() === false &&
+            isWorking() === true &&
+            (dataDateHeure.heureMin === "" ||
+              res.data[numPlaceJour].heureMin <= dataDateHeure.heureMin) &&
+            (dataDateHeure.heureMax === "" ||
+              res.data[numPlaceJour].heureMax >= dataDateHeure.heureMax)) ||
+          // dataDateHeure.jour EST UN NOMBRE => récurrent
+          (isNumber() === true &&
+            res.data[dataDateHeure.jour].ouvert === 1 &&
+            (dataDateHeure.heureMin === "" ||
+              res.data[dataDateHeure.jour].heureMin <=
+                dataDateHeure.heureMin) &&
+            (dataDateHeure.heureMax === "" ||
+              res.data[dataDateHeure.jour].heureMax >= dataDateHeure.heureMax))
+
+          // OK EN RECURRENT
+          // (
+          //   res.data[dataDateHeure.jour].ouvert === 1 &&
+          //     (dataDateHeure.heureMin === "" ||
+          //       res.data[dataDateHeure.jour].heureMin <=
+          //         dataDateHeure.heureMin) &&
+          //     (dataDateHeure.heureMax === "" ||
+          //       res.data[dataDateHeure.jour].heureMax >= dataDateHeure.heureMax)
+          // )
+        ) {
+          setDataHorairesId(res.data);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  useEffect(() => {
+    dataCalendarId !== undefined && getHorairesId();
+  }, [dataCalendarId]);
 
   const [center, setCenter] = useState([0, 0]);
 
@@ -101,7 +230,7 @@ function CarteCreche({ data, userPosition }) {
   };
 
   useEffect(() => {
-    getHorairesId();
+    getCalendrierMoins();
     handleDistance();
     staring();
   }, []);
@@ -109,10 +238,10 @@ function CarteCreche({ data, userPosition }) {
   return (
     dataHorairesId.length !== 0 && (
       <div className="carte-creche" style={isCreche ? blueBg : pinkBg}>
-        {likeCard ? (
-          <AiFillHeart className="like" onClick={() => setLikeCard(false)} />
+        {thisLiked ? (
+          <AiFillHeart className="like" onClick={() => handleLikeCard()} />
         ) : (
-          <AiOutlineHeart className="like" onClick={() => setLikeCard(true)} />
+          <AiOutlineHeart className="like" onClick={() => handleLikeCard()} />
         )}
 
         <Link to="/appli/search/card" state={{ data, dataHorairesId }}>
@@ -148,6 +277,10 @@ function CarteCreche({ data, userPosition }) {
 
 CarteCreche.propTypes = {
   data: PropTypes.object.isRequired,
+  userPosition: PropTypes.array.isRequired,
+  familleLiked: PropTypes.array.isRequired,
+  familleId: PropTypes.string.isRequired,
+  getFamilleLiked: PropTypes.func.isRequired,
 };
 
 export default CarteCreche;

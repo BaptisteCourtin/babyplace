@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import Proptypes, { bool, number, oneOfType } from "prop-types";
+import React, { useEffect } from "react";
+import Proptypes, { bool, number, string, oneOfType } from "prop-types";
 import Calendar from "react-calendar";
 import Axios from "axios";
 
@@ -110,5 +110,9 @@ Structure11.propTypes = {
   vendrediOuvert: oneOfType([bool, number]),
   samediOuvert: oneOfType([bool, number]),
   dimancheOuvert: oneOfType([bool, number]),
+  closedDays: Proptypes.node,
+  setClosedDays: Proptypes.func,
+  structureId: oneOfType([string, number]),
+  setData: Proptypes.func,
 };
 export default Structure11;

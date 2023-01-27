@@ -5,7 +5,7 @@
     display: flex;
     flex-direction: column;
     padding: 15px;
-    gap: 20px;
+    gap: 30px;
 
     h1 {
       font-size: 2em;
@@ -17,7 +17,7 @@
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 30px;
     }
 
     li {
@@ -42,6 +42,7 @@
             font-size: 1.15em;
             font-weight: 500;
             color: $third;
+            margin-bottom: 10px;
           }
 
           .messageListEmail {
@@ -63,12 +64,12 @@
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          gap: 5px;
-          width: 15%;
+          gap: 10px;
+          width: 200px;
 
           & #btnRepondre {
             padding: 5px 0;
-            width: 100%;
+            width: 150px;
             background-color: $fifth;
             color: $white;
             font-weight: 500;
@@ -85,7 +86,7 @@
 
           #btnDelete {
             padding: 5px 0;
-            width: 100%;
+            width: 150px;
             background-color: $seventh;
             color: $white;
             font-weight: 500;

@@ -6,6 +6,8 @@ import Thibaud from "@assets/features/Thibaud.png";
 import logoDave from "@assets/features/logoDave.png";
 import NavbarLite from "./NavbarLite";
 import FooterLite from "./FooterLite";
+import { TiSocialLinkedin } from "react-icons/ti";
+import { RiGithubLine } from "react-icons/ri";
 
 function Features() {
   return (
@@ -30,30 +32,102 @@ function Features() {
               à avancer ensemble, que nous mettons au service de nos clients.
             </p>
           </div>
-          <img src={logoDave} />
+          <img src={logoDave} alt="logo des DaveWarehouse" />
         </div>
       </section>
       <section id="profil">
         <h3>Nos Profils</h3>
-        <p>Notre équipe de développeur ayant participée à ce projet.</p>
+        <p>Notre équipe de développeurs ayant participé à ce projet.</p>
         <div>
           <div className="imgAboutUsContainer">
             <ul>
               <li>
-                <img src={Amelie} />
-                <p>Amélie</p>
+                <img src={Amelie} alt="Amélie" />
+                <div className="rightPart">
+                  <p>Amélie</p>
+                  <div className="links">
+                    <a
+                      href="https://github.com/AmelieGHP"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <RiGithubLine />
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/in/amelie-ghp/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <TiSocialLinkedin />
+                    </a>
+                  </div>
+                </div>
               </li>
               <li>
-                <img src={Baptiste} />
-                <p>Baptiste</p>
+                <img src={Baptiste} alt="Baptiste" />
+                <div className="rightPart">
+                  <p>Baptiste</p>
+                  <div className="links">
+                    <a
+                      href="https://github.com/BaptisteCourtin"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <RiGithubLine />
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/in/baptistecourtin/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <TiSocialLinkedin />
+                    </a>
+                  </div>
+                </div>
               </li>
               <li>
-                <img src={Gui} />
-                <p>Guillaume</p>
+                <img src={Gui} alt="Guillaume" />
+                <div className="rightPart">
+                  <p>Guillaume</p>
+                  <div className="links">
+                    <a
+                      href="https://github.com/GuiPich"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <RiGithubLine />
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/in/guillaume-pichaud-627b308a/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <TiSocialLinkedin />
+                    </a>
+                  </div>
+                </div>
               </li>
               <li>
-                <img src={Thibaud} />
-                <p>Thibaud</p>
+                <img src={Thibaud} alt="Thibaud" />
+                <div className="rightPart">
+                  <p>Thibaud</p>
+                  <div className="links">
+                    <a
+                      href="https://github.com/thibaudbrault"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <RiGithubLine />
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/in/thibaud-brault/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <TiSocialLinkedin />
+                    </a>
+                  </div>
+                </div>
               </li>
             </ul>
           </div>

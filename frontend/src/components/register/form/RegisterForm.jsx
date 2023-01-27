@@ -5,17 +5,16 @@ import {
   AiOutlineEyeInvisible,
   AiOutlineCheck,
 } from "react-icons/ai";
-import ReactModal from 'react-modal';
+import ReactModal from "react-modal";
 import UserEmailContext from "@components/context/UserEmailContext";
 import toast from "react-hot-toast";
 import Axios from "axios";
-
 
 function RegisterForm() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const { userEmail, setUserEmail } = useContext(UserEmailContext);
+  const { setUserEmail } = useContext(UserEmailContext);
   const [password, setPassword] = useState("");
   const [checked, setChecked] = useState(false);
   const [typePwd, setTypePwd] = useState(true);
@@ -30,11 +29,13 @@ function RegisterForm() {
     e.preventDefault();
 
     if (email && password && checked && pwdLength >= 8) {
-      Axios.post("http://localhost:5000/inscription", {
+      Axios.post(`${import.meta.env.VITE_PATH}/inscription`, {
         email,
         password,
       })
         .then((ret) => {
+          sessionStorage.setItem("structureEmail", email);
+          setUserEmail(email);
           const { token } = ret.data;
           navigate("/structure/inscription-form", {
             state: {
@@ -44,16 +45,14 @@ function RegisterForm() {
         })
         .catch((err) => {
           if (err.response.data.errno === 1062) {
-            setModalIsOpen(true)
+            setModalIsOpen(true);
           } else {
             console.error(err);
           }
-        })
+        });
     }
   };
-  const handleChange = (event) => {
-    setUserEmail(event.target.value);
-  };
+
   const handlePwdLength = (e) => {
     e.preventDefault();
     if (pwdLength < 8) {
@@ -76,7 +75,6 @@ function RegisterForm() {
           placeholder="Email"
           onChange={(event) => {
             setEmail(event.target.value);
-            handleChange(event);
           }}
           required
         />
@@ -138,8 +136,8 @@ function RegisterForm() {
       </form>
       <ReactModal
         isOpen={modalIsOpen}
-        shouldCloseOnOverlayClick={true}
-        shouldCloseOnEsc={true}
+        shouldCloseOnOverlayClick
+        shouldCloseOnEsc
         onRequestClose={() => setModalIsOpen(false)}
         ariaHideApp={false}
         className="waitingModal"
@@ -148,13 +146,22 @@ function RegisterForm() {
             backgroundColor: "#000000",
             height: "100vh",
             width: "100vw",
-          }
+          },
         }}
       >
         <h2>Cet email existe déjà</h2>
-        <h4>Pour accéder à la page de connexion, <Link to="/login">cliquez ici</Link></h4>
-        <button type="button" onClick={() => { setModalIsOpen(false) }}>Fermer</button>
-
+        <h4>
+          Pour accéder à la page de connexion,{" "}
+          <Link to="/login">cliquez ici</Link>
+        </h4>
+        <button
+          type="button"
+          onClick={() => {
+            setModalIsOpen(false);
+          }}
+        >
+          Fermer
+        </button>
       </ReactModal>
     </section>
   );

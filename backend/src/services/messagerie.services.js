@@ -5,7 +5,7 @@ const open = () => {
 
     let ws = new Server({
         cors: {
-            origin: "http://localhost:3000",
+            origin: `${process.env.FRONT_HOST}`,
             methods: ["GET", "POST"],
         },
     });

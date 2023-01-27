@@ -4,14 +4,14 @@ const path = require("path");
 const cors = require("cors");
 const router = require("./router");
 const bodyParser = require("body-parser");
-const ws = require("./services/messagerie.service");
+const ws = require("./services/messagerie.services");
 
 const app = express();
 
 // use some application-level middlewares
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: `${process.env.FRONT_HOST}`,
     optionsSuccessStatus: 200,
   })
 );

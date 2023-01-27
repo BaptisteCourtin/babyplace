@@ -10,7 +10,7 @@ function Stats() {
 
   const getAssMat = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/admin/assmat");
+      const res = await axios.get(`${import.meta.env.VITE_PATH}/admin/assmat`);
       setAssMat(res.data);
     } catch (err) {
       toast.error(err.message);
@@ -19,7 +19,7 @@ function Stats() {
 
   const getCreche = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/admin/creche");
+      const res = await axios.get(`${import.meta.env.VITE_PATH}/admin/creche`);
       setCreche(res.data);
     } catch (err) {
       toast.error(err.message);
@@ -28,7 +28,7 @@ function Stats() {
 
   const getFamille = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/admin/famille");
+      const res = await axios.get(`${import.meta.env.VITE_PATH}/admin/famille`);
       setFamille(res.data);
     } catch (err) {
       toast.error(err.message);

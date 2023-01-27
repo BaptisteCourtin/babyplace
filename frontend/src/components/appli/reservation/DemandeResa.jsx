@@ -2,8 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import Toggle from "../filtres/Toggle";
 import FamilleContext from "@components/context/FamilleContext";
+import Toggle from "../filtres/Toggle";
 
 function DemandeResa({
   setCompo,
@@ -46,6 +46,23 @@ function DemandeResa({
     calculPrixTotal();
   }, [kilometre, entretien, repas]);
 
+  // --- heure total avec minutes ---
+  const [heureTotal, setHeureTotal] = useState(0);
+
+  const handleHeureTotal = () => {
+    setHeureTotal(
+      `${
+        heureMax.split(":")[1] - heureMin.split(":")[1] >= 0
+          ? heureMax.split(":")[0] - heureMin.split(":")[0]
+          : heureMax.split(":")[0] - heureMin.split(":")[0] - 1
+      }:${
+        heureMax.split(":")[1] - heureMin.split(":")[1] >= 0
+          ? heureMax.split(":")[1] - heureMin.split(":")[1]
+          : 60 + (heureMax.split(":")[1] - heureMin.split(":")[1])
+      }`
+    );
+  };
+
   // --- get enfant id suivant la famille id ---
 
   const [nomsEnfants, setNomsEnfants] = useState(); // les prenoms des enfants
@@ -55,7 +72,6 @@ function DemandeResa({
     axios
       .get(`${import.meta.env.VITE_PATH}/famille/nomsEnfants100/${familleId}`)
       .then((res) => {
-        console.log(res.data);
         setNomsEnfants(res.data);
         setEnfantId(res.data[0].enfantId);
       })
@@ -65,12 +81,13 @@ function DemandeResa({
   };
   useEffect(() => {
     getNomsEnfants();
+    handleHeureTotal();
   }, []);
 
   // --- nom enfant quand clique ---
 
   const whichKid = () => {
-    for (let i = 0; i < nomsEnfants.length; i++) {
+    for (let i = 0; i < nomsEnfants.length; i += 1) {
       if (nomsEnfants[i].enfantId === enfantId) {
         return `${nomsEnfants[i].prenom}`;
       }
@@ -83,14 +100,15 @@ function DemandeResa({
   const handleRequest = () => {
     axios.post(`${import.meta.env.VITE_PATH}/reservation`, {
       enfantId,
+      familleId,
       structureId,
 
       prixTotal,
       isOccasionnel,
-      dateArrivee: jour,
+      jour,
       heureArrivee: heureMin,
-      dateDepart: jour,
       heureDepart: heureMax,
+      heureTotal,
     });
     setCompo(3);
   };
@@ -159,8 +177,9 @@ function DemandeResa({
             </div>
 
             <div className="all-kid">
-              {nomsEnfants.map((each) => (
+              {nomsEnfants.map((each, index) => (
                 <button
+                  key={index}
                   type="button"
                   onClick={() => setEnfantId(each.enfantId)}
                 >
@@ -179,17 +198,7 @@ function DemandeResa({
                 <span>{prixTotal}€ *</span>
               </p>
               <p>
-                <span>
-                  {`${
-                    heureMax.split(":")[1] - heureMin.split(":")[1] >= 0
-                      ? heureMax.split(":")[0] - heureMin.split(":")[0]
-                      : heureMax.split(":")[0] - heureMin.split(":")[0] - 1
-                  }:${
-                    heureMax.split(":")[1] - heureMin.split(":")[1] >= 0
-                      ? heureMax.split(":")[1] - heureMin.split(":")[1]
-                      : 60 - heureMax.split(":")[1] - heureMin.split(":")[1]
-                  } h de garde`}
-                </span>
+                <span>{heureTotal} h de garde</span>
               </p>
             </div>
             <button type="button" onClick={() => handleRequest()}>

@@ -20,9 +20,6 @@ function AppCalendar({
   dataHorairesId,
   dataCalendarId,
 }) {
-  // const { jourSemaine, ouvert, heureMin, heureMax} = dataHorairesId;
-  // {date} = dataCalendarId;
-
   const value = new Date(); // date de base occas
 
   const chooseTheDay = (e, each) => {
@@ -36,8 +33,10 @@ function AppCalendar({
   const [clickedDay, setClickedDay] = useState(new Date());
   const afficheDate = () => {
     let jour = clickedDay.toString();
-    jour = jour.split(" ");
-    const jourLong = `${jour[2]} ${jour[1]} ${jour[3]}`;
+    jour = jour.split(" "); // pour les heure selon le jour
+    const jourLong = `${clickedDay.getFullYear()}-${
+      clickedDay.getMonth() + 1
+    }-${clickedDay.getDate()}`;
     setJour(jourLong);
 
     if (jour[0] === "Mon") {
@@ -144,8 +143,8 @@ function AppCalendar({
       {isOccasionnel === 0 ? (
         <div className="calendar-recur">
           <div className="container-days">
-            {dataHorairesId.map((each) => (
-              <li>
+            {dataHorairesId.map((each, index) => (
+              <li key={index}>
                 {each.ouvert ? (
                   <>
                     <input
@@ -156,7 +155,7 @@ function AppCalendar({
                       onChange={(e) => chooseTheDay(e, each)}
                     />
                     <label htmlFor={each.jourSemaine}>
-                      {each.jourSemaine.split("")[0]}
+                      {each.jourSemaine.split("")[0].toUpperCase()}
                     </label>
                   </>
                 ) : (

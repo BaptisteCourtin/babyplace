@@ -1,11 +1,24 @@
 import React from "react";
 import logoBlanc from "@assets/logo-blanc.svg";
-import avatar1 from "@assets/avatar1.svg";
 import { AiOutlineUser } from "react-icons/ai";
 import PropTypes from "prop-types";
 
-function NotifAcceptee({ setCompo, photoFamille }) {
-  // prendre l'image creche
+function NotifAcceptee({ setCompo, photoFamille, oneReservation }) {
+  const {
+    crecheNom,
+    assMatNomUsage,
+    assMatPrenom,
+    assMatNomNaissance,
+    jour,
+    dateArrivee,
+    dateDepart,
+    heureArrivee,
+    heureDepart,
+    prenom,
+    nom,
+  } = oneReservation;
+
+  console.log(oneReservation);
 
   return (
     <div className="notif-container-grad">
@@ -26,16 +39,31 @@ function NotifAcceptee({ setCompo, photoFamille }) {
           ) : (
             <AiOutlineUser className="avatar" />
           )}
-          <img src={avatar1} alt="img creche" className="avatar" />
+          {oneReservation.photoProfil ? (
+            <img
+              src={oneReservation.photoProfil}
+              alt="avatar"
+              className="avatar"
+            />
+          ) : (
+            <AiOutlineUser className="avatar" />
+          )}
         </div>
 
         <div className="text">
           <h3 className="green">Fantastique !</h3>
 
-          <p>
-            La crèche Picoti Picota confirme accueillir votre enfant le Lundi 14
-            septembre de 9h à 17h
-          </p>
+          <h4>
+            {crecheNom ||
+              (assMatNomUsage
+                ? `${assMatPrenom} ${assMatNomUsage}`
+                : `${assMatPrenom} ${assMatNomNaissance}`)}{" "}
+            confirme accueillir {prenom} {nom} le {jour}{" "}
+            {dateArrivee &&
+              `du ${dateArrivee} au
+            ${dateDepart}`}{" "}
+            de {heureArrivee} à {heureDepart}
+          </h4>
         </div>
         <div className="button-bas">
           <button type="button" className="butt" onClick={() => setCompo(4)}>
@@ -50,6 +78,7 @@ function NotifAcceptee({ setCompo, photoFamille }) {
 NotifAcceptee.propTypes = {
   setCompo: PropTypes.func.isRequired,
   photoFamille: PropTypes.string.isRequired,
+  oneReservation: PropTypes.object.isRequired,
 };
 
 export default NotifAcceptee;

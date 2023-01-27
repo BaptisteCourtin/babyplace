@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 import axios from "axios";
+import PropTypes from "prop-types";
 import Chat from "./Chat";
 
-const socket = io.connect("http://localhost:3001");
+const socket = io.connect(`${import.meta.env.VITE_SOCKET}`);
 
 function Messages({ nom, prenom, email, photoProfil, structureId }) {
   const [room, setRoom] = useState("");
@@ -13,9 +14,9 @@ function Messages({ nom, prenom, email, photoProfil, structureId }) {
 
   const getStructureForMess = () => {
     axios
-      .get("http://localhost:5000/famille/all")
+      .get(`${import.meta.env.VITE_PATH}/famille/all`)
       .then((ret) => {
-        console.log(ret.data);
+        console.warn(ret.data);
         setStrucData(ret.data);
       })
       .catch((err) => {
@@ -25,12 +26,6 @@ function Messages({ nom, prenom, email, photoProfil, structureId }) {
 
   const joinRoom = async () => {
     await socket.emit("join_room", room);
-    // socket.on("is_logged", (id) => {
-    //   if (id != 0) {
-    //     console.log(`user ${id} is logged`);
-    //     setLogged(0);
-    //   }
-    // })
   };
 
   useEffect(() => {
@@ -43,7 +38,7 @@ function Messages({ nom, prenom, email, photoProfil, structureId }) {
       <div className="messagesShortsAffich">
         <h2>Messagerie</h2>
         <div className="userPart">
-          <img src={photoProfil} alt="photo de profil" id="profilImg" />
+          <img src={photoProfil} alt="profil" id="profilImg" />
           <div className="profilText">
             <p>
               <span>{nom}</span>
@@ -54,36 +49,33 @@ function Messages({ nom, prenom, email, photoProfil, structureId }) {
         <div className="messages-affichage">
           <div className="salonsMessages">
             {strucData &&
-              strucData
-                // .filter((f) => !f.email.includes(email))
-                .map((element) => (
-                  <li
-                    className={
-                      selected && element.email === title
-                        ? "selected contactList"
-                        : "contactList"
-                    }
-                    key={element.familleId}
+              strucData.map((element) => (
+                <li
+                  className={
+                    selected && element.email === title
+                      ? "selected contactList"
+                      : "contactList"
+                  }
+                  key={element.familleId}
+                >
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelected(true);
+                      setRoom(structureId + element.familleId);
+                      setTitle(element.email);
+                    }}
+                    id="btn-affiche-con"
                   >
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setSelected(true);
-                        setRoom(structureId + element.familleId);
-                        setTitle(element.email);
-                      }}
-                      id="btn-affiche-con"
-                    >
-                      {/* {element.photoProfil && <img src={element.photoProfil} />} */}
-                      {element.email}
-                    </button>
-                  </li>
-                ))}
+                    {element.email}
+                  </button>
+                </li>
+              ))}
           </div>
         </div>
       </div>
       <div className="conversationAffich">
-        {room != "" ? (
+        {room !== "" ? (
           <Chat
             socket={socket}
             username={nom || prenom}
@@ -98,5 +90,13 @@ function Messages({ nom, prenom, email, photoProfil, structureId }) {
     </div>
   );
 }
+
+Messages.propTypes = {
+  nom: PropTypes.string,
+  prenom: PropTypes.string,
+  email: PropTypes.string,
+  photoProfil: PropTypes.string,
+  structureId: PropTypes.number,
+};
 
 export default Messages;

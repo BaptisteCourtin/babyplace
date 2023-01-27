@@ -55,10 +55,9 @@ function AppliCardCreche() {
   return (
     <div className="appli-card-creche">
       <header>
-        <Link to="/appli/search">{`< ${
-          nom ||
+        <Link to="/appli/search">{`< ${nom ||
           (nomUsage ? `${prenom} ${nomUsage}` : `${prenom} ${nomNaissance}`)
-        }`}</Link>
+          }`}</Link>
       </header>
 
       <main>
@@ -144,7 +143,7 @@ function AppliCardCreche() {
             </div>
             <PopUp data={data} dataHorairesId={dataHorairesId} />
           </div>
-          <Link className="envoie-mess" to="/appli/message">
+          <Link className="envoie-mess" to="/appli/message" >
             Envoyer un Message
           </Link>
         </div>

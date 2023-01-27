@@ -38,6 +38,7 @@ function App() {
   const [familleId, setFamilleId] = useState(0);
   useEffect(() => {
     setFamilleId(sessionStorage.getItem("BabyPlacefamilleId"));
+    setUserEmail(sessionStorage.getItem("structureEmail"));
   }, []);
 
   return (

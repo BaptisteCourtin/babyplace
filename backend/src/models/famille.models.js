@@ -18,34 +18,34 @@ const getPersoConfiance = async (req) => {
   return result;
 };
 
-const getDonneesFormParent = async (req) => {
-  const [result] = await datasource.query(
-    "SELECT p.nom, p.prenom, p.profession, p.email, p.telephone, p.adresse, p.parentId FROM famille AS f INNER JOIN parent AS p ON f.familleId=p.familleId WHERE f.familleId = ?",
-    [req.params.id]
-  );
-  return result;
-};
-
-const getDonneesFormEnfant = async (req) => {
-  const [[result]] = await datasource.query(
-    "SELECT nom, prenom, dateNaissance, marcheur, allergies, medecin FROM enfant WHERE enfantId = ?",
-    [req.params.id]
-  );
-  return result;
-};
-
 const getDonneesFormInscription = async (req) => {
   const [result] = await datasource.query(
-    "SELECT p.docJustifRevenus, p.docDeclaRevenus, p.docSituationPro, p.docJustifDom, p.numCaf, p.numSecu, p.parentId, f.docAssurParent, f.docRib, f.docAutoImage, f.docDivorce FROM famille AS f INNER JOIN parent AS p ON f.familleId=p.familleId WHERE f.familleId = ?",
-    [req.params.id]
+    "SELECT docJustifRevenus, docDeclaRevenus, docSituationPro, docJustifDom, numCaf, numSecu, parentId FROM parent WHERE familleId = ? ;SELECT docAssurParent, docRib, docAutoImage, docDivorce FROM famille WHERE familleId = ?",
+    [req.params.id, req.params.id]
   );
   return result;
 };
 
 const getPourcent = async (req) => {
   const [result] = await datasource.query(
-    "SELECT pourcentFormParent, nom, prenom FROM parent WHERE familleId = ? ; SELECT pourcentFormEnfant FROM enfant WHERE familleId = ? ; SELECT photoProfilFamille FROM famille WHERE familleId = ? ",
-    [req.params.id, req.params.id, req.params.id]
+    "SELECT pourcentFormParent, nom, prenom FROM parent WHERE familleId = ? ; SELECT pourcentFormEnfant FROM enfant WHERE familleId = ? ; SELECT photoProfilFamille FROM famille WHERE familleId = ? ; SELECT pourcentFormInscription FROM famille WHERE familleId = ? ",
+    [req.params.id, req.params.id, req.params.id, req.params.id]
+  );
+  return result;
+};
+
+const getLikes = async (req) => {
+  const [result] = await datasource.query(
+    "SELECT structureIdLiked FROM favoris WHERE familleId = ?",
+    [req.params.id]
+  );
+  return result;
+};
+
+const getLikesAndStructure = async (req) => {
+  const [result] = await datasource.query(
+    "SELECT c.nom, a.nomUsage, a.nomNaissance, a.prenom, s.photoProfil, s.structureId FROM favoris AS f LEFT JOIN creche AS c ON c.structureId = f.structureIdLiked LEFT JOIN assMat AS a ON a.structureId = f.structureIdLiked LEFT JOIN structure AS s ON s.structureId = f.structureIdLiked WHERE familleId = ?",
+    [req.params.id]
   );
   return result;
 };
@@ -58,97 +58,10 @@ const getFamilleInfo = async (req) => {
   return result;
 };
 
-const getNomsEtIdEnfants = async (req) => {
+const updatePourcentFormInscr = async (req) => {
   const [result] = await datasource.query(
-    "SELECT prenom, enfantId FROM enfant WHERE familleId = ?",
-    [req.params.id]
-  );
-  return result;
-};
-
-const getNomsEtIdEnfants100 = async (req) => {
-  const [result] = await datasource.query(
-    "SELECT prenom, enfantId FROM enfant WHERE familleId = ? AND pourcentFormEnfant = 100",
-    [req.params.id]
-  );
-  return result;
-};
-
-const updateFormParent = async (req) => {
-  const { nom, prenom, profession, telephone, email, adresse } = req.body;
-
-  const [result] = await datasource.query(
-    `UPDATE parent SET nom = ? , prenom = ? , profession = ? , telephone = ? , email = ? , adresse = ? , pourcentFormParent = ? WHERE parentId = ?`,
-    [
-      nom,
-      prenom,
-      profession,
-      telephone,
-      email,
-      adresse,
-
-      parseInt(req.body.pourcent),
-      parseInt(req.params.id),
-    ]
-  );
-  return result;
-};
-
-const updateFormEnfant = async (req) => {
-  const { nom, prenom, dateNaissance, marcheur, allergies, medecin } =
-    req.body.initialData;
-
-  const [result] = await datasource.query(
-    `UPDATE enfant SET nom = ? , prenom = ? , dateNaissance = ? , marcheur = ? , allergies = ? , medecin = ? , pourcentFormEnfant = ? WHERE enfantId = ?`,
-    [
-      nom,
-      prenom,
-      dateNaissance,
-      marcheur,
-      allergies,
-      medecin,
-      req.body.pourcent,
-      req.params.id,
-    ]
-  );
-  return result;
-};
-
-const postReservation = async (req) => {
-  const {
-    structureId,
-    enfantId,
-    prixTotal,
-    isOccasionnel,
-    dateArrivee,
-    heureArrivee,
-    dateDepart,
-    heureDepart,
-  } = req.body;
-
-  const [result] = await datasource.query(
-    "INSERT INTO reservation (structureId, enfantId, prixTotal, isOccasionnel, dateArrivee, heureArrivee, dateDepart, heureDepart) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ; INSERT INTO notifications (structureId , enfantId ) VALUES (?, ?)",
-    [
-      structureId,
-      enfantId,
-      prixTotal,
-      isOccasionnel,
-      dateArrivee,
-      heureArrivee,
-      dateDepart,
-      heureDepart,
-
-      structureId,
-      enfantId,
-    ]
-  );
-  return result;
-};
-
-const postNewEnfant = async (req) => {
-  const [result] = await datasource.query(
-    "INSERT INTO enfant (familleId) VALUES (?)",
-    [req.body.familleId]
+    `UPDATE famille SET pourcentFormInscription = ? WHERE familleId = ?`,
+    [req.body.pourcent, req.params.id]
   );
   return result;
 };
@@ -162,10 +75,10 @@ const postNewConfiance = async (req) => {
   return result;
 };
 
-const deleteEnfant = async (req) => {
+const postNewLike = async (req) => {
   const [result] = await datasource.query(
-    "DELETE FROM enfant WHERE enfantId = ?",
-    [req.params.id]
+    "INSERT INTO favoris (familleId, structureIdLiked) VALUES (?, ?)",
+    [parseInt(req.body.familleId), req.body.structureId]
   );
   return result;
 };
@@ -178,10 +91,10 @@ const deleteConfiance = async (req) => {
   return result;
 };
 
-const nullOneDocFormParent = async (req) => {
+const deleteLike = async (req) => {
   const [result] = await datasource.query(
-    `UPDATE parent SET ${req.body.nomFichier} = NULL WHERE parentId = ?`,
-    [req.params.id]
+    "DELETE FROM favoris WHERE familleId = ? AND structureIdLiked = ?",
+    [req.query.familleId, req.query.structureId]
   );
   return result;
 };
@@ -196,22 +109,17 @@ const nullOneDocFormCommun = async (req) => {
 
 module.exports = {
   getPersoConfiance,
-  postReservation,
-  getDonneesFormParent,
   getFamille,
-  updateFormParent,
-  updateFormEnfant,
-  getDonneesFormEnfant,
   getPourcent,
-  getNomsEtIdEnfants,
-  getNomsEtIdEnfants100,
-  postNewEnfant,
-  deleteEnfant,
+  getLikes,
   getDonneesFormInscription,
   getFamilleDataMess,
   deleteConfiance,
   postNewConfiance,
   getFamilleInfo,
-  nullOneDocFormParent,
   nullOneDocFormCommun,
+  updatePourcentFormInscr,
+  deleteLike,
+  postNewLike,
+  getLikesAndStructure,
 };

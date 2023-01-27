@@ -7,7 +7,6 @@ import facebook from "@assets/facebook.svg";
 import twitter from "@assets/twitter.svg";
 import insta from "@assets/insta.svg";
 import { HashLink } from "react-router-hash-link";
-import { NavLink } from "react-router-dom";
 
 function Footer({ userType }) {
   return (
@@ -58,7 +57,7 @@ function Footer({ userType }) {
                 <HashLink to="/features#about">A propos</HashLink>
               </li>
               <li>
-                <HashLink to="/features#profil">Nos Profil</HashLink>
+                <HashLink to="/features#profil">Nos Profils</HashLink>
               </li>
               <li>
                 <HashLink to="/features#mentions">Mentions Légales</HashLink>
@@ -90,7 +89,7 @@ function Footer({ userType }) {
             Number: 21479524.
           </p>
           <button
-            type="button"
+            type="submit"
             onClick={() => {
               window.scrollTo(0, 0);
             }}

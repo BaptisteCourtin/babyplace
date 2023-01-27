@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
-import Proptypes, { bool, node, oneOfType } from "prop-types";
+import Proptypes from "prop-types";
 import StructureContext from "@components/context/StructureContext";
 
 function Structure1({
-  isCreche,
   typeCreche,
   nomStructure,
   telephone,
@@ -139,9 +138,9 @@ function Structure1({
             <label
               htmlFor="nomStrucure"
               className={
-                nomStructure !== "" &&
                 nomStructure !== null &&
-                nomStructure !== undefined
+                nomStructure !== undefined &&
+                nomStructure.length > 3
                   ? "labelChecked"
                   : ""
               }
@@ -165,7 +164,13 @@ function Structure1({
             />
             <label
               htmlFor="adresseStrucure"
-              className={adresseStructure !== " " ? "labelChecked" : ""}
+              className={
+                adresseStructure !== null &&
+                adresseStructure !== undefined &&
+                adresseStructure.length > 10
+                  ? "labelChecked"
+                  : ""
+              }
             >
               Adresse
             </label>
@@ -301,7 +306,6 @@ function Structure1({
   );
 }
 Structure1.propTypes = {
-  isCreche: oneOfType([bool, node]),
   typeCreche: Proptypes.string,
   nomStructure: Proptypes.string,
   telephone: Proptypes.string,

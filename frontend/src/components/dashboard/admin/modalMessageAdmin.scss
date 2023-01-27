@@ -9,8 +9,8 @@
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.5);
-  width: 60%;
-  height: 25%;
+  width: 800px;
+  height: 200px;
   animation: moveDown 0.8s forwards;
   background-color: white;
 
@@ -27,12 +27,14 @@
   .modalAdminContainer {
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     .modalAdminHeader {
       display: flex;
       align-items: center;
       flex-direction: column;
-      margin-bottom: 10px;
 
       h4 {
         font-size: 1.5em;
@@ -45,6 +47,9 @@
       margin-bottom: 10px;
       margin-bottom: 15px;
 
+      p {
+        margin: 30px 0px 20px 0px;
+      }
     }
 
     .modalAdminBtns {
@@ -52,12 +57,12 @@
       justify-content: space-between;
       align-items: center;
       padding: 0px 100px;
-      gap: 30%;
       width: 100%;
+      gap: 300px;
 
       #btnRepondre {
         padding: 5px 0;
-        width: 100%;
+        width: 300px;
         background-color: $fifth;
         color: $white;
         font-weight: 500;
@@ -75,7 +80,7 @@
 
       #btnDelete {
         padding: 5px 0;
-        width: 100%;
+        width: 300px;
         background-color: $seventh;
         color: $white;
         font-weight: 500;
@@ -91,5 +96,4 @@
       }
     }
   }
-
 }
