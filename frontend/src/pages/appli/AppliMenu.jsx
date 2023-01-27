@@ -29,7 +29,7 @@ function AppliMenu() {
     if (compo === 5) {
       return <Réservations setCompo={setCompo} familleId={familleId} />;
     }
-    return <Base setCompo={setCompo} />;
+    return <Base setCompo={setCompo} familleId={familleId} />;
   };
 
   return (

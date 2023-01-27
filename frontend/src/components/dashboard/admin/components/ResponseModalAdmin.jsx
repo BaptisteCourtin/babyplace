@@ -1,8 +1,7 @@
-import axios from "axios";
-import React, { useState } from "react";
+import React from "react";
 import madamcoucou from "@assets/img-woman.svg";
-import { toast } from "react-hot-toast";
 import PropTypes from "prop-types";
+import { useSendResponseByMail } from "../hooks/useSendResponseByMail";
 
 function ResponseModalAdmin({
   openRes,
@@ -15,38 +14,20 @@ function ResponseModalAdmin({
 }) {
   if (!openRes) return null;
 
-  const [objet, setObjet] = useState("");
-  const [message, setMessage] = useState("");
-
-  const closeMod = () => {
-    closeRes(!openRes);
+  const datas = {
+    objet,
+    message,
+    selectedMail,
+    selectedNom,
+    selectedPrenom,
+    selectedOption,
+    selectedMessage,
   };
 
-  const sendRespons = async (e) => {
-    e.preventDefault();
-    const datas = {
-      objet,
-      message,
-      selectedMail,
-      selectedNom,
-      selectedPrenom,
-      selectedOption,
-      selectedMessage,
-    };
-    try {
-      const res = await axios.post(
-        `${import.meta.env.VITE_PATH}/contact/messages/repondre`,
-        datas
-      );
-      setMessage("");
-      setObjet("");
-      closeMod();
-      console.warn(res.data);
-      toast.success("Votre mail a bien été envoyé !");
-    } catch (err) {
-      console.error(err.response);
-      toast.error(err.message);
-    }
+  const { sendRespons, objet, message } = useSendResponseByMail(datas);
+  
+  const closeMod = () => {
+    closeRes(!openRes);
   };
 
   return (

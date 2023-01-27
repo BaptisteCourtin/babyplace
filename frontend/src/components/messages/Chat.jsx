@@ -1,31 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Scrolltobottom from "react-scroll-to-bottom";
-import axios from "axios";
 import moment from "moment";
-import { toast } from "react-hot-toast";
 import PropTypes from "prop-types";
+import { saveMessage } from "./hooks/useSaveMessage";
+import { useGetMessagesFromRoom } from "./hooks/useGetMessagesFromRoom";
 
 function Chat({ socket, username, room, title, joinRoom }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
-  const [messageListData, setMessageListData] = useState([]);
 
-  const saveMessage = (messageData) => {
-    const { room, author, message, date } = messageData;
-    axios
-      .post(`${import.meta.env.VITE_PATH}/messages/sauvegarde`, {
-        room,
-        author,
-        message,
-        date,
-      })
-      .then((res) => {
-        console.warn(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
+  const { getMessagesFromRoom, messageListData } = useGetMessagesFromRoom(room);
 
   const sendMessage = async () => {
     if (currentMessage !== "") {
@@ -51,22 +35,6 @@ function Chat({ socket, username, room, title, joinRoom }) {
       setMessageList((list) => [...list, data]);
     });
   }, [socket]);
-
-  const getMessagesFromRoom = async () => {
-    try {
-      const result = await axios.get(
-        `${import.meta.env.VITE_PATH}/messages/recup/${room}`,
-        {
-          headers: {
-            room,
-          },
-        }
-      );
-      setMessageListData(result.data);
-    } catch (err) {
-      toast.error(err.message);
-    }
-  };
 
   useEffect(() => {
     joinRoom();

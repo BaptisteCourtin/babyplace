@@ -19,15 +19,13 @@ function PopUpProfilNonComplet({ setVisiblePopUp }) {
       </div>
       <p>
         Comme tout accueil en structure collective, vous devez compléter un
-        dossier d’inscription comprennant :
+        dossier d’inscription comprennant notamment :
         <br />
         <br />
-        - un certificat médical d’aptitude de vie en collectivité
+        - le nom et prénom de l'enfant
         <br />
-        - une photocopie du carnet de vaccinations,
-        <br />
-        - une photocopie du livret de famille
-        <br />- votre numéro d’allocataire CAF.
+        - les allergies de l'enfnat
+        <br />- le nom du medecin traitant de l'enfant
       </p>
       <button type="button" className="compris">
         <Link to="/appli/user/completion" state={{ quelCompo: 2 }}>

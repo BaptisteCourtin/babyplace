@@ -83,8 +83,12 @@ router.post("/inscriptionAppFamille", (req, res) => {
       }
     })
     .catch((err) => {
-      console.error(err);
-      res.status(500).send("Création de compte impossible");
+      console.error(err.errno);
+      if (err.errno === 1062) {
+        res.status(400).send(err);
+      } else {
+        res.status(500).send("Création de compte impossible");
+      }
     });
 });
 
@@ -152,6 +156,7 @@ router.put("/formParent/:id", parent.updateFormParent); // formulaire parent
 router.put("/parent/nullOneDocForm/:id", parent.nullOneDocFormParent); // delete un doc du form inscription (parent)
 router.put("/formEnfant/:id", enfant.updateFormEnfant); // formulaire enfant
 router.put("/resaToNote/:id", reservation.updateResaToNote); // passe le status à toNote
+router.put("/famille/deconnexion/:id", famille.deco); // deconnexion famille
 
 router.post("/reservation", reservation.postReservation); // reservation
 router.post("/famille/newEnfant", enfant.postNewEnfant); // nouveau enfant
@@ -474,9 +479,7 @@ router.post(
 
 router.post("/auth", async (req, res) => {
   await datasource
-    .query("SELECT * FROM structure WHERE email = ? AND isVerify = 1", [
-      req.body.email,
-    ])
+    .query("SELECT * FROM structure WHERE email = ?", [req.body.email])
     .then(([[user]]) => {
       if (user && req.body.password === user.password) {
         const start = Date.now();
@@ -492,6 +495,7 @@ router.post("/auth", async (req, res) => {
               email: user.email,
               token: token,
               tokenStart: start,
+              isVerify: user.isVerify,
             });
           })
           .catch((err) => {

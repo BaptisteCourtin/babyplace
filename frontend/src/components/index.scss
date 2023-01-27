@@ -56,11 +56,11 @@
 @import "../style/waitAdmin.scss";
 
 // --- Messages ---
-@import "../components/messages/messages.scss";
-@import "../components/messages/forApp/messagesForApp.scss";
-@import "../components/dashboard/admin/messageAdmin.scss";
-@import "../components/dashboard/admin/modalMessageAdmin.scss";
-@import "../components/dashboard/admin/responseModalAdmin.scss";
+@import "../components/messages/styles/messages.scss";
+@import "../components/messages/forApp/styles/messagesForApp.scss";
+@import "../components/dashboard/admin/styles/messageAdmin.scss";
+@import "../components/dashboard/admin/styles/modalMessageAdmin.scss";
+@import "../components/dashboard/admin/styles/responseModalAdmin.scss";
 
 // --- Features ---
 @import "../components/features/styles/footerLite.scss";

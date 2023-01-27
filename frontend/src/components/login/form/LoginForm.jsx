@@ -34,14 +34,18 @@ function LoginForm() {
         })
         .then((res) => {
           if (email !== adminEmail && password !== adminPassword) {
-            const { token } = res.data;
+            const { token, isVerify } = res.data;
             sessionStorage.setItem("structureEmail", email);
             setUserEmail(email);
-            navigate("/login-params", {
-              state: {
-                token,
-              },
-            });
+            if (isVerify === 0) {
+              navigate("/pending");
+            } else if (isVerify === 1) {
+              navigate("/login-params", {
+                state: {
+                  token,
+                },
+              });
+            }
           } else if (email === adminEmail && password === adminPassword) {
             const { token } = res.data;
             navigate("/admin", {
@@ -53,7 +57,6 @@ function LoginForm() {
         })
         .catch((err) => {
           if (err?.response.status === 404) {
-            navigate("/pending");
           } else {
             toast.error(err?.response?.data || err.message);
           }

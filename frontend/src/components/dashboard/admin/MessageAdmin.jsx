@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { toast } from "react-hot-toast";
 import Nav from "./Nav.admin";
-import ModalMessageAdmin from "./ModalMessageAdmin";
-import ResponseModalAdmin from "./ResponseModalAdmin";
+import ModalMessageAdmin from "./components/ModalMessageAdmin";
+import ResponseModalAdmin from "./components/ResponseModalAdmin";
+import { useGetAllMessages } from "./hooks/useGetAllMessages";
 
 function MessageAdmin() {
-  const [messageAdminData, setMessageAdminData] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedId, setSelectedId] = useState();
   const [openRes, setOpenRes] = useState(false);
@@ -16,14 +14,7 @@ function MessageAdmin() {
   const [selectedOption, setSelectedOption] = useState("");
   const [selectedMessage, setSelectedMessage] = useState("");
 
-  const getAllMessage = async () => {
-    try {
-      const ret = await axios.get(`${import.meta.env.VITE_PATH}/contact/message/all`);
-      setMessageAdminData(ret.data);
-    } catch (err) {
-      toast.error(err.message);
-    }
-  };
+  const { getAllMessages, messageAdminData } = useGetAllMessages();
 
   const deleteMessage = (id) => {
     setSelectedId(id);
@@ -40,12 +31,12 @@ function MessageAdmin() {
   };
 
   const closeRes = () => {
-    getAllMessage();
+    getAllMessages();
     setIsOpen(!isOpen);
   };
 
   useEffect(() => {
-    getAllMessage();
+    getAllMessages();
   }, []);
 
   return (

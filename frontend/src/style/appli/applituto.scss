@@ -13,6 +13,11 @@
     background: $white;
     color: $second;
 
+    .emailFail {
+      font-size: $h4;
+      font-weight: 500;
+    }
+
     .button-bas {
       background: $gradient;
       .butt {
