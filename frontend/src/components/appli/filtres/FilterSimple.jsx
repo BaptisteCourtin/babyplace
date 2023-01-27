@@ -44,6 +44,9 @@ function FilterSimple({ setCompo, dataBasique, setDataBasique }) {
           </select>
         </div>
       </main>
+      <button type="button" className="apply" onClick={() => setCompo(0)}>
+        Retour à la recherche
+      </button>
     </div>
   );
 }
