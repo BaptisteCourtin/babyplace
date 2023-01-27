@@ -33,7 +33,7 @@
       align-items: flex-start;
       justify-content: space-between;
       flex-direction: column;
-      height: 330px;
+      height: 410px;
       padding: 0 30px;
 
       & .dashPlacesDays {
@@ -132,10 +132,11 @@
         position: absolute;
         right: 15%;
         bottom: 20px;
-        padding: 10px 20px;
+        padding: 10px 40px;
         background: $third;
         color: $white;
-        border: 1px solid transparent;
+        border: 2px solid $white;
+        outline: 2px solid $third;
         border-radius: 5px;
         font-size: $h4;
         font-weight: 500;
@@ -144,7 +145,8 @@
 
         &:hover {
           background: transparent;
-          border: 1px solid $third;
+          border: 2px solid $third;
+          outline: 2px solid transparent;
           color: $third;
         }
       }
@@ -159,17 +161,19 @@
         justify-content: center;
         background: $third;
         color: $white;
-        border: 1px solid transparent;
+        border: 2px solid $white;
+        outline: 2px solid $third;
         font-weight: 500;
         font-size: $h4;
-        padding: 10px 20px;
+        padding: 10px 40px;
         border-radius: 5px;
         transition: 0.3s ease-in-out;
 
         &:hover {
           background: transparent;
           color: $third;
-          border: 1px solid $third;
+          border: 2px solid $third;
+          outline: 2px solid transparent;
         }
       }
 

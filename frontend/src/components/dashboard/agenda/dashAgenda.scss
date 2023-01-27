@@ -95,14 +95,16 @@
         font-size: $h4;
         font-weight: 500;
         background-color: $third;
-        border: 1px solid transparent;
+        border: 2px solid $white;
+        outline: 2px solid $third;
         border-radius: 5px;
         color: $white;
         transition: 0.3s ease-in-out;
 
         &:hover {
           background-color: transparent;
-          border: 1px solid $third;
+          border: 2px solid $third;
+          outline: 2px solid transparent;
           color: $third;
         }
       }
