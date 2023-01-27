@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Chart } from "../reservations/Components/Chart.DashReser";
 import { FaRegCalendarCheck, FaRegClock, FaPercent, FaBabyCarriage } from 'react-icons/fa';
+import { AiFillStar } from "react-icons/ai";
 import { useFormatDay } from "../agenda/Hooks/useFormatDay";
 import { useGetAgenda } from "../agenda/Hooks/useGetAgenda";
 
@@ -41,6 +42,17 @@ function DashMain({ data, fav, horaires, reser, approvedReser }) {
       )
     )
   }
+
+  const reviews =
+    Math.round(
+      ((data.avisCom +
+        data.avisHoraires +
+        data.avisEveil +
+        data.avisProprete +
+        data.avisSecurite) /
+        5) *
+      10
+    ) / 10;
 
   useEffect(() => {
     openDays()
@@ -155,8 +167,8 @@ function DashMain({ data, fav, horaires, reser, approvedReser }) {
             <p className="dashMainInfoName">{data.nom}</p>
           ) : (
             <>
-              <p className="dashMainInfoName">{data.nomUsage}</p>
               <p className="dashMainInfoName">{data.prenom}</p>
+              <p className="dashMainInfoName">{data.nomUsage}</p>
             </>
           )}
           <p>{data.email}</p>
@@ -177,8 +189,14 @@ function DashMain({ data, fav, horaires, reser, approvedReser }) {
         <div className="dashChart">
           <Chart {...data} />
           <div className="dashChartBottom">
-            <p>Il vous reste </p>
-            <p>Hello</p>
+            <p>{reviews}<AiFillStar /> <span>({data.nbNotes})</span></p>
+            <p>
+              {data.isCreche ? (
+                'Crèche'
+              ) : (
+                'Assistante maternelle'
+              )}
+            </p>
           </div>
         </div>
       </section>

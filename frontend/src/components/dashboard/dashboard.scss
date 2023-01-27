@@ -208,7 +208,7 @@
 
   & .dashBottom {
     display: grid;
-    grid-template-columns: 1fr 2fr 3fr;
+    grid-template-columns: 1.5fr 2fr 3fr;
     gap: 20px;
 
     & .dashMainInfo {
@@ -285,12 +285,31 @@
           }
         }
       }
+
+      &::-webkit-scrollbar {
+        width: 5px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: $third;
+        border-radius: 10px;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background: rgb(99, 84, 238);
+      }
     }
 
     & .dashChart {
       display: grid;
       grid-template-rows: 6fr 1fr;
       gap: 5px;
+      padding: 5px 0;
       overflow-x: hidden;
 
       & canvas {
@@ -303,7 +322,7 @@
       }
 
       & .dashChartBottom {
-        width: 500px;
+        width: 95%;
         margin: 0 auto;
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -314,8 +333,19 @@
           align-items: center;
           justify-content: center;
           padding: 5px;
-          background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
+          font-size: $h4;
+          background: $third;
+          color: $white;
+          border: 3px solid $white;
+          outline: 3px solid $third;
           border-radius: 5px;
+
+          & span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 2px;
+          }
         }
       }
     }

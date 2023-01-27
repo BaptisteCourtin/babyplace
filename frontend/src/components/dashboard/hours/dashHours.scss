@@ -8,7 +8,7 @@
 
   & .agendaSection {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     flex-direction: column;
     gap: 30px;
     padding: 20px 0;
@@ -18,7 +18,7 @@
 
     & h2 {
       font-size: $h2;
-      font-weight: 500;
+      font-weight: 700;
       margin-left: 20px;
 
       &::first-letter {
@@ -174,9 +174,16 @@
       }
 
       & .dashPlacesSelect {
+        position: absolute;
+        left: 50%;
+        bottom: 50%;
+        transform: translateX(-50%);
         display: flex;
         align-items: center;
         justify-content: center;
+        font-size: $h1;
+        color: $third;
+        font-weight: 500;
       }
     }
   }
