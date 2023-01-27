@@ -475,9 +475,7 @@ router.post(
 
 router.post("/auth", async (req, res) => {
   await datasource
-    .query("SELECT * FROM structure WHERE email = ? AND isVerify = 1", [
-      req.body.email,
-    ])
+    .query("SELECT * FROM structure WHERE email = ?", [req.body.email])
     .then(([[user]]) => {
       if (user && req.body.password === user.password) {
         const start = Date.now();
@@ -493,6 +491,7 @@ router.post("/auth", async (req, res) => {
               email: user.email,
               token: token,
               tokenStart: start,
+              isVerify: user.isVerify,
             });
           })
           .catch((err) => {
