@@ -28,7 +28,7 @@ function DashAgenda({ structureId, maxPlaces }) {
     structureId,
     getCalendar
   );
-  const { fullDate } = useDeleteData(calendarIndex, getCalendar);
+  const { fullDate } = useDeleteData(getCalendar);
 
   return (
     <div className="dashAgenda">

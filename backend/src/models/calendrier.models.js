@@ -24,10 +24,10 @@ const updateStatusClose = async (id) => {
   return result;
 };
 
-const updateStatusOpen = async (maxPlaces, id) => {
+const updateStatusOpen = async (places, id) => {
   const [result] = await datasource.query(
     "UPDATE calendrier SET nbPlaces = ? WHERE calendrierId = ?",
-    [maxPlaces, id]
+    [places, id]
   );
   return result;
 };

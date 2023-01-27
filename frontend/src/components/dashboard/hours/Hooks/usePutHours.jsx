@@ -69,9 +69,8 @@ export const usePutHours = (
     }
   };
 
-  const updateHours = async (value, type, state) => {
+  const updateHours = async (value, state) => {
     try {
-      type(value);
       await axios.put(
         `${import.meta.env.VITE_PATH}/dashboard/hours/${horairesId}`,
         {
