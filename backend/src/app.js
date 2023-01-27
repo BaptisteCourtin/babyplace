@@ -8,6 +8,8 @@ const ws = require("./services/messagerie.services");
 
 const app = express();
 
+require("dotenv").config();
+
 // use some application-level middlewares
 app.use(
   cors({
