@@ -107,6 +107,14 @@ const nullOneDocFormCommun = async (req) => {
   return result;
 };
 
+const deco = async (req) => {
+  const [result] = await datasource.query(
+    `UPDATE famille SET token = NULL, tokenStart = NULL WHERE familleId = ?`,
+    [req.params.id]
+  );
+  return result;
+};
+
 module.exports = {
   getPersoConfiance,
   getFamille,
@@ -122,4 +130,5 @@ module.exports = {
   deleteLike,
   postNewLike,
   getLikesAndStructure,
+  deco,
 };
