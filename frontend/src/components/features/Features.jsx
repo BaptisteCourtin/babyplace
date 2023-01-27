@@ -6,6 +6,8 @@ import Thibaud from "@assets/features/Thibaud.png";
 import logoDave from "@assets/features/logoDave.png";
 import NavbarLite from "./components/NavbarLite";
 import FooterLite from "./components/FooterLite";
+import { RiGithubLine } from "react-icons/ri";
+import { TiSocialLinkedin } from "react-icons/ti";
 
 function Features() {
   return (

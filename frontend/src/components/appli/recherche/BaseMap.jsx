@@ -71,8 +71,6 @@ function BaseMap({
   return (
     <>
       <div className="content">
-        <div className="lieu-date">Ville - date - heure</div>
-
         <div className="appli-filtres">
           <div className="left-filter">
             <button
