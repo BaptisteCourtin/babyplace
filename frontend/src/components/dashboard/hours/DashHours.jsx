@@ -55,8 +55,8 @@ function DashHours({ userType, structureId }) {
   useEffect(() => {
     getData();
     getHoraires();
-    setValues();
-  }, []);
+    // setValues();
+  }, [dayId]);
 
   return (
     <div className="dashPlaces">

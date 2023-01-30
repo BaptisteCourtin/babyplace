@@ -45,7 +45,7 @@ export const usePutData = (
         `${import.meta.env.VITE_PATH}/calendrier/places/open/${calendarIndex}`,
         {
           id: calendarIndex,
-          maxPlaces,
+          places: 1
         }
       );
       toast.success("Travaillez bien");

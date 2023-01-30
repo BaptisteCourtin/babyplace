@@ -5,29 +5,30 @@ import close from "@assets/dashboard/closed-sign.svg";
 function HoursDashAgenda({
   horaires,
   dayId,
-  setHoursOpen,
-  setHoursClose,
   updateHours,
   updateDay,
 }) {
+
+  console.log(horaires[dayId].heureMin)
+
   return (
     <>
       <div className="dashRangeInput">
         <input
           type="time"
-          defaultValue={horaires[dayId].heureMin}
+          value={horaires[dayId].heureMin}
           step="300"
           onChange={(e) =>
-            updateHours(e.target.value, setHoursOpen, "heureMin")
+            updateHours(e.target.value, "heureMin")
           }
         />
         <span> - </span>
         <input
           type="time"
-          defaultValue={horaires[dayId].heureMax}
+          value={horaires[dayId].heureMax}
           step="300"
           onChange={(e) =>
-            updateHours(e.target.value, setHoursClose, "heureMax")
+            updateHours(e.target.value, "heureMax")
           }
         />
       </div>

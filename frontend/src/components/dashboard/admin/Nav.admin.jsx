@@ -17,9 +17,6 @@ function Nav() {
           <Link to="/admin">Admin</Link>
         </li>
         <li>
-          <Link to="/stats">Stats</Link>
-        </li>
-        <li>
           <Link to="/admin/messages">Messages</Link>
         </li>
       </ul>
