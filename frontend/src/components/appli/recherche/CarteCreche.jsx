@@ -26,13 +26,11 @@ function CarteCreche({
   } = data;
 
   // --- like or not ---
-  // const [thisLikedIndex, setThisLikedIndex] = useState();
   const [thisLiked, setThisLiked] = useState(false);
 
   const likeOrNot = () => {
     for (let i = 0; i < familleLiked.length; i += 1) {
       if (familleLiked[i].structureIdLiked === structureId) {
-        // setThisLikedIndex(i);
         setThisLiked(true);
         break;
       }

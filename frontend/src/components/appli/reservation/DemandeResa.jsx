@@ -155,13 +155,13 @@ function DemandeResa({
                 p={`Indemnité de repas (${indemnRepas}€)`}
                 classique
               />
-              {/* indemnKm à mettre par rapport au km */}
+              {/* indemnKm à mettre par rapport au km ??? */}
               {indemnKm ? (
                 <Toggle
                   setter={setKilometre}
                   state={kilometre}
                   nom="kilometre"
-                  p={`Indemnité kilométrique (${indemnKm}€/km)`}
+                  p={`Indemnité kilométrique (${indemnKm}€)`}
                   classique
                 />
               ) : null}
