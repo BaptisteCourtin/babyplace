@@ -9,7 +9,7 @@ import { MdReportProblem } from "react-icons/md";
 
 function AppliCardCreche() {
   const location = useLocation();
-  const { data, dataHorairesId } = location.state;
+  const { data, dataHorairesId, familleId } = location.state;
   const {
     structureId,
     nom,
@@ -55,22 +55,27 @@ function AppliCardCreche() {
   return (
     <div className="appli-card-creche">
       <header>
-        <Link to="/appli/search">{`< ${nom ||
+        <Link to="/appli/search">{`< ${
+          nom ||
           (nomUsage ? `${prenom} ${nomUsage}` : `${prenom} ${nomNaissance}`)
-          }`}</Link>
+        }`}</Link>
       </header>
 
       <main>
         <div className="container-img">
           <img src={photoStructure2 || photoStructure1} alt="img creche" />
-          <button
-            type="button"
-            className="report"
-            onClick={() => handleSignaler()}
-          >
-            <MdReportProblem />
-            <p>Signaler</p>
-          </button>
+
+          {familleId && (
+            <button
+              type="button"
+              className="report"
+              onClick={() => handleSignaler()}
+            >
+              <MdReportProblem />
+              <p>Signaler</p>
+            </button>
+          )}
+
           <Star
             com={data.avisCom}
             proprete={data.avisProprete}
@@ -141,11 +146,15 @@ function AppliCardCreche() {
                 <span>{tarifHeure * 10}€</span> / jour (10h)*
               </p>
             </div>
-            <PopUp data={data} dataHorairesId={dataHorairesId} />
+
+            {familleId && <PopUp data={data} dataHorairesId={dataHorairesId} />}
           </div>
-          <Link className="envoie-mess" to="/appli/message" >
-            Envoyer un Message
-          </Link>
+
+          {familleId && (
+            <Link className="envoie-mess" to="/appli/message">
+              Envoyer un Message
+            </Link>
+          )}
         </div>
       </main>
 
