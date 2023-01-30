@@ -18,7 +18,7 @@ function Admin() {
     }
   };
 
-  const setVerified = async (structureId) => {
+  const setVerified = async (structureId, email) => {
     try {
       await axios.put(
         `${import.meta.env.VITE_PATH}/admin/verified/${structureId}`,
@@ -26,13 +26,13 @@ function Admin() {
           id: structureId,
         }
       );
-      toast.success("L'utilisateur a bien été approuvé"), getStructure();
+      toast.success("L'utilisateur a bien été approuvé"), sendEmailVerified(email), getStructure();
     } catch (err) {
       console.error(err.message);
     }
   };
 
-  const setRefused = async (structureId) => {
+  const setRefused = async (structureId, email) => {
     try {
       await axios.delete(
         `${import.meta.env.VITE_PATH
@@ -42,7 +42,7 @@ function Admin() {
           type: userType,
         }
       );
-      toast.error("L'utilisateur a bien été supprimé"), getStructure();
+      toast.error("L'utilisateur a bien été supprimé"), sendEmailRefused(email), getStructure();
     } catch (err) {
       console.error(err.message);
     }
@@ -51,7 +51,8 @@ function Admin() {
   const sendEmailVerified = async (email) => {
     try {
       await axios.post(
-        `${import.meta.env.VITE_PATH}/contact/messages/accept`, email
+        `${import.meta.env.VITE_PATH}/contact/messages/accept`,
+        { email: email, }
       );
       toast.success("Email de confirmation a bien été envoyé");
     } catch (err) {
@@ -63,7 +64,8 @@ function Admin() {
     try {
       await axios.post(
         `${import.meta.env.VITE_PATH
-        }/contact/messages/refuse`, email);
+        }/contact/messages/refuse`,
+        { email: email, });
       toast.error("Email de refus à bien été envoyé");
     } catch (err) {
       console.error(err.message);
@@ -110,8 +112,7 @@ function Admin() {
                 <button
                   className="btnApproved"
                   onClick={() => {
-                    setVerified(d.structureId);
-                    sendEmailVerified(d.email);
+                    setVerified(d.structureId, d.email);
                   }}
                 >
                   Approuver
@@ -119,8 +120,7 @@ function Admin() {
                 <button
                   className="btnRefused"
                   onClick={() => {
-                    setRefused(d.structureId);
-                    sendEmailRefused(d.email);
+                    setRefused(d.structureId, d.email);
                   }}
                 >
                   Refuser
