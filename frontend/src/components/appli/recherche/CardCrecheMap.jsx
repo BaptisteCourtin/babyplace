@@ -100,13 +100,15 @@ function CardCrecheMap({ data, familleLiked, familleId, getFamilleLiked }) {
 
   return (
     <div className="card-creche-map">
-      {thisLiked ? (
-        <AiFillHeart className="like" onClick={() => handleLikeCard()} />
-      ) : (
-        <AiOutlineHeart className="like" onClick={() => handleLikeCard()} />
-      )}
+      {familleId ? (
+        thisLiked ? (
+          <AiFillHeart className="like" onClick={() => handleLikeCard()} />
+        ) : (
+          <AiOutlineHeart className="like" onClick={() => handleLikeCard()} />
+        )
+      ) : null}
 
-      <Link to="/appli/search/card" state={{ data, dataHorairesId }}>
+      <Link to="/appli/search/card" state={{ data, dataHorairesId, familleId }}>
         <div>
           <img src={photoStructure1} alt="img creche" />
           <p className="nom-structure">

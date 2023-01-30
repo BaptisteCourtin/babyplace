@@ -4,7 +4,7 @@ const sha256 = require("js-sha256");
 const datasource = require("../database");
 const multer = require("multer");
 const uploadDoc = require("./helpers/helper");
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
 
 const multerMid = multer({
   storage: multer.memoryStorage(),
@@ -36,8 +36,8 @@ const mailer = require("./services/nodemailer/mailer.response.services");
 // form inscription au début de l'app
 router.post("/inscriptionAppFamille", async (req, res) => {
   const { email, password } = req.body;
-  const salt = await bcrypt.genSalt(10)
-  const hashedPassword = await bcrypt.hash(password, salt)
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
   datasource
     .query("INSERT INTO famille(email, password) VALUES (?, ?)", [
       email,
@@ -301,7 +301,7 @@ router.get("/structure/details", structure.getStructureDetails);
 router.get("/reservation/:id", reservation.getReser);
 router.get("/reservation/approved/:id", reservation.getApprovedReser);
 router.get("/admin", structure.getNotVerified);
-router.get("/favorites/:id", structure.getFavorites)
+router.get("/favorites/:id", structure.getFavorites);
 router.get("/horaires/:id", horaires.getHorairesById);
 router.get("/calendrier/:id", calendrier.getCalendrier);
 router.get("/notifications/:id", notification.getNotifications);
@@ -348,8 +348,8 @@ router.delete("/notifications/:id", notification.deleteNotification);
 
 router.post("/inscription", async (req, res) => {
   const { email, password } = req.body;
-  const salt = await bcrypt.genSalt(10)
-  const hashedPassword = await bcrypt.hash(password, salt)
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
   datasource
     .query("INSERT INTO structure(email, password) VALUES (?, ?)", [
       email,

@@ -109,7 +109,6 @@ function BaseCard({
         </div>
       </div>
 
-      {/* filtrer selon heure - date */}
       <main>
         {Allstructure !== undefined &&
           familleLiked !== undefined &&
@@ -155,7 +154,6 @@ function BaseCard({
                 (dataAggrements.mois === false || each.max18Mois > 0) &&
                 (dataAggrements.nuit === false || each.maxNuit > 0)
             )
-
             .sort(function compare(a, b) {
               if (tri === "Prix croissant") {
                 if (a.tarifHeure < b.tarifHeure) return -1;
@@ -178,7 +176,6 @@ function BaseCard({
                 return 0;
               }
               return 0;
-              // sort par distance ???
             })
             .map(
               (each, index) =>

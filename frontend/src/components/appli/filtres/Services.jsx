@@ -76,6 +76,9 @@ function Services({ setCompo, setDataServices, dataServices }) {
           p="Repas / Laits"
         />
       </main>
+      <button type="button" className="apply" onClick={() => setCompo(0)}>
+        Retour à la recherche
+      </button>
     </div>
   );
 }
