@@ -1,6 +1,6 @@
-const sendResponseByMail = require('./mailer.services');
-const sendConfirmationByMail = require('./mailer.services');
-const sendRefuseByMail = require('./mailer.services');
+const { sendResponseByMail } = require('./mailer.services');
+const { sendConfirmationByMail } = require('./mailer.services');
+const { sendRefuseByMail } = require('./mailer.services');
 
 const emailSender = async (req, res) => {
     const { objet, message, selectedMail, selectedNom, selectedPrenom, selectedOption, selectedMessage } = req.body;
@@ -14,8 +14,9 @@ const emailSender = async (req, res) => {
 };
 
 const acceptEmailSender = async (req, res) => {
-        try {
-        let result = await sendConfirmationByMail(req.body.email);
+    const { email } = req.body;
+    try {
+        let result = await sendConfirmationByMail(email);
         console.log(result);
         res.status(200).json({ sucess: true, msg: "email sent" });
     } catch (error) {
@@ -24,8 +25,9 @@ const acceptEmailSender = async (req, res) => {
 };
 
 const refuseEmailSender = async (req, res) => {
+    const { email } = req.body;
     try {
-        let result = await sendRefuseByMail(req.body.email);
+        let result = await sendRefuseByMail(email);
         console.log(result);
         res.status(200).json({ sucess: true, msg: "email sent" });
     } catch (error) {
