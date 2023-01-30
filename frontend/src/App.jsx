@@ -25,7 +25,6 @@ import Features from "@components/features/Features";
 import Contact from "@components/features/Contact";
 import Faq from "@components/features/Faq";
 import Admin from "@pages/Admin";
-import Stats from "@pages/Stats";
 import Home from "@pages/Home";
 import WaitAdmin from "@pages/WaitAdmin";
 import AppliChat from "@pages/appli/AppliChat";
@@ -50,17 +49,11 @@ function App() {
 
             <Route path="/admin" element={<Admin />} />
             <Route path="/admin/messages" element={<MessageAdmin />} />
-            <Route path="/stats" element={<Stats />} />
 
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/login-params" element={<Synthesis />} />
-
-            {window.localStorage.getItem("mail") !== "" ? (
-              <Route path="/dashboard" element={<Dashboard />} />
-            ) : (
-              redirect("/")
-            )}
+            <Route path="/dashboard" element={<Dashboard />} />
 
             <Route path="/features" element={<Features />} />
             <Route path="/contact" element={<Contact />} />

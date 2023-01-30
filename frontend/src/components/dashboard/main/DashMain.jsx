@@ -34,7 +34,6 @@ function DashMain({ data, fav, horaires, reser, approvedReser }) {
 
   let weekNumber = Math.ceil(days / 7);
 
-
   const openDays = () => {
     setFilteredHoraires(
       horaires.filter(h =>

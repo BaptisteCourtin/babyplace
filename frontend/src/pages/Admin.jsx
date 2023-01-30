@@ -35,8 +35,7 @@ function Admin() {
   const setRefused = async (structureId) => {
     try {
       await axios.delete(
-        `${
-          import.meta.env.VITE_PATH
+        `${import.meta.env.VITE_PATH
         }/admin/refused/${structureId}?type=${userType}`,
         {
           id: structureId,
@@ -44,6 +43,28 @@ function Admin() {
         }
       );
       toast.error("L'utilisateur a bien été supprimé"), getStructure();
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  const sendEmailVerified = async (email) => {
+    try {
+      await axios.post(
+        `${import.meta.env.VITE_PATH}/contact/messages/accept`, email
+      );
+      toast.success("Email de confirmation a bien été envoyé");
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  const sendEmailRefused = async (email) => {
+    try {
+      await axios.post(
+        `${import.meta.env.VITE_PATH
+        }/contact/messages/refuse`, email);
+      toast.error("Email de refus à bien été envoyé");
     } catch (err) {
       console.error(err.message);
     }
@@ -90,6 +111,7 @@ function Admin() {
                   className="btnApproved"
                   onClick={() => {
                     setVerified(d.structureId);
+                    sendEmailVerified(d.email);
                   }}
                 >
                   Approuver
@@ -98,6 +120,7 @@ function Admin() {
                   className="btnRefused"
                   onClick={() => {
                     setRefused(d.structureId);
+                    sendEmailRefused(d.email);
                   }}
                 >
                   Refuser

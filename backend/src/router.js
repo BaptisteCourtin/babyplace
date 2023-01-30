@@ -2,11 +2,9 @@ const express = require("express");
 const router = express.Router();
 const sha256 = require("js-sha256");
 const datasource = require("../database");
-const fs = require("fs");
 const multer = require("multer");
-const upload = multer({ dest: "public/uploads/" });
-const { v4: uuidv4 } = require("uuid");
 const uploadDoc = require("./helpers/helper");
+const bcrypt = require("bcrypt")
 
 const multerMid = multer({
   storage: multer.memoryStorage(),
@@ -36,12 +34,14 @@ const mailer = require("./services/nodemailer/mailer.response.services");
 // --- pour app ---
 
 // form inscription au début de l'app
-router.post("/inscriptionAppFamille", (req, res) => {
+router.post("/inscriptionAppFamille", async (req, res) => {
   const { email, password } = req.body;
+  const salt = await bcrypt.genSalt(10)
+  const hashedPassword = await bcrypt.hash(password, salt)
   datasource
     .query("INSERT INTO famille(email, password) VALUES (?, ?)", [
       email,
-      password,
+      hashedPassword,
     ])
     .then(([thisFamille]) => {
       if (thisFamille.affectedRows === 0) {
@@ -99,7 +99,7 @@ router.post("/authFamille", (req, res) => {
       req.body.email,
     ])
     .then(([[user]]) => {
-      if (user && req.body.password === user.password) {
+      if (bcrypt.compare(req.body.password, user.password)) {
         const start = Date.now();
         const token = sha256(req.body.email + start);
 
@@ -165,6 +165,8 @@ router.post("/contact/message", messageAdmin.postMessageToAdmin); // nouveau mes
 router.post("/messages/sauvegarde", messagerie.saveMessageInDb); // sauvegarde des messages du chat dans la db
 router.post("/famille/newConfiance", famille.postNewConfiance); // nouveau perso confiance
 router.post("/contact/messages/repondre", mailer.emailSender); // envoyer des réponses par mail pour l'admin
+router.post("/contact/messages/accept", mailer.acceptEmailSender); // envoyer acceptation des crêches par mail
+router.post("/contact/messages/refuse", mailer.refuseEmailSender); // envoyer refus des crêches par mail
 
 router.delete("/famille/deleteConfiance/:id", famille.deleteConfiance); // delete perso confiance
 router.delete("/famille/deleteEnfant/:id", enfant.deleteEnfant); // delete enfant
@@ -344,12 +346,14 @@ router.delete("/notifications/:id", notification.deleteNotification);
 
 //Routes inscription structure - start
 
-router.post("/inscription", (req, res) => {
+router.post("/inscription", async (req, res) => {
   const { email, password } = req.body;
+  const salt = await bcrypt.genSalt(10)
+  const hashedPassword = await bcrypt.hash(password, salt)
   datasource
     .query("INSERT INTO structure(email, password) VALUES (?, ?)", [
       email,
-      password,
+      hashedPassword,
     ])
     .then(([user]) => {
       const start = Date.now();
@@ -481,10 +485,9 @@ router.post("/auth", async (req, res) => {
   await datasource
     .query("SELECT * FROM structure WHERE email = ?", [req.body.email])
     .then(([[user]]) => {
-      if (user && req.body.password === user.password) {
+      if (bcrypt.compare(req.body.password, user.password)) {
         const start = Date.now();
         const token = sha256(req.body.email + start);
-
         datasource
           .query(
             "UPDATE structure SET token = ?, tokenStart = ? WHERE email = ?",

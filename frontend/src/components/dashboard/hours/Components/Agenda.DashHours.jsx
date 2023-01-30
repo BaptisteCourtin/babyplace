@@ -1,14 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import DaysDashAgenda from './Agenda/Days.DashAgenda';
 import HoursDashAgenda from './Agenda/Hours.DashAgenda';
 import DayOffDashAgenda from './Agenda/DayOff.DashAgenda';
 
 function Agenda({ updateHours, updateDay, horaires, toggleDay, setToggleDay, selected, setSelected, dayId, setDayId, setHorairesId }) {
-
-  const [hoursOpen, setHoursOpen] = useState(null);
-  const [hoursClose, setHoursClose] = useState(null);
-
-  console.log(toggleDay)
 
   return (
     <section className="agendaSection">
@@ -26,8 +21,6 @@ function Agenda({ updateHours, updateDay, horaires, toggleDay, setToggleDay, sel
           <HoursDashAgenda
             horaires={horaires}
             dayId={dayId}
-            setHoursOpen={setHoursOpen}
-            setHoursClose={setHoursClose}
             updateHours={updateHours}
             updateDay={updateDay}
           />
