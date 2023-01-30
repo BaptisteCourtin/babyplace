@@ -36,8 +36,7 @@ const mailer = require("./services/nodemailer/mailer.response.services");
 // form inscription au début de l'app
 router.post("/inscriptionAppFamille", async (req, res) => {
   const { email, password } = req.body;
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(password, salt);
+  const hashedPassword = await bcrypt.hash(password, `${process.env.SALT}`);
   datasource
     .query("INSERT INTO famille(email, password) VALUES (?, ?)", [
       email,
@@ -99,29 +98,31 @@ router.post("/authFamille", (req, res) => {
       req.body.email,
     ])
     .then(([[user]]) => {
-      if (bcrypt.compare(req.body.password, user.password)) {
-        const start = Date.now();
-        const token = sha256(req.body.email + start);
-
-        datasource
-          .query(
-            "UPDATE famille SET token = ?, tokenStart = ? WHERE email = ?",
-            [token, start, user.email]
-          )
-          .then(() => {
-            res.status(200).send({
-              familleId: user.familleId,
-              token: token,
-              tokenStart: start,
+      bcrypt.compare(req.body.password, user.password, function (err, result) {
+        if (result) {
+          const start = Date.now();
+          const token = sha256(req.body.email + start);
+          datasource
+            .query(
+              "UPDATE famille SET token = ?, tokenStart = ? WHERE email = ?",
+              [token, start, user.email]
+            )
+            .then(() => {
+              res.status(200).send({
+                familleId: user.familleId,
+                token: token,
+                tokenStart: start,
+              });
+            })
+            .catch((err) => {
+              console.error(err);
+              res.status(500).send("Erreur de connexion");
             });
-          })
-          .catch((err) => {
-            console.error(err);
-            res.status(500).send("Erreur de connexion");
-          });
-      } else {
-        res.status(401).send("Email ou mot de passe incorrect");
-      }
+        } else {
+          res.status(401).send("Email ou mot de passe incorrect");
+          console.log("Email ou mot de passe incorrect");
+        }
+      });
     })
     .catch((err) => {
       console.error(err);
@@ -348,8 +349,7 @@ router.delete("/notifications/:id", notification.deleteNotification);
 
 router.post("/inscription", async (req, res) => {
   const { email, password } = req.body;
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(password, salt);
+  const hashedPassword = await bcrypt.hash(password, `${process.env.SALT}`);
   datasource
     .query("INSERT INTO structure(email, password) VALUES (?, ?)", [
       email,
@@ -485,35 +485,36 @@ router.post("/auth", async (req, res) => {
   await datasource
     .query("SELECT * FROM structure WHERE email = ?", [req.body.email])
     .then(([[user]]) => {
-      if (bcrypt.compare(req.body.password, user.password)) {
-        const start = Date.now();
-        const token = sha256(req.body.email + start);
-        datasource
-          .query(
-            "UPDATE structure SET token = ?, tokenStart = ? WHERE email = ?",
-            [token, start, user.email]
-          )
-          .then(() => {
-            res.status(200).send({
-              email: user.email,
-              token: token,
-              tokenStart: start,
-              isVerify: user.isVerify,
-            });
-          })
-          .catch((err) => {
-            console.error(err);
-            res.status(500).send("Erreur de connexion");
-          });
-      } else if (user && req.body.password !== user.password) {
-        res.status(401).send("Email ou mot de passe incorrect");
-      } else {
-        res.sendStatus(404);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Erreur de connexion");
+      bcrypt
+        .compare(req.body.password, user.password, function (err, result) {
+          if (result) {
+            const start = Date.now();
+            const token = sha256(req.body.email + start);
+            datasource
+              .query(
+                "UPDATE structure SET token = ?, tokenStart = ? WHERE email = ?",
+                [token, start, user.email]
+              )
+              .then(() => {
+                res.status(200).send({
+                  email: user.email,
+                  token: token,
+                  tokenStart: start,
+                  isVerify: user.isVerify,
+                });
+              })
+              .catch((err) => {
+                console.error(err);
+                res.status(500).send("Erreur de connexion");
+              });
+          } else {
+            res.sendStatus(404);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+          res.status(500).send("Erreur de connexion");
+        });
     });
 });
 
