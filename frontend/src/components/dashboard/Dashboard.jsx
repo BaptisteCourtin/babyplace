@@ -16,7 +16,7 @@ import { toast } from "react-hot-toast";
 function Dashboard() {
   const navigate = useNavigate()
   const { state } = useLocation();
-  const { token } = state;
+  const { token } = state ?? '';
   let id = window.localStorage.getItem("id")
 
   const [openNav, setOpenNav] = useState(true);
@@ -35,9 +35,9 @@ function Dashboard() {
   const { deleteNotification, deleteDates } = useDeleteData(getNotifications);
 
   useEffect(() => {
-    if (!state) {
-      toast.error("Vous n'êtes pas connecté")
+    if (state === null) {
       navigate("/")
+      toast.error("Vous n'êtes pas connecté")
     }
     getData()
     getReser()
