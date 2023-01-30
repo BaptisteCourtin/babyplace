@@ -120,7 +120,6 @@ router.post("/authFamille", (req, res) => {
             });
         } else {
           res.status(401).send("Email ou mot de passe incorrect");
-          console.log("Email ou mot de passe incorrect");
         }
       });
     })
