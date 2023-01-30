@@ -165,6 +165,8 @@ router.post("/contact/message", messageAdmin.postMessageToAdmin); // nouveau mes
 router.post("/messages/sauvegarde", messagerie.saveMessageInDb); // sauvegarde des messages du chat dans la db
 router.post("/famille/newConfiance", famille.postNewConfiance); // nouveau perso confiance
 router.post("/contact/messages/repondre", mailer.emailSender); // envoyer des réponses par mail pour l'admin
+router.post("/contact/messages/accept", mailer.acceptEmailSender); // envoyer acceptation des crêches par mail
+router.post("/contact/messages/refuse", mailer.refuseEmailSender); // envoyer refus des crêches par mail
 
 router.delete("/famille/deleteConfiance/:id", famille.deleteConfiance); // delete perso confiance
 router.delete("/famille/deleteEnfant/:id", enfant.deleteEnfant); // delete enfant
