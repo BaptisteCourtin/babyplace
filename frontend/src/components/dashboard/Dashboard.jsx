@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import DashNavbar from "./nav/DashNavbar";
 import DashMain from "./main/DashMain";
 import DashFooter from "./main/DashFooter";
@@ -11,8 +11,10 @@ import { useGetAllData } from "./main/Hooks/useGetData";
 import { useGetHours } from "./hours/Hooks/useGetHours";
 import { useGetReservations } from "./reservations/Hooks/useGetReservations";
 import { useGetFavorites } from "./main/Hooks/useGetFavorites";
+import { toast } from "react-hot-toast";
 
 function Dashboard() {
+  const navigate = useNavigate()
   const { state } = useLocation();
   const { token } = state;
   let id = window.localStorage.getItem("id")
@@ -33,6 +35,10 @@ function Dashboard() {
   const { deleteNotification, deleteDates } = useDeleteData(getNotifications);
 
   useEffect(() => {
+    if (!state) {
+      toast.error("Vous n'êtes pas connecté")
+      navigate("/")
+    }
     getData()
     getReser()
     getApprovedReser()
