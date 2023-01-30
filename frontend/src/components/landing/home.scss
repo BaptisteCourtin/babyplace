@@ -252,8 +252,18 @@
 
 @media screen and (max-width: 1200px) {
   .home {
+    & h2 {
+      font-size: 1.6rem;
+      padding-top: 0;
+    }
+
     & .mainApp {
       margin: 50px 0;
+      & .mainAppText {
+        & p {
+          font-size: 18px;
+        }
+      }
     }
 
     & .mainGrid {

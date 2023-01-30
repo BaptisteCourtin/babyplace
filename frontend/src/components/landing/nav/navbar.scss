@@ -158,9 +158,11 @@
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1000px) {
   .nav {
     gap: 20px;
+    padding-top: 20px;
+    height: 10vh;
 
     & .mainTextBtn {
       border: none;
@@ -180,18 +182,30 @@
       }
     }
   }
+  .pro {
+    flex-wrap: wrap;
+    padding: 20px 16px 0;
+    height: fit-content;
+    gap: 5vw;
+    min-height: 10vh;
+
+    & .mainTextBtn {
+      border: none;
+    }
+
+    & .navBtn {
+      align-items: center;
+      gap: 10px;
+      text-align: center;
+    }
+  }
 }
 
 @media screen and (max-width: 500px) {
   .pro {
     & .navBtn {
-      flex-direction: column;
+      width: 100%;
       gap: 10px;
-      text-align: center;
-
-      & a {
-        width: 100%;
-      }
     }
   }
 }
