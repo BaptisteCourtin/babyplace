@@ -9,7 +9,7 @@ const socket = io.connect(`${import.meta.env.VITE_SOCKET}`);
 function AppliChat() {
   const room = 2;
   const username = "kevindu75@exemple.com";
-  const title = "Crêche";
+  const title = "Crèche";
 
   const joinRoom = async () => {
     console.warn(room);

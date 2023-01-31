@@ -59,13 +59,13 @@ function ConfirmeResa({
         </p>
 
         <div className="status-demande">
-          <p>Status de votre demande :</p>
+          <p>Statut de votre demande :</p>
           <br />
           <span>En attente de confirmation</span>
         </div>
 
         <p>
-          N’oubliez pas de compléter votre profil pour avoir plus de chance que
+          N’oubliez pas de compléter votre profil pour avoir plus de chances que
           votre demande soit acceptée
         </p>
       </main>

@@ -17,7 +17,7 @@ function PopUpProfilComplet({ setVisiblePopUp, data, dataHorairesId }) {
         <ul>
           <li>Enfant handicapé</li>
           <li>Enfant de moins de 18 mois</li>
-          <li>Horaires atypique</li>
+          <li>Horaires atypiques</li>
           <li>Accueil de nuit</li>
         </ul>
       </div>
@@ -40,7 +40,7 @@ function PopUpProfilComplet({ setVisiblePopUp, data, dataHorairesId }) {
           <br />
           <br />
           L’enfant arrivera en état de propreté, habillé et ayant pris son
-          premier repas Les bijoux seront enlevés et rendus aux parents pour des
+          premier repas. Les bijoux seront enlevés et rendus aux parents pour des
           raisons de sécurité (étouffement, ingestion…).
           <br />
           <br />

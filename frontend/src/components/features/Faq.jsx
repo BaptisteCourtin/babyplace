@@ -70,7 +70,7 @@ function Faq(props) {
             <HashLink to="/contact#contact">formulaire de contact</HashLink>, en
             nous indiquant l'adresse de la page d'erreur, située en haut de
             votre navigateur et qui commence par «babyplace.fr». Veuillez aussi
-            nous indiquer la page ou se trouvait le lien qui vous a mené à la
+            nous indiquer la page où se trouvait le lien qui vous a mené à la
             page d'erreur. Ces signalements nous permettront d'améliorer
             Babyplace.
           </p>
