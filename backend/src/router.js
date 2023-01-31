@@ -510,10 +510,12 @@ router.post("/auth", async (req, res) => {
             res.sendStatus(404);
           }
         })
+
     })
     .catch((err) => {
       console.error(err);
       res.status(500).send("Erreur de connexion");
+
     });
 });
 
