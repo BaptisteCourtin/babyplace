@@ -26,10 +26,10 @@ function Structure8() {
           <div className="etapeContainer">
             <div className="etape2">
               <img src={imgTime} alt="femme avec horloge" />
-              <h5>2. Ils effectue une réservation en ligne</h5>
+              <h5>2. Ils effectuent une réservation en ligne</h5>
               <p>
                 Les parents réservent instantanément en ligne, et vous disposez
-                de toutes les informations nécessaire à l'accueil de l'enfant.
+                de toutes les informations nécessaires à l'accueil de l'enfant.
               </p>
             </div>
           </div>
@@ -46,7 +46,7 @@ function Structure8() {
           </div>
         </div>
       )}
-      {resaInst === false || resaInst=== 0 && (
+      {(resaInst === false || resaInst === 0) && (
         <div className="etapesChoixResa">
           <div className="etapeContainer">
             <div className="etape1">
@@ -62,9 +62,9 @@ function Structure8() {
           <div className="etapeContainer">
             <div className="etape2">
               <img src={imgTime} alt="femme avec horloge" />
-              <h5>2. Ils vous envoie une demande de réservation</h5>
+              <h5>2. Ils vous envoient une demande de réservation</h5>
               <p>
-                Les parents vous envoie une demande de réservation, et vous
+                Les parents vous envoient une demande de réservation, et vous
                 disposez de toutes les informations pour accepter la demande.
               </p>
             </div>
@@ -85,7 +85,7 @@ function Structure8() {
               <img src={imgDossier} alt="dossiers" />
               <h5>4. Vous recevez un contrat accepté par les deux parties</h5>
               <p>
-                Lorsque la réservation est acceptée par les deux partie, un
+                Lorsque la réservation est acceptée par les deux parties, un
                 contrat engageant les parents et vous-même est envoyé à chaque
                 partie.{" "}
               </p>
