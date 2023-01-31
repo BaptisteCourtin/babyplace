@@ -221,7 +221,7 @@ function FormEnfant() {
               value={initialData.prenom}
               onChange={(e) => handleChange(e)}
             />
-            <p>Prenom</p>
+            <p>Prénom</p>
           </label>
 
           <label htmlFor="dateNaissance">

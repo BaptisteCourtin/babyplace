@@ -66,7 +66,7 @@ function Admin() {
         `${import.meta.env.VITE_PATH
         }/contact/messages/refuse`,
         { email: email, });
-      toast.error("Email de refus à bien été envoyé");
+      toast.error("Email de refus a bien été envoyé");
     } catch (err) {
       console.error(err.message);
     }

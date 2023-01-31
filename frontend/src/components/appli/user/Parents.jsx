@@ -150,7 +150,7 @@ function Parents() {
               value={initialData.prenom1}
               onChange={(e) => handleChange(e)}
             />
-            <p>Prenom</p>
+            <p>Prénom</p>
           </label>
 
           <label htmlFor="profession1">
@@ -174,7 +174,7 @@ function Parents() {
               value={initialData.telephone1}
               onChange={(e) => handleChange(e)}
             />
-            <p>telephone portable</p>
+            <p>téléphone portable</p>
           </label>
 
           <label htmlFor="email1">
@@ -235,7 +235,7 @@ function Parents() {
               value={initialData.prenom2}
               onChange={(e) => handleChange(e)}
             />
-            <p>Prenom</p>
+            <p>Prénom</p>
           </label>
 
           <label htmlFor="profession2">
@@ -259,7 +259,7 @@ function Parents() {
               value={initialData.telephone2}
               onChange={(e) => handleChange(e)}
             />
-            <p>telephone portable</p>
+            <p>téléphone portable</p>
           </label>
 
           <label htmlFor="email2">

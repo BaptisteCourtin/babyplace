@@ -107,7 +107,7 @@ function PersonnesConfiance({ setCompo, familleId }) {
                       setPrenom(event.target.value);
                     }}
                   />
-                  <p>Prenom</p>
+                  <p>Prénom</p>
                 </label>
                 <label htmlFor="email">
                   <input
@@ -131,7 +131,7 @@ function PersonnesConfiance({ setCompo, familleId }) {
                       setTel(event.target.value);
                     }}
                   />
-                  <p>Telephone</p>
+                  <p>Téléphone</p>
                 </label>
               </form>
 

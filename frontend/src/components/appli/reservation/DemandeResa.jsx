@@ -188,7 +188,7 @@ function DemandeResa({
               ))}
             </div>
             <p>
-              enfant choisi : <span>{whichKid()}</span>
+              Enfant choisi : <span>{whichKid()}</span>
             </p>
           </div>
 

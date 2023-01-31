@@ -31,7 +31,6 @@ const assmatExist = (req, res) => {
 
 const inscriptionAssmat1 = (req, res) => {
   const {
-    isCreche,
     nomNaissance,
     nomUsage,
     prenom,
@@ -39,6 +38,7 @@ const inscriptionAssmat1 = (req, res) => {
     telephone,
     email,
   } = req.body;
+  const isCreche=0;
   inscStructureModels
     .inscriptionStructure1(isCreche, adresseStructure, telephone, email)
     .then(([structure]) => {
@@ -67,7 +67,7 @@ const inscriptionAssmat1 = (req, res) => {
 
 const updateAssmat1 = (req, res) => {
   const {
-    isCreche,
+    // isCreche,
     nomNaissance,
     nomUsage,
     prenom,
@@ -75,6 +75,7 @@ const updateAssmat1 = (req, res) => {
     telephone,
     email,
   } = req.body;
+  const isCreche = 0;
   inscAssmatModels
     .updateAssmat1(
       isCreche,

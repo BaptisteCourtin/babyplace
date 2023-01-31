@@ -108,7 +108,7 @@ function AppliCardCreche() {
             {pcsc1 ? <p>Formation 1er secours</p> : null}
             {nesting ? <p>Formation Nesting</p> : null}
             {montessori ? <p>Pédagogie Montessori</p> : null}
-            {handi ? <p>Formation handicapé</p> : null}
+            {handi ? <p>Formation handicap</p> : null}
           </div>
 
           <div>
@@ -119,7 +119,7 @@ function AppliCardCreche() {
             {nonFumeur ? <p>Foyer non-fumeur</p> : null}
             {zeroPollution ? <p>0% pollution intérieure</p> : null}
             {repas ? <p>Repas maison</p> : null}
-            {hygiene ? <p>produits d'hygiène fournis</p> : null}
+            {hygiene ? <p>Produits d'hygiène fournis</p> : null}
           </div>
 
           <div>

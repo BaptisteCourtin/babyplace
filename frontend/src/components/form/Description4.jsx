@@ -21,7 +21,7 @@ function Structure4({ description, updateFields }) {
         />
         <legend>
           Maximum 500 caractères.{" "}
-          {description !== null && `Reste : ${500 - description.length}.`}
+          {(description !== null && description !== undefined) && `Reste : ${500 - description.length}.`}
         </legend>
       </div>
     </div>

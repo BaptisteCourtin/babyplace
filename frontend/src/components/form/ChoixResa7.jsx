@@ -25,7 +25,7 @@ function Structure7({ updateFields }) {
         <div className="choixResaContainer">
           <button
             type="button"
-            className={resaInst === true ? "choixResa chosen" : "choixResa"}
+            className={resaInst === true || resaInst=== 1 ? "choixResa chosen" : "choixResa"}
             onClick={() => {
               setResaInst(true);
               updateFields({ resaInst: true });
@@ -64,7 +64,7 @@ function Structure7({ updateFields }) {
               setResaInst(false);
               updateFields({ resaInst: false });
             }}
-            className={resaInst === false ? "choixResa chosen" : "choixResa"}
+            className={resaInst === false || resaInst=== 0 ? "choixResa chosen" : "choixResa"}
           >
             <div className=" etapes">
               <div className="etape2">

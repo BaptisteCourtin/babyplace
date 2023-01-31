@@ -48,7 +48,7 @@ function SeConnecter({ setCompo }) {
         })
         .catch((err) => {
           console.error(err);
-          toast.error("le mot de passe ou l'email est faux");
+          toast.error("le mot de passe ou l'email est erroné");
         });
     }
   };

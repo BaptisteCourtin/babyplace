@@ -113,12 +113,12 @@ const confirmationTemplate = (email) => {
                               <p>Madame, Monsieur,</p>
                           </div>
                           <div class="email-body-main">
-                            <p class="reponse">Nous sommes ravis de vous annoncer, que le profil concernant l'email ${email} à été vérifié et que votre demande est acceptée.</p>
+                            <p class="reponse">Nous sommes ravis de vous annoncer que le profil concernant l'email ${email} a été vérifié et que votre demande est acceptée.</p>
                           </div>
                       </div>
                   </div>
                   <div class="email-pre-footer">
-                      <p>Cet email à été envoyé par <b>Babyplace</b>, une société de DaveWarehouse, via nodemailer.</p>
+                      <p>Cet email a été envoyé par <b>Babyplace</b>, une société de DaveWarehouse, via nodemailer.</p>
                   </div>
                   <div class="email-footer">
                       <p>DaveWarehouse Society, 4 rue Baron 44100 NANTES</p>

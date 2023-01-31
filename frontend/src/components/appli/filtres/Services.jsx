@@ -60,7 +60,7 @@ function Services({ setCompo, setDataServices, dataServices }) {
           setter={setDataServices}
           state={dataServices.zeroPollution}
           nom="zeroPollution"
-          p="0% pollution intérieur"
+          p="0% pollution intérieure"
         />
         <h4>Equipements fournis</h4>
         <Check

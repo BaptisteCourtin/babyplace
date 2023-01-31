@@ -127,7 +127,7 @@ const adminTemplate = (selectedPrenom, selectedNom, selectedOption, selectedMess
                       </div>
                   </div>
                   <div class="email-pre-footer">
-                      <p>Cet email à été envoyé par <b>Babyplace</b>, une société de DaveWarehouse, via nodemailer.</p>
+                      <p>Cet email a été envoyé par <b>Babyplace</b>, une société de DaveWarehouse, via nodemailer.</p>
                   </div>
                   <div class="email-footer">
                       <p>DaveWarehouse Society, 4 rue Baron 44100 NANTES</p>

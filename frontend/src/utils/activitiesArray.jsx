@@ -2,17 +2,17 @@ export const activitiesArray = [
   {
     id: "check1",
     name: "pcsc1",
-    content: "Je suis formé aux premiers secours",
+    content: "Je suis formé(e) aux premiers secours",
   },
   {
     id: "check2",
     name: "nesting",
-    content: "Je suis formé à la méthode nesting",
+    content: "Je suis formé(e) à la méthode nesting",
   },
   {
     id: "check3",
     name: "montessori",
-    content: "Je suis formé à la méthode montessori",
+    content: "Je suis formé(e) à la méthode montessori",
   },
   {
     id: "check4",

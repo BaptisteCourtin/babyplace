@@ -58,7 +58,7 @@ function BaseCard({
             <div className="tri">
               <span>{BiFilterAlt()}Tri :</span>
               <select id="tri" onChange={(event) => setTri(event.target.value)}>
-                <option value="Recent">Recent</option>
+                <option value="Recent">Récent</option>
                 <option value="Ancien">Ancien</option>
                 <option value="Prix croissant">Prix croissant</option>
                 <option value="Prix decroissant">Prix décroissant</option>

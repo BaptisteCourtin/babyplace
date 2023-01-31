@@ -56,7 +56,7 @@ function ResponseModalAdmin({
           <div className="leftBodyContainer">
             <img
               src={madamcoucou}
-              alt="dessin d'une femme avec spn ordinateur"
+              alt="dessin d'une femme avec son ordinateur"
               width="85%"
               height="85%"
             />
@@ -95,7 +95,7 @@ function ResponseModalAdmin({
                     required
                   />
                 </div>
-                <span id="obligatoireText">* les chants sont obligatoires</span>
+                <span id="obligatoireText">* les champs sont obligatoires</span>
                 <div className="modalAdminBtns">
                   <button type="submit" id="btnDelete" onClick={closeMod}>
                     retour
