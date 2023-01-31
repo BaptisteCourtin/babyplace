@@ -8,13 +8,14 @@
 
   & .agendaMessage {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     flex-direction: column;
     gap: 40px;
 
     & .agendaPlaces {
       width: 100%;
+      max-width: 500px;
       display: flex;
       align-items: flex-start;
       justify-content: center;
@@ -107,6 +108,10 @@
           outline: 2px solid transparent;
           color: $third;
         }
+
+        & span {
+          text-transform: capitalize;
+        }
       }
     }
 
@@ -150,8 +155,9 @@
 }
 
 .agendaDashSection {
+  position: relative;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   flex-direction: column;
   gap: 30px;
   padding: 20px 0;
@@ -159,9 +165,11 @@
   border-radius: 5px;
 
   & h2 {
+    position: absolute;
+    top: 20px;
+    left: 20px;
     font-size: $h2;
     font-weight: 700;
-    margin-left: 20px;
 
     &::first-letter {
       font-weight: 700;
@@ -171,7 +179,7 @@
 
   & .react-calendar {
     padding: 0 70px;
-    height: 300px;
+    min-height: 300px;
 
     &__navigation {
       display: flex;
@@ -252,6 +260,21 @@
       border-bottom: 1px solid transparent;
       background-color: $third;
       border-radius: 5px;
+    }
+
+    & .select {
+      background-color: #f0f0f0;
+      color: $fourth;
+      font-weight: 500;
+      text-decoration: line-through;
+    }
+
+    & .select.react-calendar__tile--active {
+      background-color: $third;
+      border-bottom: 1px solid transparent;
+      background-color: $third;
+      border-radius: 5px;
+      color: $white;
     }
   }
 }

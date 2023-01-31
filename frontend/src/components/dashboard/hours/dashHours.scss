@@ -7,8 +7,9 @@
   padding: 15px;
 
   & .agendaSection {
+    position: relative;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-direction: column;
     gap: 30px;
     padding: 20px 0;
@@ -17,9 +18,11 @@
     box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
 
     & h2 {
+      position: absolute;
+      top: 20px;
+      left: 20px;
       font-size: $h2;
       font-weight: 700;
-      margin-left: 20px;
 
       &::first-letter {
         font-weight: 700;
