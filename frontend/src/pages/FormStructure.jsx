@@ -683,7 +683,7 @@ function FormStructure() {
           });
       } else if (currentStepIndex === 1) {
         const formData = new FormData();
-        if (inputRef.current.files.length > 0) {
+        if (inputRef.current !== null && inputRef.current.files.length > 0) {
           formData.append("file", inputRef.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/photoProfil`, formData)
             .then((result) => {
@@ -707,7 +707,7 @@ function FormStructure() {
           next();
         }
       } else if (currentStepIndex === 2) {
-        if (inputRef1.current.files.length > 0) {
+        if (inputRef.current !== null && inputRef1.current.files.length > 0) {
           const formData = new FormData();
           formData.append("file", inputRef1.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/photosStructure`, formData)
@@ -730,7 +730,7 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRef2.current.files.length > 0) {
+        if (inputRef.current !== null && inputRef2.current.files.length > 0) {
           const formData = new FormData();
           formData.append("file", inputRef2.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/photosStructure`, formData)
@@ -753,7 +753,7 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRef3.current.files.length > 0) {
+        if (inputRef.current !== null && inputRef3.current.files.length > 0) {
           const formData = new FormData();
           formData.append("file", inputRef3.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/photosStructure`, formData)
@@ -1003,8 +1003,7 @@ function FormStructure() {
             console.error(err);
           });
       } else if (currentStepIndex === 14) {
-        console.log(inputRefCni.current)
-        if (inputRefPmi.current !== null) {
+        if (inputRefPmi.current !== null && inputRefPmi.current.files.length>0 ) {
           const formData = new FormData();
           formData.append("file", inputRefPmi.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/photosStructure`, formData)
@@ -1027,7 +1026,7 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRefCni.current !== null) {
+        if (inputRefCni.current !== null && inputRefCni.current.files.length>0 ) {
           const formData = new FormData();
           formData.append("file", inputRefCni.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
@@ -1050,7 +1049,7 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRefCpam.current !== null) {
+        if (inputRefCpam.current !== null && inputRefCpam.current.files.length>0) {
           const formData = new FormData();
           formData.append("file", inputRefCpam.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
@@ -1073,7 +1072,7 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRefDom.current !== null) {
+        if (inputRefDom.current !== null && inputRefDom.current.files.length>0) {
           const formData = new FormData();
           formData.append("file", inputRefDom.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
@@ -1096,7 +1095,7 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRefDiplome.current !== null) {
+        if (inputRefDiplome.current !== null && inputRefDiplome.current.files.length>0) {
           const formData = new FormData();
           formData.append("file", inputRefDiplome.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
@@ -1119,7 +1118,7 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRefResp.current !== null) {
+        if (inputRefResp.current !== null && inputRefResp.current.files.length>0) {
           const formData = new FormData();
           formData.append("file", inputRefResp.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
@@ -1142,7 +1141,7 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRefAuto.current !== null) {
+        if (inputRefAuto.current !== null && inputRefAuto.current.files.length>0) {
           const formData = new FormData();
           formData.append("file", inputRefAuto.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
