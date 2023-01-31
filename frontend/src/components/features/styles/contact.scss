@@ -210,7 +210,7 @@
     #contact {
       margin: 0;
       padding: 20px;
-      width: 100%;
+      width: 95%;
 
       #question {
         font-size: 1.25em;
@@ -227,7 +227,6 @@
           display: grid;
           grid-template-columns: repeat(1, 1fr);
           grid-auto-rows: repeat(6, 1fr);
-          column-gap: 50px;
           width: 100%;
 
           .divName {
