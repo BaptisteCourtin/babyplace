@@ -97,3 +97,31 @@
     }
   }
 }
+
+@media screen and (max-width: 820px) {
+  .modalAdminDiv {
+    width: 90%;
+    height: auto;
+
+    .modalAdminContainer {
+      width: 100%;
+
+      .modalAdminBtns {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-around;
+        gap: initial;
+        padding: 0;
+
+        #btnDelete {
+          width: 100px;
+        }
+
+        #btnRepondre {
+          width: 100px;
+        }
+      }
+    }
+  }
+}
