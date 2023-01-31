@@ -175,6 +175,56 @@
 
       .messageAdminListBis {
         width: 95%;
+
+        .messageListAdminContainer {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          grid-auto-rows: minmax(100px, auto);
+          gap: 0em;
+
+          .messageListAdminHeader {
+            width: 100%;
+            grid-column: 1 / 4;
+            grid-row: 1;
+            display: flex;
+            flex-direction: column;
+
+            h4 {
+              font-size: 1.25em;
+              margin: 0 auto;
+            }
+
+            .messageListEmail {
+              color: $fourth;
+              font-size: 0.75em;
+              overflow: visible;
+              margin: 0 auto;
+            }
+          }
+
+          .optionSelected {
+            grid-column: 1 / 4;
+            grid-row: 2;
+            margin: 0;
+            width: 95%;
+            font-weight: 500;
+          }
+
+          .messageListAdminBody {
+            grid-column: 1 / 4;
+            grid-row: 3;
+            width: 95%;
+          }
+
+          .adminMessageBtn {
+            grid-column: 1 / 4;
+            grid-row: 4;
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            justify-content: center;
+          }
+        }
       }
     }
   }
