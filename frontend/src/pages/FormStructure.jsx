@@ -140,13 +140,12 @@ function FormStructure() {
   const [data, setData] = useState(INITIAL_DATA);
   const [structure, setStructure] = useState("");
   const [resaInst, setResaInst] = useState("");
-  const { userEmail } = useContext(UserEmailContext);
+  const { userEmail, structureId, setStructureId } = useContext(UserEmailContext);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [showExplications, setShowExplications] = useState(
     window.innerWidth > 1000
   );
   const [closedDays, setClosedDays] = useState([]);
-  const [structureId, setStructureId] = useState(null);
   const [horairesExist, setHorairesExist] = useState(null);
   const [closePage, setClosePage] = useState(false);
   const updateSize = () => {
@@ -187,6 +186,7 @@ function FormStructure() {
       )
         .then((result) => {
           setStructureId(result.data.structureId);
+          sessionStorage.setItem("structureId", result.data.structureId);
           setResaInst(result.data.resaInst);
           setData((prev) => {
             return {
@@ -241,6 +241,7 @@ function FormStructure() {
       )
         .then((result) => {
           setStructureId(result.data.structureId);
+          sessionStorage.setItem("structureId", result.data.structureId);
           if (result.data.resaInst === 1) {
             setResaInst(true);
           }
@@ -706,7 +707,7 @@ function FormStructure() {
           next();
         }
       } else if (currentStepIndex === 2) {
-        if (inputRef.current !== null && inputRef1.current.files.length > 0) {
+        if (inputRef1.current !== null && inputRef1.current.files.length > 0) {
           const formData = new FormData();
           formData.append("file", inputRef1.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/photosStructure`, formData)
@@ -729,7 +730,7 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRef.current !== null && inputRef2.current.files.length > 0) {
+        if (inputRef2.current !== null && inputRef2.current.files.length > 0) {
           const formData = new FormData();
           formData.append("file", inputRef2.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/photosStructure`, formData)
@@ -752,7 +753,7 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRef.current !== null && inputRef3.current.files.length > 0) {
+        if (inputRef3.current !== null && inputRef3.current.files.length > 0) {
           const formData = new FormData();
           formData.append("file", inputRef3.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/photosStructure`, formData)

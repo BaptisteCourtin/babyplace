@@ -33,16 +33,17 @@ import MessageAdmin from "@components/dashboard/admin/MessageAdmin";
 
 function App() {
   const [userEmail, setUserEmail] = useState("paulette07@laposte.net");
-
+  const [structureId, setStructureId] = useState(16);
   const [familleId, setFamilleId] = useState(0);
   useEffect(() => {
     setFamilleId(sessionStorage.getItem("BabyPlacefamilleId"));
     setUserEmail(sessionStorage.getItem("structureEmail"));
+    setStructureId(sessionStorage.getItem("structureId"));
   }, []);
 
   return (
     <div className="app">
-      <UserEmailContext.Provider value={{ userEmail, setUserEmail }}>
+      <UserEmailContext.Provider value={{ userEmail, setUserEmail, structureId, setStructureId }}>
         <FamilleContext.Provider value={{ familleId, setFamilleId }}>
           <Routes>
             <Route path="/" element={<Home />} />
