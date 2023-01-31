@@ -14,7 +14,7 @@ function ModalMessageAdmin({ open, close, selectedId }) {
       );
       close();
       console.warn(res.data);
-      toast.success("Le message à bien été supprimé");
+      toast.success("Le message a bien été supprimé");
     } catch (err) {
       toast.error(err.message);
     }
