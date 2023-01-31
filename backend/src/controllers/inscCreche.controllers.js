@@ -31,13 +31,13 @@ const crecheExist = (req, res) => {
 
 const inscriptionCreche1 = (req, res) => {
   const {
-    isCreche,
     typeCreche,
     nomStructure,
     adresseStructure,
     telephone,
     email,
   } = req.body;
+  const isCreche = 1 ;
   inscStructureModels
     .inscriptionStructure1(isCreche, adresseStructure, telephone, email)
     .then(([structure]) => {
@@ -66,13 +66,14 @@ const inscriptionCreche1 = (req, res) => {
 
 const updateCreche1 = (req, res) => {
   const {
-    isCreche,
+    // isCreche,
     typeCreche,
     nomStructure,
     adresseStructure,
     telephone,
     email,
   } = req.body;
+  const isCreche = 1;
   inscCrecheModels
     .updateCreche1(
       isCreche,

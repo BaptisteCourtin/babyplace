@@ -618,7 +618,6 @@ function FormStructure() {
           .then((result) => {
             if (result.data.structureId === undefined) {
               Axios.put(`${import.meta.env.VITE_PATH}/inscriptionCreche1`, {
-                isCreche,
                 typeCreche,
                 nomStructure,
                 adresseStructure,
@@ -631,7 +630,6 @@ function FormStructure() {
                 });
             } else {
               Axios.post(`${import.meta.env.VITE_PATH}/inscriptionCreche1`, {
-                isCreche,
                 typeCreche,
                 nomStructure,
                 adresseStructure,
@@ -654,7 +652,6 @@ function FormStructure() {
           .then((result) => {
             if (result.data.structureId === undefined) {
               Axios.put(`${import.meta.env.VITE_PATH}/inscriptionAssmat1`, {
-                isCreche,
                 nomNaissance,
                 nomUsage,
                 prenom,
@@ -668,7 +665,6 @@ function FormStructure() {
                 });
             } else {
               Axios.post(`${import.meta.env.VITE_PATH}/inscriptionAssmat1`, {
-                isCreche,
                 nomNaissance,
                 nomUsage,
                 prenom,
@@ -1007,7 +1003,8 @@ function FormStructure() {
             console.error(err);
           });
       } else if (currentStepIndex === 14) {
-        if (inputRefPmi.current.files.length > 0) {
+        console.log(inputRefCni.current)
+        if (inputRefPmi.current !== null) {
           const formData = new FormData();
           formData.append("file", inputRefPmi.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/photosStructure`, formData)
@@ -1030,7 +1027,7 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRefCni.current.files.length > 0) {
+        if (inputRefCni.current !== null) {
           const formData = new FormData();
           formData.append("file", inputRefCni.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
@@ -1053,7 +1050,7 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRefCpam.current.files.length > 0) {
+        if (inputRefCpam.current !== null) {
           const formData = new FormData();
           formData.append("file", inputRefCpam.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
@@ -1076,7 +1073,7 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRefDom.current.files.length > 0) {
+        if (inputRefDom.current !== null) {
           const formData = new FormData();
           formData.append("file", inputRefDom.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
@@ -1099,7 +1096,7 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRefDiplome.current.files.length > 0) {
+        if (inputRefDiplome.current !== null) {
           const formData = new FormData();
           formData.append("file", inputRefDiplome.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
@@ -1122,7 +1119,7 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRefResp.current.files.length > 0) {
+        if (inputRefResp.current !== null) {
           const formData = new FormData();
           formData.append("file", inputRefResp.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
@@ -1145,7 +1142,7 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRefAuto.current.files.length > 0) {
+        if (inputRefAuto.current !== null) {
           const formData = new FormData();
           formData.append("file", inputRefAuto.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)

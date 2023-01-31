@@ -10,7 +10,7 @@ function Structure8() {
   return (
     <div>
       <h4>Voici comment les parents pourront réserver chez vous</h4>
-      {resaInst === true && (
+      {(resaInst === true || resaInst === 1) && (
         <div className="etapesChoixResa">
           <div className="etapeContainer">
             <div className="etape1">
@@ -46,7 +46,7 @@ function Structure8() {
           </div>
         </div>
       )}
-      {resaInst === false && (
+      {resaInst === false || resaInst=== 0 && (
         <div className="etapesChoixResa">
           <div className="etapeContainer">
             <div className="etape1">
