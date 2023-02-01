@@ -9,11 +9,13 @@ import { useFormatDay } from "./Hooks/useFormatDay";
 import UnavailableDashAgenda from "./Components/Unavailable.DashAgenda";
 import AvailableDashAgenda from "./Components/Available.DashAgenda";
 import StatusDashAgenda from "./Components/Status.DashAgenda";
+import ReactModal from "react-modal";
 
 function DashAgenda({ structureId, maxPlaces }) {
   const [places, setPlaces] = useState(null);
   const [calendarIndex, setCalendarIndex] = useState(null);
-  const [workCheck, setWorkCheck] = useState(0)
+  const [workCheck, setWorkCheck] = useState(0);
+  const [modal, setModal] = useState(false);
 
   const { curDate, clickedDay, setClickedDay, date, day } = useFormatDay();
   const { calendar, getCalendar, horaires, getHoraires } = useGetAgenda(structureId);
@@ -41,11 +43,19 @@ function DashAgenda({ structureId, maxPlaces }) {
     }
   }, [clickedDay]);
 
+  const openModal = () => {
+    setModal(true)
+  }
+
+  const closeModal = () => {
+    setModal(false)
+  }
+
   return (
     <div className="dashAgenda">
       <section className="agendaDashSection">
         <h2>Agenda</h2>
-        {horaires.length > 0 && calendar.length > 0 &&
+        {horaires.length > 0 &&
           < DashAgendaCalendar
             clickedDay={clickedDay}
             setPlaces={setPlaces}
@@ -98,7 +108,7 @@ function DashAgenda({ structureId, maxPlaces }) {
               <button
                 type="button"
                 className="agendaPlacesWork"
-                onClick={() => addWorkDate()}
+                onClick={() => setModal(open)}
               >
                 Travailler tous les <span>{day}s</span>
               </button>
@@ -112,6 +122,17 @@ function DashAgenda({ structureId, maxPlaces }) {
           curDate={curDate}
         />
       </section >
+      {modal &&
+        <ReactModal
+          isOpen={openModal}
+          onRequestClose={closeModal}
+          className="hoursChoiceContainer"
+        >
+          <form >
+            <h2>Choisir un horaires</h2>
+          </form>
+        </ReactModal>
+      }
     </div >
   );
 }

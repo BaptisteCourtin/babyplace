@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Chart } from "../reservations/Components/Chart.DashReser";
+import { Chart } from "./Components/Chart.DashMain";
 import { FaRegCalendarCheck, FaRegClock, FaPercent, FaBabyCarriage } from 'react-icons/fa';
 import { AiFillStar } from "react-icons/ai";
 import { useFormatDay } from "../agenda/Hooks/useFormatDay";
@@ -152,7 +152,7 @@ function DashMain({ data, fav, horaires, reser, approvedReser }) {
                 `Il vous reste ${c.nbPlaces} places`
               ) : (c.date === curDate && c.nbPlaces == -1) ? (
                 "Vous êtes au repos"
-              ) : (c.date !== curDate) && (
+              ) : (
                 "Vous êtes complet"
               ))}
             </p>
