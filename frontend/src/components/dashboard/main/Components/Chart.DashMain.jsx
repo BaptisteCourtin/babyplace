@@ -40,10 +40,10 @@ export function Chart({ maxPlaces }) {
     let currentYear = new Date().getYear()
     const labels = months.slice(currentMonth).concat(months.slice(0, currentMonth))
 
-    const [daysArr, setDaysArr] = useState([])
-    const [newArr, setNewArr] = useState([])
+    const [daysArr, setDaysArr] = useState([]);
+    const [newArr, setNewArr] = useState([]);
     const getDays = () => {
-        let counter = 1
+        let counter = currentMonth + 1;
         for (let i = 0; i < months.length; i++) {
             let month = counter++
             let pushedValue = new Date(currentYear, month, 0).getDate()
@@ -54,7 +54,7 @@ export function Chart({ maxPlaces }) {
 
     useEffect(() => {
         getDays();
-    }, [])
+    }, [currentMonth])
 
     const data = {
         labels,

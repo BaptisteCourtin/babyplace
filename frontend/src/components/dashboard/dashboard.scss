@@ -144,6 +144,7 @@
   grid-template-rows: 1fr 2fr;
   gap: 20px;
   padding: 20px;
+  overflow-y: hidden;
 
   & .dashTop {
     width: 100%;
@@ -216,6 +217,7 @@
     gap: 20px;
 
     & .dashMainInfo {
+      height: 90%;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -250,7 +252,8 @@
 
     & .dashFav {
       min-height: 335px;
-      overflow-x: auto;
+      height: 90%;
+      overflow-y: scroll;
 
       & h3 {
         position: sticky;
@@ -312,6 +315,7 @@
     }
 
     & .dashChart {
+      height: 90%;
       display: grid;
       grid-template-rows: 6fr 1fr;
       align-content: center;

@@ -9,6 +9,7 @@ import {
   MdAccessTime,
   MdOutlineMarkAsUnread,
   MdLogout,
+  MdHome
 } from "react-icons/md";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -41,6 +42,17 @@ function DashNavbar({ toggle, setToggle, structureId }) {
         </h2>
       </div>
       <ul className="dashNavList">
+        <li className={toggle === 0 && "selected"}>
+          <MdHome />
+          <button
+            type="button"
+            onClick={() => {
+              setToggle(0);
+            }}
+          >
+            Accueil
+          </button>
+        </li>
         <li className={toggle === 1 && "selected"}>
           <MdOutlineFormatListBulleted />
           <button
