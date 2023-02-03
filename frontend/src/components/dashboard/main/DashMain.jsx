@@ -162,7 +162,7 @@ function DashMain({ data, fav, horaires, reser, approvedReser }) {
       <section className="dashBottom">
         <div className="dashMainInfo">
           <img src={data.photoProfil} alt="" />
-          {data.isCreche ? (
+          {data?.isCreche ? (
             <p className="dashMainInfoName">{data.nom}</p>
           ) : (
             <>
@@ -190,7 +190,7 @@ function DashMain({ data, fav, horaires, reser, approvedReser }) {
           <div className="dashChartBottom">
             <p>{reviews}<AiFillStar /> <span>({data.nbNotes})</span></p>
             <p>
-              {data.isCreche ? (
+              {data?.isCreche ? (
                 'Crèche'
               ) : (
                 'Assistante maternelle'

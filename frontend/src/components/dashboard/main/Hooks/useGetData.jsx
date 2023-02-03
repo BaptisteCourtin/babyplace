@@ -14,8 +14,8 @@ export const useGetAllData = (token) => {
           "x-token": token,
         },
       });
-      setDonnees(res.data[0]);
-      if (res.data[0].isCreche === 0) {
+      setDonnees(res.data[0])
+      if (res?.data[0]?.isCreche === 0) {
         axios
           .get(
             `${import.meta.env.VITE_PATH}/structure/details?type=assMat&id=${res.data[0].structureId
@@ -47,7 +47,7 @@ export const useGetAllData = (token) => {
     }
   };
 
-  const data = Object.assign(donnees, details);
+  const data = Object?.assign(donnees, details);
 
   const getNotifications = async () => {
     try {
