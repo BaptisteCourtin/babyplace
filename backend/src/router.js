@@ -313,6 +313,7 @@ router.put("/admin/verified/:id", structure.updateVerified);
 router.put("/reservation/status", reservation.updateStatus);
 router.put("/reservation/dates", reservation.updateDates);
 router.put("/horaires/day/:id", horaires.updateDay);
+router.put("/horaires/open/:id", horaires.updateOpen);
 router.put("/dashboard/hours/:id", dashboard.updateHours);
 router.put("/dashboard/indemn/:id", dashboard.updateIndemn);
 router.put("/dashboard/tarif/:id", dashboard.updateTarif);

@@ -18,7 +18,6 @@ function CalendarDashAgenda({ setClickedDay, clickedDay, setPlaces, horaires, ca
       return "select";
     }
     if (!(calendar.every(c => c.structureId === structureId && c.date !== dateNow))) {
-      console.log('first')
       return "";
     }
   };
