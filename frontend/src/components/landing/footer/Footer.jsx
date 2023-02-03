@@ -77,9 +77,15 @@ function Footer({ userType }) {
           </div>
           <div className="footerRight">
             <div className="socials">
-              <img src={facebook} alt="facebook" />
-              <img src={twitter} alt="twitter" />
-              <img src={insta} alt="instagram" />
+              <a href="https://fr-fr.facebook.com" target="_blank" rel="noopener noreferrer">
+                <img src={facebook} alt="facebook" />
+              </a>
+              <a href="https://twitter.com/?lang=fr" target="_blank" rel="noopener noreferrer">
+                <img src={twitter} alt="twitter" />
+              </a>
+              <a href="https://www.instagram.com/?hl=fr" target="_blank" rel="noopener noreferrer">
+                <img src={insta} alt="instagram" />
+              </a>
             </div>
           </div>
         </div>
