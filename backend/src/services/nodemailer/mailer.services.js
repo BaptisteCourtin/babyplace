@@ -58,8 +58,8 @@ const sendApprouvementByMail = async (email) => {
         {
             from: process.env.SMTP_USER,
             to: email,
-            subject: `Votre profil n'est plus signaler`,
-            text: "Nous sommes ravis de vous annoncer que le profil concernant l'email ${email} a été vérifié et n'est plus considéré comme signalé.",
+            subject: `Attention votre profil à été signalé plusieurs fois`,
+            text: "Nous sommes dans l'obligation de signaler que le profil concernant l'email ${email} a été signalé à plusieurs reprises. Rapprocher vous de l'administration pour régler le litige et ainsi éviter une suppression de votre profil.",
             html: reapprouverTemplate(email),
         },
         (err, info) => {
