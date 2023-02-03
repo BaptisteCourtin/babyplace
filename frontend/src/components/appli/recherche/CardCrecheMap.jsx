@@ -131,7 +131,7 @@ function CardCrecheMap({ data, familleLiked, familleId, getFamilleLiked }) {
 CardCrecheMap.propTypes = {
   data: PropTypes.object.isRequired,
   familleLiked: PropTypes.array.isRequired,
-  familleId: PropTypes.string.isRequired,
+  familleId: PropTypes.number.isRequired,
   getFamilleLiked: PropTypes.func.isRequired,
 };
 

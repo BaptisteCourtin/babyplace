@@ -76,14 +76,18 @@ function AppliCardCreche() {
             </button>
           )}
 
-          <Star
-            com={data.avisCom}
-            proprete={data.avisProprete}
-            securite={data.avisSecurite}
-            eveil={data.avisEveil}
-            horaires={data.avisHoraires}
-            nbNotes={data.nbNotes}
-          />
+          {data.nbNotes > 0 ? (
+            <Star
+              com={data.avisCom}
+              proprete={data.avisProprete}
+              securite={data.avisSecurite}
+              eveil={data.avisEveil}
+              horaires={data.avisHoraires}
+              nbNotes={data.nbNotes}
+            />
+          ) : (
+            <div className="star">Nouveau</div>
+          )}
         </div>
 
         <div className="text">
