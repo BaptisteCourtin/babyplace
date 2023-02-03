@@ -7,6 +7,33 @@ import Baptiste from "@assets/features/Baptiste.png";
 import Thibaud from "@assets/features/Thibaud.png";
 
 const Profils = () => {
+    const dataProfil = [
+        {
+            nom: "Amélie",
+            avatar: Amelie,
+            github: "https://github.com/AmelieGHP",
+            linkedin: "https://www.linkedin.com/in/amelie-ghp/"
+        },
+        {
+            nom: "Baptiste",
+            avatar: Baptiste,
+            github: "https://github.com/BaptisteCourtin",
+            linkedin: "https://www.linkedin.com/in/baptistecourtin/"
+        },
+        {
+            nom: "Guillaume",
+            avatar: Gui,
+            github: "https://github.com/GuiPich",
+            linkedin: "https://www.linkedin.com/in/guillaume-pichaud-627b308a/"
+        },
+        {
+            nom: "Thibaud",
+            avatar: Thibaud,
+            github: "https://github.com/thibaudbrault",
+            linkedin: "https://www.linkedin.com/in/thibaud-brault/"
+        },
+    ];
+
     return (
         <div className="profils">
 
@@ -15,99 +42,36 @@ const Profils = () => {
             <div>
                 <div className="imgAboutUsContainer">
                     <ul>
-                        <li>
-                            <img src={Amelie} alt="Amélie" />
-                            <div className="rightPart">
-                                <p>Amélie</p>
-                                <div className="links">
-                                    <a
-                                        href="https://github.com/AmelieGHP"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        <RiGithubLine />
-                                    </a>
-                                    <a
-                                        href="https://www.linkedin.com/in/amelie-ghp/"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        <TiSocialLinkedin />
-                                    </a>
+                        {dataProfil && dataProfil.map((element) => (
+                            <li>
+                                <img src={element.avatar} alt={element.nom} />
+                                <div className="rightPart">
+                                    <p>{element.nom}</p>
+                                    <div className="links">
+                                        <a
+                                            href={element.github}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            <RiGithubLine />
+                                        </a>
+                                        <a
+                                            href={element.linkedin}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            <TiSocialLinkedin />
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <img src={Baptiste} alt="Baptiste" />
-                            <div className="rightPart">
-                                <p>Baptiste</p>
-                                <div className="links">
-                                    <a
-                                        href="https://github.com/BaptisteCourtin"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        <RiGithubLine />
-                                    </a>
-                                    <a
-                                        href="https://www.linkedin.com/in/baptistecourtin/"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        <TiSocialLinkedin />
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <img src={Gui} alt="Guillaume" />
-                            <div className="rightPart">
-                                <p>Guillaume</p>
-                                <div className="links">
-                                    <a
-                                        href="https://github.com/GuiPich"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        <RiGithubLine />
-                                    </a>
-                                    <a
-                                        href="https://www.linkedin.com/in/guillaume-pichaud-627b308a/"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        <TiSocialLinkedin />
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <img src={Thibaud} alt="Thibaud" />
-                            <div className="rightPart">
-                                <p>Thibaud</p>
-                                <div className="links">
-                                    <a
-                                        href="https://github.com/thibaudbrault"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        <RiGithubLine />
-                                    </a>
-                                    <a
-                                        href="https://www.linkedin.com/in/thibaud-brault/"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        <TiSocialLinkedin />
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
+                            </li>
+                        ))}
                     </ul>
                 </div>
             </div>
         </div>
     );
 };
+
 
 export default Profils;
