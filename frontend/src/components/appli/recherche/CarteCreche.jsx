@@ -241,10 +241,14 @@ function CarteCreche({
                   ? `${prenom} ${nomUsage}`
                   : `${prenom} ${nomNaissance}`)}
             </p>
-            <div className="star-all">
-              {nbStarMoyen}
-              {AiFillStar()}
-            </div>
+            {data.nbNotes > 0 ? (
+              <div className="star-all">
+                {nbStarMoyen}
+                {AiFillStar()}
+              </div>
+            ) : (
+              <div className="star-all">Nouveau</div>
+            )}
           </div>
           <div className="info-creche">
             <div className="ville-prix">
@@ -267,7 +271,7 @@ CarteCreche.propTypes = {
   data: PropTypes.object.isRequired,
   userPosition: PropTypes.array.isRequired,
   familleLiked: PropTypes.array.isRequired,
-  familleId: PropTypes.string.isRequired,
+  familleId: PropTypes.number.isRequired,
   getFamilleLiked: PropTypes.func.isRequired,
 };
 

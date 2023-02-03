@@ -261,7 +261,7 @@ BaseMap.propTypes = {
   dataAggrements: PropTypes.object.isRequired,
 
   familleLiked: PropTypes.array.isRequired,
-  familleId: PropTypes.string.isRequired,
+  familleId: PropTypes.number.isRequired,
   getFamilleLiked: PropTypes.func.isRequired,
 };
 
