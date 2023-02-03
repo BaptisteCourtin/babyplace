@@ -1,4 +1,4 @@
-const adminTemplate = (selectedPrenom, selectedNom, selectedOption, selectedMessage, message) => {
+const reapprouverTemplate = (email) => {
     return `<!DOCTYPE html>
       <html>
       
@@ -68,13 +68,6 @@ const adminTemplate = (selectedPrenom, selectedNom, selectedOption, selectedMess
                   text-align: center;
                   padding: 10px 0px;
               }
-
-              .italic {
-                font-style: italic;
-                padding-left: 10px;
-                font-style: 0.95em;
-                color: #7e72f2;
-              }
       
               .email-footer {
                   color: #000;
@@ -117,12 +110,10 @@ const adminTemplate = (selectedPrenom, selectedNom, selectedOption, selectedMess
                       <img class="img-woman" src="https://i.ibb.co/DK8JB4W/img-woman.png" alt="logo" />
                       <div class="email-body-container">
                           <div class="email-body-header">
-                              <p>Madame, Monsieur <span>${selectedPrenom} ${selectedNom}</span>,</p>
+                              <p>Madame, Monsieur,</p>
                           </div>
                           <div class="email-body-main">
-                          <p>En réponse à votre demande concernant l'option :<span class="italic"> "${selectedOption}"</span></p>
-                          <p>Message : <span class="italic">"${selectedMessage}"</span></p>
-                              <p class="reponse">${message}</p>
+                            <p class="reponse">Nous sommes ravis de vous annoncer que le profil concernant l'email ${email} a été vérifié et n'est plus considéré comme signalé.</p>
                           </div>
                       </div>
                   </div>
@@ -145,6 +136,4 @@ const adminTemplate = (selectedPrenom, selectedNom, selectedOption, selectedMess
       `;
 };
 
-module.exports = {
-    adminTemplate
-};
+module.exports = reapprouverTemplate;

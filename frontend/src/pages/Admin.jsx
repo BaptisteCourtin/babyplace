@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import Nav from "@components/dashboard/admin/Nav.Admin";
+import Nav from "@components/dashboard/admin/Nav.admin";
 import { useNavigate } from "react-router-dom";
+import { AiFillWarning } from 'react-icons/ai';
 
 function Admin() {
   const navigate = useNavigate();
@@ -82,13 +83,14 @@ function Admin() {
     getStructure();
   }, []);
 
+
   return (
     <main className="admin">
       <Nav />
       <section className="adminSection">
         <h2>Profils à approuver</h2>
         <ul>
-          {data.map((d) => (
+          {data.filter((el) => (el.isSignaled == 0)).map((d) => (
             <li>
               <div className="adminSectionImg">
                 <img src={d?.photoProfil} />

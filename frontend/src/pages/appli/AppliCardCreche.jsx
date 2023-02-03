@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import BlocJour from "@components/appli/recherche/BlocJour";
 import Star from "@components/appli/recherche/Star";
 import PopUp from "@components/appli/recherche/PopUp";
-
+import { toast } from "react-hot-toast";
 import { MdReportProblem } from "react-icons/md";
 
 function AppliCardCreche() {
@@ -50,15 +50,15 @@ function AppliCardCreche() {
 
   const handleSignaler = () => {
     axios.put(`${import.meta.env.VITE_PATH}/structure/signal/${structureId}`);
+    toast.success("Votre signalement à bien été transmis.");
   };
 
   return (
     <div className="appli-card-creche">
       <header>
-        <Link to="/appli/search">{`< ${
-          nom ||
+        <Link to="/appli/search">{`< ${nom ||
           (nomUsage ? `${prenom} ${nomUsage}` : `${prenom} ${nomNaissance}`)
-        }`}</Link>
+          }`}</Link>
       </header>
 
       <main>

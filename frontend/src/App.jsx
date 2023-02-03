@@ -30,6 +30,7 @@ import WaitAdmin from "@pages/WaitAdmin";
 import AppliChat from "@pages/appli/AppliChat";
 import Aide from "@components/appli/menu/Aide";
 import MessageAdmin from "@components/dashboard/admin/MessageAdmin";
+import Signalement from "@components/dashboard/admin/Signalement";
 
 function App() {
   const [userEmail, setUserEmail] = useState("paulette07@laposte.net");
@@ -48,7 +49,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
 
-            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/profils" element={<Admin />} />
+            <Route path="/admin/signalements" element={<Signalement />} />
             <Route path="/admin/messages" element={<MessageAdmin />} />
 
             <Route path="/register" element={<Register />} />
