@@ -9,8 +9,6 @@ function HoursDashAgenda({
   updateDay,
 }) {
 
-  console.log(horaires[dayId].heureMin)
-
   return (
     <>
       <div className="dashRangeInput">

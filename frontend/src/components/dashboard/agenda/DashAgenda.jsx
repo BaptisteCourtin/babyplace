@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import axios from 'axios';
+import toast from 'react-hot-toast';
 import DashAgendaCalendar from "./Components/Calendar.DashAgenda";
 import { useGetAgenda } from "./Hooks/useGetAgenda";
 import { usePutData } from "./Hooks/usePutAgenda";
@@ -16,6 +18,9 @@ function DashAgenda({ structureId, maxPlaces }) {
   const [calendarIndex, setCalendarIndex] = useState(null);
   const [workCheck, setWorkCheck] = useState(0);
   const [modal, setModal] = useState(false);
+  const [hourStart, setHourStart] = useState(null);
+  const [hourEnd, setHourEnd] = useState(null);
+  const [dayId, setDayId] = useState(null);
 
   const { curDate, clickedDay, setClickedDay, date, day } = useFormatDay();
   const { calendar, getCalendar, horaires, getHoraires } = useGetAgenda(structureId);
@@ -33,6 +38,22 @@ function DashAgenda({ structureId, maxPlaces }) {
   );
   const { fullDate } = useDeleteData(getCalendar);
 
+  const handleSubmitHours = async (e) => {
+    e.preventDefault()
+    try {
+      await axios.put(`${import.meta.env.VITE_PATH}/horaires/open/${dayId.horairesId}`, {
+        id: dayId.horairesId,
+        heureMin: hourStart,
+        heureMax: hourEnd
+      })
+      toast.success("Vos horaires ont été modifiées")
+      getHoraires()
+      closeModal()
+    } catch (err) {
+      console.error(err.message)
+    }
+  }
+
   useEffect(() => {
     getCalendar();
     getHoraires();
@@ -42,6 +63,10 @@ function DashAgenda({ structureId, maxPlaces }) {
       setWorkCheck(6)
     }
   }, [clickedDay]);
+
+  useEffect(() => {
+    setDayId(horaires.find(h => h.jourSemaine.toLowerCase() === day))
+  }, [clickedDay])
 
   const openModal = () => {
     setModal(true)
@@ -108,7 +133,7 @@ function DashAgenda({ structureId, maxPlaces }) {
               <button
                 type="button"
                 className="agendaPlacesWork"
-                onClick={() => setModal(open)}
+                onClick={() => openModal()}
               >
                 Travailler tous les <span>{day}s</span>
               </button>
@@ -128,8 +153,31 @@ function DashAgenda({ structureId, maxPlaces }) {
           onRequestClose={closeModal}
           className="hoursChoiceContainer"
         >
-          <form >
+          <form className="hoursChoiceInner" onSubmit={(e) => handleSubmitHours(e)}>
             <h2>Choisir un horaires</h2>
+            <div className="hoursInputContainer">
+              <label htmlFor="timeOpen">Heure d'ouverture</label>
+              <input
+                type="time"
+                name="timeOpen"
+                id="timeOpen"
+                step="300"
+                onChange={(e) => setHourStart(e.target.value)}
+                required
+              />
+            </div>
+            <div className="hoursInputContainer">
+              <label htmlFor="timeClose">Heure de fermerture</label>
+              <input
+                type="time"
+                name="timeClose"
+                id="timeClose"
+                step="300"
+                onChange={(e) => setHourEnd(e.target.value)}
+                required
+              />
+            </div>
+            <button type="submit">Envoyer</button>
           </form>
         </ReactModal>
       }

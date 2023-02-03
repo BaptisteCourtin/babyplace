@@ -16,7 +16,19 @@ const updateDay = async (req, res) => {
   }
 };
 
+const updateOpen = async (req, res) => {
+  const { id, heureMin, heureMax } = req.body;
+  console.log(req.body)
+  const result = await horairesModels.updateOpen(id, heureMin, heureMax);
+  if (result.affectedRows === 0) {
+    res.status(404).send("Not found");
+  } else {
+    res.sendStatus(204);
+  }
+}
+
 module.exports = {
   updateDay,
+  updateOpen,
   getHorairesById,
 };
