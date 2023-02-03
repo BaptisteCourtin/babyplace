@@ -1,4 +1,4 @@
-const refuseTemplate = (email) => {
+const supprimerTemplate = (email) => {
     return `<!DOCTYPE html>
     <html>
       
@@ -113,7 +113,7 @@ const refuseTemplate = (email) => {
                             <p>Madame, Monsieur,</p>
                         </div>
                         <div class="email-body-main">
-                          <p class="reponse">Nous avons malheureusement une mauvaise nouvelle à vous annoncer. Le profil concernant l'email ${email} a été vérifié et refusé par l'administration du site. Je vous invite à reprendre contact avec Babyplace rapidement, pour revoir avec nous votre dossier.</p>
+                          <p class="reponse">Nous avons le regret de vous annoncer, que le profil concernant l'email ${email}, faisant l'objet d'un signalement, a été vérifié et supprimer par l'administration du site. Je vous invite à reprendre contact avec Babyplace rapidement, pour revoir avec nous votre dossier.</p>
                         </div>
                     </div>
                 </div>
@@ -136,6 +136,4 @@ const refuseTemplate = (email) => {
       `;
 };
 
-module.exports = {
-    refuseTemplate
-};
+module.exports = supprimerTemplate;

@@ -11,10 +11,10 @@ function Nav() {
           <Link to="/">Accueil</Link>
         </li>
         <li>
-          <Link to="/appli/search">Liste</Link>
+          <Link to="/admin/profils">Profils à approuver</Link>
         </li>
         <li>
-          <Link to="/admin">Admin</Link>
+          <Link to="/admin/signalements">Profils signalés</Link>
         </li>
         <li>
           <Link to="/admin/messages">Messages</Link>

@@ -141,6 +141,14 @@ const updateSignal = async (req) => {
   return result;
 };
 
+const updateSignaled = async (req) => {
+  const [result] = await datasource.query(
+    `UPDATE structure SET isSignaled = 0 WHERE structureId = ?`,
+    [req.params.id]
+  );
+  return result;
+};
+
 module.exports = {
   getStructure,
   getStructures,
@@ -160,4 +168,5 @@ module.exports = {
   updateImages,
   logout,
   updateSignal,
+  updateSignaled
 };

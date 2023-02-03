@@ -48,7 +48,7 @@ function LoginForm() {
             }
           } else if (email === adminEmail && password === adminPassword) {
             const { token } = res.data;
-            navigate("/admin", {
+            navigate("/admin/profils", {
               state: {
                 token,
               },

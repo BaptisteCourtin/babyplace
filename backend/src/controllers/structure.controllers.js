@@ -23,7 +23,7 @@ const getStructure = async (req, res) => {
 };
 
 const getStructureId = async (req, res) => {
-  const {token} = req.query
+  const { token } = req.query
   const result = await structureModels.getStructureId(token)
   return res.json(result)
 }
@@ -154,6 +154,15 @@ const updateSignal = async (req, res) => {
   }
 };
 
+const updateSignaled = async (req, res) => {
+  const result = await structureModels.updateSignaled(req);
+  if (result.affectedRows === 0) {
+    res.status(404).send("Not found");
+  } else {
+    res.sendStatus(204);
+  }
+};
+
 module.exports = {
   getStructure,
   getStructures,
@@ -174,4 +183,5 @@ module.exports = {
   uploadProfil,
   logout,
   updateSignal,
+  updateSignaled
 };
