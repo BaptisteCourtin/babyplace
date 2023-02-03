@@ -23,8 +23,16 @@ const updateOpen = async (id, heureMin, heureMax) => {
   return result
 }
 
+const updateClose = async (id) => {
+  const [result] = await datasource.query(
+    "UPDATE horaires SET ouvert = 0, heureMin = NULL, heureMax = NULL WHERE horairesId = ?", [id]
+  )
+  return result
+}
+
 module.exports = {
   updateDay,
   updateOpen,
+  updateClose,
   getHorairesById,
 };

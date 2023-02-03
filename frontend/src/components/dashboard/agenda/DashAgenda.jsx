@@ -24,11 +24,11 @@ function DashAgenda({ structureId, maxPlaces }) {
 
   const { curDate, clickedDay, setClickedDay, date, day } = useFormatDay();
   const { calendar, getCalendar, horaires, getHoraires } = useGetAgenda(structureId);
-  const { updatePlaces, updateStatusClose, updateStatusOpen } = usePutData(
+  const { updatePlaces, updateStatusClose, updateStatusOpen, updateClose } = usePutData(
     calendarIndex,
     getCalendar,
-    maxPlaces,
-    setPlaces
+    getHoraires,
+    setPlaces,
   );
   const { addSleepDate, addWorkDate } = usePostData(
     setPlaces,
@@ -104,8 +104,11 @@ function DashAgenda({ structureId, maxPlaces }) {
                 calendar={calendar}
                 structureId={structureId}
                 date={date}
+                day={day}
+                dayId={dayId}
                 addSleepDate={addSleepDate}
                 addWorkDate={addWorkDate}
+                updateClose={updateClose}
               />
               <StatusDashAgenda
                 calendar={calendar}
