@@ -13,7 +13,7 @@
     }
 
     .messageAdminListBis {
-      width: 90%;
+      width: 85%;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
@@ -73,6 +73,7 @@
           & #btnRepondre {
             padding: 5px 0;
             width: 150px;
+            height: 40px;
             background-color: $fifth;
             color: $white;
             font-weight: 500;
@@ -90,6 +91,7 @@
           #btnDelete {
             padding: 5px 0;
             width: 150px;
+            height: 40px;
             background-color: $seventh;
             color: $white;
             font-weight: 500;
@@ -165,10 +167,12 @@
 
             #btnDelete {
               width: 100px;
+              height: 40px;
             }
 
             #btnRepondre {
               width: 100px;
+              height: 40px;
             }
           }
         }
