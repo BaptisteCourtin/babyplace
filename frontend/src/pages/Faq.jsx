@@ -1,7 +1,7 @@
 import React from "react";
 import { HashLink } from "react-router-hash-link";
-import FooterLite from "./components/FooterLite";
-import NavbarLite from "./components/NavbarLite";
+import FooterLite from "@components/features/components/FooterLite";
+import NavbarLite from "@components/features/components/NavbarLite";
 
 function Faq(props) {
   return (

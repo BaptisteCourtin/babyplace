@@ -2,7 +2,7 @@ import React from 'react';
 
 const Mentions = () => {
     return (
-        <div>
+        <section id="mentions">
             <h3>Mention légales</h3>
             <p>
                 L'agence Dave Warehouse de création de site Web, société par actions
@@ -52,7 +52,7 @@ const Mentions = () => {
                 d’accès, de modification, de rectification et de suppression des
                 données recueillies.
             </p>
-        </div>
+        </section>
     );
 };
 
