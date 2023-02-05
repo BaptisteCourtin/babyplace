@@ -3,7 +3,7 @@ import logoDave from "@assets/features/logoDave.png";
 
 const About = () => {
     return (
-        <div className="about">
+        <section id="about-us">
             <h3>A propos de nous</h3>
             <div className="descriptionContainer">
                 <div className="descriptionTxt">
@@ -24,7 +24,7 @@ const About = () => {
                 </div>
                 <img src={logoDave} alt="logo des DaveWarehouse" />
             </div>
-        </div>
+        </section>
     );
 };
 

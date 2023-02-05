@@ -35,11 +35,10 @@ const Profils = () => {
     ];
 
     return (
-        <div className="profils">
-
+        <section id="profil">
             <h3>Nos Profils</h3>
             <p>Notre équipe de développeurs ayant participé à ce projet.</p>
-            <div>
+            <div className="divdiv">
                 <div className="imgAboutUsContainer">
                     <ul>
                         {dataProfil && dataProfil.map((element) => (
@@ -69,7 +68,7 @@ const Profils = () => {
                     </ul>
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 
