@@ -50,9 +50,7 @@ function Nav() {
           </ul>
         </nav >
       ) : (
-      
-            <BurgerMenuAdmin logout={logout} logo={logo}/>
-    
+        <BurgerMenuAdmin logout={logout} logo={logo} />
       )
       }
     </>
