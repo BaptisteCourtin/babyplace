@@ -63,6 +63,7 @@ function Dashboard() {
       {toggle === 0 && (
         <DashMain
           data={data}
+          toggle={toggle}
           fav={fav}
           horaires={horaires}
           reser={reser}

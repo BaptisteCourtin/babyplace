@@ -5,11 +5,12 @@ import { AiFillStar } from "react-icons/ai";
 import { useFormatDay } from "../agenda/Hooks/useFormatDay";
 import { useGetAgenda } from "../agenda/Hooks/useGetAgenda";
 
-function DashMain({ data, fav, horaires, reser, approvedReser }) {
+function DashMain({ data, fav, toggle, horaires, reser, approvedReser }) {
 
-  const [filteredHoraires, setFilteredHoraires] = useState([])
+  const [filteredHoraires, setFilteredHoraires] = useState([]);
+  const [status, setStatus] = useState(null);
   const { curDate } = useFormatDay();
-  const { calendar } = useGetAgenda(data.structureId)
+  const { calendar, getCalendar } = useGetAgenda(data.structureId);
 
   const calcHours = () => {
     let tmpHours = 0;
@@ -53,9 +54,29 @@ function DashMain({ data, fav, horaires, reser, approvedReser }) {
       10
     ) / 10;
 
+  const getStatus = () => {
+    setStatus(
+      calendar
+        .filter(c => c.date === curDate)
+        .map(c => {
+          if (c.nbPlaces != -1) {
+            return `Il vous reste ${c.nbPlaces} ${c.nbPlaces == 1 ? 'place' : 'places'}`
+          } else if (c.nbPlaces == -1) {
+            return "Vous êtes au repos"
+          }
+        })
+        .toString()
+    )
+  }
+
   useEffect(() => {
-    openDays()
+    getCalendar()
   }, [])
+
+  useEffect(() => {
+    getStatus()
+    openDays()
+  }, [calendar])
 
   return (
     <main className="dashMain">
@@ -100,7 +121,7 @@ function DashMain({ data, fav, horaires, reser, approvedReser }) {
               <p>Heures hebdomadaires</p>
               <h3>{calcHours()}H</h3>
             </div>
-            <p className="dashListSubText">sur {filteredHoraires.length} jours</p>
+            <p className="dashListSubText">sur {filteredHoraires.length} {filteredHoraires.length > 1 ? "jours" : "jour"}</p>
           </li>
           <li
             style={{
@@ -148,13 +169,7 @@ function DashMain({ data, fav, horaires, reser, approvedReser }) {
               <h3>{data.maxPlaces}</h3>
             </div>
             <p className="dashListSubText">
-              {calendar.map(c => (c.date === curDate && c.nbPlaces != -1) ? (
-                `Il vous reste ${c.nbPlaces} places`
-              ) : (c.date === curDate && c.nbPlaces == -1) ? (
-                "Vous êtes au repos"
-              ) : (
-                "Vous êtes complet"
-              ))}
+              {status || 'Vous êtes complet'}
             </p>
           </li>
         </ul>
