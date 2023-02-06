@@ -21,9 +21,9 @@ import AppliMessage from "@pages/appli/AppliMessage";
 import FormStructure from "@pages/FormStructure";
 
 import Dashboard from "@components/dashboard/Dashboard";
-import Features from "@components/features/Features";
-import Contact from "@components/features/Contact";
-import Faq from "@components/features/Faq";
+import Features from "@pages/Features";
+import Contact from "@pages/Contact";
+import Faq from "@pages/Faq";
 import Admin from "@pages/Admin";
 import Home from "@pages/Home";
 import WaitAdmin from "@pages/WaitAdmin";

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { HashLink } from "react-router-hash-link";
 import { useForm } from "react-hook-form";
-import FooterLite from "./components/FooterLite";
-import NavbarLite from "./components/NavbarLite";
-import Modal from "./components/Modal";
-import { onSubmit } from "./hooks/usePostMessage";
+import FooterLite from "@components/features/components/FooterLite";
+import NavbarLite from "@components/features/components/NavbarLite";
+import Modal from "@components/features/components/Modal";
+import { onSubmit } from "@components/features/hooks/usePostMessage";
+import AideFeature from "@components/features/components/AideFeature";
 
 function Contact() {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,14 +52,7 @@ function Contact() {
   return (
     <div className="contact-form" id="aide">
       <NavbarLite />
-      <section className="aide">
-        <h3>Aide</h3>
-        <p>
-          Besoin d'aide ? N'hésitez pas à utiliser notre formulaire de contact
-          ci-dessous, pour poser vos questions. Nous vous répondrons dans les
-          plus brefs délais.
-        </p>
-      </section>
+      <AideFeature />
       <section id="contact">
         <h3>Contactez-nous</h3>
         <p id="question">

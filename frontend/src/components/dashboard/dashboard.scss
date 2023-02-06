@@ -207,9 +207,7 @@
         }
       }
     }
-
   }
-
 
   & .dashBottom {
     display: grid;
@@ -229,10 +227,9 @@
       color: $white;
 
       & img {
-        width: 110px;
-        height: 110px;
-        min-width: 60%;
-        min-height: 30%;
+        width: 130px;
+        height: 130px;
+        object-fit: cover;
         padding: 10px;
         margin: 0 10% 30px 10%;
         border-radius: 50%;

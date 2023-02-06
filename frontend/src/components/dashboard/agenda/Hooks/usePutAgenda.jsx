@@ -8,7 +8,7 @@ export const usePutData = (
   setPlaces,
 ) => {
 
-  const updatePlaces = async () => {
+  const updatePlaces = async (places) => {
     try {
       await axios.put(
         `${import.meta.env.VITE_PATH}/calendrier/places/${calendarIndex}`,

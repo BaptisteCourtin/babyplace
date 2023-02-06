@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import Nav from "@components/dashboard/admin/Nav.Admin";
+import Nav from "@components/dashboard/admin/Nav.admin";
 import { useNavigate } from "react-router-dom";
 import { AiFillWarning } from 'react-icons/ai';
 import { BiMailSend } from 'react-icons/bi';
