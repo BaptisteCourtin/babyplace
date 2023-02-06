@@ -1,0 +1,64 @@
+.adminNavRes {
+    background: $third;
+    border: none;
+
+    & ul {
+        width: 95%;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 80px;
+        padding: 15px;
+        border: none;
+
+        & img {
+            width: 20px;
+            height: 20px;
+        }
+
+        #btnBurger {
+            z-index: 10000;
+        }
+    }
+
+    .styledMenu {
+        display: flex;
+        flex-direction: column;
+        padding: 4rem 2rem;
+        background: #EFFFFA;
+        transform: translateX(-100%);
+        height: 100vh;
+        text-align: left;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: transform 0.3s ease-in-out;
+
+        @media (max-width: 800px) {
+            width: 100%;
+        }
+
+        li {
+            margin: 10px;
+            font-size: 1.5em;
+            padding: 2rem 0;
+            font-weight: 500;
+            color: $third;
+
+            a {
+                text-decoration: none;
+                transition: color 0.3s linear;
+            }
+
+            button {
+                background: none;
+            }
+
+            #iconAdminNav {
+                transform: scale(0.95);
+                transform: translateY(3px);
+            }
+        }
+    }
+}

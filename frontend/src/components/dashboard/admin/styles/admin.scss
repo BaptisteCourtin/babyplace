@@ -110,6 +110,7 @@
 
 .adminNav {
   background: $third;
+  border: none;
 
   & ul {
     width: 95%;
@@ -117,26 +118,43 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 80px;
+    gap: 20px;
     padding: 15px;
+    border: none;
 
     & img {
       width: 20px;
       height: 20px;
+
     }
 
     & li {
-      color: $white;
-      font-size: $normal;
-      font-weight: 500;
+      margin-top: 2px;
 
-      #iconAdminNav {
-        transform: scale(0.95);
-        transform: translateY(3px);
+      a {
+        width: 350px;
+        padding: 8px 15px 15px 15px;
+        color: $white;
+        font-size: $normal;
+        font-weight: 500;
+
+        #iconAdminNav {
+          transform: scale(0.95);
+          transform: translateY(3px);
+        }
+
+      }
+
+      .selectedAdmin {
+        background-color: white;
+        color: $third;
+        border-radius: 10% 10% 0% 0% / 25% 25% 25% 25%;
       }
 
       & button {
         background: none;
+        color: $white;
+        font-weight: 500;
       }
     }
   }

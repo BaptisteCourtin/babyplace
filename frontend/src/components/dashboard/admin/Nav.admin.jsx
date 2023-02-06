@@ -1,10 +1,12 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from "@assets/logo5white.svg";
 import axios from "axios";
 import { MdManageAccounts, MdNoAccounts, MdMarkAsUnread, MdLogout } from 'react-icons/md';
+import BurgerMenuAdmin from "./components/BurgerMenuAdmin";
 
 function Nav() {
+  const activeClassName = "selectedAdmin";
   const structureId = 0;
   const navigate = useNavigate();
   const logout = async () => {
@@ -20,24 +22,41 @@ function Nav() {
     }
   };
 
+
   return (
-    <nav className="adminNav">
-      <ul>
-        <img src={logo} alt="logo" />
-        <li>
-          <Link to="/admin/profils"><MdManageAccounts id="iconAdminNav" /> Profils à approuver</Link>
-        </li>
-        <li>
-          <Link to="/admin/signalements"><MdNoAccounts id="iconAdminNav" /> Profils signalés</Link>
-        </li>
-        <li>
-          <Link to="/admin/messages"><MdMarkAsUnread id="iconAdminNav" /> Messages</Link>
-        </li>
-        <li>
-          <button onClick={() => logout()}><MdLogout id="iconAdminNav" /> Déconnexion</button>
-        </li>
-      </ul>
-    </nav >
+    <>
+      {window.innerWidth > 800 ? (
+        <nav className="adminNav">
+          <ul>
+            <img src={logo} alt="logo" />
+            <li>
+              <NavLink to="/admin/profils" className={({ isActive }) =>
+                isActive ? activeClassName : undefined
+              }><MdManageAccounts id="iconAdminNav" /> Profils à approuver</NavLink>
+            </li>
+            <li>
+              <NavLink to="/admin/signalements" className={({ isActive }) =>
+                isActive ? activeClassName : undefined
+              }><MdNoAccounts id="iconAdminNav" /> Profils signalés</NavLink>
+            </li>
+            <li>
+              <NavLink to="/admin/messages" className={({ isActive }) =>
+                isActive ? activeClassName : undefined
+              }><MdMarkAsUnread id="iconAdminNav" /> Messages</NavLink>
+            </li>
+            <li>
+              <button onClick={() => logout()}><MdLogout id="iconAdminNav" /> Déconnexion</button>
+            </li>
+          </ul>
+        </nav >
+      ) : (
+      
+            <BurgerMenuAdmin logout={logout} logo={logo}/>
+    
+      )
+      }
+    </>
+
   );
 }
 
