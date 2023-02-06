@@ -8,13 +8,16 @@ function OpenDashStatus({
   setCalendarIndex,
   updatePlaces,
 }) {
+
+  console.log(places)
+
   return (
     <>
       <div className="agendaPlacesLeft">
         <p>
           Il vous reste
           <b> {fc.nbPlaces} </b>
-          places sur
+          {fc.nbPlaces == 1 ? 'place' : 'places'} sur
           <b> {maxPlaces} </b>
         </p>
       </div>
@@ -33,8 +36,7 @@ function OpenDashStatus({
         <button
           type="button"
           onClick={() => {
-            updatePlaces();
-            setPlaces("");
+            updatePlaces(places);
           }}
         >
           Modifier

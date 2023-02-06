@@ -34,7 +34,7 @@ function AvailableDashAgenda({ calendar, structureId, date, curDate }) {
                 </span>
               )}
               <p>
-                Vous avez <span>{fc.nbPlaces}</span> places restantes le{" "}
+                Vous avez <span>{fc.nbPlaces}</span> {fc.nbPlaces == 1 ? 'place' : 'places'} restantes le{" "}
                 <span>
                   {fc.date.split("-")[2]} / {fc.date.split("-")[1]} /{" "}
                   {fc.date.split("-")[0]}
