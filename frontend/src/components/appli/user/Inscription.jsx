@@ -280,7 +280,7 @@ function Inscription() {
             src={docJustifRevenus1Src}
             nomDoc="docJustifRevenus"
             handleSupp={handleSupp}
-            p="Justificatif de revenu (moins de 3 mois)"
+            p="Justificatif de revenus (moins de 3 mois)"
             who={1}
           />
           <OneFormInscr
@@ -288,7 +288,7 @@ function Inscription() {
             src={docDeclaRevenus1Src}
             nomDoc="docDeclaRevenus"
             handleSupp={handleSupp}
-            p="Déclaration de revenu (année en cours)"
+            p="Déclaration de revenus (année en cours)"
             who={1}
           />
           <OneFormInscr
@@ -296,7 +296,7 @@ function Inscription() {
             src={docSituationPro1Src}
             nomDoc="docSituationPro"
             handleSupp={handleSupp}
-            p="Justificatif de situation professionnel"
+            p="Justificatif de situation professionnelle"
             who={1}
           />
           <OneFormInscr
@@ -342,7 +342,7 @@ function Inscription() {
             src={docJustifRevenus2Src}
             nomDoc="docJustifRevenus"
             handleSupp={handleSupp}
-            p="Justificatif de revenu (moins de 3 mois)"
+            p="Justificatif de revenus (moins de 3 mois)"
             who={2}
           />
           <OneFormInscr
@@ -350,7 +350,7 @@ function Inscription() {
             src={docDeclaRevenus2Src}
             nomDoc="docDeclaRevenus"
             handleSupp={handleSupp}
-            p="Déclaration de revenu (année en cours)"
+            p="Déclaration de revenus (année en cours)"
             who={2}
           />
           <OneFormInscr
@@ -358,7 +358,7 @@ function Inscription() {
             src={docSituationPro2Src}
             nomDoc="docSituationPro"
             handleSupp={handleSupp}
-            p="Justificatif de situation professionnel"
+            p="Justificatif de situation professionnelle"
             who={2}
           />
           <OneFormInscr

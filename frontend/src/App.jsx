@@ -21,46 +21,42 @@ import AppliMessage from "@pages/appli/AppliMessage";
 import FormStructure from "@pages/FormStructure";
 
 import Dashboard from "@components/dashboard/Dashboard";
-import Features from "@components/features/Features";
-import Contact from "@components/features/Contact";
-import Faq from "@components/features/Faq";
+import Features from "@pages/Features";
+import Contact from "@pages/Contact";
+import Faq from "@pages/Faq";
 import Admin from "@pages/Admin";
-import Stats from "@pages/Stats";
 import Home from "@pages/Home";
 import WaitAdmin from "@pages/WaitAdmin";
 import AppliChat from "@pages/appli/AppliChat";
 import Aide from "@components/appli/menu/Aide";
 import MessageAdmin from "@components/dashboard/admin/MessageAdmin";
+import Signalement from "@components/dashboard/admin/Signalement";
 
 function App() {
   const [userEmail, setUserEmail] = useState("paulette07@laposte.net");
-
+  const [structureId, setStructureId] = useState(16);
   const [familleId, setFamilleId] = useState(0);
   useEffect(() => {
     setFamilleId(sessionStorage.getItem("BabyPlacefamilleId"));
     setUserEmail(sessionStorage.getItem("structureEmail"));
+    setStructureId(sessionStorage.getItem("structureId"));
   }, []);
 
   return (
     <div className="app">
-      <UserEmailContext.Provider value={{ userEmail, setUserEmail }}>
+      <UserEmailContext.Provider value={{ userEmail, setUserEmail, structureId, setStructureId }}>
         <FamilleContext.Provider value={{ familleId, setFamilleId }}>
           <Routes>
             <Route path="/" element={<Home />} />
 
-            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/profils" element={<Admin />} />
+            <Route path="/admin/signalements" element={<Signalement />} />
             <Route path="/admin/messages" element={<MessageAdmin />} />
-            <Route path="/stats" element={<Stats />} />
 
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/login-params" element={<Synthesis />} />
-
-            {window.localStorage.getItem("mail") !== "" ? (
-              <Route path="/dashboard" element={<Dashboard />} />
-            ) : (
-              redirect("/")
-            )}
+            <Route path="/dashboard" element={<Dashboard />} />
 
             <Route path="/features" element={<Features />} />
             <Route path="/contact" element={<Contact />} />

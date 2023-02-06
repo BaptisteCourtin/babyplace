@@ -4,10 +4,11 @@ import { toast } from "react-hot-toast";
 export const usePutData = (
   calendarIndex,
   getCalendar,
-  maxPlaces,
-  setPlaces
+  getHoraires,
+  setPlaces,
 ) => {
-  const updatePlaces = async () => {
+
+  const updatePlaces = async (places) => {
     try {
       await axios.put(
         `${import.meta.env.VITE_PATH}/calendrier/places/${calendarIndex}`,
@@ -45,7 +46,7 @@ export const usePutData = (
         `${import.meta.env.VITE_PATH}/calendrier/places/open/${calendarIndex}`,
         {
           id: calendarIndex,
-          maxPlaces,
+          places: 1
         }
       );
       toast.success("Travaillez bien");
@@ -56,5 +57,18 @@ export const usePutData = (
     }
   };
 
-  return { updatePlaces, updateStatusClose, updateStatusOpen };
+  const updateClose = async (dayId) => {
+    try {
+      await axios.put(
+        `${import.meta.env.VITE_PATH}/horaires/close/${dayId}`, {
+        id: dayId
+      })
+      toast.success("Bon repos")
+      getHoraires()
+    } catch (err) {
+      console.error(err.message)
+    }
+  }
+
+  return { updatePlaces, updateStatusClose, updateStatusOpen, updateClose };
 };

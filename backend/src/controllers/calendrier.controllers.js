@@ -23,8 +23,8 @@ const updateStatusClose = async (req, res) => {
 };
 
 const updateStatusOpen = async (req, res) => {
-  const { maxPlaces, id } = req.body;
-  const result = await calendrierModels.updateStatusOpen(maxPlaces, id);
+  const { places, id } = req.body;
+  const result = await calendrierModels.updateStatusOpen(places, id);
   if (result.affectedRows === 0) {
     res.status(404).send("Not found");
   } else {

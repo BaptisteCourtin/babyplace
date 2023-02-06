@@ -22,7 +22,7 @@ export default function Home() {
       {userType === "parent" ? (
         <main className="home">
           <h2>
-            Simplifiez-vous la vie avec Babyplace grâce à notre logiciel de
+            Simplifiez-vous la vie avec Babyplace grâce à notre système de
             réservation en ligne
           </h2>
           <ul className="mainGrid">
@@ -246,7 +246,8 @@ export default function Home() {
             </button>
           </section>
         </main>
-      )}
+      )
+      }
       <Footer userType={userType} />
     </>
   );

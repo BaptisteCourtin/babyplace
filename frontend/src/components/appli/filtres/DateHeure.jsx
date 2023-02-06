@@ -19,6 +19,9 @@ function DateHeure({ setCompo, dataDateHeure, setDataDateHeure }) {
           setDataDateHeure={setDataDateHeure}
         />
       </main>
+      <button type="button" className="apply" onClick={() => setCompo(0)}>
+        Retour à la recherche
+      </button>
     </div>
   );
 }

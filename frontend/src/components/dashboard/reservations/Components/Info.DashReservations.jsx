@@ -32,7 +32,7 @@ function InfoDashReservations({ r, tarifHeure }) {
           {(~~r.heureTotal.split(':')[0]) + 1}H
         </p>
         <p>
-          {(~~r.heureTotal.split(':')[0] + 1) * tarifHeure}€
+          {((~~r.heureTotal.split(':')[0] + 1) * tarifHeure)?.toFixed(0)}€
         </p>
       </div>
     </>

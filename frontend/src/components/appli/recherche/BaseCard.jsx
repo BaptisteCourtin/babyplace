@@ -58,7 +58,7 @@ function BaseCard({
             <div className="tri">
               <span>{BiFilterAlt()}Tri :</span>
               <select id="tri" onChange={(event) => setTri(event.target.value)}>
-                <option value="Recent">Recent</option>
+                <option value="Recent">Récent</option>
                 <option value="Ancien">Ancien</option>
                 <option value="Prix croissant">Prix croissant</option>
                 <option value="Prix decroissant">Prix décroissant</option>
@@ -109,7 +109,6 @@ function BaseCard({
         </div>
       </div>
 
-      {/* filtrer selon heure - date */}
       <main>
         {Allstructure !== undefined &&
           familleLiked !== undefined &&
@@ -155,7 +154,6 @@ function BaseCard({
                 (dataAggrements.mois === false || each.max18Mois > 0) &&
                 (dataAggrements.nuit === false || each.maxNuit > 0)
             )
-
             .sort(function compare(a, b) {
               if (tri === "Prix croissant") {
                 if (a.tarifHeure < b.tarifHeure) return -1;
@@ -178,7 +176,6 @@ function BaseCard({
                 return 0;
               }
               return 0;
-              // sort par distance ???
             })
             .map(
               (each, index) =>
@@ -204,7 +201,7 @@ BaseCard.propTypes = {
   setCompo: PropTypes.func.isRequired,
   Allstructure: PropTypes.array.isRequired,
   familleLiked: PropTypes.array.isRequired,
-  familleId: PropTypes.string.isRequired,
+  familleId: PropTypes.number.isRequired,
   getFamilleLiked: PropTypes.func.isRequired,
 
   dataBasique: PropTypes.object.isRequired,

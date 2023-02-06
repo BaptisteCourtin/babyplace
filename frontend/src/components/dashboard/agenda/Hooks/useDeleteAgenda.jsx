@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-hot-toast";
 
-export const useDeleteData = (calendarIndex, getCalendar) => {
+export const useDeleteData = (getCalendar) => {
   const fullDate = async (calendarIndex) => {
     try {
       await axios.delete(

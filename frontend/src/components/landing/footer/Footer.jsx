@@ -2,10 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import logo from "@assets/logo4.svg";
 import logotxt from "@assets/babyplaceTxt.svg";
-import up from "@assets/up.svg";
-import facebook from "@assets/facebook.svg";
-import twitter from "@assets/twitter.svg";
-import insta from "@assets/insta.svg";
+import { FaChevronUp } from "react-icons/fa";
+import { BsFacebook, BsTwitter } from "react-icons/bs";
+import { AiFillInstagram } from "react-icons/ai";
 import { HashLink } from "react-router-hash-link";
 
 function Footer({ userType }) {
@@ -77,9 +76,15 @@ function Footer({ userType }) {
           </div>
           <div className="footerRight">
             <div className="socials">
-              <img src={facebook} alt="facebook" />
-              <img src={twitter} alt="twitter" />
-              <img src={insta} alt="instagram" />
+              <a href="https://fr-fr.facebook.com" target="_blank" rel="noopener noreferrer">
+                <BsFacebook id="iconFooter" />
+              </a>
+              <a href="https://twitter.com/?lang=fr" target="_blank" rel="noopener noreferrer">
+                <BsTwitter id="iconFooter" />
+              </a>
+              <a href="https://www.instagram.com/?hl=fr" target="_blank" rel="noopener noreferrer">
+                <AiFillInstagram id="iconFooter2" />
+              </a>
             </div>
           </div>
         </div>
@@ -94,7 +99,7 @@ function Footer({ userType }) {
               window.scrollTo(0, 0);
             }}
           >
-            <img src={up} alt="M" />
+            <FaChevronUp id="chevronUp" />
           </button>
         </div>
       </footer>

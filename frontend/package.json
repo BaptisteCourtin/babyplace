@@ -12,10 +12,9 @@
   "dependencies": {
     "@originjs/vite-plugin-commonjs": "^1.0.3",
     "axios": "^1.2.2",
+    "hamburger-react": "^2.5.0",
     "leaflet": "^1.9.3",
     "moment": "^2.29.4",
-    "moodal": "^0.1.1",
-    "multi-range-slider-react": "^2.0.2",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-calendar": "^4.0.0",

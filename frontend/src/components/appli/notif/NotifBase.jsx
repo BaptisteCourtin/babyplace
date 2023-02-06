@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import NavbarApp from "@components/appli/navbar/NavbarApp";
@@ -17,13 +16,6 @@ function NotifBase({ setCompo, allReservation, setOneReservation }) {
             <span>{`>`}</span>
           </div>
         </a>
-
-        <Link to="/appli/message">
-          <div className="card-notif">
-            <p>Vous avez un message de XXX</p>
-            <span>{`>`}</span>
-          </div>
-        </Link>
 
         {allReservation.map((each, index) => (
           <CardNotif

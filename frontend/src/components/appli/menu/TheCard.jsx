@@ -21,7 +21,7 @@ function TheCard() {
   return (
     <main className="moyens-paiements">
       <p>
-        Ne rentrez pas vos vrai informations de paiments, ça ne sert à rien, de
+        Ne rentrez pas vos vrai informations de paiement, ça ne sert à rien, de
         toute façon le bouton en bas vous emmène juste sur une autre page 😘
       </p>
       <br />
@@ -36,7 +36,7 @@ function TheCard() {
             value={data.cardNumber}
             onChange={(e) => updateFields({ cardNumber: e.target.value })}
           />
-          <p className="checkSymbol">Numero de la carte</p>
+          <p className="checkSymbol">Numéro de la carte</p>
         </label>
 
         <label htmlFor="expire">

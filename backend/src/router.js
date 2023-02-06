@@ -2,11 +2,9 @@ const express = require("express");
 const router = express.Router();
 const sha256 = require("js-sha256");
 const datasource = require("../database");
-const fs = require("fs");
 const multer = require("multer");
-const upload = multer({ dest: "public/uploads/" });
-const { v4: uuidv4 } = require("uuid");
 const uploadDoc = require("./helpers/helper");
+const bcrypt = require("bcrypt");
 
 const multerMid = multer({
   storage: multer.memoryStorage(),
@@ -36,12 +34,13 @@ const mailer = require("./services/nodemailer/mailer.response.services");
 // --- pour app ---
 
 // form inscription au début de l'app
-router.post("/inscriptionAppFamille", (req, res) => {
+router.post("/inscriptionAppFamille", async (req, res) => {
   const { email, password } = req.body;
+  const hashedPassword = await bcrypt.hash(password, `${process.env.SALT}`);
   datasource
     .query("INSERT INTO famille(email, password) VALUES (?, ?)", [
       email,
-      password,
+      hashedPassword,
     ])
     .then(([thisFamille]) => {
       if (thisFamille.affectedRows === 0) {
@@ -99,29 +98,30 @@ router.post("/authFamille", (req, res) => {
       req.body.email,
     ])
     .then(([[user]]) => {
-      if (user && req.body.password === user.password) {
-        const start = Date.now();
-        const token = sha256(req.body.email + start);
-
-        datasource
-          .query(
-            "UPDATE famille SET token = ?, tokenStart = ? WHERE email = ?",
-            [token, start, user.email]
-          )
-          .then(() => {
-            res.status(200).send({
-              familleId: user.familleId,
-              token: token,
-              tokenStart: start,
+      bcrypt.compare(req.body.password, user.password, function (err, result) {
+        if (result) {
+          const start = Date.now();
+          const token = sha256(req.body.email + start);
+          datasource
+            .query(
+              "UPDATE famille SET token = ?, tokenStart = ? WHERE email = ?",
+              [token, start, user.email]
+            )
+            .then(() => {
+              res.status(200).send({
+                familleId: user.familleId,
+                token: token,
+                tokenStart: start,
+              });
+            })
+            .catch((err) => {
+              console.error(err);
+              res.status(500).send("Erreur de connexion");
             });
-          })
-          .catch((err) => {
-            console.error(err);
-            res.status(500).send("Erreur de connexion");
-          });
-      } else {
-        res.status(401).send("Email ou mot de passe incorrect");
-      }
+        } else {
+          res.status(401).send("Email ou mot de passe incorrect");
+        }
+      });
     })
     .catch((err) => {
       console.error(err);
@@ -157,6 +157,7 @@ router.put("/parent/nullOneDocForm/:id", parent.nullOneDocFormParent); // delete
 router.put("/formEnfant/:id", enfant.updateFormEnfant); // formulaire enfant
 router.put("/resaToNote/:id", reservation.updateResaToNote); // passe le status à toNote
 router.put("/famille/deconnexion/:id", famille.deco); // deconnexion famille
+router.put("/admin/unsignaled/:id", structure.updateSignaled) // unsignaler structure
 
 router.post("/reservation", reservation.postReservation); // reservation
 router.post("/famille/newEnfant", enfant.postNewEnfant); // nouveau enfant
@@ -165,6 +166,10 @@ router.post("/contact/message", messageAdmin.postMessageToAdmin); // nouveau mes
 router.post("/messages/sauvegarde", messagerie.saveMessageInDb); // sauvegarde des messages du chat dans la db
 router.post("/famille/newConfiance", famille.postNewConfiance); // nouveau perso confiance
 router.post("/contact/messages/repondre", mailer.emailSender); // envoyer des réponses par mail pour l'admin
+router.post("/contact/messages/accept", mailer.acceptEmailSender); // envoyer acceptation des crêches par mail
+router.post("/contact/messages/accept", mailer.acceptEmailSender); // envoyer acceptation des crêches par mail
+router.post("/contact/messages/reaccept", mailer.reAcceptEmailSender); // envoyer refus des crêches par mail
+router.post("/contact/messages/supprimer", mailer.suppressionEmailSender); // envoyer refus des crêches par mail
 
 router.delete("/famille/deleteConfiance/:id", famille.deleteConfiance); // delete perso confiance
 router.delete("/famille/deleteEnfant/:id", enfant.deleteEnfant); // delete enfant
@@ -299,7 +304,7 @@ router.get("/structure/details", structure.getStructureDetails);
 router.get("/reservation/:id", reservation.getReser);
 router.get("/reservation/approved/:id", reservation.getApprovedReser);
 router.get("/admin", structure.getNotVerified);
-router.get("/favorites/:id", structure.getFavorites)
+router.get("/favorites/:id", structure.getFavorites);
 router.get("/horaires/:id", horaires.getHorairesById);
 router.get("/calendrier/:id", calendrier.getCalendrier);
 router.get("/notifications/:id", notification.getNotifications);
@@ -311,6 +316,8 @@ router.put("/admin/verified/:id", structure.updateVerified);
 router.put("/reservation/status", reservation.updateStatus);
 router.put("/reservation/dates", reservation.updateDates);
 router.put("/horaires/day/:id", horaires.updateDay);
+router.put("/horaires/open/:id", horaires.updateOpen);
+router.put("/horaires/close/:id", horaires.updateClose);
 router.put("/dashboard/hours/:id", dashboard.updateHours);
 router.put("/dashboard/indemn/:id", dashboard.updateIndemn);
 router.put("/dashboard/tarif/:id", dashboard.updateTarif);
@@ -344,12 +351,13 @@ router.delete("/notifications/:id", notification.deleteNotification);
 
 //Routes inscription structure - start
 
-router.post("/inscription", (req, res) => {
+router.post("/inscription", async (req, res) => {
   const { email, password } = req.body;
+  const hashedPassword = await bcrypt.hash(password, `${process.env.SALT}`);
   datasource
     .query("INSERT INTO structure(email, password) VALUES (?, ?)", [
       email,
-      password,
+      hashedPassword,
     ])
     .then(([user]) => {
       const start = Date.now();
@@ -481,36 +489,38 @@ router.post("/auth", async (req, res) => {
   await datasource
     .query("SELECT * FROM structure WHERE email = ?", [req.body.email])
     .then(([[user]]) => {
-      if (user && req.body.password === user.password) {
-        const start = Date.now();
-        const token = sha256(req.body.email + start);
+      bcrypt
+        .compare(req.body.password, user.password, function (err, result) {
+          if (result) {
+            const start = Date.now();
+            const token = sha256(req.body.email + start);
+            datasource
+              .query(
+                "UPDATE structure SET token = ?, tokenStart = ? WHERE email = ?",
+                [token, start, user.email]
+              )
+              .then(() => {
+                res.status(200).send({
+                  email: user.email,
+                  token: token,
+                  tokenStart: start,
+                  isVerify: user.isVerify,
+                });
+              })
+              .catch((err) => {
+                console.error(err);
+                res.status(500).send("Erreur de connexion");
+              });
+          } else {
+            res.sendStatus(404);
+          }
+        })
 
-        datasource
-          .query(
-            "UPDATE structure SET token = ?, tokenStart = ? WHERE email = ?",
-            [token, start, user.email]
-          )
-          .then(() => {
-            res.status(200).send({
-              email: user.email,
-              token: token,
-              tokenStart: start,
-              isVerify: user.isVerify,
-            });
-          })
-          .catch((err) => {
-            console.error(err);
-            res.status(500).send("Erreur de connexion");
-          });
-      } else if (user && req.body.password !== user.password) {
-        res.status(401).send("Email ou mot de passe incorrect");
-      } else {
-        res.sendStatus(404);
-      }
     })
     .catch((err) => {
       console.error(err);
       res.status(500).send("Erreur de connexion");
+
     });
 });
 

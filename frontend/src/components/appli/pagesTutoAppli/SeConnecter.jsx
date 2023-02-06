@@ -4,6 +4,7 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import FamilleContext from "@components/context/FamilleContext";
+import { toast } from "react-hot-toast";
 
 function SeConnecter({ setCompo }) {
   const navigate = useNavigate();
@@ -47,6 +48,7 @@ function SeConnecter({ setCompo }) {
         })
         .catch((err) => {
           console.error(err);
+          toast.error("le mot de passe ou l'email est erroné");
         });
     }
   };

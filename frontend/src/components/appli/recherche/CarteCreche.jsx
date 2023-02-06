@@ -26,13 +26,11 @@ function CarteCreche({
   } = data;
 
   // --- like or not ---
-  const [thisLikedIndex, setThisLikedIndex] = useState();
   const [thisLiked, setThisLiked] = useState(false);
 
   const likeOrNot = () => {
     for (let i = 0; i < familleLiked.length; i += 1) {
       if (familleLiked[i].structureIdLiked === structureId) {
-        setThisLikedIndex(i);
         setThisLiked(true);
         break;
       }
@@ -70,11 +68,6 @@ function CarteCreche({
   };
 
   // --- les horaires de chaques jour suivant l'id de la structure
-
-  // dataDateHeure
-  //   heureMin: "" OK
-  //   heureMax: "" OK
-  //   jour: "" OK recurrent
   const [dataCalendarId, setDataCalendarId] = useState();
 
   const getCalendrierMoins = () => {
@@ -140,16 +133,6 @@ function CarteCreche({
                 dataDateHeure.heureMin) &&
             (dataDateHeure.heureMax === "" ||
               res.data[dataDateHeure.jour].heureMax >= dataDateHeure.heureMax))
-
-          // OK EN RECURRENT
-          // (
-          //   res.data[dataDateHeure.jour].ouvert === 1 &&
-          //     (dataDateHeure.heureMin === "" ||
-          //       res.data[dataDateHeure.jour].heureMin <=
-          //         dataDateHeure.heureMin) &&
-          //     (dataDateHeure.heureMax === "" ||
-          //       res.data[dataDateHeure.jour].heureMax >= dataDateHeure.heureMax)
-          // )
         ) {
           setDataHorairesId(res.data);
         }
@@ -238,13 +221,18 @@ function CarteCreche({
   return (
     dataHorairesId.length !== 0 && (
       <div className="carte-creche" style={isCreche ? blueBg : pinkBg}>
-        {thisLiked ? (
-          <AiFillHeart className="like" onClick={() => handleLikeCard()} />
-        ) : (
-          <AiOutlineHeart className="like" onClick={() => handleLikeCard()} />
-        )}
+        {familleId ? (
+          thisLiked ? (
+            <AiFillHeart className="like" onClick={() => handleLikeCard()} />
+          ) : (
+            <AiOutlineHeart className="like" onClick={() => handleLikeCard()} />
+          )
+        ) : null}
 
-        <Link to="/appli/search/card" state={{ data, dataHorairesId }}>
+        <Link
+          to="/appli/search/card"
+          state={{ data, dataHorairesId, familleId }}
+        >
           <div className="container-img">
             <img src={photoStructure1} alt="img-creche" />
             <p className="nom-structure">
@@ -253,10 +241,14 @@ function CarteCreche({
                   ? `${prenom} ${nomUsage}`
                   : `${prenom} ${nomNaissance}`)}
             </p>
-            <div className="star-all">
-              {nbStarMoyen}
-              {AiFillStar()}
-            </div>
+            {data.nbNotes > 0 ? (
+              <div className="star-all">
+                {nbStarMoyen}
+                {AiFillStar()}
+              </div>
+            ) : (
+              <div className="star-all">Nouveau</div>
+            )}
           </div>
           <div className="info-creche">
             <div className="ville-prix">
@@ -279,7 +271,7 @@ CarteCreche.propTypes = {
   data: PropTypes.object.isRequired,
   userPosition: PropTypes.array.isRequired,
   familleLiked: PropTypes.array.isRequired,
-  familleId: PropTypes.string.isRequired,
+  familleId: PropTypes.number.isRequired,
   getFamilleLiked: PropTypes.func.isRequired,
 };
 

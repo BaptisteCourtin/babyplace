@@ -22,7 +22,7 @@ function Modal({ open, closeModal, onReset }) {
         </div>
         <div className="modalDivBis">
           <h4>
-            Merci pour votre message, nous vous repondrons dans les plus bref
+            Merci pour votre message, nous vous répondrons dans les plus brefs
             délais.
           </h4>
           <button

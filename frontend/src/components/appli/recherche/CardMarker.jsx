@@ -7,8 +7,9 @@ import PropTypes from "prop-types";
 function CardMarker({ data }) {
   const { nom, nomUsage, nomNaissance, prenom } = data;
 
-  const [adresseGPS, setAdresseGPS] = useState();
+  // --- adresse ---
 
+  const [adresseGPS, setAdresseGPS] = useState();
   // api convertir adresse en position gps
   const getAdresse = () => {
     axios
@@ -21,7 +22,7 @@ function CardMarker({ data }) {
       });
   };
 
-  // prendre horaires back pour passer dans card pour resa
+  // --- prendre horaires back pour passer dans card pour resa ---
   const [dataHorairesId, setDataHorairesId] = useState([]);
 
   const Token =

@@ -24,7 +24,7 @@ function Structure1({
             className={structure === "creche" ? "selected" : ""}
             onClick={() => {
               setStructure("creche");
-              updateFields({ isCreche: true });
+              updateFields({ isCreche: 1 });
             }}
           >
             Crèche
@@ -34,7 +34,7 @@ function Structure1({
             className={structure === "assmat" ? "selected" : ""}
             onClick={() => {
               setStructure("assmat");
-              updateFields({ isCreche: false });
+              updateFields({ isCreche: 0 });
             }}
           >
             Assistante maternelle

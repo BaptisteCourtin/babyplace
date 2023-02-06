@@ -23,9 +23,9 @@ function WaitAdmin() {
         <div className="inlineLink">
           <p>
             Si vous le souhaitez, vous pouvez modifier/compléter/vérifier vos
-            informations en cliquant
+            informations 
             <Link to="/structure/inscription-form" className="boldText">
-              ici{" "}
+            en cliquant ici{" "}
             </Link>
           </p>
         </div>

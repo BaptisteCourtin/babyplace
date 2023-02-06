@@ -7,7 +7,6 @@ import Toggle from "../filtres/Toggle";
 
 function FormEnfant() {
   const { familleId } = useContext(FamilleContext);
-  // console.log("fID : " + familleId);
 
   // meme nom que bdd
   const [initialData, setInitialData] = useState({
@@ -222,7 +221,7 @@ function FormEnfant() {
               value={initialData.prenom}
               onChange={(e) => handleChange(e)}
             />
-            <p>Prenom</p>
+            <p>Prénom</p>
           </label>
 
           <label htmlFor="dateNaissance">
@@ -253,7 +252,7 @@ function FormEnfant() {
               value={initialData.allergies}
               onChange={(e) => handleChange(e)}
             />
-            <p>Allergies</p>
+            <p>Allergies ou rien</p>
           </label>
 
           <label htmlFor="medecin">

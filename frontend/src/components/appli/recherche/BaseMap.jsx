@@ -14,7 +14,7 @@ import CardCrecheMap from "./CardCrecheMap";
 
 import "leaflet/dist/leaflet.css";
 
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 function BaseMap({
   setCompo,
@@ -135,9 +135,8 @@ function BaseMap({
           >
             <TileLayer
               url="https://api.maptiler.com/maps/basic-v2/256/{z}/{x}/{y}.png?key=JV4eU3swHqD1YPZtc09q"
-              attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+              attribution='<a ="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
             />
-            {/* mettre les filtres ICI */}
             {Allstructure
               // creche, assmat ou les 2
               .filter(
@@ -198,7 +197,6 @@ function BaseMap({
             centerSlidePercentage={70}
             axis={screenWidth >= 650 ? "vertical" : "horizontal"}
           >
-            {/* et mettre les filtres ICI AUSSI */}
             {Allstructure
               // creche, assmat ou les 2
               .filter(
@@ -263,7 +261,7 @@ BaseMap.propTypes = {
   dataAggrements: PropTypes.object.isRequired,
 
   familleLiked: PropTypes.array.isRequired,
-  familleId: PropTypes.string.isRequired,
+  familleId: PropTypes.number.isRequired,
   getFamilleLiked: PropTypes.func.isRequired,
 };
 

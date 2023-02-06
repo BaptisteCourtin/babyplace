@@ -108,7 +108,7 @@ function Connexion({ setCompo }) {
                 setPassword2(event.target.value);
               }}
             />
-            <p>Réécrir Mot de passe</p>
+            <p>Confirmer Mot de passe</p>
             <button
               type="button"
               className="view-password"

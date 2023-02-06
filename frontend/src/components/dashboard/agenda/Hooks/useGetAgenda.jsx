@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 export const useGetAgenda = (structureId) => {
   const [calendar, setCalendar] = useState([]);
+  const [horaires, setHoraires] = useState([]);
 
   const getCalendar = async () => {
     try {
@@ -18,9 +19,20 @@ export const useGetAgenda = (structureId) => {
     }
   };
 
-  useEffect(() => {
-    getCalendar();
-  }, []);
+  const getHoraires = async () => {
+    try {
+      const res = await axios.get(
+        `${import.meta.env.VITE_PATH}/horaires/${structureId}`,
+        {
+          id: structureId,
+        }
+      )
+      setHoraires(res.data)
+    } catch (err) {
+      console.error(err.message)
+    }
+  }
 
-  return { calendar, getCalendar };
+
+  return { calendar, getCalendar, horaires, getHoraires };
 };

@@ -27,6 +27,11 @@
       flex-direction: column;
       gap: 10px;
       text-align: center;
+
+      & img {
+        width: 230px;
+        height: 210px;
+      }
     }
   }
 
@@ -252,8 +257,19 @@
 
 @media screen and (max-width: 1200px) {
   .home {
+    & h2 {
+      font-size: 1.6rem;
+      padding-top: 0;
+    }
+
     & .mainApp {
       margin: 50px 0;
+
+      & .mainAppText {
+        & p {
+          font-size: 18px;
+        }
+      }
     }
 
     & .mainGrid {
@@ -359,6 +375,7 @@
 
     & .homeProGrid {
       width: 95%;
+
       & ul {
         & li {
           display: flex;

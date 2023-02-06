@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { HashLink } from "react-router-hash-link";
 import { useForm } from "react-hook-form";
-import FooterLite from "./components/FooterLite";
-import NavbarLite from "./components/NavbarLite";
-import Modal from "./components/Modal";
-import { onSubmit } from "./hooks/usePostMessage";
+import FooterLite from "@components/features/components/FooterLite";
+import NavbarLite from "@components/features/components/NavbarLite";
+import Modal from "@components/features/components/Modal";
+import { onSubmit } from "@components/features/hooks/usePostMessage";
+import AideFeature from "@components/features/components/AideFeature";
 
 function Contact() {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,39 +33,32 @@ function Contact() {
     },
     {
       id: 2,
-      text: "besoin de connaitre le fonctionnement du site",
+      text: "besoin de connaître le fonctionnement du site",
     },
     {
       id: 3,
-      text: "demander d'une vidéo d'explication",
+      text: "demande d'une vidéo d'explication",
     },
     {
       id: 4,
-      text: "proposer un partenariat",
+      text: "proposition de partenariat",
     },
     {
       id: 5,
-      text: "tout autres questoins",
+      text: "toute autre question",
     },
   ];
 
   return (
     <div className="contact-form" id="aide">
       <NavbarLite />
-      <section className="aide">
-        <h3>Aide</h3>
-        <p>
-          Besoin d'aide n'hésitez pas à utiliser notre formulaire de contact
-          ci-dessous, pour poser vos questions. Nous vous repondrons dans les
-          plus bref délai.
-        </p>
-      </section>
+      <AideFeature />
       <section id="contact">
-        <h3>Contactez-Nous</h3>
+        <h3>Contactez-nous</h3>
         <p id="question">
-          Une question ? Vous souhaitez en savoir plus ? N'hesitez pas à
-          utiliser ce formulaire, ci-dessous, nous vous repondrons dans les plus
-          bref délais.
+          Une question ? Vous souhaitez en savoir plus ? N'hésitez pas à
+          utiliser le formulaire ci-dessous, nous vous répondrons dans les plus
+          brefs délais.
         </p>
         <form className="formContact" onSubmit={handleSubmit(onSubmit)}>
           <div className="formContainer">
@@ -125,7 +119,7 @@ function Contact() {
                 id="formulaireMessage"
                 {...register("texte", { required: true })}
               />
-              <span id="obligatoireText">* les chants sont obligatoires</span>
+              <span id="obligatoireText">* les champs sont obligatoires</span>
             </div>
             <div className="policyTextDiv">
               <p id="policyText">
@@ -136,7 +130,7 @@ function Contact() {
                   onChange={() => setChecked(!checked)}
                   required
                 />{" "}
-                En cliquant sur “Envoyer” vous acceptez d'être contactés par
+                En cliquant sur “Envoyer”, vous acceptez d'être contacté par
                 l'administrateur de Babyplace ou l'agence web Dave Warehouse.
                 Pour en savoir plus sur l'utilisation de vos données
                 personnelles, merci de consulter la page concernant{" "}

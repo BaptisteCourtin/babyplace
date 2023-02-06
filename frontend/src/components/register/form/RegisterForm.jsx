@@ -86,7 +86,7 @@ function RegisterForm() {
             placeholder="Password"
             onInput={(event) => {
               setPassword(event.target.value);
-              setPwdLength(password.length);
+              setPwdLength(event.target.value.length);
             }}
             required
           />

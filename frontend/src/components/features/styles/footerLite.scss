@@ -94,9 +94,16 @@
         align-items: center;
         gap: 20px;
 
-        img {
+        #iconFooter {
           width: 40px;
           height: 40px;
+          color: $third;
+        }
+
+        #iconFooter2 {
+          width: 45px;
+          height: 45px;
+          color: $third;
         }
       }
     }
@@ -114,8 +121,8 @@
     }
 
     & button {
-      width: 30px;
-      height: 30px;
+      width: 45px;
+      height: 40px;
       color: $white;
       background: none;
       font-size: $h4;
@@ -123,9 +130,28 @@
       align-items: center;
       justify-content: center;
 
-      & img {
+      :hover {
+        animation: upAndDown 2s infinite;
+      }
+
+      @keyframes upAndDown {
+        from {
+          transform: translateY(0);
+        }
+
+        50% {
+          transform: translateY(-20px);
+        }
+
+        to {
+          transform: translateY(0);
+        }
+      }
+
+      #chevronUp {
         width: 100%;
         height: 100%;
+        color: $third;
       }
     }
   }

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import Nav from "@components/dashboard/admin/Nav.Admin";
+import Nav from "@components/dashboard/admin/Nav.admin";
 import { useNavigate } from "react-router-dom";
+import { AiFillWarning } from 'react-icons/ai';
 
 function Admin() {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ function Admin() {
     }
   };
 
-  const setVerified = async (structureId) => {
+  const setVerified = async (structureId, email) => {
     try {
       await axios.put(
         `${import.meta.env.VITE_PATH}/admin/verified/${structureId}`,
@@ -26,24 +27,47 @@ function Admin() {
           id: structureId,
         }
       );
-      toast.success("L'utilisateur a bien été approuvé"), getStructure();
+      toast.success("L'utilisateur a bien été approuvé"), sendEmailVerified(email), getStructure();
     } catch (err) {
       console.error(err.message);
     }
   };
 
-  const setRefused = async (structureId) => {
+  const setRefused = async (structureId, email) => {
     try {
       await axios.delete(
-        `${
-          import.meta.env.VITE_PATH
+        `${import.meta.env.VITE_PATH
         }/admin/refused/${structureId}?type=${userType}`,
         {
           id: structureId,
           type: userType,
         }
       );
-      toast.error("L'utilisateur a bien été supprimé"), getStructure();
+      toast.error("L'utilisateur a bien été supprimé"), sendEmailRefused(email), getStructure();
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  const sendEmailVerified = async (email) => {
+    try {
+      await axios.post(
+        `${import.meta.env.VITE_PATH}/contact/messages/accept`,
+        { email: email, }
+      );
+      toast.success("Email de confirmation a bien été envoyé");
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  const sendEmailRefused = async (email) => {
+    try {
+      await axios.post(
+        `${import.meta.env.VITE_PATH
+        }/contact/messages/refuse`,
+        { email: email, });
+      toast.error("Email de refus a bien été envoyé");
     } catch (err) {
       console.error(err.message);
     }
@@ -59,13 +83,14 @@ function Admin() {
     getStructure();
   }, []);
 
+
   return (
     <main className="admin">
       <Nav />
       <section className="adminSection">
         <h2>Profils à approuver</h2>
         <ul>
-          {data.map((d) => (
+          {data.filter((el) => (el.isSignaled == 0)).map((d) => (
             <li>
               <div className="adminSectionImg">
                 <img src={d?.photoProfil} />
@@ -89,7 +114,7 @@ function Admin() {
                 <button
                   className="btnApproved"
                   onClick={() => {
-                    setVerified(d.structureId);
+                    setVerified(d.structureId, d.email);
                   }}
                 >
                   Approuver
@@ -97,7 +122,7 @@ function Admin() {
                 <button
                   className="btnRefused"
                   onClick={() => {
-                    setRefused(d.structureId);
+                    setRefused(d.structureId, d.email);
                   }}
                 >
                   Refuser

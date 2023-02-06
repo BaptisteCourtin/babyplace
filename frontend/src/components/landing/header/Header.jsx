@@ -1,31 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import headerImg from "@assets/landing page/image1.svg";
 import { useNavigate } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
+import mother from "@assets/app parents/mom2.png";
 
 function Header({ userType }) {
   const navigate = useNavigate();
-
+  const [showArrow, setShowArrow] = useState(true);
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.pageYOffset > 100) {
+        setShowArrow(false);
+      } else {
+        setShowArrow(true);
+      }
+    });
+  }, []);
   return userType === "parent" ? (
     <header className="header">
-      <h1>
-        Réservez une place auprès de professionnels de la petite enfance
-        gratuitement en quelques clics
-      </h1>
-      <div className="headerInputs">
-        <input
-          type="text"
-          name="type"
-          id="type"
-          placeholder="Assistante maternelle, crèche, ..."
-        />
-        <input type="text" name="date" id="date" placeholder="Date" />
-        <input type="text" name="place" id="place" placeholder="Où" />
-        <button type="submit" onClick={() => navigate("/appli")}>
-          Rechercher <span>➜</span>
-        </button>
+      <div className="leftPart">
+        <h1>
+          Réservez une place auprès de professionnels de la petite enfance
+          gratuitement en quelques clics
+        </h1>
+        <div className="headerInputs">
+          <button type="button" onClick={() => navigate("/appli/search")}>
+            Rechercher <span>➜</span>
+          </button>
+        </div>
       </div>
+      <div className="imageContainer">
+        <img src={mother} alt="mother & baby" />
+      </div>
+      {showArrow && <div className="scrollDown">&#10095;</div>}
     </header>
   ) : (
     <header className="headerPro">
@@ -50,6 +58,7 @@ function Header({ userType }) {
         </button>
       </div>
       <img src={headerImg} alt="" />
+      {showArrow && <div className="scrollDown">&#10095;</div>}
     </header>
   );
 }

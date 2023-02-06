@@ -4,12 +4,12 @@ import { Link, useLocation } from "react-router-dom";
 import BlocJour from "@components/appli/recherche/BlocJour";
 import Star from "@components/appli/recherche/Star";
 import PopUp from "@components/appli/recherche/PopUp";
-
+import { toast } from "react-hot-toast";
 import { MdReportProblem } from "react-icons/md";
 
 function AppliCardCreche() {
   const location = useLocation();
-  const { data, dataHorairesId } = location.state;
+  const { data, dataHorairesId, familleId } = location.state;
   const {
     structureId,
     nom,
@@ -50,6 +50,7 @@ function AppliCardCreche() {
 
   const handleSignaler = () => {
     axios.put(`${import.meta.env.VITE_PATH}/structure/signal/${structureId}`);
+    toast.success("Votre signalement à bien été transmis.");
   };
 
   return (
@@ -63,22 +64,30 @@ function AppliCardCreche() {
       <main>
         <div className="container-img">
           <img src={photoStructure2 || photoStructure1} alt="img creche" />
-          <button
-            type="button"
-            className="report"
-            onClick={() => handleSignaler()}
-          >
-            <MdReportProblem />
-            <p>Signaler</p>
-          </button>
-          <Star
-            com={data.avisCom}
-            proprete={data.avisProprete}
-            securite={data.avisSecurite}
-            eveil={data.avisEveil}
-            horaires={data.avisHoraires}
-            nbNotes={data.nbNotes}
-          />
+
+          {familleId && (
+            <button
+              type="button"
+              className="report"
+              onClick={() => handleSignaler()}
+            >
+              <MdReportProblem />
+              <p>Signaler</p>
+            </button>
+          )}
+
+          {data.nbNotes > 0 ? (
+            <Star
+              com={data.avisCom}
+              proprete={data.avisProprete}
+              securite={data.avisSecurite}
+              eveil={data.avisEveil}
+              horaires={data.avisHoraires}
+              nbNotes={data.nbNotes}
+            />
+          ) : (
+            <div className="star">Nouveau</div>
+          )}
         </div>
 
         <div className="text">
@@ -103,7 +112,7 @@ function AppliCardCreche() {
             {pcsc1 ? <p>Formation 1er secours</p> : null}
             {nesting ? <p>Formation Nesting</p> : null}
             {montessori ? <p>Pédagogie Montessori</p> : null}
-            {handi ? <p>Formation handicapé</p> : null}
+            {handi ? <p>Formation handicap</p> : null}
           </div>
 
           <div>
@@ -114,7 +123,7 @@ function AppliCardCreche() {
             {nonFumeur ? <p>Foyer non-fumeur</p> : null}
             {zeroPollution ? <p>0% pollution intérieure</p> : null}
             {repas ? <p>Repas maison</p> : null}
-            {hygiene ? <p>produits d'hygiène fournis</p> : null}
+            {hygiene ? <p>Produits d'hygiène fournis</p> : null}
           </div>
 
           <div>
@@ -141,11 +150,15 @@ function AppliCardCreche() {
                 <span>{tarifHeure * 10}€</span> / jour (10h)*
               </p>
             </div>
-            <PopUp data={data} dataHorairesId={dataHorairesId} />
+
+            {familleId && <PopUp data={data} dataHorairesId={dataHorairesId} />}
           </div>
-          <Link className="envoie-mess" to="/appli/message" >
-            Envoyer un Message
-          </Link>
+
+          {familleId && (
+            <Link className="envoie-mess" to="/appli/message">
+              Envoyer un Message
+            </Link>
+          )}
         </div>
       </main>
 

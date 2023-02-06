@@ -144,10 +144,15 @@
   grid-template-rows: 1fr 2fr;
   gap: 20px;
   padding: 20px;
+  overflow-y: hidden;
 
   & .dashTop {
+    width: 100%;
+    display: flex;
+    align-items: center;
 
     & ul {
+      width: 100%;
       display: flex;
       justify-content: space-evenly;
       gap: 50px;
@@ -160,8 +165,8 @@
           "logo text"
           "info info";
         align-items: center;
-        width: 200px;
-        height: 150px;
+        min-width: 200px;
+        min-height: 150px;
         gap: 5px;
         padding: 10px 15px;
         border-radius: 25px;
@@ -212,6 +217,7 @@
     gap: 20px;
 
     & .dashMainInfo {
+      height: 90%;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -225,6 +231,9 @@
       & img {
         width: 110px;
         height: 110px;
+        min-width: 60%;
+        min-height: 30%;
+        object-fit: cover;
         padding: 10px;
         margin: 0 10% 30px 10%;
         border-radius: 50%;
@@ -243,8 +252,9 @@
     }
 
     & .dashFav {
-      height: 335px;
-      overflow-x: auto;
+      min-height: 335px;
+      height: 90%;
+      overflow-y: scroll;
 
       & h3 {
         position: sticky;
@@ -306,16 +316,18 @@
     }
 
     & .dashChart {
+      height: 90%;
       display: grid;
       grid-template-rows: 6fr 1fr;
+      align-content: center;
       gap: 5px;
       padding: 5px 0;
       overflow-x: hidden;
 
       & canvas {
         padding: 5px 10px;
-        max-width: 500px !important;
-        max-height: 250px !important;
+        min-width: 500px !important;
+        min-height: 250px !important;
         justify-self: center;
         background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
         border-radius: 5px;

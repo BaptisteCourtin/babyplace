@@ -5,71 +5,75 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
   gap: 40px;
 
-  & h1 {
-    width: 80%;
-    font-size: 50px;
-    font-family: $display;
-    color: $second;
-  }
+  & .leftPart {
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
+    flex: 2;
 
-  & .headerInputs {
-    width: 80%;
-    display: grid;
-    grid-template-areas: "inp1 inp2 inp3 button";
+    & h1 {
+      width: 80%;
+      font-size: 2.5rem;
+      font-family: $display;
+      color: $second;
+    }
 
-    & input {
-      padding: $h4;
-      box-shadow: 0px 3px 0px rgba(75, 93, 104, 0.1);
-      background: #ffffff;
-      outline: none;
+    & .headerInputs {
+      & button {
+        width: 200px;
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        padding: 15px;
+        position: relative;
+        border-radius: 50px;
+        background-color: $third;
+        color: $white;
+        grid-area: button;
+        cursor: pointer;
 
-      &:first-of-type {
-        border-bottom-left-radius: 50px;
-        border-top-left-radius: 50px;
-        grid-area: inp1;
-      }
-
-      &:nth-of-type(2) {
-        grid-area: inp2;
-      }
-
-      &:last-of-type {
-        border-bottom-right-radius: 50px;
-        border-top-right-radius: 50px;
-        grid-area: inp3;
-        z-index: 2;
-      }
-
-      &:focus {
-        &::placeholder {
-          color: $third;
+        & span {
+          font-size: $h4;
         }
       }
     }
-
-    & button {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 5px;
-      padding-right: 15px;
-      position: relative;
-      margin-left: -40px;
-      border-bottom-right-radius: 50px;
-      border-top-right-radius: 50px;
-      background-color: $third;
-      color: $white;
-      grid-area: button;
-      cursor: pointer;
-
-      & span {
-        font-size: $h4;
-      }
+  }
+  & .imageContainer {
+    flex: 1;
+    & img {
+      width: 25vw;
     }
   }
+}
+@keyframes slideDown {
+  from {
+    transform: translate(0px, 0px) rotate(90deg);
+  }
+
+  to {
+    transform: translate(0px, 3vh) rotate(90deg);
+  }
+}
+
+.scrollDown {
+  font-size: 3rem;
+  color: $third;
+  text-align: center;
+  height: 45px;
+  width: 65px;
+  position: fixed;
+  left: calc(50vw - (65px / 2));
+  top: 85vh;
+  margin: 0;
+  padding: 0;
+  animation-name: slideDown;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 .headerPro {
@@ -124,26 +128,22 @@
 @media screen and (max-width: 1200px) {
   .header {
     width: 95%;
+    gap: 2vh;
 
-    & .headerInputs {
-      grid-template-areas:
-        "inp1 inp2 inp3"
-        "button button button";
-      justify-content: center;
-      gap: 20px;
+    & .leftPart {
+      margin-top: 2vh;
+      height: fit-content;
 
-      & input {
-        border-radius: 50px;
-        border: 1px solid $third;
-      }
-
-      & button {
-        width: fit-content;
-        justify-self: center;
-        padding: 15px 35px;
-        border-radius: 50px;
-        justify-content: center;
-        margin-left: 0;
+      & .headerInputs {
+        & button {
+          width: fit-content;
+          justify-self: center;
+          padding: 15px 35px;
+          border-radius: 50px;
+          justify-content: center;
+          margin-left: 0;
+          font-size: 20px;
+        }
       }
     }
   }
@@ -155,37 +155,61 @@
     & .headerProMain {
       margin: 0;
     }
-
-    & img {
-      display: none;
-    }
+  }
+  .scrollDown {
+    top: 90vh;
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1000px) {
   .header {
     width: 95%;
+    flex-direction: column;
 
-    & h1 {
-      width: 100%;
+    & .leftPart {
+      flex: 1;
+      align-items: center;
+
+      & h1 {
+        width: 100%;
+        text-align: center;
+        font-size: 1.6rem;
+      }
+
+      & .headerInputs {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+      }
     }
 
-    & .headerInputs {
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
+    & .imageContainer {
+      flex: 2;
+      height: 70vw;
+
+      & img {
+        width: 70vw;
+      }
     }
   }
 
   .headerPro {
+    padding: 4vh 0;
+
     & .headerProMain {
+      align-items: center;
+
       & h1 {
         font-size: 60px;
+        text-align: center;
       }
 
       & p {
         font-size: $normal;
       }
+    }
+    & img {
+      width: 30vw;
     }
   }
 }
@@ -193,7 +217,13 @@
 @media screen and (max-width: 500px) {
   .header {
     & h1 {
-      font-size: $h1;
+      text-align: center;
+    }
+  }
+
+  .headerPro {
+    & img {
+      display: none;
     }
   }
 }

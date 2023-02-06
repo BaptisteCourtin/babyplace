@@ -34,6 +34,9 @@ function Aggrements({ setCompo, dataAggrements, setDataAggrements }) {
           p="Accueil de nuit"
         />
       </main>
+      <button type="button" className="apply" onClick={() => setCompo(0)}>
+        Retour à la recherche
+      </button>
     </div>
   );
 }

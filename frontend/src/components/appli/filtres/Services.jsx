@@ -60,7 +60,7 @@ function Services({ setCompo, setDataServices, dataServices }) {
           setter={setDataServices}
           state={dataServices.zeroPollution}
           nom="zeroPollution"
-          p="0% pollution intérieur"
+          p="0% pollution intérieure"
         />
         <h4>Equipements fournis</h4>
         <Check
@@ -76,6 +76,9 @@ function Services({ setCompo, setDataServices, dataServices }) {
           p="Repas / Laits"
         />
       </main>
+      <button type="button" className="apply" onClick={() => setCompo(0)}>
+        Retour à la recherche
+      </button>
     </div>
   );
 }
