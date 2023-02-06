@@ -246,7 +246,8 @@ export default function Home() {
             </button>
           </section>
         </main>
-      )}
+      )
+      }
       <Footer userType={userType} />
     </>
   );

@@ -197,9 +197,25 @@ hr {
       justify-content: center;
 
       :hover {
-        transition: all 1s ease-in-out;
-        transform: translateY(-20px);
+        animation: upAndDown 2s infinite;
       }
+
+      @keyframes upAndDown {
+        from {
+          transform: translateY(0);
+        }
+
+        50% {
+          transform: translateY(-20px);
+        }
+
+        to {
+          transform: translateY(0);
+        }
+      }
+
+      ;
+
 
       #chevronUp {
         width: 100%;
