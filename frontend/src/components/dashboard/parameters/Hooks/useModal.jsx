@@ -1,4 +1,4 @@
-export const useModal = (setDeleteModal) => {
+const useModal = (setDeleteModal) => {
   const openDeleteModal = () => {
     setDeleteModal(true);
   };
@@ -9,3 +9,5 @@ export const useModal = (setDeleteModal) => {
 
   return { openDeleteModal, closeDeleteModal };
 };
+
+export default useModal;

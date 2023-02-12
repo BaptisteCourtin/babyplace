@@ -1,13 +1,14 @@
 import React from "react";
-import { activitiesArray } from "@utils/activitiesArray";
+import PropTypes from "prop-types";
+import activitiesArray from "@utils/activitiesArray";
 
 function ActivitiesDashHours({ data, updateOptions }) {
   return (
     <details>
       <summary>Vos activités</summary>
       <ul className="dashPlacesCheckboxes">
-        {activitiesArray.map((a) => (
-          <li>
+        {activitiesArray.map((a, index) => (
+          <li key={index}>
             <input
               type="checkbox"
               id={a.id}
@@ -24,5 +25,10 @@ function ActivitiesDashHours({ data, updateOptions }) {
     </details>
   );
 }
+
+ActivitiesDashHours.propTypes = {
+  data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  updateOptions: PropTypes.func.isRequired,
+};
 
 export default ActivitiesDashHours;

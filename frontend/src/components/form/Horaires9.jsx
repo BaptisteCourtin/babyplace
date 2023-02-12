@@ -40,7 +40,7 @@ function Structure9({
         } else {
           setHorairesExist(false);
         }
-        for (let i = 0; i < result.data.length; i++) {
+        for (let i = 0; i < result.data.length; i += 1) {
           if (result.data[i].jourId === 1) {
             setData((prev) => {
               return {

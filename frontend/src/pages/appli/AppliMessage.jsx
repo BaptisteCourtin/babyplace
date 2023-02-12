@@ -6,14 +6,12 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 
 function AppliMessage() {
-
   const [strucData, setStrucData] = useState([]);
 
   const getStructureForMess = () => {
     axios
       .get(`${import.meta.env.VITE_PATH}/structure/all`)
       .then((ret) => {
-        console.warn(ret.data);
         setStrucData(ret.data);
       })
       .catch((err) => {
@@ -30,8 +28,8 @@ function AppliMessage() {
       <ProfilPlat />
 
       <main>
-        {strucData.map((each) => (
-          <NavLink to="/appli/message/room">
+        {strucData.map((each, index) => (
+          <NavLink to="/appli/message/room" key={index}>
             <CardFavPlat each={each} />
           </NavLink>
         ))}

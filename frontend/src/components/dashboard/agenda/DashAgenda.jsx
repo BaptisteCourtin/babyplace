@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import axios from 'axios';
-import toast from 'react-hot-toast';
+import axios from "axios";
+import toast from "react-hot-toast";
+import ReactModal from "react-modal";
 import DashAgendaCalendar from "./Components/Calendar.DashAgenda";
-import { useGetAgenda } from "./Hooks/useGetAgenda";
-import { usePutData } from "./Hooks/usePutAgenda";
-import { usePostData } from "./Hooks/usePostAgenda";
-import { useDeleteData } from "./Hooks/useDeleteAgenda";
-import { useFormatDay } from "./Hooks/useFormatDay";
+import useGetAgenda from "./Hooks/useGetAgenda";
+import usePutData from "./Hooks/usePutAgenda";
+import usePostData from "./Hooks/usePostAgenda";
+import useDeleteData from "./Hooks/useDeleteAgenda";
+import useFormatDay from "./Hooks/useFormatDay";
 import UnavailableDashAgenda from "./Components/Unavailable.DashAgenda";
 import AvailableDashAgenda from "./Components/Available.DashAgenda";
 import StatusDashAgenda from "./Components/Status.DashAgenda";
-import ReactModal from "react-modal";
 
 function DashAgenda({ structureId, maxPlaces }) {
   const [places, setPlaces] = useState(null);
@@ -23,13 +23,10 @@ function DashAgenda({ structureId, maxPlaces }) {
   const [dayId, setDayId] = useState(null);
 
   const { curDate, clickedDay, setClickedDay, date, day } = useFormatDay();
-  const { calendar, getCalendar, horaires, getHoraires } = useGetAgenda(structureId);
-  const { updatePlaces, updateStatusClose, updateStatusOpen, updateClose } = usePutData(
-    calendarIndex,
-    getCalendar,
-    getHoraires,
-    setPlaces,
-  );
+  const { calendar, getCalendar, horaires, getHoraires } =
+    useGetAgenda(structureId);
+  const { updatePlaces, updateStatusClose, updateStatusOpen, updateClose } =
+    usePutData(calendarIndex, getCalendar, getHoraires, setPlaces);
   const { addSleepDate, addWorkDate } = usePostData(
     setPlaces,
     date,
@@ -38,50 +35,53 @@ function DashAgenda({ structureId, maxPlaces }) {
   );
   const { fullDate } = useDeleteData(getCalendar);
 
+  const openModal = () => {
+    setModal(true);
+  };
+
+  const closeModal = () => {
+    setModal(false);
+  };
+
   const handleSubmitHours = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      await axios.put(`${import.meta.env.VITE_PATH}/horaires/open/${dayId.horairesId}`, {
-        id: dayId.horairesId,
-        heureMin: hourStart,
-        heureMax: hourEnd
-      })
-      toast.success("Vos horaires ont été modifiées")
-      getHoraires()
-      closeModal()
+      await axios.put(
+        `${import.meta.env.VITE_PATH}/horaires/open/${dayId.horairesId}`,
+        {
+          id: dayId.horairesId,
+          heureMin: hourStart,
+          heureMax: hourEnd,
+        }
+      );
+      toast.success("Vos horaires ont été modifiées");
+      getHoraires();
+      closeModal();
     } catch (err) {
-      console.error(err.message)
+      console.error(err.message);
     }
-  }
+  };
 
   useEffect(() => {
     getCalendar();
     getHoraires();
     if (clickedDay.getDay() !== 0) {
-      setWorkCheck(clickedDay.getDay() - 1)
+      setWorkCheck(clickedDay.getDay() - 1);
     } else {
-      setWorkCheck(6)
+      setWorkCheck(6);
     }
   }, [clickedDay]);
 
   useEffect(() => {
-    setDayId(horaires.find(h => h.jourSemaine.toLowerCase() === day))
-  }, [clickedDay])
-
-  const openModal = () => {
-    setModal(true)
-  }
-
-  const closeModal = () => {
-    setModal(false)
-  }
+    setDayId(horaires.find((h) => h.jourSemaine.toLowerCase() === day));
+  }, [clickedDay]);
 
   return (
     <div className="dashAgenda">
       <section className="agendaDashSection">
         <h2>Agenda</h2>
-        {horaires.length > 0 &&
-          < DashAgendaCalendar
+        {horaires.length > 0 && (
+          <DashAgendaCalendar
             clickedDay={clickedDay}
             setPlaces={setPlaces}
             setClickedDay={setClickedDay}
@@ -90,15 +90,17 @@ function DashAgenda({ structureId, maxPlaces }) {
             dateNow={date}
             structureId={structureId}
           />
-        }
+        )}
       </section>
       <section className="agendaMessage">
         <div className="agendaPlaces">
           <h3>
             {day} {clickedDay.toLocaleDateString()}
           </h3>
-          {horaires.length > 0 &&
-            horaires?.[workCheck].ouvert || !(calendar.every(c => c.structureId === structureId && c.date !== date)) ? (
+          {(horaires.length > 0 && horaires?.[workCheck].ouvert) ||
+          !calendar.every(
+            (c) => c.structureId === structureId && c.date !== date
+          ) ? (
             <>
               <UnavailableDashAgenda
                 calendar={calendar}
@@ -149,14 +151,17 @@ function DashAgenda({ structureId, maxPlaces }) {
           date={date}
           curDate={curDate}
         />
-      </section >
-      {modal &&
+      </section>
+      {modal && (
         <ReactModal
           isOpen={openModal}
           onRequestClose={closeModal}
           className="hoursChoiceContainer"
         >
-          <form className="hoursChoiceInner" onSubmit={(e) => handleSubmitHours(e)}>
+          <form
+            className="hoursChoiceInner"
+            onSubmit={(e) => handleSubmitHours(e)}
+          >
             <h2>Choisir un horaires</h2>
             <div className="hoursInputContainer">
               <label htmlFor="timeOpen">Heure d'ouverture</label>
@@ -183,8 +188,8 @@ function DashAgenda({ structureId, maxPlaces }) {
             <button type="submit">Envoyer</button>
           </form>
         </ReactModal>
-      }
-    </div >
+      )}
+    </div>
   );
 }
 

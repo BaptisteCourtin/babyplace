@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function NavDashReservations({ statusToggle, setStatusToggle }) {
   return (
@@ -44,5 +45,10 @@ function NavDashReservations({ statusToggle, setStatusToggle }) {
     </div>
   );
 }
+
+NavDashReservations.propTypes = {
+  statusToggle: PropTypes.number.isRequired,
+  setStatusToggle: PropTypes.func.isRequired,
+};
 
 export default NavDashReservations;

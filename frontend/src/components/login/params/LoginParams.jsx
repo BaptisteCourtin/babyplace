@@ -10,18 +10,18 @@ function LoginParams() {
 
   const getStructureId = async () => {
     try {
-      const res = await axios
-        .get(`${import.meta.env.VITE_PATH}/structureId/?token=${token}`)
-      setLocalId(res.data[0].structureId)
-
+      const res = await axios.get(
+        `${import.meta.env.VITE_PATH}/structureId/?token=${token}`
+      );
+      setLocalId(res.data[0].structureId);
     } catch (err) {
-      console.error(err.message)
+      console.error(err.message);
     }
-  }
+  };
 
   useEffect(() => {
-    getStructureId()
-  }, [])
+    getStructureId();
+  }, []);
 
   return (
     <section className="loginParams">

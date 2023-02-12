@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function DayOffDashAgenda({ updateDay }) {
   return (
@@ -13,5 +14,9 @@ function DayOffDashAgenda({ updateDay }) {
     </button>
   );
 }
+
+DayOffDashAgenda.propTypes = {
+  updateDay: PropTypes.func.isRequired,
+};
 
 export default DayOffDashAgenda;

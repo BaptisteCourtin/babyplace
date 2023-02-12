@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-export const useGetHours = (structureId, userType) => {
+const useGetHours = (structureId, userType) => {
   const [toggleDay, setToggleDay] = useState(null);
   const [selected, setSelected] = useState(null);
 
@@ -39,7 +39,8 @@ export const useGetHours = (structureId, userType) => {
   const getData = async () => {
     try {
       const res = await axios.get(
-        `${import.meta.env.VITE_PATH
+        `${
+          import.meta.env.VITE_PATH
         }/structure/type/${structureId}?type=${userType}`,
         {
           id: structureId,
@@ -106,6 +107,8 @@ export const useGetHours = (structureId, userType) => {
     setSwitch3,
     getData,
     getHoraires,
-    setValues
+    setValues,
   };
 };
+
+export default useGetHours;

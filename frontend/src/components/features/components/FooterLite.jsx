@@ -66,13 +66,25 @@ function FooterLite() {
         </div>
         <div className="footerRightLite">
           <div className="socialsLite">
-            <a href="https://fr-fr.facebook.com" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://fr-fr.facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <BsFacebook id="iconFooter" />
             </a>
-            <a href="https://twitter.com/?lang=fr" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://twitter.com/?lang=fr"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <BsTwitter id="iconFooter" />
             </a>
-            <a href="https://www.instagram.com/?hl=fr" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://www.instagram.com/?hl=fr"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <AiFillInstagram id="iconFooter2" />
             </a>
           </div>

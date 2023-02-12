@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function OpenDashStatus({
   fc,
@@ -8,16 +9,13 @@ function OpenDashStatus({
   setCalendarIndex,
   updatePlaces,
 }) {
-
-  console.log(places)
-
   return (
     <>
       <div className="agendaPlacesLeft">
         <p>
           Il vous reste
           <b> {fc.nbPlaces} </b>
-          {fc.nbPlaces == 1 ? 'place' : 'places'} sur
+          {fc.nbPlaces == 1 ? "place" : "places"} sur
           <b> {maxPlaces} </b>
         </p>
       </div>
@@ -45,5 +43,14 @@ function OpenDashStatus({
     </>
   );
 }
+
+OpenDashStatus.propTypes = {
+  fc: PropTypes.object.isRequired,
+  maxPlaces: PropTypes.number.isRequired,
+  places: PropTypes.number.isRequired,
+  setPlaces: PropTypes.func.isRequired,
+  setCalendarIndex: PropTypes.func.isRequired,
+  updatePlaces: PropTypes.func.isRequired,
+};
 
 export default OpenDashStatus;

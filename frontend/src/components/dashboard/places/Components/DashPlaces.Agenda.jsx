@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import open from "@assets/dashboard/open-sign.svg";
 import close from "@assets/dashboard/closed-sign.svg";
 import axios from "axios";
@@ -168,5 +169,17 @@ function Agenda({
     </section>
   );
 }
+
+Agenda.propTypes = {
+  structureId: PropTypes.number.isRequired,
+  getHoraires: PropTypes.func.isRequired,
+  horaires: PropTypes.object.isRequired,
+  toggleDay: PropTypes.bool.isRequired,
+  setToggleDay: PropTypes.func.isRequired,
+  selected: PropTypes.bool.isRequired,
+  setSelected: PropTypes.func.isRequired,
+  dayId: PropTypes.number.isRequired,
+  setDayId: PropTypes.func.isRequired,
+};
 
 export default Agenda;

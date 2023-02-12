@@ -83,9 +83,12 @@ function Base({
 Base.propTypes = {
   setCompo: PropTypes.func.isRequired,
   setDataBasique: PropTypes.func.isRequired,
-  setdataDateHeure: PropTypes.func.isRequired,
-  setdataServices: PropTypes.func.isRequired,
-  setdataAggrements: PropTypes.func.isRequired,
+  dataDateHeure: PropTypes.object.isRequired,
+  setDataDateHeure: PropTypes.func.isRequired,
+  dataServices: PropTypes.object.isRequired,
+  setDataServices: PropTypes.func.isRequired,
+  dataAggrements: PropTypes.object.isRequired,
+  setDataAggrements: PropTypes.func.isRequired,
 };
 
 export default Base;

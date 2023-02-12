@@ -201,7 +201,7 @@ BaseCard.propTypes = {
   setCompo: PropTypes.func.isRequired,
   Allstructure: PropTypes.array.isRequired,
   familleLiked: PropTypes.array.isRequired,
-  familleId: PropTypes.number.isRequired,
+  familleId: PropTypes.string,
   getFamilleLiked: PropTypes.func.isRequired,
 
   dataBasique: PropTypes.object.isRequired,

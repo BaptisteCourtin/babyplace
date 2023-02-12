@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-export const useGetAgenda = (structureId) => {
+const useGetAgenda = (structureId) => {
   const [calendar, setCalendar] = useState([]);
   const [horaires, setHoraires] = useState([]);
 
@@ -26,13 +26,14 @@ export const useGetAgenda = (structureId) => {
         {
           id: structureId,
         }
-      )
-      setHoraires(res.data)
+      );
+      setHoraires(res.data);
     } catch (err) {
-      console.error(err.message)
+      console.error(err.message);
     }
-  }
-
+  };
 
   return { calendar, getCalendar, horaires, getHoraires };
 };
+
+export default useGetAgenda;

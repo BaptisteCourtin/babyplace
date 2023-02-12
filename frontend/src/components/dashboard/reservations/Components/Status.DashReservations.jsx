@@ -1,41 +1,48 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { MdOutlineCancel, MdCheckCircleOutline } from "react-icons/md";
 import { GoFile } from "react-icons/go";
 import ReactModal from "react-modal";
-import { usePutReservations } from "../Hooks/usePutReservations";
+import usePutReservations from "../Hooks/usePutReservations";
 
 function StatusDashReservations({ r, updateStatus, getReser }) {
+  const [modal, setModal] = useState(false);
+  const [dateStart, setDateStart] = useState("");
+  const [dateEnd, setDateEnd] = useState("");
 
-  const [modal, setModal] = useState(false)
-  const [dateStart, setDateStart] = useState('')
-  const [dateEnd, setDateEnd] = useState('')
-
-  const { updateDates } = usePutReservations()
+  const { updateDates } = usePutReservations();
 
   const openModal = () => {
-    setModal(true)
-  }
+    setModal(true);
+  };
 
   const closeModal = () => {
-    setModal(false)
-  }
+    setModal(false);
+  };
 
   const sendDates = async (e, reserId, dateStart, dateEnd) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      await updateDates(reserId, dateStart, dateEnd)
-      await getReser()
-      closeModal()
+      await updateDates(reserId, dateStart, dateEnd);
+      await getReser();
+      closeModal();
     } catch (err) {
-      console.error(err.message)
+      console.error(err.message);
     }
-  }
+  };
 
   return (
     <>
       {r.status === "waiting" ? (
         <div className="reserChoice">
-          <button type="button" onClick={(/\d/.test(r.jour)) ? () => updateStatus("approved", r.id) : () => openModal()}>
+          <button
+            type="button"
+            onClick={
+              /\d/.test(r.jour)
+                ? () => updateStatus("approved", r.id)
+                : () => openModal()
+            }
+          >
             <MdCheckCircleOutline />
             Accepter
           </button>
@@ -43,7 +50,7 @@ function StatusDashReservations({ r, updateStatus, getReser }) {
             <MdOutlineCancel /> Refuser
           </button>
         </div>
-      ) : (r.status === "approved" || r.status === "refused") ? (
+      ) : r.status === "approved" || r.status === "refused" ? (
         <div className="reserModif">
           <button type="button" onClick={() => updateStatus("waiting", r.id)}>
             <GoFile />
@@ -55,13 +62,16 @@ function StatusDashReservations({ r, updateStatus, getReser }) {
           <p>Réservation déjà passée</p>
         </div>
       )}
-      {modal &&
+      {modal && (
         <ReactModal
           isOpen={openModal}
           onRequestClose={closeModal}
           className="dateChoiceContainer"
         >
-          <form className="dateChoiceInner" onSubmit={(e) => sendDates(e, r.id, dateStart, dateEnd)}>
+          <form
+            className="dateChoiceInner"
+            onSubmit={(e) => sendDates(e, r.id, dateStart, dateEnd)}
+          >
             <h2>Choisir des dates</h2>
             <div className="dateInputContainer">
               <label htmlFor="dateStart">Date de début</label>
@@ -69,7 +79,7 @@ function StatusDashReservations({ r, updateStatus, getReser }) {
                 type="date"
                 name="dateStart"
                 id="dateStart"
-                min={new Date().toISOString().slice(0, -8).split('T')[0]}
+                min={new Date().toISOString().slice(0, -8).split("T")[0]}
                 onChange={(e) => setDateStart(e.target.value)}
                 required
               />
@@ -80,7 +90,7 @@ function StatusDashReservations({ r, updateStatus, getReser }) {
                 type="date"
                 name="dateEnd"
                 id="dateEnd"
-                min={new Date().toISOString().slice(0, -8).split('T')[0]}
+                min={new Date().toISOString().slice(0, -8).split("T")[0]}
                 onChange={(e) => setDateEnd(e.target.value)}
                 required
               />
@@ -88,9 +98,15 @@ function StatusDashReservations({ r, updateStatus, getReser }) {
             <button type="submit">Envoyer</button>
           </form>
         </ReactModal>
-      }
+      )}
     </>
   );
 }
+
+StatusDashReservations.propTypes = {
+  r: PropTypes.object.isRequired,
+  updateStatus: PropTypes.func.isRequired,
+  getReser: PropTypes.func.isRequired,
+};
 
 export default StatusDashReservations;

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-export const useGetAllData = (token) => {
+const useGetAllData = (token) => {
   const [userType, setUserType] = useState(null);
   const [donnees, setDonnees] = useState({});
   const [details, setDetails] = useState([]);
@@ -14,11 +14,12 @@ export const useGetAllData = (token) => {
           "x-token": token,
         },
       });
-      setDonnees(res.data[0])
+      setDonnees(res.data[0]);
       if (res?.data[0]?.isCreche === 0) {
         axios
           .get(
-            `${import.meta.env.VITE_PATH}/structure/details?type=assMat&id=${res.data[0].structureId
+            `${import.meta.env.VITE_PATH}/structure/details?type=assMat&id=${
+              res.data[0].structureId
             }`,
             {
               id: res.data[0].structureId,
@@ -31,7 +32,8 @@ export const useGetAllData = (token) => {
       } else {
         axios
           .get(
-            `${import.meta.env.VITE_PATH}/structure/details?type=creche&id=${res.data[0].structureId
+            `${import.meta.env.VITE_PATH}/structure/details?type=creche&id=${
+              res.data[0].structureId
             }`,
             {
               id: res.data[0].structureId,
@@ -63,7 +65,7 @@ export const useGetAllData = (token) => {
     }
   };
 
-
-
   return { getData, data, userType, donnees, details, notif, getNotifications };
 };
+
+export default useGetAllData;

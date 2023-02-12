@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-hot-toast";
 
-export const usePutHours = (
+const usePutHours = (
   structureId,
   userType,
   getData,
@@ -108,3 +108,5 @@ export const usePutHours = (
 
   return { updateIndemn, updateOptions, updateTarif, updateHours, updateDay };
 };
+
+export default usePutHours;

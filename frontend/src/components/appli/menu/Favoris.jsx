@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import imgCreche from "@assets/img-time.svg";
 import CardFavoris from "@components/appli/menu/CardFavoris";
 import PropTypes from "prop-types";
 import Toggle from "../filtres/Toggle";
@@ -16,7 +15,6 @@ function Favoris({ setCompo, familleId }) {
       )
       .then((res) => {
         setFamilleLiked(res.data);
-        console.log(res.data);
       })
       .catch((err) => {
         console.error(err);
@@ -67,6 +65,7 @@ function Favoris({ setCompo, familleId }) {
 
 Favoris.propTypes = {
   setCompo: PropTypes.func.isRequired,
+  familleId: PropTypes.string.isRequired,
 };
 
 export default Favoris;

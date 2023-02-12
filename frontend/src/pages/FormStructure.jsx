@@ -6,6 +6,7 @@ import ResaContext from "@components/context/ResaContext";
 import UserEmailContext from "@components/context/UserEmailContext";
 import imgTime from "@assets/img-time.svg";
 import { useNavigate } from "react-router-dom";
+import logotxt from "@assets/babyplaceTxt.svg";
 import Structure1 from "../components/form/InfoAdmin1";
 import Structure2 from "../components/form/PhotoProfil2";
 import Structure3 from "../components/form/PhotosStructure3";
@@ -29,7 +30,6 @@ import profilJM from "../assets/profilJM.png";
 import profilCPP from "../assets/profilCPP.jpg";
 import imgWoman from "../assets/img-woman.svg";
 import logo from "../assets/logo4.svg";
-import logotxt from "@assets/babyplaceTxt.svg";
 
 const INITIAL_DATA = {
   isCreche: null,
@@ -140,7 +140,8 @@ function FormStructure() {
   const [data, setData] = useState(INITIAL_DATA);
   const [structure, setStructure] = useState("");
   const [resaInst, setResaInst] = useState("");
-  const { userEmail, structureId, setStructureId } = useContext(UserEmailContext);
+  const { userEmail, structureId, setStructureId } =
+    useContext(UserEmailContext);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [showExplications, setShowExplications] = useState(
     window.innerWidth > 1000
@@ -166,6 +167,8 @@ function FormStructure() {
       userEmail,
     })
       .then((result) => {
+        setStructureId(result.data.structureId);
+        sessionStorage.setItem("structureId", result.data.structureId);
         if (result.data.isCreche === 0) {
           setStructure("assmat");
         }
@@ -185,8 +188,6 @@ function FormStructure() {
         { userEmail }
       )
         .then((result) => {
-          setStructureId(result.data.structureId);
-          sessionStorage.setItem("structureId", result.data.structureId);
           setResaInst(result.data.resaInst);
           setData((prev) => {
             return {
@@ -311,6 +312,7 @@ function FormStructure() {
         });
     }
   }, [structure]);
+
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
     useMultistepForm([
       <Structure1 {...data} updateFields={updateFields} />,
@@ -1003,7 +1005,10 @@ function FormStructure() {
             console.error(err);
           });
       } else if (currentStepIndex === 14) {
-        if (inputRefPmi.current !== null && inputRefPmi.current.files.length>0 ) {
+        if (
+          inputRefPmi.current !== null &&
+          inputRefPmi.current.files.length > 0
+        ) {
           const formData = new FormData();
           formData.append("file", inputRefPmi.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/photosStructure`, formData)
@@ -1026,7 +1031,10 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRefCni.current !== null && inputRefCni.current.files.length>0 ) {
+        if (
+          inputRefCni.current !== null &&
+          inputRefCni.current.files.length > 0
+        ) {
           const formData = new FormData();
           formData.append("file", inputRefCni.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
@@ -1049,7 +1057,10 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRefCpam.current !== null && inputRefCpam.current.files.length>0) {
+        if (
+          inputRefCpam.current !== null &&
+          inputRefCpam.current.files.length > 0
+        ) {
           const formData = new FormData();
           formData.append("file", inputRefCpam.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
@@ -1072,7 +1083,10 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRefDom.current !== null && inputRefDom.current.files.length>0) {
+        if (
+          inputRefDom.current !== null &&
+          inputRefDom.current.files.length > 0
+        ) {
           const formData = new FormData();
           formData.append("file", inputRefDom.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
@@ -1095,7 +1109,10 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRefDiplome.current !== null && inputRefDiplome.current.files.length>0) {
+        if (
+          inputRefDiplome.current !== null &&
+          inputRefDiplome.current.files.length > 0
+        ) {
           const formData = new FormData();
           formData.append("file", inputRefDiplome.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
@@ -1118,7 +1135,10 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRefResp.current !== null && inputRefResp.current.files.length>0) {
+        if (
+          inputRefResp.current !== null &&
+          inputRefResp.current.files.length > 0
+        ) {
           const formData = new FormData();
           formData.append("file", inputRefResp.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)
@@ -1141,7 +1161,10 @@ function FormStructure() {
               console.error(err);
             });
         }
-        if (inputRefAuto.current !== null && inputRefAuto.current.files.length>0) {
+        if (
+          inputRefAuto.current !== null &&
+          inputRefAuto.current.files.length > 0
+        ) {
           const formData = new FormData();
           formData.append("file", inputRefAuto.current.files[0]);
           Axios.post(`${import.meta.env.VITE_PATH}/justificatifs`, formData)

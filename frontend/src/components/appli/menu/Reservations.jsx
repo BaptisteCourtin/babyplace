@@ -28,8 +28,8 @@ function Reservations({ setCompo, familleId }) {
         </button>
       </div>
       <main className="reservation">
-        {allReservation.map((each) => (
-          <CardResaPlat each={each} />
+        {allReservation.map((each, index) => (
+          <CardResaPlat each={each} key={index} />
         ))}
       </main>
     </>

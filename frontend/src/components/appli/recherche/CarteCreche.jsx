@@ -103,13 +103,13 @@ function CarteCreche({
             numPlaceJour = 6;
           } else numPlaceJour -= 1;
 
-          let isWork = true;
+          const isWork = true;
           // suivant le jour (en jour) suivant table horaires
           if (res.data[numPlaceJour].ouvert === 0) {
             return false;
           }
           // suivant le jour (en date) suivant table calendrier
-          for (let i = 0; i < dataCalendarId.length; i++) {
+          for (let i = 0; i < dataCalendarId.length; i += 1) {
             if (dataCalendarId[i].date === dataDateHeure.jour.split("&")[0]) {
               return false;
             }
@@ -271,8 +271,9 @@ CarteCreche.propTypes = {
   data: PropTypes.object.isRequired,
   userPosition: PropTypes.array.isRequired,
   familleLiked: PropTypes.array.isRequired,
-  familleId: PropTypes.number.isRequired,
+  familleId: PropTypes.string,
   getFamilleLiked: PropTypes.func.isRequired,
+  dataDateHeure: PropTypes.object.isRequired,
 };
 
 export default CarteCreche;

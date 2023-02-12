@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function AvailableDashAgenda({ calendar, structureId, date, curDate }) {
   return (
@@ -13,9 +14,9 @@ function AvailableDashAgenda({ calendar, structureId, date, curDate }) {
         )
         .slice(0, 2)
         .sort((a, b) => a.date.localeCompare(b.date))
-        .map((fc) => {
+        .map((fc, index) => {
           return (
-            <li>
+            <li key={index}>
               {fc.nbPlaces < 4 ? (
                 <span
                   className="agendaAlertSign"
@@ -34,7 +35,8 @@ function AvailableDashAgenda({ calendar, structureId, date, curDate }) {
                 </span>
               )}
               <p>
-                Vous avez <span>{fc.nbPlaces}</span> {fc.nbPlaces == 1 ? 'place' : 'places'} restantes le{" "}
+                Vous avez <span>{fc.nbPlaces}</span>{" "}
+                {fc.nbPlaces == 1 ? "place" : "places"} restantes le{" "}
                 <span>
                   {fc.date.split("-")[2]} / {fc.date.split("-")[1]} /{" "}
                   {fc.date.split("-")[0]}
@@ -46,5 +48,12 @@ function AvailableDashAgenda({ calendar, structureId, date, curDate }) {
     </ul>
   );
 }
+
+AvailableDashAgenda.propTypes = {
+  calendar: PropTypes.array.isRequired,
+  structureId: PropTypes.number.isRequired,
+  date: PropTypes.string.isRequired,
+  curDate: PropTypes.string.isRequired,
+};
 
 export default AvailableDashAgenda;

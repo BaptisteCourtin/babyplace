@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-hot-toast";
 
-export const useUploadParams = (structureId, getData, fileName) => {
+const useUploadParams = (structureId, getData, fileName) => {
   const uploadDoc = async (value, docData, ref, table) => {
     try {
       docData = new FormData();
@@ -26,3 +26,5 @@ export const useUploadParams = (structureId, getData, fileName) => {
 
   return { uploadDoc };
 };
+
+export default useUploadParams;

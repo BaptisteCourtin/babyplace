@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
+import { AiOutlineUser } from "react-icons/ai";
 
 function CardFavPlat({ each, familleId, getFamilleLiked }) {
   const { nom, photoProfil, nomUsage, nomNaissance, prenom, structureId } =

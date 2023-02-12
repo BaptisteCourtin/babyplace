@@ -5,7 +5,7 @@ import DashParams from "@components/dashboard/parameters/DashParams";
 import DashReservations from "@components/dashboard/reservations/DashReservations";
 import Messages from "@components/messages/Messages";
 
-export const usePageToggle = (data, userType, getData) => {
+const usePageToggle = (data, userType, getData) => {
   const [toggle, setToggle] = useState(0);
   const pageShown = () => {
     if (toggle === 1) {
@@ -30,3 +30,5 @@ export const usePageToggle = (data, userType, getData) => {
 
   return { pageShown, toggle, setToggle };
 };
+
+export default usePageToggle;

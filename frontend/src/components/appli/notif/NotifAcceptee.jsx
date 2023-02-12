@@ -18,8 +18,6 @@ function NotifAcceptee({ setCompo, photoFamille, oneReservation }) {
     nom,
   } = oneReservation;
 
-  console.log(oneReservation);
-
   return (
     <div className="notif-container-grad">
       <div className="notif-accepte">

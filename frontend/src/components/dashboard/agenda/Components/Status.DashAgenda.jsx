@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ClosedDashStatus from "./Status/Closed.DashStatus";
 import FullDashStatus from "./Status/Full.DashStatus";
 import OpenDashStatus from "./Status/Open.DashStatus";
@@ -47,5 +48,19 @@ function StatusDashAgenda({
     </>
   );
 }
+
+StatusDashAgenda.propTypes = {
+  calendar: PropTypes.array.isRequired,
+  structureId: PropTypes.number.isRequired,
+  date: PropTypes.string.isRequired,
+  updateStatusOpen: PropTypes.func.isRequired,
+  maxPlaces: PropTypes.number.isRequired,
+  places: PropTypes.object,
+  setPlaces: PropTypes.func.isRequired,
+  setCalendarIndex: PropTypes.func.isRequired,
+  updatePlaces: PropTypes.func.isRequired,
+  updateStatusClose: PropTypes.func.isRequired,
+  fullDate: PropTypes.func.isRequired,
+};
 
 export default StatusDashAgenda;

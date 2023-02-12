@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Agenda from "./Components/Agenda.DashHours";
-import { useGetHours } from "./Hooks/useGetHours";
-import { usePutHours } from "./Hooks/usePutHours";
+import useGetHours from "./Hooks/useGetHours";
+import usePutHours from "./Hooks/usePutHours";
 import PricesDashHours from "./Components/Prices.DashHours";
 import OptionsDashHours from "./Components/Options.DashHours";
 import ActivitiesDashHours from "./Components/Activities.DashHours";
@@ -38,7 +38,6 @@ function DashHours({ userType, structureId }) {
     setSwitch3,
     getData,
     getHoraires,
-    setValues
   } = useGetHours(structureId, userType);
 
   const { updateIndemn, updateOptions, updateTarif, updateDay, updateHours } =
@@ -55,7 +54,6 @@ function DashHours({ userType, structureId }) {
   useEffect(() => {
     getData();
     getHoraires();
-    // setValues();
   }, [dayId]);
 
   return (
@@ -110,10 +108,6 @@ function DashHours({ userType, structureId }) {
 export default DashHours;
 
 DashHours.propTypes = {
-  title: PropTypes.string.isRequired,
   userType: PropTypes.string.isRequired,
   structureId: PropTypes.number.isRequired,
-  indemnRepas: PropTypes.number.isRequired,
-  Tarif_heure: PropTypes.number.isRequired,
-  Tarif_horaire_spec: PropTypes.number.isRequired,
 };

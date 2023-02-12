@@ -2,7 +2,12 @@ import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "@assets/logo5white.svg";
 import axios from "axios";
-import { MdManageAccounts, MdNoAccounts, MdMarkAsUnread, MdLogout } from 'react-icons/md';
+import {
+  MdManageAccounts,
+  MdNoAccounts,
+  MdMarkAsUnread,
+  MdLogout,
+} from "react-icons/md";
 import BurgerMenuAdmin from "./components/BurgerMenuAdmin";
 
 function Nav() {
@@ -22,7 +27,6 @@ function Nav() {
     }
   };
 
-
   return (
     <>
       {window.innerWidth > 800 ? (
@@ -30,31 +34,46 @@ function Nav() {
           <ul>
             <img src={logo} alt="logo" />
             <li>
-              <NavLink to="/admin/profils" className={({ isActive }) =>
-                isActive ? activeClassName : undefined
-              }><MdManageAccounts id="iconAdminNav" /> Profils à approuver</NavLink>
+              <NavLink
+                to="/admin/profils"
+                className={({ isActive }) =>
+                  isActive ? activeClassName : undefined
+                }
+              >
+                <MdManageAccounts id="iconAdminNav" /> Profils à approuver
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/admin/signalements" className={({ isActive }) =>
-                isActive ? activeClassName : undefined
-              }><MdNoAccounts id="iconAdminNav" /> Profils signalés</NavLink>
+              <NavLink
+                to="/admin/signalements"
+                className={({ isActive }) =>
+                  isActive ? activeClassName : undefined
+                }
+              >
+                <MdNoAccounts id="iconAdminNav" /> Profils signalés
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/admin/messages" className={({ isActive }) =>
-                isActive ? activeClassName : undefined
-              }><MdMarkAsUnread id="iconAdminNav" /> Messages</NavLink>
+              <NavLink
+                to="/admin/messages"
+                className={({ isActive }) =>
+                  isActive ? activeClassName : undefined
+                }
+              >
+                <MdMarkAsUnread id="iconAdminNav" /> Messages
+              </NavLink>
             </li>
             <li>
-              <button onClick={() => logout()}><MdLogout id="iconAdminNav" /> Déconnexion</button>
+              <button onClick={() => logout()}>
+                <MdLogout id="iconAdminNav" /> Déconnexion
+              </button>
             </li>
           </ul>
-        </nav >
+        </nav>
       ) : (
         <BurgerMenuAdmin logout={logout} logo={logo} />
-      )
-      }
+      )}
     </>
-
   );
 }
 

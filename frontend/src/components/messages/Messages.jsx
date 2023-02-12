@@ -16,7 +16,6 @@ function Messages({ nom, prenom, email, photoProfil, structureId }) {
     axios
       .get(`${import.meta.env.VITE_PATH}/famille/all`)
       .then((ret) => {
-        console.warn(ret.data);
         setStrucData(ret.data);
       })
       .catch((err) => {

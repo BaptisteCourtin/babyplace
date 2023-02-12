@@ -1,9 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function InfoDashReservations({ r, tarifHeure }) {
-
   function calcAge(dateString) {
-    let birthday = +new Date(dateString);
+    const birthday = +new Date(dateString);
     return ~~((Date.now() - birthday) / (31557600000 / 12));
   }
 
@@ -28,15 +28,16 @@ function InfoDashReservations({ r, tarifHeure }) {
         </p>
       </div>
       <div className="reserInfo3">
-        <p>
-          {(~~r.heureTotal.split(':')[0]) + 1}H
-        </p>
-        <p>
-          {((~~r.heureTotal.split(':')[0] + 1) * tarifHeure)?.toFixed(0)}€
-        </p>
+        <p>{~~r.heureTotal.split(":")[0] + 1}H</p>
+        <p>{((~~r.heureTotal.split(":")[0] + 1) * tarifHeure)?.toFixed(0)}€</p>
       </div>
     </>
   );
 }
+
+InfoDashReservations.propTypes = {
+  r: PropTypes.object.isRequired,
+  tarifHeure: PropTypes.number.isRequired,
+};
 
 export default InfoDashReservations;

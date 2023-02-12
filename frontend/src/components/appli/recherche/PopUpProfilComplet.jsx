@@ -40,8 +40,8 @@ function PopUpProfilComplet({ setVisiblePopUp, data, dataHorairesId }) {
           <br />
           <br />
           L’enfant arrivera en état de propreté, habillé et ayant pris son
-          premier repas. Les bijoux seront enlevés et rendus aux parents pour des
-          raisons de sécurité (étouffement, ingestion…).
+          premier repas. Les bijoux seront enlevés et rendus aux parents pour
+          des raisons de sécurité (étouffement, ingestion…).
           <br />
           <br />
           L’assistante maternelle est habilitée à administrer les médicaments

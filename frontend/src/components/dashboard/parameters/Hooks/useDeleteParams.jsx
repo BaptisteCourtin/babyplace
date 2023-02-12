@@ -2,7 +2,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
-export const useDeleteParams = (email, deleteMail, structureId, userType) => {
+const useDeleteParams = (email, deleteMail, structureId, userType) => {
   const navigate = useNavigate();
 
   const deleteAccount = async (e) => {
@@ -30,3 +30,5 @@ export const useDeleteParams = (email, deleteMail, structureId, userType) => {
 
   return { deleteAccount };
 };
+
+export default useDeleteParams;

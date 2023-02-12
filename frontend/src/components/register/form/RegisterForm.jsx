@@ -90,7 +90,7 @@ function RegisterForm() {
             }}
             required
           />
-          <button onClick={handlePwdClick}>
+          <button onClick={handlePwdClick} type="button">
             {!typePwd ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
           </button>
         </div>

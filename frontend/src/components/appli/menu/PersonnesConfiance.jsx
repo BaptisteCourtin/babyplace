@@ -183,6 +183,7 @@ function PersonnesConfiance({ setCompo, familleId }) {
 
 PersonnesConfiance.propTypes = {
   setCompo: PropTypes.func.isRequired,
+  familleId: PropTypes.string.isRequired,
 };
 
 export default PersonnesConfiance;

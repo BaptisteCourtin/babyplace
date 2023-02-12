@@ -58,7 +58,7 @@ function AppliPlaces({ dataDateHeure, setDataDateHeure }) {
       clickedDay.getMonth() + 1
     }-${clickedDay.getDate()}`;
 
-    ChangeDateHeure(jour + "&" + clickedDay.getDay(), "jour");
+    ChangeDateHeure(`${jour}&${clickedDay.getDay()}`, "jour");
   };
   useEffect(() => {
     if (clickedDay !== "") afficheDate();

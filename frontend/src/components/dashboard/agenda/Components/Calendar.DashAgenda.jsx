@@ -2,7 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import Calendar from "react-calendar";
 
-function CalendarDashAgenda({ setClickedDay, clickedDay, setPlaces, horaires, calendar, dateNow, structureId }) {
+function CalendarDashAgenda({
+  setClickedDay,
+  clickedDay,
+  setPlaces,
+  horaires,
+  calendar,
+  dateNow,
+  structureId,
+}) {
   const value = new Date();
 
   const tileDisable = ({ date }) => {
@@ -17,7 +25,11 @@ function CalendarDashAgenda({ setClickedDay, clickedDay, setPlaces, horaires, ca
     ) {
       return "select";
     }
-    if (!(calendar.every(c => c.structureId === structureId && c.date !== dateNow))) {
+    if (
+      !calendar.every(
+        (c) => c.structureId === structureId && c.date !== dateNow
+      )
+    ) {
       return "";
     }
   };
@@ -39,9 +51,14 @@ function CalendarDashAgenda({ setClickedDay, clickedDay, setPlaces, horaires, ca
   );
 }
 
-export default CalendarDashAgenda;
-
 CalendarDashAgenda.propTypes = {
-  clickedDay: PropTypes.string.isRequired,
   setClickedDay: PropTypes.func.isRequired,
+  clickedDay: PropTypes.instanceOf(Date).isRequired,
+  setPlaces: PropTypes.func.isRequired,
+  horaires: PropTypes.array.isRequired,
+  calendar: PropTypes.array.isRequired,
+  dateNow: PropTypes.string.isRequired,
+  structureId: PropTypes.number.isRequired,
 };
+
+export default CalendarDashAgenda;

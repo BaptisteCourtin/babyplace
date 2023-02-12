@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function ProfilDashParams({
   photoProfil,
@@ -34,5 +35,15 @@ function ProfilDashParams({
     </div>
   );
 }
+
+ProfilDashParams.propTypes = {
+  photoProfil: PropTypes.string.isRequired,
+  photoProfilRef: PropTypes.object.isRequired,
+  uploadDoc: PropTypes.func.isRequired,
+  nom: PropTypes.string,
+  nomUsage: PropTypes.string.isRequired,
+  prenom: PropTypes.string.isRequired,
+  type: PropTypes.string,
+};
 
 export default ProfilDashParams;

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ReactModal from "react-modal";
 import logo from "@assets/logo5.svg";
 
@@ -17,10 +18,14 @@ function ModalDashParams({
           onRequestClose={closeDeleteModal}
           className="deleteContainer"
         >
-          <button className="deleteContainerClose" onClick={closeDeleteModal}>
+          <button
+            type="button"
+            className="deleteContainerClose"
+            onClick={closeDeleteModal}
+          >
             X
           </button>
-          <div className="deleteContainerHeader">
+          <div type="button" className="deleteContainerHeader">
             <img src={logo} />
             <h2>Babyplace</h2>
           </div>
@@ -55,5 +60,13 @@ function ModalDashParams({
     </>
   );
 }
+
+ModalDashParams.propTypes = {
+  deleteModal: PropTypes.bool.isRequired,
+  openDeleteModal: PropTypes.func.isRequired,
+  closeDeleteModal: PropTypes.func.isRequired,
+  deleteAccount: PropTypes.func.isRequired,
+  setDeleteMail: PropTypes.func.isRequired,
+};
 
 export default ModalDashParams;

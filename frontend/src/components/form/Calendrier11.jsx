@@ -24,7 +24,7 @@ function Structure11({
       .then((result) => {
         const indispo = [];
         if (result.data.length > 0) {
-          for (let i = 0; i < result.data.length; i++) {
+          for (let i = 0; i < result.data.length; i += 1) {
             indispo.push(result.data[i].date);
           }
         }

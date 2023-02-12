@@ -36,7 +36,7 @@ function Toggle({ setter, state = false, nom, p, classique }) {
 
 Toggle.propTypes = {
   setter: PropTypes.func.isRequired,
-  state: PropTypes.bool,
+  state: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
   nom: PropTypes.string.isRequired,
   p: PropTypes.string.isRequired,
   classique: PropTypes.bool,

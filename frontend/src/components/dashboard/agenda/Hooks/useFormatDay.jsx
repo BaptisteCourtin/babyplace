@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const useFormatDay = () => {
+const useFormatDay = () => {
   let curDate = new Date();
   curDate = `${curDate.getFullYear()}-${
     curDate.getMonth() + 1
@@ -15,3 +15,5 @@ export const useFormatDay = () => {
 
   return { curDate, clickedDay, setClickedDay, date, day };
 };
+
+export default useFormatDay;

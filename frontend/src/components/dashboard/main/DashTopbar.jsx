@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { FiBell } from "react-icons/fi";
 import { RxHamburgerMenu } from "react-icons/rx";
 
@@ -12,7 +13,11 @@ function DashTopbar({
 }) {
   return (
     <nav className="dashTopbar">
-      <button className="dashboardBurger" onClick={() => setOpenNav(!openNav)}>
+      <button
+        type="button"
+        className="dashboardBurger"
+        onClick={() => setOpenNav(!openNav)}
+      >
         <RxHamburgerMenu />
       </button>
       <div className="dashboardTopNav">
@@ -27,5 +32,14 @@ function DashTopbar({
     </nav>
   );
 }
+
+DashTopbar.propTypes = {
+  openNav: PropTypes.bool.isRequired,
+  setOpenNav: PropTypes.func.isRequired,
+  toggleNotif: PropTypes.bool.isRequired,
+  setToggleNotif: PropTypes.func.isRequired,
+  setToggle: PropTypes.func.isRequired,
+  data: PropTypes.object.isRequired,
+};
 
 export default DashTopbar;

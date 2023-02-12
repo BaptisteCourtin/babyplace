@@ -9,7 +9,7 @@ import {
   MdAccessTime,
   MdOutlineMarkAsUnread,
   MdLogout,
-  MdHome
+  MdHome,
 } from "react-icons/md";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -20,7 +20,7 @@ function DashNavbar({ toggle, setToggle, structureId }) {
   const [localEmail, setLocalEmail] = useLocalStorage("email", "mail");
 
   const logout = async () => {
-    setLocalEmail("")
+    setLocalEmail("");
     try {
       await axios.put(`${import.meta.env.VITE_PATH}/logout/${structureId}`, {
         id: structureId,
@@ -108,7 +108,7 @@ function DashNavbar({ toggle, setToggle, structureId }) {
           <MdOutlineSettings />
           Paramètres
         </button>
-        <button onClick={() => logout()}>
+        <button onClick={() => logout()} type="button">
           <MdLogout />
           Déconnexion
         </button>
@@ -117,10 +117,10 @@ function DashNavbar({ toggle, setToggle, structureId }) {
   );
 }
 
-export default DashNavbar;
-
 DashNavbar.propTypes = {
   setToggle: PropTypes.func.isRequired,
-  structureId: PropTypes.number.isRequired,
-  token: PropTypes.string.isRequired,
+  structureId: PropTypes.number,
+  toggle: PropTypes.number.isRequired,
 };
+
+export default DashNavbar;

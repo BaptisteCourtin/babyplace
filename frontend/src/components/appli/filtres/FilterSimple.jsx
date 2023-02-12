@@ -38,6 +38,7 @@ function FilterSimple({ setCompo, dataBasique, setDataBasique }) {
             <option
               value="2"
               selected={dataBasique.isCreche === 2 ? "selected" : ""}
+              defaultValue
             >
               Crèche et Assistant maternel
             </option>

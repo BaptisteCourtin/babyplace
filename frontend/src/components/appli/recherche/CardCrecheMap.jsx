@@ -37,7 +37,6 @@ function CardCrecheMap({ data, familleLiked, familleId, getFamilleLiked }) {
       familleLiked[thisLikedIndex] &&
       familleLiked[thisLikedIndex].structureIdLiked === structureId
     ) {
-      console.log(structureId, familleId);
       axios
         .delete(
           `${
@@ -131,7 +130,7 @@ function CardCrecheMap({ data, familleLiked, familleId, getFamilleLiked }) {
 CardCrecheMap.propTypes = {
   data: PropTypes.object.isRequired,
   familleLiked: PropTypes.array.isRequired,
-  familleId: PropTypes.number.isRequired,
+  familleId: PropTypes.number,
   getFamilleLiked: PropTypes.func.isRequired,
 };
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Nav from "./Nav.admin";
 import ModalMessageAdmin from "./components/ModalMessageAdmin";
 import ResponseModalAdmin from "./components/ResponseModalAdmin";
-import { useGetAllMessages } from "./hooks/useGetAllMessages";
+import useGetAllMessages from "./hooks/useGetAllMessages";
 
 function MessageAdmin() {
   const [isOpen, setIsOpen] = useState(false);

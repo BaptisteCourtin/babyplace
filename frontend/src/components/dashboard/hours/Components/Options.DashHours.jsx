@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function OptionsDashHours({
   userType,
@@ -112,5 +113,22 @@ function OptionsDashHours({
     </details>
   );
 }
+
+OptionsDashHours.propTypes = {
+  userType: PropTypes.string.isRequired,
+  updateIndemn: PropTypes.func.isRequired,
+  indemn1: PropTypes.number,
+  setIndemn1: PropTypes.func.isRequired,
+  indemn2: PropTypes.number,
+  setIndemn2: PropTypes.func.isRequired,
+  indemn3: PropTypes.number,
+  setIndemn3: PropTypes.func.isRequired,
+  switch1: PropTypes.bool,
+  setSwitch1: PropTypes.func.isRequired,
+  switch2: PropTypes.bool,
+  setSwitch2: PropTypes.func.isRequired,
+  switch3: PropTypes.bool,
+  setSwitch3: PropTypes.func.isRequired,
+};
 
 export default OptionsDashHours;

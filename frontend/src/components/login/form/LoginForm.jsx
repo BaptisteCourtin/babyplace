@@ -25,7 +25,7 @@ function LoginForm() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    setLocalEmail(email)
+    setLocalEmail(email);
     if (email && password) {
       axios
         .post(`${import.meta.env.VITE_PATH}/auth`, {
