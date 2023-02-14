@@ -8,19 +8,29 @@ import { NavLink } from "react-router-dom";
 function AppliMessage() {
   const [strucData, setStrucData] = useState([]);
 
-  const getStructureForMess = () => {
+  const getStructureForMess = (source) => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/structure/all`)
+      .get(`${import.meta.env.VITE_PATH}/structure/all`, {
+        cancelToken: source.token,
+      })
       .then((ret) => {
         setStrucData(ret.data);
       })
       .catch((err) => {
-        console.error(err);
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
       });
   };
 
   useEffect(() => {
-    getStructureForMess();
+    const source = axios.CancelToken.source();
+    getStructureForMess(source);
+    return () => {
+      source.cancel();
+    };
   }, []);
 
   return (

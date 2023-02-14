@@ -49,7 +49,7 @@ UnavailableDashAgenda.propTypes = {
   structureId: PropTypes.number.isRequired,
   date: PropTypes.string.isRequired,
   day: PropTypes.string.isRequired,
-  dayId: PropTypes.number,
+  dayId: PropTypes.object,
   addSleepDate: PropTypes.func.isRequired,
   addWorkDate: PropTypes.func.isRequired,
   updateClose: PropTypes.func.isRequired,

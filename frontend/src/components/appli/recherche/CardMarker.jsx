@@ -11,40 +11,50 @@ function CardMarker({ data }) {
 
   const [adresseGPS, setAdresseGPS] = useState();
   // api convertir adresse en position gps
-  const getAdresse = () => {
+  const getAdresse = (source) => {
     axios
-      .get(`https://api-adresse.data.gouv.fr/search/?q=${data.adresse}`)
+      .get(`https://api-adresse.data.gouv.fr/search/?q=${data.adresse}`, {
+        cancelToken: source.token,
+      })
       .then((res) => {
         setAdresseGPS(res.data.features[0].geometry.coordinates.reverse());
       })
       .catch((err) => {
-        console.error(err);
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
       });
   };
 
   // --- prendre horaires back pour passer dans card pour resa ---
   const [dataHorairesId, setDataHorairesId] = useState([]);
 
-  const Token =
-    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
-  const getHorairesId = () => {
+  const getHorairesId = (source) => {
     axios
       .get(`${import.meta.env.VITE_PATH}/horaires/${data.structureId}`, {
-        headers: {
-          "x-token": Token,
-        },
+        cancelToken: source.token,
       })
       .then((res) => {
         setDataHorairesId(res.data);
       })
       .catch((err) => {
-        console.error(err);
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
       });
   };
 
   useEffect(() => {
-    getAdresse();
-    getHorairesId();
+    const source = axios.CancelToken.source();
+    getAdresse(source);
+    getHorairesId(source);
+    return () => {
+      source.cancel();
+    };
   }, []);
 
   return (

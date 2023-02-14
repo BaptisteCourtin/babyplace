@@ -4,25 +4,40 @@ import axios from "axios";
 const useGetReservations = (structureId) => {
   const [reser, setReser] = useState([]);
   const [approvedReser, setApprovedReser] = useState([]);
-  const getReser = async () => {
+
+  const getReser = async (source) => {
     try {
       const res = await axios.get(
-        `${import.meta.env.VITE_PATH}/reservation/${structureId}`
+        `${import.meta.env.VITE_PATH}/reservation/${structureId}`,
+        {
+          cancelToken: source.token,
+        }
       );
       setReser(res.data);
     } catch (err) {
-      console.error(err.message);
+      if (err.code === "ERR_CANCELED") {
+        console.warn("cancel request");
+      } else {
+        console.error(err);
+      }
     }
   };
 
-  const getApprovedReser = async () => {
+  const getApprovedReser = async (source) => {
     try {
       const res = await axios.get(
-        `${import.meta.env.VITE_PATH}/reservation/approved/${structureId}`
+        `${import.meta.env.VITE_PATH}/reservation/approved/${structureId}`,
+        {
+          cancelToken: source.token,
+        }
       );
       setApprovedReser(res.data);
     } catch (err) {
-      console.error(err.message);
+      if (err.code === "ERR_CANCELED") {
+        console.warn("cancel request");
+      } else {
+        console.error(err);
+      }
     }
   };
 

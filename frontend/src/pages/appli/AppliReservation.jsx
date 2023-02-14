@@ -29,18 +29,31 @@ function AppliReservation() {
   // --- get calendar par structureId ---
   const [dataCalendarId, setDataCalendarId] = useState([]);
 
-  const getCalendar = () => {
+  const getCalendar = (source) => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/calendrier/whereMoins/${structureId}`)
+      .get(
+        `${import.meta.env.VITE_PATH}/calendrier/whereMoins/${structureId}`,
+        {
+          cancelToken: source.token,
+        }
+      )
       .then((res) => {
         setDataCalendarId(res.data);
       })
       .catch((err) => {
-        console.error(err);
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
       });
   };
   useEffect(() => {
-    getCalendar();
+    const source = axios.CancelToken.source();
+    getCalendar(source);
+    return () => {
+      source.cancel();
+    };
   }, []);
 
   // --- les infos à passer ---

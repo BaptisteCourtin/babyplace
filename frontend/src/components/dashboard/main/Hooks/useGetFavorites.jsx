@@ -4,17 +4,22 @@ import axios from "axios";
 const useGetFavorites = (structureId) => {
   const [fav, setFav] = useState([]);
 
-  const getFavorites = async () => {
+  const getFavorites = async (source) => {
     try {
       const res = await axios.get(
         `${import.meta.env.VITE_PATH}/favorites/${structureId}`,
         {
           id: structureId,
+          cancelToken: source.token,
         }
       );
       setFav(res.data);
     } catch (err) {
-      console.error(err.message);
+      if (err.code === "ERR_CANCELED") {
+        console.warn("cancel request");
+      } else {
+        console.error(err);
+      }
     }
   };
 

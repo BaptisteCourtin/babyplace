@@ -21,11 +21,15 @@ function StatusDashAgenda({
     <>
       {calendar
         .filter((c) => c.structureId === structureId && c.date === date)
-        .map((fc) =>
+        .map((fc, index) =>
           fc.nbPlaces == -1 ? (
-            <ClosedDashStatus fc={fc} updateStatusOpen={updateStatusOpen} />
+            <ClosedDashStatus
+              key={index}
+              fc={fc}
+              updateStatusOpen={updateStatusOpen}
+            />
           ) : (
-            <>
+            <div key={index}>
               <OpenDashStatus
                 fc={fc}
                 maxPlaces={maxPlaces}
@@ -42,7 +46,7 @@ function StatusDashAgenda({
                 updateStatusClose={updateStatusClose}
                 fullDate={fullDate}
               />
-            </>
+            </div>
           )
         )}
     </>

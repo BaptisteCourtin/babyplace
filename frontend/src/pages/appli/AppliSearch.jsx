@@ -17,36 +17,29 @@ function AppliSearch() {
   // --- les structures ---
   const [structure, setStructure] = useState([]);
 
-  const getStructure = () => {
+  const getStructure = (source) => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/structure/allapp`)
+      .get(`${import.meta.env.VITE_PATH}/structure/allapp`, {
+        cancelToken: source.token,
+      })
       .then((res) => {
         setStructure(res.data);
       })
       .catch((err) => {
-        console.error(err);
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
       });
   };
   useEffect(() => {
-    getStructure();
+    const source = axios.CancelToken.source();
+    getStructure(source);
+    return () => {
+      source.cancel();
+    };
   }, []);
-
-  // --- likes des familles ---
-  const [familleLiked, setFamilleLiked] = useState();
-
-  const getFamilleLiked = () => {
-    axios
-      .get(`${import.meta.env.VITE_PATH}/famille/likes/${familleId}`)
-      .then((res) => {
-        setFamilleLiked(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-  useEffect(() => {
-    getFamilleLiked();
-  }, [familleId]);
 
   // --- les filtres ---
   const [dataBasique, setDataBasique] = useState({
@@ -90,9 +83,7 @@ function AppliSearch() {
           dataDateHeure={dataDateHeure}
           dataServices={dataServices}
           dataAggrements={dataAggrements}
-          familleLiked={familleLiked}
           familleId={familleId}
-          getFamilleLiked={getFamilleLiked}
         />
       );
     }
@@ -154,14 +145,12 @@ function AppliSearch() {
         dataDateHeure={dataDateHeure}
         dataServices={dataServices}
         dataAggrements={dataAggrements}
-        familleLiked={familleLiked}
         familleId={familleId}
-        getFamilleLiked={getFamilleLiked}
       />
     );
   };
 
-  return familleLiked && <div className="applisearch">{choixComposant()}</div>;
+  return <div className="applisearch">{choixComposant()}</div>;
 }
 
 export default AppliSearch;

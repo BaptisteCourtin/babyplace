@@ -4,7 +4,7 @@ import axios from "axios";
 import { AiOutlineHeart, AiFillHeart, AiFillStar } from "react-icons/ai";
 import PropTypes from "prop-types";
 
-function CardCrecheMap({ data, familleLiked, familleId, getFamilleLiked }) {
+function CardCrecheMap({ data, familleLiked, familleId }) {
   const {
     photoStructure1,
     structureId,
@@ -59,19 +59,25 @@ function CardCrecheMap({ data, familleLiked, familleId, getFamilleLiked }) {
         });
       setThisLiked(true);
     }
-    getFamilleLiked();
   };
 
   // ---
+
   const [dataHorairesId, setDataHorairesId] = useState([]);
-  const getHorairesId = () => {
+  const getHorairesId = (source) => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/horaires/${structureId}`)
+      .get(`${import.meta.env.VITE_PATH}/horaires/${structureId}`, {
+        cancelToken: source.token,
+      })
       .then((res) => {
         setDataHorairesId(res.data);
       })
       .catch((err) => {
-        console.error(err);
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
       });
   };
 
@@ -93,8 +99,12 @@ function CardCrecheMap({ data, familleLiked, familleId, getFamilleLiked }) {
   };
 
   useEffect(() => {
-    getHorairesId();
+    const source = axios.CancelToken.source();
+    getHorairesId(source);
     staring();
+    return () => {
+      source.cancel();
+    };
   }, []);
 
   return (
@@ -130,8 +140,7 @@ function CardCrecheMap({ data, familleLiked, familleId, getFamilleLiked }) {
 CardCrecheMap.propTypes = {
   data: PropTypes.object.isRequired,
   familleLiked: PropTypes.array.isRequired,
-  familleId: PropTypes.number,
-  getFamilleLiked: PropTypes.func.isRequired,
+  familleId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 export default CardCrecheMap;

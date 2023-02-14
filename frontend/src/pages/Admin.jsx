@@ -9,12 +9,20 @@ function Admin() {
   const [data, setData] = useState([]);
   const [userType, setUserType] = useState(null);
 
-  const getStructure = async () => {
+  const [newGet, setNewGet] = useState(true);
+
+  const getStructure = async (source) => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_PATH}/admin`);
+      const res = await axios.get(`${import.meta.env.VITE_PATH}/admin`, {
+        cancelToken: source.token,
+      });
       setData(res.data);
     } catch (err) {
-      console.error(err.message);
+      if (err.code === "ERR_CANCELED") {
+        console.warn("cancel request");
+      } else {
+        console.error(err);
+      }
     }
   };
 
@@ -28,7 +36,7 @@ function Admin() {
       );
       toast.success("L'utilisateur a bien été approuvé"),
         sendEmailVerified(email),
-        getStructure();
+        setNewGet(!newGet);
     } catch (err) {
       console.error(err.message);
     }
@@ -47,7 +55,7 @@ function Admin() {
       );
       toast.error("L'utilisateur a bien été supprimé"),
         sendEmailRefused(email),
-        getStructure();
+        setNewGet(!newGet);
     } catch (err) {
       console.error(err.message);
     }
@@ -82,8 +90,12 @@ function Admin() {
     //   toast.error("Vous n'avez pas l'autorisation d'accéder à cette page");
     //   navigate("/");
     // }
-    getStructure();
-  }, []);
+    const source = axios.CancelToken.source();
+    getStructure(source);
+    return () => {
+      source.cancel();
+    };
+  }, [newGet]);
 
   return (
     <main className="admin">
@@ -93,8 +105,8 @@ function Admin() {
         <ul>
           {data
             .filter((el) => el.isSignaled == 0)
-            .map((d) => (
-              <li>
+            .map((d, index) => (
+              <li key={index}>
                 <div className="adminSectionImg">
                   <img src={d?.photoProfil} />
                   {d.isCreche ? (

@@ -47,7 +47,7 @@ function OpenDashStatus({
 OpenDashStatus.propTypes = {
   fc: PropTypes.object.isRequired,
   maxPlaces: PropTypes.number.isRequired,
-  places: PropTypes.number.isRequired,
+  places: PropTypes.number,
   setPlaces: PropTypes.func.isRequired,
   setCalendarIndex: PropTypes.func.isRequired,
   updatePlaces: PropTypes.func.isRequired,

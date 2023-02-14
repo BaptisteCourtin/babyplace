@@ -13,10 +13,14 @@ function Structure3({
   const [image1Src, setImage1Src] = useState(placeHolder);
   const [image2Src, setImage2Src] = useState(placeHolder);
   const [image3Src, setImage3Src] = useState(placeHolder);
-  const getPicture = () => {
+
+  const getPicture = (source) => {
     Axios.get(
       `${import.meta.env.VITE_PATH}/photosStructure?id=${structureId}`,
-      [structureId]
+      {
+        structureId,
+        cancelToken: source.token,
+      }
     )
       .then((result) => {
         if (result.data[0].photoStructure1 !== null) {
@@ -33,9 +37,21 @@ function Structure3({
         }
       })
       .catch((err) => {
-        console.error(err);
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
       });
   };
+
+  useEffect(() => {
+    const source = Axios.CancelToken.source();
+    getPicture(source);
+    return () => {
+      source.cancel();
+    };
+  }, []);
 
   const updateImg1 = (e) => {
     // e.files contient un objet FileList
@@ -74,9 +90,6 @@ function Structure3({
     }
   };
 
-  useEffect(() => {
-    getPicture();
-  }, []);
   return (
     <div className="structure3">
       <h4>Égayez votre annonce avec des photos</h4>

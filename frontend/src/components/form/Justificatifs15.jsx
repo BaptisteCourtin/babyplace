@@ -33,22 +33,30 @@ function Structure15({
 }) {
   const { structure } = useContext(StructureContext);
 
-  const getDocs = () => {
-    Axios.get(`${import.meta.env.VITE_PATH}/docPmi?id=${structureId}`, [
+  const getDocs = (source) => {
+    Axios.get(`${import.meta.env.VITE_PATH}/docPmi?id=${structureId}`, {
       structureId,
-    ])
+      cancelToken: source.token,
+    })
       .then((result) => {
         if (result.data[0].docPmi !== null) {
           updateFields({ docPmi: result.data[0].docPmi });
         }
       })
       .catch((err) => {
-        console.error(err);
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
       });
     if (structure === "assmat") {
       Axios.get(
         `${import.meta.env.VITE_PATH}/justificatifs?id=${structureId}`,
-        [structureId]
+        {
+          structureId,
+          cancelToken: source.token,
+        }
       )
         .then((result) => {
           if (result.data[0].docIdentite !== null) {
@@ -71,13 +79,21 @@ function Structure15({
           }
         })
         .catch((err) => {
-          console.error(err);
+          if (err.code === "ERR_CANCELED") {
+            console.warn("cancel request");
+          } else {
+            console.error(err);
+          }
         });
     }
   };
 
   useEffect(() => {
-    getDocs();
+    const source = Axios.CancelToken.source();
+    getDocs(source);
+    return () => {
+      source.cancel();
+    };
   }, []);
 
   return (

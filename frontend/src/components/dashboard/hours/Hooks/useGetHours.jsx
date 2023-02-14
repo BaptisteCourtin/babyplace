@@ -36,7 +36,7 @@ const useGetHours = (structureId, userType) => {
     return false;
   });
 
-  const getData = async () => {
+  const getData = async (source) => {
     try {
       const res = await axios.get(
         `${
@@ -45,6 +45,7 @@ const useGetHours = (structureId, userType) => {
         {
           id: structureId,
           type: userType,
+          cancelToken: source.token,
         }
       );
       setData(res.data[0]);
@@ -55,21 +56,30 @@ const useGetHours = (structureId, userType) => {
       setIndemn2(res.data[0].indemnKm);
       setIndemn3(res.data[0].indemnRepas);
     } catch (err) {
-      console.error(err.message);
+      if (err.code === "ERR_CANCELED") {
+        console.warn("cancel request");
+      } else {
+        console.error(err);
+      }
     }
   };
 
-  const getHoraires = async () => {
+  const getHoraires = async (source) => {
     try {
       const res = await axios.get(
         `${import.meta.env.VITE_PATH}/horaires/${structureId}`,
         {
           id: structureId,
+          cancelToken: source.token,
         }
       );
       setHoraires(res.data);
     } catch (err) {
-      console.error(err.message);
+      if (err.code === "ERR_CANCELED") {
+        console.warn("cancel request");
+      } else {
+        console.error(err);
+      }
     }
   };
 

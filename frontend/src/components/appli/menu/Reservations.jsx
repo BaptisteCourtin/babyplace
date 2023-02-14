@@ -6,18 +6,28 @@ import PropTypes from "prop-types";
 function Reservations({ setCompo, familleId }) {
   const [allReservation, setAllReservation] = useState([]);
 
-  const getAllReservation = () => {
+  const getAllReservation = (source) => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/getReservationPayed/${familleId}`)
+      .get(`${import.meta.env.VITE_PATH}/getReservationPayed/${familleId}`, {
+        cancelToken: source.token,
+      })
       .then((res) => {
         setAllReservation(res.data);
       })
       .catch((err) => {
-        console.error(err);
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
       });
   };
   useEffect(() => {
-    getAllReservation();
+    const source = axios.CancelToken.source();
+    getAllReservation(source);
+    return () => {
+      source.cancel();
+    };
   }, [familleId]);
 
   return (

@@ -4,8 +4,10 @@ import { toast } from "react-hot-toast";
 const usePutHours = (
   structureId,
   userType,
-  getData,
-  getHoraires,
+  newData,
+  setNewData,
+  newHoraire,
+  setNewHoraire,
   horairesId,
   toggleDay,
   setToggleDay
@@ -25,7 +27,7 @@ const usePutHours = (
         }
       );
       toast.success("Vos tarifs ont bien été modifiés");
-      getData();
+      setNewData(!newData);
     } catch (err) {
       console.error(err.message);
     }
@@ -46,7 +48,7 @@ const usePutHours = (
         }
       );
       toast.success("Vos indemnités ont bien été modifiées");
-      getData();
+      setNewData(!newData);
     } catch (err) {
       console.error(err.message);
     }
@@ -63,7 +65,7 @@ const usePutHours = (
         }
       );
       toast.success("Vos options ont bien été modifiées");
-      getData();
+      setNewData(!newData);
     } catch (err) {
       console.error(err.message);
     }
@@ -83,7 +85,7 @@ const usePutHours = (
         id: "horaires",
         duration: 2000,
       });
-      getHoraires();
+      setNewHoraire(!newHoraire);
     } catch (err) {
       console.error(err.message);
     }
@@ -100,7 +102,7 @@ const usePutHours = (
         }
       );
       toast.success("Vos préférences ont bien été modifiées");
-      getHoraires();
+      setNewHoraire(!newHoraire);
     } catch (err) {
       console.error(err.message);
     }

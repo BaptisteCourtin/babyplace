@@ -1,35 +1,37 @@
 import useMultistepForm from "@components/form/useMultistepForm";
 import React, { useState, useEffect, useContext, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import Axios from "axios";
+
 import StructureContext from "@components/context/StructureContext";
 import ResaContext from "@components/context/ResaContext";
 import UserEmailContext from "@components/context/UserEmailContext";
+import Structure1 from "@components/form/InfoAdmin1";
+import Structure2 from "@components/form/PhotoProfil2";
+import Structure3 from "@components/form/PhotosStructure3";
+import Structure4 from "@components/form/Description4";
+import Structure5 from "@components/form/Formation5";
+import Structure6 from "@components/form/Conditions6";
+import Structure7 from "@components/form/ChoixResa7";
+import Structure8 from "@components/form/RecapResa8";
+import Structure9 from "@components/form/Horaires9";
+import Structure10 from "@components/form/Duree10";
+import Structure11 from "@components/form/Calendrier11";
+import Structure12 from "@components/form/NbPlaces12";
+import Structure13 from "@components/form/Tarifs13";
+import Structure14 from "@components/form/RecapFinal14";
+import Structure15 from "@components/form/Justificatifs15";
+import Structure16 from "@components/form/FinFormulaire16";
+
 import imgTime from "@assets/img-time.svg";
-import { useNavigate } from "react-router-dom";
 import logotxt from "@assets/babyplaceTxt.svg";
-import Structure1 from "../components/form/InfoAdmin1";
-import Structure2 from "../components/form/PhotoProfil2";
-import Structure3 from "../components/form/PhotosStructure3";
-import Structure4 from "../components/form/Description4";
-import Structure5 from "../components/form/Formation5";
-import Structure6 from "../components/form/Conditions6";
-import Structure7 from "../components/form/ChoixResa7";
-import Structure8 from "../components/form/RecapResa8";
-import Structure9 from "../components/form/Horaires9";
-import Structure10 from "../components/form/Duree10";
-import Structure11 from "../components/form/Calendrier11";
-import Structure12 from "../components/form/NbPlaces12";
-import Structure13 from "../components/form/Tarifs13";
-import Structure14 from "../components/form/RecapFinal14";
-import Structure15 from "../components/form/Justificatifs15";
-import Structure16 from "../components/form/FinFormulaire16";
-import imgDossier from "../assets/img-dossier.svg";
-import imgCopie from "../assets/landing page/image2.svg";
-import selfie from "../assets/selfie.svg";
-import profilJM from "../assets/profilJM.png";
-import profilCPP from "../assets/profilCPP.jpg";
-import imgWoman from "../assets/img-woman.svg";
-import logo from "../assets/logo4.svg";
+import imgDossier from "@assets/img-dossier.svg";
+import imgCopie from "@assets/landing page/image2.svg";
+import selfie from "@assets/selfie.svg";
+import profilJM from "@assets/profilJM.png";
+import profilCPP from "@assets/profilCPP.jpg";
+import imgWoman from "@assets/img-woman.svg";
+import logo from "@assets/logo4.svg";
 
 const INITIAL_DATA = {
   isCreche: null,
@@ -126,6 +128,9 @@ const INITIAL_DATA = {
 
 function FormStructure() {
   const navigate = useNavigate();
+  const { userEmail, structureId, setStructureId } =
+    useContext(UserEmailContext);
+
   const inputRef = useRef(null);
   const inputRef1 = useRef(null);
   const inputRef2 = useRef(null);
@@ -137,34 +142,42 @@ function FormStructure() {
   const inputRefDiplome = useRef(null);
   const inputRefResp = useRef(null);
   const inputRefAuto = useRef(null);
+
   const [data, setData] = useState(INITIAL_DATA);
   const [structure, setStructure] = useState("");
   const [resaInst, setResaInst] = useState("");
-  const { userEmail, structureId, setStructureId } =
-    useContext(UserEmailContext);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const [showExplications, setShowExplications] = useState(
-    window.innerWidth > 1000
-  );
   const [closedDays, setClosedDays] = useState([]);
   const [horairesExist, setHorairesExist] = useState(null);
   const [closePage, setClosePage] = useState(false);
+  const [showExplications, setShowExplications] = useState(
+    window.innerWidth > 1000
+  );
+
+  // --- taille de l'écran ---
   const updateSize = () => {
     setScreenWidth(window.innerWidth);
     if (window.innerWidth < 1000) {
       setShowExplications(false);
     } else setShowExplications(true);
   };
-  useEffect(() => (window.onresize = updateSize), []);
+  useEffect(() => {
+    window.onresize = updateSize;
+  }, []);
+
+  // --- update fields ---
   function updateFields(fields) {
     setData((prev) => {
       return { ...prev, ...fields };
     });
   }
 
+  // --- 2 useEffect ---
   useEffect(() => {
+    const source = Axios.CancelToken.source();
     Axios.get(`${import.meta.env.VITE_PATH}/isCreche?email=${userEmail}`, {
       userEmail,
+      cancelToken: source.token,
     })
       .then((result) => {
         setStructureId(result.data.structureId);
@@ -177,15 +190,23 @@ function FormStructure() {
         }
       })
       .catch((err) => {
-        console.error(err);
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
       });
+    return () => {
+      source.cancel();
+    };
   }, []);
 
   useEffect(() => {
+    const source = Axios.CancelToken.source();
     if (structure === "creche") {
       Axios.get(
         `${import.meta.env.VITE_PATH}/getCrecheInfo?email=${userEmail}`,
-        { userEmail }
+        { userEmail, cancelToken: source.token }
       )
         .then((result) => {
           setResaInst(result.data.resaInst);
@@ -233,12 +254,16 @@ function FormStructure() {
           });
         })
         .catch((err) => {
-          console.error(err);
+          if (err.code === "ERR_CANCELED") {
+            console.warn("cancel request");
+          } else {
+            console.error(err);
+          }
         });
     } else if (structure === "assmat") {
       Axios.get(
         `${import.meta.env.VITE_PATH}/getAssmatInfo?email=${userEmail}`,
-        { userEmail }
+        { userEmail, cancelToken: source.token }
       )
         .then((result) => {
           setStructureId(result.data.structureId);
@@ -308,11 +333,20 @@ function FormStructure() {
           });
         })
         .catch((err) => {
-          console.error(err);
+          if (err.code === "ERR_CANCELED") {
+            console.warn("cancel request");
+          } else {
+            console.error(err);
+          }
         });
     }
+    return () => {
+      source.cancel();
+    };
   }, [structure]);
+  // --- fin useEffect ---
 
+  // --- choix de la page ---
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
     useMultistepForm([
       <Structure1 {...data} updateFields={updateFields} />,
@@ -367,6 +401,8 @@ function FormStructure() {
       />,
       <Structure16 />,
     ]);
+
+  // --- choix du titre ---
   const pageTitle = () => {
     switch (currentStepIndex) {
       case 0:
@@ -403,6 +439,7 @@ function FormStructure() {
     }
   };
 
+  // --- choix image ---
   const imgExplication = () => {
     switch (currentStepIndex) {
       case 0:
@@ -459,6 +496,8 @@ function FormStructure() {
         return "";
     }
   };
+
+  // --- choix titre explication ---
   const explicationTitle = () => {
     switch (currentStepIndex) {
       case 0:
@@ -479,6 +518,8 @@ function FormStructure() {
         return "";
     }
   };
+
+  // --- choix text explication ---
   const explicationText = () => {
     switch (currentStepIndex) {
       case 0:
@@ -504,6 +545,7 @@ function FormStructure() {
     }
   };
 
+  // --- déconnection ---
   const logout = async () => {
     try {
       await Axios.put(`${import.meta.env.VITE_PATH}/logout/${structureId}`, {
@@ -518,6 +560,7 @@ function FormStructure() {
     }
   };
 
+  // --- choix enregistrement selon la page ---
   const onSubmit = (e) => {
     e.preventDefault();
     const {
@@ -612,6 +655,7 @@ function FormStructure() {
       docAssAuto,
     } = data;
     const email = userEmail;
+
     if (!isLastStep) {
       if (currentStepIndex === 0 && structure === "creche") {
         Axios.get(`${import.meta.env.VITE_PATH}/crecheExist?email=${email}`, {
@@ -1219,6 +1263,7 @@ function FormStructure() {
       }
     } else logout();
   };
+
   return (
     <StructureContext.Provider value={{ structure, setStructure }}>
       <ResaContext.Provider value={{ resaInst, setResaInst }}>

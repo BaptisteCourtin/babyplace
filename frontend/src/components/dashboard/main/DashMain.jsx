@@ -194,8 +194,8 @@ function DashMain({ data, fav, horaires, reser, approvedReser }) {
         <div className="dashFav">
           <h3>Favoris de</h3>
           <ul>
-            {fav.map((f) => (
-              <li>
+            {fav.map((f, index) => (
+              <li key={index}>
                 <p className="dashFavText dashFavName">
                   {f.prenom} {f.nom}
                 </p>

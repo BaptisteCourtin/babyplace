@@ -16,10 +16,13 @@ function Structure11({
   structureId,
   setData,
 }) {
-  const getCalendrier = () => {
+  const getCalendrier = (source) => {
     Axios.get(
       `${import.meta.env.VITE_PATH}/calendrierExist?id=${structureId}`,
-      { structureId }
+      {
+        structureId,
+        cancelToken: source.token,
+      }
     )
       .then((result) => {
         const indispo = [];
@@ -37,9 +40,22 @@ function Structure11({
         });
       })
       .catch((err) => {
-        console.error(err);
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
       });
   };
+
+  useEffect(() => {
+    const source = Axios.CancelToken.source();
+    getCalendrier(source);
+    return () => {
+      source.cancel();
+    };
+  }, []);
+
   const isOpenDay = (e) => {
     const clickedDayFormated = `${e.getFullYear()}-${
       e.getMonth() + 1
@@ -80,9 +96,7 @@ function Structure11({
       return "";
     }
   };
-  useEffect(() => {
-    getCalendrier();
-  }, []);
+
   return (
     <div className="structure11 page-left">
       <h4>Calendrier de vos indisponibilités</h4>

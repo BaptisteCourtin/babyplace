@@ -15,36 +15,51 @@ function AppliNotif() {
 
   const [photoFamille, setPhotoFamille] = useState();
 
-  const getFamilleInfo = () => {
+  const getFamilleInfo = (source) => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/famille/info/${familleId}`)
+      .get(`${import.meta.env.VITE_PATH}/famille/info/${familleId}`, {
+        cancelToken: source.token,
+      })
       .then((res) => {
         setPhotoFamille(res.data[1][0].photoProfilFamille);
       })
       .catch((err) => {
-        console.error(err);
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
       });
   };
-  useEffect(() => {
-    getFamilleInfo();
-  }, [familleId]);
 
   // --- get reservation refused ET approved ---
 
   const [allReservation, setAllReservation] = useState([]);
 
-  const getAllReservation = () => {
+  const getAllReservation = (source) => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/reservationAR/${familleId}`)
+      .get(`${import.meta.env.VITE_PATH}/reservationAR/${familleId}`, {
+        cancelToken: source.token,
+      })
       .then((res) => {
         setAllReservation(res.data);
       })
       .catch((err) => {
-        console.error(err);
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
       });
   };
+
   useEffect(() => {
-    getAllReservation();
+    const source = axios.CancelToken.source();
+    getFamilleInfo(source);
+    getAllReservation(source);
+    return () => {
+      source.cancel();
+    };
   }, [familleId]);
 
   // ---

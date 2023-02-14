@@ -1,4 +1,5 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
+import axios from "axios";
 import PropTypes from "prop-types";
 import usePutParams from "./Hooks/usePutParams";
 import useDeleteParams from "./Hooks/useDeleteParams";
@@ -50,6 +51,8 @@ function DashParams({
 
   const fileName = "";
 
+  const [newGetData, setNewGetData] = useState(true);
+
   const [infos, setInfos] = useState({
     nom,
     prenom,
@@ -68,12 +71,18 @@ function DashParams({
   const { handleSubmitInfo, updatePassword } = usePutParams(
     structureId,
     userType,
-    getData,
+    newGetData,
+    setNewGetData,
     infos,
     newPwd,
     cNewPwd
   );
-  const { uploadDoc } = useUploadParams(structureId, getData, fileName);
+  const { uploadDoc } = useUploadParams(
+    structureId,
+    newGetData,
+    setNewGetData,
+    fileName
+  );
   const { deleteAccount } = useDeleteParams(
     email,
     deleteMail,
@@ -87,6 +96,15 @@ function DashParams({
       return { ...prev, ...fields };
     });
   };
+
+  // useEffect get data ???
+  useEffect(() => {
+    const source = axios.CancelToken.source();
+    getData(source);
+    return () => {
+      source.cancel();
+    };
+  }, [newGetData]);
 
   return (
     <div className="dashParams">

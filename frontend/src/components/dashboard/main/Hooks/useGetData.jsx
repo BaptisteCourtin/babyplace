@@ -7,12 +7,13 @@ const useGetAllData = (token) => {
   const [details, setDetails] = useState([]);
   const [notif, setNotif] = useState([]);
 
-  const getData = async () => {
+  const getData = async (source) => {
     try {
       const res = await axios.get(`${import.meta.env.VITE_PATH}/structure`, {
         headers: {
           "x-token": token,
         },
+        cancelToken: source.token,
       });
       setDonnees(res.data[0]);
       if (res?.data[0]?.isCreche === 0) {
@@ -23,6 +24,7 @@ const useGetAllData = (token) => {
             }`,
             {
               id: res.data[0].structureId,
+              cancelToken: source.token,
             }
           )
           .then((res) => {
@@ -37,6 +39,7 @@ const useGetAllData = (token) => {
             }`,
             {
               id: res.data[0].structureId,
+              cancelToken: source.token,
             }
           )
           .then((res) => {
@@ -45,23 +48,32 @@ const useGetAllData = (token) => {
           });
       }
     } catch (err) {
-      console.error(err.message);
+      if (err.code === "ERR_CANCELED") {
+        console.warn("cancel request");
+      } else {
+        console.error(err);
+      }
     }
   };
 
   const data = Object?.assign(donnees, details);
 
-  const getNotifications = async () => {
+  const getNotifications = async (source) => {
     try {
       const res = await axios.get(
         `${import.meta.env.VITE_PATH}/notifications/${data.structureId}`,
         {
           id: data.structureId,
+          cancelToken: source.token,
         }
       );
       setNotif(res.data);
     } catch (err) {
-      console.error(err.message);
+      if (err.code === "ERR_CANCELED") {
+        console.warn("cancel request");
+      } else {
+        console.error(err);
+      }
     }
   };
 

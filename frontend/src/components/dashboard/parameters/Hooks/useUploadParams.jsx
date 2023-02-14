@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-hot-toast";
 
-const useUploadParams = (structureId, getData, fileName) => {
+const useUploadParams = (structureId, newGetData, setNewGetData, fileName) => {
   const uploadDoc = async (value, docData, ref, table) => {
     try {
       docData = new FormData();
@@ -18,7 +18,7 @@ const useUploadParams = (structureId, getData, fileName) => {
         table,
       });
       toast.success("Votre profil a bien été mis à jour");
-      getData();
+      setNewGetData(!newGetData);
     } catch (err) {
       console.error(err.message);
     }

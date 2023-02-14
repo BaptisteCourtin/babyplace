@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import axios from "axios";
+
 import DashNavbar from "./nav/DashNavbar";
 import DashMain from "./main/DashMain";
 import DashFooter from "./main/DashFooter";
 import DashNotif from "./main/DashNotif";
 import DashTopbar from "./main/DashTopbar";
+
 import usePageToggle from "./main/Hooks/usePageToggle";
 import useDeleteData from "./main/Hooks/useDeleteData";
 import useGetAllData from "./main/Hooks/useGetData";
@@ -28,6 +31,7 @@ function Dashboard() {
   const { horaires, getHoraires } = useGetHours(id, userType);
   const { reser, getReser, approvedReser, getApprovedReser } =
     useGetReservations(id);
+
   const { pageShown, toggle, setToggle } = usePageToggle(
     data,
     userType,
@@ -40,13 +44,17 @@ function Dashboard() {
       navigate("/");
       toast.error("Vous n'êtes pas connecté");
     }
-    getData();
-    getReser();
-    getApprovedReser();
-    getHoraires();
-    getFavorites();
-    getNotifications();
+    const source = axios.CancelToken.source();
+    getData(source);
+    getReser(source);
+    getApprovedReser(source);
+    getHoraires(source);
+    getFavorites(source);
+    getNotifications(source);
     deleteDates();
+    return () => {
+      source.cancel();
+    };
   }, [toggle]);
 
   return (

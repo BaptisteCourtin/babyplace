@@ -4,7 +4,8 @@ import { toast } from "react-hot-toast";
 const usePutParams = (
   structureId,
   userType,
-  getData,
+  newGetData,
+  setNewGetData,
   infos,
   newPwd,
   cNewPwd
@@ -45,7 +46,7 @@ const usePutParams = (
         }
       );
       toast.success("Vos informations ont bien été modifiées");
-      getData();
+      setNewGetData(!newGetData);
     } catch (err) {
       console.error(err.message);
     }

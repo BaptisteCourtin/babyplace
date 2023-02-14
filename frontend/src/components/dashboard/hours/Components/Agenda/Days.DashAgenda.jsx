@@ -43,7 +43,7 @@ function DaysDashAgenda({
 
 DaysDashAgenda.propTypes = {
   horaires: PropTypes.array.isRequired,
-  selected: PropTypes.array,
+  selected: PropTypes.string,
   setSelected: PropTypes.func.isRequired,
   setToggleDay: PropTypes.func.isRequired,
   setDayId: PropTypes.func.isRequired,

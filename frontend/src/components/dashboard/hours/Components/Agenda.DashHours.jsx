@@ -51,7 +51,7 @@ Agenda.propTypes = {
   updateHours: PropTypes.func.isRequired,
   updateDay: PropTypes.func.isRequired,
   horaires: PropTypes.array.isRequired,
-  toggleDay: PropTypes.bool,
+  toggleDay: PropTypes.number,
   setToggleDay: PropTypes.func.isRequired,
   selected: PropTypes.string,
   setSelected: PropTypes.func.isRequired,

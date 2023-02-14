@@ -26,8 +26,8 @@ function FullDashStatus({ fc, updateStatusClose, fullDate }) {
 
 FullDashStatus.propTypes = {
   fc: PropTypes.object.isRequired,
-  updateStatusOpen: PropTypes.func.isRequired,
-  fullDate: PropTypes.string.isRequired,
+  updateStatusOpen: PropTypes.func,
+  fullDate: PropTypes.func.isRequired,
 };
 
 export default FullDashStatus;

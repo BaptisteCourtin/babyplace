@@ -9,9 +9,7 @@ import PropTypes from "prop-types";
 function BaseCard({
   setCompo,
   Allstructure,
-  familleLiked,
   familleId,
-  getFamilleLiked,
   // filtres
   dataBasique,
   dataDateHeure,
@@ -19,6 +17,30 @@ function BaseCard({
   dataAggrements,
 }) {
   const [tri, setTri] = useState("Recent");
+
+  // --- likes des familles ---
+  const [familleLiked, setFamilleLiked] = useState();
+
+  const getFamilleLiked = (source) => {
+    axios
+      .get(`${import.meta.env.VITE_PATH}/famille/likes/${familleId}`, {
+        cancelToken: source.token,
+      })
+      .then((res) => {
+        setFamilleLiked(res.data);
+      })
+      .catch((err) => {
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
+      });
+  };
+  useEffect(() => {
+    const source = axios.CancelToken.source();
+    getFamilleLiked(source);
+  }, [familleId]);
 
   // --- position user ---
   const [ville, setVille] = useState();
@@ -186,7 +208,6 @@ function BaseCard({
                     userPosition={userPosition}
                     familleLiked={familleLiked}
                     familleId={familleId}
-                    getFamilleLiked={getFamilleLiked}
                     dataDateHeure={dataDateHeure}
                   />
                 )
@@ -200,9 +221,7 @@ function BaseCard({
 BaseCard.propTypes = {
   setCompo: PropTypes.func.isRequired,
   Allstructure: PropTypes.array.isRequired,
-  familleLiked: PropTypes.array.isRequired,
   familleId: PropTypes.string,
-  getFamilleLiked: PropTypes.func.isRequired,
 
   dataBasique: PropTypes.object.isRequired,
   dataDateHeure: PropTypes.object.isRequired,

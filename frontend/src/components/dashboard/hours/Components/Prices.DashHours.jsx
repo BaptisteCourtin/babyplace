@@ -72,11 +72,11 @@ function PricesDashHours({
 PricesDashHours.propTypes = {
   userType: PropTypes.string.isRequired,
   updateTarif: PropTypes.func.isRequired,
-  hour1: PropTypes.number,
+  hour1: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   setHour1: PropTypes.func.isRequired,
-  hour2: PropTypes.number,
+  hour2: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   setHour2: PropTypes.func.isRequired,
-  hour3: PropTypes.number,
+  hour3: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   setHour3: PropTypes.func.isRequired,
 };
 

@@ -9,19 +9,27 @@ function Signalement() {
   const [data, setData] = useState([]);
   const [userType, setUserType] = useState(null);
 
-  const getStructure = async () => {
+  const [newGet, setNewGet] = useState(true);
+
+  const getStructure = async (source) => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_PATH}/admin`);
+      const res = await axios.get(`${import.meta.env.VITE_PATH}/admin`, {
+        cancelToken: source.token,
+      });
       setData(res.data);
     } catch (err) {
-      console.error(err.message);
+      if (err.code === "ERR_CANCELED") {
+        console.warn("cancel request");
+      } else {
+        console.error(err);
+      }
     }
   };
 
   const setUnsignaled = (structureId, email) => {
     axios.put(`${import.meta.env.VITE_PATH}/admin/unsignaled/${structureId}`);
     toast.success("L'utilisateur a bien été ré-approuvé");
-    getStructure();
+    setNewGet(!newGet);
   };
 
   const setSupprim = async (structureId, email) => {
@@ -37,7 +45,7 @@ function Signalement() {
       );
       toast.error("L'utilisateur a bien été supprimé"),
         sendEmailSupprimer(email),
-        getStructure();
+        setNewGet(!newGet);
     } catch (err) {
       console.error(err.message);
     }
@@ -68,8 +76,12 @@ function Signalement() {
   };
 
   useEffect(() => {
-    getStructure();
-  }, [setUnsignaled]);
+    const source = axios.CancelToken.source();
+    getStructure(source);
+    return () => {
+      source.cancel();
+    };
+  }, [newGet]);
 
   return (
     <main className="signalement">

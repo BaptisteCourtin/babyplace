@@ -16,9 +16,11 @@ function AppliUser() {
   const [donneesOK, setDonneesOK] = useState(false);
 
   const { familleId } = useContext(FamilleContext);
-  const getPourcentForm = () => {
+  const getPourcentForm = (source) => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/famille/pourcent/${familleId}`)
+      .get(`${import.meta.env.VITE_PATH}/famille/pourcent/${familleId}`, {
+        cancelToken: source.token,
+      })
       .then((res) => {
         setPourcentFormParent(res.data[0][0].pourcentFormParent);
         setPourcentFormEnfant(res.data[1]);
@@ -30,11 +32,19 @@ function AppliUser() {
         setDonneesOK(true);
       })
       .catch((err) => {
-        console.error(err);
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
       });
   };
   useEffect(() => {
-    getPourcentForm();
+    const source = axios.CancelToken.source();
+    getPourcentForm(source);
+    return () => {
+      source.cancel();
+    };
   }, [familleId]);
 
   // --- pour avoir le vrai pourcent des enfants ---

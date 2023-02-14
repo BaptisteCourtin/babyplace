@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Nav from "./Nav.admin";
 import ModalMessageAdmin from "./components/ModalMessageAdmin";
 import ResponseModalAdmin from "./components/ResponseModalAdmin";
@@ -15,6 +16,7 @@ function MessageAdmin() {
   const [selectedMessage, setSelectedMessage] = useState("");
 
   const { getAllMessages, messageAdminData } = useGetAllMessages();
+  const [newGetMessage, setNewGetMessage] = useState(true);
 
   const deleteMessage = (id) => {
     setSelectedId(id);
@@ -31,13 +33,17 @@ function MessageAdmin() {
   };
 
   const closeRes = () => {
-    getAllMessages();
+    setNewGetMessage(!newGetMessage);
     setIsOpen(!isOpen);
   };
 
   useEffect(() => {
-    getAllMessages();
-  }, []);
+    const source = axios.CancelToken.source();
+    getAllMessages(source);
+    return () => {
+      source.cancel();
+    };
+  }, [newGetMessage]);
 
   return (
     <div className="messageAdmin">

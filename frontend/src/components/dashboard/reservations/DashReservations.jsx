@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import PropTypes from "prop-types";
 import useGetReservations from "./Hooks/useGetReservations";
 import usePutReservations from "./Hooks/usePutReservations";
@@ -12,7 +13,11 @@ function DashReservations({ tarifHeure, structureId }) {
   const { updateStatus } = usePutReservations(getReser);
 
   useEffect(() => {
-    getReser();
+    const source = axios.CancelToken.source();
+    getReser(source);
+    return () => {
+      source.cancel();
+    };
   }, [statusToggle]);
 
   return (

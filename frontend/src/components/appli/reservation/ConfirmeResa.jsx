@@ -19,18 +19,28 @@ function ConfirmeResa({
   const { familleId } = useContext(FamilleContext);
   const [photoFamille, setPhotoFamille] = useState();
 
-  const getFamilleInfo = () => {
+  const getFamilleInfo = (source) => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/famille/info/${familleId}`)
+      .get(`${import.meta.env.VITE_PATH}/famille/info/${familleId}`, {
+        cancelToken: source.token,
+      })
       .then((res) => {
         setPhotoFamille(res.data[1][0].photoProfilFamille);
       })
       .catch((err) => {
-        console.error(err);
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
       });
   };
   useEffect(() => {
-    getFamilleInfo();
+    const source = axios.CancelToken.source();
+    getFamilleInfo(source);
+    return () => {
+      source.cancel();
+    };
   }, [familleId]);
 
   return (

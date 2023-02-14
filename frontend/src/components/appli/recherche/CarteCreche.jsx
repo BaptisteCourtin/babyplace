@@ -10,7 +10,6 @@ function CarteCreche({
   userPosition,
   familleLiked,
   familleId,
-  getFamilleLiked,
   dataDateHeure,
 }) {
   const {
@@ -64,29 +63,40 @@ function CarteCreche({
         });
       setThisLiked(true);
     }
-    getFamilleLiked();
   };
 
   // --- les horaires de chaques jour suivant l'id de la structure
   const [dataCalendarId, setDataCalendarId] = useState();
 
-  const getCalendrierMoins = () => {
+  const getCalendrierMoins = (source) => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/calendrier/whereMoins/${structureId}`)
+      .get(
+        `${import.meta.env.VITE_PATH}/calendrier/whereMoins/${structureId}`,
+        {
+          cancelToken: source.token,
+        }
+      )
       .then((res) => {
         setDataCalendarId(res.data);
       })
       .catch((err) => {
-        console.error(err);
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
       });
   };
 
   const [dataHorairesId, setDataHorairesId] = useState([]);
-  const getHorairesId = () => {
+  const getHorairesId = (source) => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/horaires/${structureId}`)
+      .get(`${import.meta.env.VITE_PATH}/horaires/${structureId}`, {
+        cancelToken: source.token,
+      })
       .then((res) => {
         let numPlaceJour;
+
         const isNumber = () => {
           // true => recurrent
           // false => occasionnel
@@ -116,6 +126,7 @@ function CarteCreche({
           }
           return isWork;
         };
+
         if (
           dataDateHeure.jour === "" ||
           // dataDateHeure.jour N'EST PAS UN NOMBRE => occas
@@ -138,24 +149,38 @@ function CarteCreche({
         }
       })
       .catch((err) => {
-        console.error(err);
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
       });
   };
   useEffect(() => {
-    dataCalendarId !== undefined && getHorairesId();
+    const source = axios.CancelToken.source();
+    dataCalendarId !== undefined && getHorairesId(source);
+    return () => {
+      source.cancel();
+    };
   }, [dataCalendarId]);
 
   const [center, setCenter] = useState([0, 0]);
 
-  const handleDistance = () => {
+  const handleDistance = (source) => {
     // api convertir adresse en position gps
     axios
-      .get(`https://api-adresse.data.gouv.fr/search/?q=${adresse}`)
+      .get(`https://api-adresse.data.gouv.fr/search/?q=${adresse}`, {
+        cancelToken: source.token,
+      })
       .then((res) => {
         setCenter(res.data.features[0].geometry.coordinates.reverse());
       })
       .catch((err) => {
-        console.error(err);
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
       });
   };
 
@@ -213,9 +238,13 @@ function CarteCreche({
   };
 
   useEffect(() => {
-    getCalendrierMoins();
-    handleDistance();
+    const source = axios.CancelToken.source();
+    getCalendrierMoins(source);
+    handleDistance(source);
     staring();
+    return () => {
+      source.cancel();
+    };
   }, []);
 
   return (
@@ -272,7 +301,6 @@ CarteCreche.propTypes = {
   userPosition: PropTypes.array.isRequired,
   familleLiked: PropTypes.array.isRequired,
   familleId: PropTypes.string,
-  getFamilleLiked: PropTypes.func.isRequired,
   dataDateHeure: PropTypes.object.isRequired,
 };
 
