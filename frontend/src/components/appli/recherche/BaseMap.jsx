@@ -22,11 +22,33 @@ function BaseMap({
   dataBasique,
   dataServices,
   dataAggrements,
-  familleLiked,
   familleId,
-  getFamilleLiked,
 }) {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  // --- likes des familles ---
+  const [familleLiked, setFamilleLiked] = useState();
+
+  const getFamilleLiked = (source) => {
+    axios
+      .get(`${import.meta.env.VITE_PATH}/famille/likes/${familleId}`, {
+        cancelToken: source.token,
+      })
+      .then((res) => {
+        setFamilleLiked(res.data);
+      })
+      .catch((err) => {
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
+      });
+  };
+  useEffect(() => {
+    const source = axios.CancelToken.source();
+    getFamilleLiked(source);
+  }, [familleId]);
 
   // --- position user ---
   const [ville, setVille] = useState(); // donné par utilisateur
@@ -69,187 +91,188 @@ function BaseMap({
   });
 
   return (
-    <>
-      <div className="content">
-        <div className="appli-filtres">
-          <div className="left-filter">
-            <button
-              className="search-filtres"
-              type="button"
-              onClick={() => setCompo(3)}
-            >
-              <span>{BiFilterAlt()}Filtres</span>
-            </button>
-
-            <div className="vrai-localisation">
+    familleLiked !== undefined && (
+      <>
+        <div className="content">
+          <div className="appli-filtres">
+            <div className="left-filter">
               <button
+                className="search-filtres"
                 type="button"
-                onClick={() => {
-                  getVraiPosition();
-                }}
+                onClick={() => setCompo(3)}
               >
-                Votre position
+                <span>{BiFilterAlt()}Filtres</span>
               </button>
-            </div>
 
-            <form className="localisation">
-              <label htmlFor="ville">
-                <input
-                  required
-                  type="text"
-                  name="ville"
-                  id="ville"
-                  placeholder="une position"
-                  onChange={(event) => {
-                    setVille(event.target.value);
+              <div className="vrai-localisation">
+                <button
+                  type="button"
+                  onClick={() => {
+                    getVraiPosition();
                   }}
-                />
-              </label>
-              <button
-                className="butt-localisation"
-                type="submit"
-                onClick={(e) => {
-                  handleVille(e);
-                }}
-              >
-                Envoyer
-              </button>
-            </form>
+                >
+                  Votre position
+                </button>
+              </div>
+
+              <form className="localisation">
+                <label htmlFor="ville">
+                  <input
+                    required
+                    type="text"
+                    name="ville"
+                    id="ville"
+                    placeholder="une position"
+                    onChange={(event) => {
+                      setVille(event.target.value);
+                    }}
+                  />
+                </label>
+                <button
+                  className="butt-localisation"
+                  type="submit"
+                  onClick={(e) => {
+                    handleVille(e);
+                  }}
+                >
+                  Envoyer
+                </button>
+              </form>
+            </div>
+            <button
+              className="map-butt"
+              type="button"
+              onClick={() => setCompo(0)}
+            >
+              <BsCardList />
+            </button>
           </div>
-          <button
-            className="map-butt"
-            type="button"
-            onClick={() => setCompo(0)}
-          >
-            <BsCardList />
-          </button>
-        </div>
-      </div>
-
-      <main className="container-map">
-        <div className="map">
-          <MapContainer
-            center={center}
-            zoom={12}
-            style={{ width: "100%", height: "100%" }}
-          >
-            <TileLayer
-              url="https://api.maptiler.com/maps/basic-v2/256/{z}/{x}/{y}.png?key=JV4eU3swHqD1YPZtc09q"
-              attribution='<a ="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
-            />
-            {Allstructure
-              // creche, assmat ou les 2
-              .filter(
-                (each) =>
-                  dataBasique.isCreche === each.isCreche ||
-                  dataBasique.isCreche === 2
-              )
-              // false = tout le monde = pas de filtre
-              // true = filtrer pour avoir seulement ceux qui l'ont
-              .filter(
-                (each) =>
-                  (dataServices.pcsc1 === false ||
-                    dataServices.pcsc1 == each.pcsc1) &&
-                  (dataServices.handi === false ||
-                    dataServices.handi == each.handi) &&
-                  (dataServices.bilingue === false ||
-                    dataServices.bilingue == each.bilingue) &&
-                  (dataServices.jardin === false ||
-                    dataServices.jardin == each.jardin) &&
-                  // si ass mat
-                  (each.isCreche === 0
-                    ? (dataServices.animaux === false ||
-                        dataServices.animaux == each.animaux) &&
-                      (dataServices.nonFumeur === false ||
-                        dataServices.nonFumeur == each.nonFumeur) &&
-                      (dataServices.zeroPollution === false ||
-                        dataServices.zeroPollution == each.zeroPollution) &&
-                      (dataServices.hygiene === false ||
-                        dataServices.hygiene == each.hygiene) &&
-                      (dataServices.repas === false ||
-                        dataServices.repas == each.repas)
-                    : true)
-              )
-              .filter(
-                (each) =>
-                  (dataAggrements.handi === false || each.maxHandi > 0) &&
-                  (dataAggrements.mois === false || each.max18Mois > 0) &&
-                  (dataAggrements.nuit === false || each.maxNuit > 0)
-              )
-              .map((each, index) => (
-                <CardMarker data={each} key={index} />
-              ))}
-            <Marker position={center} icon={pointer}>
-              <Popup>Vous êtes par ici</Popup>
-            </Marker>
-          </MapContainer>
         </div>
 
-        <div className="caroussel">
-          <Carousel
-            showArrows={false}
-            infiniteLoop={false}
-            showIndicators={false}
-            showStatus={false}
-            showThumbs={false}
-            emulateTouch
-            centerMode
-            centerSlidePercentage={70}
-            axis={screenWidth >= 650 ? "vertical" : "horizontal"}
-          >
-            {Allstructure
-              // creche, assmat ou les 2
-              .filter(
-                (each) =>
-                  dataBasique.isCreche === each.isCreche ||
-                  dataBasique.isCreche === 2
-              )
-              // false = tout le monde = pas de filtre
-              // true = filtrer pour avoir seulement ceux qui l'ont
-              .filter(
-                (each) =>
-                  (dataServices.pcsc1 === false ||
-                    dataServices.pcsc1 == each.pcsc1) &&
-                  (dataServices.handi === false ||
-                    dataServices.handi == each.handi) &&
-                  (dataServices.bilingue === false ||
-                    dataServices.bilingue == each.bilingue) &&
-                  (dataServices.jardin === false ||
-                    dataServices.jardin == each.jardin) &&
-                  // si ass mat
-                  (each.isCreche === 0
-                    ? (dataServices.animaux === false ||
-                        dataServices.animaux == each.animaux) &&
-                      (dataServices.nonFumeur === false ||
-                        dataServices.nonFumeur == each.nonFumeur) &&
-                      (dataServices.zeroPollution === false ||
-                        dataServices.zeroPollution == each.zeroPollution) &&
-                      (dataServices.hygiene === false ||
-                        dataServices.hygiene == each.hygiene) &&
-                      (dataServices.repas === false ||
-                        dataServices.repas == each.repas)
-                    : true)
-              )
-              .filter(
-                (each) =>
-                  (dataAggrements.handi === false || each.maxHandi > 0) &&
-                  (dataAggrements.mois === false || each.max18Mois > 0) &&
-                  (dataAggrements.nuit === false || each.maxNuit > 0)
-              )
-              .map((each, index) => (
-                <CardCrecheMap
-                  key={index}
-                  data={each}
-                  familleLiked={familleLiked}
-                  familleId={familleId}
-                  getFamilleLiked={getFamilleLiked}
-                />
-              ))}
-          </Carousel>
-        </div>
-      </main>
-      <NavbarApp />
-    </>
+        <main className="container-map">
+          <div className="map">
+            <MapContainer
+              center={center}
+              zoom={12}
+              style={{ width: "100%", height: "100%" }}
+            >
+              <TileLayer
+                url="https://api.maptiler.com/maps/basic-v2/256/{z}/{x}/{y}.png?key=JV4eU3swHqD1YPZtc09q"
+                attribution='<a ="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+              />
+              {Allstructure
+                // creche, assmat ou les 2
+                .filter(
+                  (each) =>
+                    dataBasique.isCreche === each.isCreche ||
+                    dataBasique.isCreche === 2
+                )
+                // false = tout le monde = pas de filtre
+                // true = filtrer pour avoir seulement ceux qui l'ont
+                .filter(
+                  (each) =>
+                    (dataServices.pcsc1 === false ||
+                      dataServices.pcsc1 == each.pcsc1) &&
+                    (dataServices.handi === false ||
+                      dataServices.handi == each.handi) &&
+                    (dataServices.bilingue === false ||
+                      dataServices.bilingue == each.bilingue) &&
+                    (dataServices.jardin === false ||
+                      dataServices.jardin == each.jardin) &&
+                    // si ass mat
+                    (each.isCreche === 0
+                      ? (dataServices.animaux === false ||
+                          dataServices.animaux == each.animaux) &&
+                        (dataServices.nonFumeur === false ||
+                          dataServices.nonFumeur == each.nonFumeur) &&
+                        (dataServices.zeroPollution === false ||
+                          dataServices.zeroPollution == each.zeroPollution) &&
+                        (dataServices.hygiene === false ||
+                          dataServices.hygiene == each.hygiene) &&
+                        (dataServices.repas === false ||
+                          dataServices.repas == each.repas)
+                      : true)
+                )
+                .filter(
+                  (each) =>
+                    (dataAggrements.handi === false || each.maxHandi > 0) &&
+                    (dataAggrements.mois === false || each.max18Mois > 0) &&
+                    (dataAggrements.nuit === false || each.maxNuit > 0)
+                )
+                .map((each, index) => (
+                  <CardMarker data={each} key={index} />
+                ))}
+              <Marker position={center} icon={pointer}>
+                <Popup>Vous êtes par ici</Popup>
+              </Marker>
+            </MapContainer>
+          </div>
+
+          <div className="caroussel">
+            <Carousel
+              showArrows={false}
+              infiniteLoop={false}
+              showIndicators={false}
+              showStatus={false}
+              showThumbs={false}
+              emulateTouch
+              centerMode
+              centerSlidePercentage={70}
+              axis={screenWidth >= 650 ? "vertical" : "horizontal"}
+            >
+              {Allstructure
+                // creche, assmat ou les 2
+                .filter(
+                  (each) =>
+                    dataBasique.isCreche === each.isCreche ||
+                    dataBasique.isCreche === 2
+                )
+                // false = tout le monde = pas de filtre
+                // true = filtrer pour avoir seulement ceux qui l'ont
+                .filter(
+                  (each) =>
+                    (dataServices.pcsc1 === false ||
+                      dataServices.pcsc1 == each.pcsc1) &&
+                    (dataServices.handi === false ||
+                      dataServices.handi == each.handi) &&
+                    (dataServices.bilingue === false ||
+                      dataServices.bilingue == each.bilingue) &&
+                    (dataServices.jardin === false ||
+                      dataServices.jardin == each.jardin) &&
+                    // si ass mat
+                    (each.isCreche === 0
+                      ? (dataServices.animaux === false ||
+                          dataServices.animaux == each.animaux) &&
+                        (dataServices.nonFumeur === false ||
+                          dataServices.nonFumeur == each.nonFumeur) &&
+                        (dataServices.zeroPollution === false ||
+                          dataServices.zeroPollution == each.zeroPollution) &&
+                        (dataServices.hygiene === false ||
+                          dataServices.hygiene == each.hygiene) &&
+                        (dataServices.repas === false ||
+                          dataServices.repas == each.repas)
+                      : true)
+                )
+                .filter(
+                  (each) =>
+                    (dataAggrements.handi === false || each.maxHandi > 0) &&
+                    (dataAggrements.mois === false || each.max18Mois > 0) &&
+                    (dataAggrements.nuit === false || each.maxNuit > 0)
+                )
+                .map((each, index) => (
+                  <CardCrecheMap
+                    key={index}
+                    data={each}
+                    familleLiked={familleLiked}
+                    familleId={familleId}
+                  />
+                ))}
+            </Carousel>
+          </div>
+        </main>
+        <NavbarApp />
+      </>
+    )
   );
 }
 
@@ -260,9 +283,7 @@ BaseMap.propTypes = {
   dataServices: PropTypes.object.isRequired,
   dataAggrements: PropTypes.object.isRequired,
 
-  familleLiked: PropTypes.array.isRequired,
-  familleId: PropTypes.number.isRequired,
-  getFamilleLiked: PropTypes.func.isRequired,
+  familleId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 export default BaseMap;

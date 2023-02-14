@@ -30,17 +30,19 @@ function Structure9({
   updateFields,
 }) {
   const [memeHoraire, setMemeHoraire] = useState(true);
-  const getHoraires = () => {
-    Axios.get(`${import.meta.env.VITE_PATH}/horairesExist?id=${structureId}`, [
+
+  const getHoraires = (source) => {
+    Axios.get(`${import.meta.env.VITE_PATH}/horairesExist?id=${structureId}`, {
       structureId,
-    ])
+      cancelToken: source.token,
+    })
       .then((result) => {
         if (result.data.length > 0) {
           setHorairesExist(true);
         } else {
           setHorairesExist(false);
         }
-        for (let i = 0; i < result.data.length; i++) {
+        for (let i = 0; i < result.data.length; i += 1) {
           if (result.data[i].jourId === 1) {
             setData((prev) => {
               return {
@@ -108,11 +110,19 @@ function Structure9({
         }
       })
       .catch((err) => {
-        console.error(err);
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
       });
   };
   useEffect(() => {
-    getHoraires();
+    const source = Axios.CancelToken.source();
+    getHoraires(source);
+    return () => {
+      source.cancel();
+    };
   }, [structureId]);
 
   return (

@@ -3,7 +3,7 @@ import Synthesis from "@components/login/Synthesis";
 import Register from "@components/register/Register";
 
 import { useState, useEffect } from "react";
-import { redirect, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import UserEmailContext from "@components/context/UserEmailContext";
 import FamilleContext from "@components/context/FamilleContext";
@@ -28,14 +28,13 @@ import Admin from "@pages/Admin";
 import Home from "@pages/Home";
 import WaitAdmin from "@pages/WaitAdmin";
 import AppliChat from "@pages/appli/AppliChat";
-import Aide from "@components/appli/menu/Aide";
 import MessageAdmin from "@components/dashboard/admin/MessageAdmin";
 import Signalement from "@components/dashboard/admin/Signalement";
 
 function App() {
   const [userEmail, setUserEmail] = useState("paulette07@laposte.net");
   const [structureId, setStructureId] = useState(16);
-  const [familleId, setFamilleId] = useState(0);
+  const [familleId, setFamilleId] = useState("0");
   useEffect(() => {
     setFamilleId(sessionStorage.getItem("BabyPlacefamilleId"));
     setUserEmail(sessionStorage.getItem("structureEmail"));
@@ -44,7 +43,9 @@ function App() {
 
   return (
     <div className="app">
-      <UserEmailContext.Provider value={{ userEmail, setUserEmail, structureId, setStructureId }}>
+      <UserEmailContext.Provider
+        value={{ userEmail, setUserEmail, structureId, setStructureId }}
+      >
         <FamilleContext.Provider value={{ familleId, setFamilleId }}>
           <Routes>
             <Route path="/" element={<Home />} />

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function ImagesDashParams({
   uploadDoc,
@@ -70,5 +71,15 @@ function ImagesDashParams({
     </details>
   );
 }
+
+ImagesDashParams.propTypes = {
+  uploadDoc: PropTypes.func.isRequired,
+  photoStructure1: PropTypes.string.isRequired,
+  photoStructure1Ref: PropTypes.object.isRequired,
+  photoStructure2: PropTypes.string.isRequired,
+  photoStructure2Ref: PropTypes.object.isRequired,
+  photoStructure3: PropTypes.string.isRequired,
+  photoStructure3Ref: PropTypes.object.isRequired,
+};
 
 export default ImagesDashParams;

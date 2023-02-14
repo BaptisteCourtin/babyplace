@@ -68,20 +68,30 @@ function DemandeResa({
   const [nomsEnfants, setNomsEnfants] = useState(); // les prenoms des enfants
   const [enfantId, setEnfantId] = useState(0); // mettre l'id du premier enfant dans le usestate
 
-  const getNomsEnfants = () => {
+  const getNomsEnfants = (source) => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/famille/nomsEnfants100/${familleId}`)
+      .get(`${import.meta.env.VITE_PATH}/famille/nomsEnfants100/${familleId}`, {
+        cancelToken: source.token,
+      })
       .then((res) => {
         setNomsEnfants(res.data);
         setEnfantId(res.data[0].enfantId);
       })
       .catch((err) => {
-        console.error(err);
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
       });
   };
   useEffect(() => {
-    getNomsEnfants();
+    const source = axios.CancelToken.source();
+    getNomsEnfants(source);
     handleHeureTotal();
+    return () => {
+      source.cancel();
+    };
   }, []);
 
   // --- nom enfant quand clique ---

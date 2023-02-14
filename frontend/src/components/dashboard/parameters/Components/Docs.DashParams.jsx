@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function DocsDashParams({
   userType,
@@ -200,5 +201,24 @@ function DocsDashParams({
     </details>
   );
 }
+
+DocsDashParams.propTypes = {
+  userType: PropTypes.string.isRequired,
+  uploadDoc: PropTypes.func.isRequired,
+  docPmi: PropTypes.string,
+  docPmiRef: PropTypes.object.isRequired,
+  docAssAuto: PropTypes.string,
+  docAssAutoRef: PropTypes.object.isRequired,
+  docDiplome: PropTypes.string,
+  docDiplomeRef: PropTypes.object.isRequired,
+  docIdentite: PropTypes.string,
+  docIdentiteRef: PropTypes.object.isRequired,
+  docJustifDom: PropTypes.string,
+  docJustifDomRef: PropTypes.object.isRequired,
+  docRespCivile: PropTypes.string,
+  docRespCivileRef: PropTypes.object.isRequired,
+  docVitale: PropTypes.string,
+  docVitaleRef: PropTypes.object.isRequired,
+};
 
 export default DocsDashParams;

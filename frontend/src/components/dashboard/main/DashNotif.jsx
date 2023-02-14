@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ReactModal from "react-modal";
 
 function DashNotif({ notif, toggleNotif, setToggleNotif, deleteNotification }) {
@@ -27,12 +28,14 @@ function DashNotif({ notif, toggleNotif, setToggleNotif, deleteNotification }) {
           <>
             <div className="notifInner">
               <h2>Notifications</h2>
-              <button onClick={() => setToggleNotif(false)}>X</button>
+              <button type="button" onClick={() => setToggleNotif(false)}>
+                X
+              </button>
             </div>
             <hr />
             <ul>
               {notif.length ? (
-                notif.map((n) => (
+                notif.map((n, index) => (
                   <li
                     onClick={() => {
                       if (n.type === "waiting") {
@@ -41,7 +44,10 @@ function DashNotif({ notif, toggleNotif, setToggleNotif, deleteNotification }) {
                     }}
                   >
                     <p>{notifContent(n.type)}</p>
-                    <button onClick={() => deleteNotification(n.notifId)}>
+                    <button
+                      type="button"
+                      onClick={() => deleteNotification(n.notifId)}
+                    >
                       X
                     </button>
                   </li>
@@ -62,5 +68,12 @@ function DashNotif({ notif, toggleNotif, setToggleNotif, deleteNotification }) {
     </>
   );
 }
+
+DashNotif.propTypes = {
+  notif: PropTypes.array.isRequired,
+  toggleNotif: PropTypes.bool.isRequired,
+  setToggleNotif: PropTypes.func.isRequired,
+  deleteNotification: PropTypes.func.isRequired,
+};
 
 export default DashNotif;

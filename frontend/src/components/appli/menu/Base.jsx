@@ -10,12 +10,14 @@ import { FaPiggyBank } from "react-icons/fa";
 import { MdLogout } from "react-icons/md";
 import axios from "axios";
 
-function Base({ setCompo, familleId }) {
+function Base({ setCompo, familleId, setFamilleId }) {
   const navigate = useNavigate();
   const handleDeco = () => {
     axios
       .put(`${import.meta.env.VITE_PATH}/famille/deconnexion/${familleId}`)
       .then(() => {
+        sessionStorage.clear();
+        setFamilleId(null);
         navigate("/");
       })
       .catch((err) => {
@@ -71,6 +73,8 @@ function Base({ setCompo, familleId }) {
 
 Base.propTypes = {
   setCompo: PropTypes.func.isRequired,
+  familleId: PropTypes.string.isRequired,
+  setFamilleId: PropTypes.func.isRequired,
 };
 
 export default Base;

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import FormDashDanger from "./Danger/Form.DashDanger";
 
 function DangerDashParams({
@@ -22,5 +23,12 @@ function DangerDashParams({
     </details>
   );
 }
+
+DangerDashParams.propTypes = {
+  updatePassword: PropTypes.func.isRequired,
+  setNewPwd: PropTypes.func.isRequired,
+  setCNewPwd: PropTypes.func.isRequired,
+  openDeleteModal: PropTypes.func.isRequired,
+};
 
 export default DangerDashParams;

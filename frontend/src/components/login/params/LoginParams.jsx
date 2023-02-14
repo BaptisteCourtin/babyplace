@@ -8,20 +8,31 @@ function LoginParams() {
   const { token } = state;
   const [localId, setLocalId] = useLocalStorage("id", "id");
 
-  const getStructureId = async () => {
+  const getStructureId = async (source) => {
     try {
-      const res = await axios
-        .get(`${import.meta.env.VITE_PATH}/structureId/?token=${token}`)
-      setLocalId(res.data[0].structureId)
-
+      const res = await axios.get(
+        `${import.meta.env.VITE_PATH}/structureId/?token=${token}`,
+        {
+          cancelToken: source.token,
+        }
+      );
+      setLocalId(res.data[0].structureId);
     } catch (err) {
-      console.error(err.message)
+      if (err.code === "ERR_CANCELED") {
+        console.warn("cancel request");
+      } else {
+        console.error(err);
+      }
     }
-  }
+  };
 
   useEffect(() => {
-    getStructureId()
-  }, [])
+    const source = axios.CancelToken.source();
+    getStructureId(source);
+    return () => {
+      source.cancel();
+    };
+  }, []);
 
   return (
     <section className="loginParams">

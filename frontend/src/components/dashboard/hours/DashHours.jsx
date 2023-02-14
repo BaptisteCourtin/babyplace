@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import PropTypes from "prop-types";
 import Agenda from "./Components/Agenda.DashHours";
-import { useGetHours } from "./Hooks/useGetHours";
-import { usePutHours } from "./Hooks/usePutHours";
+import useGetHours from "./Hooks/useGetHours";
+import usePutHours from "./Hooks/usePutHours";
 import PricesDashHours from "./Components/Prices.DashHours";
 import OptionsDashHours from "./Components/Options.DashHours";
 import ActivitiesDashHours from "./Components/Activities.DashHours";
@@ -10,6 +11,9 @@ import ActivitiesDashHours from "./Components/Activities.DashHours";
 function DashHours({ userType, structureId }) {
   const [dayId, setDayId] = useState(1);
   const [horairesId, setHorairesId] = useState(null);
+
+  const [newData, setNewData] = useState(true);
+  const [newHoraire, setNewHoraire] = useState(true);
 
   const {
     toggleDay,
@@ -38,32 +42,34 @@ function DashHours({ userType, structureId }) {
     setSwitch3,
     getData,
     getHoraires,
-    setValues
   } = useGetHours(structureId, userType);
 
   const { updateIndemn, updateOptions, updateTarif, updateDay, updateHours } =
     usePutHours(
       structureId,
       userType,
-      getData,
-      getHoraires,
+      newData,
+      setNewData,
+      newHoraire,
+      setNewHoraire,
       horairesId,
       toggleDay,
       setToggleDay
     );
 
   useEffect(() => {
-    getData();
-    getHoraires();
-    // setValues();
-  }, [dayId]);
+    const source = axios.CancelToken.source();
+    getData(source);
+    getHoraires(source);
+    return () => {
+      source.cancel();
+    };
+  }, [dayId, newData, newHoraire]);
 
   return (
     <div className="dashPlaces">
       <Agenda
-        structureId={structureId}
         horaires={horaires}
-        getHoraires={getHoraires}
         updateDay={updateDay}
         updateHours={updateHours}
         toggleDay={toggleDay}
@@ -110,10 +116,6 @@ function DashHours({ userType, structureId }) {
 export default DashHours;
 
 DashHours.propTypes = {
-  title: PropTypes.string.isRequired,
   userType: PropTypes.string.isRequired,
   structureId: PropTypes.number.isRequired,
-  indemnRepas: PropTypes.number.isRequired,
-  Tarif_heure: PropTypes.number.isRequired,
-  Tarif_horaire_spec: PropTypes.number.isRequired,
 };

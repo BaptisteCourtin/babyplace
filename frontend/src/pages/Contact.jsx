@@ -158,6 +158,6 @@ function Contact() {
       <FooterLite />
     </div>
   );
-};
+}
 
 export default Contact;

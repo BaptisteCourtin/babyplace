@@ -13,20 +13,30 @@ function PopUp({ data, dataHorairesId }) {
 
   // --- savoir si au moins 1 enfant a 100% ---
 
-  const getNomsEnfants = () => {
+  const getNomsEnfants = (source) => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/famille/nomsEnfants100/${familleId}`)
+      .get(`${import.meta.env.VITE_PATH}/famille/nomsEnfants100/${familleId}`, {
+        cancelToken: source.token,
+      })
       .then((res) => {
         if (res.data[0] !== undefined) {
           setProfilComplet(true);
         }
       })
       .catch((err) => {
-        console.error(err);
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
       });
   };
   useEffect(() => {
-    getNomsEnfants();
+    const source = axios.CancelToken.source();
+    getNomsEnfants(source);
+    return () => {
+      source.cancel();
+    };
   }, []);
 
   // ---

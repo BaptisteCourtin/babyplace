@@ -38,8 +38,9 @@ function ChatForApp({ socket, username, room, title, joinRoom }) {
         time: `${new Date(Date.now()).getHours()}:${new Date(
           Date.now()
         ).getMinutes()}`,
-        date: `${new Date(Date.now()).getFullYear()} -${new Date(Date.now()).getMonth() + 1
-          } -${new Date(Date.now()).getUTCDate()} `,
+        date: `${new Date(Date.now()).getFullYear()}-${
+          new Date(Date.now()).getMonth() + 1
+        }-${new Date(Date.now()).getUTCDate()}`,
       };
 
       saveMessage(messageData);
@@ -89,9 +90,10 @@ function ChatForApp({ socket, username, room, title, joinRoom }) {
       </div>
       <div className="chat-bodyForApp">
         <Scrolltobottom className="message-containerForApp">
-          {messageListData.map((messageContent) => {
+          {messageListData.map((messageContent, index) => {
             return (
               <div
+                key={index}
                 className="messageForApp"
                 id={username === messageContent.author ? "you" : "other"}
               >
@@ -109,9 +111,10 @@ function ChatForApp({ socket, username, room, title, joinRoom }) {
               </div>
             );
           })}
-          {messageList.map((messageContent) => {
+          {messageList.map((messageContent, index) => {
             return (
               <div
+                key={index}
                 className="messageForApp"
                 id={username === messageContent.author ? "you" : "other"}
               >

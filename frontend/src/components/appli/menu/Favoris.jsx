@@ -1,30 +1,40 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import imgCreche from "@assets/img-time.svg";
 import CardFavoris from "@components/appli/menu/CardFavoris";
 import PropTypes from "prop-types";
 import Toggle from "../filtres/Toggle";
 
 function Favoris({ setCompo, familleId }) {
   // --- likes des familles ---
+  const [suppLiked, setSuppLiked] = useState(true);
   const [familleLiked, setFamilleLiked] = useState();
 
-  const getFamilleLiked = () => {
+  const getFamilleLiked = (source) => {
     axios
       .get(
-        `${import.meta.env.VITE_PATH}/famille/likesAndStructure/${familleId}`
+        `${import.meta.env.VITE_PATH}/famille/likesAndStructure/${familleId}`,
+        {
+          cancelToken: source.token,
+        }
       )
       .then((res) => {
         setFamilleLiked(res.data);
-        console.log(res.data);
       })
       .catch((err) => {
-        console.error(err);
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
       });
   };
   useEffect(() => {
-    getFamilleLiked();
-  }, [familleId]);
+    const source = axios.CancelToken.source();
+    getFamilleLiked(source);
+    return () => {
+      source.cancel();
+    };
+  }, [familleId, suppLiked]);
 
   const [occasions, setOccasions] = useState(false);
   return (
@@ -55,7 +65,8 @@ function Favoris({ setCompo, familleId }) {
             <CardFavoris
               each={each}
               key={index}
-              getFamilleLiked={getFamilleLiked}
+              setSuppLiked={setSuppLiked}
+              suppLiked={suppLiked}
               familleId={familleId}
             />
           ))}
@@ -67,6 +78,7 @@ function Favoris({ setCompo, familleId }) {
 
 Favoris.propTypes = {
   setCompo: PropTypes.func.isRequired,
+  familleId: PropTypes.string.isRequired,
 };
 
 export default Favoris;

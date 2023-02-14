@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function PricesDashHours({
   userType,
@@ -67,5 +68,16 @@ function PricesDashHours({
     </details>
   );
 }
+
+PricesDashHours.propTypes = {
+  userType: PropTypes.string.isRequired,
+  updateTarif: PropTypes.func.isRequired,
+  hour1: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  setHour1: PropTypes.func.isRequired,
+  hour2: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  setHour2: PropTypes.func.isRequired,
+  hour3: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  setHour3: PropTypes.func.isRequired,
+};
 
 export default PricesDashHours;

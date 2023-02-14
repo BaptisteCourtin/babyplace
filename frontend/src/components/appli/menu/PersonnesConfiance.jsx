@@ -3,21 +3,32 @@ import axios from "axios";
 import PropTypes from "prop-types";
 
 function PersonnesConfiance({ setCompo, familleId }) {
+  const [newSuppPersoConf, setNewSuppPersoConf] = useState(true);
   const [persoConf, setPersoConf] = useState([]);
 
-  const getPersoConf = () => {
+  const getPersoConf = (source) => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/famille/conf/${familleId}`)
+      .get(`${import.meta.env.VITE_PATH}/famille/conf/${familleId}`, {
+        cancelToken: source.token,
+      })
       .then((res) => {
         setPersoConf(res.data);
       })
       .catch((err) => {
-        console.error(err);
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
       });
   };
   useEffect(() => {
-    getPersoConf();
-  }, []);
+    const source = axios.CancelToken.source();
+    getPersoConf(source);
+    return () => {
+      source.cancel();
+    };
+  }, [newSuppPersoConf]);
 
   // --- ajout confiance ---
 
@@ -38,7 +49,7 @@ function PersonnesConfiance({ setCompo, familleId }) {
           email,
         })
         .then(() => {
-          getPersoConf();
+          setNewSuppPersoConf(!newSuppPersoConf);
         });
       setNewForm(false);
     }
@@ -52,7 +63,7 @@ function PersonnesConfiance({ setCompo, familleId }) {
         `${import.meta.env.VITE_PATH}/famille/deleteConfiance/${confianceId}`
       )
       .then(() => {
-        getPersoConf();
+        setNewSuppPersoConf(!newSuppPersoConf);
       });
   };
 
@@ -183,6 +194,7 @@ function PersonnesConfiance({ setCompo, familleId }) {
 
 PersonnesConfiance.propTypes = {
   setCompo: PropTypes.func.isRequired,
+  familleId: PropTypes.string.isRequired,
 };
 
 export default PersonnesConfiance;

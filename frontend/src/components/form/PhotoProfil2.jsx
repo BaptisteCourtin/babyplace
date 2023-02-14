@@ -5,10 +5,12 @@ import Axios from "axios";
 
 function Structure2({ inputRef, structureId, updateFields }) {
   const [imageSrc, setImageSrc] = useState(profil);
-  const getPicture = () => {
-    Axios.get(`${import.meta.env.VITE_PATH}/photoProfil?id=${structureId}`, [
+
+  const getPicture = (source) => {
+    Axios.get(`${import.meta.env.VITE_PATH}/photoProfil?id=${structureId}`, {
       structureId,
-    ])
+      cancelToken: source.token,
+    })
       .then((result) => {
         if (result.data[0].photoProfil !== null) {
           setImageSrc(result.data[0].photoProfil);
@@ -16,9 +18,20 @@ function Structure2({ inputRef, structureId, updateFields }) {
         }
       })
       .catch((err) => {
-        console.error(err);
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
       });
   };
+  useEffect(() => {
+    const source = Axios.CancelToken.source();
+    getPicture(source);
+    return () => {
+      source.cancel();
+    };
+  }, []);
 
   const updateImg = (e) => {
     // e.files contient un objet FileList
@@ -39,9 +52,7 @@ function Structure2({ inputRef, structureId, updateFields }) {
       reader.readAsDataURL(picture);
     }
   };
-  useEffect(() => {
-    getPicture();
-  }, []);
+
   return (
     <div className="structure2">
       <h4>Choisir une photo de profil :</h4>

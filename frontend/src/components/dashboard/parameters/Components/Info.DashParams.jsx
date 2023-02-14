@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function InfoDashParams({
   userType,
@@ -122,5 +123,19 @@ function InfoDashParams({
     </details>
   );
 }
+
+InfoDashParams.propTypes = {
+  userType: PropTypes.string.isRequired,
+  updateFields: PropTypes.func.isRequired,
+  nom: PropTypes.string,
+  nomUsage: PropTypes.string,
+  nomNaissance: PropTypes.string,
+  prenom: PropTypes.string,
+  adresse: PropTypes.string.isRequired,
+  telephone: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  handleSubmitInfo: PropTypes.func.isRequired,
+};
 
 export default InfoDashParams;

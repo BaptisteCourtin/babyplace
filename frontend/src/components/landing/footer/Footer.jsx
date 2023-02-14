@@ -34,15 +34,16 @@ function Footer({ userType }) {
         </div>
         <div className="footerGrid">
           <div className="footerLeft">
-            <div
+            <button
               className="logoContainer"
+              type="button"
               onClick={() => {
                 window.scrollTo(0, 0);
               }}
             >
               <img src={logo} alt="logo" id="logoCoeur" />
               <img src={logotxt} alt="babyplace" id="logotxt" />
-            </div>
+            </button>
             <p className="footerAddress">
               DaveWarehouse Society, 4 rue Baron 44100 NANTES
             </p>
@@ -76,13 +77,25 @@ function Footer({ userType }) {
           </div>
           <div className="footerRight">
             <div className="socials">
-              <a href="https://fr-fr.facebook.com" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://fr-fr.facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <BsFacebook id="iconFooter" />
               </a>
-              <a href="https://twitter.com/?lang=fr" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://twitter.com/?lang=fr"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <BsTwitter id="iconFooter" />
               </a>
-              <a href="https://www.instagram.com/?hl=fr" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://www.instagram.com/?hl=fr"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <AiFillInstagram id="iconFooter2" />
               </a>
             </div>

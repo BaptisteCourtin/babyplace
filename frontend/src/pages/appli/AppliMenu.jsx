@@ -10,7 +10,7 @@ import Aide from "@components/appli/menu/Aide";
 import Réservations from "@components/appli/menu/Reservations";
 
 function AppliMenu() {
-  const { familleId } = useContext(FamilleContext);
+  const { familleId, setFamilleId } = useContext(FamilleContext);
 
   const [compo, setCompo] = useState(0);
   const choixComposant = () => {
@@ -29,7 +29,13 @@ function AppliMenu() {
     if (compo === 5) {
       return <Réservations setCompo={setCompo} familleId={familleId} />;
     }
-    return <Base setCompo={setCompo} familleId={familleId} />;
+    return (
+      <Base
+        setCompo={setCompo}
+        familleId={familleId}
+        setFamilleId={setFamilleId}
+      />
+    );
   };
 
   return (

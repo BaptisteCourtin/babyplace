@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function DaysDashAgenda({
   horaires,
@@ -17,8 +18,8 @@ function DaysDashAgenda({
 
   return (
     <ul className="dashPlacesDays">
-      {horaires.map((h) => (
-        <li>
+      {horaires.map((h, index) => (
+        <li key={index}>
           <input
             type="radio"
             name="days"
@@ -39,5 +40,14 @@ function DaysDashAgenda({
     </ul>
   );
 }
+
+DaysDashAgenda.propTypes = {
+  horaires: PropTypes.array.isRequired,
+  selected: PropTypes.string,
+  setSelected: PropTypes.func.isRequired,
+  setToggleDay: PropTypes.func.isRequired,
+  setDayId: PropTypes.func.isRequired,
+  setHorairesId: PropTypes.func.isRequired,
+};
 
 export default DaysDashAgenda;

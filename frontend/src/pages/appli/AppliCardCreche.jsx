@@ -56,9 +56,10 @@ function AppliCardCreche() {
   return (
     <div className="appli-card-creche">
       <header>
-        <Link to="/appli/search">{`< ${nom ||
+        <Link to="/appli/search">{`< ${
+          nom ||
           (nomUsage ? `${prenom} ${nomUsage}` : `${prenom} ${nomNaissance}`)
-          }`}</Link>
+        }`}</Link>
       </header>
 
       <main>

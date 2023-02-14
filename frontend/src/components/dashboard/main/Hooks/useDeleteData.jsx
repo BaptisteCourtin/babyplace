@@ -1,6 +1,7 @@
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
-export const useDeleteData = (getNotifications) => {
+const useDeleteData = (getNotifications) => {
   const deleteNotification = async (id) => {
     try {
       await axios.delete(`${import.meta.env.VITE_PATH}/notifications/${id}`, {
@@ -18,3 +19,5 @@ export const useDeleteData = (getNotifications) => {
 
   return { deleteNotification, deleteDates };
 };
+
+export default useDeleteData;

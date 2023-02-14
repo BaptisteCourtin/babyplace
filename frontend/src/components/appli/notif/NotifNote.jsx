@@ -12,22 +12,33 @@ function NotifNote({ setCompo, photoFamille, oneReservation }) {
   // --- get ---
   const [structureNotes, setStructureNotes] = useState();
 
-  const getStructureById = () => {
+  const getStructureById = (source) => {
     axios
       .get(
         `${import.meta.env.VITE_PATH}/structure/notes/${
-          oneReservation.structureId
+          (oneReservation.structureId,
+          {
+            cancelToken: source.token,
+          })
         }`
       )
       .then((res) => {
         setStructureNotes(res.data[0]);
       })
       .catch((err) => {
-        console.error(err);
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
       });
   };
   useEffect(() => {
-    getStructureById();
+    const source = axios.CancelToken.source();
+    getStructureById(source);
+    return () => {
+      source.cancel();
+    };
   }, []);
 
   // --- update ---

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import InfoDashReservations from "./Info.DashReservations";
 import StatusDashReservations from "./Status.DashReservations";
 
@@ -7,7 +8,7 @@ function ListDashReservations({
   statusToggle,
   tarifHeure,
   updateStatus,
-  getReser
+  getReser,
 }) {
   return (
     <ul className="reserList">
@@ -19,8 +20,9 @@ function ListDashReservations({
           if (statusToggle === 3) return r.status.includes("refused");
           if (statusToggle === 4) return r.status.includes("payed");
         })
-        .map((r) => (
+        .map((r, index) => (
           <li
+            key={index}
             style={{
               border: (() => {
                 if (r.status === "approved") {
@@ -64,11 +66,23 @@ function ListDashReservations({
               }}
             />
             <InfoDashReservations r={r} tarifHeure={tarifHeure} />
-            <StatusDashReservations r={r} updateStatus={updateStatus} getReser={getReser} />
+            <StatusDashReservations
+              r={r}
+              updateStatus={updateStatus}
+              getReser={getReser}
+            />
           </li>
         ))}
     </ul>
   );
 }
+
+ListDashReservations.propTypes = {
+  reser: PropTypes.array.isRequired,
+  statusToggle: PropTypes.number.isRequired,
+  tarifHeure: PropTypes.number.isRequired,
+  updateStatus: PropTypes.func.isRequired,
+  getReser: PropTypes.func.isRequired,
+};
 
 export default ListDashReservations;

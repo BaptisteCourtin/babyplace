@@ -1,8 +1,9 @@
 import React from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
+import { AiOutlineUser } from "react-icons/ai";
 
-function CardFavPlat({ each, familleId, getFamilleLiked }) {
+function CardFavPlat({ each, familleId, setSuppLiked, suppLiked }) {
   const { nom, photoProfil, nomUsage, nomNaissance, prenom, structureId } =
     each;
 
@@ -18,7 +19,7 @@ function CardFavPlat({ each, familleId, getFamilleLiked }) {
         console.error(err);
       });
 
-    getFamilleLiked();
+    setSuppLiked(!suppLiked);
   };
 
   return (
@@ -44,7 +45,8 @@ function CardFavPlat({ each, familleId, getFamilleLiked }) {
 CardFavPlat.propTypes = {
   each: PropTypes.object.isRequired,
   familleId: PropTypes.string.isRequired,
-  getFamilleLiked: PropTypes.func.isRequired,
+  setSuppLiked: PropTypes.func.isRequired,
+  suppLiked: PropTypes.bool.isRequired,
 };
 
 export default CardFavPlat;

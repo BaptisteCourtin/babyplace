@@ -1,8 +1,10 @@
-import React, { useRef, useState } from "react";
-import { usePutParams } from "./Hooks/usePutParams";
-import { useDeleteParams } from "./Hooks/useDeleteParams";
-import { useModal } from "./Hooks/useModal";
-import { useUploadParams } from "./Hooks/useUploadParams";
+import React, { useRef, useState, useEffect } from "react";
+import axios from "axios";
+import PropTypes from "prop-types";
+import usePutParams from "./Hooks/usePutParams";
+import useDeleteParams from "./Hooks/useDeleteParams";
+import useModal from "./Hooks/useModal";
+import useUploadParams from "./Hooks/useUploadParams";
 import ModalDashParams from "./Components/Modal.DashParams";
 import DangerDashParams from "./Components/Danger.DashParams";
 import DocsDashParams from "./Components/Docs.DashParams";
@@ -49,6 +51,8 @@ function DashParams({
 
   const fileName = "";
 
+  const [newGetData, setNewGetData] = useState(true);
+
   const [infos, setInfos] = useState({
     nom,
     prenom,
@@ -67,12 +71,18 @@ function DashParams({
   const { handleSubmitInfo, updatePassword } = usePutParams(
     structureId,
     userType,
-    getData,
+    newGetData,
+    setNewGetData,
     infos,
     newPwd,
     cNewPwd
   );
-  const { uploadDoc } = useUploadParams(structureId, getData, fileName);
+  const { uploadDoc } = useUploadParams(
+    structureId,
+    newGetData,
+    setNewGetData,
+    fileName
+  );
   const { deleteAccount } = useDeleteParams(
     email,
     deleteMail,
@@ -86,6 +96,15 @@ function DashParams({
       return { ...prev, ...fields };
     });
   };
+
+  // useEffect get data ???
+  useEffect(() => {
+    const source = axios.CancelToken.source();
+    getData(source);
+    return () => {
+      source.cancel();
+    };
+  }, [newGetData]);
 
   return (
     <div className="dashParams">
@@ -155,5 +174,33 @@ function DashParams({
     </div>
   );
 }
+
+DashParams.propTypes = {
+  type: PropTypes.string,
+  structureId: PropTypes.number.isRequired,
+  photoProfil: PropTypes.string.isRequired,
+  photoStructure1: PropTypes.string.isRequired,
+  photoStructure2: PropTypes.string.isRequired,
+  photoStructure3: PropTypes.string.isRequired,
+
+  nom: PropTypes.string,
+  prenom: PropTypes.string.isRequired,
+  nomUsage: PropTypes.string.isRequired,
+  nomNaissance: PropTypes.string.isRequired,
+  adresse: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  telephone: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  userType: PropTypes.string.isRequired,
+
+  getData: PropTypes.func.isRequired,
+  docPmi: PropTypes.string,
+  docIdentite: PropTypes.string,
+  docVitale: PropTypes.string,
+  docJustifDom: PropTypes.string,
+  docDiplome: PropTypes.string,
+  docRespCivile: PropTypes.string,
+  docAssAuto: PropTypes.string,
+};
 
 export default DashParams;

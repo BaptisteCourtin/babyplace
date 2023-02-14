@@ -5,28 +5,26 @@ import DashParams from "@components/dashboard/parameters/DashParams";
 import DashReservations from "@components/dashboard/reservations/DashReservations";
 import Messages from "@components/messages/Messages";
 
-export const usePageToggle = (data, userType, getData) => {
+const usePageToggle = (data, userType, getData) => {
   const [toggle, setToggle] = useState(0);
+
   const pageShown = () => {
     if (toggle === 1) {
       return <DashReservations {...data} />;
-    }
-    if (toggle === 2) {
+    } else if (toggle === 2) {
       return (
         <DashAgenda structureId={data.structureId} maxPlaces={data.maxPlaces} />
       );
-    }
-    if (toggle === 3) {
+    } else if (toggle === 3) {
       return <DashHours userType={userType} structureId={data.structureId} />;
-    }
-    if (toggle === 4) {
+    } else if (toggle === 4) {
       return <Messages {...data} />;
-    }
-
-    if (toggle === 5) {
+    } else if (toggle === 5) {
       return <DashParams {...data} userType={userType} getData={getData} />;
     }
   };
 
   return { pageShown, toggle, setToggle };
 };
+
+export default usePageToggle;

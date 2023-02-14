@@ -38,10 +38,16 @@ function Inscription() {
   }, [donneesForm]);
 
   // --- prise info bdd ---
+  const [newDonneesForm, setNewDonneesForm] = useState(true); // si un enfant ajouter / supprimer
 
-  const getDonneesForm = () => {
+  const getDonneesForm = (source) => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/famille/formInscription/${familleId}`)
+      .get(
+        `${import.meta.env.VITE_PATH}/famille/formInscription/${familleId}`,
+        {
+          cancelToken: source.token,
+        }
+      )
       .then((res) => {
         setDonneesForm(res.data);
       })
@@ -49,12 +55,20 @@ function Inscription() {
         setDonneesOK(true);
       })
       .catch((err) => {
-        console.error(err);
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
       });
   };
   useEffect(() => {
-    getDonneesForm();
-  }, []);
+    const source = axios.CancelToken.source();
+    getDonneesForm(source);
+    return () => {
+      source.cancel();
+    };
+  }, [newDonneesForm]);
 
   // --- changer une donnée avec le form ---
 
@@ -185,7 +199,7 @@ function Inscription() {
     const { parentId } = donneesForm[0][num - 1];
     await doTheIfParent(parentId, num);
     toast.success("C'est bon, c'est mis à jour 👌");
-    getDonneesForm();
+    setNewDonneesForm(!newDonneesForm);
   };
 
   // --- form famille -> en commun ---
@@ -239,7 +253,7 @@ function Inscription() {
     e.preventDefault();
     await doTheIfFamille();
     toast.success("C'est bon, c'est mis à jour 👌");
-    getDonneesForm();
+    setNewDonneesForm(!newDonneesForm);
   };
 
   // --- supprimer un fichier ---
@@ -261,7 +275,7 @@ function Inscription() {
         }
       );
     }
-    getDonneesForm();
+    setNewDonneesForm(!newDonneesForm);
   };
 
   return (

@@ -39,19 +39,29 @@ function Parents() {
   const [donneesOK, setDonneesOK] = useState(false); // les donnees sont prises => mis dans initial data
   const [finalOK, setFinalOK] = useState(false); // donnees mises dans initial => go visuel
 
-  const getDonneesForm = () => {
+  const getDonneesForm = (source) => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/famille/formParent/${familleId}`)
+      .get(`${import.meta.env.VITE_PATH}/famille/formParent/${familleId}`, {
+        cancelToken: source.token,
+      })
       .then((res) => {
         setDonneesForm(res.data);
         setDonneesOK(true);
       })
       .catch((err) => {
-        console.error(err);
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
       });
   };
   useEffect(() => {
-    getDonneesForm();
+    const source = axios.CancelToken.source();
+    getDonneesForm(source);
+    return () => {
+      source.cancel();
+    };
   }, []);
 
   // --- func pour changer initial value ---

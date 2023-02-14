@@ -29,7 +29,7 @@ function Connexion({ setCompo }) {
         .then((ret) => {
           const { token, familleId } = ret.data;
 
-          setFamilleId(familleId);
+          setFamilleId(familleId.toString());
           sessionStorage.setItem("BabyPlacefamilleId", familleId);
 
           navigate("/appli/search", {

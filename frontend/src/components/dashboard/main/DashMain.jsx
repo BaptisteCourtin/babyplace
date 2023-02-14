@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Chart } from "./Components/Chart.DashMain";
-import { FaRegCalendarCheck, FaRegClock, FaPercent, FaBabyCarriage } from 'react-icons/fa';
+import PropTypes from "prop-types";
+import {
+  FaRegCalendarCheck,
+  FaRegClock,
+  FaPercent,
+  FaBabyCarriage,
+} from "react-icons/fa";
 import { AiFillStar } from "react-icons/ai";
-import { useFormatDay } from "../agenda/Hooks/useFormatDay";
-import { useGetAgenda } from "../agenda/Hooks/useGetAgenda";
+import Chart from "./Components/Chart.DashMain";
+import useFormatDay from "../agenda/Hooks/useFormatDay";
+import useGetAgenda from "../agenda/Hooks/useGetAgenda";
 
-function DashMain({ data, fav, toggle, horaires, reser, approvedReser }) {
-
+function DashMain({ data, fav, horaires, reser, approvedReser }) {
   const [filteredHoraires, setFilteredHoraires] = useState([]);
   const [status, setStatus] = useState(null);
   const { curDate } = useFormatDay();
@@ -14,34 +19,30 @@ function DashMain({ data, fav, toggle, horaires, reser, approvedReser }) {
 
   const calcHours = () => {
     let tmpHours = 0;
-    for (let i = 0; i < horaires.length; i++) {
-      tmpHours += ((~~horaires?.[i]?.heureMax?.split(':')[0] ?? 0) - (~~horaires?.[i]?.heureMin?.split(':')[0] ?? 0))
+    for (let i = 0; i < horaires.length; i += 1) {
+      tmpHours +=
+        (~~horaires?.[i]?.heureMax?.split(":")[0] ?? 0) -
+        (~~horaires?.[i]?.heureMin?.split(":")[0] ?? 0);
     }
-    return tmpHours
-  }
+    return tmpHours;
+  };
 
-  let percentComplete = (
-    (
-      Object.values(data).length - Object.values(data).filter(el =>
-        el === null).length
-    ) /
-    Object.values(data).length * 100
+  const percentComplete = (
+    ((Object.values(data).length -
+      Object.values(data).filter((el) => el === null).length) /
+      Object.values(data).length) *
+    100
   ).toFixed(0);
 
-  let currentDate = new Date();
-  let startDate = new Date(currentDate.getFullYear(), 0, 1);
-  let days = Math.floor((currentDate - startDate) /
-    (24 * 60 * 60 * 1000));
+  const currentDate = new Date();
+  const startDate = new Date(currentDate.getFullYear(), 0, 1);
+  const days = Math.floor((currentDate - startDate) / (24 * 60 * 60 * 1000));
 
-  let weekNumber = Math.ceil(days / 7);
+  const weekNumber = Math.ceil(days / 7);
 
   const openDays = () => {
-    setFilteredHoraires(
-      horaires.filter(h =>
-        h.ouvert
-      )
-    )
-  }
+    setFilteredHoraires(horaires.filter((h) => h.ouvert));
+  };
 
   const reviews =
     Math.round(
@@ -51,32 +52,35 @@ function DashMain({ data, fav, toggle, horaires, reser, approvedReser }) {
         data.avisProprete +
         data.avisSecurite) /
         5) *
-      10
+        10
     ) / 10;
 
   const getStatus = () => {
     setStatus(
       calendar
-        .filter(c => c.date === curDate)
-        .map(c => {
+        .filter((c) => c.date === curDate)
+        .map((c) => {
           if (c.nbPlaces != -1) {
-            return `Il vous reste ${c.nbPlaces} ${c.nbPlaces == 1 ? 'place' : 'places'}`
-          } else if (c.nbPlaces == -1) {
-            return "Vous êtes au repos"
+            return `Il vous reste ${c.nbPlaces} ${
+              c.nbPlaces == 1 ? "place" : "places"
+            }`;
+          }
+          if (c.nbPlaces == -1) {
+            return "Vous êtes au repos";
           }
         })
         .toString()
-    )
-  }
+    );
+  };
 
   useEffect(() => {
-    getCalendar()
-  }, [])
+    getCalendar();
+  }, []);
 
   useEffect(() => {
-    getStatus()
-    openDays()
-  }, [calendar])
+    getStatus();
+    openDays();
+  }, [calendar]);
 
   return (
     <main className="dashMain">
@@ -94,13 +98,15 @@ function DashMain({ data, fav, toggle, horaires, reser, approvedReser }) {
                 if (approvedReser.length >= 0) {
                   return "1px solid #EF3672";
                 }
-              })()
+              })(),
             }}
           >
             <FaRegCalendarCheck />
             <div className="dashListSubgrid">
               <p>Demandes acceptées</p>
-              <h3>{approvedReser.length} / {reser.length}</h3>
+              <h3>
+                {approvedReser.length} / {reser.length}
+              </h3>
             </div>
             <p className="dashListSubText">Semaine {weekNumber}</p>
           </li>
@@ -113,7 +119,7 @@ function DashMain({ data, fav, toggle, horaires, reser, approvedReser }) {
                 if (calcHours() < 30) {
                   return "1px solid #7e72f2";
                 }
-              })()
+              })(),
             }}
           >
             <FaRegClock />
@@ -121,7 +127,10 @@ function DashMain({ data, fav, toggle, horaires, reser, approvedReser }) {
               <p>Heures hebdomadaires</p>
               <h3>{calcHours()}H</h3>
             </div>
-            <p className="dashListSubText">sur {filteredHoraires.length} {filteredHoraires.length > 1 ? "jours" : "jour"}</p>
+            <p className="dashListSubText">
+              sur {filteredHoraires.length}{" "}
+              {filteredHoraires.length > 1 ? "jours" : "jour"}
+            </p>
           </li>
           <li
             style={{
@@ -135,7 +144,7 @@ function DashMain({ data, fav, toggle, horaires, reser, approvedReser }) {
                 if (percentComplete >= 0) {
                   return "1px solid #EF3672";
                 }
-              })()
+              })(),
             }}
           >
             <FaPercent />
@@ -144,11 +153,7 @@ function DashMain({ data, fav, toggle, horaires, reser, approvedReser }) {
               <h3>{percentComplete}%</h3>
             </div>
             <p className="dashListSubText">
-              {percentComplete < 100 ? (
-                'Finissez-le'
-              ) : (
-                'Bravo'
-              )}
+              {percentComplete < 100 ? "Finissez-le" : "Bravo"}
             </p>
           </li>
           <li
@@ -160,7 +165,7 @@ function DashMain({ data, fav, toggle, horaires, reser, approvedReser }) {
                 if (data.maxPlaces === 0) {
                   return "1px solid #EF3672";
                 }
-              })()
+              })(),
             }}
           >
             <FaBabyCarriage />
@@ -168,9 +173,7 @@ function DashMain({ data, fav, toggle, horaires, reser, approvedReser }) {
               <p>Nombre de places</p>
               <h3>{data.maxPlaces}</h3>
             </div>
-            <p className="dashListSubText">
-              {status || 'Vous êtes complet'}
-            </p>
+            <p className="dashListSubText">{status || "Vous êtes complet"}</p>
           </li>
         </ul>
       </section>
@@ -191,31 +194,38 @@ function DashMain({ data, fav, toggle, horaires, reser, approvedReser }) {
         <div className="dashFav">
           <h3>Favoris de</h3>
           <ul>
-            {fav.map(f =>
-              <li>
-                <p className="dashFavText dashFavName">{f.prenom} {f.nom}</p>
+            {fav.map((f, index) => (
+              <li key={index}>
+                <p className="dashFavText dashFavName">
+                  {f.prenom} {f.nom}
+                </p>
                 <p>{f.email}</p>
                 <p className="dashFavText">{f.profession}</p>
               </li>
-            )}
+            ))}
           </ul>
         </div>
         <div className="dashChart">
           <Chart {...data} />
           <div className="dashChartBottom">
-            <p>{reviews}<AiFillStar /> <span>({data.nbNotes})</span></p>
             <p>
-              {data?.isCreche ? (
-                'Crèche'
-              ) : (
-                'Assistante maternelle'
-              )}
+              {reviews}
+              <AiFillStar /> <span>({data.nbNotes})</span>
             </p>
+            <p>{data?.isCreche ? "Crèche" : "Assistante maternelle"}</p>
           </div>
         </div>
       </section>
     </main>
   );
 }
+
+DashMain.propTypes = {
+  data: PropTypes.object.isRequired,
+  fav: PropTypes.array.isRequired,
+  horaires: PropTypes.array.isRequired,
+  reser: PropTypes.array.isRequired,
+  approvedReser: PropTypes.array.isRequired,
+};
 
 export default DashMain;

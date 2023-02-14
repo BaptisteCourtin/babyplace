@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function FormDashDanger({ updatePassword, setNewPwd, setCNewPwd }) {
   return (
@@ -41,5 +42,11 @@ function FormDashDanger({ updatePassword, setNewPwd, setCNewPwd }) {
     </form>
   );
 }
+
+FormDashDanger.propTypes = {
+  updatePassword: PropTypes.func.isRequired,
+  setNewPwd: PropTypes.func.isRequired,
+  setCNewPwd: PropTypes.func.isRequired,
+};
 
 export default FormDashDanger;

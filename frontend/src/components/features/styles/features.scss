@@ -6,13 +6,10 @@
   align-items: center;
   color: $second;
 
-
-
   h3 {
     font-weight: 700;
     font-size: 2em;
   }
-
 
   #about-us {
     justify-content: center;
@@ -39,7 +36,6 @@
         line-height: 1.5em;
         width: 100%;
       }
-
     }
 
     img {
@@ -48,7 +44,6 @@
   }
 
   #profil {
-
     justify-content: center;
     display: flex;
     flex-direction: column;
@@ -67,7 +62,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-
 
       .imgAboutUsContainer {
         display: flex;
@@ -177,7 +171,7 @@
   }
 }
 
-@media screen and (max-width:820px) {
+@media screen and (max-width: 820px) {
   .features {
     #about-us {
       .descriptionContainer {
@@ -211,7 +205,6 @@
       flex-direction: column;
       width: 100%;
       padding: 20px;
-
     }
   }
 

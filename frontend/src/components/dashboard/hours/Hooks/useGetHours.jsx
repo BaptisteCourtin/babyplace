@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-export const useGetHours = (structureId, userType) => {
+const useGetHours = (structureId, userType) => {
   const [toggleDay, setToggleDay] = useState(null);
   const [selected, setSelected] = useState(null);
 
@@ -36,14 +36,16 @@ export const useGetHours = (structureId, userType) => {
     return false;
   });
 
-  const getData = async () => {
+  const getData = async (source) => {
     try {
       const res = await axios.get(
-        `${import.meta.env.VITE_PATH
+        `${
+          import.meta.env.VITE_PATH
         }/structure/type/${structureId}?type=${userType}`,
         {
           id: structureId,
           type: userType,
+          cancelToken: source.token,
         }
       );
       setData(res.data[0]);
@@ -54,21 +56,30 @@ export const useGetHours = (structureId, userType) => {
       setIndemn2(res.data[0].indemnKm);
       setIndemn3(res.data[0].indemnRepas);
     } catch (err) {
-      console.error(err.message);
+      if (err.code === "ERR_CANCELED") {
+        console.warn("cancel request");
+      } else {
+        console.error(err);
+      }
     }
   };
 
-  const getHoraires = async () => {
+  const getHoraires = async (source) => {
     try {
       const res = await axios.get(
         `${import.meta.env.VITE_PATH}/horaires/${structureId}`,
         {
           id: structureId,
+          cancelToken: source.token,
         }
       );
       setHoraires(res.data);
     } catch (err) {
-      console.error(err.message);
+      if (err.code === "ERR_CANCELED") {
+        console.warn("cancel request");
+      } else {
+        console.error(err);
+      }
     }
   };
 
@@ -106,6 +117,8 @@ export const useGetHours = (structureId, userType) => {
     setSwitch3,
     getData,
     getHoraires,
-    setValues
+    setValues,
   };
 };
+
+export default useGetHours;

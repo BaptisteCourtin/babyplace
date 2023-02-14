@@ -157,7 +157,7 @@ router.put("/parent/nullOneDocForm/:id", parent.nullOneDocFormParent); // delete
 router.put("/formEnfant/:id", enfant.updateFormEnfant); // formulaire enfant
 router.put("/resaToNote/:id", reservation.updateResaToNote); // passe le status à toNote
 router.put("/famille/deconnexion/:id", famille.deco); // deconnexion famille
-router.put("/admin/unsignaled/:id", structure.updateSignaled) // unsignaler structure
+router.put("/admin/unsignaled/:id", structure.updateSignaled); // unsignaler structure
 
 router.post("/reservation", reservation.postReservation); // reservation
 router.post("/famille/newEnfant", enfant.postNewEnfant); // nouveau enfant
@@ -489,38 +489,35 @@ router.post("/auth", async (req, res) => {
   await datasource
     .query("SELECT * FROM structure WHERE email = ?", [req.body.email])
     .then(([[user]]) => {
-      bcrypt
-        .compare(req.body.password, user.password, function (err, result) {
-          if (result) {
-            const start = Date.now();
-            const token = sha256(req.body.email + start);
-            datasource
-              .query(
-                "UPDATE structure SET token = ?, tokenStart = ? WHERE email = ?",
-                [token, start, user.email]
-              )
-              .then(() => {
-                res.status(200).send({
-                  email: user.email,
-                  token: token,
-                  tokenStart: start,
-                  isVerify: user.isVerify,
-                });
-              })
-              .catch((err) => {
-                console.error(err);
-                res.status(500).send("Erreur de connexion");
+      bcrypt.compare(req.body.password, user.password, function (err, result) {
+        if (result) {
+          const start = Date.now();
+          const token = sha256(req.body.email + start);
+          datasource
+            .query(
+              "UPDATE structure SET token = ?, tokenStart = ? WHERE email = ?",
+              [token, start, user.email]
+            )
+            .then(() => {
+              res.status(200).send({
+                email: user.email,
+                token: token,
+                tokenStart: start,
+                isVerify: user.isVerify,
               });
-          } else {
-            res.sendStatus(404);
-          }
-        })
-
+            })
+            .catch((err) => {
+              console.error(err);
+              res.status(500).send("Erreur de connexion");
+            });
+        } else {
+          res.sendStatus(404);
+        }
+      });
     })
     .catch((err) => {
       console.error(err);
       res.status(500).send("Erreur de connexion");
-
     });
 });
 

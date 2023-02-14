@@ -1,10 +1,11 @@
 import axios from "axios";
 import { toast } from "react-hot-toast";
 
-export const usePutParams = (
+const usePutParams = (
   structureId,
   userType,
-  getData,
+  newGetData,
+  setNewGetData,
   infos,
   newPwd,
   cNewPwd
@@ -45,7 +46,7 @@ export const usePutParams = (
         }
       );
       toast.success("Vos informations ont bien été modifiées");
-      getData();
+      setNewGetData(!newGetData);
     } catch (err) {
       console.error(err.message);
     }
@@ -73,3 +74,5 @@ export const usePutParams = (
 
   return { handleSubmitInfo, updatePassword };
 };
+
+export default usePutParams;

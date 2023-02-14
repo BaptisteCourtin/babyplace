@@ -1,4 +1,4 @@
-export const activitiesArray = [
+const activitiesArray = [
   {
     id: "check1",
     name: "pcsc1",
@@ -51,3 +51,5 @@ export const activitiesArray = [
     content: "Je propose des photos connectées",
   },
 ];
+
+export default activitiesArray;

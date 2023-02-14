@@ -34,7 +34,7 @@ function SeConnecter({ setCompo }) {
         .then((ret) => {
           const { familleId, token } = ret.data;
 
-          setFamilleId(familleId);
+          setFamilleId(familleId.toString());
           sessionStorage.setItem("BabyPlacefamilleId", familleId);
 
           updateToNote(ret.data.familleId);

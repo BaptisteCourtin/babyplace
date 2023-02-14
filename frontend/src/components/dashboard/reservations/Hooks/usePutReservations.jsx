@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-hot-toast";
 
-export const usePutReservations = (getReser) => {
+const usePutReservations = (getReser) => {
   const updateStatus = async (status, reserId) => {
     try {
       await axios.put(`${import.meta.env.VITE_PATH}/reservation/status`, {
@@ -23,14 +23,16 @@ export const usePutReservations = (getReser) => {
     try {
       await axios.put(`${import.meta.env.VITE_PATH}/reservation/dates`, {
         id: reserId,
-        dateStart: dateStart,
-        dateEnd: dateEnd,
-      })
+        dateStart,
+        dateEnd,
+      });
       toast.success("Vos disponibilités ont été envoyées");
     } catch (err) {
-      console.error(err.message)
+      console.error(err.message);
     }
-  }
+  };
 
   return { updateStatus, updateDates };
 };
+
+export default usePutReservations;

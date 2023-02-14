@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import Scrolltobottom from "react-scroll-to-bottom";
 import moment from "moment";
 import PropTypes from "prop-types";
-import { saveMessage } from "./hooks/useSaveMessage";
-import { useGetMessagesFromRoom } from "./hooks/useGetMessagesFromRoom";
+import saveMessage from "./hooks/useSaveMessage";
+import useGetMessagesFromRoom from "./hooks/useGetMessagesFromRoom";
 
 function Chat({ socket, username, room, title, joinRoom }) {
   const [currentMessage, setCurrentMessage] = useState("");
@@ -20,8 +20,9 @@ function Chat({ socket, username, room, title, joinRoom }) {
         time: `${new Date(Date.now()).getHours()}:${new Date(
           Date.now()
         ).getMinutes()}`,
-        date: `${new Date(Date.now()).getFullYear()} -${new Date(Date.now()).getMonth() + 1
-          } -${new Date(Date.now()).getUTCDate()} `,
+        date: `${new Date(Date.now()).getFullYear()}-${
+          new Date(Date.now()).getMonth() + 1
+        }-${new Date(Date.now()).getUTCDate()}`,
       };
       saveMessage(messageData);
       await socket.emit("send_message", messageData);

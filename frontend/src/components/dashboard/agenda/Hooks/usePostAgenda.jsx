@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-hot-toast";
 
-export const usePostData = (setPlaces, date, structureId, getCalendar) => {
+const usePostData = (setPlaces, date, structureId, getCalendar) => {
   const addSleepDate = async () => {
     try {
       await axios.post(`${import.meta.env.VITE_PATH}/calendrier/add`, {
@@ -33,3 +33,5 @@ export const usePostData = (setPlaces, date, structureId, getCalendar) => {
 
   return { addSleepDate, addWorkDate };
 };
+
+export default usePostData;

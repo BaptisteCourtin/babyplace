@@ -331,10 +331,6 @@ function DashPlaces({ userType, structureId }) {
 export default DashPlaces;
 
 DashPlaces.propTypes = {
-  title: PropTypes.string.isRequired,
   userType: PropTypes.string.isRequired,
   structureId: PropTypes.number.isRequired,
-  indemnRepas: PropTypes.number.isRequired,
-  Tarif_heure: PropTypes.number.isRequired,
-  Tarif_horaire_spec: PropTypes.number.isRequired,
 };

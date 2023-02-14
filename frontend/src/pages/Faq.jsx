@@ -3,7 +3,7 @@ import { HashLink } from "react-router-hash-link";
 import FooterLite from "@components/features/components/FooterLite";
 import NavbarLite from "@components/features/components/NavbarLite";
 
-function Faq(props) {
+function Faq() {
   return (
     <div className="faq" id="faq">
       <NavbarLite />

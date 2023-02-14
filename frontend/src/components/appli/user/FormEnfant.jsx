@@ -29,42 +29,63 @@ function FormEnfant() {
   };
 
   // --- prise des donnees qui sont dans la bdd ---
+  const [newDelEnfant, setNewDelEnfant] = useState(true); // si un enfant ajouter / supprimer
 
   const [nomsEnfants, setNomsEnfants] = useState(); // les prenoms des enfants
   const [enfantId, setEnfantId] = useState(0); // mettre l'id du premier enfant dans le usestate
 
-  const getNomsEnfants = () => {
+  const getNomsEnfants = (source) => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/famille/nomsEnfants/${familleId}`)
+      .get(`${import.meta.env.VITE_PATH}/famille/nomsEnfants/${familleId}`, {
+        cancelToken: source.token,
+      })
       .then((res) => {
         setNomsEnfants(res.data);
         setEnfantId(res.data[0].enfantId);
       })
       .catch((err) => {
-        console.error(err);
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
       });
   };
   useEffect(() => {
-    getNomsEnfants();
-  }, []);
+    const source = axios.CancelToken.source();
+    getNomsEnfants(source);
+    return () => {
+      source.cancel();
+    };
+  }, [newDelEnfant]);
 
   const [donneesForm, setDonneesForm] = useState(); // les donnees des form
   const [donneesOK, setDonneesOK] = useState(false); // les donnees sont prises => mis dans initial data
   const [finalOK, setFinalOK] = useState(false); // donnees mises dans initial => go visuel
 
-  const getDonneesForm = () => {
+  const getDonneesForm = (source) => {
     axios
-      .get(`${import.meta.env.VITE_PATH}/famille/formEnfant/${enfantId}`)
+      .get(`${import.meta.env.VITE_PATH}/famille/formEnfant/${enfantId}`, {
+        cancelToken: source.token,
+      })
       .then((res) => {
         setDonneesForm(res.data);
         setDonneesOK(true);
       })
       .catch((err) => {
-        console.error(err);
+        if (err.code === "ERR_CANCELED") {
+          console.warn("cancel request");
+        } else {
+          console.error(err);
+        }
       });
   };
   useEffect(() => {
-    getDonneesForm();
+    const source = axios.CancelToken.source();
+    getDonneesForm(source);
+    return () => {
+      source.cancel();
+    };
   }, [enfantId, nomsEnfants]); // met le bon form
 
   // --- func pour changer initial value ---
@@ -134,7 +155,8 @@ function FormEnfant() {
         familleId,
       })
       .then(() => {
-        getNomsEnfants();
+        // getNomsEnfants();
+        setNewDelEnfant(!newDelEnfant);
       });
   };
 
@@ -144,7 +166,8 @@ function FormEnfant() {
     axios
       .delete(`${import.meta.env.VITE_PATH}/famille/deleteEnfant/${enfantId}`)
       .then(() => {
-        getNomsEnfants();
+        // getNomsEnfants();
+        setNewDelEnfant(!newDelEnfant);
       });
   };
 
