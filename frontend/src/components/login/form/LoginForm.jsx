@@ -15,6 +15,7 @@ function LoginForm() {
   const [typePwd, setTypePwd] = useState(true);
   const [localEmail, setLocalEmail] = useLocalStorage("email", "mail");
 
+  // --- password visible ou non ---
   const handlePwdClick = (e) => {
     e.preventDefault();
     setTypePwd(!typePwd);
@@ -23,6 +24,7 @@ function LoginForm() {
   const adminEmail = import.meta.env.VITE_ADMIN_EMAIL;
   const adminPassword = import.meta.env.VITE_ADMIN_PWD;
 
+  // --- login ---
   const handleClick = (e) => {
     e.preventDefault();
     setLocalEmail(email);
@@ -64,6 +66,7 @@ function LoginForm() {
     }
   };
 
+  // ---
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       handleClick(e);

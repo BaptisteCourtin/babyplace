@@ -11,8 +11,7 @@ import NotifPaye from "@components/appli/notif/NotifPaye";
 function AppliNotif() {
   const { familleId } = useContext(FamilleContext);
 
-  // --- photo famille ---
-
+  // --- get photo famille ---
   const [photoFamille, setPhotoFamille] = useState();
 
   const getFamilleInfo = (source) => {
@@ -33,7 +32,6 @@ function AppliNotif() {
   };
 
   // --- get reservation refused ET approved ---
-
   const [allReservation, setAllReservation] = useState([]);
 
   const getAllReservation = (source) => {
@@ -53,6 +51,7 @@ function AppliNotif() {
       });
   };
 
+  // useEffect photo famille + reservation refused ET approved
   useEffect(() => {
     const source = axios.CancelToken.source();
     getFamilleInfo(source);
@@ -62,8 +61,7 @@ function AppliNotif() {
     };
   }, [familleId]);
 
-  // ---
-
+  // --- choix compo ---
   const [compo, setCompo] = useState(0);
   const [oneReservation, setOneReservation] = useState(0);
 

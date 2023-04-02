@@ -8,6 +8,7 @@ function LoginParams() {
   const { token } = state;
   const [localId, setLocalId] = useLocalStorage("id", "id");
 
+  // --- get structure id ---
   const getStructureId = async (source) => {
     try {
       const res = await axios.get(

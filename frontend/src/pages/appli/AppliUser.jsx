@@ -6,6 +6,8 @@ import FamilleContext from "@components/context/FamilleContext";
 import { AiOutlineUser } from "react-icons/ai";
 
 function AppliUser() {
+  const { familleId } = useContext(FamilleContext);
+
   const [pourcentFormParent, setPourcentFormParent] = useState(0);
   const [pourcentFormEnfant, setPourcentFormEnfant] = useState(0);
   const [truePourcentEnfant, setTruePourcentEnfant] = useState(0);
@@ -15,7 +17,7 @@ function AppliUser() {
   const [nomPrenom, setNomPrenom] = useState(false);
   const [donneesOK, setDonneesOK] = useState(false);
 
-  const { familleId } = useContext(FamilleContext);
+  // --- get pourcentage des 3 formulaire + image profil ---
   const getPourcentForm = (source) => {
     axios
       .get(`${import.meta.env.VITE_PATH}/famille/pourcent/${familleId}`, {
@@ -48,7 +50,6 @@ function AppliUser() {
   }, [familleId]);
 
   // --- pour avoir le vrai pourcent des enfants ---
-
   const getTruePourcentEnfant = () => {
     let pourcent = 0;
     let nbTime = 0;
@@ -64,7 +65,6 @@ function AppliUser() {
   }, [pourcentFormEnfant]);
 
   // --- upload image profil---
-
   const docImgProfil = useRef(null);
 
   const SubmitPhotoFamille = () => {
@@ -93,8 +93,7 @@ function AppliUser() {
       });
   };
 
-  // ---
-
+  // --- tableau utilsé pour les barres de progression ---
   const tabCompletion = [
     {
       nom: "Dossier Enfant",

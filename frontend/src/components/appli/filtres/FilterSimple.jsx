@@ -1,7 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+// voir la page AppliSearch
+// les filtres sont directement appliqués
 function FilterSimple({ setCompo, dataBasique, setDataBasique }) {
+  // --- met à jour les filtres ---
   const ChangeIsCreche = (e) => {
     setDataBasique((prevState) => ({
       ...prevState,

@@ -22,14 +22,14 @@ function AppCalendar({
 }) {
   const value = new Date(); // date de base occas
 
+  // --- choix jour et heures ---
   const chooseTheDay = (e, each) => {
     setJour(e.target.value);
     setThisMinHeure(each.heureMin);
     setThisMaxHeure(each.heureMax);
   };
 
-  // --- version occas
-
+  // --- version occasionnel ---
   const [clickedDay, setClickedDay] = useState(new Date());
   const afficheDate = () => {
     let jour = clickedDay.toString();
@@ -65,7 +65,6 @@ function AppCalendar({
   };
 
   // --- enlever des jours ---
-
   const EnleverCase = ({ date }) => {
     if (
       (date.getDay() === 1 && dataHorairesId[0].ouvert === 0) ||
@@ -94,7 +93,6 @@ function AppCalendar({
   };
 
   // --- classname et couleur des cases ---
-
   const CaseClassName = ({ date }) => {
     if (
       (date.getDay() === 1 && dataHorairesId[0].ouvert === 0) ||
@@ -117,7 +115,6 @@ function AppCalendar({
       }
       return result;
     }
-
     return "";
   };
 

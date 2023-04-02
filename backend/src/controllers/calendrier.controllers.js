@@ -61,9 +61,9 @@ const deleteDates = async (req, res) => {
   }
 };
 
-const fullDate = async (req, res) => {
+const deleteFullDate = async (req, res) => {
   const { id } = req.params;
-  const result = await calendrierModels.fullDate(id);
+  const result = await calendrierModels.deleteFullDate(id);
   if (result.affectedRows === 0) {
     res.status(404).send("Not found");
   } else {
@@ -78,6 +78,6 @@ module.exports = {
   updatePlaces,
   postDate,
   deleteDates,
-  fullDate,
+  deleteFullDate,
   getCalendrierMoins,
 };

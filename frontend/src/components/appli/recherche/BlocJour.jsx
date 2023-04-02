@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function BlocJour({ dataHorairesId }) {
+  // --- tableau utilisé pour savoir si jour normalement travaillé ou non ---
   const tabJour = [
     { jour: "Lun", check: dataHorairesId[0].ouvert },
     { jour: "Mar", check: dataHorairesId[1].ouvert },

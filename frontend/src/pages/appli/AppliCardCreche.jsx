@@ -48,6 +48,7 @@ function AppliCardCreche() {
     photoConnecte,
   } = data;
 
+  // --- signalement de la structure ---
   const handleSignaler = () => {
     axios.put(`${import.meta.env.VITE_PATH}/structure/signal/${structureId}`);
     toast.success("Votre signalement à bien été transmis.");

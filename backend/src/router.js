@@ -9,10 +9,11 @@ const bcrypt = require("bcrypt");
 const multerMid = multer({
   storage: multer.memoryStorage(),
   limits: {
-    fileSize: 5 * 1024 * 1024,
+    fileSize: 0.5 * 1024 * 1024, // => 524 288 = 0.5Mo = 500ko
   },
 });
 
+// --- les controllers ---
 const structure = require("./controllers/structure.controllers");
 const horaires = require("./controllers/horaires.controllers");
 const calendrier = require("./controllers/calendrier.controllers");
@@ -31,8 +32,7 @@ const inscCreche = require("./controllers/inscCreche.controllers");
 const inscAssmat = require("./controllers/inscAssmat.controllers");
 const mailer = require("./services/nodemailer/mailer.response.services");
 
-// --- pour app ---
-
+// --- APP ---
 // form inscription au début de l'app
 router.post("/inscriptionAppFamille", async (req, res) => {
   const { email, password } = req.body;
@@ -129,18 +129,18 @@ router.post("/authFamille", (req, res) => {
     });
 });
 
-router.get("/structure/allapp", structure.getAllStructures); //search
-router.get("/structure/notes/:id", structure.getStructureById); //notes
-router.get("/horaires/:id", horaires.getHorairesById); //search
+router.get("/structure/allapp", structure.getAllStructures); // toutes les structures
+router.get("/structure/notes/:id", structure.getStructureById); // les notes
+router.get("/horaires/:id", horaires.getHorairesById); // les jours pour savoir si de base travaillé ou non
 router.get("/calendrier/whereMoins/:id", calendrier.getCalendrierMoins); // calendrier par id where nbPlaces = -1
-router.get("/famille/conf/:id", famille.getPersoConfiance); //perso confiance
+router.get("/famille/conf/:id", famille.getPersoConfiance); // perso confiance
 router.get("/famille/info/:id", famille.getFamilleInfo); // info famille (noms + photo)
 router.get("/famille/formInscription/:id", famille.getDonneesFormInscription); //donnees du formulaire inscription
 router.get("/famille/pourcent/:id", famille.getPourcent); // pourcent des formulaire
-router.get("/famille/likes/:id", famille.getLikes); // get likes
-router.get("/famille/likesAndStructure/:id", famille.getLikesAndStructure); // get likes et info structure
-router.get("/famille/formParent/:id", parent.getDonneesFormParent); //donnees du formulaire parent
-router.get("/famille/formEnfant/:id", enfant.getDonneesFormEnfant); //donnees du formulaire enfant
+router.get("/famille/likes/:id", famille.getLikes); // likes suivant la familleId
+router.get("/famille/likesAndStructure/:id", famille.getLikesAndStructure); // get info structure si like
+router.get("/famille/formParent/:id", parent.getDonneesFormParent); // donnees du formulaire parent
+router.get("/famille/formEnfant/:id", enfant.getDonneesFormEnfant); // donnees du formulaire enfant
 router.get("/famille/nomsEnfants/:id", enfant.getNomsEtIdEnfants); // noms et id des enfants
 router.get("/famille/nomsEnfants100/:id", enfant.getNomsEtIdEnfants100); // noms et id des enfants à 100 %
 router.get("/reservationAR/:id", reservation.getReservationAR); // prend les résa pour la page notif
@@ -148,16 +148,15 @@ router.get("/getReservationPayed/:id", reservation.getReservationPayed); // pren
 router.get("/contact/message/all", messageAdmin.getAllMessageToAdmin); // recupérer tous les message pour le dashboard admin
 router.get("/messages/recup/:room", messagerie.getAllMessageFromDb); // recupération des message pour le chat
 
-router.put("/structure/notes/:id", structure.updateNotes); //notes
-router.put("/structure/signal/:id", structure.updateSignal); // signalement
-router.put("/pourcentFormInscr/:id", famille.updatePourcentFormInscr); // pourcent formulaire inscr
+router.put("/structure/notes/:id", structure.updateNotes); // change les notes
+router.put("/structure/signal/:id", structure.updateSignal); // signal la structure
+router.put("/pourcentFormInscr/:id", famille.updatePourcentFormInscr); // pourcent formulaire inscription
 router.put("/famille/nullOneDocForm/:id", famille.nullOneDocFormCommun); // delete un doc du form inscription (commun)
-router.put("/formParent/:id", parent.updateFormParent); // formulaire parent
+router.put("/formParent/:id", parent.updateFormParent); // update formulaire parent
 router.put("/parent/nullOneDocForm/:id", parent.nullOneDocFormParent); // delete un doc du form inscription (parent)
 router.put("/formEnfant/:id", enfant.updateFormEnfant); // formulaire enfant
-router.put("/resaToNote/:id", reservation.updateResaToNote); // passe le status à toNote
+router.put("/resaToNote/:id", reservation.updateResaToNote); // passe le status à toNote (se fait tout seul)
 router.put("/famille/deconnexion/:id", famille.deco); // deconnexion famille
-router.put("/admin/unsignaled/:id", structure.updateSignaled); // unsignaler structure
 
 router.post("/reservation", reservation.postReservation); // reservation
 router.post("/famille/newEnfant", enfant.postNewEnfant); // nouveau enfant
@@ -165,18 +164,12 @@ router.post("/famille/oneMoreLike", famille.postNewLike); // nouveau like
 router.post("/contact/message", messageAdmin.postMessageToAdmin); // nouveau message pour l'admin
 router.post("/messages/sauvegarde", messagerie.saveMessageInDb); // sauvegarde des messages du chat dans la db
 router.post("/famille/newConfiance", famille.postNewConfiance); // nouveau perso confiance
-router.post("/contact/messages/repondre", mailer.emailSender); // envoyer des réponses par mail pour l'admin
-router.post("/contact/messages/accept", mailer.acceptEmailSender); // envoyer acceptation des crêches par mail
-router.post("/contact/messages/accept", mailer.acceptEmailSender); // envoyer acceptation des crêches par mail
-router.post("/contact/messages/reaccept", mailer.reAcceptEmailSender); // envoyer refus des crêches par mail
-router.post("/contact/messages/supprimer", mailer.suppressionEmailSender); // envoyer refus des crêches par mail
 
 router.delete("/famille/deleteConfiance/:id", famille.deleteConfiance); // delete perso confiance
 router.delete("/famille/deleteEnfant/:id", enfant.deleteEnfant); // delete enfant
 router.delete("/reservation/deleteResa/:id", reservation.deleteResa); // delete resa
-router.delete("/deleteAncienResa/:id", reservation.deleteResaByDate); // delete resa by date
+router.delete("/deleteAncienResa/:id", reservation.deleteResaByDate); // delete resa by date (se fait tout seul)
 router.delete("/famille/deleteLike", famille.deleteLike); // delete like
-router.delete("/contact/message/all/:id", messageAdmin.deleteMessagebyId); // delete message from admin dashboard
 
 // FORM INSCRIPTION CHAQUE PARENT (juste le where qui change)
 // mettre dans uploads et change nom
@@ -254,7 +247,6 @@ router.put("/formInscription/docFamilleChangeName/:id/:nomDoc", (req, res) => {
 
 // PHOTO DE PROFIL FAMILLE
 // mettre dans uploads et change nom
-
 router.post(
   "/famille/photoProfil",
   multerMid.single("file"),
@@ -290,29 +282,55 @@ router.put("/famille/photoProfil/:id", (req, res) => {
     });
 });
 
-// --- pour messagerie ---
+// --- AUTHENTIFICATION STRUCTURE (dashboard + admin + formulaire) ---
+router.post("/auth", async (req, res) => {
+  await datasource
+    .query("SELECT * FROM structure WHERE email = ?", [req.body.email])
+    .then(([[user]]) => {
+      bcrypt.compare(req.body.password, user.password, function (err, result) {
+        if (result) {
+          const start = Date.now();
+          const token = sha256(req.body.email + start);
+          datasource
+            .query(
+              "UPDATE structure SET token = ?, tokenStart = ? WHERE email = ?",
+              [token, start, user.email]
+            )
+            .then(() => {
+              res.status(200).send({
+                email: user.email,
+                token: token,
+                tokenStart: start,
+                isVerify: user.isVerify,
+              });
+            })
+            .catch((err) => {
+              console.error(err);
+              res.status(500).send("Erreur de connexion");
+            });
+        } else {
+          res.sendStatus(404);
+        }
+      });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Erreur de connexion");
+    });
+});
 
-router.get("/structure/all", structure.getStructureDataMess);
-router.get("/famille/all", famille.getFamilleDataMess);
-
-//Routes for dashboard + admin page start
-router.get("/structure", structure.getStructure);
-router.get("/structures", structure.getStructures);
-router.get("/structureId", structure.getStructureId);
+// --- DASHBOARD ---
+router.get("/structure", structure.getStructure); // tous sur la structure
+router.get("/structureId", structure.getStructureId); // prend l'id de la structure
 router.get("/structure/type/:id", structure.getStructureType);
 router.get("/structure/details", structure.getStructureDetails);
 router.get("/reservation/:id", reservation.getReser);
 router.get("/reservation/approved/:id", reservation.getApprovedReser);
-router.get("/admin", structure.getNotVerified);
 router.get("/favorites/:id", structure.getFavorites);
 router.get("/horaires/:id", horaires.getHorairesById);
 router.get("/calendrier/:id", calendrier.getCalendrier);
 router.get("/notifications/:id", notification.getNotifications);
-router.get("/admin/assmat", assMat.getAssMat);
-router.get("/admin/creche", creche.getCreche);
-router.get("/admin/famille", famille.getFamille);
 
-router.put("/admin/verified/:id", structure.updateVerified);
 router.put("/reservation/status", reservation.updateStatus);
 router.put("/reservation/dates", reservation.updateDates);
 router.put("/horaires/day/:id", horaires.updateDay);
@@ -330,7 +348,7 @@ router.put("/calendrier/places/close/:id", calendrier.updateStatusClose);
 router.put("/calendrier/places/open/:id", calendrier.updateStatusOpen);
 router.put("/logout/:id", structure.logout);
 
-router.post("/calendrier/add", calendrier.postDate);
+router.post("/calendrier/add", calendrier.postDate); // met une date dans la table calendrier
 router.post("/dashboard/docs", structure.uploadProfil);
 router.post("/uploads", multerMid.single("file"), async (req, res, next) => {
   try {
@@ -342,15 +360,33 @@ router.post("/uploads", multerMid.single("file"), async (req, res, next) => {
   }
 });
 
-router.delete("/calendrier", calendrier.deleteDates);
-router.delete("/calendrier/:id", calendrier.fullDate);
-router.delete("/admin/refused/:id", structure.deleteRefused);
-router.delete("/notifications/:id", notification.deleteNotification);
+router.delete("/calendrier", calendrier.deleteDates); // delete les dates avant aujourd'hui (automatique)
+router.delete("/calendrier/:id", calendrier.deleteFullDate); // delete une date du calendrier
+router.delete("/notifications/:id", notification.deleteNotification); // delete la notif
 
-//Routes for dashboard + admin page end
+// --- MESSAGERIE ---
+router.get("/structure/all", structure.getStructureDataMess);
+router.get("/famille/all", famille.getFamilleDataMess);
 
-//Routes inscription structure - start
+router.post("/contact/messages/repondre", mailer.emailSender); // envoyer des réponses par mail pour l'admin
+router.post("/contact/messages/accept", mailer.acceptEmailSender); // envoyer acceptation des crêches par mail
+router.post("/contact/messages/reaccept", mailer.reAcceptEmailSender); // envoyer refus des crêches par mail
+router.post("/contact/messages/supprimer", mailer.suppressionEmailSender); // envoyer refus des crêches par mail
 
+// --- ADMIN ---
+router.get("/admin", structure.getNotVerified); // get not verify OU signalé
+router.get("/admin/assmat", assMat.getAssMat); // id de l'assMat
+router.get("/admin/creche", creche.getCreche); // id de la creche
+router.get("/admin/famille", famille.getFamille); // id de la famille
+
+router.put("/admin/unsignaled/:id", structure.updateSignaled); // désignaler la structure
+router.put("/admin/verified/:id", structure.updateVerified); // verifié et non signalé
+
+router.delete("/contact/message/all/:id", messageAdmin.deleteMessagebyId); // delete message from admin dashboard
+router.delete("/admin/refused/:id", structure.deleteRefused); // delete la structure
+
+// --- FORMULAIRE ---
+// inscription
 router.post("/inscription", async (req, res) => {
   const { email, password } = req.body;
   const hashedPassword = await bcrypt.hash(password, `${process.env.SALT}`);
@@ -394,7 +430,7 @@ router.get("/getStructureId", inscStructure.getStructureId); // get id structure
 
 router.get("/crecheExist", inscCreche.crecheExist); // creche existe?
 router.get("/getCrecheInfo", inscCreche.getCrecheInfo); // get infos creche
-router.put("/inscriptionCreche1", inscCreche.inscriptionCreche1); //modif infos adimin creche
+router.put("/inscriptionCreche1", inscCreche.inscriptionCreche1); // modif infos adimin creche
 router.post("/inscriptionCreche1", inscCreche.updateCreche1); // création creche
 
 router.get("/assmatExist", inscAssmat.assmatExist); // assmat existe ?
@@ -480,45 +516,5 @@ router.post(
     }
   }
 );
-
-//Routes inscription structure - end
-
-// Route auth structure
-
-router.post("/auth", async (req, res) => {
-  await datasource
-    .query("SELECT * FROM structure WHERE email = ?", [req.body.email])
-    .then(([[user]]) => {
-      bcrypt.compare(req.body.password, user.password, function (err, result) {
-        if (result) {
-          const start = Date.now();
-          const token = sha256(req.body.email + start);
-          datasource
-            .query(
-              "UPDATE structure SET token = ?, tokenStart = ? WHERE email = ?",
-              [token, start, user.email]
-            )
-            .then(() => {
-              res.status(200).send({
-                email: user.email,
-                token: token,
-                tokenStart: start,
-                isVerify: user.isVerify,
-              });
-            })
-            .catch((err) => {
-              console.error(err);
-              res.status(500).send("Erreur de connexion");
-            });
-        } else {
-          res.sendStatus(404);
-        }
-      });
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Erreur de connexion");
-    });
-});
 
 module.exports = router;

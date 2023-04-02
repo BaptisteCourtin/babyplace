@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import ProfilPlat from "@components/appli/ProfilPlat";
@@ -8,10 +9,11 @@ import { BsFillPeopleFill } from "react-icons/bs";
 import { BiBuoy } from "react-icons/bi";
 import { FaPiggyBank } from "react-icons/fa";
 import { MdLogout } from "react-icons/md";
-import axios from "axios";
 
 function Base({ setCompo, familleId, setFamilleId }) {
   const navigate = useNavigate();
+
+  // --- deconnection et retour à la page / ---
   const handleDeco = () => {
     axios
       .put(`${import.meta.env.VITE_PATH}/famille/deconnexion/${familleId}`)

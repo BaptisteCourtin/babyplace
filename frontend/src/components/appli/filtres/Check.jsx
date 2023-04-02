@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function Check({ setter, state, nom, p }) {
+  // --- met à jour le check en version groupe(objet) ---
   const handleChange = (e) => {
     const { name } = e.target;
     setter((prevState) => ({

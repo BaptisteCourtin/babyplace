@@ -19,15 +19,16 @@ function RegisterForm() {
   const [checked, setChecked] = useState(false);
   const [typePwd, setTypePwd] = useState(true);
 
+  // --- password visible ou non ---
   const [pwdLength, setPwdLength] = useState(null);
   const handlePwdClick = (e) => {
     e.preventDefault();
     setTypePwd(!typePwd);
   };
 
+  // --- s'enregistrer ---
   const handleClick = (e) => {
     e.preventDefault();
-
     if (email && password && checked && pwdLength >= 8) {
       Axios.post(`${import.meta.env.VITE_PATH}/inscription`, {
         email,
@@ -53,6 +54,7 @@ function RegisterForm() {
     }
   };
 
+  // --- si password trop court ---
   const handlePwdLength = (e) => {
     e.preventDefault();
     if (pwdLength < 8) {

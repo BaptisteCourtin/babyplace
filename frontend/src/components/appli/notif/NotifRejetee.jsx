@@ -19,6 +19,7 @@ function NotifRejetee({ setCompo, photoFamille, oneReservation }) {
     nom,
   } = oneReservation;
 
+  // --- delete la reservation quand on clique sur voir autres ---
   const removeResa = () => {
     axios.delete(
       `${import.meta.env.VITE_PATH}/reservation/deleteResa/${oneReservation.id}`

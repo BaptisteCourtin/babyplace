@@ -19,6 +19,7 @@ function ConfirmeResa({
   const { familleId } = useContext(FamilleContext);
   const [photoFamille, setPhotoFamille] = useState();
 
+  // --- get photo famille ---
   const getFamilleInfo = (source) => {
     axios
       .get(`${import.meta.env.VITE_PATH}/famille/info/${familleId}`, {

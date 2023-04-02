@@ -16,8 +16,9 @@ function Connexion({ setCompo }) {
   const [typePwd, setTypePwd] = useState(true);
   const [typePwd2, setTypePwd2] = useState(true);
 
-  const [otherPassword, setOtherPassword] = useState(false);
+  const [otherEmail, setOtherEmail] = useState(false);
 
+  // --- inscription ---
   const handleInscription = (e) => {
     e.preventDefault();
     if (email && password === password2) {
@@ -40,7 +41,7 @@ function Connexion({ setCompo }) {
         })
         .catch((err) => {
           if (err.response.data.errno === 1062) {
-            setOtherPassword(true);
+            setOtherEmail(true);
           } else {
             console.error(err);
           }
@@ -119,7 +120,7 @@ function Connexion({ setCompo }) {
           </label>
         </form>
 
-        {otherPassword && (
+        {otherEmail && (
           <p className="emailFail">
             Cet email est déjà utilisé, vous pouvez vous connecter en haut à
             droite

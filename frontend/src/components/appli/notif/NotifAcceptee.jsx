@@ -63,6 +63,8 @@ function NotifAcceptee({ setCompo, photoFamille, oneReservation }) {
             de {heureArrivee} à {heureDepart}
           </h4>
         </div>
+
+        {/* va à la page pour payer */}
         <div className="button-bas">
           <button type="button" className="butt" onClick={() => setCompo(4)}>
             Payer et Confirmer

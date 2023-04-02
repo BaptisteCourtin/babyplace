@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import logoBlanc from "@assets/logo-blanc.svg";
 import PropTypes from "prop-types";
 
 import Rating from "react-rating";
 import { AiOutlineStar, AiFillStar, AiOutlineUser } from "react-icons/ai";
 import { toast } from "react-hot-toast";
+import logoBlanc from "@assets/logo-blanc.svg";
 
 function NotifNote({ setCompo, photoFamille, oneReservation }) {
-  // --- get ---
+  // --- get les notes de la structure ---
   const [structureNotes, setStructureNotes] = useState();
 
   const getStructureById = (source) => {
     axios
       .get(
         `${import.meta.env.VITE_PATH}/structure/notes/${
-          (oneReservation.structureId,
-          {
-            cancelToken: source.token,
-          })
-        }`
+          oneReservation.structureId
+        }`,
+        {
+          cancelToken: source.token,
+        }
       )
       .then((res) => {
         setStructureNotes(res.data[0]);
@@ -33,6 +33,7 @@ function NotifNote({ setCompo, photoFamille, oneReservation }) {
         }
       });
   };
+
   useEffect(() => {
     const source = axios.CancelToken.source();
     getStructureById(source);
@@ -42,7 +43,6 @@ function NotifNote({ setCompo, photoFamille, oneReservation }) {
   }, []);
 
   // --- update ---
-
   const [noteCom, setNoteCom] = useState(0);
   const [noteEveil, setNoteEveil] = useState(0);
   const [noteSecurite, setNoteSecurite] = useState(0);
@@ -65,6 +65,7 @@ function NotifNote({ setCompo, photoFamille, oneReservation }) {
     );
   };
 
+  // --- submit la note et delete la demande de note (table reservation) ---
   const submitNote = () => {
     let { nbNotes } = structureNotes;
 

@@ -14,6 +14,7 @@ function Structure3({
   const [image2Src, setImage2Src] = useState(placeHolder);
   const [image3Src, setImage3Src] = useState(placeHolder);
 
+  // --- get des images ---
   const getPicture = (source) => {
     Axios.get(
       `${import.meta.env.VITE_PATH}/photosStructure?id=${structureId}`,
@@ -53,6 +54,7 @@ function Structure3({
     };
   }, []);
 
+  // --- update des images (*3) ---
   const updateImg1 = (e) => {
     // e.files contient un objet FileList
     const [picture] = e.target.files;

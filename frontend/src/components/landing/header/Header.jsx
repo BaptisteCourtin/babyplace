@@ -7,6 +7,8 @@ import mother from "@assets/app parents/mom2.png";
 
 function Header({ userType }) {
   const navigate = useNavigate();
+
+  // --- montre la fleche ou non ---
   const [showArrow, setShowArrow] = useState(true);
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -17,6 +19,7 @@ function Header({ userType }) {
       }
     });
   }, []);
+
   return userType === "parent" ? (
     <header className="header">
       <div className="leftPart">

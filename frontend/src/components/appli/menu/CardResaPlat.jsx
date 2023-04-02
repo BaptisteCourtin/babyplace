@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { AiOutlineUser } from "react-icons/ai";
 
+// voir components Reservations
 function CardResaPlat({ each }) {
   const {
     crecheNom,

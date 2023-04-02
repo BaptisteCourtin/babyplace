@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
+import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import FamilleContext from "@components/context/FamilleContext";
 
 import { BsFillGridFill, BsSearch } from "react-icons/bs";
 import { AiOutlineUser, AiOutlineBell } from "react-icons/ai";
 import { BiMessageDetail } from "react-icons/bi";
-
-import { NavLink } from "react-router-dom";
 
 function Navbar({ setCompo }) {
   const { familleId } = useContext(FamilleContext);

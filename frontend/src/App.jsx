@@ -1,13 +1,24 @@
-import Login from "@components/login/Login";
-import Synthesis from "@components/login/Synthesis";
-import Register from "@components/register/Register";
-
 import { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import UserEmailContext from "@components/context/UserEmailContext";
 import FamilleContext from "@components/context/FamilleContext";
 
+// page de base
+import Home from "@pages/Home";
+import Features from "@pages/Features";
+import Contact from "@pages/Contact";
+import Faq from "@pages/Faq";
+
+// log-in formulaire - dashboard - admin
+import Login from "@components/login/Login";
+import Register from "@components/register/Register";
+
+// dashboard
+import Dashboard from "@components/dashboard/Dashboard";
+import Synthesis from "@components/login/Synthesis";
+
+// appli
 import Appli from "@pages/appli/AppliTuto";
 import AppliMenu from "@pages/appli/AppliMenu";
 import AppliSearch from "@pages/appli/AppliSearch";
@@ -17,24 +28,25 @@ import AppliUser from "@pages/appli/AppliUser";
 import AppliUserCompletion from "@pages/appli/AppliUserCompletion";
 import AppliNotif from "@pages/appli/AppliNotif";
 import AppliMessage from "@pages/appli/AppliMessage";
+import AppliChat from "@pages/appli/AppliChat";
 
+// formulaire
 import FormStructure from "@pages/FormStructure";
 
-import Dashboard from "@components/dashboard/Dashboard";
-import Features from "@pages/Features";
-import Contact from "@pages/Contact";
-import Faq from "@pages/Faq";
+// admin
 import Admin from "@pages/Admin";
-import Home from "@pages/Home";
 import WaitAdmin from "@pages/WaitAdmin";
-import AppliChat from "@pages/appli/AppliChat";
 import MessageAdmin from "@components/dashboard/admin/MessageAdmin";
 import Signalement from "@components/dashboard/admin/Signalement";
 
 function App() {
+  // formulaire
   const [userEmail, setUserEmail] = useState("paulette07@laposte.net");
   const [structureId, setStructureId] = useState(16);
+
+  // appli
   const [familleId, setFamilleId] = useState("0");
+
   useEffect(() => {
     setFamilleId(sessionStorage.getItem("BabyPlacefamilleId"));
     setUserEmail(sessionStorage.getItem("structureEmail"));
@@ -48,21 +60,21 @@ function App() {
       >
         <FamilleContext.Provider value={{ familleId, setFamilleId }}>
           <Routes>
+            {/* page de base */}
             <Route path="/" element={<Home />} />
-
-            <Route path="/admin/profils" element={<Admin />} />
-            <Route path="/admin/signalements" element={<Signalement />} />
-            <Route path="/admin/messages" element={<MessageAdmin />} />
-
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/login-params" element={<Synthesis />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-
             <Route path="/features" element={<Features />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/faq" element={<Faq />} />
 
+            {/* log-in formulaire - dashboard - admin */}
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+
+            {/* dashboard */}
+            <Route path="/login-params" element={<Synthesis />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+
+            {/* appli */}
             <Route path="/appli" element={<Appli />} />
             <Route path="/appli/menu" element={<AppliMenu />} />
             <Route path="/appli/search" element={<AppliSearch />} />
@@ -80,12 +92,17 @@ function App() {
             <Route path="/appli/message" element={<AppliMessage />} />
             <Route path="/appli/message/room" element={<AppliChat />} />
 
+            {/* formulaire */}
             <Route
               path="/structure/inscription-form"
               element={<FormStructure />}
             />
 
+            {/* admin */}
+            <Route path="/admin/profils" element={<Admin />} />
             <Route path="/pending" element={<WaitAdmin />} />
+            <Route path="/admin/signalements" element={<Signalement />} />
+            <Route path="/admin/messages" element={<MessageAdmin />} />
           </Routes>
         </FamilleContext.Provider>
       </UserEmailContext.Provider>

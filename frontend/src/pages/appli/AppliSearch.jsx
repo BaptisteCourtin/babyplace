@@ -4,7 +4,6 @@ import BaseCard from "@components/appli/recherche/BaseCard";
 import BaseMap from "@components/appli/recherche/BaseMap";
 import FamilleContext from "@components/context/FamilleContext";
 
-// ---
 import Base from "@components/appli/filtres/Base";
 import FilterSimple from "@components/appli/filtres/FilterSimple";
 import DateHeure from "@components/appli/filtres/DateHeure";
@@ -14,7 +13,7 @@ import Aggrements from "@components/appli/filtres/Aggrements";
 function AppliSearch() {
   const { familleId } = useContext(FamilleContext);
 
-  // --- les structures ---
+  // --- get toutes les structures ---
   const [structure, setStructure] = useState([]);
 
   const getStructure = (source) => {
@@ -70,7 +69,7 @@ function AppliSearch() {
     nuit: false,
   });
 
-  // ---
+  // --- choix compo ---
   const [compo, setCompo] = useState(0);
 
   const choixComposant = () => {

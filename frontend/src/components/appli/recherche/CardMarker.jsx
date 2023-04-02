@@ -7,9 +7,9 @@ import PropTypes from "prop-types";
 function CardMarker({ data }) {
   const { nom, nomUsage, nomNaissance, prenom } = data;
 
-  // --- adresse ---
-
+  // --- get adresse pour placer le marker ---
   const [adresseGPS, setAdresseGPS] = useState();
+
   // api convertir adresse en position gps
   const getAdresse = (source) => {
     axios

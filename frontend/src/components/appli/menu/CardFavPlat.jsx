@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { AiFillCloseCircle, AiFillStar } from "react-icons/ai";
 
+// utilisé dans la messagerie
 function CardFavPlat({ each }) {
   const {
     nom,

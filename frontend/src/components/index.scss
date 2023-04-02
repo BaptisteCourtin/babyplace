@@ -1,12 +1,13 @@
 @import "./variables.scss";
 @import "./reset.scss";
 
+// --- page de base + login (dashboard + admin + formulaire) ---
 @import "../components/landing/home.scss";
-
 @import "../components/register/register.scss";
 @import "../components/login/login.scss";
 @import "../components/login/synthesis.scss";
 
+// --- dashboard ---
 @import "../components/dashboard/dashboard.scss";
 
 // --- appli ---
@@ -36,7 +37,7 @@
 @import "../components/appli/filtres/check.scss";
 @import "../components/appli/reservation/appCalendar.scss";
 
-// --- form ---
+// --- formulaire ---
 @import "../components/form/style/formStructure.scss";
 @import "../components/form/style/structure1.scss";
 @import "../components/form/style/structure2.scss";

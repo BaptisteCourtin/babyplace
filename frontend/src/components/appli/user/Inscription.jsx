@@ -10,7 +10,6 @@ function Inscription() {
   const [donneesOK, setDonneesOK] = useState(false); // les donnees sont prises => mis dans initial data
 
   // --- calcul % completion ---
-
   const calculPourcent = () => {
     if (donneesForm !== undefined) {
       let pourcent = 0;
@@ -37,7 +36,7 @@ function Inscription() {
     calculPourcent();
   }, [donneesForm]);
 
-  // --- prise info bdd ---
+  // --- get données formulaire inscription ---
   const [newDonneesForm, setNewDonneesForm] = useState(true); // si un enfant ajouter / supprimer
 
   const getDonneesForm = (source) => {
@@ -71,7 +70,6 @@ function Inscription() {
   }, [newDonneesForm]);
 
   // --- changer une donnée avec le form ---
-
   const docJustifRevenus1Src = useRef(null);
   const docDeclaRevenus1Src = useRef(null);
   const docSituationPro1Src = useRef(null);
@@ -93,7 +91,6 @@ function Inscription() {
 
   // --- form parent 1 ou 2 ---
   // que des if car pas obligé de tout mettre d'un coup
-
   const OneIfFormParent = async (parentId, src, nameDoc) => {
     const formData = new FormData();
     formData.append("file", src.current.files[0]);
@@ -203,7 +200,6 @@ function Inscription() {
   };
 
   // --- form famille -> en commun ---
-
   const OneIfFormFamille = async (src, nameDoc) => {
     const formData = new FormData();
     formData.append("file", src.current.files[0]);
@@ -257,7 +253,6 @@ function Inscription() {
   };
 
   // --- supprimer un fichier ---
-
   const handleSupp = async (e, who) => {
     if (who === 1 || who === 2) {
       const { parentId } = donneesForm[0][who - 1];

@@ -5,11 +5,6 @@ const getFamille = async () => {
   return result;
 };
 
-const getFamilleDataMess = async (req) => {
-  const [result] = await datasource.query("SELECT * FROM famille");
-  return result;
-};
-
 const getPersoConfiance = async (req) => {
   const [result] = await datasource.query(
     "SELECT * FROM personne_confiance WHERE familleId = ?",
@@ -55,6 +50,11 @@ const getFamilleInfo = async (req) => {
     "SELECT nom, prenom FROM parent WHERE familleId = ? ; SELECT photoProfilFamille FROM famille WHERE familleId = ? ",
     [req.params.id, req.params.id]
   );
+  return result;
+};
+
+const getFamilleDataMess = async (req) => {
+  const [result] = await datasource.query("SELECT * FROM famille");
   return result;
 };
 

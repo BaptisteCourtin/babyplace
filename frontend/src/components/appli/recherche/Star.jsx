@@ -9,6 +9,7 @@ function Star({ com, proprete, securite, eveil, horaires, nbNotes }) {
   const [visibleStar, setVisibleStar] = useState(false);
   const [nbStarMoyen, setNbStarMoyen] = useState(0);
 
+  // --- tab utilisé pour display les étoiles ---
   const tabStar = [
     { nom: "Communication", nbStar: com },
     { nom: "Propreté", nbStar: proprete },
@@ -17,7 +18,7 @@ function Star({ com, proprete, securite, eveil, horaires, nbNotes }) {
     { nom: "Souplesse des horaires", nbStar: horaires },
   ];
 
-  // donne les étoiles globales
+  // --- donne les étoiles globales ---
   const staring = () => {
     let init = 0;
     for (let i = 0; i < tabStar.length; i += 1) {

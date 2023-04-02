@@ -4,6 +4,7 @@ import CardResaPlat from "@components/appli/menu/CardResaPlat";
 import PropTypes from "prop-types";
 
 function Reservations({ setCompo, familleId }) {
+  // --- get all réservations payées ---
   const [allReservation, setAllReservation] = useState([]);
 
   const getAllReservation = (source) => {

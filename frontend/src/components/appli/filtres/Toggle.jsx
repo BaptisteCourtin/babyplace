@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function Toggle({ setter, state = false, nom, p, classique }) {
+  // --- met à jour le toggle suivant si classique ou en groupe(objet) ---
   const handleChange = (e) => {
     if (classique) {
       setter(!state);

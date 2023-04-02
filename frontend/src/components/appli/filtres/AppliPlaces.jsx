@@ -2,7 +2,13 @@ import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import PropTypes from "prop-types";
 
+// voir la page AppliSearch
+// les filtres sont directement appliqués
 function AppliPlaces({ dataDateHeure, setDataDateHeure }) {
+  const value = new Date(); // date de base occas
+  const [isOccasionnel, setIsOccasionnel] = useState(0); // quel composant
+
+  // --- reset les variables des dates et heures ---
   const resetDateHeure = () => {
     for (const key in dataDateHeure) {
       setDataDateHeure((prevState) => ({
@@ -12,10 +18,18 @@ function AppliPlaces({ dataDateHeure, setDataDateHeure }) {
     }
   };
 
+  // --- met à jour les filtres ---
+  const ChangeDateHeure = (e, what) => {
+    setDataDateHeure((prevState) => ({
+      ...prevState,
+      [what]: e,
+    }));
+  };
+
+  // --- return le jour suivant si récurrent ou occasionnel ---
   const visuelJour = () => {
     if (typeof dataDateHeure.jour === "number") {
       const myDay = dataDateHeure.jour;
-
       switch (myDay) {
         case 0:
           return "Lundi";
@@ -31,7 +45,6 @@ function AppliPlaces({ dataDateHeure, setDataDateHeure }) {
           return "Samedi";
         case 6:
           return "Dimanche";
-
         default:
           return "Lundi";
       }
@@ -39,29 +52,19 @@ function AppliPlaces({ dataDateHeure, setDataDateHeure }) {
     return dataDateHeure.jour.split("&")[0];
   };
 
-  const value = new Date(); // date de base occas
-  const [isOccasionnel, setIsOccasionnel] = useState(0);
-
-  const ChangeDateHeure = (e, what) => {
-    setDataDateHeure((prevState) => ({
-      ...prevState,
-      [what]: e,
-    }));
-  };
-
-  // --- version occas ---
-
+  // --- date version occasionnel - pour pouvoir l'utiliser ---
   const [clickedDay, setClickedDay] = useState(""); // version full
 
   const afficheDate = () => {
     const jour = `${clickedDay.getFullYear()}-${
       clickedDay.getMonth() + 1
     }-${clickedDay.getDate()}`;
-
     ChangeDateHeure(`${jour}&${clickedDay.getDay()}`, "jour");
   };
   useEffect(() => {
-    if (clickedDay !== "") afficheDate();
+    if (clickedDay !== "") {
+      afficheDate();
+    }
   }, [clickedDay]);
 
   return (

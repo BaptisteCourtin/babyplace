@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import Toggle from "../filtres/Toggle";
 
 function Favoris({ setCompo, familleId }) {
-  // --- likes des familles ---
+  // --- get likes des familles ---
   const [suppLiked, setSuppLiked] = useState(true);
   const [familleLiked, setFamilleLiked] = useState();
 
@@ -36,7 +36,9 @@ function Favoris({ setCompo, familleId }) {
     };
   }, [familleId, suppLiked]);
 
+  // --- un toggle qui sert à rien ---
   const [occasions, setOccasions] = useState(false);
+
   return (
     familleLiked && (
       <>
