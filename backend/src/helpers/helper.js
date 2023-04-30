@@ -1,7 +1,7 @@
 // mise dans le google cloud des images et fichiers
 const util = require("util");
 const gc = require("../config/index");
-const bucket = gc.bucket("babyplace");
+const bucket = gc.bucket("my-babyplace");
 
 /**
  *
