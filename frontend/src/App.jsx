@@ -19,16 +19,16 @@ import Dashboard from "@components/dashboard/Dashboard";
 import Synthesis from "@components/login/Synthesis";
 
 // appli
-import Appli from "@pages/appli/AppliTuto";
-import AppliMenu from "@pages/appli/AppliMenu";
-import AppliSearch from "@pages/appli/AppliSearch";
-import AppliCardCreche from "@pages/appli/AppliCardCreche";
-import AppliReservation from "@pages/appli/AppliReservation";
-import AppliUser from "@pages/appli/AppliUser";
-import AppliUserCompletion from "@pages/appli/AppliUserCompletion";
-import AppliNotif from "@pages/appli/AppliNotif";
-import AppliMessage from "@pages/appli/AppliMessage";
-import AppliChat from "@pages/appli/AppliChat";
+import Appli from "@components/appli/pagesTutoAppli/AppliTuto";
+import AppliMenu from "@components/appli/menu/AppliMenu";
+import AppliSearch from "@components/appli/recherche/AppliSearch";
+import AppliCardCreche from "@components/appli/recherche/cardStructure/AppliCardCreche";
+import AppliReservation from "@components/appli/reservation/AppliReservation";
+import AppliUser from "@components/appli/user/AppliUser";
+import AppliUserCompletion from "@components/appli/user/formulaires/AppliUserCompletion";
+import AppliNotif from "@components/appli/notif/AppliNotif";
+import AppliMessage from "@components/appli/messagerie/AppliMessage";
+import AppliChat from "@components/appli/messagerie/AppliChat";
 
 // formulaire
 import FormStructure from "@pages/FormStructure";

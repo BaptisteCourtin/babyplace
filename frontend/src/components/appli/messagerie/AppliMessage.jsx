@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import NavbarApp from "@components/appli/navbar/NavbarApp";
 import ProfilPlat from "@components/appli/ProfilPlat";
-import CardFavPlat from "@components/appli/menu/CardFavPlat";
+import CardFavPlat from "@components/appli/menu/composant/CardFavPlat";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 

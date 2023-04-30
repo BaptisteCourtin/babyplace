@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import BlocJour from "@components/appli/recherche/BlocJour";
+import BlocJour from "@components/appli/recherche/composantCard/BlocJour";
 import PropTypes from "prop-types";
 import { AiOutlineHeart, AiFillHeart, AiFillStar } from "react-icons/ai";
 

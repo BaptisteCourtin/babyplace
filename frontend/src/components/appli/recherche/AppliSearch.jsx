@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import BaseCard from "@components/appli/recherche/BaseCard";
-import BaseMap from "@components/appli/recherche/BaseMap";
+import BaseCard from "@components/appli/recherche/composantCard/BaseCard";
+import BaseMap from "@components/appli/recherche/composantMap/BaseMap";
 import FamilleContext from "@components/context/FamilleContext";
 
 import Base from "@components/appli/filtres/Base";

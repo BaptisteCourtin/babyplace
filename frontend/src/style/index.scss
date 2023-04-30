@@ -11,31 +11,31 @@
 @import "../components/dashboard/dashboard.scss";
 
 // --- appli ---
-@import "../style/appli/applituto.scss";
-@import "../style/appli/applimenu.scss";
-@import "../style/appli/applisearch.scss";
-@import "../style/appli/applifiltres.scss";
-@import "../style/appli/applicardcreche.scss";
-@import "../style/appli/appliReservation.scss";
-@import "../style/appli/appliuser.scss";
-@import "../style/appli/appliUserCompletion.scss";
-@import "../style/appli/applinotif.scss";
-@import "../style/appli/applimessage.scss";
-
-@import "../components/appli/formChanger.scss";
-@import "../components/appli/buttons.scss";
-@import "../components/appli/recherche/carteCreche.scss";
-@import "../components/appli/recherche/cardCrecheMap.scss";
-@import "../components/appli/recherche/blocJour.scss";
-@import "../components/appli/recherche/star.scss";
-@import "../components/appli/recherche/popUp.scss";
-@import "../components/appli/user/completion.scss";
-@import "../components/appli/navbar/navbarApp.scss";
-@import "../components/appli/profilplat.scss";
-@import "../components/appli/menu/cardFavPlat.scss";
+@import "../components/appli/pagesTutoAppli/applituto.scss";
+@import "../components/appli/recherche/applisearch.scss";
+@import "../components/appli/recherche/composantCard/carteCreche.scss";
+@import "../components/appli/recherche/composantCard/blocJour.scss";
+@import "../components/appli/recherche/composantMap/cardCrecheMap.scss";
+@import "../components/appli/recherche/cardStructure/star.scss";
+@import "../components/appli/recherche/cardStructure/popUp.scss";
+@import "../components/appli/recherche/cardStructure/applicardcreche.scss";
+@import "../components/appli/filtres/applifiltres.scss";
 @import "../components/appli/filtres/toggle.scss";
 @import "../components/appli/filtres/check.scss";
 @import "../components/appli/reservation/appCalendar.scss";
+@import "../components/appli/reservation/appliReservation.scss";
+@import "../components/appli/user/appliuser.scss";
+@import "../components/appli/user/formulaires/appliUserCompletion.scss";
+@import "../components/appli/user/completion.scss";
+@import "../components/appli/menu/applimenu.scss";
+@import "../components/appli/menu/cardFavPlat.scss";
+@import "../components/appli/notif/applinotif.scss";
+@import "../components/appli/messagerie/applimessage.scss";
+@import "../components/appli/navbar/navbarApp.scss";
+
+@import "../components/appli/formChanger.scss";
+@import "../components/appli/buttons.scss";
+@import "../components/appli/profilplat.scss";
 
 // --- formulaire ---
 @import "../components/form/style/formStructure.scss";
@@ -54,7 +54,7 @@
 @import "../components/form/style/structure14.scss";
 @import "../components/form/style/structure15.scss";
 @import "../components/form/style/structure16.scss";
-@import "../style/waitAdmin.scss";
+@import "../components/form/style/waitAdmin.scss";
 
 // --- Messages ---
 @import "../components/messages/styles/messages.scss";

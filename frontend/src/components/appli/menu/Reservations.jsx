@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import CardResaPlat from "@components/appli/menu/CardResaPlat";
+import CardResaPlat from "@components/appli/menu/composant/CardResaPlat";
 import PropTypes from "prop-types";
 
 function Reservations({ setCompo, familleId }) {

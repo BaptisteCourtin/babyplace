@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import CardFavoris from "@components/appli/menu/CardFavoris";
+import CardFavoris from "@components/appli/menu/composant/CardFavoris";
 import PropTypes from "prop-types";
 import Toggle from "../filtres/Toggle";
 

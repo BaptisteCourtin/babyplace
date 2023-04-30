@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import Rating from "react-rating";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
-import BlocStar from "./BlocStar";
+import BlocStar from "../composantCard/BlocStar";
 
 function Star({ com, proprete, securite, eveil, horaires, nbNotes }) {
   const [visibleStar, setVisibleStar] = useState(false);

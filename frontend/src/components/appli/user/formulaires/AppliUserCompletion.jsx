@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Navbar from "@components/appli/navbar/NavbarApp";
-import FormEnfant from "@components/appli/user/FormEnfant";
-import Parents from "@components/appli/user/Parents";
-import Inscription from "@components/appli/user/Inscription";
+import FormEnfant from "@components/appli/user/formulaires/FormEnfant";
+import Parents from "@components/appli/user/formulaires/Parents";
+import Inscription from "@components/appli/user/formulaires/Inscription";
 
 function AppliUserCompletion() {
   const [compo, setCompo] = useState(0);

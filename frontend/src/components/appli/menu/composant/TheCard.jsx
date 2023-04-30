@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CreditCard from "@assets/app parents/CreditCard.svg";
-import Check from "../filtres/Check";
+import Check from "../../filtres/Check";
 
 const INITIAL_DATA = {
   cardNumber: "",

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import CarteCreche from "@components/appli/recherche/CarteCreche";
+import CarteCreche from "@components/appli/recherche/composantCard/CarteCreche";
 import NavbarApp from "@components/appli/navbar/NavbarApp";
 import PropTypes from "prop-types";
 
