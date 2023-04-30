@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import Connexion from "@components/appli/pagesTutoAppli/Connexion";
-import SeConnecter from "@components/appli/pagesTutoAppli/SeConnecter";
+import Connexion from "@components/appli/pagesTutoAppli/connexion/Connexion";
+import SeConnecter from "@components/appli/pagesTutoAppli/connexion/SeConnecter";
 import Bienvenue from "@components/appli/pagesTutoAppli/Bienvenue";
 import Page0 from "@components/appli/pagesTutoAppli/Page0";
 import Page1 from "@components/appli/pagesTutoAppli/Page1";

@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { toast } from "react-hot-toast";
-import TheCard from "../menu/TheCard";
+import TheCard from "../menu/composant/TheCard";
 
 function NotifPaye({ setCompo, oneReservation }) {
   // --- met le status de la réservation en payed ---

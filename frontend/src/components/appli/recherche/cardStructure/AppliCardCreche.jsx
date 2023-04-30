@@ -1,9 +1,9 @@
 import React from "react";
 import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
-import BlocJour from "@components/appli/recherche/BlocJour";
-import Star from "@components/appli/recherche/Star";
-import PopUp from "@components/appli/recherche/PopUp";
+import BlocJour from "@components/appli/recherche/composantCard/BlocJour";
+import Star from "@components/appli/recherche/cardStructure/Star";
+import PopUp from "@components/appli/recherche/cardStructure/PopUp";
 import { toast } from "react-hot-toast";
 import { MdReportProblem } from "react-icons/md";
 
