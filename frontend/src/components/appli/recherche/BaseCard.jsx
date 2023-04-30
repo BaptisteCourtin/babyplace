@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import CarteCreche from "@components/appli/recherche/CarteCreche";
 import NavbarApp from "@components/appli/navbar/NavbarApp";
+import PropTypes from "prop-types";
+
 import { FiMap } from "react-icons/fi";
 import { BiFilterAlt } from "react-icons/bi";
-import PropTypes from "prop-types";
 
 function BaseCard({
   setCompo,
@@ -18,7 +19,7 @@ function BaseCard({
 }) {
   const [tri, setTri] = useState("Recent");
 
-  // --- likes des familles ---
+  // --- get likes des familles ---
   const [familleLiked, setFamilleLiked] = useState();
 
   const getFamilleLiked = (source) => {
@@ -42,8 +43,7 @@ function BaseCard({
     getFamilleLiked(source);
   }, [familleId]);
 
-  // --- position user ---
-  const [ville, setVille] = useState();
+  // --- get vrai position user ---
   const [userPosition, setUserPosition] = useState([47.2135655, -1.5496263]);
 
   const getVraiPosition = () => {
@@ -54,6 +54,9 @@ function BaseCard({
   useEffect(() => {
     getVraiPosition();
   }, []);
+
+  // --- get position suivant demande ---
+  const [ville, setVille] = useState(); // donné par utilisateur
 
   const handleVille = (e) => {
     e.preventDefault();
@@ -170,12 +173,14 @@ function BaseCard({
                       dataServices.repas == each.repas)
                   : true)
             )
+            // aggrements
             .filter(
               (each) =>
                 (dataAggrements.handi === false || each.maxHandi > 0) &&
                 (dataAggrements.mois === false || each.max18Mois > 0) &&
                 (dataAggrements.nuit === false || each.maxNuit > 0)
             )
+            // sens d'apparition
             .sort(function compare(a, b) {
               if (tri === "Prix croissant") {
                 if (a.tarifHeure < b.tarifHeure) return -1;

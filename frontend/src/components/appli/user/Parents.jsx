@@ -33,8 +33,7 @@ function Parents() {
     }));
   };
 
-  // --- les donnees qui sont dans la bdd ---
-
+  // --- get données formulaire parents ---
   const [donneesForm, setDonneesForm] = useState();
   const [donneesOK, setDonneesOK] = useState(false); // les donnees sont prises => mis dans initial data
   const [finalOK, setFinalOK] = useState(false); // donnees mises dans initial => go visuel
@@ -65,7 +64,6 @@ function Parents() {
   }, []);
 
   // --- func pour changer initial value ---
-
   const handleChangeInitial = (ligne, tab) => {
     setInitialData((prevState) => ({
       ...prevState,
@@ -98,8 +96,7 @@ function Parents() {
     }
   }, [donneesOK]);
 
-  // --- func pour changer la bdd ---
-
+  // --- fonction calcul pourcentage completion ---
   const calculPourcent = () => {
     let pourcent = 0;
     for (const prop in initialData) {
@@ -111,6 +108,7 @@ function Parents() {
     // !!! pour 2 parents !!!
   };
 
+  // --- update formaulaire parents ---
   const updateFormParent = (place) => {
     const { parentId } = donneesForm[place - 1];
     const pourcent = calculPourcent();

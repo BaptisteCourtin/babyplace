@@ -55,7 +55,7 @@ const deleteDates = async () => {
   return result;
 };
 
-const fullDate = async (id) => {
+const deleteFullDate = async (id) => {
   const [result] = await datasource.query(
     "DELETE FROM calendrier WHERE calendrierId = ?",
     [id]
@@ -70,6 +70,6 @@ module.exports = {
   updatePlaces,
   postDate,
   deleteDates,
-  fullDate,
+  deleteFullDate,
   getCalendrierMoins,
 };

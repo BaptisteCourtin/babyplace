@@ -14,6 +14,7 @@ function ProfilPlat() {
 
   const [donneesOK, setDonneesOK] = useState(false);
 
+  // --- get noms - prenoms et photo famille ---
   const getFamilleInfo = (source) => {
     axios
       .get(`${import.meta.env.VITE_PATH}/famille/info/${familleId}`, {

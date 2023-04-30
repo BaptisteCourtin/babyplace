@@ -2,8 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function CardNotif({ each, setCompo, setOneReservation }) {
+  // --- quand on clique sur l'une des cartes ---
   const handleClicked = () => {
     setOneReservation(each);
+    // toNote => 1 / approved => 3 / refued => 2
     setCompo(each.status === "toNote" ? 1 : each.status === "approved" ? 3 : 2);
   };
 

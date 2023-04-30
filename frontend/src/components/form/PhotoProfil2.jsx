@@ -6,6 +6,7 @@ import Axios from "axios";
 function Structure2({ inputRef, structureId, updateFields }) {
   const [imageSrc, setImageSrc] = useState(profil);
 
+  // --- get photo profil ---
   const getPicture = (source) => {
     Axios.get(`${import.meta.env.VITE_PATH}/photoProfil?id=${structureId}`, {
       structureId,
@@ -33,6 +34,7 @@ function Structure2({ inputRef, structureId, updateFields }) {
     };
   }, []);
 
+  // --- nouvelle image profil ----
   const updateImg = (e) => {
     // e.files contient un objet FileList
     const [picture] = e.target.files;

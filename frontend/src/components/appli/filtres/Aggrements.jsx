@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import Toggle from "./Toggle";
 
+// voir la page AppliSearch
+// les filtres sont directement appliqués
 function Aggrements({ setCompo, dataAggrements, setDataAggrements }) {
   return (
     <div className="filtres">
@@ -10,7 +12,7 @@ function Aggrements({ setCompo, dataAggrements, setDataAggrements }) {
           type="button"
           className="h2"
           onClick={() => setCompo(3)}
-        >{`< Aggrements`}</button>
+        >{`< Agréments`}</button>
       </header>
 
       <main className="aggrements">

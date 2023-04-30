@@ -35,6 +35,11 @@ const getFamilleInfo = async (req, res) => {
   return res.json(result);
 };
 
+const getFamilleDataMess = async (req, res) => {
+  const result = await familleModels.getFamilleDataMess(req);
+  return res.json(result);
+};
+
 const updatePourcentFormInscr = async (req, res) => {
   const result = await familleModels.updatePourcentFormInscr(req);
   if (result.affectedRows === 0) {
@@ -66,11 +71,6 @@ const deleteLike = async (req, res) => {
 
 const nullOneDocFormCommun = async (req, res) => {
   const result = await familleModels.nullOneDocFormCommun(req);
-  return res.json(result);
-};
-
-const getFamilleDataMess = async (req, res) => {
-  const result = await familleModels.getFamilleDataMess(req);
   return res.json(result);
 };
 

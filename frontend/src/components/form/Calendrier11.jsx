@@ -16,6 +16,7 @@ function Structure11({
   structureId,
   setData,
 }) {
+  // --- get le calendrier ---
   const getCalendrier = (source) => {
     Axios.get(
       `${import.meta.env.VITE_PATH}/calendrierExist?id=${structureId}`,
@@ -56,6 +57,7 @@ function Structure11({
     };
   }, []);
 
+  // ---
   const isOpenDay = (e) => {
     const clickedDayFormated = `${e.getFullYear()}-${
       e.getMonth() + 1
@@ -74,6 +76,7 @@ function Structure11({
     }
   };
 
+  // ---
   const tileDisable = ({ date, view }) => {
     if (
       (date.getDay() === 1 && !lundiOuvert) ||
@@ -116,6 +119,7 @@ function Structure11({
     </div>
   );
 }
+
 Structure11.propTypes = {
   lundiOuvert: oneOfType([bool, number]),
   mardiOuvert: oneOfType([bool, number]),
@@ -129,4 +133,5 @@ Structure11.propTypes = {
   structureId: oneOfType([string, number]),
   setData: Proptypes.func,
 };
+
 export default Structure11;

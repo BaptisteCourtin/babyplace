@@ -24,7 +24,7 @@ function CarteCreche({
     adresse,
   } = data;
 
-  // --- like or not ---
+  // --- si la carte est like or non ---
   const [thisLiked, setThisLiked] = useState(false);
 
   const likeOrNot = () => {
@@ -39,6 +39,7 @@ function CarteCreche({
     likeOrNot();
   }, [familleLiked]);
 
+  // --- delete OU post un like sur la structure ---
   const handleLikeCard = async () => {
     if (thisLiked === true) {
       await axios
@@ -65,7 +66,7 @@ function CarteCreche({
     }
   };
 
-  // --- les horaires de chaques jour suivant l'id de la structure
+  // --- les horaires de chaques jour suivant l'id de la structure ---
   const [dataCalendarId, setDataCalendarId] = useState();
 
   const getCalendrierMoins = (source) => {
@@ -88,6 +89,7 @@ function CarteCreche({
       });
   };
 
+  // --- filtres suivant si jour travaillé ou non ---
   const [dataHorairesId, setDataHorairesId] = useState([]);
   const getHorairesId = (source) => {
     axios
@@ -156,6 +158,7 @@ function CarteCreche({
         }
       });
   };
+
   useEffect(() => {
     const source = axios.CancelToken.source();
     dataCalendarId !== undefined && getHorairesId(source);
@@ -164,6 +167,7 @@ function CarteCreche({
     };
   }, [dataCalendarId]);
 
+  // --- prend la position de la structure ---
   const [center, setCenter] = useState([0, 0]);
 
   const handleDistance = (source) => {
@@ -184,8 +188,7 @@ function CarteCreche({
       });
   };
 
-  // --- calcul distance ---
-
+  // --- calcul distance entre structure et position ---
   function toRadian(degree) {
     return (degree * Math.PI) / 180;
   }
@@ -210,8 +213,7 @@ function CarteCreche({
 
   const distance = (getDistance(userPosition, center) / 1000).toFixed(2);
 
-  // --- avis moyen ---
-
+  // --- avis moyen sur la structure ---
   const [nbStarMoyen, setNbStarMoyen] = useState(0);
 
   const staring = () => {
@@ -227,8 +229,7 @@ function CarteCreche({
     );
   };
 
-  // ---
-
+  // --- couleur si creche OU assMat ---
   const blueBg = {
     background: "linear-gradient( #7f72f266, #7f72f2cc)",
   };

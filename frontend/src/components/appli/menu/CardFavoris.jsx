@@ -3,10 +3,12 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import { AiOutlineUser } from "react-icons/ai";
 
+// voir components Favoris
 function CardFavPlat({ each, familleId, setSuppLiked, suppLiked }) {
   const { nom, photoProfil, nomUsage, nomNaissance, prenom, structureId } =
     each;
 
+  // --- delete un like ---
   const handleClick = async () => {
     await axios
       .delete(

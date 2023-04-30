@@ -30,6 +30,7 @@ function DemandeResa({
   const [repas, setRepas] = useState(false);
   const [prixTotal, setPrixTotal] = useState(0);
 
+  // --- calcul le prix total ---
   const calculPrixTotal = () => {
     // heure commencé = payer
     setPrixTotal(
@@ -46,7 +47,7 @@ function DemandeResa({
     calculPrixTotal();
   }, [kilometre, entretien, repas]);
 
-  // --- heure total avec minutes ---
+  // --- calcul heure total avec minutes ---
   const [heureTotal, setHeureTotal] = useState(0);
 
   const handleHeureTotal = () => {
@@ -64,7 +65,6 @@ function DemandeResa({
   };
 
   // --- get enfant id suivant la famille id ---
-
   const [nomsEnfants, setNomsEnfants] = useState(); // les prenoms des enfants
   const [enfantId, setEnfantId] = useState(0); // mettre l'id du premier enfant dans le usestate
 
@@ -95,7 +95,6 @@ function DemandeResa({
   }, []);
 
   // --- nom enfant quand clique ---
-
   const whichKid = () => {
     for (let i = 0; i < nomsEnfants.length; i += 1) {
       if (nomsEnfants[i].enfantId === enfantId) {
@@ -106,7 +105,6 @@ function DemandeResa({
   };
 
   // --- put resa + notif ---
-
   const handleRequest = () => {
     axios.post(`${import.meta.env.VITE_PATH}/reservation`, {
       enfantId,

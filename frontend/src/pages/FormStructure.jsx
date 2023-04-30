@@ -6,6 +6,7 @@ import Axios from "axios";
 import StructureContext from "@components/context/StructureContext";
 import ResaContext from "@components/context/ResaContext";
 import UserEmailContext from "@components/context/UserEmailContext";
+
 import Structure1 from "@components/form/InfoAdmin1";
 import Structure2 from "@components/form/PhotoProfil2";
 import Structure3 from "@components/form/PhotosStructure3";

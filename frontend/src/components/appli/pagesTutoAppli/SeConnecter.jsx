@@ -14,15 +14,19 @@ function SeConnecter({ setCompo }) {
   const [password, setPassword] = useState("");
   const [typePwd, setTypePwd] = useState(true);
 
+  // met les reservations en toNote
   const updateToNote = async (familleId) => {
     await axios.put(`${import.meta.env.VITE_PATH}/resaToNote/${familleId}`);
   };
+
+  // delete les anciennes reservations
   const deleteAncienResa = async (familleId) => {
     await axios.delete(
       `${import.meta.env.VITE_PATH}/deleteAncienResa/${familleId}`
     );
   };
 
+  // --- connection ---
   const handleConnection = (e) => {
     e.preventDefault();
     if (email && password) {

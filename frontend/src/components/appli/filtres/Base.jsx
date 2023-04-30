@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+// voir la page AppliSearch
+// les filtres sont directement appliqués
 function Base({
   setCompo,
   setDataBasique,
@@ -11,26 +13,24 @@ function Base({
   dataAggrements,
   setDataAggrements,
 }) {
+  // --- reset tous les filtres ---
   const fullReset = () => {
     setDataBasique((prevState) => ({
       ...prevState,
       isCreche: parseInt(2, 10),
     }));
-
     for (const key in dataDateHeure) {
       setDataDateHeure((prevState) => ({
         ...prevState,
         [key]: "",
       }));
     }
-
     for (const key in dataServices) {
       setDataServices((prevState) => ({
         ...prevState,
         [key]: false,
       }));
     }
-
     for (const key in dataAggrements) {
       setDataAggrements((prevState) => ({
         ...prevState,
@@ -70,7 +70,7 @@ function Base({
           type="button"
           className="h3"
           onClick={() => setCompo(7)}
-        >{`Aggréments >`}</button>
+        >{`Agréments >`}</button>
       </main>
 
       <button type="button" className="apply" onClick={() => setCompo(0)}>

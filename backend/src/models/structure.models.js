@@ -8,11 +8,6 @@ const getAllStructures = async () => {
   return result;
 };
 
-const getStructures = async () => {
-  const [result] = await datasource.query("SELECT * FROM structure");
-  return result;
-};
-
 const getStructureById = async (req) => {
   const [result] = await datasource.query(
     "SELECT structureId, avisCom, avisProprete, avisSecurite, avisEveil, avisHoraires, nbNotes FROM structure WHERE structureId = ?",
@@ -31,10 +26,11 @@ const getStructure = async (req) => {
 
 const getStructureId = async (token) => {
   const [result] = await datasource.query(
-    "SELECT structure.structureId from structure WHERE token = ?", [token]
-  )
-  return result
-}
+    "SELECT structure.structureId from structure WHERE token = ?",
+    [token]
+  );
+  return result;
+};
 
 const getStructureType = async (id, type) => {
   const [result] = await datasource.query(
@@ -60,9 +56,19 @@ const getNotVerified = async () => {
 };
 
 const getFavorites = async (id) => {
-  const [result] = await datasource.query("SELECT * FROM favoris AS v LEFT JOIN famille AS f ON v.familleId=f.familleId LEFT JOIN parent AS p ON f.familleId=p.familleId WHERE structureIdLiked = ?", [id])
-  return result
-}
+  const [result] = await datasource.query(
+    "SELECT * FROM favoris AS v LEFT JOIN famille AS f ON v.familleId=f.familleId LEFT JOIN parent AS p ON f.familleId=p.familleId WHERE structureIdLiked = ?",
+    [id]
+  );
+  return result;
+};
+
+const getStructureDataMess = async (req) => {
+  const [result] = await datasource.query(
+    "SELECT * FROM structure AS s JOIN creche AS c ON s.structureId=c.structureId WHERE s.isVerify = 1"
+  );
+  return result;
+};
 
 const updateVerified = async (id) => {
   const [result] = await datasource.query(
@@ -73,46 +79,49 @@ const updateVerified = async (id) => {
 };
 
 const updateImages = async (id, value, file, table) => {
-  const [result] = await datasource.query(`UPDATE ${table} SET ${value} = ? WHERE structureId = ?`, [file, id])
+  const [result] = await datasource.query(
+    `UPDATE ${table} SET ${value} = ? WHERE structureId = ?`,
+    [file, id]
+  );
   return result;
-}
+};
 
-const updateInfos = async (id, table, nom, nomNaissance, nomUsage, prenom, adresse, email, telephone, description) => {
-  if (table === 'assMat') {
-    const [result] = await datasource.query(`UPDATE assMat SET nomNaissance = ?, nomUsage = ?, prenom = ? WHERE structureId = ?`, [nomNaissance, nomUsage, prenom, id])
+const updateInfos = async (
+  id,
+  table,
+  nom,
+  nomNaissance,
+  nomUsage,
+  prenom,
+  adresse,
+  email,
+  telephone,
+  description
+) => {
+  if (table === "assMat") {
+    const [result] = await datasource.query(
+      `UPDATE assMat SET nomNaissance = ?, nomUsage = ?, prenom = ? WHERE structureId = ?`,
+      [nomNaissance, nomUsage, prenom, id]
+    );
     return result;
-  } else if (table === 'creche') {
-    const [result] = await datasource.query(`UPDATE creche SET nom = ? WHERE structureId = ?`, [nom, id])
+  } else if (table === "creche") {
+    const [result] = await datasource.query(
+      `UPDATE creche SET nom = ? WHERE structureId = ?`,
+      [nom, id]
+    );
     return result;
   }
-  const [result] = await datasource.query(`UPDATE structure SET adresse = ?, email = ?, telephone = ?, description = ? WHERE structureId = ?`, [adresse, email, telephone, description, id])
+  const [result] = await datasource.query(
+    `UPDATE structure SET adresse = ?, email = ?, telephone = ?, description = ? WHERE structureId = ?`,
+    [adresse, email, telephone, description, id]
+  );
   return result;
-}
+};
 
 const updatePwd = async (id, pwd) => {
-  const [result] = await datasource.query(`UPDATE structure SET password = ? WHERE structureId = ?`, [pwd, id])
-  return result;
-}
-
-const deleteRefused = async (id, type) => {
   const [result] = await datasource.query(
-    `DELETE FROM ${type} WHERE structureId = ?; DELETE FROM calendrier WHERE structureId = ?; DELETE FROM horaires WHERE structureID = ?; DELETE FROM structure WHERE structureId = ?`,
-    [id, id, id, id]
-  );
-  return result;
-};
-
-const logout = async (token, tokenStart, id) => {
-  const [result] = await datasource.query(
-    "UPDATE structure SET token = ?, tokenStart = ? WHERE structureId = ?",
-    [token, tokenStart, id]
-  );
-  return result;
-};
-
-const getStructureDataMess = async (req) => {
-  const [result] = await datasource.query(
-    "SELECT * FROM structure AS s JOIN creche AS c ON s.structureId=c.structureId WHERE s.isVerify = 1"
+    `UPDATE structure SET password = ? WHERE structureId = ?`,
+    [pwd, id]
   );
   return result;
 };
@@ -149,9 +158,24 @@ const updateSignaled = async (req) => {
   return result;
 };
 
+const deleteRefused = async (id, type) => {
+  const [result] = await datasource.query(
+    `DELETE FROM ${type} WHERE structureId = ?; DELETE FROM calendrier WHERE structureId = ?; DELETE FROM horaires WHERE structureID = ?; DELETE FROM structure WHERE structureId = ?`,
+    [id, id, id, id]
+  );
+  return result;
+};
+
+const logout = async (token, tokenStart, id) => {
+  const [result] = await datasource.query(
+    "UPDATE structure SET token = ?, tokenStart = ? WHERE structureId = ?",
+    [token, tokenStart, id]
+  );
+  return result;
+};
+
 module.exports = {
   getStructure,
-  getStructures,
   getStructureId,
   getStructureDetails,
   getStructureType,
@@ -168,5 +192,5 @@ module.exports = {
   updateImages,
   logout,
   updateSignal,
-  updateSignaled
+  updateSignaled,
 };

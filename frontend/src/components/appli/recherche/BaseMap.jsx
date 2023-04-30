@@ -13,7 +13,6 @@ import CardMarker from "./CardMarker";
 import CardCrecheMap from "./CardCrecheMap";
 
 import "leaflet/dist/leaflet.css";
-
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 function BaseMap({
@@ -51,14 +50,20 @@ function BaseMap({
   }, [familleId]);
 
   // --- position user ---
-  const [ville, setVille] = useState(); // donné par utilisateur
-  const [center, setCenter] = useState([47.2135655, -1.5496263]); // donné par api suivant ville ou position de base // base à la wild
+  const [center, setCenter] = useState([47.2135655, -1.5496263]);
 
   const getVraiPosition = () => {
     navigator.geolocation.getCurrentPosition(function (position) {
       setCenter([position.coords.latitude, position.coords.longitude]);
     });
   };
+
+  useEffect(() => {
+    getVraiPosition();
+  }, []);
+
+  // --- get position suivant demande ---
+  const [ville, setVille] = useState(); // donné par utilisateur
 
   const handleVille = (e) => {
     e.preventDefault();
@@ -78,7 +83,6 @@ function BaseMap({
   }, []);
 
   // --- icon perso pour vous etes ici ---
-
   const LeafIcon = L.Icon.extend({
     options: {
       iconSize: [25, 45],
@@ -193,6 +197,7 @@ function BaseMap({
                           dataServices.repas == each.repas)
                       : true)
                 )
+                // aggrements
                 .filter(
                   (each) =>
                     (dataAggrements.handi === false || each.maxHandi > 0) &&
@@ -200,7 +205,7 @@ function BaseMap({
                     (dataAggrements.nuit === false || each.maxNuit > 0)
                 )
                 .map((each, index) => (
-                  <CardMarker data={each} key={index} />
+                  <CardMarker data={each} key={index} familleId={familleId} />
                 ))}
               <Marker position={center} icon={pointer}>
                 <Popup>Vous êtes par ici</Popup>
@@ -253,6 +258,7 @@ function BaseMap({
                           dataServices.repas == each.repas)
                       : true)
                 )
+                // aggrements
                 .filter(
                   (each) =>
                     (dataAggrements.handi === false || each.maxHandi > 0) &&

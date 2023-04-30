@@ -15,7 +15,7 @@ function CardCrecheMap({ data, familleLiked, familleId }) {
     tarifHeure,
   } = data;
 
-  // --- like or not ---
+  // --- si la carte est like or non ---
   const [thisLikedIndex, setThisLikedIndex] = useState();
   const [thisLiked, setThisLiked] = useState(false);
 
@@ -32,6 +32,7 @@ function CardCrecheMap({ data, familleLiked, familleId }) {
     likeOrNot();
   }, [familleLiked]);
 
+  // --- delete OU post un like sur la structure ---
   const handleLikeCard = () => {
     if (
       familleLiked[thisLikedIndex] &&
@@ -61,8 +62,7 @@ function CardCrecheMap({ data, familleLiked, familleId }) {
     }
   };
 
-  // ---
-
+  // --- get les jours pour savoir si normalement travaillé ou non ---
   const [dataHorairesId, setDataHorairesId] = useState([]);
   const getHorairesId = (source) => {
     axios
@@ -81,8 +81,7 @@ function CardCrecheMap({ data, familleLiked, familleId }) {
       });
   };
 
-  // --- star ---
-
+  // --- calcul le nombre d'étoile au global ---
   const [nbStarMoyen, setNbStarMoyen] = useState(0);
 
   const staring = () => {

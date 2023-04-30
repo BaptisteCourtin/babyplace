@@ -9,15 +9,18 @@ const useMultistepForm = (steps) => {
       return i + 1;
     });
   };
+
   const back = () => {
     setCurrentStepIndex((i) => {
       if (i <= 0) return i;
       return i - 1;
     });
   };
+
   const goTo = (index) => {
     setCurrentStepIndex(index);
   };
+
   return {
     currentStepIndex,
     step: steps[currentStepIndex],

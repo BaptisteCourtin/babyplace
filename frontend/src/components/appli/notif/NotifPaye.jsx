@@ -6,6 +6,7 @@ import { toast } from "react-hot-toast";
 import TheCard from "../menu/TheCard";
 
 function NotifPaye({ setCompo, oneReservation }) {
+  // --- met le status de la réservation en payed ---
   const handlePaiement = () => {
     axios.put(`${import.meta.env.VITE_PATH}/reservation/status`, {
       status: "payed",

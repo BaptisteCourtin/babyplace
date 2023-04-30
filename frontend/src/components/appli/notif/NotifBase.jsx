@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import NavbarApp from "@components/appli/navbar/NavbarApp";
-
 import CardNotif from "@components/appli/notif/CardNotif";
 
+// voir page AppliNotif
 function NotifBase({ setCompo, allReservation, setOneReservation }) {
   return (
     <div className="notif-base">

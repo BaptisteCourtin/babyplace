@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import Check from "./Check";
 
+// voir la page AppliSearch
+// les filtres sont directement appliqués
 function Services({ setCompo, setDataServices, dataServices }) {
   return (
     <div className="filtres">

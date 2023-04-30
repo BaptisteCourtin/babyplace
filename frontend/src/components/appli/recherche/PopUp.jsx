@@ -12,7 +12,6 @@ function PopUp({ data, dataHorairesId }) {
   const [profilComplet, setProfilComplet] = useState(false);
 
   // --- savoir si au moins 1 enfant a 100% ---
-
   const getNomsEnfants = (source) => {
     axios
       .get(`${import.meta.env.VITE_PATH}/famille/nomsEnfants100/${familleId}`, {
@@ -39,8 +38,7 @@ function PopUp({ data, dataHorairesId }) {
     };
   }, []);
 
-  // ---
-
+  // --- choix compo ---
   const choixComposant = () => {
     if (visiblePopUp && profilComplet) {
       return (

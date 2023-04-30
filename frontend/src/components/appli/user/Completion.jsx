@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 function Completion({ nom, completion, quelCompo }) {
+  // --- taille remplissage ---
   const mystyle = {
     width: `${completion}%`,
   };
+
   return (
     <div className="bar-completion">
       <Link to="/appli/user/completion" state={{ quelCompo }}>

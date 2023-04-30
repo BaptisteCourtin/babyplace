@@ -3,6 +3,7 @@ import axios from "axios";
 import PropTypes from "prop-types";
 
 function PersonnesConfiance({ setCompo, familleId }) {
+  // --- get personnes confiance ---
   const [newSuppPersoConf, setNewSuppPersoConf] = useState(true);
   const [persoConf, setPersoConf] = useState([]);
 
@@ -30,8 +31,7 @@ function PersonnesConfiance({ setCompo, familleId }) {
     };
   }, [newSuppPersoConf]);
 
-  // --- ajout confiance ---
-
+  // --- ajout personne de confiance ---
   const [newForm, setNewForm] = useState(false);
   const [prenom, setPrenom] = useState("");
   const [nom, setNom] = useState("");
@@ -55,8 +55,7 @@ function PersonnesConfiance({ setCompo, familleId }) {
     }
   };
 
-  // --- supprimer confiance ---
-
+  // --- supprimer personne de confiance ---
   const deleteConfiance = (confianceId) => {
     axios
       .delete(

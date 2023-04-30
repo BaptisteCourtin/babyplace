@@ -19,7 +19,6 @@ function FormEnfant() {
   });
 
   // --- changer une donnée avec le form ---
-
   const handleChange = (e) => {
     const { name } = e.target;
     setInitialData((prevState) => ({
@@ -28,7 +27,7 @@ function FormEnfant() {
     }));
   };
 
-  // --- prise des donnees qui sont dans la bdd ---
+  // --- get noms des enfants ---
   const [newDelEnfant, setNewDelEnfant] = useState(true); // si un enfant ajouter / supprimer
 
   const [nomsEnfants, setNomsEnfants] = useState(); // les prenoms des enfants
@@ -59,6 +58,7 @@ function FormEnfant() {
     };
   }, [newDelEnfant]);
 
+  // --- get donnees du formulaire enfant ---
   const [donneesForm, setDonneesForm] = useState(); // les donnees des form
   const [donneesOK, setDonneesOK] = useState(false); // les donnees sont prises => mis dans initial data
   const [finalOK, setFinalOK] = useState(false); // donnees mises dans initial => go visuel
@@ -88,8 +88,7 @@ function FormEnfant() {
     };
   }, [enfantId, nomsEnfants]); // met le bon form
 
-  // --- func pour changer initial value ---
-
+  // --- function pour changer initial value ---
   const handleChangeInitial = (ligne) => {
     if (donneesForm[ligne] === null) {
       setInitialData((prevState) => ({
@@ -115,7 +114,6 @@ function FormEnfant() {
     setFinalOK(true);
   };
 
-  // pour avoir les data du back
   useEffect(() => {
     if (donneesOK === true) {
       remplirInitial();
@@ -123,8 +121,7 @@ function FormEnfant() {
     setDonneesOK(false);
   }, [donneesOK]);
 
-  // --- func pour changer la bdd ---
-
+  // --- put le pourcentage de complétion pour cet enfant ---
   const calculPourcent = () => {
     let pourcent = 0;
     for (const prop in initialData) {
@@ -148,25 +145,21 @@ function FormEnfant() {
   };
 
   // --- ajout enfant ---
-
   const ajoutEnfant = () => {
     axios
       .post(`${import.meta.env.VITE_PATH}/famille/newEnfant`, {
         familleId,
       })
       .then(() => {
-        // getNomsEnfants();
         setNewDelEnfant(!newDelEnfant);
       });
   };
 
   // --- supprimer enfant ---
-
   const deleteEnfant = () => {
     axios
       .delete(`${import.meta.env.VITE_PATH}/famille/deleteEnfant/${enfantId}`)
       .then(() => {
-        // getNomsEnfants();
         setNewDelEnfant(!newDelEnfant);
       });
   };

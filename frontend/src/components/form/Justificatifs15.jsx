@@ -33,6 +33,7 @@ function Structure15({
 }) {
   const { structure } = useContext(StructureContext);
 
+  // --- get les documents ---
   const getDocs = (source) => {
     Axios.get(`${import.meta.env.VITE_PATH}/docPmi?id=${structureId}`, {
       structureId,

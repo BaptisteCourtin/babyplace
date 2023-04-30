@@ -1,3 +1,4 @@
+// pour créer la table sql
 require("dotenv").config();
 
 const fs = require("fs");
@@ -18,6 +19,7 @@ const migrate = async () => {
   await connection.query(`create database ${DB_NAME}`);
   await connection.query(`use ${DB_NAME}`);
 
+  // nom du fichier sql
   const sql = fs.readFileSync("./babydb.sql", "utf8");
 
   await connection.query(sql);

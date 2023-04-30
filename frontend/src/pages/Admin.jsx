@@ -11,6 +11,7 @@ function Admin() {
 
   const [newGet, setNewGet] = useState(true);
 
+  // --- get not verify OU signalé ---
   const getStructure = async (source) => {
     try {
       const res = await axios.get(`${import.meta.env.VITE_PATH}/admin`, {
@@ -26,6 +27,21 @@ function Admin() {
     }
   };
 
+  useEffect(() => {
+    // if (
+    //   window.localStorage.getItem("mail") !== import.meta.env.VITE_ADMIN_EMAIL
+    // ) {
+    //   toast.error("Vous n'avez pas l'autorisation d'accéder à cette page");
+    //   navigate("/");
+    // }
+    const source = axios.CancelToken.source();
+    getStructure(source);
+    return () => {
+      source.cancel();
+    };
+  }, [newGet]);
+
+  // --- update en vérifié et non signalé ---
   const setVerified = async (structureId, email) => {
     try {
       await axios.put(
@@ -42,6 +58,7 @@ function Admin() {
     }
   };
 
+  // --- delete la structure ---
   const setRefused = async (structureId, email) => {
     try {
       await axios.delete(
@@ -61,6 +78,7 @@ function Admin() {
     }
   };
 
+  // --- envoie accepation par email ---
   const sendEmailVerified = async (email) => {
     try {
       await axios.post(`${import.meta.env.VITE_PATH}/contact/messages/accept`, {
@@ -72,6 +90,7 @@ function Admin() {
     }
   };
 
+  // --- envoie refus par email ---
   const sendEmailRefused = async (email) => {
     try {
       await axios.post(`${import.meta.env.VITE_PATH}/contact/messages/refuse`, {
@@ -82,20 +101,6 @@ function Admin() {
       console.error(err.message);
     }
   };
-
-  useEffect(() => {
-    // if (
-    //   window.localStorage.getItem("mail") !== import.meta.env.VITE_ADMIN_EMAIL
-    // ) {
-    //   toast.error("Vous n'avez pas l'autorisation d'accéder à cette page");
-    //   navigate("/");
-    // }
-    const source = axios.CancelToken.source();
-    getStructure(source);
-    return () => {
-      source.cancel();
-    };
-  }, [newGet]);
 
   return (
     <main className="admin">

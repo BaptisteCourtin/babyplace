@@ -8,7 +8,6 @@ import ConfirmeResa from "@components/appli/reservation/ConfirmeResa";
 function AppliReservation() {
   const location = useLocation();
   const { data, dataHorairesId } = location.state;
-
   const {
     structureId,
     nom,
@@ -48,6 +47,7 @@ function AppliReservation() {
         }
       });
   };
+
   useEffect(() => {
     const source = axios.CancelToken.source();
     getCalendar(source);
@@ -56,8 +56,7 @@ function AppliReservation() {
     };
   }, []);
 
-  // --- les infos à passer ---
-
+  // --- info à passer + choix compo ---
   const [heureMin, setHeureMin] = useState("");
   const [heureMax, setHeureMax] = useState("");
   const [jour, setJour] = useState("");

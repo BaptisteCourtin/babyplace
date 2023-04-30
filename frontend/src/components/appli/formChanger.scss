@@ -17,9 +17,6 @@
       position: relative;
       width: 100%;
 
-      input {
-        color: transparent;
-      }
       input:focus,
       input:valid {
         color: $second;
@@ -34,6 +31,7 @@
         height: 50px;
         /* enleve la border de base */
         outline: none;
+        color: transparent;
 
         &:focus {
           border-color: $third;

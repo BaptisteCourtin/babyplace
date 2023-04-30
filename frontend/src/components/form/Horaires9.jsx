@@ -31,6 +31,7 @@ function Structure9({
 }) {
   const [memeHoraire, setMemeHoraire] = useState(true);
 
+  // --- get des horaires ---
   const getHoraires = (source) => {
     Axios.get(`${import.meta.env.VITE_PATH}/horairesExist?id=${structureId}`, {
       structureId,

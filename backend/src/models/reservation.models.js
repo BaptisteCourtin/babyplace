@@ -2,7 +2,8 @@ const datasource = require("../../database");
 
 const getReser = async (id) => {
   const [result] = await datasource.query(
-    "SELECT * FROM reservation AS r INNER JOIN enfant AS e ON e.enfantId=r.enfantId WHERE structureId = ? AND status != 'toNote'", [id],
+    "SELECT * FROM reservation AS r INNER JOIN enfant AS e ON e.enfantId=r.enfantId WHERE structureId = ? AND status != 'toNote'",
+    [id]
   );
   return result;
 };
@@ -25,10 +26,11 @@ const getReservationPayed = async (req) => {
 
 const getApprovedReser = async (id) => {
   const [result] = await datasource.query(
-    "SELECT reservation.id FROM reservation WHERE structureId = ? AND status = 'approved'", [id]
-  )
+    "SELECT reservation.id FROM reservation WHERE structureId = ? AND status = 'approved'",
+    [id]
+  );
   return result;
-}
+};
 
 const updateStatus = async (status, id) => {
   const [result] = await datasource.query(
@@ -40,10 +42,18 @@ const updateStatus = async (status, id) => {
 
 const updateResaToNote = async (req) => {
   // update toNote quand payed ET (occas et dépassé de 1)
-  // update toNote quand payed ET (pas occas et dépassé de 5)
+  // update toNote quand payed ET (pas occas et dépassé de 14)
   const [result] = await datasource.query(
-    "UPDATE reservation SET status = 'toNote' WHERE familleId = ? AND status='payed' AND ((isOccasionnel=1 AND (jour < (CURDATE() - INTERVAL 1 DAY))) OR (isOccasionnel=0 AND (dateArrivee < (CURDATE() - INTERVAL 5 DAY))) )",
+    "UPDATE reservation SET status = 'toNote' WHERE familleId = ? AND status='payed' AND ((isOccasionnel=1 AND (jour < (CURDATE() - INTERVAL 1 DAY))) OR (isOccasionnel=0 AND (dateArrivee < (CURDATE() - INTERVAL 14 DAY))) )",
     [req.params.id]
+  );
+  return result;
+};
+
+const updateDates = async (id, dateStart, dateEnd) => {
+  const [result] = await datasource.query(
+    "UPDATE reservation SET dateArrivee = ?, dateDepart = ?, status = 'approved' WHERE id= ?",
+    [dateStart, dateEnd, id]
   );
   return result;
 };
@@ -99,11 +109,6 @@ const deleteResaByDate = async (req) => {
   return result;
 };
 
-const updateDates = async (id, dateStart, dateEnd) => {
-  const [result] = await datasource.query("UPDATE reservation SET dateArrivee = ?, dateDepart = ?, status = 'approved' WHERE id= ?", [dateStart, dateEnd, id])
-  return result
-}
-
 module.exports = {
   getReser,
   getApprovedReser,
@@ -111,7 +116,6 @@ module.exports = {
   updateDates,
   getReservationAR,
   getReservationPayed,
-  updateStatus,
   postReservation,
   deleteResa,
   updateResaToNote,
