@@ -45,7 +45,7 @@ function Footer({ userType }) {
               <img src={logotxt} alt="babyplace" id="logotxt" />
             </button>
             <p className="footerAddress">
-              DaveWarehouse Society, 4 rue Baron 44100 NANTES
+              DaveWarehouse Society, 4 rue Baron 44000 NANTES
             </p>
             <p className="footerMail">
               info@davewarehouse.projet - 02.40.01.02.03

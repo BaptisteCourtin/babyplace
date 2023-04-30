@@ -4,7 +4,7 @@ import axios from "axios";
 import { Marker, Popup } from "react-leaflet";
 import PropTypes from "prop-types";
 
-function CardMarker({ data }) {
+function CardMarker({ data, familleId }) {
   const { nom, nomUsage, nomNaissance, prenom } = data;
 
   // --- get adresse pour placer le marker ---
@@ -61,7 +61,10 @@ function CardMarker({ data }) {
     adresseGPS && (
       <Marker position={adresseGPS}>
         <Popup>
-          <Link to="/appli/search/card" state={{ data, dataHorairesId }}>
+          <Link
+            to="/appli/search/card"
+            state={{ data, dataHorairesId, familleId }}
+          >
             {nom ||
               (nomUsage
                 ? `${prenom} ${nomUsage}`

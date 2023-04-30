@@ -42,9 +42,9 @@ const updateStatus = async (status, id) => {
 
 const updateResaToNote = async (req) => {
   // update toNote quand payed ET (occas et dépassé de 1)
-  // update toNote quand payed ET (pas occas et dépassé de 5)
+  // update toNote quand payed ET (pas occas et dépassé de 14)
   const [result] = await datasource.query(
-    "UPDATE reservation SET status = 'toNote' WHERE familleId = ? AND status='payed' AND ((isOccasionnel=1 AND (jour < (CURDATE() - INTERVAL 1 DAY))) OR (isOccasionnel=0 AND (dateArrivee < (CURDATE() - INTERVAL 5 DAY))) )",
+    "UPDATE reservation SET status = 'toNote' WHERE familleId = ? AND status='payed' AND ((isOccasionnel=1 AND (jour < (CURDATE() - INTERVAL 1 DAY))) OR (isOccasionnel=0 AND (dateArrivee < (CURDATE() - INTERVAL 14 DAY))) )",
     [req.params.id]
   );
   return result;
@@ -116,7 +116,6 @@ module.exports = {
   updateDates,
   getReservationAR,
   getReservationPayed,
-  updateStatus,
   postReservation,
   deleteResa,
   updateResaToNote,

@@ -11,19 +11,15 @@ const usePageToggle = (data, userType, getData) => {
   const pageShown = () => {
     if (toggle === 1) {
       return <DashReservations {...data} />;
-    }
-    if (toggle === 2) {
+    } else if (toggle === 2) {
       return (
         <DashAgenda structureId={data.structureId} maxPlaces={data.maxPlaces} />
       );
-    }
-    if (toggle === 3) {
+    } else if (toggle === 3) {
       return <DashHours userType={userType} structureId={data.structureId} />;
-    }
-    if (toggle === 4) {
+    } else if (toggle === 4) {
       return <Messages {...data} />;
-    }
-    if (toggle === 5) {
+    } else if (toggle === 5) {
       return <DashParams {...data} userType={userType} getData={getData} />;
     }
   };

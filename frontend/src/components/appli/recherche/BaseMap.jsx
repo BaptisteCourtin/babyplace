@@ -205,7 +205,7 @@ function BaseMap({
                     (dataAggrements.nuit === false || each.maxNuit > 0)
                 )
                 .map((each, index) => (
-                  <CardMarker data={each} key={index} />
+                  <CardMarker data={each} key={index} familleId={familleId} />
                 ))}
               <Marker position={center} icon={pointer}>
                 <Popup>Vous êtes par ici</Popup>
