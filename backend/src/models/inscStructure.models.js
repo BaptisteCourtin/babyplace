@@ -1,9 +1,10 @@
 const datasource = require("../../database");
 
 const getIsCreche = (email) => {
-  return datasource.query("SELECT isCreche FROM structure WHERE email = ?", [
-    email,
-  ]);
+  return datasource.query(
+    "SELECT isCreche, structureId FROM structure WHERE email = ?",
+    [email]
+  );
 };
 
 const getStructureInfo = (table, email) => {

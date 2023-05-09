@@ -9,6 +9,7 @@ function MessageAdmin() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedId, setSelectedId] = useState();
   const [openRes, setOpenRes] = useState(false);
+
   const [selectedMail, setSelectedMail] = useState("");
   const [selectedNom, setSelectedNom] = useState("");
   const [selectedPrenom, setSelectedPrenom] = useState("");
@@ -16,13 +17,16 @@ function MessageAdmin() {
   const [selectedMessage, setSelectedMessage] = useState("");
 
   const { getAllMessages, messageAdminData } = useGetAllMessages();
+
   const [newGetMessage, setNewGetMessage] = useState(true);
 
+  // prend l'id pour le transmettre à la modale pour supprimer le message
   const deleteMessage = (id) => {
     setSelectedId(id);
     setIsOpen(!isOpen);
   };
 
+  // prend les infos quand on clique sur répondre pour transmettre à la modale
   const repondre = (email, nom, prenom, option, msg) => {
     setSelectedMail(email);
     setSelectedNom(nom);
@@ -37,6 +41,7 @@ function MessageAdmin() {
     setIsOpen(!isOpen);
   };
 
+  // prend tous les messages
   useEffect(() => {
     const source = axios.CancelToken.source();
     getAllMessages(source);
@@ -92,11 +97,13 @@ function MessageAdmin() {
             ))}
         </div>
       </div>
+      {/* si clique sur delete */}
       <ModalMessageAdmin
         open={isOpen}
         close={closeRes}
         selectedId={selectedId}
       />
+      {/* si clique sur repondre */}
       <ResponseModalAdmin
         openRes={openRes}
         closeRes={setOpenRes}

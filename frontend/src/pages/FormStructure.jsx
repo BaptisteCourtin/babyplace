@@ -174,6 +174,7 @@ function FormStructure() {
   }
 
   // --- 2 useEffect ---
+  // se fait de base
   useEffect(() => {
     const source = Axios.CancelToken.source();
     Axios.get(`${import.meta.env.VITE_PATH}/isCreche?email=${userEmail}`, {
@@ -202,6 +203,7 @@ function FormStructure() {
     };
   }, []);
 
+  // se fait quand on change en creche ou assmat
   useEffect(() => {
     const source = Axios.CancelToken.source();
     if (structure === "creche") {
@@ -553,12 +555,25 @@ function FormStructure() {
         id: structureId,
         token: null,
         tokenStart: null,
-      });
-      sessionStorage.clear();
+      }),
+        sessionStorage.clear();
       navigate("/");
     } catch (err) {
       console.error(err.message);
     }
+
+    // Axios.put(`${import.meta.env.VITE_PATH}/logout/${structureId}`, {
+    //   id: structureId,
+    //   token: null,
+    //   tokenStart: null,
+    // })
+    //   .then(() => {
+    //     sessionStorage.clear();
+    //     navigate("/");
+    //   })
+    //   .catch((err) => {
+    //     console.error(err.message);
+    //   });
   };
 
   // --- choix enregistrement selon la page ---

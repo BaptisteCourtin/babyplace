@@ -19,6 +19,7 @@ function AppliCardCreche() {
 
     photoStructure1,
     photoStructure2,
+    photoStructure3,
     tarifHeure,
     description,
 
@@ -65,7 +66,10 @@ function AppliCardCreche() {
 
       <main>
         <div className="container-img">
-          <img src={photoStructure2 || photoStructure1} alt="img creche" />
+          <img
+            src={photoStructure2 || photoStructure1 || photoStructure3}
+            alt="img creche"
+          />
 
           {familleId && (
             <button

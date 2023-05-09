@@ -16,6 +16,7 @@ function DemandeResa({
   nomNaissance,
   prenom,
   photo1,
+  photo2,
   photo3,
   indemnEntretien,
   indemnRepas,
@@ -137,7 +138,7 @@ function DemandeResa({
         </div>
         <main className="demande-resa">
           <div className="container-img">
-            <img src={photo3 || photo1} alt="img creche" />
+            <img src={photo3 || photo2 || photo1} alt="img creche" />
           </div>
 
           <div className="principale">

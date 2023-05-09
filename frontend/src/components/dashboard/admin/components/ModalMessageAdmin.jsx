@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 function ModalMessageAdmin({ open, close, selectedId }) {
   if (!open) return null;
 
+  // delete le message suivant l'id
   const deleteMessage = async () => {
     const id = selectedId;
     try {

@@ -15,6 +15,8 @@ function CarteCreche({
   const {
     isCreche,
     photoStructure1,
+    photoStructure2,
+    photoStructure3,
     tarifHeure,
     structureId,
     nom,
@@ -264,7 +266,10 @@ function CarteCreche({
           state={{ data, dataHorairesId, familleId }}
         >
           <div className="container-img">
-            <img src={photoStructure1} alt="img-creche" />
+            <img
+              src={photoStructure1 || photoStructure2 || photoStructure3}
+              alt="img-creche"
+            />
             <p className="nom-structure">
               {nom ||
                 (nomUsage

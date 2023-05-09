@@ -17,6 +17,7 @@ function AppliReservation() {
 
     photoProfil,
     photoStructure1,
+    photoStructure2,
     photoStructure3,
 
     tarifHeure,
@@ -77,6 +78,7 @@ function AppliReservation() {
           nomNaissance={nomNaissance}
           prenom={prenom}
           photo1={photoStructure1}
+          photo2={photoStructure2}
           photo3={photoStructure3}
           tarifHeure={tarifHeure}
           indemnRepas={indemnRepas}

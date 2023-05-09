@@ -9,7 +9,7 @@ const bcrypt = require("bcrypt");
 const multerMid = multer({
   storage: multer.memoryStorage(),
   limits: {
-    fileSize: 0.5 * 1024 * 1024, // => 524 288 = 0.5Mo = 500ko
+    fileSize: 5 * 1024 * 1024, // => 5Mo
   },
 });
 

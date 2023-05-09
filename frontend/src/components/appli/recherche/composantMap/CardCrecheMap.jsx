@@ -7,6 +7,8 @@ import PropTypes from "prop-types";
 function CardCrecheMap({ data, familleLiked, familleId }) {
   const {
     photoStructure1,
+    photoStructure2,
+    photoStructure3,
     structureId,
     nom,
     nomUsage,
@@ -118,7 +120,10 @@ function CardCrecheMap({ data, familleLiked, familleId }) {
 
       <Link to="/appli/search/card" state={{ data, dataHorairesId, familleId }}>
         <div>
-          <img src={photoStructure1} alt="img creche" />
+          <img
+            src={photoStructure1 || photoStructure2 || photoStructure3}
+            alt="img creche"
+          />
           <p className="nom-structure">
             {nom ||
               (nomUsage
