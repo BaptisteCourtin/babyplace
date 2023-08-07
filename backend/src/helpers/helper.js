@@ -1,6 +1,6 @@
 // mise dans le google cloud des images et fichiers
 const util = require("util");
-const gc = require("../config/index");
+const gc = require("../config/index"); // de là viens la config google cloud
 const bucket = gc.bucket("my-babyplace");
 
 /**
@@ -15,18 +15,24 @@ const bucket = gc.bucket("my-babyplace");
 const uploadDoc = (file) =>
   new Promise((resolve, reject) => {
     let { originalname, buffer } = file;
+
+    // nouveau nom
     const date = new Date();
     originalname = `${Math.round(
       Math.random() * 10000
     )}${date.getHours()}${date.getMinutes()}${date.getSeconds()}${date.getMilliseconds()}-qws-${originalname}`;
+
+    // mise dans google cloud
     const blob = bucket.file(originalname.replace(/ /g, "_"));
     const blobStream = blob.createWriteStream({
       resumable: false,
     });
+
+    // vérifie si c'est bon + renvoie le lien
     blobStream
       .on("finish", () => {
         const publicUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
-        resolve(publicUrl);
+        resolve(publicUrl); // renvoie le lien
       })
       .on("error", () => {
         reject(`Unable to upload image, something went wrong`);

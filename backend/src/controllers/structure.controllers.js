@@ -155,13 +155,7 @@ const updateSignaled = async (req, res) => {
 
 const deleteRefused = async (req, res) => {
   const id = parseInt(req.params.id);
-  let type = req.query.type;
-  if (type) {
-    type = "creche";
-  } else {
-    type = "assMat";
-  }
-  const result = await structureModels.deleteRefused(id, type);
+  const result = await structureModels.deleteRefused(id);
   if (result.affectedRows === 0) {
     res.status(404).send("Not found");
   } else {

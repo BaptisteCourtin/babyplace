@@ -62,12 +62,9 @@ function Admin() {
   const setRefused = async (structureId, email) => {
     try {
       await axios.delete(
-        `${
-          import.meta.env.VITE_PATH
-        }/admin/refused/${structureId}?type=${userType}`,
+        `${import.meta.env.VITE_PATH}/admin/refused/${structureId}`,
         {
           id: structureId,
-          type: userType,
         }
       );
       toast.error("L'utilisateur a bien été supprimé"),

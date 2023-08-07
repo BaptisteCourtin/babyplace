@@ -211,7 +211,7 @@ function DemandeResa({
               </p>
             </div>
             <button type="button" onClick={() => handleRequest()}>
-              Suivant
+              Envoyer
             </button>
           </div>
         </main>

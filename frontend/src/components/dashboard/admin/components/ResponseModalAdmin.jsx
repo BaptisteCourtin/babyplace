@@ -33,7 +33,6 @@ function ResponseModalAdmin({
       selectedOption,
       selectedMessage,
     };
-    console.log("datas :", datas); //OK
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_PATH}/contact/messages/repondre`,

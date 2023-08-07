@@ -10,7 +10,10 @@ function NotifBase({ setCompo, allReservation, setOneReservation }) {
     <div className="notif-base">
       <h3>Notifications</h3>
       <main>
-        <a href="https://www.pajemploi.urssaf.fr/pajewebinfo/cms/sites/pajewebinfo/accueil.html">
+        <a
+          href="https://www.pajemploi.urssaf.fr/pajewebinfo/cms/sites/pajewebinfo/accueil.html"
+          target="_blank"
+        >
           <div className="card-notif">
             <p>Pensez à faire la déclaration PAJEMPLOI</p>
             <span>{`>`}</span>

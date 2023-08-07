@@ -129,8 +129,9 @@ const INITIAL_DATA = {
 
 function FormStructure() {
   const navigate = useNavigate();
-  const { userEmail, structureId, setStructureId } =
-    useContext(UserEmailContext);
+  const { userEmail } = useContext(UserEmailContext);
+
+  const [structureId, setStructureId] = useState();
 
   const inputRef = useRef(null);
   const inputRef1 = useRef(null);
@@ -180,7 +181,7 @@ function FormStructure() {
     Axios.get(`${import.meta.env.VITE_PATH}/isCreche?email=${userEmail}`, {
       userEmail,
       cancelToken: source.token,
-    })
+    }) // va chercher si creche et idStructure
       .then((result) => {
         setStructureId(result.data.structureId);
         sessionStorage.setItem("structureId", result.data.structureId);
@@ -269,8 +270,6 @@ function FormStructure() {
         { userEmail, cancelToken: source.token }
       )
         .then((result) => {
-          setStructureId(result.data.structureId);
-          sessionStorage.setItem("structureId", result.data.structureId);
           if (result.data.resaInst === 1) {
             setResaInst(true);
           }
@@ -555,25 +554,13 @@ function FormStructure() {
         id: structureId,
         token: null,
         tokenStart: null,
-      }),
+      }).then(() => {
         sessionStorage.clear();
-      navigate("/");
+        navigate("/");
+      });
     } catch (err) {
       console.error(err.message);
     }
-
-    // Axios.put(`${import.meta.env.VITE_PATH}/logout/${structureId}`, {
-    //   id: structureId,
-    //   token: null,
-    //   tokenStart: null,
-    // })
-    //   .then(() => {
-    //     sessionStorage.clear();
-    //     navigate("/");
-    //   })
-    //   .catch((err) => {
-    //     console.error(err.message);
-    //   });
   };
 
   // --- choix enregistrement selon la page ---

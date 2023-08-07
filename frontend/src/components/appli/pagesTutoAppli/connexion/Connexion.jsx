@@ -85,6 +85,7 @@ function Connexion({ setCompo }) {
               type={typePwd ? "password" : "text"}
               name="mdp"
               id="mdp"
+              className="no-take"
               onChange={(event) => {
                 setPassword(event.target.value);
               }}
@@ -105,6 +106,7 @@ function Connexion({ setCompo }) {
               type={typePwd2 ? "password" : "text"}
               name="mdp2"
               id="mdp2"
+              className="no-take"
               onChange={(event) => {
                 setPassword2(event.target.value);
               }}

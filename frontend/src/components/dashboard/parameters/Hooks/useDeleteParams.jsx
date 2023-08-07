@@ -10,12 +10,9 @@ const useDeleteParams = (email, deleteMail, structureId, userType) => {
     try {
       if (deleteMail === email) {
         await axios.delete(
-          `${
-            import.meta.env.VITE_PATH
-          }/admin/refused/${structureId}?type=${userType}`,
+          `${import.meta.env.VITE_PATH}/admin/refused/${structureId}`,
           {
             id: structureId,
-            type: userType,
           }
         );
         toast.success("Votre compte a bien été supprimé");

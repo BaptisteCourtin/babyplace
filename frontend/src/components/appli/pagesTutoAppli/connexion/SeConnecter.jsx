@@ -88,6 +88,7 @@ function SeConnecter({ setCompo }) {
               type={typePwd ? "password" : "text"}
               name="mdp"
               id="mdp"
+              className="no-take"
               onChange={(event) => {
                 setPassword(event.target.value);
               }}

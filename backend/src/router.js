@@ -226,6 +226,7 @@ router.post(
 
 // mise dans bdd
 router.put("/formInscription/docFamilleChangeName/:id/:nomDoc", (req, res) => {
+  // :nomDoc => nom colonne bdd
   const { httpDoc } = req.body;
   datasource
     .query(`UPDATE famille SET ${req.params.nomDoc}=? WHERE familleId=?`, [

@@ -158,10 +158,10 @@ const updateSignaled = async (req) => {
   return result;
 };
 
-const deleteRefused = async (id, type) => {
+const deleteRefused = async (id) => {
   const [result] = await datasource.query(
-    `DELETE FROM ${type} WHERE structureId = ?; DELETE FROM calendrier WHERE structureId = ?; DELETE FROM horaires WHERE structureID = ?; DELETE FROM structure WHERE structureId = ?`,
-    [id, id, id, id]
+    `DELETE FROM creche WHERE structureId = ?; DELETE FROM assmat WHERE structureId = ?; DELETE FROM calendrier WHERE structureId = ?; DELETE FROM horaires WHERE structureID = ?; DELETE FROM structure WHERE structureId = ?`,
+    [id, id, id, id, id]
   );
   return result;
 };
