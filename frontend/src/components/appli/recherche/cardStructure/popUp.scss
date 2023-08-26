@@ -2,11 +2,11 @@
   flex-grow: 1;
 
   button {
-    background-color: $third;
+    background-color: var(--third);
     border-radius: 10px;
-    color: $white;
+    color: var(--white);
     font-weight: 500;
-    font-size: $h3;
+    font-size: var(--h3);
     width: 100%;
     min-height: 50px;
     max-height: 70px;
@@ -33,8 +33,8 @@
     width: calc(100% - 1rem);
     max-height: 700px;
     padding: 1rem 2rem;
-    background-color: $white;
-    color: $second;
+    background-color: var(--white);
+    color: var(--second);
     overflow-y: auto;
 
     display: flex;
@@ -44,9 +44,9 @@
 
     .retour {
       background: transparent;
-      color: $second;
+      color: var(--second);
       font-size: 1rem;
-      border: 1px solid $second;
+      border: 1px solid var(--second);
       width: max-content;
       height: 50px;
       position: absolute;
@@ -68,7 +68,7 @@
       width: 100%;
 
       .compris {
-        background: $gradient;
+        background: var(--gradient);
         flex-shrink: 0;
         height: 50px;
       }
@@ -86,7 +86,7 @@
       position: relative;
 
       h4 {
-        font-size: $h4;
+        font-size: var(--h4);
         font-weight: 600;
         margin-bottom: 1rem;
       }

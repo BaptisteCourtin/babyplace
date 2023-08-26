@@ -19,11 +19,11 @@
 
       input:focus,
       input:valid {
-        color: $second;
+        color: var(--second);
       }
 
       input {
-        border: 3px solid $second;
+        border: 3px solid var(--second);
         background-color: transparent;
         border-radius: 10px;
         padding: 0.5rem;
@@ -34,34 +34,34 @@
         color: transparent;
 
         &:focus {
-          border-color: $third;
+          border-color: var(--third);
 
           & + p {
             transform: translate(5px, -9px);
             font-size: 13px;
             padding: 0 5px;
-            color: $third;
-            border-right: 3px solid $third;
-            border-left: 3px solid $third;
+            color: var(--third);
+            border-right: 3px solid var(--third);
+            border-left: 3px solid var(--third);
             border-radius: 5px;
             line-height: 20px;
-            background-color: $white;
+            background-color: var(--white);
           }
         }
 
         &:valid {
-          border-color: $green;
+          border-color: var(--green);
 
           & + p {
             transform: translate(5px, -9px);
             font-size: 13px;
             padding: 0 5px;
-            color: $green;
-            border-right: 3px solid $green;
-            border-left: 3px solid $green;
+            color: var(--green);
+            border-right: 3px solid var(--green);
+            border-left: 3px solid var(--green);
             border-radius: 5px;
             line-height: 20px;
-            background-color: $white;
+            background-color: var(--white);
             transition: 0s;
           }
         }

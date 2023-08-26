@@ -4,6 +4,8 @@ import { Route, Routes } from "react-router-dom";
 import UserEmailContext from "@components/context/UserEmailContext";
 import FamilleContext from "@components/context/FamilleContext";
 
+import ToggleDarkLight from "./components/ToggleDarkLight";
+
 // page de base
 import Home from "@pages/Home";
 import Features from "@pages/Features";
@@ -40,6 +42,9 @@ import MessageAdmin from "@components/dashboard/admin/MessageAdmin";
 import Signalement from "@components/dashboard/admin/Signalement";
 
 function App() {
+  // dark light
+  const [isDarkTheme, setIsDarkTheme] = useState(true);
+
   // formulaire
   const [userEmail, setUserEmail] = useState("test@test.com");
   const [structureId, setStructureId] = useState(666);
@@ -54,7 +59,7 @@ function App() {
   }, []);
 
   return (
-    <div className="app">
+    <div className={isDarkTheme ? "dark-theme app" : "app"}>
       <UserEmailContext.Provider
         value={{ userEmail, setUserEmail, structureId, setStructureId }}
       >
@@ -104,6 +109,10 @@ function App() {
             <Route path="/admin/signalements" element={<Signalement />} />
             <Route path="/admin/messages" element={<MessageAdmin />} />
           </Routes>
+          <ToggleDarkLight
+            isDarkTheme={isDarkTheme}
+            setIsDarkTheme={setIsDarkTheme}
+          />
         </FamilleContext.Provider>
       </UserEmailContext.Provider>
     </div>

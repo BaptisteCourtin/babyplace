@@ -16,14 +16,14 @@
 
     & input[type="number"] {
       margin: 0 8px;
-      border: 1px solid $third;
+      border: 1px solid var(--third);
       border-radius: 10px;
       padding: 4px 1px 4px 4px;
       width: 45px;
     }
 
     & input[type="number"]:focus {
-      outline: 1.5px solid $third;
+      outline: 1.5px solid var(--third);
     }
 
     & label {

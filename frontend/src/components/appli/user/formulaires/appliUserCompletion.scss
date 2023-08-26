@@ -1,10 +1,10 @@
 .AppliUserCompletion {
   padding-bottom: 4rem;
   min-height: 100vh;
-  background-color: $white;
+  background-color: var(--white);
 
   .container-header {
-    background: $gradient;
+    background: var(--gradient);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,11 +13,11 @@
       max-width: 500px;
       text-align: center;
       padding: 2rem 0;
-      color: $white;
+      color: var(--white);
       width: 100%;
 
       .button-head {
-        font-size: $h3;
+        font-size: var(--h3);
         font-weight: 600;
         background-color: transparent;
         text-align: left;
@@ -36,13 +36,13 @@
           font-weight: 500;
 
           &:nth-child(1) {
-            background-color: $blue;
+            background-color: var(--blue);
           }
           &:nth-child(2) {
-            background-color: $green;
+            background-color: var(--green);
           }
           &:nth-child(3) {
-            background-color: $orange;
+            background-color: var(--orange);
           }
         }
       }
@@ -66,19 +66,19 @@
       text-align: center;
 
       h3 {
-        font-size: $h3;
+        font-size: var(--h3);
         font-weight: 600;
-        color: $gradient;
+        color: var(--gradient);
       }
 
       h4 {
-        font-size: $h3;
+        font-size: var(--h3);
         font-weight: 500;
         padding-top: 2rem;
         margin-top: 2rem;
-        border-top: 2px $second solid;
+        border-top: 2px var(--second) solid;
         width: 90%;
-        color: $third;
+        color: var(--third);
         text-align: center;
       }
 
@@ -91,7 +91,7 @@
         gap: 1rem;
 
         .action-kid {
-          font-size: $h4;
+          font-size: var(--h4);
           font-weight: 500;
 
           display: flex;
@@ -100,13 +100,13 @@
           gap: 1rem;
 
           button {
-            background-color: $blue;
+            background-color: var(--blue);
             border-radius: 10px;
             padding: 7px;
           }
 
           .create-kid {
-            color: $green;
+            color: var(--green);
           }
 
           .delete-kid {
@@ -135,7 +135,7 @@
           }
 
           button {
-            background-color: $third;
+            background-color: var(--third);
             border-radius: 10px;
             padding: 7px;
           }
@@ -143,7 +143,7 @@
       }
 
       .button-bas {
-        background: $gradient;
+        background: var(--gradient);
       }
 
       // inscription
@@ -155,15 +155,15 @@
         margin-top: 1.5rem;
 
         .champ {
-          border: 1px $second solid;
+          border: 1px var(--second) solid;
           border-radius: 10px;
-          background-color: $grey;
+          background-color: var(--grey);
           padding: 0.5rem 0;
 
           p {
             text-align: center;
             width: 100%;
-            font-size: $h4;
+            font-size: var(--h4);
             font-weight: 600;
           }
 
@@ -173,7 +173,7 @@
             padding: 0.25rem;
 
             button {
-              color: $white;
+              color: var(--white);
               font-weight: 500;
               background-color: red;
               padding: 0.5rem;
@@ -181,9 +181,9 @@
             }
 
             a {
-              color: $white;
+              color: var(--white);
               font-weight: 500;
-              background-color: $green;
+              background-color: var(--green);
               padding: 0.5rem;
               border-radius: 10px;
             }

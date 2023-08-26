@@ -23,7 +23,7 @@
     color: #787885;
     text-align: center;
     width: 30vw;
-    font-size: $h4;
+    font-size: var(--h4);
   }
 
   & button {
@@ -33,7 +33,7 @@
     width: 250px;
     max-width: 30vw;
     height: 40px;
-    font-size: $h4;
+    font-size: var(--h4);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -43,7 +43,7 @@
   }
 
   & button:hover {
-    color: $third;
+    color: var(--third);
     text-decoration: underline;
     text-underline-offset: 4px;
   }
@@ -69,13 +69,13 @@
   }
 
   & progress::-webkit-progress-value {
-    background: $gradient;
+    background: var(--gradient);
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
   }
 
   & progress[value]::-moz-progress-bar {
-    background: $gradient;
+    background: var(--gradient);
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
   }
@@ -122,7 +122,7 @@
 
     & .backButton {
       border: none;
-      color: $third;
+      color: var(--third);
       background-color: #eeeeee00;
       padding: 8px;
       margin: 1vh 0;
@@ -167,7 +167,7 @@
 
       & .indispo {
         background-color: #f0f0f0;
-        color: $fourth;
+        color: var(--fourth);
         text-decoration: line-through;
         font-weight: 500;
       }
@@ -215,26 +215,26 @@
     button {
       width: 150px;
       height: 40px;
-      color: $white;
-      background: $third;
-      font-size: $h4;
+      color: var(--white);
+      background: var(--third);
+      font-size: var(--h4);
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 50px;
       margin: 4px;
       padding: 8px;
-      border: 1px solid $grey;
+      border: 1px solid var(--grey);
       transition: 0.2s ease-in-out;
     }
 
     & button:hover {
-      box-shadow: 2px 2px 4px $grey;
+      box-shadow: 2px 2px 4px var(--grey);
     }
 
     & .backButton {
       border: none;
-      color: $third;
+      color: var(--third);
       background-color: #eeeeee00;
     }
 

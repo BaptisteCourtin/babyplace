@@ -1,5 +1,5 @@
 .appli-reservation {
-  background: $gradient;
+  background: var(--gradient);
   min-height: 100vh;
   text-align: center;
   padding: 0 1rem 1rem 1rem;
@@ -17,30 +17,30 @@
     flex-grow: 1;
 
     .title {
-      font-size: $h1;
+      font-size: var(--h1);
       font-weight: 700;
       margin: 2rem;
     }
 
     .sub-title {
-      font-size: $h4;
+      font-size: var(--h4);
 
       span {
         font-weight: 500;
-        font-size: $h2;
+        font-size: var(--h2);
       }
     }
 
     // choix dates
     &.choix-dates {
-      background-color: $white;
+      background-color: var(--white);
       padding: 1rem;
     }
 
     // demande resa
     &.demande-resa {
       overflow: hidden;
-      background-color: $white;
+      background-color: var(--white);
       border-radius: 20px;
       margin-bottom: 1.5rem;
       position: relative;
@@ -67,7 +67,7 @@
         flex-grow: 1;
 
         h3 {
-          font-size: $h3;
+          font-size: var(--h3);
           font-weight: 600;
         }
 
@@ -82,7 +82,7 @@
 
         .all-kid {
           margin-bottom: 1rem;
-          background-color: $grey;
+          background-color: var(--grey);
           padding: 0.5rem;
           border-radius: 10px;
 
@@ -91,7 +91,7 @@
           gap: 0.75rem;
 
           button {
-            background-color: $blue;
+            background-color: var(--blue);
             border-radius: 10px;
             padding: 7px;
             height: 60px;
@@ -100,7 +100,7 @@
         }
 
         span {
-          font-size: $h4;
+          font-size: var(--h4);
           font-weight: 600;
         }
       }
@@ -119,16 +119,16 @@
           font-weight: 600;
 
           span {
-            font-size: $h3;
+            font-size: var(--h3);
           }
         }
         button {
           padding: 0 0.5rem;
-          background: $gradient;
-          font-size: $h3;
+          background: var(--gradient);
+          font-size: var(--h3);
           font-weight: 500;
           height: 50px;
-          color: $white;
+          color: var(--white);
           border-radius: 10px;
           height: 50px;
           flex-grow: 1;
@@ -139,7 +139,7 @@
 
     // confirme resa
     &.confirme-resa {
-      color: $white;
+      color: var(--white);
 
       .mini-logo {
         max-height: 50px;
@@ -164,7 +164,7 @@
         width: 100%;
         padding: 1rem;
         border-radius: 10px;
-        background-color: $orange;
+        background-color: var(--orange);
         margin: 2rem 0;
 
         span {

@@ -11,7 +11,7 @@
     }
 
     & input {
-      border: 1px solid $third;
+      border: 1px solid var(--third);
       border-radius: 10px;
       padding: 4px 1px 4px 4px;
       margin: 0 8px;
@@ -19,7 +19,7 @@
     }
 
     & input:focus {
-      outline: 1.5px solid $third;
+      outline: 1.5px solid var(--third);
     }
   }
 }

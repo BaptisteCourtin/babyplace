@@ -54,19 +54,19 @@
         display: flex;
         align-items: flex-end;
         justify-content: center;
-        gap: $h1;
+        gap: var(--h1);
         padding: 10px 25px 10px 25px;
         border: 1px solid transparent;
         border-radius: 50px;
-        background-color: $third;
-        color: $white;
+        background-color: var(--third);
+        color: var(--white);
         font-weight: 500;
         transition: 0.3s ease-in-out;
 
         &:hover {
           background: none;
-          border: 1px solid $third;
-          color: $second;
+          border: 1px solid var(--third);
+          color: var(--second);
         }
       }
     }

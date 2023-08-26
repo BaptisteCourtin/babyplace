@@ -25,9 +25,9 @@ section {
 
 html {
   scroll-behavior: smooth;
-  font-size: $normal;
-  font-family: $text;
-  color: $second;
+  font-size: var(--normal);
+  font-family: var(--text);
+  color: var(--second);
   background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
   cursor: default;
   min-height: 100vh;

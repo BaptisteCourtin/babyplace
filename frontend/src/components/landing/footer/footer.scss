@@ -1,6 +1,6 @@
 hr {
   height: 1px;
-  background-color: $third;
+  background-color: var(--third);
 }
 
 .footer {
@@ -22,8 +22,8 @@ hr {
       & p {
         &:last-of-type {
           margin-top: 10px;
-          color: $first;
-          font-size: $normal;
+          color: var(--first);
+          font-size: var(--normal);
         }
       }
     }
@@ -40,14 +40,14 @@ hr {
         border-radius: 50px;
 
         &:first-of-type {
-          background-color: $fourth;
-          color: $white;
+          background-color: var(--fourth);
+          color: var(--white);
           transition: 0.3s ease-in-out;
 
           &:hover {
-            border: 1px solid $fourth;
+            border: 1px solid var(--fourth);
             background-color: transparent;
-            color: $second;
+            color: var(--second);
           }
         }
 
@@ -57,14 +57,14 @@ hr {
           transition: 0.3s ease-in-out;
 
           &:hover {
-            border: 1px solid $third;
+            border: 1px solid var(--third);
             box-shadow: none;
           }
         }
 
         & span {
-          font-size: $h4;
-          color: $third;
+          font-size: var(--h4);
+          color: var(--third);
         }
       }
     }
@@ -95,12 +95,12 @@ hr {
 
       & .footerAddress {
         margin: 30px 0 10px;
-        font-size: $h4;
+        font-size: var(--h4);
         line-height: 1.5;
       }
 
       & .footerMail {
-        font-size: $small;
+        font-size: var(--small);
       }
     }
 
@@ -123,7 +123,7 @@ hr {
           transition: 0.3s ease-in-out;
 
           &:hover {
-            border-bottom: 1px solid $second;
+            border-bottom: 1px solid var(--second);
           }
         }
 
@@ -141,9 +141,9 @@ hr {
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background-color: $grey;
-            color: $white;
-            font-size: $h4;
+            background-color: var(--grey);
+            color: var(--white);
+            font-size: var(--h4);
 
             &:hover {
               border-bottom: 1px solid transparent;
@@ -163,13 +163,13 @@ hr {
         #iconFooter {
           width: 40px;
           height: 40px;
-          color: $third;
+          color: var(--third);
         }
 
         #iconFooter2 {
           width: 45px;
           height: 45px;
-          color: $third;
+          color: var(--third);
         }
       }
     }
@@ -183,15 +183,15 @@ hr {
     line-height: 1.5;
 
     & p {
-      font-size: $xs;
+      font-size: var(--xs);
     }
 
     & button {
       width: 45px;
       height: 40px;
-      color: $white;
+      color: var(--white);
       background: none;
-      font-size: $h4;
+      font-size: var(--h4);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -217,7 +217,7 @@ hr {
       #chevronUp {
         width: 100%;
         height: 100%;
-        color: $third;
+        color: var(--third);
       }
     }
   }

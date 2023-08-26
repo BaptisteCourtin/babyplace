@@ -1,8 +1,8 @@
 .container-navbar-app {
-  background: linear-gradient($grey, $white);
+  background: linear-gradient(var(--grey), var(--white));
   width: 100%;
   padding: 0.5rem 1rem;
-  border-top: 0.5px $second solid;
+  border-top: 0.5px var(--second) solid;
   height: 60px;
 
   display: flex;
@@ -26,10 +26,10 @@
     }
 
     .active {
-      color: $white;
-      background: $gradient;
+      color: var(--white);
+      background: var(--gradient);
       border-radius: 10px;
-      box-shadow: 0 0 5px $second;
+      box-shadow: 0 0 5px var(--second);
     }
   }
 }

@@ -16,17 +16,17 @@
     gap: 20px;
     padding-bottom: 20px;
     background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
-    border-right: solid 2px $third;
+    border-right: solid 2px var(--third);
     border-radius: 5px;
 
     h2 {
       padding: 20px 30px 20px 10px;
       font-weight: 700;
-      font-size: $h2;
+      font-size: var(--h2);
 
       &::first-letter {
         font-weight: 700;
-        color: $third;
+        color: var(--third);
       }
     }
 
@@ -55,7 +55,7 @@
 
         #email {
           font-style: italic;
-          color: $fourth;
+          color: var(--fourth);
           font-size: 0.8em;
           font-weight: 500;
         }
@@ -70,10 +70,10 @@
         .contactList {
           list-style: none;
           padding: 20px;
-          border-bottom: 1px solid $third;
+          border-bottom: 1px solid var(--third);
 
           &:first-of-type {
-            border-top: 1px solid $third;
+            border-top: 1px solid var(--third);
           }
 
           // &:last-of-type {
@@ -82,12 +82,12 @@
         }
 
         & .selected {
-          background-color: $third;
-          color: $white;
+          background-color: var(--third);
+          color: var(--white);
 
           & #btn-affiche-con {
             &:hover {
-              color: $white;
+              color: var(--white);
             }
           }
         }
@@ -115,7 +115,7 @@
           }
 
           &:hover {
-            color: $third;
+            color: var(--third);
           }
         }
       }

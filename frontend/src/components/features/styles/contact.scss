@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: $second;
+  color: var(--second);
 
   section {
     padding-top: 40px;
@@ -37,7 +37,7 @@
       flex-direction: column;
       align-items: center;
       margin: 20px 30px;
-      border: solid 1px $third;
+      border: solid 1px var(--third);
       padding: 30px 40px;
       border-radius: 25px;
 
@@ -62,7 +62,7 @@
 
           #userName {
             height: 30px;
-            border: solid 1px $grey;
+            border: solid 1px var(--grey);
             border-radius: 10px;
             padding: 15px;
           }
@@ -82,7 +82,7 @@
 
           #userFirstName {
             height: 30px;
-            border: solid 1px $grey;
+            border: solid 1px var(--grey);
             border-radius: 10px;
             padding: 15px;
           }
@@ -103,7 +103,7 @@
 
           #userMail {
             height: 30px;
-            border: solid 1px $grey;
+            border: solid 1px var(--grey);
             border-radius: 10px;
             padding: 15px;
           }
@@ -125,7 +125,7 @@
           .object-select {
             background: none;
             height: 30px;
-            border: solid 1px $grey;
+            border: solid 1px var(--grey);
             border-radius: 10px;
             padding: 0px 15px;
           }
@@ -147,7 +147,7 @@
           #formulaireMessage {
             width: 100%;
             height: 150px;
-            border: solid 1px $grey;
+            border: solid 1px var(--grey);
             border-radius: 10px;
             padding: 15px;
           }
@@ -169,11 +169,11 @@
 
             span {
               font-weight: 600;
-              color: $third;
+              color: var(--third);
             }
 
             :hover {
-              color: $fourth;
+              color: var(--fourth);
             }
           }
         }
@@ -183,12 +183,12 @@
         display: flex;
         align-items: flex-end;
         justify-content: center;
-        gap: $h1;
+        gap: var(--h1);
         padding: 10px 25px 10px 25px;
         border: 1px solid transparent;
         border-radius: 50px;
-        background-color: $third;
-        color: $white;
+        background-color: var(--third);
+        color: var(--white);
         font-weight: 500;
         transition: 0.3s ease-in-out;
       }
@@ -196,11 +196,11 @@
   }
 
   #obligatoire {
-    color: $fourth;
+    color: var(--fourth);
   }
 
   #obligatoireText {
-    color: $fourth;
+    color: var(--fourth);
     font-size: smaller;
     margin-top: 10px;
   }

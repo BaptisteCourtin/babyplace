@@ -44,7 +44,7 @@
         align-items: center;
         border-top-left-radius: 10px;
         border-bottom-left-radius: 10px;
-        background: $gradient;
+        background: var(--gradient);
 
         #madamecoucou {
           width: 100%;
@@ -68,7 +68,7 @@
             font-weight: 400;
 
             span {
-              color: $third;
+              color: var(--third);
               font-weight: 500;
             }
           }
@@ -100,7 +100,7 @@
 
               #objet {
                 height: 30px;
-                border: solid 1px $grey;
+                border: solid 1px var(--grey);
                 border-radius: 10px;
                 padding: 15px;
                 margin-bottom: 20px;
@@ -120,7 +120,7 @@
 
               #message {
                 height: 150px;
-                border: solid 1px $grey;
+                border: solid 1px var(--grey);
                 border-radius: 10px;
                 padding: 15px;
               }
@@ -138,25 +138,25 @@
       #btnDelete {
         padding: 5px 0;
         width: 20%;
-        background-color: $seventh;
-        color: $white;
+        background-color: var(--seventh);
+        color: var(--white);
         font-weight: 500;
         border: 1px solid transparent;
         border-radius: 5px;
         transition: 0.3s ease-in-out;
 
         &:hover {
-          border: 1px solid $seventh;
+          border: 1px solid var(--seventh);
           background-color: transparent;
-          color: $seventh;
+          color: var(--seventh);
         }
       }
 
       #btnRepondre {
         padding: 5px 0;
         width: 20%;
-        background-color: $fifth;
-        color: $white;
+        background-color: var(--fifth);
+        color: var(--white);
         font-weight: 500;
         border-radius: 5px;
         transition: 0.3s ease-in-out;
@@ -164,20 +164,20 @@
         border-radius: 5px;
 
         &:hover {
-          border: 1px solid $fifth;
+          border: 1px solid var(--fifth);
           background-color: transparent;
-          color: $fifth;
+          color: var(--fifth);
         }
       }
     }
   }
 
   #obligatoire {
-    color: $fourth;
+    color: var(--fourth);
   }
 
   #obligatoireText {
-    color: $fourth;
+    color: var(--fourth);
     font-size: smaller;
     margin-top: 10px;
   }
