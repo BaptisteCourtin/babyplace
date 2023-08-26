@@ -6,7 +6,7 @@ import Bienvenue from "@components/appli/pagesTutoAppli/Bienvenue";
 import Page0 from "@components/appli/pagesTutoAppli/Page0";
 import Page1 from "@components/appli/pagesTutoAppli/Page1";
 
-function Appli() {
+function AppliTuto() {
   const [compo, setCompo] = useState(0);
 
   const choixComposant = () => {
@@ -28,4 +28,4 @@ function Appli() {
   return choixComposant();
 }
 
-export default Appli;
+export default AppliTuto;

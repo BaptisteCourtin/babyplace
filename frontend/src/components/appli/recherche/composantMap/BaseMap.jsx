@@ -78,10 +78,6 @@ function BaseMap({
       });
   };
 
-  useEffect(() => {
-    getVraiPosition();
-  }, []);
-
   // --- icon perso pour vous etes ici ---
   const LeafIcon = L.Icon.extend({
     options: {

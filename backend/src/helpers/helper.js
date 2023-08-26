@@ -23,7 +23,7 @@ const uploadDoc = (file) =>
     )}${date.getHours()}${date.getMinutes()}${date.getSeconds()}${date.getMilliseconds()}-qws-${originalname}`;
 
     // mise dans google cloud
-    const blob = bucket.file(originalname.replace(/ /g, "_"));
+    const blob = bucket.file(originalname.replace(/ /g, "_")); // utilise le nouveau nom
     const blobStream = blob.createWriteStream({
       resumable: false,
     });
