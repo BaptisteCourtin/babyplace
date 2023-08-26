@@ -2,7 +2,7 @@
   background: var(--gradient);
   min-height: 100vh;
   text-align: center;
-  color: var(--white);
+  color: var(--background);
   padding: 0 1rem 1rem 1rem;
 
   display: flex;
@@ -10,8 +10,8 @@
   align-items: center;
 
   &.connexion {
-    background: var(--white);
-    color: var(--second);
+    background: var(--background);
+    color: var(--front);
 
     .emailFail {
       font-size: var(--h4);
@@ -35,11 +35,16 @@
       position: absolute;
       right: 1rem;
       top: 1.5rem;
+      padding: 0.5rem;
+
       font-size: var(--h4);
       font-weight: 500;
+
       border: 1px var(--third) solid;
-      padding: 0.5rem;
       border-radius: 10px;
+
+      background: var(--background);
+      color: var(--front);
     }
   }
 

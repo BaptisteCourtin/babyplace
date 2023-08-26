@@ -35,7 +35,7 @@
     }
 
     & .input {
-      border: 1px solid var(--grey);
+      border: 1px solid var(--grey2);
     }
 
     & .inputChecked {
@@ -59,7 +59,7 @@
       z-index: 2;
       transform: translateY(6px) translateX(10px);
       font-weight: 600;
-      color: var(--grey);
+      color: var(--grey2);
     }
 
     & p {

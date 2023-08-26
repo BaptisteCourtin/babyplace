@@ -3,7 +3,7 @@
   background: var(--gradient);
   padding: 15px;
   padding-right: 0;
-  color: var(--white);
+  color: var(--background);
 
   & .dashNavLogo {
     display: flex;
@@ -24,7 +24,7 @@
       & span {
         padding: 0 5px;
         font-size: var(--normal);
-        border: 1px solid var(--white);
+        border: 1px solid var(--background);
         border-radius: 50px;
       }
     }
@@ -51,14 +51,14 @@
         transition: 0.3s ease-in-out;
 
         &:hover {
-          border-bottom: 1px solid var(--white);
+          border-bottom: 1px solid var(--background);
         }
       }
     }
 
     & .selected {
       position: relative;
-      background: var(--white);
+      background: var(--background);
       color: var(--third);
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;

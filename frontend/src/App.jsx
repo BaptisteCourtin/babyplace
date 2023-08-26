@@ -4,8 +4,6 @@ import { Route, Routes } from "react-router-dom";
 import UserEmailContext from "@components/context/UserEmailContext";
 import FamilleContext from "@components/context/FamilleContext";
 
-import ToggleDarkLight from "./components/ToggleDarkLight";
-
 // page de base
 import Home from "@pages/Home";
 import Features from "@pages/Features";
@@ -40,10 +38,11 @@ import Admin from "@pages/Admin";
 import WaitAdmin from "@pages/WaitAdmin";
 import MessageAdmin from "@components/dashboard/admin/MessageAdmin";
 import Signalement from "@components/dashboard/admin/Signalement";
+import ToggleDarkLight from "./components/ToggleDarkLight";
 
 function App() {
   // dark light
-  const [isDarkTheme, setIsDarkTheme] = useState(true);
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   // formulaire
   const [userEmail, setUserEmail] = useState("test@test.com");

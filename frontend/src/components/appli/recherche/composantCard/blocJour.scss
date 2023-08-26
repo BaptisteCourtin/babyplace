@@ -5,7 +5,7 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
-  color: var(--white);
+  color: var(--background);
 
   .each-jour {
     width: 70px;
@@ -17,7 +17,7 @@
     text-align: center;
   }
   .daygray .each-jour {
-    background-color: var(--grey);
+    background-color: var(--grey2);
     text-align: center;
   }
 }
@@ -42,12 +42,12 @@
     background-color: var(--fifth);
     line-height: 25px;
     text-align: center;
-    color: var(--white);
+    color: var(--background);
   }
   .daygray .each-jour {
-    background-color: var(--grey);
+    background-color: var(--grey2);
     line-height: 25px;
     text-align: center;
-    color: var(--white);
+    color: var(--background);
   }
 }

@@ -1,7 +1,7 @@
 .AppliUserCompletion {
   padding-bottom: 4rem;
   min-height: 100vh;
-  background-color: var(--white);
+  background-color: var(--background);
 
   .container-header {
     background: var(--gradient);
@@ -13,7 +13,7 @@
       max-width: 500px;
       text-align: center;
       padding: 2rem 0;
-      color: var(--white);
+      color: var(--background);
       width: 100%;
 
       .button-head {
@@ -76,7 +76,7 @@
         font-weight: 500;
         padding-top: 2rem;
         margin-top: 2rem;
-        border-top: 2px var(--second) solid;
+        border-top: 2px var(--grey1) solid;
         width: 90%;
         color: var(--third);
         text-align: center;
@@ -155,9 +155,9 @@
         margin-top: 1.5rem;
 
         .champ {
-          border: 1px var(--second) solid;
+          border: 1px var(--grey1) solid;
           border-radius: 10px;
-          background-color: var(--grey);
+          background-color: var(--grey2);
           padding: 0.5rem 0;
 
           p {
@@ -173,7 +173,7 @@
             padding: 0.25rem;
 
             button {
-              color: var(--white);
+              color: var(--background);
               font-weight: 500;
               background-color: red;
               padding: 0.5rem;
@@ -181,7 +181,7 @@
             }
 
             a {
-              color: var(--white);
+              color: var(--background);
               font-weight: 500;
               background-color: var(--green);
               padding: 0.5rem;

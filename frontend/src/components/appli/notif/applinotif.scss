@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  background-color: var(--white);
+  background-color: var(--background);
 
   .notif-container-grad {
     display: flex;
@@ -14,7 +14,7 @@
     height: 100%;
 
     .button-top {
-      color: var(--white);
+      color: var(--background);
     }
   }
 
@@ -73,7 +73,7 @@
         width: 100%;
         height: 70px;
         padding: 1rem;
-        border-left: 1px var(--second) solid;
+        border-left: 1px var(--grey1) solid;
         text-align: left;
 
         display: flex;
@@ -145,7 +145,7 @@
 
     .button-bas {
       background-color: var(--third);
-      color: var(--second);
+      color: var(--front);
       width: 90%;
     }
   }
@@ -170,8 +170,8 @@
     }
 
     .button-bas {
-      background-color: var(--white);
-      color: var(--second);
+      background-color: var(--background);
+      color: var(--front);
     }
   }
 

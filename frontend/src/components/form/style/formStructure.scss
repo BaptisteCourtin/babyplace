@@ -215,7 +215,7 @@
     button {
       width: 150px;
       height: 40px;
-      color: var(--white);
+      color: var(--background);
       background: var(--third);
       font-size: var(--h4);
       display: flex;
@@ -224,12 +224,12 @@
       border-radius: 50px;
       margin: 4px;
       padding: 8px;
-      border: 1px solid var(--grey);
+      border: 1px solid var(--grey2);
       transition: 0.2s ease-in-out;
     }
 
     & button:hover {
-      box-shadow: 2px 2px 4px var(--grey);
+      box-shadow: 2px 2px 4px var(--grey2);
     }
 
     & .backButton {

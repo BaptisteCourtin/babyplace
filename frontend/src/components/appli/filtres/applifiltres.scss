@@ -1,7 +1,7 @@
 .filtres {
   padding: 0 1rem;
   min-height: 100vh;
-  background-color: var(--white);
+  background-color: var(--background);
 
   display: flex;
   flex-direction: column;
@@ -23,7 +23,7 @@
     }
 
     button.reset {
-      background-color: var(--grey);
+      background-color: var(--grey2);
       padding: 0.5rem;
       border-radius: 10px;
       border: 2px var(--blue) solid;
@@ -33,8 +33,8 @@
       background-color: var(--blue);
       padding: 0.5rem;
       border-radius: 10px;
-      border: 2px var(--grey) solid;
-      color: var(--grey);
+      border: 2px var(--grey2) solid;
+      color: var(--grey2);
     }
   }
 
@@ -76,7 +76,7 @@
     width: 90%;
     height: 70px;
     border-radius: 10px;
-    color: var(--white);
+    color: var(--background);
     font-size: var(--h3);
     font-weight: 500;
 

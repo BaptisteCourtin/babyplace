@@ -39,7 +39,7 @@
           border-radius: 5px;
 
           & span {
-            color: var(--white);
+            color: var(--background);
             font-weight: 500;
             text-transform: capitalize;
           }
@@ -55,7 +55,7 @@
 
         &__weekdays {
           padding-bottom: 10px;
-          border-bottom: 1px solid var(--grey);
+          border-bottom: 1px solid var(--grey2);
 
           &__weekday {
             display: flex;
@@ -71,7 +71,7 @@
 
         &__days {
           &__day {
-            border-bottom: 1px dashed var(--second);
+            border-bottom: 1px dashed var(--front);
             width: 50px;
             height: 50px;
             padding: 10px;
@@ -82,13 +82,13 @@
 
       &__tile--now {
         background-color: var(--third);
-        color: var(--white);
+        color: var(--background);
         font-weight: 500;
         border-bottom: 1px solid transparent;
       }
 
       &__tile--active {
-        color: var(--second);
+        color: var(--front);
         font-weight: 400;
         border-radius: 0;
       }

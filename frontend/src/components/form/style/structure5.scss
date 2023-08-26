@@ -28,7 +28,7 @@
 
   & select {
     width: 100%;
-    border: 1px solid var(--grey);
+    border: 1px solid var(--grey2);
     border-radius: 10px;
     height: 50px;
     padding-top: 24px;
@@ -50,7 +50,7 @@
     appearance: none;
     width: 1.1em;
     height: 1.1em;
-    border: 1px solid var(--grey);
+    border: 1px solid var(--grey2);
     border-radius: 30%;
     transform: translateY(0.2em);
     cursor: pointer;
@@ -73,7 +73,7 @@
   }
 
   & select + label {
-    color: var(--grey);
+    color: var(--grey2);
     font-size: 0.9rem;
     position: absolute;
     top: 10px;
@@ -81,7 +81,7 @@
   }
 
   & input[type="number"] {
-    border: 1px solid var(--grey);
+    border: 1px solid var(--grey2);
     border-radius: 10px;
     height: 100%;
     padding: 4px 1px 4px 4px;

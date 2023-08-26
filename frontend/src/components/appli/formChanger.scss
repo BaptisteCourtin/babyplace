@@ -19,11 +19,11 @@
 
       input:focus,
       input:valid {
-        color: var(--second);
+        color: var(--front);
       }
 
       input {
-        border: 3px solid var(--second);
+        border: 3px solid var(--front);
         background-color: transparent;
         border-radius: 10px;
         padding: 0.5rem;
@@ -45,7 +45,7 @@
             border-left: 3px solid var(--third);
             border-radius: 5px;
             line-height: 20px;
-            background-color: var(--white);
+            background-color: var(--background);
           }
         }
 
@@ -61,7 +61,7 @@
             border-left: 3px solid var(--green);
             border-radius: 5px;
             line-height: 20px;
-            background-color: var(--white);
+            background-color: var(--background);
             transition: 0s;
           }
         }
@@ -86,6 +86,8 @@
         position: absolute;
         right: 10px;
         top: 17px;
+
+        background: transparent;
       }
     }
   }

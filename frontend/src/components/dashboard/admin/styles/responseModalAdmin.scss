@@ -100,7 +100,7 @@
 
               #objet {
                 height: 30px;
-                border: solid 1px var(--grey);
+                border: solid 1px var(--grey2);
                 border-radius: 10px;
                 padding: 15px;
                 margin-bottom: 20px;
@@ -120,7 +120,7 @@
 
               #message {
                 height: 150px;
-                border: solid 1px var(--grey);
+                border: solid 1px var(--grey2);
                 border-radius: 10px;
                 padding: 15px;
               }
@@ -139,7 +139,7 @@
         padding: 5px 0;
         width: 20%;
         background-color: var(--seventh);
-        color: var(--white);
+        color: var(--background);
         font-weight: 500;
         border: 1px solid transparent;
         border-radius: 5px;
@@ -156,7 +156,7 @@
         padding: 5px 0;
         width: 20%;
         background-color: var(--fifth);
-        color: var(--white);
+        color: var(--background);
         font-weight: 500;
         border-radius: 5px;
         transition: 0.3s ease-in-out;

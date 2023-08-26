@@ -1,50 +1,36 @@
 @import url("https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@400;500;700&display=swap");
 
 :root {
-  // rename en light dark
-  --first-light: #4b5d68;
-  --second-light: #212353;
-  --third-light: #7e72f2;
-  --fourth-light: #f063a7;
-  --fifth-light: #2dcd7a;
-  --sixth-light: #ffa84c;
-  --seventh-light: #ef3672;
+  // light
+  --front-light: #212353;
+  --background-light: #f2f2f2;
 
-  --white-light: #f2f2f2;
-  --grey-light: #d6d6e0;
-  --gradient-light: linear-gradient(
+  --grey1-light: #4b5d68;
+  --grey2-light: #d6d6e0;
+
+  // dark
+  --front-dark: #f2f2f2;
+  --background-dark: #1f1f1f;
+
+  --grey1-dark: #d6d6e0;
+  --grey2-dark: #4b5d68;
+
+  // commun
+  --third: #7e72f2;
+  --fourth: #f063a7;
+  --fifth: #2dcd7a;
+  --sixth: #ffa84c;
+  --seventh: #ef3672;
+
+  --blue: #5555ff;
+  --green: #30c580;
+  --orange: #ffa500;
+
+  --gradient: linear-gradient(
     148.74deg,
     rgb(71, 79, 255) 2.49%,
     rgb(227, 122, 204) 99.05%
   );
-
-  --blue-light: #5555ff;
-  --green-light: #30c580;
-  --orange-light: #ffa500;
-
-  // ---
-
-  --first-dark: #8eaec1;
-  --second-dark: #999abd;
-  --third-dark: #7e72f2;
-  --fourth-dark: #f063a7;
-  --fifth-dark: #2dcd7a;
-  --sixth-dark: #ffa84c;
-  --seventh-dark: #ef3672;
-
-  --white-dark: #171717;
-  --grey-dark: #4a4a4a;
-  --gradient-dark: linear-gradient(
-    148.74deg,
-    rgb(71, 79, 255) 2.49%,
-    rgb(227, 122, 204) 99.05%
-  );
-
-  --blue-dark: #5555ff;
-  --green-dark: #30c580;
-  --orange-dark: #ffa500;
-
-  // ---
 
   --text: "Red Hat Text", sans-serif;
 
@@ -59,38 +45,18 @@
 
 // light theme
 :root {
-  --first: var(--first-light);
-  --second: var(--second-light);
-  --third: var(--third-light);
-  --fourth: var(--fourth-light);
-  --fifth: var(--fifth-light);
-  --sixth: var(--sixth-light);
-  --seventh: var(--seventh-light);
+  --front: var(--front-light);
+  --background: var(--background-light);
 
-  --white: var(--white-light);
-  --grey: var(--grey-light);
-  --gradient: var(--gradient-light);
-
-  --blue: var(--blue-light);
-  --green: var(--green-light);
-  --orange: var(--orange-light);
+  --grey1: var(--grey1-light);
+  --grey2: var(--grey2-light);
 }
 
 // dark theme
 .dark-theme {
-  --first: var(--first-dark);
-  --second: var(--second-dark);
-  --third: var(--third-dark);
-  --fourth: var(--fourth-dark);
-  --fifth: var(--fifth-dark);
-  --sixth: var(--sixth-dark);
-  --seventh: var(--seventh-dark);
+  --front: var(--front-dark);
+  --background: var(--background-dark);
 
-  --white: var(--white-dark);
-  --grey: var(--grey-dark);
-  --gradient: var(--gradient-dark);
-
-  --blue: var(--blue-dark);
-  --green: var(--green-dark);
-  --orange: var(--orange-dark);
+  --grey1: var(--grey1-dark);
+  --grey2: var(--grey2-dark);
 }

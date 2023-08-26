@@ -224,7 +224,7 @@
       padding: 25px 15px;
       background: var(--gradient);
       border-radius: 25px;
-      color: var(--white);
+      color: var(--background);
 
       & img {
         width: 130px;
@@ -261,7 +261,7 @@
         margin-top: 0;
         font-size: var(--h4);
         font-weight: 500;
-        color: var(--white);
+        color: var(--background);
         background-color: var(--third);
         border-radius: 5px;
       }
@@ -343,8 +343,8 @@
           padding: 5px;
           font-size: var(--h4);
           background: var(--third);
-          color: var(--white);
-          border: 3px solid var(--white);
+          color: var(--background);
+          border: 3px solid var(--background);
           outline: 3px solid var(--third);
           border-radius: 5px;
 

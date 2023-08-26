@@ -2,7 +2,7 @@
   & textarea {
     width: 80%;
     height: 30vh;
-    border: 1px solid var(--grey);
+    border: 1px solid var(--grey2);
     border-radius: 10px;
     margin: 2vh 10% 0;
     resize: none;
@@ -11,7 +11,7 @@
 
   & legend {
     text-align: center;
-    color: var(--grey);
+    color: var(--grey2);
   }
 
   & textarea:focus {

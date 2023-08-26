@@ -48,7 +48,7 @@
         width: fit-content;
         margin-bottom: 10px;
         margin-left: 20px;
-        border-bottom: 1px solid var(--second);
+        border-bottom: 1px solid var(--front);
         font-weight: 500;
 
         &:first-of-type {
@@ -69,12 +69,12 @@
     border-radius: 50px;
     font-size: var(--h4);
     font-weight: 700;
-    color: var(--white);
+    color: var(--background);
     transition: 0.3s ease-in-out;
 
     &:hover {
       color: var(--third);
-      background-color: var(--white);
+      background-color: var(--background);
       border: 1px solid var(--third);
     }
   }

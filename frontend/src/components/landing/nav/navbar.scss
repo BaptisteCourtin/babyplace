@@ -35,7 +35,7 @@
     font-weight: 700;
 
     &:hover {
-      border-bottom: 1px solid var(--first);
+      border-bottom: 1px solid var(--front);
     }
   }
 
@@ -44,7 +44,7 @@
     transition: 0.3s ease-in-out;
 
     &:hover {
-      border-bottom: 1px solid var(--first);
+      border-bottom: 1px solid var(--front);
     }
   }
 
@@ -106,14 +106,14 @@
 
       &:first-of-type {
         background-color: var(--third);
-        color: var(--white);
+        color: var(--background);
         font-weight: 500;
         transition: 0.3s ease-in-out;
 
         &:hover {
           background: none;
           border: 1px solid var(--third);
-          color: var(--second);
+          color: var(--front);
         }
       }
 

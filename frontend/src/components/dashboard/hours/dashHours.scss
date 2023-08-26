@@ -70,7 +70,7 @@
 
           & .selected {
             background-color: var(--third);
-            color: var(--white);
+            color: var(--background);
           }
 
           & label {
@@ -137,8 +137,8 @@
         bottom: 20px;
         padding: 10px 40px;
         background: var(--third);
-        color: var(--white);
-        border: 2px solid var(--white);
+        color: var(--background);
+        border: 2px solid var(--background);
         outline: 2px solid var(--third);
         border-radius: 5px;
         font-size: var(--h4);
@@ -163,8 +163,8 @@
         align-items: center;
         justify-content: center;
         background: var(--third);
-        color: var(--white);
-        border: 2px solid var(--white);
+        color: var(--background);
+        border: 2px solid var(--background);
         outline: 2px solid var(--third);
         font-weight: 500;
         font-size: var(--h4);
@@ -329,14 +329,14 @@
             appearance: none;
             width: 20px;
             height: 20px;
-            border: 1px solid var(--grey);
+            border: 1px solid var(--grey2);
             border-radius: 5px;
             transform: translateY(0.2em);
             cursor: pointer;
           }
 
           & input:checked {
-            background-color: var(--white);
+            background-color: var(--background);
             position: relative;
 
             &:before {
@@ -347,7 +347,7 @@
               justify-content: center;
               content: "\2713";
               border-radius: 5px;
-              color: var(--white);
+              color: var(--background);
               background-color: var(--third);
               font-weight: 700;
             }

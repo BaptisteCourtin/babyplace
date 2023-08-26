@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: var(--second);
+  color: var(--front);
 
   & button {
     background: none;
@@ -44,14 +44,14 @@
 
         &:first-of-type {
           background-color: var(--third);
-          color: var(--white);
+          color: var(--background);
           font-weight: 500;
           transition: 0.3s ease-in-out;
 
           &:hover {
             background: none;
             border: 1px solid var(--third);
-            color: var(--second);
+            color: var(--front);
           }
         }
       }

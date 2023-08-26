@@ -7,6 +7,8 @@ hr {
   padding: 100px 0 20px;
   width: 80%;
   margin: 0 auto;
+  background-color: var(--background);
+  color: var(--front);
 
   & .footerTop {
     display: grid;
@@ -22,7 +24,7 @@ hr {
       & p {
         &:last-of-type {
           margin-top: 10px;
-          color: var(--first);
+          color: var(--front);
           font-size: var(--normal);
         }
       }
@@ -41,13 +43,13 @@ hr {
 
         &:first-of-type {
           background-color: var(--fourth);
-          color: var(--white);
+          color: var(--background);
           transition: 0.3s ease-in-out;
 
           &:hover {
             border: 1px solid var(--fourth);
             background-color: transparent;
-            color: var(--second);
+            color: var(--front);
           }
         }
 
@@ -123,7 +125,7 @@ hr {
           transition: 0.3s ease-in-out;
 
           &:hover {
-            border-bottom: 1px solid var(--second);
+            border-bottom: 1px solid var(--front);
           }
         }
 
@@ -141,8 +143,8 @@ hr {
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background-color: var(--grey);
-            color: var(--white);
+            background-color: var(--grey2);
+            color: var(--background);
             font-size: var(--h4);
 
             &:hover {
@@ -189,7 +191,7 @@ hr {
     & button {
       width: 45px;
       height: 40px;
-      color: var(--white);
+      color: var(--background);
       background: none;
       font-size: var(--h4);
       display: flex;

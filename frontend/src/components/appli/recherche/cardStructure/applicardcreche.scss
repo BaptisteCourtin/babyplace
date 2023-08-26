@@ -7,7 +7,7 @@
   align-items: center;
 
   header {
-    color: var(--white);
+    color: var(--background);
     font-size: var(--h3);
     font-weight: 500;
     max-width: 500px;
@@ -17,7 +17,7 @@
   }
 
   main {
-    background-color: var(--white);
+    background-color: var(--background);
     border-radius: 20px;
     margin: 1.5rem 0;
     position: relative;
@@ -39,7 +39,7 @@
         left: 10px;
 
         background-color: red;
-        color: var(--white);
+        color: var(--background);
         border-radius: 10px;
         padding: 0.5rem;
 
@@ -104,7 +104,7 @@
 
       .envoie-mess {
         background: var(--gradient);
-        color: var(--white);
+        color: var(--background);
         font-size: var(--h4);
         font-weight: 500;
         border-radius: 10px;

@@ -59,14 +59,14 @@
         border: 1px solid transparent;
         border-radius: 50px;
         background-color: var(--third);
-        color: var(--white);
+        color: var(--background);
         font-weight: 500;
         transition: 0.3s ease-in-out;
 
         &:hover {
           background: none;
           border: 1px solid var(--third);
-          color: var(--second);
+          color: var(--front);
         }
       }
     }

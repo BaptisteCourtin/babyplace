@@ -83,11 +83,11 @@
 
         & .selected {
           background-color: var(--third);
-          color: var(--white);
+          color: var(--background);
 
           & #btn-affiche-con {
             &:hover {
-              color: var(--white);
+              color: var(--background);
             }
           }
         }

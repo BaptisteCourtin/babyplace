@@ -4,7 +4,7 @@
   button {
     background-color: var(--third);
     border-radius: 10px;
-    color: var(--white);
+    color: var(--background);
     font-weight: 500;
     font-size: var(--h3);
     width: 100%;
@@ -33,8 +33,8 @@
     width: calc(100% - 1rem);
     max-height: 700px;
     padding: 1rem 2rem;
-    background-color: var(--white);
-    color: var(--second);
+    background-color: var(--background);
+    color: var(--front);
     overflow-y: auto;
 
     display: flex;
@@ -44,9 +44,9 @@
 
     .retour {
       background: transparent;
-      color: var(--second);
+      color: var(--front);
       font-size: 1rem;
-      border: 1px solid var(--second);
+      border: 1px solid var(--front);
       width: max-content;
       height: 50px;
       position: absolute;

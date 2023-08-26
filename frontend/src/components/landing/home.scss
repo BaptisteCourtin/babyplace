@@ -5,7 +5,7 @@
 .home {
   width: 80%;
   margin: 0 auto;
-  color: var(--second);
+  color: var(--front);
 
   & h2 {
     padding: 30px 0;
@@ -165,7 +165,7 @@
             transition: 0.3s ease-in-out;
 
             &:hover {
-              border-bottom: 1px solid var(--second);
+              border-bottom: 1px solid var(--front);
             }
           }
         }
@@ -200,7 +200,7 @@
     & h2 {
       margin-bottom: 50px;
       font-size: 40px;
-      color: var(--white);
+      color: var(--background);
     }
   }
 
@@ -218,7 +218,7 @@
       height: 230px;
       position: relative;
       padding: 50px 70px;
-      background-color: var(--white);
+      background-color: var(--background);
       border-radius: 20px;
 
       & p {
@@ -251,7 +251,7 @@
     right: 10%;
     background: none;
     font-size: 40px;
-    color: var(--white);
+    color: var(--background);
   }
 }
 

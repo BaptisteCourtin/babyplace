@@ -72,7 +72,7 @@
             width: 150px;
             height: 40px;
             background-color: var(--fifth);
-            color: var(--white);
+            color: var(--background);
             font-weight: 500;
             border: 1px solid transparent;
             border-radius: 5px;
@@ -90,7 +90,7 @@
             width: 150px;
             height: 40px;
             background-color: var(--seventh);
-            color: var(--white);
+            color: var(--background);
             font-weight: 500;
             border: 1px solid transparent;
             border-radius: 5px;
@@ -133,7 +133,7 @@
       a {
         width: 350px;
         padding: 8px 15px 15px 15px;
-        color: var(--white);
+        color: var(--background);
         font-size: var(--normal);
         font-weight: 500;
 
@@ -151,7 +151,7 @@
 
       & button {
         background: none;
-        color: var(--white);
+        color: var(--background);
         font-weight: 500;
       }
     }

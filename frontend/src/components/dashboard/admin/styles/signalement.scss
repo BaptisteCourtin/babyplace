@@ -94,7 +94,7 @@
             width: 175px;
             height: 40px;
             background-color: var(--fifth);
-            color: var(--white);
+            color: var(--background);
             font-weight: 500;
             border: 1px solid transparent;
             border-radius: 5px;
@@ -112,7 +112,7 @@
             width: 175px;
             height: 40px;
             background-color: var(--sixth);
-            color: var(--white);
+            color: var(--background);
             font-weight: 500;
             border: 1px solid transparent;
             border-radius: 5px;
@@ -134,7 +134,7 @@
             width: 175px;
             height: 40px;
             background-color: var(--seventh);
-            color: var(--white);
+            color: var(--background);
             font-weight: 500;
             border: 1px solid transparent;
             border-radius: 5px;
@@ -170,7 +170,7 @@
     }
 
     & li {
-      color: var(--white);
+      color: var(--background);
       font-size: var(--normal);
       font-weight: 500;
     }

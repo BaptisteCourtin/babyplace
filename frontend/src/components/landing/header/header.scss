@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: center;
   gap: 40px;
+  background-color: var(--background);
 
   & .leftPart {
     display: flex;
@@ -17,7 +18,7 @@
       width: 80%;
       font-size: 2.5rem;
       font-family: var(--text);
-      color: var(--second);
+      color: var(--front);
     }
 
     & .headerInputs {
@@ -32,7 +33,7 @@
         position: relative;
         border-radius: 50px;
         background-color: var(--third);
-        color: var(--white);
+        color: var(--background);
         grid-area: button;
         cursor: pointer;
 
@@ -105,7 +106,7 @@
     & button {
       padding: 10px 25px 10px 25px;
       background: var(--third);
-      color: var(--white);
+      color: var(--background);
       border: 1px solid transparent;
       border-radius: 50px;
       font-weight: 500;
@@ -114,7 +115,7 @@
 
       &:hover {
         background: none;
-        color: var(--second);
+        color: var(--front);
         border: 1px solid var(--third);
       }
     }
