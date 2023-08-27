@@ -150,6 +150,9 @@
 
         .delete-conf {
           color: red;
+          border: 1px red solid;
+          border-radius: 10px;
+          padding: 0.5rem;
         }
       }
     }

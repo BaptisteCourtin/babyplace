@@ -54,7 +54,8 @@ hr {
         }
 
         &:last-of-type {
-          background: none;
+          background: var(--background-light);
+          color: var(--front-light);
           box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
           transition: 0.3s ease-in-out;
 
@@ -84,6 +85,7 @@ hr {
         justify-content: space-between;
         cursor: pointer;
         gap: 15px;
+        background: var(--background);
 
         #logoCoeur {
           width: 17%;

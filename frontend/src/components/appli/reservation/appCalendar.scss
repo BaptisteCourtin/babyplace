@@ -97,7 +97,10 @@
         font-weight: 500;
 
         img {
-          width: 40px;
+          width: 50px;
+          padding: 0.5rem;
+          border-radius: 10px;
+          background-color: var(--background-light);
         }
       }
     }
@@ -118,6 +121,7 @@
         input {
           padding: 0.25rem 0;
           border-radius: 10px;
+          color: var(--front-light);
         }
       }
     }

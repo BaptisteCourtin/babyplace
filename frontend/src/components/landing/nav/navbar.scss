@@ -62,6 +62,7 @@
       text-align: left;
       padding: 10px 25px 10px 25px;
       background: #ffffff;
+      color: var(--front-light);
       box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
       border: 1px solid transparent;
       border-radius: 50px;
@@ -125,6 +126,8 @@
         box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
         border: 1px solid transparent;
         transition: 0.3s ease-in-out;
+        background-color: var(--background-light);
+        color: var(--front-light);
 
         & span {
           font-size: var(--h4);

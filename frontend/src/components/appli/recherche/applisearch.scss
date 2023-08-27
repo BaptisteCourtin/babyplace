@@ -12,14 +12,13 @@
     }
 
     .appli-filtres {
-      margin-top: 1rem;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
 
       width: 100%;
-      padding: 0.5rem;
+      padding: 1rem 0.5rem;
       background-color: var(--grey2);
 
       .left-filter {
@@ -37,9 +36,14 @@
           justify-content: center;
           align-items: center;
           height: 100%;
+          color: var(--front-light);
 
           span {
             margin-right: 0.25rem;
+
+            &.text {
+              color: var(--front);
+            }
           }
         }
 
