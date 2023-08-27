@@ -60,7 +60,8 @@
     flex-wrap: wrap;
 
     & button {
-      background-color: #f2f2f2;
+      background-color: var(--background-light);
+      color: var(--front-light);
       width: fit-content;
       min-width: 140px;
       height: 40px;
@@ -73,7 +74,7 @@
 
     & .selected {
       background-color: var(--third);
-      color: white;
+      color: var(--background-light);
     }
   }
 

@@ -3,7 +3,7 @@
   height: 85vh;
   padding: 2vh 3vh;
   margin: 0 auto;
-  background-color: #f9f9f9;
+  background-color: var(--background);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -43,7 +43,7 @@
       height: fit-content;
       margin-top: 17vh;
       padding: 8px;
-      background-color: #fff;
+      background-color: var(--background);
       flex: 1;
 
       & .etape1 {
@@ -67,7 +67,7 @@
     }
 
     & .choixResa {
-      background-color: #fff;
+      background-color: var(--background);
       margin-bottom: 1vw;
       min-height: 20vh;
       height: fit-content;
@@ -99,7 +99,7 @@
       & .lienChoixResa {
         color: var(--third);
         width: fit-content;
-        background-color: #fff;
+        background-color: var(--background);
         border: none;
         font-size: 1.1rem;
         font-weight: 500;
@@ -120,7 +120,7 @@
       display: flex;
       gap: 2vw;
       margin-bottom: 6vh;
-      background-color: #fff;
+      background-color: var(--background);
       margin-top: 6vh;
       flex: 1;
       max-width: 22%;

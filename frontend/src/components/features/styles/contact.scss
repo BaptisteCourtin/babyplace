@@ -48,6 +48,12 @@
         column-gap: 100px;
         width: 100%;
 
+        input,
+        textarea {
+          background-color: transparent;
+          resize: none;
+        }
+
         .divName {
           grid-column: 1;
           grid-row: 1;
@@ -128,6 +134,10 @@
             border: solid 1px var(--grey2);
             border-radius: 10px;
             padding: 0px 15px;
+
+            option {
+              background-color: var(--background);
+            }
           }
         }
 

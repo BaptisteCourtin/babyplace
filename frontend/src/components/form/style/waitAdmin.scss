@@ -1,15 +1,14 @@
 .pageWait {
   max-width: 1000px;
   margin: 0 auto;
-  height: 97vh;
+  height: 100vh;
 
   .logoWait {
-    height: 4vh;
-    padding: 0 8px;
+    height: 7vh;
+    padding: 3vh 8px 0 0;
     display: flex;
     gap: 8px;
     margin: auto;
-    margin-top: 3vh;
 
     & img {
       max-height: 100%;
@@ -24,7 +23,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    background-color: #f9f9f9;
+    background-color: var(--background);
     text-align: center;
 
     & h1 {
