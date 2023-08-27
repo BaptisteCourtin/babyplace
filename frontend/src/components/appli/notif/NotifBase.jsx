@@ -13,6 +13,7 @@ function NotifBase({ setCompo, allReservation, setOneReservation }) {
         <a
           href="https://www.pajemploi.urssaf.fr/pajewebinfo/cms/sites/pajewebinfo/accueil.html"
           target="_blank"
+          rel="noreferrer"
         >
           <div className="card-notif">
             <p>Pensez à faire la déclaration PAJEMPLOI</p>

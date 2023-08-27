@@ -20,7 +20,7 @@
     border-radius: 500px;
     height: 30px;
     width: 70px;
-    background: $grey;
+    background: var(--grey2);
 
     .ball {
       background-color: white;
@@ -34,7 +34,7 @@
   }
 
   input.input-toggle:checked + .toggle {
-    background: $gradient;
+    background: var(--gradient);
   }
 
   input.input-toggle:checked + .toggle .ball {

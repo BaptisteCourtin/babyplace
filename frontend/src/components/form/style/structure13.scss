@@ -10,7 +10,7 @@
       appearance: none;
       width: 1.1em;
       height: 1.1em;
-      border: 1px solid $grey;
+      border: 1px solid var(--grey2);
       border-radius: 30%;
       transform: translateY(0.2em);
       cursor: pointer;
@@ -25,7 +25,7 @@
         content: "\2713";
         padding: 0 2px;
         display: block;
-        color: $third;
+        color: var(--third);
         font-size: initial;
         font-weight: 800;
         position: absolute;
@@ -38,7 +38,7 @@
   }
 
   & .purpleText {
-    color: $third;
+    color: var(--third);
     font-weight: 500;
   }
 
@@ -50,7 +50,7 @@
     margin: 1vh 0;
 
     & input[type="number"] {
-      border: 1px solid $third;
+      border: 1px solid var(--third);
       border-radius: 10px;
       padding: 4px 1px 4px 4px;
       margin: 0 8px;
@@ -58,7 +58,7 @@
     }
 
     & input[type="number"]:focus {
-      outline: 1.5px solid $third;
+      outline: 1.5px solid var(--third);
     }
 
     & label {

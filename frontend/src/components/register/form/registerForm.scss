@@ -6,23 +6,23 @@
   width: clamp(200px, 80vw, 600px);
   height: 400px;
   margin: 20vh auto;
-  box-shadow: 2px 2px 6px $grey;
+  box-shadow: 2px 2px 6px var(--grey2);
   text-align: center;
   background-color: #ffffff;
 
   & h2 {
-    color: $third;
-    font-size: $h2;
-    font-family: $text;
+    color: var(--third);
+    font-size: var(--h2);
+    font-family: var(--text);
   }
 
   & h4 {
-    font-size: $h4;
+    font-size: var(--h4);
   }
 
   & a {
     font-weight: 600;
-    color: $third;
+    color: var(--third);
 
     &:hover {
       text-decoration: underline;
@@ -33,21 +33,21 @@
   button {
     width: 150px;
     height: 40px;
-    color: $white;
-    background: $third;
-    font-size: $h4;
+    color: var(--background);
+    background: var(--third);
+    font-size: var(--h4);
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50px;
     margin: 4px;
     padding: 8px;
-    border: 1px solid $grey;
+    border: 1px solid var(--grey2);
     transition: 0.3s ease-in-out;
   }
 
   & button:hover {
-    box-shadow: 2px 2px 6px $grey;
+    box-shadow: 2px 2px 6px var(--grey2);
   }
 }
 
@@ -64,20 +64,20 @@
     right: 20px;
 
     & a {
-      color: $third;
+      color: var(--third);
       font-weight: 700;
       border-bottom: 1px solid transparent;
       transition: 0.3s ease-in-out;
 
       &:hover {
-        border-bottom: 1px solid $third;
+        border-bottom: 1px solid var(--third);
       }
     }
   }
 
   & h2 {
     font-weight: 500;
-    font-size: $h3;
+    font-size: var(--h3);
     margin-bottom: 30px;
   }
 
@@ -90,12 +90,13 @@
 
     & input:not([type="checkbox"]) {
       padding: 10px 15px;
-      border: 1px solid $grey;
+      border: 1px solid var(--grey2);
       border-radius: 5px;
       outline: none;
+      background-color: transparent;
 
       &:focus {
-        border: 1px solid $third;
+        border: 1px solid var(--third);
       }
     }
 
@@ -115,8 +116,8 @@
         padding: 0;
         right: 15px;
         background: none;
-        color: $second;
-        font-size: $normal;
+        color: var(--front);
+        font-size: var(--normal);
       }
     }
 
@@ -124,7 +125,7 @@
       display: flex;
       align-items: center;
       gap: 3px;
-      font-size: $xs;
+      font-size: var(--xs);
       margin-top: -10px;
     }
 
@@ -136,10 +137,10 @@
 
     & .btnSubmit {
       margin-top: 10px;
-      background: $third;
-      color: $white;
+      background: var(--third);
+      color: var(--background);
       padding: 10px 0;
-      font-size: $h3;
+      font-size: var(--h3);
       font-weight: 700;
       border: 1px solid transparent;
       border-radius: 5px;
@@ -147,13 +148,13 @@
 
       &:hover {
         background: transparent;
-        color: $third;
-        border: 1px solid $third;
+        color: var(--third);
+        border: 1px solid var(--third);
       }
 
       &:disabled:hover {
-        background: $third;
-        color: $white;
+        background: var(--third);
+        color: var(--background);
       }
     }
   }

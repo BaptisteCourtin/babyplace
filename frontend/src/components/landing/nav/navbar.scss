@@ -35,7 +35,7 @@
     font-weight: 700;
 
     &:hover {
-      border-bottom: 1px solid $first;
+      border-bottom: 1px solid var(--front);
     }
   }
 
@@ -44,7 +44,7 @@
     transition: 0.3s ease-in-out;
 
     &:hover {
-      border-bottom: 1px solid $first;
+      border-bottom: 1px solid var(--front);
     }
   }
 
@@ -62,6 +62,7 @@
       text-align: left;
       padding: 10px 25px 10px 25px;
       background: #ffffff;
+      color: var(--front-light);
       box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
       border: 1px solid transparent;
       border-radius: 50px;
@@ -70,22 +71,22 @@
       & div {
         & span {
           &:first-of-type {
-            font-size: $normal;
+            font-size: var(--normal);
           }
 
           &:nth-of-type(2) {
-            font-size: $xs;
+            font-size: var(--xs);
           }
         }
       }
 
       .arrow {
-        font-size: $h4;
-        color: $third;
+        font-size: var(--h4);
+        color: var(--third);
       }
 
       &:hover {
-        border: 1px solid $third;
+        border: 1px solid var(--third);
         box-shadow: none;
       }
     }
@@ -97,7 +98,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: $h1;
+    gap: var(--h1);
 
     & a {
       padding: 10px 25px 10px 25px;
@@ -105,15 +106,15 @@
       border-radius: 50px;
 
       &:first-of-type {
-        background-color: $third;
-        color: $white;
+        background-color: var(--third);
+        color: var(--background);
         font-weight: 500;
         transition: 0.3s ease-in-out;
 
         &:hover {
           background: none;
-          border: 1px solid $third;
-          color: $second;
+          border: 1px solid var(--third);
+          color: var(--front);
         }
       }
 
@@ -125,14 +126,16 @@
         box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
         border: 1px solid transparent;
         transition: 0.3s ease-in-out;
+        background-color: var(--background-light);
+        color: var(--front-light);
 
         & span {
-          font-size: $h4;
-          color: $third;
+          font-size: var(--h4);
+          color: var(--third);
         }
 
         &:hover {
-          border: 1px solid $third;
+          border: 1px solid var(--third);
           box-shadow: none;
         }
       }

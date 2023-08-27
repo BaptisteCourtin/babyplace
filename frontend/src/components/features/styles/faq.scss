@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: $second;
+  color: var(--front);
 
   section {
     padding-top: 40px;
@@ -24,11 +24,11 @@
 
     li {
       font-weight: 600;
-      color: $third;
+      color: var(--third);
     }
 
     :hover {
-      color: $fourth;
+      color: var(--fourth);
     }
   }
 
@@ -47,10 +47,10 @@
     a {
       font-weight: 600;
 
-      color: $third;
+      color: var(--third);
 
       &:hover {
-        color: $fourth;
+        color: var(--fourth);
       }
     }
   }

@@ -20,7 +20,7 @@
     width: 60%;
 
     h4 {
-      font-size: $h4;
+      font-size: var(--h4);
     }
 
     p {
@@ -36,7 +36,7 @@
   .note {
     display: flex;
     justify-content: center;
-    background-color: $third;
+    background-color: var(--third);
     border-radius: 10px;
     width: 45px;
     padding: 0.25rem 0;

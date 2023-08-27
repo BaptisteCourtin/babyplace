@@ -63,8 +63,8 @@
       #btnRepondre {
         padding: 5px 0;
         width: 300px;
-        background-color: $fifth;
-        color: $white;
+        background-color: var(--fifth);
+        color: var(--background);
         font-weight: 500;
         border-radius: 5px;
         transition: 0.3s ease-in-out;
@@ -72,26 +72,26 @@
         border-radius: 5px;
 
         &:hover {
-          border: 1px solid $fifth;
+          border: 1px solid var(--fifth);
           background-color: transparent;
-          color: $fifth;
+          color: var(--fifth);
         }
       }
 
       #btnDelete {
         padding: 5px 0;
         width: 300px;
-        background-color: $seventh;
-        color: $white;
+        background-color: var(--seventh);
+        color: var(--background);
         font-weight: 500;
         border: 1px solid transparent;
         border-radius: 5px;
         transition: 0.3s ease-in-out;
 
         &:hover {
-          border: 1px solid $seventh;
+          border: 1px solid var(--seventh);
           background-color: transparent;
-          color: $seventh;
+          color: var(--seventh);
         }
       }
     }

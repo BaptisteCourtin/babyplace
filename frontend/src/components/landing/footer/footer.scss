@@ -1,12 +1,14 @@
 hr {
   height: 1px;
-  background-color: $third;
+  background-color: var(--third);
 }
 
 .footer {
   padding: 100px 0 20px;
   width: 80%;
   margin: 0 auto;
+  background-color: var(--background);
+  color: var(--front);
 
   & .footerTop {
     display: grid;
@@ -22,8 +24,8 @@ hr {
       & p {
         &:last-of-type {
           margin-top: 10px;
-          color: $first;
-          font-size: $normal;
+          color: var(--front);
+          font-size: var(--normal);
         }
       }
     }
@@ -40,31 +42,32 @@ hr {
         border-radius: 50px;
 
         &:first-of-type {
-          background-color: $fourth;
-          color: $white;
+          background-color: var(--fourth);
+          color: var(--background);
           transition: 0.3s ease-in-out;
 
           &:hover {
-            border: 1px solid $fourth;
+            border: 1px solid var(--fourth);
             background-color: transparent;
-            color: $second;
+            color: var(--front);
           }
         }
 
         &:last-of-type {
-          background: none;
+          background: var(--background-light);
+          color: var(--front-light);
           box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
           transition: 0.3s ease-in-out;
 
           &:hover {
-            border: 1px solid $third;
+            border: 1px solid var(--third);
             box-shadow: none;
           }
         }
 
         & span {
-          font-size: $h4;
-          color: $third;
+          font-size: var(--h4);
+          color: var(--third);
         }
       }
     }
@@ -82,6 +85,7 @@ hr {
         justify-content: space-between;
         cursor: pointer;
         gap: 15px;
+        background: var(--background);
 
         #logoCoeur {
           width: 17%;
@@ -95,12 +99,12 @@ hr {
 
       & .footerAddress {
         margin: 30px 0 10px;
-        font-size: $h4;
+        font-size: var(--h4);
         line-height: 1.5;
       }
 
       & .footerMail {
-        font-size: $small;
+        font-size: var(--small);
       }
     }
 
@@ -123,7 +127,7 @@ hr {
           transition: 0.3s ease-in-out;
 
           &:hover {
-            border-bottom: 1px solid $second;
+            border-bottom: 1px solid var(--front);
           }
         }
 
@@ -141,9 +145,9 @@ hr {
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background-color: $grey;
-            color: $white;
-            font-size: $h4;
+            background-color: var(--grey2);
+            color: var(--background);
+            font-size: var(--h4);
 
             &:hover {
               border-bottom: 1px solid transparent;
@@ -163,13 +167,13 @@ hr {
         #iconFooter {
           width: 40px;
           height: 40px;
-          color: $third;
+          color: var(--third);
         }
 
         #iconFooter2 {
           width: 45px;
           height: 45px;
-          color: $third;
+          color: var(--third);
         }
       }
     }
@@ -183,15 +187,15 @@ hr {
     line-height: 1.5;
 
     & p {
-      font-size: $xs;
+      font-size: var(--xs);
     }
 
     & button {
       width: 45px;
       height: 40px;
-      color: $white;
+      color: var(--background);
       background: none;
-      font-size: $h4;
+      font-size: var(--h4);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -217,7 +221,7 @@ hr {
       #chevronUp {
         width: 100%;
         height: 100%;
-        color: $third;
+        color: var(--third);
       }
     }
   }

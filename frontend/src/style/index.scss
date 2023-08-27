@@ -1,6 +1,8 @@
 @import "./variables.scss";
 @import "./reset.scss";
 
+@import "../components/toggleDarkLight.scss";
+
 // --- page de base + login (dashboard + admin + formulaire) ---
 @import "../components/landing/home.scss";
 @import "../components/register/register.scss";

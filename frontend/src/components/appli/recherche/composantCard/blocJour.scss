@@ -5,7 +5,7 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
-  color: $white;
+  color: var(--background);
 
   .each-jour {
     width: 70px;
@@ -13,11 +13,11 @@
   }
 
   .daygreen .each-jour {
-    background-color: $fifth;
+    background-color: var(--fifth);
     text-align: center;
   }
   .daygray .each-jour {
-    background-color: $grey;
+    background-color: var(--grey2);
     text-align: center;
   }
 }
@@ -39,15 +39,15 @@
   }
 
   .daygreen .each-jour {
-    background-color: $fifth;
+    background-color: var(--fifth);
     line-height: 25px;
     text-align: center;
-    color: $white;
+    color: var(--background);
   }
   .daygray .each-jour {
-    background-color: $grey;
+    background-color: var(--grey2);
     line-height: 25px;
     text-align: center;
-    color: $white;
+    color: var(--background);
   }
 }

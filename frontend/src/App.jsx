@@ -38,8 +38,12 @@ import Admin from "@pages/Admin";
 import WaitAdmin from "@pages/WaitAdmin";
 import MessageAdmin from "@components/dashboard/admin/MessageAdmin";
 import Signalement from "@components/dashboard/admin/Signalement";
+import ToggleDarkLight from "./components/ToggleDarkLight";
 
 function App() {
+  // dark light
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
+
   // formulaire
   const [userEmail, setUserEmail] = useState("test@test.com");
   const [structureId, setStructureId] = useState(666);
@@ -54,7 +58,7 @@ function App() {
   }, []);
 
   return (
-    <div className="app">
+    <div className={isDarkTheme ? "dark-theme app" : "app"}>
       <UserEmailContext.Provider
         value={{ userEmail, setUserEmail, structureId, setStructureId }}
       >
@@ -104,6 +108,10 @@ function App() {
             <Route path="/admin/signalements" element={<Signalement />} />
             <Route path="/admin/messages" element={<MessageAdmin />} />
           </Routes>
+          <ToggleDarkLight
+            isDarkTheme={isDarkTheme}
+            setIsDarkTheme={setIsDarkTheme}
+          />
         </FamilleContext.Provider>
       </UserEmailContext.Provider>
     </div>

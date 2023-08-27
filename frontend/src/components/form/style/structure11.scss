@@ -8,7 +8,7 @@
     border-radius: 5px;
 
     & h2 {
-      font-size: $h2;
+      font-size: var(--h2);
       font-weight: 500;
       margin-left: 20px;
     }
@@ -24,8 +24,8 @@
 
         &__arrow {
           background: none;
-          color: $third;
-          font-size: $h2;
+          color: var(--third);
+          font-size: var(--h2);
         }
 
         &__prev2-button {
@@ -34,12 +34,12 @@
 
         &__label {
           flex-grow: 0 !important;
-          background: $third;
+          background: var(--third);
           padding: 5px 10px;
           border-radius: 5px;
 
           & span {
-            color: $white;
+            color: var(--background);
             font-weight: 500;
             text-transform: capitalize;
           }
@@ -55,7 +55,7 @@
 
         &__weekdays {
           padding-bottom: 10px;
-          border-bottom: 1px solid $grey;
+          border-bottom: 1px solid var(--grey2);
 
           &__weekday {
             display: flex;
@@ -71,7 +71,7 @@
 
         &__days {
           &__day {
-            border-bottom: 1px dashed $second;
+            border-bottom: 1px dashed var(--front);
             width: 50px;
             height: 50px;
             padding: 10px;
@@ -81,21 +81,21 @@
       }
 
       &__tile--now {
-        background-color: $third;
-        color: $white;
+        background-color: var(--third);
+        color: var(--background);
         font-weight: 500;
         border-bottom: 1px solid transparent;
       }
 
       &__tile--active {
-        color: $second;
+        color: var(--front);
         font-weight: 400;
         border-radius: 0;
       }
 
       & .select {
         background-color: #f0f0f0;
-        color: $fourth;
+        color: var(--fourth);
         font-weight: 500;
         text-decoration: line-through;
       }

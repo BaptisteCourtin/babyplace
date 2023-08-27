@@ -38,11 +38,11 @@
   }
 
   & input::file-selector-button {
-    border: 2px solid $third;
+    border: 2px solid var(--third);
     border-radius: 10px;
     height: 40px;
     background-color: white;
-    color: $third;
+    color: var(--third);
     font-weight: 600;
     width: fit-content;
   }

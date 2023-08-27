@@ -25,10 +25,9 @@ section {
 
 html {
   scroll-behavior: smooth;
-  font-size: $normal;
-  font-family: $text;
-  color: $second;
-  background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
+  font-size: var(--normal);
+  font-family: var(--text);
+  color: var(--front);
   cursor: default;
   min-height: 100vh;
 }
@@ -36,6 +35,11 @@ html {
 body {
   line-height: 1;
   min-height: 100%;
+}
+
+.app {
+  background-color: var(--background);
+  color: var(--front);
 }
 
 button {

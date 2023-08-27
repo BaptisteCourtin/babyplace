@@ -1,11 +1,13 @@
 .admin {
+  min-height: 100vh;
+
   & .adminSection {
     padding: 15px;
     gap: 30px;
 
     & h2 {
       margin-bottom: 20px;
-      font-size: $h2;
+      font-size: var(--h2);
       font-weight: 700;
     }
 
@@ -24,7 +26,7 @@
         grid-row-gap: 0px;
         align-items: center;
         padding: 20px;
-        border: 2px solid $third;
+        border: 2px solid var(--third);
         border-radius: 5px;
 
         & .adminSectionImg {
@@ -34,7 +36,7 @@
             margin-bottom: 5px;
             width: 75px;
             height: 75px;
-            border: 1px solid $third;
+            border: 1px solid var(--third);
             border-radius: 50%;
             object-fit: cover;
           }
@@ -71,17 +73,17 @@
             padding: 5px 0;
             width: 150px;
             height: 40px;
-            background-color: $fifth;
-            color: $white;
+            background-color: var(--fifth);
+            color: var(--background);
             font-weight: 500;
             border: 1px solid transparent;
             border-radius: 5px;
             transition: 0.3s ease-in-out;
 
             &:hover {
-              border: 1px solid $fifth;
+              border: 1px solid var(--fifth);
               background-color: transparent;
-              color: $fifth;
+              color: var(--fifth);
             }
           }
 
@@ -89,17 +91,17 @@
             padding: 5px 0;
             width: 150px;
             height: 40px;
-            background-color: $seventh;
-            color: $white;
+            background-color: var(--seventh);
+            color: var(--background);
             font-weight: 500;
             border: 1px solid transparent;
             border-radius: 5px;
             transition: 0.3s ease-in-out;
 
             &:hover {
-              border: 1px solid $seventh;
+              border: 1px solid var(--seventh);
               background-color: transparent;
-              color: $seventh;
+              color: var(--seventh);
             }
           }
         }
@@ -109,7 +111,7 @@
 }
 
 .adminNav {
-  background: $third;
+  background: var(--third);
   border: none;
 
   & ul {
@@ -133,8 +135,8 @@
       a {
         width: 350px;
         padding: 8px 15px 15px 15px;
-        color: $white;
-        font-size: $normal;
+        color: var(--background);
+        font-size: var(--normal);
         font-weight: 500;
 
         #iconAdminNav {
@@ -145,13 +147,13 @@
 
       .selectedAdmin {
         background-color: white;
-        color: $third;
+        color: var(--third);
         border-radius: 10% 10% 0% 0% / 25% 25% 25% 25%;
       }
 
       & button {
         background: none;
-        color: $white;
+        color: var(--background);
         font-weight: 500;
       }
     }

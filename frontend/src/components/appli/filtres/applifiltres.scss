@@ -1,7 +1,7 @@
 .filtres {
   padding: 0 1rem;
   min-height: 100vh;
-  background-color: $white;
+  background-color: var(--background);
 
   display: flex;
   flex-direction: column;
@@ -17,24 +17,24 @@
     width: 100%;
 
     button.h2 {
-      font-size: $h2;
+      font-size: var(--h2);
       font-weight: 600;
       background-color: transparent;
     }
 
     button.reset {
-      background-color: $grey;
       padding: 0.5rem;
       border-radius: 10px;
-      border: 2px $blue solid;
-      color: $blue;
-    }
-    button.reset:active {
-      background-color: $blue;
-      padding: 0.5rem;
-      border-radius: 10px;
-      border: 2px $grey solid;
-      color: $grey;
+      border: 2px var(--blue) solid;
+      color: var(--blue);
+
+      &:active {
+        background-color: var(--blue);
+        padding: 0.5rem;
+        border-radius: 10px;
+        border: 2px var(--grey2) solid;
+        color: var(--grey2);
+      }
     }
   }
 
@@ -50,14 +50,20 @@
 
     flex-grow: 1;
 
+    &.filter-simple {
+      select {
+        color: var(--front-light);
+      }
+    }
+
     .h3 {
-      font-size: $h3;
+      font-size: var(--h3);
       font-weight: 500;
       background-color: transparent;
     }
 
     h4 {
-      font-size: $h4;
+      font-size: var(--h4);
       font-weight: 600;
     }
 
@@ -70,14 +76,14 @@
   button.apply {
     max-width: 500px;
 
-    background: $gradient;
+    background: var(--gradient);
     align-self: center;
     margin-bottom: 1rem;
     width: 90%;
     height: 70px;
     border-radius: 10px;
-    color: $white;
-    font-size: $h3;
+    color: var(--background);
+    font-size: var(--h3);
     font-weight: 500;
 
     flex-grow: 0;

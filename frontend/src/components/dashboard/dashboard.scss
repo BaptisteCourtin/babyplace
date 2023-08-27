@@ -15,7 +15,7 @@
     "navbar footer";
   width: 100vw;
   height: 100vh;
-  background-color: #e6e6e6;
+  background-color: var(--dashbg);
 }
 
 .dashboardClosed {
@@ -31,14 +31,15 @@
   grid-area: topbar;
   padding: 0 10px;
   gap: 20px;
-  background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
-  box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
+  background: var(--background);
+  box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1),
+    -5px 5px 5px rgba(126, 156, 175, 0.1);
 
   & .dashboardBurger {
     visibility: hidden;
     background: none;
-    color: $third;
-    font-size: $h3;
+    color: var(--third);
+    font-size: var(--h3);
     cursor: pointer;
 
     @media screen and (max-width: 1000px) {
@@ -59,7 +60,7 @@
       gap: 3px;
       height: 100%;
       background: none;
-      color: $third;
+      color: var(--third);
       cursor: pointer;
 
       & img {
@@ -78,11 +79,11 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 10px;
-  background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
-  box-shadow: 5px -5px 5px rgba(75, 93, 104, 0.1);
-
+  background: var(--background);
+  box-shadow: 5px -5px 5px rgba(75, 93, 104, 0.1),
+    5px -5px 5px rgba(126, 156, 175, 0.1);
   & p {
-    font-size: $xs;
+    font-size: var(--xs);
 
     & span {
       color: red;
@@ -108,11 +109,11 @@
       align-items: center;
       justify-content: space-between;
       font-weight: 500;
-      font-size: $h4;
+      font-size: var(--h4);
 
       & button {
         background: transparent;
-        color: $seventh;
+        color: var(--seventh);
       }
     }
 
@@ -170,14 +171,14 @@
         gap: 5px;
         padding: 10px 15px;
         border-radius: 25px;
-        background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
+        background: var(--grey2);
 
         & svg {
-          font-size: $h1;
+          font-size: var(--h1);
           grid-area: logo;
 
           & path {
-            fill: $third;
+            fill: var(--third);
           }
         }
 
@@ -188,13 +189,13 @@
           grid-area: text;
 
           & p {
-            font-size: $small;
+            font-size: var(--small);
             font-weight: 500;
             opacity: 0.7;
           }
 
           & h3 {
-            font-size: $h2;
+            font-size: var(--h2);
             font-weight: 700;
           }
         }
@@ -202,7 +203,7 @@
         & .dashListSubText {
           grid-area: info;
           opacity: 0.7;
-          font-size: $xs;
+          font-size: var(--xs);
           text-align: center;
         }
       }
@@ -222,9 +223,9 @@
       flex-direction: column;
       gap: 5px;
       padding: 25px 15px;
-      background: $gradient;
+      background: var(--gradient);
       border-radius: 25px;
-      color: $white;
+      color: var(--background);
 
       & img {
         width: 130px;
@@ -242,7 +243,7 @@
       }
 
       & .dashMainInfoName {
-        font-size: $h4;
+        font-size: var(--h4);
         font-weight: 500;
       }
     }
@@ -259,10 +260,10 @@
         padding: 5px;
         margin: 5px;
         margin-top: 0;
-        font-size: $h4;
+        font-size: var(--h4);
         font-weight: 500;
-        color: $white;
-        background-color: $third;
+        color: var(--background);
+        background-color: var(--third);
         border-radius: 5px;
       }
 
@@ -274,7 +275,7 @@
 
         & li {
           padding: 10px;
-          background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
+          background: var(--grey2);
           border-radius: 5px;
 
           & p {
@@ -282,7 +283,7 @@
           }
 
           & .dashFavName {
-            color: $third;
+            color: var(--third);
             font-weight: 500;
           }
 
@@ -302,7 +303,7 @@
       }
 
       &::-webkit-scrollbar-thumb {
-        background: $third;
+        background: var(--third);
         border-radius: 10px;
       }
 
@@ -341,11 +342,11 @@
           align-items: center;
           justify-content: center;
           padding: 5px;
-          font-size: $h4;
-          background: $third;
-          color: $white;
-          border: 3px solid $white;
-          outline: 3px solid $third;
+          font-size: var(--h4);
+          background: var(--third);
+          color: var(--background);
+          border: 3px solid var(--background);
+          outline: 3px solid var(--third);
           border-radius: 5px;
 
           & span {

@@ -1,5 +1,5 @@
 .adminNavRes {
-  background: $third;
+  background: var(--third);
   border: none;
 
   & ul {
@@ -44,7 +44,7 @@
       font-size: 1.5em;
       padding: 2rem 0;
       font-weight: 500;
-      color: $third;
+      color: var(--third);
 
       a {
         text-decoration: none;

@@ -1,31 +1,66 @@
 @import url("https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@400;500;700&display=swap");
 
-$first: #4b5d68;
-$second: #212353;
-$third: #7e72f2;
-$fourth: #f063a7;
-$fifth: #2dcd7a;
-$sixth: #ffa84c;
-$seventh: #ef3672;
+:root {
+  // light
+  --front-light: #212353;
+  --background-light: #f2f2f2;
 
-$white: #f2f2f2;
-$grey: #d6d6e0;
-$gradient: linear-gradient(
-  148.74deg,
-  rgb(71, 79, 255) 2.49%,
-  rgb(227, 122, 204) 99.05%
-);
+  --grey1-light: #4b5d68;
+  --grey2-light: #d6d6e0;
+  --dashbg-light: #e6e6e6;
 
-$blue: #5555ff;
-$green: #30c580;
-$orange: #ffa500;
+  // dark
+  --front-dark: #f2f2f2;
+  --background-dark: #1f1f1f;
 
-$h1: 36px;
-$h2: 30px;
-$h3: 24px;
-$h4: 18px;
-$normal: 16px;
-$small: 14px;
-$xs: 12px;
+  --grey1-dark: #d6d6e0;
+  --grey2-dark: #4b5d68;
+  --dashbg-dark: #2b2b2b;
 
-$text: "Red Hat Text", sans-serif;
+  // commun
+  --third: #7e72f2;
+  --fourth: #f063a7;
+  --fifth: #2dcd7a;
+  --sixth: #ffa84c;
+  --seventh: #ef3672;
+
+  --blue: #5555ff;
+  --green: #30c580;
+  --orange: #ffa500;
+
+  --gradient: linear-gradient(
+    148.74deg,
+    rgb(71, 79, 255) 2.49%,
+    rgb(227, 122, 204) 99.05%
+  );
+
+  --text: "Red Hat Text", sans-serif;
+
+  --h1: 36px;
+  --h2: 30px;
+  --h3: 24px;
+  --h4: 18px;
+  --normal: 16px;
+  --small: 14px;
+  --xs: 12px;
+}
+
+// light theme
+:root {
+  --front: var(--front-light);
+  --background: var(--background-light);
+
+  --grey1: var(--grey1-light);
+  --grey2: var(--grey2-light);
+  --dahbg: var(--dashbg-light);
+}
+
+// dark theme
+.dark-theme {
+  --front: var(--front-dark);
+  --background: var(--background-dark);
+
+  --grey1: var(--grey1-dark);
+  --grey2: var(--grey2-dark);
+  --dahbg: var(--dashbg-dark);
+}

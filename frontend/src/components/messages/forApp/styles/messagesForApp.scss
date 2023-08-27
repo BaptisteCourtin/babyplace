@@ -20,7 +20,7 @@
     gap: 20px;
     padding-bottom: 20px;
     background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
-    border-right: solid 2px $third;
+    border-right: solid 2px var(--third);
     border-radius: 5px;
 
     .messages-affichageForApp {
@@ -31,20 +31,20 @@
         .contactListForApp {
           list-style: none;
           padding: 20px;
-          border-bottom: 1px solid $third;
+          border-bottom: 1px solid var(--third);
 
           &:first-of-type {
-            border-top: 1px solid $third;
+            border-top: 1px solid var(--third);
           }
         }
 
         & .selected {
-          background-color: $third;
-          color: $white;
+          background-color: var(--third);
+          color: var(--background);
 
           & #btn-affiche-conForApp {
             &:hover {
-              color: $white;
+              color: var(--background);
             }
           }
         }
@@ -72,7 +72,7 @@
           }
 
           &:hover {
-            color: $third;
+            color: var(--third);
           }
         }
       }

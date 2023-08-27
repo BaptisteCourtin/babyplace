@@ -9,22 +9,22 @@
       border-radius: 10px;
       padding: 20px 4px 4px;
       margin: 0 4px;
-      border: 1px solid $grey;
+      border: 1px solid var(--grey2);
       height: 50px;
       position: relative;
       width: 32vw;
     }
 
     & input:focus {
-      outline: 1.5px solid $third;
+      outline: 1.5px solid var(--third);
     }
 
     & input:valid {
-      border: 2px solid $green;
+      border: 2px solid var(--green);
     }
 
     & input:valid + label {
-      color: $green;
+      color: var(--green);
     }
 
     .checkSymbol {
@@ -35,7 +35,7 @@
       position: absolute;
       transform: translateX(29vw) translateY(6px);
       font-size: 2rem;
-      color: $green;
+      color: var(--green);
       display: initial;
     }
 
@@ -44,7 +44,7 @@
       z-index: 2;
       transform: translateY(6px) translateX(10px);
       font-weight: 800;
-      color: $grey;
+      color: var(--grey2);
     }
 
     & p {
@@ -60,20 +60,21 @@
     flex-wrap: wrap;
 
     & button {
-      background-color: #f2f2f2;
+      background-color: var(--background-light);
+      color: var(--front-light);
       width: fit-content;
       min-width: 140px;
       height: 40px;
-      font-size: $h4;
+      font-size: var(--h4);
       border-radius: 50px;
       margin: 4px;
       padding: 8px;
-      border: 1px solid $grey;
+      border: 1px solid var(--grey2);
     }
 
     & .selected {
-      background-color: $third;
-      color: white;
+      background-color: var(--third);
+      color: var(--background-light);
     }
   }
 

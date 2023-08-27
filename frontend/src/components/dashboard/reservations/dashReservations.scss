@@ -11,7 +11,7 @@
     gap: 50px;
 
     & h2 {
-      font-size: $h3;
+      font-size: var(--h3);
       font-weight: 700;
     }
 
@@ -23,60 +23,60 @@
 
       & button {
         padding: 5px 10px;
-        font-size: $small;
+        font-size: var(--small);
         font-weight: 500;
         border-radius: 5px;
         background: none;
 
         &:nth-of-type(1) {
-          color: $third;
-          border: 1px solid $third;
+          color: var(--third);
+          border: 1px solid var(--third);
         }
 
         &:nth-of-type(2) {
-          color: $fifth;
-          border: 1px solid $fifth;
+          color: var(--fifth);
+          border: 1px solid var(--fifth);
         }
 
         &:nth-of-type(3) {
-          color: $sixth;
-          border: 1px solid $sixth;
+          color: var(--sixth);
+          border: 1px solid var(--sixth);
         }
 
         &:nth-of-type(4) {
-          color: $seventh;
-          border: 1px solid $seventh;
+          color: var(--seventh);
+          border: 1px solid var(--seventh);
         }
 
         &:nth-of-type(5) {
-          color: $first;
-          border: 1px solid $first;
+          color: var(--front);
+          border: 1px solid var(--front);
         }
       }
 
       & .selected:nth-of-type(1) {
-        background: $third;
-        color: $white !important;
+        background: var(--third);
+        color: var(--background) !important;
       }
 
       & .selected:nth-of-type(2) {
-        background: $fifth;
-        color: $white !important;
+        background: var(--fifth);
+        color: var(--background) !important;
       }
 
       & .selected:nth-of-type(3) {
-        background: $sixth;
-        color: $white !important;
+        background: var(--sixth);
+        color: var(--background) !important;
       }
 
       & .selected:nth-of-type(4) {
-        background: $seventh;
-        color: $white !important;
+        background: var(--seventh);
+        color: var(--background) !important;
       }
 
       & .selected:nth-of-type(5) {
-        background: $first;
-        color: $white !important;
+        background: var(--front);
+        color: var(--background) !important;
       }
     }
   }
@@ -95,7 +95,7 @@
       width: 95%;
       margin: 0 auto;
       padding: 10px 25px 10px 50px;
-      background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%);
+      background: var(--grey2);
       border-radius: 5px;
       box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
 
@@ -163,14 +163,14 @@
         }
 
         & button:first-of-type {
-          background-color: $fifth;
-          color: $white;
+          background-color: var(--fifth);
+          color: var(--background);
           font-weight: 500;
         }
 
         & button:last-of-type {
-          background-color: $seventh;
-          color: $white;
+          background-color: var(--seventh);
+          color: var(--background);
         }
       }
 
@@ -181,7 +181,7 @@
           justify-content: center;
           gap: 3px;
           background: none;
-          color: $third;
+          color: var(--third);
           font-weight: 500;
         }
       }
@@ -207,15 +207,15 @@
     padding: 30px;
     transform: translate(-50%, -50%);
     border-radius: 5px;
-    background-color: $white;
+    background-color: var(--background);
     gap: 10px;
 
     & h2 {
-      font-size: $h2;
+      font-size: var(--h2);
       font-weight: 700;
       text-align: center;
       margin-bottom: 20px;
-      color: $third;
+      color: var(--third);
     }
 
     & .dateInputContainer {
@@ -227,7 +227,7 @@
 
       & input {
         padding: 5px;
-        border: 1px solid $third;
+        border: 1px solid var(--third);
         border-radius: 5px;
         outline: none;
       }
@@ -236,18 +236,18 @@
     & button {
       padding: 5px 15px;
       margin-top: 20px;
-      font-size: $h4;
+      font-size: var(--h4);
       font-weight: 500;
-      color: $white;
-      background: $third;
+      color: var(--background);
+      background: var(--third);
       border: 1px solid transparent;
       border-radius: 5px;
       transition: 0.3s ease-in-out;
 
       &:hover {
-        color: $third;
+        color: var(--third);
         background: transparent;
-        border: 1px solid $third;
+        border: 1px solid var(--third);
       }
     }
   }

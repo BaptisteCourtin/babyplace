@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: $second;
+  color: var(--front);
 
   & button {
     background: none;
@@ -35,7 +35,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: $h1;
+      gap: var(--h1);
 
       & a {
         padding: 10px 25px 10px 25px;
@@ -43,15 +43,15 @@
         border-radius: 50px;
 
         &:first-of-type {
-          background-color: $third;
-          color: $white;
+          background-color: var(--third);
+          color: var(--background);
           font-weight: 500;
           transition: 0.3s ease-in-out;
 
           &:hover {
             background: none;
-            border: 1px solid $third;
-            color: $second;
+            border: 1px solid var(--third);
+            color: var(--front);
           }
         }
       }

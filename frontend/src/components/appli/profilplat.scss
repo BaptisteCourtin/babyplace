@@ -4,12 +4,12 @@
   justify-content: flex-start;
   align-items: center;
   padding: 1rem;
-  border-bottom: 1px $second solid;
+  border-bottom: 1px var(--grey1) solid;
   width: 100%;
   max-width: 500px;
 
   .container-image {
-    background: $gradient;
+    background: var(--gradient);
     border-radius: 50%;
     margin: 0.5rem;
     display: flex;
@@ -33,11 +33,11 @@
     font-weight: 500;
 
     h3 {
-      font-size: $h3;
+      font-size: var(--h3);
     }
 
     p {
-      color: $third;
+      color: var(--third);
     }
   }
 }
