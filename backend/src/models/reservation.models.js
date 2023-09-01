@@ -101,9 +101,9 @@ const deleteResa = async (req) => {
 
 const deleteResaByDate = async (req) => {
   // delete quand ocass ET (pas toNote et dépassé de 1) OU (toNote et dépassé de 5)
-  // delete quand pas ocass ET (pas toNote et dépassé de 1) OU (toNote et dépassé de 5)
+  // delete quand pas ocass ET avec départ ET (pas toNote et départ dépassé de 1) OU (toNote et départ dépassé de 5)
   const [result] = await datasource.query(
-    "DELETE FROM reservation WHERE familleId = ? AND ((isOccasionnel=1  AND ((status!='toNote' AND (jour < (CURDATE() - INTERVAL 1 DAY)))OR (jour < (CURDATE() - INTERVAL 5 DAY)))) OR (isOccasionnel=0 AND dateDepart!='NULL' AND ((status!='toNote' AND (dateDepart < (CURDATE() - INTERVAL 1 DAY))) OR (dateDepart < (CURDATE() - INTERVAL 5 DAY)))))",
+    "DELETE FROM reservation WHERE familleId = ? AND ( (isOccasionnel=1  AND ( (status!='toNote' AND (jour < (CURDATE() - INTERVAL 1 DAY))) OR (jour < (CURDATE() - INTERVAL 5 DAY)) ) ) OR (isOccasionnel=0 AND dateDepart!='NULL' AND ( (status!='toNote' AND (dateDepart < (CURDATE() - INTERVAL 1 DAY)) ) OR (dateDepart < (CURDATE() - INTERVAL 5 DAY)) ) ) )",
     [req.params.id]
   );
   return result;
